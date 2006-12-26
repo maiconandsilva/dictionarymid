@@ -1,0 +1,594 @@
+﻿! This is Language Titles file for DictionaryForMIDs User Interface
+! This file is UTF-8 charcode
+! 
+! To add new language, copy the rows in English (with also ======= row)
+! Paste it at the end of file
+! Replace the English text with it's new language
+! See Vietnamese for example
+
+! The texts use the Java-syntax for strings. For example \n is a newline
+! character and \" is a quotation mark character.
+! If you want to use the \-character, write it as \\ (two backslash characters)
+! 
+! For the language titles ("English", "French", etc.), there is separated by
+! comma the language code. This language code is used by DictionaryForMIDs
+! to determine the right language for the device. For a list of all language 
+! codes see http://www.ics.uci.edu/pub/ietf/http/related/iso639.txt
+! 
+! If you do not know the translation for a word, just put [no translation] there,
+! DictionaryForMIDs will then use the English translation for this word.
+! 
+! A few texts include parameters, such as %1, %2, %3, etc. These parameters 
+! are replaced by DictionaryForMIDs at runtime.
+! Example: 
+! InfoTextContent %5 is "Java application version number", so for English the
+! text "Version %5" will be replaced by, for example, "Version 2.9.0". 
+! 
+! 
+! The following User Interfaces are brought to you by ThreeSearch <http://vllp.sourceforge.net>
+! Chinese
+! Dutch
+! French
+! Greek
+! German
+! Italian
+! Japanese
+! Rusian
+! Spanish
+! 
+================================================================================
+#UIDisplayTextItems,
+EmptyText ; just an empty text (0 characters)
+WordForTranslation
+CommandTranslate
+CommandNewWord
+CommandInfo
+CommandHelp
+CommandSettings
+CommandExit
+SettingsFromLanguage
+SettingsToLanguage
+SettingsFontSize
+SettingsFontDeviceDefault  ; selection 'device default' font
+SettingsFontSmall          ; selection small font
+SettingsFontMedium         ; selection medium font
+SettingsFontLarge          ; selection large font
+SettingsDisplayOptions
+SettingsShowStatistics
+SettingsBypassCharsetDecoding
+SettingsSearchOptions
+SettingsIncrementalSearchEnabled ; todo: with version 3.0 disable changed to enabled: this needs to be updated in the translations !!
+SettingsFindMatchWordOnly
+CommandApply
+CommandDone
+SettingsUILanguage
+CommandBackWord
+CommandForwardWord
+SettingsOptionsWhenNotFound
+SettingsShowNearbyWords
+SettingsShowSuggestionWords
+TranslationMessageNotFound
+StatisticResponseTimeInMS
+StatisticHits
+StatisticFreeMemory
+HelpTextContent, 4  ; complete help text:  %1 match any character wildcard (default: *) / %2 match single character wildcard (default: ?) / %3 no subexpression begin character (default: /) / %4 no subexpression end character (default: /)
+TranslationMessageMaxNrOfHitsReached
+TranslationMessageMaxExecutionTimeReached
+TranslationMessageCancelReceived ; this display text item is currently not used
+SettingsDisableSuggestion
+InfoTextContent, 5 ; complete info text: %1 infoText from dictionary / %2 Java application name / %3 copyright by / %4 project homepage / %5 Java application version number 
+LanguageEnglish
+LanguageVietnamesee
+LanguageChinese
+LanguageJapanese
+LanguageThai
+LanguageHindi
+LanguageIndonesian
+LanguageFrench
+LanguageSpanish
+LanguageGerman
+LanguageItalian
+LanguageLatin
+LanguageRussian
+LanguageArabic
+SettingsPerformanceOptions
+SettingsShowTranslationList
+SettingsColouredItems
+SettingsAddSearchCharsOptions
+SettingsEndWildcardAnySeriesOfCharacter, 1
+SettingsBeginNoSearchSubExpressionCharacter, 1
+CommandChangeInputLanguage
+FromLanguageToLanguage, 2 ; indicates the translation direction (used for multi-direction dictionaries): %1 is the FromLanguage / %2 is the ToLanguage
+CommandCancel
+SettingsUseBitmapFont
+================================================================================
+#English, en
+
+Word for translation:
+Translate
+New word
+Info
+Help
+Settings
+Exit
+From language
+To language
+Font size
+Device default
+Small
+Medium
+Large
+Display options
+Show statistics
+Bypass charset decoding
+Search options
+Incremental search
+Find matching word only
+Apply
+Done
+Select language
+Back word
+Forward word
+Options when not found:
+Show nearby words
+Show suggestion words
+not found
+Response time [ms]:
+Hits:
+Free Memory:
+You can use wildchard characters for your search:\n%1 matches any series of character\n%2 matches any single character\n\nTo switch off sub-expression search:\n%3 as first character inhibits sub-expression search at begin of expression\n%4 as last character inhibits sub-expression search at end of expression
+(...max nr of hits reached)
+(...max execution time reached)
+(...cancel received)
+Disable suggestion
+%1\n\nJava application %2 copyright (C) by %3 and other contributors.\n%4\n\nVersion %5\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n
+English
+Vietnamese
+Chinese
+Japanese
+Thai
+Hindi
+Indonesian
+French
+Spanish
+German
+Italian
+Latin
+Russian
+Arabic
+Performance
+Translation list
+Coloured display
+Search characters
+%1 character at end
+%1 character at begin
+Change direction
+%1 > %2
+Cancel
+Use bitmap font
+================================================================================
+#Việt Nam, vi
+
+Từ cần tra:
+Tra từ
+Từ mới
+Thông tin
+Trợ giúp
+Cài đặt
+Thoát
+Dịch từ tiếng:
+Sang tiếng:
+Cỡ chữ:
+Của thiết bị
+Nhỏ
+Trung bình
+Lớn
+Hiển thị:
+Hiển thị thông số
+Không định dạng phông chữ
+Tìm kiếm:
+Bỏ tìm tăng cường
+Chỉ tìm đúng từ
+Áp dụng
+Xong
+Giao diện tiếng:
+Từ trước
+Từ Sau
+Lựa chọn khi không thấy từ:
+Hiển thị từ gần nhất
+Hiển thị từ gợi ý
+không có
+Thời gian đáp ứng [ms]:
+Tìm được (lần):
+Bộ nhớ trống:
+Dùng ký tự đại diện trong từ cần tra:\n%1 đại diện cho bất kỳ chữ nào\n%2 đại diện cho bất kỳ một ký tự nào\n\nDùng ký tự %3 ở đầu từ để tìm tất cả các từ có từ cần tra ở đầu\nDùng ký tự %4 ở cuối từ để tìm tất cả các từ có từ cần tra ở giữa hoặc sau
+(...vượt quá số lượng tìm)
+(...vượt quá thời gian tìm)
+(...ngắt giữa chừng)
+Không gợi ý từ
+%1\n\nMã Java của phần mềm %2 bản quyền (C) bởi %3 và các cộng tác viên khác.\n%4\n\nPhiên bản %5\n\nGNU Điều ước sử dụng mã nguồn mở được áp dụng cho %2 mã Java của sản phẩm. Chi tiết đọc tệp COPYING.\n
+Tiếng Anh
+Việt Nam
+Trung Quốc
+Nhật Bản
+Thái Lan
+Ấn Độ
+Inđônêxia
+Pháp
+Tây Ban Nha
+Đức
+Italia
+Latin
+Nga
+Ả rập
+Cơ sở
+Danh mục dịch
+Hiển thị mầu
+Tìm từ
+%1 từ ở cuối
+%1 từ ở đầu
+Đổi chiều dịch
+%1 > %2
+Bỏ qua
+================================================================================
+#Chinese, zh
+
+词为翻译:
+翻译
+新词
+信息
+帮助
+设置
+出口
+从语言
+对语言
+字体大小
+设备缺省
+小
+媒介
+大
+看法选择
+显示统计
+绕过charset 解码
+搜寻选择
+[no translation]
+发现比赛词唯一
+申请
+做
+选择语言
+落后
+向前
+选择当没发现:
+显示附近的词
+显示建议词
+不是发现了
+反应时间[ 女士]:
+命中:
+自由记忆:
+您能使用wildchard 字符为您查寻: \n * 比赛字符些系列\n? 匹配任一个唯一字符\n \nTo 开关次级表示查寻: \n/ 作为字符首先禁止次级表示查寻在开始表示\n/ 如同最后字符禁止次级表示查寻在表示的结尾
+(...命中最大nr 被到达)
+(...最大执行时间被到达)
+(...取消接受)
+使建议失去能力
+================================================================================
+#Dutch, nl
+
+Word voor vertaling:
+Vertaal
+Nieuw woord
+Info
+Hulp
+Montages
+Uitgang
+Van taal
+Aan taal
+Font grootte
+Het gebrek van het apparaat
+Klein
+Middel
+Groot
+De opties van de mening
+Toon statistieken
+Mijd charset het decoderen
+Opties zoek
+[no translation]
+Vind gelijke slechts woord
+Ben van toepassing
+Gedaan
+Selecteer taal
+Achteruit
+Door:sturen
+Opties wanneer gevonden niet:
+Toon nabijgelegen woorden
+Toon suggestiewoorden
+vinden niet
+De tijd van de reactie [ Mej. ]:
+Klappen:
+Vrij Geheugen:
+U kunt wildchard karakters voor uw onderzoek: / gebruikenn * past om het even welke reeks van karakter / aann? past om het even welk enig karakter / aann \nTo schakelen sub-uitdrukkingsonderzoek: / uitn/ aangezien het eerste karakter sub-uitdrukkingsonderzoek remt bij begin van uitdrukking \n/ aangezien het karakter het laatst sub-uitdrukkingsonderzoek op eind van uitdrukking remt
+(...maximum nr van bereikte klappen)
+(...maximum bereikte uitvoeringstijd)
+(...annuleer ontvangen)
+Maak suggestie onbruikbaar
+================================================================================
+#Français, fr
+
+Mot pour la traduction :
+Traduire
+Nouveau mot
+Informations
+Aide
+Cadres
+Sortie
+De la langue
+À la langue
+Grandeur de fonte
+Défaut d'artifice
+Petit
+Médium
+Grand
+Options de vue
+Statistique de spectacle
+Évitez le décodage de charset
+Fouillez des options
+Recherche incrémentielle
+Trouvez le mot de match seulement
+Faire une demande
+Fait
+Choisissez la langue
+En arrière
+Envoyer
+Options sinon trouvées :
+Montrez des mots proches
+Mots de suggestion de spectacle
+non trouvé
+Temps de réponse [Mme] :
+Coups :
+Mémoire Libre :
+Vous pouvez utiliser des caractères wildchard de vos matches de search:\n* une série de character\n ? les matches n'importe quels character\n\nTo simples éteignent la sous-expression search:\n/comme le premier caractère inhibent la recherche de sous-expression à commencent d'expression\n/comme le dernier caractère inhibe la recherche de sous-expression à la fin d'expression
+(... max nr des coups atteints)
+(... le temps d'exécution de max atteint)
+(... annulent reçu)
+Rendez infirmes la suggestion
+================================================================================
+#Greek, el
+
+Λέξη για τη μετάφραση:
+Μεταφράστε
+Νέα λέξη
+Πληροφορίες
+Βοήθεια
+Τοποθετήσεις
+Έξοδος
+Από τη γλώσσα
+Στη γλώσσα
+Μέγεθος πηγών
+Προεπιλογή συσκευών
+Μικρός
+Μέσο
+Μεγάλος
+Επιλογές άποψης
+Παρουσιάστε στατιστικές
+Παρακάμψτε charset την αποκωδικοποίηση
+Ψάξτε τις επιλογές
+[no translation]
+Βρείτε τη λέξη αντιστοιχιών μόνο
+Ισχύστε
+Γίνοντας
+Επιλέξτε τη γλώσσα
+Προς τα πίσω
+Διαβιβάστε
+Επιλογές όταν δεν βρίσκεται:
+Παρουσιάστε κοντινές λέξεις
+Παρουσιάστε λέξεις πρότασης
+να μην βρεί
+Χρόνος απόκρισης [ κα ]:
+Χτυπήματα:
+Ελεύθερη μνήμη:
+Μπορείτε να χρησιμοποιήσετε wildchard τους χαρακτήρες για την αναζήτησή σας: /το ν * ταιριάζει με οποιαδήποτε σειρά χαρακτήρα /ν; ταιριάζει με οποιοδήποτε ενιαίο χαρακτήρα /ν \nTo σβήνουν την αναζήτηση: / υπο--έκφρασηςν/ δεδομένου ότι ο πρώτος χαρακτήρας εμποδίζει την αναζήτηση υπο--έκφρασης αρχίστε της έκφρασης /ν/ δεδομένου ότι στο τέλος ο χαρακτήρας εμποδίζει την αναζήτηση υπο--έκφρασης στο τέλος της έκφρασης
+(...ανώτατο nr των χτυπημάτων που επιτυγχάνονται)
+(...ανώτατος χρόνος εκτέλεσης που επιτυγχάνεται)
+(...ακυρώστε λαμβανόμενος)
+Θέστε εκτός λειτουργίας την πρόταση
+================================================================================
+#Deutsch, de
+
+Wort für die Übersetzung:
+Übersetzen
+Neues Wort
+Info
+Hilfe
+Einstellungen
+Ausgang
+Von der Sprache
+In die Sprache
+Schriftart-Größe
+Gerät-Verzug
+Klein
+Medium
+Groß
+Ansicht-Optionen
+Show-Statistik
+Umgehen Sie die Charset-Entzifferung
+Suchoptionen
+Inkrementelle Suche
+Finden Sie Match-Wort nur
+Wenden
+Getan
+Wählen Sie Sprache aus
+Rückwärts
+Nachschicken
+Wenn nicht gefundene Optionen:
+Zeigen Sie nahe gelegene Wörter
+Show-Vorschlag-Wörter
+nicht gefunden
+Antwortzeit [Frau]:
+Erfolge:
+Freies Gedächtnis:
+Sie können wildchard Charaktere für Ihre search:\n*-Matchs irgendwelche Reihe von character\n verwenden? Matchs irgendwelche einzelnen character\n\nTo schalten Subausdruck search:\n/als der erste Charakter aus, hemmen Subausdruck-Suche daran beginnen von expression\n/, wie letzter Charakter Subausdruck-Suche am Ende des Ausdrucks hemmt
+(... Max nr erreichter Erfolge)
+(... erreichte Auführungszeit von Max)
+(... annullieren erhalten)
+Machen Sie Vorschlag unbrauchbar
+================================================================================
+#Italiano, it
+
+Parola per la traduzione:
+Traduca
+Nuova parola
+Info
+Aiuto
+Regolazioni
+Uscita
+Dalla lingua
+Alla lingua
+Dimensione
+Difetto del dispositivo
+Piccolo
+Mezzo
+Grande
+Opzioni di vista
+Mostri le statistiche
+Escluda la decodificazione del charset
+Cerchi le opzioni
+Ricerca incrementale
+Trovi la parola del fiammifero soltanto
+Applichisi
+Fatto
+Selezioni la lingua
+Indietro
+Di andata
+Opzioni una volta non trovato:
+Mostri alle le parole vicine
+Mostri le parole di suggerimento
+non ha trovato
+Tempo di reazione [ spettrografia di massa ]:
+Colpi:
+Memoria Libera:
+Potete usare i caratteri di wildchard per vostro di ricerca: \n * fiammiferi qualsiasi serie di carattere \n? abbina tutto il singolo carattere \n /interruttore di \nTo fuori di secondario-espressione di ricerca del: \n come in primo luogo carattere inibisce la ricerca di secondario-espressione a cominciano dell'espressione \n come il carattere inibisce l'ultima volta la ricerca di secondario-espressione alla conclusione dell'espressione
+(...nr massimo dei colpi raggiunti)
+(...tempo di esecuzione massimo raggiunto)
+(...annulli ricevuto)
+Inabiliti il suggerimento
+================================================================================
+#Japanese, ja
+
+翻訳のための単語:
+翻訳しなさい
+新しい単語
+インフォメーション
+助け
+設定
+出口
+言語から
+言語に
+フォント・サイズ
+装置デフォルト
+小さい
+媒体
+大きい
+眺めの選択
+ショーの統計量
+バイパスcharset の解読
+調査の選択
+[no translation]
+発見のマッチは言い表わすただ
+適用しなさい
+される
+言語を選びなさい
+後方に
+前方
+見つけられなかった場合選択:
+ショーの近くの単語
+ショーの提案の単語
+見つけられない
+応答時間[ 氏]:
+衝突:
+自由な記憶:
+使用のためにできるwildchard の特性をあなたの調査の: \n * マッチ特性の一連\n か。 単一の特性に/一致させるn /を離れたnTo スイッチは補助的表現の調査の: \n/ 最初にとして補助的表現の調査をで始まる表現の/拡張文字禁止機構n/ 最後に表現の終わりに補助的表現の調査を拡張文字禁止機構ように
+(...達される衝突の最高のnr)
+(...達される最高の実行時間)
+(...受け取られる取り消し)
+ディスエイブルの提案
+================================================================================
+#Russian, ru
+
+Слово для перевода:
+Перевести
+Новое слово
+Информация
+Помощь
+Параметры настройки
+Выход
+С языка
+На язык
+Размер шрифта
+Неплатеж устройства
+Маленький
+Среда
+Большой
+Варианты представления
+Статистика показа
+Обойдите расшифровку charset
+Ищите варианты
+[no translation]
+Найдите слово состязания только
+Применитесь
+Сделанный
+Выберите язык
+Назад
+Отправить
+Варианты, если не найденные:
+Покажите соседние слова
+Слова предложения показа
+не найденный
+Время ответа [госпожа]:
+Хиты:
+Свободная Память:
+Вы можете использовать wildchard характеры для ваших спичек search:\n* какой-нибудь ряд character\n? спички любые единственные character\n\nTo выключают подвыражение search:\n/как первый характер, запрещают поиск подвыражения в, начинаются из expression\n/, поскольку последний характер запрещает поиск подвыражения в конце выражения
+(... Макс номер достигнутых хитов)
+(... достигнутое время выполнения Макса)
+(... отменяют полученный), 
+Повредите предложение
+================================================================================
+#Español, es
+
+Palabra para traducción:
+Traducir
+Nueva palabra
+Información
+Ayuda
+Ajustes
+Salida
+De lengua
+A lengua
+Tamaño de fuente
+Falta de dispositivo
+Pequeño
+Medio
+Grande
+Opciones de vista
+Estadística de espectáculo
+Evite el descifre de charset
+Opciones de búsqueda
+Búsqueda incremental
+Encuentre la palabra de partido sólo
+Aplicar
+Hecho
+Seleccione lengua
+Hacia atrás
+Expedir
+Opciones cuando no encontrado:
+Muestre palabras cercanas
+Palabras de sugerencia de espectáculo
+no encontrado
+Tiempo de respuesta [Sra.]:
+Golpes:
+Memoria Libre:
+¿Usted puede usar carácteres wildchard para sus partidos de search:\n* alguna serie de character\n? los partidos cualesquiera character\n\nTo solos apagan la subexpresión search:\n/como el primer carácter inhiben la búsqueda de subexpresión en comienzan de expression\n/cuando el último carácter inhibe la búsqueda de subexpresión al final de la expresión
+(... máximo nr de golpes alcanzados)
+(... tiempo de ejecución de máximo alcanzado)
+(... anulan recibido)
+Incapacite sugerencia
+================================================================================
+#Portugês [who can translate ?], pt
