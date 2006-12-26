@@ -1,0 +1,36 @@
+/*
+DictionaryForMIDs - a free multi-language dictionary for mobile devices.
+Copyright (C) 2005, 2006 Gert Nuber (dict@kugihan.de)
+
+GPL applies - see file COPYING for copyright statement.
+*/
+
+package de.kugihan.dictionaryformids.translation.normation;
+import de.kugihan.dictionaryformids.general.Util;
+
+public class NormationFil extends Normation {
+
+	public StringBuffer normateWord(StringBuffer nonNormatedWord,
+                                    boolean      fromUserInput) {
+		StringBuffer defaultNormatedWord = NormationLib.defaultNormation(nonNormatedWord, fromUserInput);
+		StringBuffer normatedWord = new StringBuffer();
+		for (int charPos = 0; charPos < defaultNormatedWord.length(); ++charPos) {
+			if (defaultNormatedWord.charAt(charPos) == 'b') {
+				normatedWord.append("v");
+			}
+			else if (defaultNormatedWord.charAt(charPos) == 'i') {
+				normatedWord.append("e");
+			}
+			else if (defaultNormatedWord.charAt(charPos) == 'o') {
+				normatedWord.append("u");
+			}
+			else if (defaultNormatedWord.charAt(charPos) == 'f') {
+				normatedWord.append("p");
+			}
+			else {
+				normatedWord.append(defaultNormatedWord.charAt(charPos));
+			}
+		}
+		return normatedWord;
+	}
+}
