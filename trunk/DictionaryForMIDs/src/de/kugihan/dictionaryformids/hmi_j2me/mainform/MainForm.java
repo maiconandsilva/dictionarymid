@@ -34,7 +34,6 @@ import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.DfMForm;
 import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.DfMStringItem;
 import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.DfMTextField;
 import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.StringColourItem;
-import de.kugihan.dictionaryformids.hmi_j2me.mainform.bitmapfont.BitMapFontCanvas;
 import de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext.LanguageUI;
 import de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext.UIDisplayTextItem;
 import de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext.UIDisplayTextItems;
@@ -112,23 +111,19 @@ public class MainForm
 		updateMainFormItemsObj();
 
 		translationResultStatus = new DfMStringItem();
-		if (DictionaryForMIDs.useMIDP20)
-			translationResultStatus.setLayout(Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2);
+		translationResultStatus.setLayout(Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2);
 		append(translationResultStatus);
 		
 		responseTimeItem = new DfMStringItem();
-		if (DictionaryForMIDs.useMIDP20)
-			responseTimeItem.setLayout(Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2);
+		responseTimeItem.setLayout(Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2);
 		append(responseTimeItem);
 
 		statisticItem = new DfMStringItem();
-		if (DictionaryForMIDs.useMIDP20)
-			statisticItem.setLayout(Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2);
+		statisticItem.setLayout(Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2);
 		append(statisticItem);
 		
 		freeMemoryItem = new DfMStringItem();
-		if (DictionaryForMIDs.useMIDP20)
-			freeMemoryItem.setLayout(Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2);
+		freeMemoryItem.setLayout(Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2);
 		append(freeMemoryItem);
 
 		// create the command objects:
@@ -310,8 +305,7 @@ public class MainForm
 	}
 
 	public void setFocusToBeTranslatedWordTextField() {
-		if (DictionaryForMIDs.useMIDP20)
-			display.setCurrentItem(toBeTranslatedWordTextField); 
+		display.setCurrentItem(toBeTranslatedWordTextField); 
 	}
 
 	public void changeInputLanguage() 
@@ -384,12 +378,17 @@ public class MainForm
 		// may be initialised yet
 		boolean isColouredItems;
 		isColouredItems = SettingsStore.getSettingsStore().getColouredItems();
+		boolean useBitmapFont;
+		useBitmapFont = SettingsStore.getSettingsStore().getUseBitmapFont();
 		
 		// create new mainFormItemsObj
-		if (isColouredItems) {
+		if (useBitmapFont && isColouredItems) {
+			mainFormItemsObj = new MainFormItemsBitmap(this, true);
+		} else if (useBitmapFont) {
+			mainFormItemsObj = new MainFormItemsBitmap(this, false);
+		} else if (isColouredItems) {
 			mainFormItemsObj = new MainFormItemsColoured(this);
-		}
-		else {
+		} else {
 			mainFormItemsObj = new MainFormItemsSimple(this);
 		}
 		
@@ -402,8 +401,7 @@ public class MainForm
 		// redisplay translation results
 		refreshAllTranslationResults();
 		
-		if (DictionaryForMIDs.useMIDP20)
-			display.setCurrentItem(toBeTranslatedWordTextField); 
+		display.setCurrentItem(toBeTranslatedWordTextField); 
 	}
 
 	// update the fonts of the translated texts:
@@ -581,14 +579,10 @@ public class MainForm
 			contentParserObj.determineItemsFromContent(translationToString, 
 													   DictionarySettings.determineOutputLanguage(),
 													   true); 
-		if (useBitmapFont) {
-			int width = this.getWidth();
-			translationFromItem = new BitMapFontCanvas(contentParserObj.getTextFromStringColourItemText(translationFromItemText).toString(), width);
-			translationToItem = new BitMapFontCanvas(contentParserObj.getTextFromStringColourItemText(translationToItemText).toString(), width);
-		} else {
-			translationFromItem = mainFormItemsObj.createTranslationItem(translationFromItemText, true); 
-			translationToItem   = mainFormItemsObj.createTranslationItem(translationToItemText, false); 
-		}
+		int width = this.getWidth();
+		translationFromItem = mainFormItemsObj.createTranslationItem(translationFromItemText, true, width); 
+		translationToItem   = mainFormItemsObj.createTranslationItem(translationToItemText, false, width); 
+
 		addTranslationItem(translationFromItem);
 		if (DictionarySettings.getShowTranslationList() && (! displayTranslationListContent)) {
 			translationListIsShown = true;

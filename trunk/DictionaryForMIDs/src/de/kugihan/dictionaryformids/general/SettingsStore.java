@@ -110,8 +110,8 @@ public class SettingsStore {
 				// addAtEndWildcardAnySeriesOfCharacter: switched off
 				addBooleanValue(false);
 				
-				// colouredItems: switched on for MIDP 2.0, switched off otherwise
-				addBooleanValue(DictionaryForMIDs.useMIDP20);				
+				// colouredItems: switched on by default
+				addBooleanValue(true);				
 
 				// bitmap font: switched off
 				addBooleanValue(false);

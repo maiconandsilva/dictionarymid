@@ -26,7 +26,7 @@ public class MainFormItemsColoured implements MainFormItems {
 		return new DfMTextField(null, null, 60, TextField.ANY);
 	}
 	
-	public Item createTranslationItem(StringColourItemText stringColourItemText, boolean fromItem) throws DictionaryException {
+	public Item createTranslationItem(StringColourItemText stringColourItemText, boolean fromItem, int screenWidth) throws DictionaryException {
 
 		int index = applicationMainForm.indexOfLastTranslationItem+1;
 		if(!fromItem) index++;

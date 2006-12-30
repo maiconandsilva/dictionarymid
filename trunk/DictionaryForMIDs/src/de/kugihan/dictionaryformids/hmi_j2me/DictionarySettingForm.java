@@ -10,8 +10,6 @@ package de.kugihan.dictionaryformids.hmi_j2me;
 
 import java.util.Enumeration;
 
-import javax.microedition.lcdui.Alert;
-import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Choice;
 import javax.microedition.lcdui.ChoiceGroup;
 import javax.microedition.lcdui.Command;
@@ -28,13 +26,19 @@ import javax.microedition.io.file.FileSystemRegistry;
 
 import de.kugihan.dictionaryformids.dataaccess.CsvFile;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
+import de.kugihan.dictionaryformids.dataaccess.content.FontStyle;
+import de.kugihan.dictionaryformids.dataaccess.content.RGBColour;
+import de.kugihan.dictionaryformids.dataaccess.content.SelectionMode;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.SettingsStore;
 import de.kugihan.dictionaryformids.general.Util;
+import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
+import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart;
 import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.DfMChoiceGroup;
 import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.DfMCommand;
 import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.DfMForm;
 import de.kugihan.dictionaryformids.hmi_j2me.mainform.MainForm;
+import de.kugihan.dictionaryformids.hmi_j2me.mainform.bitmapfont.BitmapFontCanvas;
 import de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext.LanguageUI;
 import de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext.UIDisplayTextItem;
 import de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext.UIDisplayTextItems;
@@ -47,7 +51,7 @@ public class DictionarySettingForm
 	
 	DfMCommand applyCommand;
 	DfMCommand cancelCommand;
-	Command    selectDictionaryPathCommand = new Command("List root devices", Command.ITEM, 4); // todo: temporary solution for preliminaty file system access
+	Command    selectDictionaryPathCommand = new Command("List root devices", Command.ITEM, 4); // temporary solution for preliminaty file system access
 
 	Form callingForm;
 	Display display;
@@ -90,8 +94,12 @@ public class DictionarySettingForm
 		/**
 		 * Check to see if the bitmap font setting should be shown
 		 */
-		bitmapFontExists = new de.kugihan.dictionaryformids.hmi_j2me.mainform.bitmapfont.BitMapFontCanvas(
-				"blah", 50).fontExists();
+		StringColourItemTextPart part = new StringColourItemTextPart("test",
+				new RGBColour(0, 0, 0), new FontStyle(FontStyle.plain),
+				new SelectionMode(SelectionMode.none));
+		StringColourItemText text = new StringColourItemText();
+		text.addItemTextPart(part);
+		bitmapFontExists = new BitmapFontCanvas(text, 50, false).fontExists();
 		
 		/* 
 		 * input language
@@ -195,10 +203,10 @@ public class DictionarySettingForm
 		 * Path to dictionary (when file system access is used)
 		 */
 		if (DictionarySettings.isUseFileAccessJSR75()) {
-			dictionaryPathTextField = new TextField("Dictionary path", null, 300, TextField.URL); // todo: change to UIDisplayText label
+			dictionaryPathTextField = new TextField("Dictionary path", null, 300, TextField.URL); // temporary: change to UIDisplayText label
 			// DictionaryDataFile.dictionaryPath was already set in the constructor of class DictionaryForMIDs
 			append(dictionaryPathTextField);
-			// todo: this is a temporary solution for the partial file system dictionary support.
+			// temporary: this is a temporary solution for the partial file system dictionary support.
 			dictionaryPathTextField.setDefaultCommand(selectDictionaryPathCommand);
 			dictionaryPathTextField.setItemCommandListener(this);
 		}
@@ -212,26 +220,22 @@ public class DictionarySettingForm
 		            			                       			       UIDisplayTextItems.SettingsFontMedium,
 		            			                       			       UIDisplayTextItems.SettingsFontLarge};
 		            			               									
-		if (DictionaryForMIDs.useMIDP20) {
-			fontSizeChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsFontSize,
-					                                 Choice.POPUP,
-					                                 fontSizeStrings);
-			DictionarySettings.setFontSize(SettingsStore.getSettingsStore().getFontSize());
-			append(fontSizeChoiceGroup);
-		}
+		fontSizeChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsFontSize,
+				                                 Choice.POPUP,
+				                                 fontSizeStrings);
+		DictionarySettings.setFontSize(SettingsStore.getSettingsStore().getFontSize());
+		append(fontSizeChoiceGroup);
 
 		/* 
 		 * Select user Interface Language
 		 */
 		String[] uiLanguageStrings = LanguageUI.getUI().getLanguageTitle();
-		if (DictionaryForMIDs.useMIDP20) {
-			uiLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsUILanguage,
-					                                   Choice.POPUP,
-					                                   uiLanguageStrings,
-					                                   null);
-			DictionarySettings.setUILanguage(SettingsStore.getSettingsStore().getUILanguage());
-			append(uiLanguageChoiceGroup);
-		}
+		uiLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsUILanguage,
+				                                   Choice.POPUP,
+				                                   uiLanguageStrings,
+				                                   null);
+		DictionarySettings.setUILanguage(SettingsStore.getSettingsStore().getUILanguage());
+		append(uiLanguageChoiceGroup);
 		
 		/* 
 		 * performance
@@ -279,14 +283,10 @@ public class DictionarySettingForm
 		}
 		
 		// fontSizeChoiceGroup
-		if (DictionaryForMIDs.useMIDP20) {
-			fontSizeChoiceGroup.setSelectedIndex(DictionarySettings.getFontSize(), true);
-		}
+		fontSizeChoiceGroup.setSelectedIndex(DictionarySettings.getFontSize(), true);
 
 		// uiLanguageChoiceGroup
-		if (DictionaryForMIDs.useMIDP20) {
-			uiLanguageChoiceGroup.setSelectedIndex(DictionarySettings.getUILanguage(), true);
-		}
+		uiLanguageChoiceGroup.setSelectedIndex(DictionarySettings.getUILanguage(), true);
 		
 		// performanceChoiceGroup
 		performanceChoiceGroup.setSelectedIndex(indexPerfCGBypassCharsetDecoding, CsvFile.selectedBypassCharsetDecoding);
@@ -297,7 +297,7 @@ public class DictionarySettingForm
 		super.setupCommands();
 		applyCommand = updateCommand(applyCommand, UIDisplayTextItems.CommandApply, Command.OK, 4);
 		cancelCommand = updateCommand(cancelCommand, UIDisplayTextItems.CommandCancel, Command.CANCEL, 5);
-		// todo: this is a temporary solution for the partial file system dictionary support.
+		// temporary: this is a temporary solution for the partial file system dictionary support.
 		if (dictionaryPathTextField != null)
 			dictionaryPathTextField.setDefaultCommand(selectDictionaryPathCommand);
 	}
@@ -367,14 +367,12 @@ public class DictionarySettingForm
 		setOutputLanguage(outputLanguageSettingsSelectedIndexes);
 		
 		// font size:
-		if (DictionaryForMIDs.useMIDP20) {
-			int newFontSize = fontSizeChoiceGroup.getSelectedIndex();
-			if (newFontSize != DictionarySettings.getFontSize()) {
-				DictionarySettings.setFontSize(newFontSize);
-				SettingsStore.getSettingsStore().setFontSize(DictionarySettings.getFontSize());
-				// update font size on display
-				MainForm.applicationMainForm.updateFonts();
-			}
+		int newFontSize = fontSizeChoiceGroup.getSelectedIndex();
+		if (newFontSize != DictionarySettings.getFontSize()) {
+			DictionarySettings.setFontSize(newFontSize);
+			SettingsStore.getSettingsStore().setFontSize(DictionarySettings.getFontSize());
+			// update font size on display
+			MainForm.applicationMainForm.updateFonts();
 		}
 		
 		// user interface language:
@@ -481,18 +479,16 @@ public class DictionarySettingForm
 
 	
 	public void setUILanguage(boolean updateSettingsStore) throws DictionaryException {
-		if (DictionaryForMIDs.useMIDP20) {
-			int newSelectedLanguage = uiLanguageChoiceGroup.getSelectedIndex();
-			if (newSelectedLanguage != DictionarySettings.getUILanguage()) {
-				DictionarySettings.setUILanguage(newSelectedLanguage);
-				LanguageUI.getUI().setUILanguage(newSelectedLanguage);
-				// update language on display
-				MainForm.applicationMainForm.refreshAllForms();
-			}
-			if (updateSettingsStore && 
-			    (newSelectedLanguage != SettingsStore.getSettingsStore().getUILanguage()))
-				SettingsStore.getSettingsStore().setUILanguage(DictionarySettings.getUILanguage());
+		int newSelectedLanguage = uiLanguageChoiceGroup.getSelectedIndex();
+		if (newSelectedLanguage != DictionarySettings.getUILanguage()) {
+			DictionarySettings.setUILanguage(newSelectedLanguage);
+			LanguageUI.getUI().setUILanguage(newSelectedLanguage);
+			// update language on display
+			MainForm.applicationMainForm.refreshAllForms();
 		}
+		if (updateSettingsStore && 
+		    (newSelectedLanguage != SettingsStore.getSettingsStore().getUILanguage()))
+			SettingsStore.getSettingsStore().setUILanguage(DictionarySettings.getUILanguage());
 	}
 	
 	// setting of a new input language

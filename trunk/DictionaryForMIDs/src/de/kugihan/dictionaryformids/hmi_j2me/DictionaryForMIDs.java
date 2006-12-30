@@ -30,9 +30,6 @@ public class DictionaryForMIDs
 		public static String versionNumber;
 		public static String versionStatus;
 		public static byte   versionRMSStructure = 20;
-
-		public static boolean useMIDP20 = false;
-
 	
 	public DictionaryForMIDs() {
 		/*
@@ -57,10 +54,12 @@ public class DictionaryForMIDs
 			
 			// check for supported MIDP version
 			String supportedMidpProfile = System.getProperty("microedition.profiles");
-			if (supportedMidpProfile.indexOf("MIDP-2.") == -1)
-				useMIDP20 = false;
-			else 
-				useMIDP20 = true;
+			if (supportedMidpProfile.indexOf("MIDP-2.") == -1) {
+				// if MIDP 2.0 is not supported, then the application will not run
+				utilObj.log("MIDP 2.0 not supported by the device.\n" +
+                            applicationName + " will not run correctly !");
+				Thread.sleep(3000);
+			}
 
 			// check for supported CLDC version
 			String supportedCldcConfiguration = System.getProperty("microedition.configuration");

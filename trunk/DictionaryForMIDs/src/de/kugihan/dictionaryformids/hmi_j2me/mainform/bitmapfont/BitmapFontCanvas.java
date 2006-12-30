@@ -8,30 +8,30 @@ package de.kugihan.dictionaryformids.hmi_j2me.mainform.bitmapfont;
 
 import javax.microedition.lcdui.*;
 
-public class BitMapFontCanvas extends CustomItem {
+import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
 
-	public static String bitmapFontFilename;
+public class BitmapFontCanvas extends CustomItem {
 
-	private static BitMapFont font;
+	private static BitmapFont font;
 
-	private BitMapFontViewer viewer;
+	private BitmapFontViewer viewer;
 
-	private String displayedString;
+	private StringColourItemText stringItem;
 
-	// TODO: variable line height?
-	private final int lineHeightPixels = 14;
+	private int lineHeightPixels;
 
-	private int totalHeightPixels = lineHeightPixels;
+	private int totalHeightPixels;
 
 	private int maxWidthPixels;
-
-	public BitMapFontCanvas(String input, int maxWidthPixels) {
+	
+	public BitmapFontCanvas(StringColourItemText input, int maxWidthPixels, boolean colouredMode) {
 		super(null);
 		this.maxWidthPixels = maxWidthPixels;
-		displayedString = input;
+		stringItem = input;
 		try {
-			font = BitMapFont.getInstance("/fonts/font.bmf");
-			viewer = font.getViewer(input, maxWidthPixels);
+			font = BitmapFont.getInstance();
+			viewer = font.getViewer(stringItem, maxWidthPixels, colouredMode);
+			lineHeightPixels = font.getLineHeightPixels();
 			totalHeightPixels = viewer.getLinesPainted() * lineHeightPixels;
 		} catch (Exception e) {
 		}
@@ -41,10 +41,6 @@ public class BitMapFontCanvas extends CustomItem {
 		if (viewer == null)
 			return false;
 		return true;
-	}
-
-	public String getString() {
-		return displayedString;
 	}
 
 	protected int getMinContentHeight() {
