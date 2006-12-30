@@ -42,4 +42,8 @@ public class StringColourItemTextPart {
 	public SelectionMode getSelectionMode(){
 		return seletionMode;
 	}
+	
+	public char charAt(int index) {
+		return text.charAt(index);
+	}
 }

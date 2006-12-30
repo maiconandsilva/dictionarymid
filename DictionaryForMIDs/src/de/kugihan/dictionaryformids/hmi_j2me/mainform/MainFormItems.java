@@ -30,7 +30,7 @@ public interface MainFormItems {
 	 * The parameter fromItem is true when the text belongs to the inputLanguage and false when it belongs to 
 	 * the outputLanguage.
 	 */ 
-	Item createTranslationItem(StringColourItemText stringColourItemText, boolean fromItem) throws DictionaryException;
+	Item createTranslationItem(StringColourItemText stringColourItemText, boolean fromItem, int screenWidth) throws DictionaryException;
 	
 	
 	public void updateFonts() throws DictionaryException;

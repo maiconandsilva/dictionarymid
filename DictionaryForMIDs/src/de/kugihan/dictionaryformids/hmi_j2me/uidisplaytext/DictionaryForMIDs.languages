@@ -26,12 +26,8 @@
 ! 
 ! 
 ! The following User Interfaces are brought to you by ThreeSearch <http://vllp.sourceforge.net>
-! Chinese
 ! Dutch
-! French
 ! Greek
-! German
-! Italian
 ! Japanese
 ! Rusian
 ! Spanish
@@ -127,8 +123,8 @@ Find matching word only
 Apply
 Done
 Select language
-Back word
-Forward word
+Up word
+Down word
 Options when not found:
 Show nearby words
 Show suggestion words
@@ -136,11 +132,11 @@ not found
 Response time [ms]:
 Hits:
 Free Memory:
-You can use wildchard characters for your search:\n%1 matches any series of character\n%2 matches any single character\n\nTo switch off sub-expression search:\n%3 as first character inhibits sub-expression search at begin of expression\n%4 as last character inhibits sub-expression search at end of expression
+Use wildcard characters to refine your search:\n%1 matches any series of characters\n%2 matches any single character\n\nTo control sub-expression search:\n%3 As the first character produces results starting with your search-entry\n%4 After your entry produces results ending with it.
 (...max nr of hits reached)
 (...max execution time reached)
 (...cancel received)
-Disable suggestion
+Disable suggestions
 %1\n\nJava application %2 copyright (C) by %3 and other contributors.\n%4\n\nVersion %5\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n
 English
 Vietnamese
@@ -161,7 +157,7 @@ Translation list
 Coloured display
 Search characters
 %1 character at end
-%1 character at begin
+%1 character at start
 Change direction
 %1 > %2
 Cancel
@@ -233,43 +229,68 @@ Bỏ qua
 ================================================================================
 #Chinese, zh
 
-词为翻译:
+要翻译的词:
 翻译
 新词
 信息
 帮助
 设置
-出口
-从语言
-对语言
+退出
+本语言
+目标语言
 字体大小
-设备缺省
+重新设置
 小
-媒介
+中
 大
-看法选择
+屏幕选择
 显示统计
 绕过charset 解码
-搜寻选择
-[no translation]
-发现比赛词唯一
+搜索选择
+相关搜索]
+只发现匹配的词
 申请
-做
+确定
 选择语言
-落后
+向后
 向前
-选择当没发现:
+选择（未找到）
 显示附近的词
 显示建议词
-不是发现了
-反应时间[ 女士]:
+未发现
+反应时间[ ms]:
 命中:
-自由记忆:
-您能使用wildchard 字符为您查寻: \n * 比赛字符些系列\n? 匹配任一个唯一字符\n \nTo 开关次级表示查寻: \n/ 作为字符首先禁止次级表示查寻在开始表示\n/ 如同最后字符禁止次级表示查寻在表示的结尾
-(...命中最大nr 被到达)
-(...最大执行时间被到达)
-(...取消接受)
-使建议失去能力
+可用空间
+您能使用通配符为您查寻: \n%1匹配的任何的字符\n%2 包含输入字符的所有信息\n\n不包含不匹配的字符:\n%3当通配符在单词前面时，显示为以此单词开始的句子\n%4当通配符在单词后面时，显示为以此单词结束的句子
+(…达到极限)
+（…达到时间极限）
+(...取消接收的信息)
+使建议无效
+[no translation]
+英语
+越语
+中文
+日文
+泰语
+北印度语
+印度尼西亚语
+法语
+西班牙语
+德语
+意大利语
+拉丁文
+俄语
+阿拉伯语
+性能
+翻译清单
+彩色屏幕
+搜索字符
+加前缀的字符
+加后缀的字符
+语言切换
+%1 > %2
+取消
+使用bitmap字体
 ================================================================================
 #Dutch, nl
 
@@ -313,43 +334,68 @@ Maak suggestie onbruikbaar
 ================================================================================
 #Français, fr
 
-Mot pour la traduction :
+Mot a traduire
 Traduire
 Nouveau mot
 Informations
 Aide
-Cadres
-Sortie
-De la langue
-À la langue
-Grandeur de fonte
-Défaut d'artifice
+Paramètres
+Sortir
+Langue source
+Langue objectif
+Taille de caractères
+Paramètres par défaut 
 Petit
-Médium
+Moyen
 Grand
-Options de vue
-Statistique de spectacle
-Évitez le décodage de charset
-Fouillez des options
-Recherche incrémentielle
-Trouvez le mot de match seulement
-Faire une demande
-Fait
-Choisissez la langue
-En arrière
-Envoyer
-Options sinon trouvées :
-Montrez des mots proches
-Mots de suggestion de spectacle
-non trouvé
-Temps de réponse [Mme] :
-Coups :
-Mémoire Libre :
-Vous pouvez utiliser des caractères wildchard de vos matches de search:\n* une série de character\n ? les matches n'importe quels character\n\nTo simples éteignent la sous-expression search:\n/comme le premier caractère inhibent la recherche de sous-expression à commencent d'expression\n/comme le dernier caractère inhibe la recherche de sous-expression à la fin d'expression
-(... max nr des coups atteints)
-(... le temps d'exécution de max atteint)
-(... annulent reçu)
-Rendez infirmes la suggestion
+Options d'affichage
+Indiquer statistique
+Eviter charset-décodage
+Options recherche
+Recherche incrementale
+Trouver le mot exact
+Effectué
+Validé
+Choisir langue
+Mot précédente
+Mot suivant
+Options si sans succès 
+Afficher mots proches
+Afficher mots suggérés
+Pas de résultats
+Temps de réponse [ms]
+Réponses
+Memoire Libre :
+Raffiner la recherche:\n%1 Trouve quelconque séquence des caractères\n%2 Substitue caractères seuls\n\nPour raffiner la recherche sub-expression:\n%3 Avant de l'entrée trouve des résultats qui commencent avec celle-ci\n%4 Après de l'entrée génére des résultats qui finissent avec
+(... Résultats max)
+(…Durée max)
+Annuler  résultats
+Désactiver suggestions
+[no translation]
+Anglais
+Vietnamien
+Chinois
+Japonais
+Thaïlandais
+Hindi
+Indonésien
+Français
+Espagnol
+Allemand
+Italien
+Latin
+Russe
+Arabe
+Performance
+Liste de traduction
+Affichage couleur
+Trouver caractères
+%1 à la fin
+%1 au début
+Changer direction
+%1 > %2
+Annuler
+Utiliser caractères bitmap
 ================================================================================
 #Greek, el
 
@@ -393,83 +439,133 @@ Rendez infirmes la suggestion
 ================================================================================
 #Deutsch, de
 
-Wort für die Übersetzung:
+Suchwort
 Übersetzen
 Neues Wort
 Info
 Hilfe
 Einstellungen
-Ausgang
-Von der Sprache
-In die Sprache
-Schriftart-Größe
-Gerät-Verzug
+Beenden
+Quellsprache
+Zielsprache
+Schriftgröße
+Geräte Einstellungen
 Klein
-Medium
+Mittel
 Groß
-Ansicht-Optionen
-Show-Statistik
-Umgehen Sie die Charset-Entzifferung
+Display
+Statistik einblenden
+Umgehen der Charset-Dekodierung
 Suchoptionen
 Inkrementelle Suche
-Finden Sie Match-Wort nur
-Wenden
-Getan
-Wählen Sie Sprache aus
-Rückwärts
-Nachschicken
-Wenn nicht gefundene Optionen:
-Zeigen Sie nahe gelegene Wörter
-Show-Vorschlag-Wörter
-nicht gefunden
-Antwortzeit [Frau]:
-Erfolge:
-Freies Gedächtnis:
-Sie können wildchard Charaktere für Ihre search:\n*-Matchs irgendwelche Reihe von character\n verwenden? Matchs irgendwelche einzelnen character\n\nTo schalten Subausdruck search:\n/als der erste Charakter aus, hemmen Subausdruck-Suche daran beginnen von expression\n/, wie letzter Charakter Subausdruck-Suche am Ende des Ausdrucks hemmt
-(... Max nr erreichter Erfolge)
-(... erreichte Auführungszeit von Max)
-(... annullieren erhalten)
-Machen Sie Vorschlag unbrauchbar
+exaktes Wort finden
+Anwenden
+Fertig
+Sprache
+Letztes Wort
+Nächstes Wort
+0-Treffer Optionen
+Nachbarwörter anzeigen
+Vorschläge anzeigen
+Leider kein Ergebnis
+Antwortzeit [ms]:
+Ergebnisse:
+Freier Speicher:
+Mit Platzhaltern die Suche verfeinern:\n%1 Sucht nach beliebiger Zeichenfolge\n%2 Ersetzt einzelne Zeichen im Suchwort\n\nDie Suche weiter verfeinern:\n%3 Vor dem Suchwort ergibt Ergebnisse mit dem Suchwort am Anfang\n%4 Nach dem Suchwort produziert Ergebnisse mit dem Suchwort am Ende
+(... Max Ergebnisse)
+(... Max Rechenzeit)
+(... Ergebnisse loeschen)
+Vorschläge deaktivieren
+[no translation]
+Englisch
+Vietnamesisch
+Chinesisch
+Japanisch
+Thai
+Hindi
+Indonesisch
+Französisch
+Spanisch
+Deutsch
+Italienisch
+Lateinisch
+Russisch
+Arabisch
+[No Translation]
+Übersetzungs Liste
+Farbdarstellung
+Suche Zeichen
+%1 am Wortende
+%1 am Wortanfang
+Sprachrichtung
+%1 > %2
+Abbruch
+Bitmap Font benutzen
 ================================================================================
 #Italiano, it
 
-Parola per la traduzione:
-Traduca
+Parola per tradurre:
+Tradurre
 Nuova parola
 Info
 Aiuto
-Regolazioni
+Settaggi
 Uscita
 Dalla lingua
 Alla lingua
 Dimensione
-Difetto del dispositivo
+Resettagio
 Piccolo
-Mezzo
+Medio
 Grande
-Opzioni di vista
-Mostri le statistiche
-Escluda la decodificazione del charset
-Cerchi le opzioni
+Opzioni schermo
+Mostra statistiche
+Escludi charset-decodificazione 
+Opzioni Ricerca
 Ricerca incrementale
-Trovi la parola del fiammifero soltanto
-Applichisi
-Fatto
-Selezioni la lingua
-Indietro
-Di andata
-Opzioni una volta non trovato:
-Mostri alle le parole vicine
-Mostri le parole di suggerimento
-non ha trovato
-Tempo di reazione [ spettrografia di massa ]:
-Colpi:
+Trova la parola corrispondente 
+Applica
+Finito
+Selezione lingua
+Parola Indietro
+Parola avanti
+Opzioni se non trovato:
+Mostra parole vicine
+Mostra parole di suggerimento
+non trovato
+Tempo di reazione [ ms ]:
+Resultati:
 Memoria Libera:
-Potete usare i caratteri di wildchard per vostro di ricerca: \n * fiammiferi qualsiasi serie di carattere \n? abbina tutto il singolo carattere \n /interruttore di \nTo fuori di secondario-espressione di ricerca del: \n come in primo luogo carattere inibisce la ricerca di secondario-espressione a cominciano dell'espressione \n come il carattere inibisce l'ultima volta la ricerca di secondario-espressione alla conclusione dell'espressione
-(...nr massimo dei colpi raggiunti)
-(...tempo di esecuzione massimo raggiunto)
-(...annulli ricevuto)
-Inabiliti il suggerimento
+Raffini la ricerca:\n% Cerca qualsiasi serie di carattere\n%2 Cerca solo carattere singoli\n\nControlla la ricerca sub-espressione\n%3 Come primo carattere produce risultati con la parola al'inizio\n%4 Come ultimo carattere produce risultati con la parola alla fine dell'espressione
+(…Numero Risultati)
+(…Tempo massimo di esecuzione)
+(...annulla ricevuto)
+Disabilita suggerimenti
+[no translation]
+Inglese
+Vietnamita
+Cinese
+Giapponese
+Tailandese
+Hindi
+Indonesiano
+Francese
+Spagnolo
+Tedesco
+Italiano
+Latino
+Russo
+Arabo
+[No Translation]
+Lista di Traduzione
+Mostra colori
+Cerci caratteri
+%1 alla fina della parola
+%1 al inizio della parola
+Cambia direzione
+%1 > %2
+Annulla
+Usi caratteri Bitmap
 ================================================================================
 #Japanese, ja
 
@@ -590,5 +686,135 @@ Memoria Libre:
 (... tiempo de ejecución de máximo alcanzado)
 (... anulan recibido)
 Incapacite sugerencia
+================================================================================
+#Czech, cz
+
+Slovo k překladu:
+Přeložit
+Nové slovo
+Informace
+Pomoc
+Nastavení
+Konec
+Z jazyka
+Do jazyka
+Velikost fontu
+Standardní zařízení
+Malý
+Střední
+Velký
+Ukaž možnosti
+Ukaž statistiku
+dekódování znakové sady
+Možnosti hledání
+Inkrementální hledání
+Najdi jenom přesný překlad
+Potvrď
+Hotovo
+Nastav jazyk
+předchozí slovo
+následující slovo
+Možnosti při neúspěšném hledání:
+Ukaž podobná slova
+Ukázat nabízená slova
+nenalezeno
+Čas odozvy [ms]:
+Početnost:
+Volná paměť:
+Mužete použít tyto znaky pro urychlení hledání:\n%1 zastupuje libovolnou množinu znaku\n%2 zastupuje libovolný znak\n\nPro vypnutí postupného vyhledávání:\n%3 použit jako první znak umožňuje postupné vyhledávání na začátku výrazu\n%4 použit na konci slova umožňuje postupné vyhledávání
+(...maximální dosažena početnost)
+(...maximální dosažený čas hledání)
+(...zrušeno)
+zrušit zobrazování nabídky
+%1\n\nAplikace Java %2 copyright (C) by %3 a jiných přispívatelu.\n%4\n\nVerze %5\n\nGNU General Public License platí pro %2 Java aplikaci. Čtete soubor COPYING.\n
+Angličtina
+Vietnamčina
+Čínština
+Japončina
+Thajština
+Hindština
+Indonezsky
+Francouština
+Španielština
+Nemčina
+Italština
+Latina
+Ruština
+Arabština
+Výkon
+Seznam překladu
+Farební zobrazení
+Hledej znaky
+%1 znak na konci
+%1 znak na začátku
+změň směr
+%1 > %2
+Zruš
+Use bitmap Font
+================================================================================
+#Slovakian, sk
+
+Slovo pre preklad:
+Preložiť
+Nové slovo
+Informácie
+Pomoc
+Nastavenie
+Koniec
+Z jazyka
+Do jazyka
+Veľkosť fontu
+Štandardné zariadenie
+Malý
+Stredný
+Veľký
+Ukáž možnosti
+Ukáž štatistiku
+dekódovanie znakovej sady
+Možnosti hľadania
+Inkrementálne hľadanie
+Nájdi len presný preklad
+Potvrď
+Hotovo
+Nastav jazyk
+predchodzie slovo
+nasledujúce slovo
+Možnosti pri neúspešnom hľadaní:
+Ukáž podobné slová
+Ukázať ponúkané slová
+nenájdené
+Čas odozvy [ms]:
+Početnosť:
+Voľná pamäť:
+Môžete použiť tieto znaky pre urýchlenie hľadania:\n%1 zastupuje ľubovoľnú množinu znakov\n%2 zastupuje ľubovoľný znak\n\nPre vypnutie postupného vyhľadávania:\n%3 použitý ako prvý znak umožňuje postupné vyhľadávanie na začiatku výrazu\n%4 použitý na konci slova umožňuje postupné vyhľadávanie
+(...maximálna dosiahnutá početnosť)
+(...maximálny dosiahnutý čas hľadania)
+(...zrušené)
+zrušiť zobrazovania ponuky
+%1\n\nAplikácia Java %2 copyright (C) by %3 a iných prispievateľov.\n%4\n\nVerzia %5\n\nGNU General Public License platí pre %2 Java aplikáciu. Čítajte súbor COPYING.\n
+Angličtina
+Vietnamčina
+Čínština
+Japončina
+Thajština
+Hindština
+Indonezsky
+Francúzština
+Španielština
+Nemčina
+Taliančina
+Latinčina
+Ruština
+Arabština
+Výkon
+Zoznam prekladov
+Farebné zobrazenie
+Hľadaj znaky
+%1 znak na konci
+%1 znak na začiatku
+zmeň smer
+%1 > %2
+Zruš
+Use bitmap font
 ================================================================================
 #Portugês [who can translate ?], pt

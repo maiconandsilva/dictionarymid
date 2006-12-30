@@ -8,8 +8,11 @@ package de.kugihan.dictionaryformids.hmi_j2me.mainform.bitmapfont;
 
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.game.Sprite;
 
-public class BitMapFontViewer {
+import de.kugihan.dictionaryformids.dataaccess.content.RGBColour;
+
+public class BitmapFontViewer {
 
 	protected final static byte ABSOLUTE_LINE_BREAK = -2;
 
@@ -39,6 +42,8 @@ public class BitMapFontViewer {
 
 	private final int[] indeces;
 
+	private final RGBColour[] colours;
+
 	private final byte[] actualCharacterWidths;
 
 	private final short[] originalLineIndeces;
@@ -46,6 +51,8 @@ public class BitMapFontViewer {
 	private int orientation;
 
 	private int maxWidthPixels;
+
+	private boolean colouredMode;
 
 	/**
 	 * Views a specific input string with a specific bitmap font.
@@ -66,12 +73,15 @@ public class BitMapFontViewer {
 	 *            the padding between two lines
 	 * 
 	 */
-	public BitMapFontViewer(Image image, int[] indeces, short[] xPositions,
-			byte[] characterWidths, int fontHeight, int spaceIndex,
-			int verticalPadding, int maxWidthPixels) {
+	public BitmapFontViewer(Image image, int[] indeces, RGBColour[] colours,
+			short[] xPositions, byte[] characterWidths, int fontHeight,
+			int spaceIndex, int verticalPadding, int maxWidthPixels,
+			boolean colouredMode) {
 		this.image = image;
+		this.colouredMode = colouredMode;
 		this.maxWidthPixels = maxWidthPixels;
 		this.indeces = indeces;
+		this.colours = colours;
 		this.actualCharacterWidths = characterWidths;
 		this.spaceIndex = spaceIndex;
 		this.lineWidths = new short[20];
@@ -195,7 +205,61 @@ public class BitMapFontViewer {
 			// + characterWidth + ", " + this.fontHeight
 			// + ") imageStartX=" + (x - this.xPositions[i]) + " imageX="
 			// + imageX);
-			g.drawImage(this.image, imageX, y, Graphics.TOP | Graphics.LEFT);
+
+			RGBColour colour = colours[i];
+
+			Image theCharacter = Image.createImage(image, this.xPositions[i],
+					0, characterWidth, this.fontHeight, Sprite.TRANS_NONE);
+
+			int w = theCharacter.getWidth();
+			int h = theCharacter.getHeight();
+			int[] rgbValues = new int[w * h];
+			theCharacter.getRGB(rgbValues, 0, w, 0, 0, w, h);
+			for (int k = 0; k < rgbValues.length; k++) {
+				int argb = rgbValues[k];
+				int red = (argb >> 16) & 0xff;
+				int green = (argb >> 8) & 0xff;
+				int blue = argb & 0xff;
+				int alpha = (argb >> 24) & 0xff;
+				if (rgbValues[k] != 0) {
+					if (colouredMode) {
+						// set foreground to coloured
+						try {
+							// try to set colours...
+							red = colour.red;
+							blue = colour.blue;
+							green = colour.green;
+						} catch (NullPointerException e) {
+							// if colours[i] is null, just set it to black :(
+							// can somebody find out why this exception happens?
+							red = 0;
+							blue = 0;
+							green = 0;
+						}
+						alpha = 255;
+					} else {
+						// set foreground to black
+						red = 0;
+						blue = 0;
+						green = 0;
+						alpha = 255;
+					}
+				} else {
+					// set background to white
+					red = 255;
+					blue = 255;
+					green = 255;
+					alpha = 255;
+				}
+				argb = (alpha << 24) | (red << 16) | (green << 8) | blue;
+				rgbValues[k] = argb;
+			}
+
+			theCharacter = Image.createRGBImage(rgbValues, w, h, false);
+
+			// g.drawImage(this.image, imageX, y, Graphics.TOP | Graphics.LEFT);
+
+			g.drawImage(theCharacter, x, y, Graphics.TOP | Graphics.LEFT);
 			x += characterWidth;
 			// reset clip:
 			g.setClip(clipX, clipY, clipWidth, clipHeight);

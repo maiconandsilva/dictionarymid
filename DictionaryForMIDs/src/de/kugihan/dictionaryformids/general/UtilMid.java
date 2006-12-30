@@ -57,8 +57,7 @@ public class UtilMid extends Util {
 
 	protected void outputMessage(String message) {
 		StringItem outputMessageItem = new StringItem(null, message);
-		if (DictionaryForMIDs.useMIDP20)
-			outputMessageItem.setLayout(Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2);
+		outputMessageItem.setLayout(Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2);
 		logForm.append(outputMessageItem);
 	}
 

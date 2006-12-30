@@ -28,7 +28,9 @@ public class UIDisplayTextItem {
 	UIDisplayTextItemParameter [] parameters;  // values for each of the parameters
 
 	Image 	  icon = null; 					// icon for the UIDisplayTextItem  
-	boolean   iconResourceLoadDone = false; // set to true when the icon was loaded from the resource (whether successful or not)   
+	boolean   iconResourceLoadDone = false; // set to true when the icon was loaded from the resource (whether successful or not)  
+	int       iconImageHeight;			    // requested height of the loaded icon
+	int       iconImageWidth;                // requested width of the loaded icon
 	
 	UIDisplayTextItem(String idParam, int keyValueParam, int numberOfParameters) {
 		// the ID is saved
@@ -148,15 +150,25 @@ public class UIDisplayTextItem {
 	 * or null if no icon exists.
 	 */
 	protected final String iconArea = "UIDisplayTextItems";
-	protected final String extensionIcons = ".gif";
 	
 	public Image getIcon(int bestImageHeight, int bestImageWidth) 
 				throws DictionaryException {
-		if ((icon == null) && (! iconResourceLoadDone)) {
+		// the icon is loaded from the resouce if
+		// - the icon does not exist (icon == null) and no loading was tried before (! iconResourceLoadDone)  or
+		// - the icon exists (icon != null) but the icon is now requested with a different height/width 
+		if (((icon == null) && (! iconResourceLoadDone)) ||
+			((icon != null) && ((iconImageHeight != bestImageHeight) || (iconImageWidth != bestImageWidth)))) {			
 			// retrieve icon from resource
 			try {
 				iconResourceLoadDone = true;
-				icon = ResourceHandler.getResourceHandlerObj().getIcon(iconArea, id + extensionIcons, bestImageHeight, bestImageWidth);
+				icon = ResourceHandler.getResourceHandlerObj().getIcon("UIDisplayTextItems", 
+																	   "small",
+						                                               id, 
+						                                               bestImageHeight, 
+						                                               bestImageWidth);
+				// store the requested height and width
+				iconImageHeight = bestImageHeight;
+				iconImageWidth  = bestImageWidth;
 			}
 			catch (CouldNotOpenFileException e) {
 				// icon was not found, null is returned.
