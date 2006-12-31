@@ -31,13 +31,13 @@ public class DictionaryForMIDs
 		public static String versionStatus;
 		public static byte   versionRMSStructure = 20;
 	
-	public DictionaryForMIDs() {
+	public DictionaryForMIDs() throws DictionaryException {
 		/*
 		 *  initialise the application
 		 */
 		super();
 		
-		MainForm applicationMainForm = new MainForm(this);
+		MainForm applicationMainForm = new MainForm(this);			
 
 		UtilMid utilObj = new UtilMid();
 		utilObj.setLogForm(applicationMainForm);

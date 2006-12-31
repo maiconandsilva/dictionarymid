@@ -151,7 +151,7 @@ public class UIDisplayTextItem {
 	 */
 	protected final String iconArea = "UIDisplayTextItems";
 	
-	public Image getIcon(int bestImageHeight, int bestImageWidth) 
+	public Image getIcon(String iconSizeGroup, int bestImageHeight, int bestImageWidth) 
 				throws DictionaryException {
 		// the icon is loaded from the resouce if
 		// - the icon does not exist (icon == null) and no loading was tried before (! iconResourceLoadDone)  or
@@ -161,11 +161,12 @@ public class UIDisplayTextItem {
 			// retrieve icon from resource
 			try {
 				iconResourceLoadDone = true;
-				icon = ResourceHandler.getResourceHandlerObj().getIcon("UIDisplayTextItems", 
-																	   "small",
-						                                               id, 
-						                                               bestImageHeight, 
-						                                               bestImageWidth);
+				icon = ResourceHandler.getResourceHandlerObj().getIcon
+									  (ResourceHandler.getResourceHandlerObj().iconAreaUIDisplayTextItems, 
+									   iconSizeGroup,
+	                                   id, 
+	                                   bestImageHeight, 
+	                                   bestImageWidth);
 				// store the requested height and width
 				iconImageHeight = bestImageHeight;
 				iconImageWidth  = bestImageWidth;

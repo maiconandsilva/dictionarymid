@@ -42,6 +42,10 @@ public class ResourceHandler {
 
 	protected final String fileExtensionIcons = ".png";
 
+	public final String iconAreaUIDisplayTextItems = "UIDisplayTextItems";
+	public final String iconSizeGroupSmall = "small";
+	public final String iconSizeGroupBig   = "big";
+
 	class IconSize { 
 		IconSize(String iconAreaParam, 
 				 String iconSizeGroupParam, 
@@ -57,7 +61,8 @@ public class ResourceHandler {
 	}
 	// iconSizes defines the available sizes of the icons for a certain iconArea / iconSizeGroup
 	IconSize[] iconSizes = { 
-					new IconSize("UIDisplayTextItems", "small", new int[] {12 , 16, 20, 24, 32} ) 
+					new IconSize(iconAreaUIDisplayTextItems, iconSizeGroupSmall, new int[] {12 , 16, 20, 24, 32} ), 
+					new IconSize(iconAreaUIDisplayTextItems, iconSizeGroupBig,   new int[] {20, 32, 48} ), 
 			};
 
 	public Image getIcon(String        iconArea,       // specifies the subdirectory where the icons are located 

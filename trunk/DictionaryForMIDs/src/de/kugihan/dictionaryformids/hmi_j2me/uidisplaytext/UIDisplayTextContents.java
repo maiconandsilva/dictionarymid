@@ -85,6 +85,7 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"Cancel",
 									"Use bitmap font",
+									"bitmap font",
 		}),
 
 		new LanguageDisplayText("Việt Nam" ,
@@ -153,6 +154,7 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"Bỏ qua",
 									"Use bitmap font",
+									"bitmap font",
 		}),
 
 		new LanguageDisplayText("Chinese" ,
@@ -221,6 +223,7 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"取消",
 									"使用bitmap字体",
+									"bitmap font",
 		}),
 
 		new LanguageDisplayText("Dutch" ,
@@ -289,6 +292,7 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"Cancel",
 									"Use bitmap font",
+									"bitmap font",
 		}),
 
 		new LanguageDisplayText("Français" ,
@@ -357,6 +361,7 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"Annuler",
 									"Utiliser caractères bitmap",
+									"bitmap font",
 		}),
 
 		new LanguageDisplayText("Greek" ,
@@ -425,6 +430,7 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"Cancel",
 									"Use bitmap font",
+									"bitmap font",
 		}),
 
 		new LanguageDisplayText("Deutsch" ,
@@ -493,6 +499,7 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"Abbruch",
 									"Bitmap Font benutzen",
+									"bitmap font",
 		}),
 
 		new LanguageDisplayText("Italiano" ,
@@ -561,6 +568,7 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"Annulla",
 									"Usi caratteri Bitmap",
+									"bitmap font",
 		}),
 
 		new LanguageDisplayText("Japanese" ,
@@ -629,6 +637,7 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"Cancel",
 									"Use bitmap font",
+									"bitmap font",
 		}),
 
 		new LanguageDisplayText("Russian" ,
@@ -697,6 +706,7 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"Cancel",
 									"Use bitmap font",
+									"bitmap font",
 		}),
 
 		new LanguageDisplayText("Español" ,
@@ -765,6 +775,7 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"Cancel",
 									"Use bitmap font",
+									"bitmap font",
 		}),
 
 		new LanguageDisplayText("Czech" ,
@@ -833,6 +844,7 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"Zruš",
 									"Use bitmap Font",
+									"bitmap font",
 		}),
 
 		new LanguageDisplayText("Slovakian" ,
@@ -901,6 +913,7 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"Zruš",
 									"Use bitmap font",
+									"bitmap font",
 		}),
 
 		new LanguageDisplayText("Portugês [who can translate ?]" ,
@@ -969,9 +982,10 @@ public class UIDisplayTextContents {
 									"%1 > %2",
 									"Cancel",
 									"Use bitmap font",
+									"bitmap font",
 		})
 	};
 
-	public static int totalNumberItemsInLanguage = 63;
+	public static int totalNumberItemsInLanguage = 64;
 
 }

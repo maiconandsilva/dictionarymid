@@ -80,4 +80,5 @@ public class UIDisplayTextItems {
 	public static final UIDisplayTextItem FromLanguageToLanguage = LanguageUI.getUI().createNewUIDisplayTextItem("FromLanguageToLanguage", 60, 2);
 	public static final UIDisplayTextItem CommandCancel = LanguageUI.getUI().createNewUIDisplayTextItem("CommandCancel", 61, 0);
 	public static final UIDisplayTextItem SettingsUseBitmapFont = LanguageUI.getUI().createNewUIDisplayTextItem("SettingsUseBitmapFont", 62, 0);
+	public static final UIDisplayTextItem SettingsFontBitmapFont = LanguageUI.getUI().createNewUIDisplayTextItem("SettingsFontBitmapFont", 63, 0);
 }

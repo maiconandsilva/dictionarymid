@@ -56,19 +56,20 @@ public class DictionarySettingForm
 	Form callingForm;
 	Display display;
 
-	ChoiceGroup inputLanguageChoiceGroup;
-	ChoiceGroup outputLanguageChoiceGroup;
-	ChoiceGroup searchChoiceGroup;
-	ChoiceGroup displayChoiceGroup;
-	ChoiceGroup fontSizeChoiceGroup;
-	ChoiceGroup uiLanguageChoiceGroup;
-	ChoiceGroup performanceChoiceGroup;
+	DfMChoiceGroup inputLanguageChoiceGroup;
+	DfMChoiceGroup outputLanguageChoiceGroup;
+	DfMChoiceGroup searchChoiceGroup;
+	DfMChoiceGroup displayChoiceGroup;
+	DfMChoiceGroup fontSizeChoiceGroup;
+	DfMChoiceGroup uiLanguageChoiceGroup;
+	DfMChoiceGroup performanceChoiceGroup;
 	static TextField   dictionaryPathTextField = null;
 	
-	protected final int indexFontSizeCGDefault = 0;
-	protected final int indexFontSizeCGSmall   = 1;
-	protected final int indexFontSizeCGMedium  = 2;
-	protected final int indexFontSizeCGLarge   = 3;	
+	protected final int indexFontSizeCGDefault    = 0;
+	protected final int indexFontSizeCGSmall      = 1;
+	protected final int indexFontSizeCGMedium     = 2;
+	protected final int indexFontSizeCGLarge      = 3;	
+	protected final int indexFontSizeCGBitmapFont = 0;	
 	protected final int indexSearchCGIncrementalSearchEnabled = 0;
 	protected final int indexSearchCGFindExactMatches = 1;
 	protected final int indexSearchCGEndWildcardAnySeriesOfCharacter = 2;
@@ -80,26 +81,19 @@ public class DictionarySettingForm
 	protected final int indexPerfCGBypassCharsetDecoding = 0;
 
 	private boolean bitmapFontExists;
+	private boolean lastSettingUseBitmapFont; // last setting of use bitmap fonts
 
 	public DictionarySettingForm(Display displayParam,
 			                     Form callingFormParam) 
 			          throws DictionaryException {
-		super("Settings");
+		setTitleUIDisplayTextItem(UIDisplayTextItems.CommandSettings);
 
 		callingForm = callingFormParam;
 		display = displayParam;
 		setupCommands();
 		setCommandListener(this);
 
-		/**
-		 * Check to see if the bitmap font setting should be shown
-		 */
-		StringColourItemTextPart part = new StringColourItemTextPart("test",
-				new RGBColour(0, 0, 0), new FontStyle(FontStyle.plain),
-				new SelectionMode(SelectionMode.none));
-		StringColourItemText text = new StringColourItemText();
-		text.addItemTextPart(part);
-		bitmapFontExists = new BitmapFontCanvas(text, 50, false).fontExists();
+		checkBitmapFontAvailable();
 		
 		/* 
 		 * input language
@@ -195,8 +189,7 @@ public class DictionarySettingForm
 		displayChoiceGroup.setSelectedIndex(indexDisplayCGShowTranslationList, DictionarySettings.getShowTranslationList());
 		DictionarySettings.setColouredItems(SettingsStore.getSettingsStore().getColouredItems());
 		DictionarySettings.setShowStatistic(SettingsStore.getSettingsStore().getShowStatistic());
-		if (bitmapFontExists)
-			DictionarySettings.setUseBitmapFont(SettingsStore.getSettingsStore().getUseBitmapFont());
+		DictionarySettings.setUseBitmapFont(SettingsStore.getSettingsStore().getUseBitmapFont());
 		append(displayChoiceGroup);
 		
 		/* 
@@ -214,15 +207,10 @@ public class DictionarySettingForm
 		/* 
 		 * Font size
 		 */
-		UIDisplayTextItem[] fontSizeStrings = new UIDisplayTextItem [] 
-		            	                                             { UIDisplayTextItems.SettingsFontDeviceDefault,
-		            			                       			       UIDisplayTextItems.SettingsFontSmall,
-		            			                       			       UIDisplayTextItems.SettingsFontMedium,
-		            			                       			       UIDisplayTextItems.SettingsFontLarge};
-		            			               									
 		fontSizeChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsFontSize,
 				                                 Choice.POPUP,
-				                                 fontSizeStrings);
+				                                 null);
+		setFontSizeCGDisplayTextItems(DictionarySettings.getUseBitmapFont());
 		DictionarySettings.setFontSize(SettingsStore.getSettingsStore().getFontSize());
 		append(fontSizeChoiceGroup);
 
@@ -274,16 +262,19 @@ public class DictionarySettingForm
 		// displayChoiceGroup
 		displayChoiceGroup.setSelectedIndex(indexDisplayCGColouredItems, DictionarySettings.isColouredItems());
 		displayChoiceGroup.setSelectedIndex(indexDisplayCGShowStatistic, DictionarySettings.getShowStatistic());
-		if (bitmapFontExists)
-			displayChoiceGroup.setSelectedIndex(indexDisplayCGUseBitmapFont, DictionarySettings.getUseBitmapFont());
+		if (bitmapFontExists) {
+			boolean useBitmapFont = DictionarySettings.getUseBitmapFont();
+			displayChoiceGroup.setSelectedIndex(indexDisplayCGUseBitmapFont, useBitmapFont);
+			lastSettingUseBitmapFont = useBitmapFont;
+		}
 
 		// dictionaryPathTextField
 		if (DictionarySettings.isUseFileAccessJSR75()) {
 			dictionaryPathTextField.setString(DictionaryDataFile.dictionaryPath);
 		}
 		
-		// fontSizeChoiceGroup
-		fontSizeChoiceGroup.setSelectedIndex(DictionarySettings.getFontSize(), true);
+		// fontSizeChoiceGroup: use only if bitmap font is not active
+		setFontSizeCGSelectedIndex(DictionarySettings.getUseBitmapFont());
 
 		// uiLanguageChoiceGroup
 		uiLanguageChoiceGroup.setSelectedIndex(DictionarySettings.getUILanguage(), true);
@@ -337,15 +328,30 @@ public class DictionarySettingForm
 
 	public void itemStateChanged(Item item) {
 		
-		// Input language changed:
-		if (item == inputLanguageChoiceGroup) {
-			selectNextOutputLanguage();
-		}	
-
-		// UI language changed:
 		try {
+			// Input language changed:
+			if (item == inputLanguageChoiceGroup) {
+				selectNextOutputLanguage();
+			}	
+	
+			// UI language changed:
 			if (item == uiLanguageChoiceGroup) {
 				setUILanguage(false);
+			}
+
+			// Display option changed :
+			if (item == displayChoiceGroup) {
+				// check if bitmap font settings changed
+				if (bitmapFontExists) {
+					boolean [] displayCGFlags = new boolean[displayChoiceGroup.size()];
+					displayChoiceGroup.getSelectedFlags(displayCGFlags); 
+					boolean newUseBitmapFont = displayCGFlags[indexDisplayCGUseBitmapFont];
+					if (lastSettingUseBitmapFont != newUseBitmapFont) {
+						// bitmap font settings did change: update font size selection:
+						updateFontSizeCGDisplayTextItems(newUseBitmapFont);
+					}
+					lastSettingUseBitmapFont = newUseBitmapFont;
+				}
 			}
 		}
 		catch (DictionaryException e) {
@@ -366,13 +372,15 @@ public class DictionarySettingForm
 		outputLanguageChoiceGroup.getSelectedFlags(outputLanguageSettingsSelectedIndexes);
 		setOutputLanguage(outputLanguageSettingsSelectedIndexes);
 		
-		// font size:
-		int newFontSize = fontSizeChoiceGroup.getSelectedIndex();
-		if (newFontSize != DictionarySettings.getFontSize()) {
-			DictionarySettings.setFontSize(newFontSize);
-			SettingsStore.getSettingsStore().setFontSize(DictionarySettings.getFontSize());
-			// update font size on display
-			MainForm.applicationMainForm.updateFonts();
+		// font size: save only when bitmap font is not activated
+		if (! lastSettingUseBitmapFont) {
+			int newFontSize = fontSizeChoiceGroup.getSelectedIndex();
+			if (newFontSize != DictionarySettings.getFontSize()) {
+				DictionarySettings.setFontSize(newFontSize);
+				SettingsStore.getSettingsStore().setFontSize(DictionarySettings.getFontSize());
+				// update font size on display
+				MainForm.applicationMainForm.updateFonts();
+			}
 		}
 		
 		// user interface language:
@@ -428,7 +436,7 @@ public class DictionarySettingForm
 			DictionarySettings.setUseBitmapFont(displayCGFlags[indexDisplayCGUseBitmapFont]);
 			SettingsStore.getSettingsStore().setUseBitmapFont(DictionarySettings.getUseBitmapFont());
 			if (oldUseBitmapFont != DictionarySettings.getUseBitmapFont())
-				MainForm.applicationMainForm.refreshAllTranslationResults();
+				MainForm.applicationMainForm.updateMainFormItemsObj();
 		}
 
 		// path to dictionary
@@ -605,6 +613,48 @@ public class DictionarySettingForm
 		return settingsIndex;
 	}
 
+	void updateFontSizeCGDisplayTextItems(boolean useBitmapFont) throws DictionaryException {
+		setFontSizeCGDisplayTextItems(useBitmapFont);
+		setFontSizeCGSelectedIndex(useBitmapFont);
+	}
+
+	void setFontSizeCGDisplayTextItems(boolean useBitmapFont) throws DictionaryException {
+		UIDisplayTextItem[] fontSizeStrings;
+		if (useBitmapFont) {
+			// when bitmap fonts are used, then the size of the font cannot be changed:
+			fontSizeStrings = new UIDisplayTextItem [] 
+	                                 { UIDisplayTextItems.SettingsFontBitmapFont};
+		}
+		else {
+			fontSizeStrings = new UIDisplayTextItem [] 
+                                     { UIDisplayTextItems.SettingsFontDeviceDefault,
+                       			       UIDisplayTextItems.SettingsFontSmall,
+                       			       UIDisplayTextItems.SettingsFontMedium,
+                       			       UIDisplayTextItems.SettingsFontLarge};
+		}
+		fontSizeChoiceGroup.setAll(fontSizeStrings);
+	}
+	   
+	void setFontSizeCGSelectedIndex(boolean useBitmapFont) {
+		if (! useBitmapFont) {
+			fontSizeChoiceGroup.setSelectedIndex(DictionarySettings.getFontSize(), true);
+		}
+		else {
+			fontSizeChoiceGroup.setSelectedIndex(indexFontSizeCGBitmapFont, true);
+		}
+	}
+
+	/**
+	 * Check to see if the bitmap font setting should be shown
+	 */
+	void checkBitmapFontAvailable() {
+		StringColourItemTextPart part = new StringColourItemTextPart("test",
+				new RGBColour(0, 0, 0), new FontStyle(FontStyle.plain),
+				new SelectionMode(SelectionMode.none));
+		StringColourItemText text = new StringColourItemText();
+		text.addItemTextPart(part);
+		bitmapFontExists = new BitmapFontCanvas(text, 50, false).fontExists();
+	}
 }
 
 class SelectDictionaryPath extends Thread {

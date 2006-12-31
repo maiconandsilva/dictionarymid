@@ -30,7 +30,8 @@ public class DfMAlert extends Alert {
 				throws DictionaryException {
 		super(languageUITitle.getItemDisplayText(),
 			  languageUIAlertText.getItemDisplayText(),
-			  languageUIAlertText.getIcon(MainForm.applicationMainForm.display.getBestImageHeight(Display.ALERT), 
+			  languageUIAlertText.getIcon(ResourceHandler.getResourceHandlerObj().iconSizeGroupBig,
+           		   						  MainForm.applicationMainForm.display.getBestImageHeight(Display.ALERT), 
 					                      MainForm.applicationMainForm.display.getBestImageWidth(Display.ALERT)),
 			  alertType);
 	}
