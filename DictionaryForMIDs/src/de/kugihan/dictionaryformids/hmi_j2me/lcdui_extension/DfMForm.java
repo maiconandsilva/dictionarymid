@@ -14,11 +14,28 @@ import de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext.UIDisplayTextItem;
 public class DfMForm extends Form implements
 			LanguageUISensitiveItem  {
 	
-	public DfMForm(String Title) {
-		super(Title);		
+	UIDisplayTextItem title = null;
+	
+	public DfMForm()  {
+		super(null);
+	}
+	
+	public void setTitle(String titleParam) {
+		super.setTitle(titleParam);
+		title = null; 
+	}
+	
+	public void setTitleUIDisplayTextItem(UIDisplayTextItem titleParam) throws DictionaryException {
+		super.setTitle(titleParam.getItemDisplayText());
+		title = titleParam; 
 	}
 	
 	public void redisplayLabels() throws DictionaryException {
+		// redisplay the title
+		if (title != null) {
+			super.setTitle(title.getItemDisplayText());
+		}
+		
 		// Loops over all items of the form and redisplay their labels.
 		for (int currentIndexItem = 0;
 		 	 currentIndexItem <= size()-1;

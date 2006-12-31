@@ -20,7 +20,8 @@ public class DfMChoiceGroup extends ChoiceGroup implements
 
 	UIDisplayTextItem     languageUILabel = null;
 	UIDisplayTextItem[]   languageUIElements = null;  // remains null if languageUIElemens are not used
-	
+
+	// DfMChoiceGroup with String-type elements
 	public DfMChoiceGroup(UIDisplayTextItem languageUILabelParam,
             			  int 				choiceType,
             			  String[] 			StringElements,
@@ -29,31 +30,45 @@ public class DfMChoiceGroup extends ChoiceGroup implements
 		languageUILabel = languageUILabelParam;
 	}
 
+	// DfMChoiceGroup with UIDisplayTextItem-type elements
 	public DfMChoiceGroup(UIDisplayTextItem    languageUILabelParam,
                           int 				   choiceType,
                           UIDisplayTextItem [] languageUIElementsParam) throws DictionaryException {
 		super(languageUILabelParam.getItemDisplayText(), choiceType);
 		languageUILabel = languageUILabelParam;
 		languageUIElements = languageUIElementsParam;
-		for (int elementCount = 0; elementCount < languageUIElements.length; ++elementCount) {
-			Image imagePart;
-				imagePart = languageUIElements[elementCount].
-				               getIcon(MainForm.applicationMainForm.display.getBestImageHeight(Display.CHOICE_GROUP_ELEMENT), 
-				            		   MainForm.applicationMainForm.display.getBestImageWidth(Display.CHOICE_GROUP_ELEMENT)); 
-			append(languageUIElements[elementCount].getItemDisplayText(), imagePart);
+		if (languageUIElements != null ) {
+			for (int elementCount = 0; elementCount < languageUIElements.length; ++elementCount) {
+				append(languageUIElements[elementCount].getItemDisplayText(), getChoiceGroupIcon(languageUIElements[elementCount]));
+			}
 		}
 	}
-
+	
+	// setting of one single element
 	public void set(int elementNum, UIDisplayTextItem languageUIElement) throws DictionaryException {
 		languageUIElements[elementNum] = languageUIElement; 
-		Image imagePart = languageUIElement.
-							getIcon(MainForm.applicationMainForm.display.getBestImageHeight(Display.CHOICE_GROUP_ELEMENT), 
-									MainForm.applicationMainForm.display.getBestImageWidth(Display.CHOICE_GROUP_ELEMENT)); 
 		super.set(elementNum, 
 				  languageUIElement.getItemDisplayText(), 
-				  imagePart);
+				  getChoiceGroupIcon(languageUIElement));
 	}
 	
+	// appending of one single element
+	public void append(UIDisplayTextItem languageUIElement) throws DictionaryException {
+		super.append(languageUIElement.getItemDisplayText(), 
+				     getChoiceGroupIcon(languageUIElement));
+		languageUIElements[super.size()-1] = languageUIElement; 
+	}
+	
+	// setting of all elements
+	public void setAll(UIDisplayTextItem[] languageUIElementsParam) throws DictionaryException {
+		languageUIElements = new UIDisplayTextItem[languageUIElementsParam.length];
+		super.deleteAll();
+		for (int elementCount = 0; elementCount < languageUIElementsParam.length; ++ elementCount) {
+			append(languageUIElementsParam[elementCount]);
+		}
+	}
+	
+	// new display of the labels
 	public void redisplayLabels() throws DictionaryException {
 		LcdUILib.setLanguageUIItemLabel(this, languageUILabel);
 		if (languageUIElements != null) {
@@ -63,4 +78,13 @@ public class DfMChoiceGroup extends ChoiceGroup implements
 		}
 	}
 
+	// getting the icon for an element
+	Image getChoiceGroupIcon(UIDisplayTextItem uiDisplayTextItem) throws DictionaryException {
+		Image imagePart;
+		imagePart = uiDisplayTextItem.
+		               getIcon(ResourceHandler.getResourceHandlerObj().iconSizeGroupSmall,
+		            		   MainForm.applicationMainForm.display.getBestImageHeight(Display.CHOICE_GROUP_ELEMENT), 
+		            		   MainForm.applicationMainForm.display.getBestImageWidth(Display.CHOICE_GROUP_ELEMENT));
+		return imagePart;
+	}
 }

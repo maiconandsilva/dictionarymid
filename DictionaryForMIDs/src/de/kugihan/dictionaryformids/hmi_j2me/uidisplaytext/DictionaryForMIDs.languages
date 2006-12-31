@@ -97,6 +97,7 @@ CommandChangeInputLanguage
 FromLanguageToLanguage, 2 ; indicates the translation direction (used for multi-direction dictionaries): %1 is the FromLanguage / %2 is the ToLanguage
 CommandCancel
 SettingsUseBitmapFont
+SettingsFontBitmapFont    ; selection font size for bitmap fonts
 ================================================================================
 #English, en
 
@@ -162,6 +163,7 @@ Change direction
 %1 > %2
 Cancel
 Use bitmap font
+bitmap font
 ================================================================================
 #Việt Nam, vi
 

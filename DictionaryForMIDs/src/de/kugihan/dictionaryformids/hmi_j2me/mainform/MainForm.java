@@ -91,7 +91,7 @@ public class MainForm
 										    // translation list is currently shown
 	
 	public MainForm(DictionaryForMIDs DictionaryForMIDsMidletParam) {
-		super(DictionaryForMIDs.applicationName);
+		setTitle(DictionaryForMIDs.applicationName);
 		/*
 		 * Initialisation of required objects
 		 */
@@ -407,7 +407,7 @@ public class MainForm
 	// update the fonts of the translated texts:
 	public void updateFonts() 
 				throws DictionaryException {
-		if (!DictionarySettings.getUseBitmapFont()) // todo: font size changes must be possible with activated bitmap fonts
+		if (!DictionarySettings.getUseBitmapFont())
 		mainFormItemsObj.updateFonts();
 	}
 	
