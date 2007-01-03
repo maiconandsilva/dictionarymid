@@ -1,0 +1,228 @@
+/*
+	 JARCreator for DictionaryForMIDs 
+	 Copyright (C) 2005 Mathis Karmann
+
+	 Some modifications by Gert Nuber
+
+	 GPL applies - see file COPYING for copyright statement.
+	 */
+package de.kugihan.jarCreator;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.jar.Attributes;
+import java.util.jar.JarEntry;
+import java.util.jar.JarInputStream;
+import java.util.jar.JarOutputStream;
+import java.util.jar.Manifest;
+import java.util.zip.ZipEntry;
+
+import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
+import de.kugihan.dictionaryformids.general.Util;
+import de.kugihan.dictionaryformids.j2se.UtilWin;
+
+public class JarCreator {
+	public static final String EXTENSION_JAR = ".jar";
+	public static final String EXTENSION_JAD = ".jad";
+	public static final String FILE_EMPTY_JAR_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAR;
+	public static final String FILE_EMPTY_JAD_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAD;
+	public static final String versionNumber = "2.7.4";
+
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+		printCopyrightNotice();
+		if (args.length!=3){
+			System.err.println("USAGE: java -jar JarCreator.jar dictionarydirectory emptyjar outputdirectory\n\n"+
+					"dictionarydirectory: directory containing the dictionary files and the file DictionaryForMIDs.properties\n"+
+					"emptydictionaryformids: directory of the empty DictionaryForMIDs.jar/.jad without dictionary files\n"+
+					"outputdirectory: directory where the generated JAR/JAD files are written to\n\n");
+			System.exit(1);
+		}
+
+		String dictionarydirectory = getPathName(args[0]); 
+		String emptydictionaryformids = getPathName(args[1]);
+		String outputdirectory = getPathName(args[2]);
+		// Test to be sure that only the 'dictionary'-directory is included in the JAR-file: 
+		if (! dictionarydirectory.endsWith(DictionaryDataFile.pathNameDataFiles + File.separator)) {
+			System.err.println("Argument 1 (dictionarydirectory) must end with " + DictionaryDataFile.pathNameDataFiles);  
+			System.exit(1);
+		}
+		String applicationUniqueIdentifier = buildApplicationUniqueIdentifier(dictionarydirectory);
+		String midletName = DictionaryDataFile.applicationFileNamePrefix + applicationUniqueIdentifier; 
+		String midletNameShort = "DfM" + applicationUniqueIdentifier; 
+		// restrict midletName to a maximum of 32 characters, because Motorola phones cannot handle more
+		int maxMidletNameLength = 32;
+		if (midletName.length() > maxMidletNameLength) 
+			midletName = midletName.substring(0, maxMidletNameLength); 
+		String fileNameOutputJar = outputdirectory + midletName + EXTENSION_JAR;
+		String fileNameOutputJad = outputdirectory + midletName + EXTENSION_JAD;
+
+		File dictDir = new File(dictionarydirectory);
+		String fileNameEmptyJar = emptydictionaryformids + FILE_EMPTY_JAR_NAME;
+		JarInputStream emptyJar = new JarInputStream(new FileInputStream(new File(fileNameEmptyJar))); //would be better: in resources of JAR file of JARCreator -- new JarInputStream(getClass().getResourceAsStream(emptyJAR));	 
+		File jarOutputFile = new File(fileNameOutputJar);
+		long jarSize=writeJAR(midletName, midletNameShort, dictDir, emptyJar, jarOutputFile);
+		System.out.println("Written JAR-file: " + fileNameOutputJar);
+
+		File jadInputFile=new File(emptydictionaryformids+FILE_EMPTY_JAD_NAME);
+		File jadOutputFile=new File(fileNameOutputJad);
+		writeJAD(jarSize, midletNameShort, midletName, jadInputFile, jadOutputFile);
+		System.out.println("Written JAD-file: " + fileNameOutputJad);
+
+		System.out.println("\nYou may now create "+
+				"DictionaryForMIDs_VVVVV_XXXYYY_ZZZ.zip\n"+
+				"VVVVV: version of DictionaryForMIDs\n"+
+				"XXX: language1FilePostfix\n"+
+				"YYY: language2FilePostfix\n"+
+				"ZZZ: dictionaryAbbreviation");
+	}
+
+	static void writeJAD(long jarSize, String midletNameShort,String midletName, File jadInputFile, File jadOutputFile) throws IOException {
+		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(jadInputFile)));
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(jadOutputFile)));
+
+		boolean sizeSuccessful=false;
+		boolean midletNameSuccessful=false;
+		boolean midlet1Successful=false;
+		String line = null;
+		while((line = in.readLine()) != null){
+			if (line.startsWith("MIDlet-Jar-Size")){
+				out.write("MIDlet-Jar-Size: "+jarSize);
+				sizeSuccessful=true;
+			}
+			else if (line.startsWith("MIDlet-Name")){
+				out.write("MIDlet-Name: "+midletNameShort);
+				midletNameSuccessful=true;
+			}
+			else if (line.startsWith("MIDlet-1")){
+				out.write("MIDlet-1: " + buildMidlet1Name(midletName));
+				midlet1Successful=true;
+			}
+			else if (line.startsWith("MIDlet-Jar-URL")){
+				out.write("MIDlet-Jar-URL: "+midletName + EXTENSION_JAR);  // complete URL is not provided
+			}
+			else{
+				out.write(line);
+			}
+			out.newLine();
+		}
+		in.close();
+		out.close();
+
+		if (!sizeSuccessful){
+			throw new RuntimeException("MIDlet-Jar-Size entry in jad file couldn't be changed");
+		}
+		else if (!midletNameSuccessful){
+			throw new RuntimeException("MIDlet-Name entry in jad file couldn't be changed");
+		} 
+		else if (!midlet1Successful){
+			throw new RuntimeException("MIDlet-1 entry in jad file couldn't be changed");
+		} 
+	}
+
+	static long writeJAR(String midletName, String midletNameShort, File dictDir, JarInputStream in, File jarOutputFile) throws IOException{//returns the file size of the JAR file
+		Manifest manifest = new Manifest(in.getManifest());
+		Attributes manifestAttributes = manifest.getMainAttributes();
+		manifestAttributes.putValue("MIDlet-Name", midletNameShort);
+		manifestAttributes.putValue("MIDlet-1", buildMidlet1Name(midletName));
+
+		JarOutputStream out=new JarOutputStream(new FileOutputStream(jarOutputFile), manifest);
+
+		byte[] b = new byte[3000];
+		int readBytes;
+		JarEntry nextOne;
+		while((nextOne=in.getNextJarEntry())!=null){
+			out.putNextEntry(nextOne);
+			while(( readBytes= in.read(b,0,3000)) != -1) 
+			{ 
+				out.write(b, 0, readBytes); 
+			} 
+		}
+		in.close();
+
+		ZipEntry dictionaryDir= new ZipEntry(DictionaryDataFile.pathNameDataFiles + "/"); // are these two
+		out.putNextEntry(dictionaryDir);												  // lines neccessary?
+
+		File[] dictFiles= dictDir.listFiles();
+		for(int i=0; i<dictFiles.length; i++) 
+		{ 
+			FileInputStream fis = new FileInputStream(dictFiles[i]); 
+			if (dictFiles[i].getName().equals("font.bmf")){
+				// out.putNextEntry(new ZipEntry(DictionaryDataFile.pathNameFonts + "/"+dictFiles[i].getName())); 
+				out.putNextEntry(new ZipEntry("fonts" + "/"+dictFiles[i].getName())); 
+				while((readBytes = fis.read(b)) != -1) { 
+					out.write(b, 0, readBytes); 
+				}
+			}
+			else{
+				out.putNextEntry(new ZipEntry(DictionaryDataFile.pathNameDataFiles + "/"+dictFiles[i].getName())); 
+				while((readBytes = fis.read(b)) != -1) { 
+					out.write(b, 0, readBytes); 
+				}
+			}
+			fis.close(); 
+		}
+		out.close();
+		return jarOutputFile.length();
+	}
+
+	// adds a directory separator character to pathName if the pathName does have one at the end 
+	static String getPathName(String pathName) {
+		String completePathName = pathName;
+		if (! completePathName.endsWith(File.separator)) {
+			completePathName = completePathName + File.separator; 
+		}
+		return completePathName;
+	}
+
+	// create suffix for unique application name from the language postfixes plus dictionary abbreviation
+	static String buildApplicationUniqueIdentifier(String propertyPath) {
+		UtilWin utilObj = new UtilWin();
+		Util.setUtil(utilObj);
+		String applicationUniqueIdentifier = new String("_");
+		try {
+			utilObj.setPropertyPath(propertyPath);
+			DictionaryDataFile.initValues(false);
+			for (int indexLanguage = 0;
+					indexLanguage < DictionaryDataFile.numberOfAvailableLanguages;
+					++indexLanguage) {
+				applicationUniqueIdentifier = applicationUniqueIdentifier + 
+					DictionaryDataFile.supportedLanguages[indexLanguage].languageFilePostfix;
+					}
+			if (DictionaryDataFile.dictionaryAbbreviation != null) {
+				applicationUniqueIdentifier = applicationUniqueIdentifier + "_" + 
+					DictionaryDataFile.dictionaryAbbreviation;
+			}
+			else {
+				System.err.println("Warning: property dictionaryAbbreviation is not set");  
+			}
+		}
+		catch (Throwable t) {
+			Util.getUtil().log(t);
+		}
+		return applicationUniqueIdentifier;
+	}
+
+	static String buildMidlet1Name(String midletName) {
+		return midletName + ", DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_j2me.DictionaryForMIDs";		
+	}
+
+	static public void printCopyrightNotice() {
+		System.out.print(
+				"\n\nDictionaryForMIDs/JarCreator, Copyright (C) 2005 Mathis Karmann\n" +
+				"Version : " + versionNumber + "\n\n" +
+				"This program comes with ABSOLUTELY NO WARRANTY\n\n" +
+				"This program is free software under the terms and conditions of the GPL " + 
+				"(GNU \nGeneral Public License) version 2. See file COPYING. " +
+				"If you did not receive the\nGNU General Public License along with this program " +
+				"(file COPYING), write\nto the Free Software Foundation, Inc., " +
+				"59 Temple Place, Suite 330, Boston,\nMA  02111-1307  USA\n\n" +
+				"Source code is availble from http://sourceforge.net/projects/dictionarymid\n\n\n");
+	}
+}
