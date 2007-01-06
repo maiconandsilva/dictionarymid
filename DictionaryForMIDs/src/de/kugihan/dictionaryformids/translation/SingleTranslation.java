@@ -8,11 +8,18 @@ GPL applies - see file COPYING for copyright statement.
 package de.kugihan.dictionaryformids.translation;
 
 public class SingleTranslation {
-	public StringBuffer fromText;
-	public StringBuffer toText;
+	public    StringBuffer fromText;
+	public    StringBuffer toText;
+	protected boolean      foundAtBeginOfExpression;
+	protected DirectoryFileLocation directoryFileLocation;
 	
-	public SingleTranslation(StringBuffer fromTextParam, StringBuffer toTextParam) {
+	public SingleTranslation(StringBuffer          fromTextParam, 
+			                 StringBuffer          toTextParam,
+			                 boolean      		   foundAtBeginOfExpressionParam,
+			                 DirectoryFileLocation directoryFileLocationParam) {
 		fromText = fromTextParam;
 		toText = toTextParam;
+		foundAtBeginOfExpression = foundAtBeginOfExpressionParam;
+		directoryFileLocation = directoryFileLocationParam;
 	}
 }

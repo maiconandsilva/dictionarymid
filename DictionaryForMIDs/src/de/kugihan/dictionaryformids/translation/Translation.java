@@ -418,7 +418,8 @@ public class Translation {
 			posFirstCharIndexString = posLastCharIndexString + 1;
 			int posIndexFileSeparatorFileNumberToPosition = 
 			        indexString.indexOf(DictionaryDataFile.indexFileSeparatorFileNumberToPosition);
-			String directoryFileNumber = indexString.substring(0, posIndexFileSeparatorFileNumberToPosition);
+			String directoryFileNumberString = indexString.substring(0, posIndexFileSeparatorFileNumberToPosition);
+			int directoryFileNumber = Integer.parseInt(directoryFileNumberString);
 			int posIndexFileSeparatorFilePositionToSearchIndicator = 
 				    indexString.indexOf(DictionaryDataFile.indexFileSeparatorFilePositionToSearchIndicator, 
 				    		            posIndexFileSeparatorFileNumberToPosition + 1);
@@ -448,19 +449,15 @@ public class Translation {
 				}
 				
 				if (! translationBreakCondition()) {
-					String dictionaryFileName = DictionaryDataFile.getPathDataFiles() + 
-		                                        DictionaryDataFile.prefixDictionaryFile +
-		                                        postfixDictionaryFile +
-												directoryFileNumber +
-		                                        DictionaryDataFile.suffixDictionaryFile;
 					
 					/*
 					 *  read dictionary file
 					 */ 
-					Util.getUtil().logDebug("dictionaryFileName " + dictionaryFileName);
-					Util.getUtil().logDebug("position " + String.valueOf(positionInDirectoryFile));
-					getTranslation(dictionaryFileName, 
-							       positionInDirectoryFile, 
+					DirectoryFileLocation directoryFileLocation = 
+						             new DirectoryFileLocation(directoryFileNumber,
+														       postfixDictionaryFile,
+														       positionInDirectoryFile);
+					getTranslation(directoryFileLocation, 
 							       searchIndicatorObj.isBeginOfExpression());
 				}
 				else {
@@ -471,16 +468,21 @@ public class Translation {
 		while (posIndexFileSeparatorIndexEntries > 0);
 	}
 	
-	public void getTranslation(String dictionaryFileName,
-							   int positionInDirectoryFile,
-							   boolean foundAtBeginOfExpression) 
+	public void getTranslation(DirectoryFileLocation directoryFileLocation, boolean foundAtBeginOfExpression) 
 	throws DictionaryException
 	{
+		String dictionaryFileName = DictionaryDataFile.getPathDataFiles() + 
+							        DictionaryDataFile.prefixDictionaryFile +
+							        directoryFileLocation.postfixDictionaryFile +
+							        directoryFileLocation.directoryFileNumber +
+							        DictionaryDataFile.suffixDictionaryFile;
+		Util.getUtil().logDebug("dictionaryFileName " + dictionaryFileName);
+		Util.getUtil().logDebug("position " + String.valueOf(directoryFileLocation.positionInDirectoryFile));
 		CsvFile dictionaryFile = new CsvFile(dictionaryFileName, 
 	    							         DictionaryDataFile.dictionaryFileSeparationCharacter,
 											 DictionaryDataFile.dictionaryCharEncoding,
 											 DictionaryDataFile.dictionaryFileMaxSize,
-											 positionInDirectoryFile);
+											 directoryFileLocation.positionInDirectoryFile);
 
 		Util.memCheck("dictionaryfile open: ");
 		StringBuffer fromText = null; 
@@ -498,38 +500,39 @@ public class Translation {
 				toText = word;
 			}
 		}
-		addTranslation(fromText, toText, foundAtBeginOfExpression);
+		addTranslation(fromText, toText, foundAtBeginOfExpression, directoryFileLocation);
 		dictionaryFile = null; // to allow garbage collection
 	}
 	
-	public void addTranslation(StringBuffer fromText, 
-			                   StringBuffer toText,
-			                   boolean foundAtBeginOfExpression) {
+	public void addTranslation(StringBuffer 		 fromText, 
+			                   StringBuffer 		 toText,
+			                   boolean               foundAtBeginOfExpression,
+			                   DirectoryFileLocation directoryFileLocation) {
 		if (toText == null) // one-language dictionaries don't have a toText
 			toText = new StringBuffer();
 		if (toText.length() > 0) {
 			Util.getUtil().convertFieldAndLineSeparatorChars(toText);
+			// remove duplicate entries 
+			// optimization: this needs to be implemented more efficiently; current implementation is
+			//               slow if many results exist
 			/* Some dictionaries contain the same translation twice: such duplicate translations
 			   are included one one time in the result. */
 			boolean isDuplicate = false;
-			// todo : for tests:
-			if (toText.equals("???")) isDuplicate = true;
-			/* Uncommented because this may be a performance issue if plenty of results are found 
-			String fromTextString = fromText.toString(); 
-			String toTextString = toText.toString(); 
 			for (int indexTranslation = 0; 
 			     indexTranslation < resultOfTranslation.translations.size(); 
 				 ++indexTranslation) {
 				SingleTranslation translation = (SingleTranslation) resultOfTranslation.translations.elementAt(indexTranslation);
-				if (fromTextString.equals(translation.fromText.toString()) &&  
-					toTextString.equals(translation.toText.toString())) {
+				if (directoryFileLocation.compareTo(translation.directoryFileLocation) == 0) {
 					isDuplicate = true;
 					break;
 				} 
-			} */
+			}
 			if (! isDuplicate) {
 				Util.getUtil().convertFieldAndLineSeparatorChars(fromText);
-				SingleTranslation singleTranslation = new SingleTranslation(fromText, toText);
+				SingleTranslation singleTranslation = new SingleTranslation(fromText, 
+						                                                    toText,
+						                                                    foundAtBeginOfExpression,
+						                                                    directoryFileLocation);
 				// if the translation was found at the beginning then put at the top of the result list 
 				if (foundAtBeginOfExpression) {
 					// put at the top
