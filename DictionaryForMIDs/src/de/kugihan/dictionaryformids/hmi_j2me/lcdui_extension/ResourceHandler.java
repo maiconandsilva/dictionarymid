@@ -33,7 +33,7 @@ public class ResourceHandler {
 	
 	protected ResourceDfMInputStream resourceDfMInputStream;  // resources are all read from the JAR-file
 	
-	final static String pathSeparator = "/";
+	public final static String pathSeparator = "/";
 	/*
 	 * The method getIcon(int bestImageHeight, int bestImageWidth) should return an icon with the
 	 * size of bestImageHeight and bestImageWidth (or as closely as possible).
@@ -46,7 +46,7 @@ public class ResourceHandler {
 	public final String iconSizeGroupSmall = "small";
 	public final String iconSizeGroupBig   = "big";
 
-	class IconSize { 
+	public class IconSize { 
 		IconSize(String iconAreaParam, 
 				 String iconSizeGroupParam, 
 				 int[] sizesInPixelParam) {
@@ -54,13 +54,13 @@ public class ResourceHandler {
 			iconSizeGroup = iconSizeGroupParam;
 			sizesInPixel = sizesInPixelParam;
 		}
-		String iconArea;
-		String iconSizeGroup;
-		int[]  sizesInPixel;  // size is used both for height and width
-		                      // sizes must be sorted ascendingly
+		public String iconArea;
+		public String iconSizeGroup;
+		public int[]  sizesInPixel;  // size is used both for height and width
+		                      		 // sizes must be sorted ascendingly
 	}
 	// iconSizes defines the available sizes of the icons for a certain iconArea / iconSizeGroup
-	IconSize[] iconSizes = { 
+	public IconSize[] iconSizes = { 
 					new IconSize(iconAreaUIDisplayTextItems, iconSizeGroupSmall, new int[] {12 , 16, 20, 24, 32} ), 
 					new IconSize(iconAreaUIDisplayTextItems, iconSizeGroupBig,   new int[] {20, 32, 48} ), 
 			};
@@ -108,11 +108,23 @@ public class ResourceHandler {
 			throw new DictionaryException("Size for icon could not be determined: " +  iconArea + "/" + iconSizeGroup);
 		}
 		
-		return getImage(pathIcons + pathSeparator + 
-				        iconArea + pathSeparator + 
-				        iconSizeGroup + pathSeparator + 
-				        foundIconSizeInPixel +  "px", 
-				        iconName + fileExtensionIcons);
+		return getImage(buildIconPathName(iconArea, iconSizeGroup, foundIconSizeInPixel),  
+		        		buildIconFileName(iconName));
+	}
+	
+	public String buildIconPathName(String  iconArea, 
+						            String  iconSizeGroup,
+						            int     foundIconSizeInPixel) {
+		String iconPathName =   pathIcons + pathSeparator + 
+						        iconArea + pathSeparator + 
+						        iconSizeGroup + pathSeparator + 
+						        foundIconSizeInPixel +  "px";
+		return iconPathName;
+	}
+
+	public String buildIconFileName(String  iconName) {
+		String iconFileName = iconName + fileExtensionIcons;
+		return iconFileName;
 	}
 	
 	/*
@@ -134,7 +146,7 @@ public class ResourceHandler {
 		return imageFromResource;
 	}
 	
-	protected String getResourceLocation(String path,  // path is without leading or trailing /
+	public String getResourceLocation(String path,  // path is without leading or trailing /
 			                             String resourceName)
 	{
 		return pathSeparator + path + pathSeparator + resourceName;
