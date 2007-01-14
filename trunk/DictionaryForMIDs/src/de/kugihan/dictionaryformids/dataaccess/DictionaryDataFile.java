@@ -99,6 +99,7 @@ public class DictionaryDataFile  {
 			checkForEmptyProperty(normationClassName);
 			String dictionaryUpdateClassName = utilObj.getDictionaryPropertyString(languagePropertyPrefix + "DictionaryUpdateClassName", true);
 			checkForEmptyProperty(dictionaryUpdateClassName);
+			int indexNumberOfSourceEntries = utilObj.getDictionaryPropertyIntDefault(languagePropertyPrefix + "IndexNumberOfSourceEntries", -1);
 			String expressionSplitString = null;
 			if (initDictionaryGenerationValues) {
 				expressionSplitString = utilObj.getDictionaryPropertyString("dictionaryGenerationLanguage" + indexLanguageString + "ExpressionSplitString", true);
@@ -196,6 +197,7 @@ public class DictionaryDataFile  {
 																	   isSearchable,
 																	   hasSeparateDictionaryFile,
 					                                                   normationClassName,
+					                                                   indexNumberOfSourceEntries,
 					                                                   contentDefinitionAvailable,
 					                                                   content,
 					                                                   dictionaryUpdateClassName,
