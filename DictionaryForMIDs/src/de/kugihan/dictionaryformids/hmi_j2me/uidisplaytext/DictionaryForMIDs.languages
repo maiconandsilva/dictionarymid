@@ -29,7 +29,7 @@
 ! Dutch
 ! Greek
 ! Japanese
-! Rusian
+! Russian
 ! Spanish
 ! 
 ================================================================================
@@ -97,7 +97,11 @@ CommandChangeInputLanguage
 FromLanguageToLanguage, 2 ; indicates the translation direction (used for multi-direction dictionaries): %1 is the FromLanguage / %2 is the ToLanguage
 CommandCancel
 SettingsUseBitmapFont
+LanguageCzech
+LanguageSlovak
 SettingsFontBitmapFont    ; selection font size for bitmap fonts
+StartDisplayLanguageNumberOfEntries, 2  ; on the start display the number of entries for a language: %1 is the language / %2 is the number of entries
+StartDisplaySizeOfDictionaryInKb ; size of the dictionary in kB: %1 is the size
 ================================================================================
 #English, en
 
@@ -124,8 +128,8 @@ Find matching word only
 Apply
 Done
 Select language
-Up word
-Down word
+Back word
+Forward word
 Options when not found:
 Show nearby words
 Show suggestion words
@@ -163,7 +167,11 @@ Change direction
 %1 > %2
 Cancel
 Use bitmap font
+Czech
+Slovak
 bitmap font
+%1: %2 entries
+Size: %1 kB
 ================================================================================
 #Việt Nam, vi
 
@@ -228,6 +236,9 @@ Tìm từ
 Đổi chiều dịch
 %1 > %2
 Bỏ qua
+Sử dụng phông chữ vẽ
+Czech
+Slovak
 ================================================================================
 #Chinese, zh
 
@@ -293,6 +304,8 @@ Bỏ qua
 %1 > %2
 取消
 使用bitmap字体
+Czech
+Slovak
 ================================================================================
 #Dutch, nl
 
@@ -368,7 +381,7 @@ Pas de résultats
 Temps de réponse [ms]
 Réponses
 Memoire Libre :
-Raffiner la recherche:\n%1 Trouve quelconque séquence des caractères\n%2 Substitue caractères seuls\n\nPour raffiner la recherche sub-expression:\n%3 Avant de l'entrée trouve des résultats qui commencent avec celle-ci\n%4 Après de l'entrée génére des résultats qui finissent avec
+Raffiner la recherche:\n%1 Trouve quelconque séquence des caractères\n%2 Substitue caractères seuls\n\nPour raffiner la recherche sub-expression:\n%3 Avant de l'entrée trouve des résultats qui commencent avec celle-ci\n%4 Après de l'entrée génére des résultats qui finissent avec celle-ci
 (... Résultats max)
 (…Durée max)
 Annuler  résultats
@@ -398,6 +411,8 @@ Changer direction
 %1 > %2
 Annuler
 Utiliser caractères bitmap
+Czech
+Slovak
 ================================================================================
 #Greek, el
 
@@ -503,6 +518,8 @@ Sprachrichtung
 %1 > %2
 Abbruch
 Bitmap Font benutzen
+Czech
+Slovak
 ================================================================================
 #Italiano, it
 
@@ -543,7 +560,7 @@ Raffini la ricerca:\n% Cerca qualsiasi serie di carattere\n%2 Cerca solo caratte
 (…Tempo massimo di esecuzione)
 (...annulla ricevuto)
 Disabilita suggerimenti
-[no translation]
+
 Inglese
 Vietnamita
 Cinese
@@ -568,6 +585,8 @@ Cambia direzione
 %1 > %2
 Annulla
 Usi caratteri Bitmap
+Czech
+Slovak
 ================================================================================
 #Japanese, ja
 
@@ -690,7 +709,7 @@ Memoria Libre:
 Incapacite sugerencia
 ================================================================================
 #Czech, cz
-
+					
 Slovo k překladu:
 Přeložit
 Nové slovo
@@ -752,9 +771,11 @@ Hledej znaky
 změň směr
 %1 > %2
 Zruš
-Use bitmap Font
+Use bitmap font
+Czech
+Slovak
 ================================================================================
-#Slovakian, sk
+#Slovak, sl
 
 Slovo pre preklad:
 Preložiť
@@ -818,5 +839,7 @@ zmeň smer
 %1 > %2
 Zruš
 Use bitmap font
+Czech
+Slovak
 ================================================================================
 #Portugês [who can translate ?], pt

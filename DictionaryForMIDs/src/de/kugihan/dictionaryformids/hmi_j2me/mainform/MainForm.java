@@ -15,11 +15,16 @@ import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
+import javax.microedition.lcdui.Font;
+import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.ImageItem;
 import javax.microedition.lcdui.Item;
 import javax.microedition.lcdui.ItemCommandListener;
 import javax.microedition.lcdui.ItemStateListener;
+import javax.microedition.lcdui.Spacer;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
+import de.kugihan.dictionaryformids.dataaccess.LanguageDefinition;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.SettingsStore;
 import de.kugihan.dictionaryformids.general.Util;
@@ -141,6 +146,8 @@ public class MainForm
 		updateFonts();
 
 		displayStatisticItems();
+
+		showStartupDisplay();
 		
 		// special workaround for SE OutOfMemoryError
 		checkForSonyEricssonWorkaround();
@@ -233,6 +240,7 @@ public class MainForm
 	
 	public void translateToBeTranslatedWordTextField(boolean executeInBackground) 
 			throws DictionaryException {
+		removeStartupDisplay();
 		translateWord(toBeTranslatedWordTextField.getString(),
 					  executeInBackground);
 	}
@@ -315,6 +323,7 @@ public class MainForm
 	}
 	
 	public void dictionarySetting() {
+		removeStartupDisplay();
 		Display.getDisplay(dictionaryForMIDsMidlet).setCurrent(dictionarySettingFormObj);	
 	}
 	
@@ -420,18 +429,14 @@ public class MainForm
 		else  {
 			if ((DictionarySettings.isDictionaryAvailable()) && 
 				(dictionarySettingFormObj != null)) { // in order to set from/to language the settings must be available 
-				// more than one input language: indicate translation direction
-				String inputLanguageText  = 
-							LanguageUI.getUI().uiDisplayTextItemReference + 
-							LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + 
-				 			DictionaryDataFile.supportedLanguages[DictionarySettings.getInputLanguage()].languageDisplayText;
-				String outputLanguageText = 
-							LanguageUI.getUI().uiDisplayTextItemReference + 
-							LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + 
-				 			DictionaryDataFile.supportedLanguages[DictionarySettings.determineOutputLanguage()].languageDisplayText;
+				                                      // more than one input language: indicate translation direction
+				UIDisplayTextItem inputLanguageUIDisplayTextItem = 
+					LanguageUI.getUI().getLanguageUIDisplayTextItem(DictionaryDataFile.supportedLanguages[DictionarySettings.getInputLanguage()].languageDisplayText);
+				UIDisplayTextItem outputLanguageUIDisplayTextItem = 
+					LanguageUI.getUI().getLanguageUIDisplayTextItem(DictionaryDataFile.supportedLanguages[DictionarySettings.determineOutputLanguage()].languageDisplayText);
 				UIDisplayTextItems.FromLanguageToLanguage.setAllParameterValues(
-														new String [] { inputLanguageText, 
-																		outputLanguageText });
+														new Object [] { inputLanguageUIDisplayTextItem, 
+																        outputLanguageUIDisplayTextItem });
 				toBeTranslatedWordTextField.setLabel(UIDisplayTextItems.FromLanguageToLanguage);
 			}
 		}
@@ -612,6 +617,79 @@ public class MainForm
 		}
 	}
 
+	/*
+	 * Startup display
+	 */
+	boolean startupDisplayIsShown;  // set to true, when after startup the start screen is shown
+	int     indexOfFirstItemStartupDisplay;
+	int     indexOfLastItemStartupDisplay;
+	
+	// showing of the start display
+	void showStartupDisplay() 
+			throws DictionaryException {
+		indexOfFirstItemStartupDisplay = indexOfFirstTranslationItem;
+		indexOfLastItemStartupDisplay = indexOfFirstItemStartupDisplay - 1;
+		// use bold font
+		Font startupDisplayFont = Font.getFont(Font.getDefaultFont().getFace(), 
+				                               Font.STYLE_BOLD, 
+				                               Font.getDefaultFont().getSize());
+		// display info text of the dictionary
+		DfMStringItem infoTextItem = new DfMStringItem(DictionaryDataFile.infoText);
+		infoTextItem.setLayout(Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2);
+		infoTextItem.setFont(startupDisplayFont);
+		++indexOfLastItemStartupDisplay;
+		/* don't show for the moment insert(indexOfLastItemStartupDisplay, infoTextItem); */
+		Spacer space = new Spacer(0, getHeight()/10 + 5);
+		space.setLayout(Item.LAYOUT_2 | Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_NEWLINE_AFTER);
+		insert(indexOfLastItemStartupDisplay, space);
+		// display the number of entries for each input language
+		for (int languageCounter = 0; languageCounter < DictionaryDataFile.numberOfAvailableLanguages; ++languageCounter) {
+			LanguageDefinition language = DictionaryDataFile.supportedLanguages[languageCounter]; 
+			if (language.isSearchable) {
+				// prepare required UIDisplayTextItems
+				String languageDisplayText = DictionaryDataFile.supportedLanguages[languageCounter].languageDisplayText;
+				UIDisplayTextItem inputLanguageTextItem = 
+					LanguageUI.getUI().getUIDisplayTextItem
+				                   (LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + languageDisplayText, 
+				                    languageDisplayText);
+				String entriesUIDisplayTextItemTemplate = "StartDisplayLanguageNumberOfEntries";
+				UIDisplayTextItem entriesUIDisplayTextItem =  
+					LanguageUI.getUI().createUIDisplayTextItemFromTemplate
+				                   (entriesUIDisplayTextItemTemplate + language,
+				                    entriesUIDisplayTextItemTemplate);
+				entriesUIDisplayTextItem.setIconID(inputLanguageTextItem.getIconID());  // use the icon for the language
+				entriesUIDisplayTextItem.setParameterValue(1, inputLanguageTextItem);
+				entriesUIDisplayTextItem.setParameterValue(2, new Integer(language.indexNumberOfSourceEntries));
+				// first create icon
+				int iconSizeHeight = startupDisplayFont.getBaselinePosition();
+				int iconSizeWidth = (startupDisplayFont.getBaselinePosition()*4)/3; // flag icons have a bigger width than height
+				Image icon = entriesUIDisplayTextItem.getIcon("small", iconSizeHeight, iconSizeWidth);
+				ImageItem iconItem = new ImageItem(null, icon, Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_CENTER | Item.LAYOUT_VCENTER | Item.LAYOUT_2, null);
+				++indexOfLastItemStartupDisplay;
+				insert(indexOfLastItemStartupDisplay, iconItem);
+				// second create display text
+				DfMStringItem numberOfEntriesForLanguageItem = new DfMStringItem(entriesUIDisplayTextItem);
+				numberOfEntriesForLanguageItem.setLayout(Item.LAYOUT_2);
+				numberOfEntriesForLanguageItem.setFont(startupDisplayFont);
+				++indexOfLastItemStartupDisplay;
+				insert(indexOfLastItemStartupDisplay, numberOfEntriesForLanguageItem);
+			}
+		}
+		startupDisplayIsShown = true;
+	}
+	
+	// removal of the start display if it is shown
+	void removeStartupDisplay() {
+		if (startupDisplayIsShown) {
+			for (int currentIndexItemStartupDisplay = indexOfFirstItemStartupDisplay;
+				 currentIndexItemStartupDisplay <= indexOfLastItemStartupDisplay;
+				 ++currentIndexItemStartupDisplay) {
+				delete(indexOfFirstItemStartupDisplay);
+			}
+			startupDisplayIsShown = false;
+		}
+	}
+	
 
 	// Hope someone will solve this SonyEricsson problem, so that the following workaround will
 	// not be necessary any more !

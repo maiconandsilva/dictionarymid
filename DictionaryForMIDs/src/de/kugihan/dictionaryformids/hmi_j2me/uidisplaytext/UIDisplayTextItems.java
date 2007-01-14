@@ -80,5 +80,9 @@ public class UIDisplayTextItems {
 	public static final UIDisplayTextItem FromLanguageToLanguage = LanguageUI.getUI().createNewUIDisplayTextItem("FromLanguageToLanguage", 60, 2);
 	public static final UIDisplayTextItem CommandCancel = LanguageUI.getUI().createNewUIDisplayTextItem("CommandCancel", 61, 0);
 	public static final UIDisplayTextItem SettingsUseBitmapFont = LanguageUI.getUI().createNewUIDisplayTextItem("SettingsUseBitmapFont", 62, 0);
-	public static final UIDisplayTextItem SettingsFontBitmapFont = LanguageUI.getUI().createNewUIDisplayTextItem("SettingsFontBitmapFont", 63, 0);
+	public static final UIDisplayTextItem LanguageCzech = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageCzech", 63, 0);
+	public static final UIDisplayTextItem LanguageSlovak = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageSlovak", 64, 0);
+	public static final UIDisplayTextItem SettingsFontBitmapFont = LanguageUI.getUI().createNewUIDisplayTextItem("SettingsFontBitmapFont", 65, 0);
+	public static final UIDisplayTextItem StartDisplayLanguageNumberOfEntries = LanguageUI.getUI().createNewUIDisplayTextItem("StartDisplayLanguageNumberOfEntries", 66, 2);
+	public static final UIDisplayTextItem StartDisplaySizeOfDictionaryInKb = LanguageUI.getUI().createNewUIDisplayTextItem("StartDisplaySizeOfDictionaryInKb", 67, 0);
 }

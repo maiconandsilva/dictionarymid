@@ -74,6 +74,7 @@ public class WordHistory {
 	protected void setCurHistoryWord() 
 			throws DictionaryException {
 		saveFlag = false;
+		MainForm.applicationMainForm.removeStartupDisplay();
 		MainForm.applicationMainForm.toBeTranslatedWordTextField.setString(historyWord[curHistoryPos]);
 		MainForm.applicationMainForm.dictionarySettingFormObj.setInputLanguage(fromLanguageHistory[curHistoryPos]);
 		MainForm.applicationMainForm.dictionarySettingFormObj.setOutputLanguage(toLanguageHistory[curHistoryPos]);

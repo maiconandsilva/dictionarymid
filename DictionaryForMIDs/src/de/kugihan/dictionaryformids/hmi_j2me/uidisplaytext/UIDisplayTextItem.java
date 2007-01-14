@@ -20,8 +20,9 @@ public class UIDisplayTextItem {
 	final char parameterIndicator = '%';
 	
 	public String    id;       // ID for this UIDisplayTextItem
-	protected int    keyValue; // index to UIDisplayTextsContent
-	final int keyValueNonTranslatable = -1;   // when keyValue is set to keyValueNonTranslateable then this indicates that
+	protected String iconID;   // ID for the icon (by default the same as id) 
+	public int       keyValue; // index to UIDisplayTextsContent
+	final int keyValueNonTranslatable = -1;    // when keyValue is set to keyValueNonTranslateable then this indicates that
 	                                           // for this UIDisplayTextItem there is no translation in UIDisplayTextContents.availableDisplayTexts
 											   // In this case, the value of fallbackTranslation is used
 	String    fallbackTranslation = null;
@@ -34,7 +35,7 @@ public class UIDisplayTextItem {
 	
 	UIDisplayTextItem(String idParam, int keyValueParam, int numberOfParameters) {
 		// the ID is saved
-		id = idParam; 
+		iconID = id = idParam; 
 		// the index to UIDisplayTextsContent is saved
 		keyValue = keyValueParam;
 		// the parameterValue-array is created
@@ -43,7 +44,7 @@ public class UIDisplayTextItem {
 
 	UIDisplayTextItem(String idParam, String fallbackTranslationParam, int numberOfParameters) {
 		// the ID is saved
-		id = idParam; 
+		iconID = id = idParam; 
 		// the keyValue is set to keyValueNonTranslateable to indicate that there is no translation for this UIDisplayTextItem
 		keyValue = keyValueNonTranslatable;
 		// the fallback translation is saved
@@ -58,15 +59,18 @@ public class UIDisplayTextItem {
 			parameters[parameterCount] = new UIDisplayTextItemParameter();
 	}
 
+	public int getNumberOfParameters() {
+		return parameters.length;
+	}
 	
 	// parameter numbers are starting with 1
-	public void setParameterValue(int parameterNumber, String parameterValueParam) 
+	public void setParameterValue(int parameterNumber, Object parameterValueParam) 
 				throws DictionaryException {
 		doParameterRangeCheck(parameterNumber);
 		parameters[parameterNumber - 1].setValue(parameterValueParam);
 	}
 	
-	public void setAllParameterValues(String [] parameterValueParam) 
+	public void setAllParameterValues(Object [] parameterValueParam) 
 				throws DictionaryException {
 		if (parameterValueParam.length != parameters.length)
 			throw new DictionaryException("Incorrect number of parameter values");
@@ -107,7 +111,7 @@ public class UIDisplayTextItem {
 							throw new DictionaryException(parameterIndicator + " is not followed by number");
 						int parameterNumber = Integer.valueOf(String.valueOf(nextCharacter)).intValue();
 						doParameterRangeCheck(parameterNumber);
-						parametersReplaced.append(parameters[parameterNumber-1].getValue());
+						parametersReplaced.append(parameters[parameterNumber-1].getStringValue());
 					}
 					fromPos = toPos + 2; // skip parameterIndicator and the parameterNumber
 				}
@@ -164,7 +168,7 @@ public class UIDisplayTextItem {
 				icon = ResourceHandler.getResourceHandlerObj().getIcon
 									  (ResourceHandler.getResourceHandlerObj().iconAreaUIDisplayTextItems, 
 									   iconSizeGroup,
-	                                   id, 
+									   iconID, 
 	                                   bestImageHeight, 
 	                                   bestImageWidth);
 				// store the requested height and width
@@ -177,39 +181,50 @@ public class UIDisplayTextItem {
 		}
 		return icon;
 	}	
+	
+	// normally the icon is identified by the id of the UIDisplayText; with the setIconID method 
+	// a special id for the icon can be set.
+	public void setIconID(String iconIDParam) {
+		iconID = iconIDParam;
+	}
+
+	public String getIconID() {
+		return iconID;
+	}
+	
 }
 
 class UIDisplayTextItemParameter {
-	private String  value;
-	private boolean isUIDisplayTextItem; // true when the parameter refers to the content of another UIDisplayTextItem
+	private Object  value;  // value can be of type String, Integer and UIDisplayTextItem
 	
 	UIDisplayTextItemParameter() {
 		value = null;  // initialise with null as 'not yet defined'
 	}
 
-	public String getValue() throws DictionaryException {
+	public String getStringValue() throws DictionaryException {
 		String returnValue;
 		if (value == null)
 			throw new DictionaryException("Parameter value not defined");
-		if (isUIDisplayTextItem) {
+		if (value instanceof String) {
+			// this parameter is of type Integer
+			returnValue = (String) value;
+		}
+		else if (value instanceof Integer) {
+			// this parameter is of type Integer
+			returnValue = ((Integer) value).toString(); 
+		}
+		else if (value instanceof UIDisplayTextItem) {
 			// this parameter refers to another UIDisplayTextItem
-			String uiDisplayTextItemID = value.substring(LanguageUI.getUI().uiDisplayTextItemReference.length(),
-					                                     value.length());
-			UIDisplayTextItem referredUIDisplayTextItem = LanguageUI.getUI().existingUIDisplayTextItem(uiDisplayTextItemID, false);
-			returnValue = referredUIDisplayTextItem.getItemDisplayText();
+			returnValue = ((UIDisplayTextItem) value).getItemDisplayText();
 		}
 		else {
-			returnValue = value;
+			throw new DictionaryException("Type " + value.getClass().toString() + " not supported as parameter");
 		}
 		return returnValue;
 	}
 
-	public void setValue(String value) {
+	public void setValue(Object value) {
 		this.value = value;
-		if (value.startsWith(LanguageUI.getUI().uiDisplayTextItemReference)) 
-			isUIDisplayTextItem = true;
-		else
-			isUIDisplayTextItem = false;
 	}
 
 }

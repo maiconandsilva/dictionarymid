@@ -11,7 +11,9 @@ package de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext;
 
 import java.util.Hashtable;
 
+import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.general.DictionaryException;
+import de.kugihan.dictionaryformids.hmi_j2me.DictionarySettings;
 
 public class LanguageUI {
 	
@@ -77,6 +79,16 @@ public class LanguageUI {
 	 */
 	private Hashtable uiDisplayTextItemTable = new Hashtable(UIDisplayTextContents.totalNumberItemsInLanguage);
 	
+	// Creates a new translatable UIDisplayTextItem object as a clone from an template    
+	public UIDisplayTextItem createUIDisplayTextItemFromTemplate(String idNewUIDisplayTextItem, String idTemplate)
+			throws DictionaryException {
+		UIDisplayTextItem template = existingUIDisplayTextItem(idTemplate, true);
+		UIDisplayTextItem newUIDisplayTextItem = createNewUIDisplayTextItem(idNewUIDisplayTextItem, 
+				                                                            template.keyValue,
+				                                                            template.getNumberOfParameters());
+		return newUIDisplayTextItem;
+	}
+
 	// Creates a new translatable UIDisplayTextItem object  
 	UIDisplayTextItem createNewUIDisplayTextItem(String id, int keyValue, int numberOfParameters) {
 		UIDisplayTextItem newUIDisplayTextItem = new UIDisplayTextItem(id, keyValue, numberOfParameters);
@@ -117,6 +129,19 @@ public class LanguageUI {
 			throw new DictionaryException("No UIDisplayTextItem for " + uiDisplayTextItemID);
 		}
 		return foundUIDisplayTextItem;
+	}
+	
+	/*
+	 * Getting specific UIDisplayTextItems
+	 */
+	// Language UIDisplayTextItems
+	public UIDisplayTextItem getLanguageUIDisplayTextItem(String language) 
+			throws DictionaryException {
+		String languageID  = uiDisplayTextItemReference + 
+							 uiDisplayTextItemPrefixLanguage + 
+							 language;
+		UIDisplayTextItem languageUIDisplayTextItem = LanguageUI.getUI().getUIDisplayTextItem(languageID, language);
+		return languageUIDisplayTextItem;
 	}
 	
 }
