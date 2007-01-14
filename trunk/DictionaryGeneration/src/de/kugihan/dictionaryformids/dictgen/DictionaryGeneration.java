@@ -37,7 +37,7 @@ import de.kugihan.dictionaryformids.translation.normation.Normation;
 
 public class DictionaryGeneration {
 
-	static final String versionNumber = "3.0.6";
+	static final String versionNumber = "3.0.7";
 	static String FILE_SEPARATOR = System.getProperty("file.separator");
 	
 	static String sourceFile;
