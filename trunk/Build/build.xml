@@ -1,0 +1,68 @@
+<!-- This file build.xml should be located in directory Build -->
+<!-- You must set _path_ to your WTK installation directory -->
+<!-- this version generates DictionaryGeneration.jar  and JarCreator.jar -->
+<!-- using: run ant in directory Build  -->
+<!-- it runs well on both platforms windows/linux -->
+<!-- version 1.0 -->
+
+<project name="allwork" default="create_jars">
+
+  <property name="DfM" location="../DictionaryForMIDs"/>
+  <property name="DG"  location="../DictionaryGeneration"/>
+  <property name="J2SE"  location="../J2SE"/>
+  <property name="JC"  location="../JarCreator"/>
+
+	<property name="_path_"  location="D:\WTK25"/>
+	<!-- <property name="_path_"  location="/home/peto/.netbeans/5.5beta2/emulators/wtk22_linux/emulator/wtk22"/> -->
+  <property name="jars"  location="${_path_}\lib\midpapi20.jar;${_path_}\lib\cldcapi11.jar;${_path_}\lib\jsr75.jar"/>
+  <!-- <property environment="env"/> -->
+
+  <target name="compile" depends="clean">
+    <mkdir dir="${JC}/bin"/>
+    <mkdir dir="${DG}/bin"/>
+    <mkdir dir="${DfM}/bin"/>
+    <mkdir dir="${J2SE}/bin"/>
+ 
+    <javac srcdir="${DfM}/src"   classpath="${jars}" encoding="UTF-8" destdir="${DfM}/bin" />
+    <javac srcdir="${J2SE}/src"  classpath="${jars};${DfM}/bin" encoding="UTF-8" destdir="${J2SE}/bin" />
+    <javac srcdir="${DG}/src"    classpath="${jars};${J2SE}/bin;${DfM}/bin" encoding="UTF-8" destdir="${DG}/bin" />
+    <javac srcdir="${JC}/src"    classpath="${jars};${J2SE}/bin;${DfM}/bin;${DG}/bin" encoding="UTF-8" destdir="${JC}/bin" />
+  </target>
+
+  <target name="clean">
+    <delete dir="${DfM}/bin"/>
+    <delete dir="${DG}/bin"/>
+    <delete dir="${JC}/bin"/>
+    <delete dir="${J2SE}/bin"/>
+  </target>
+
+  <target name="create_jars" depends="compile">
+    <!-- <jar destfile="${JC}/JarCreator.jar"  > -->
+    <jar destfile="JarCreator.jar"  >
+      <fileset dir="${DfM}/bin"  includes="de/kugihan/dictionaryformids/**"  />
+      <fileset dir="${JC}/bin"  includes="de/kugihan/jarCreator/JarCreator.class"  />
+      <fileset dir="${DG}/bin"  includes="de/kugihan/dictionaryformids/**"  />
+      
+      <manifest>
+        <attribute name="Built-By" value="${user.name}"/>
+        <attribute name="Created-By" value="Mathis Karmann"/>
+        <attribute name="Main-Class" value="de.kugihan.jarCreator.JarCreator"/>
+      </manifest>
+    </jar>
+
+    <!-- <jar destfile="${DG}/DictionaryGeneration.jar"  > -->
+    <jar destfile="DictionaryGeneration.jar"  >
+      <fileset dir="${DfM}/bin"    includes="de/kugihan/dictionaryformids/**"   />
+      <fileset dir="${DG}/bin"    includes="de/kugihan/dictionaryformids/**"  />
+      <fileset dir="${J2SE}/bin"  includes="de/kugihan/dictionaryformids/**"  />
+      <manifest>
+        <attribute name="Manifest-Version" value="1.0"/>
+        <attribute name="Built-By" value="${user.name}"/>
+        <attribute name="Created-By" value="Gert Nuber"/>
+        <attribute name="Main-Class" value="de.kugihan.dictionaryformids.dictgen.DictionaryGeneration"/>
+      </manifest>
+    </jar>
+  </target>
+  
+</project>
+
