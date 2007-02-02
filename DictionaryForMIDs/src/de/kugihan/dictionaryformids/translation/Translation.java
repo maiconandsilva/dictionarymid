@@ -511,39 +511,41 @@ public class Translation {
 		if (toText == null) // one-language dictionaries don't have a toText
 			toText = new StringBuffer();
 		if (toText.length() > 0) {
+			Util.getUtil().convertFieldAndLineSeparatorChars(fromText);
 			Util.getUtil().convertFieldAndLineSeparatorChars(toText);
-			// remove duplicate entries 
+			SingleTranslation newSingleTranslation = 
+							new SingleTranslation(fromText, 
+							                      toText,
+								                  foundAtBeginOfExpression,
+								                  0, // primarySortNumber is currently not used
+								                  directoryFileLocation);
+			// sort entries and remove duplicates 
 			// optimization: this needs to be implemented more efficiently; current implementation is
 			//               slow if many results exist
-			/* Some dictionaries contain the same translation twice: such duplicate translations
-			   are included one one time in the result. */
-			boolean isDuplicate = false;
-			for (int indexTranslation = 0; 
-			     indexTranslation < resultOfTranslation.translations.size(); 
-				 ++indexTranslation) {
+			int indexTranslation = 0;
+			int numberOfTranslations = resultOfTranslation.translations.size();
+			while (indexTranslation < numberOfTranslations) {
 				SingleTranslation translation = (SingleTranslation) resultOfTranslation.translations.elementAt(indexTranslation);
-				if (directoryFileLocation.compareTo(translation.directoryFileLocation) == 0) {
-					isDuplicate = true;
+				int translationsCompared = newSingleTranslation.compareTo(translation);
+				if (translationsCompared == 0) {
+					// duplicate entry: new translation is ignored
+					break;
+				}
+				else if (translationsCompared < 0) {
+					// insert new translation at current position
+					resultOfTranslation.translations.insertElementAt(newSingleTranslation, indexTranslation);
+					resultOfTranslation.translationFound = true;	
+					++resultOfTranslation.numberOfHits;
 					break;
 				} 
-			}
-			if (! isDuplicate) {
-				Util.getUtil().convertFieldAndLineSeparatorChars(fromText);
-				SingleTranslation singleTranslation = new SingleTranslation(fromText, 
-						                                                    toText,
-						                                                    foundAtBeginOfExpression,
-						                                                    directoryFileLocation);
-				// if the translation was found at the beginning then put at the top of the result list 
-				if (foundAtBeginOfExpression) {
-					// put at the top
-					resultOfTranslation.translations.insertElementAt(singleTranslation, 0);
-				}
 				else {
-					// put at the end
-					resultOfTranslation.translations.addElement(singleTranslation);
+					// continue to search for the right position 
 				}
-				resultOfTranslation.translationFound = true;	
-				++resultOfTranslation.numberOfHits;
+				++indexTranslation;
+			}
+			if (indexTranslation == numberOfTranslations) {
+				// add new translation at end
+				resultOfTranslation.translations.addElement(newSingleTranslation);
 			}
 		}
 	}
