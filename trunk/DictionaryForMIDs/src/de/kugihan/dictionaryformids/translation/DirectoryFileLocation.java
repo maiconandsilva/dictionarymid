@@ -15,12 +15,21 @@ public class DirectoryFileLocation {
 	}
 	
 	int compareTo(DirectoryFileLocation otherDirectoryFileLocation) {
-		if ((directoryFileNumber == otherDirectoryFileLocation.directoryFileNumber) &&
-			(positionInDirectoryFile == otherDirectoryFileLocation.positionInDirectoryFile) &&
-			(postfixDictionaryFile.compareTo(otherDirectoryFileLocation.postfixDictionaryFile) == 0))
-			return 0;
-		else
-			return 1;
-		// optimization: also handle sorting to allow for more efficient filtering
+		int compareResult;
+		int postfixDictionaryFileCompared = postfixDictionaryFile.compareTo(otherDirectoryFileLocation.postfixDictionaryFile);
+		if (postfixDictionaryFileCompared == 0) {
+			int directoryFileNumberCompared = directoryFileNumber - otherDirectoryFileLocation.directoryFileNumber;
+			if (directoryFileNumberCompared == 0) {
+				int positionInDirectoryFileCompared = positionInDirectoryFile - otherDirectoryFileLocation.positionInDirectoryFile;
+				compareResult = positionInDirectoryFileCompared;
+			}
+			else {
+				compareResult = directoryFileNumberCompared;
+			}
+		}
+		else {
+			compareResult = postfixDictionaryFileCompared;
+		}
+		return compareResult;
 	}
 }
