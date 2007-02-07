@@ -72,7 +72,7 @@ TranslationMessageMaxNrOfHitsReached
 TranslationMessageMaxExecutionTimeReached
 TranslationMessageCancelReceived ; this display text item is currently not used
 SettingsDisableSuggestion
-InfoTextContent, 5 ; complete info text: %1 infoText from dictionary / %2 Java application name / %3 copyright by / %4 project homepage / %5 Java application version number 
+DfMInfoText, 4 ; complete info text: %1 Java application name / %2 copyright by / %3 project homepage / %4 Java application version number 
 LanguageEnglish
 LanguageVietnamesee
 LanguageChinese
@@ -102,6 +102,7 @@ LanguageSlovak
 SettingsFontBitmapFont    ; selection font size for bitmap fonts
 StartDisplayLanguageNumberOfEntries, 2  ; on the start display the number of entries for a language: %1 is the language / %2 is the number of entries
 StartDisplaySizeOfDictionaryInKb ; size of the dictionary in kB: %1 is the size
+DictionaryForMIDsApplicationName ; this is the name of the DictionaryForMIDs application. Should be set to "[no translation]" for most languages (Chinese and Japanese may be an exception)
 ================================================================================
 #English, en
 
@@ -142,7 +143,7 @@ Use wildcard characters to refine your search:\n%1 matches any series of charact
 (...max execution time reached)
 (...cancel received)
 Disable suggestions
-%1\n\nJava application %2 copyright (C) by %3 and other contributors.\n%4\n\nVersion %5\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n
+Java application %1 copyright (C) by %2 and other contributors.\n%3\n\nVersion %4\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n
 English
 Vietnamese
 Chinese
@@ -172,6 +173,7 @@ Slovak
 bitmap font
 %1: %2 entries
 Size: %1 kB
+DictionaryForMIDs
 ================================================================================
 #Việt Nam, vi
 
@@ -212,7 +214,7 @@ Dùng ký tự đại diện trong từ cần tra:\n%1 đại diện cho bất k
 (...vượt quá thời gian tìm)
 (...ngắt giữa chừng)
 Không gợi ý từ
-%1\n\nMã Java của phần mềm %2 bản quyền (C) bởi %3 và các cộng tác viên khác.\n%4\n\nPhiên bản %5\n\nGNU Điều ước sử dụng mã nguồn mở được áp dụng cho %2 mã Java của sản phẩm. Chi tiết đọc tệp COPYING.\n
+Mã Java của phần mềm %1 bản quyền (C) bởi %2 và các cộng tác viên khác.\n%3\n\nPhiên bản %4\n\nGNU Điều ước sử dụng mã nguồn mở được áp dụng cho %2 mã Java của sản phẩm. Chi tiết đọc tệp COPYING.\n
 Tiếng Anh
 Việt Nam
 Trung Quốc
@@ -560,7 +562,7 @@ Raffini la ricerca:\n% Cerca qualsiasi serie di carattere\n%2 Cerca solo caratte
 (…Tempo massimo di esecuzione)
 (...annulla ricevuto)
 Disabilita suggerimenti
-
+[no translation]
 Inglese
 Vietnamita
 Cinese
@@ -747,7 +749,7 @@ Mužete použít tyto znaky pro urychlení hledání:\n%1 zastupuje libovolnou m
 (...maximální dosažený čas hledání)
 (...zrušeno)
 zrušit zobrazování nabídky
-%1\n\nAplikace Java %2 copyright (C) by %3 a jiných přispívatelu.\n%4\n\nVerze %5\n\nGNU General Public License platí pro %2 Java aplikaci. Čtete soubor COPYING.\n
+Aplikace Java %1 copyright (C) by %2 a jiných přispívatelu.\n%3\n\nVerze %4\n\nGNU General Public License platí pro %1 Java aplikaci. Čtete soubor COPYING.\n
 Angličtina
 Vietnamčina
 Čínština
@@ -814,7 +816,7 @@ Môžete použiť tieto znaky pre urýchlenie hľadania:\n%1 zastupuje ľubovoľ
 (...maximálny dosiahnutý čas hľadania)
 (...zrušené)
 zrušiť zobrazovania ponuky
-%1\n\nAplikácia Java %2 copyright (C) by %3 a iných prispievateľov.\n%4\n\nVerzia %5\n\nGNU General Public License platí pre %2 Java aplikáciu. Čítajte súbor COPYING.\n
+Aplikácia Java %1 copyright (C) by %2 a iných prispievateľov.\n%3\n\nVerzia %4\n\nGNU General Public License platí pre %1 Java aplikáciu. Čítajte súbor COPYING.\n
 Angličtina
 Vietnamčina
 Čínština
