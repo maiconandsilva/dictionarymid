@@ -55,7 +55,7 @@ public class UIDisplayTextItems {
 	public static final UIDisplayTextItem TranslationMessageMaxExecutionTimeReached = LanguageUI.getUI().createNewUIDisplayTextItem("TranslationMessageMaxExecutionTimeReached", 35, 0);
 	public static final UIDisplayTextItem TranslationMessageCancelReceived = LanguageUI.getUI().createNewUIDisplayTextItem("TranslationMessageCancelReceived", 36, 0);
 	public static final UIDisplayTextItem SettingsDisableSuggestion = LanguageUI.getUI().createNewUIDisplayTextItem("SettingsDisableSuggestion", 37, 0);
-	public static final UIDisplayTextItem InfoTextContent = LanguageUI.getUI().createNewUIDisplayTextItem("InfoTextContent", 38, 5);
+	public static final UIDisplayTextItem DfMInfoText = LanguageUI.getUI().createNewUIDisplayTextItem("DfMInfoText", 38, 4);
 	public static final UIDisplayTextItem LanguageEnglish = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageEnglish", 39, 0);
 	public static final UIDisplayTextItem LanguageVietnamesee = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageVietnamesee", 40, 0);
 	public static final UIDisplayTextItem LanguageChinese = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageChinese", 41, 0);
@@ -85,4 +85,5 @@ public class UIDisplayTextItems {
 	public static final UIDisplayTextItem SettingsFontBitmapFont = LanguageUI.getUI().createNewUIDisplayTextItem("SettingsFontBitmapFont", 65, 0);
 	public static final UIDisplayTextItem StartDisplayLanguageNumberOfEntries = LanguageUI.getUI().createNewUIDisplayTextItem("StartDisplayLanguageNumberOfEntries", 66, 2);
 	public static final UIDisplayTextItem StartDisplaySizeOfDictionaryInKb = LanguageUI.getUI().createNewUIDisplayTextItem("StartDisplaySizeOfDictionaryInKb", 67, 0);
+	public static final UIDisplayTextItem DictionaryForMIDsApplicationName = LanguageUI.getUI().createNewUIDisplayTextItem("DictionaryForMIDsApplicationName", 68, 0);
 }

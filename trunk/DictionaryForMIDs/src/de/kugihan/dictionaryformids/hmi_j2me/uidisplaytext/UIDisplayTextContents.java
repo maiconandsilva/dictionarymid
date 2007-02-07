@@ -60,7 +60,7 @@ public class UIDisplayTextContents {
 									"(...max execution time reached)",
 									"(...cancel received)",
 									"Disable suggestions",
-									"%1\n\nJava application %2 copyright (C) by %3 and other contributors.\n%4\n\nVersion %5\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
+									"Java application %1 copyright (C) by %2 and other contributors.\n%3\n\nVersion %4\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
 									"English",
 									"Vietnamese",
 									"Chinese",
@@ -90,6 +90,7 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		}),
 
 		new LanguageDisplayText("Việt Nam" ,
@@ -133,7 +134,7 @@ public class UIDisplayTextContents {
 									"(...vượt quá thời gian tìm)",
 									"(...ngắt giữa chừng)",
 									"Không gợi ý từ",
-									"%1\n\nMã Java của phần mềm %2 bản quyền (C) bởi %3 và các cộng tác viên khác.\n%4\n\nPhiên bản %5\n\nGNU Điều ước sử dụng mã nguồn mở được áp dụng cho %2 mã Java của sản phẩm. Chi tiết đọc tệp COPYING.\n",
+									"Mã Java của phần mềm %1 bản quyền (C) bởi %2 và các cộng tác viên khác.\n%3\n\nPhiên bản %4\n\nGNU Điều ước sử dụng mã nguồn mở được áp dụng cho %2 mã Java của sản phẩm. Chi tiết đọc tệp COPYING.\n",
 									"Tiếng Anh",
 									"Việt Nam",
 									"Trung Quốc",
@@ -163,6 +164,7 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		}),
 
 		new LanguageDisplayText("Chinese" ,
@@ -206,7 +208,7 @@ public class UIDisplayTextContents {
 									"（…达到时间极限）",
 									"(...取消接收的信息)",
 									"使建议无效",
-									"%1\n\nJava application %2 copyright (C) by %3 and other contributors.\n%4\n\nVersion %5\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
+									"Java application %1 copyright (C) by %2 and other contributors.\n%3\n\nVersion %4\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
 									"英语",
 									"越语",
 									"中文",
@@ -236,6 +238,7 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		}),
 
 		new LanguageDisplayText("Dutch" ,
@@ -279,7 +282,7 @@ public class UIDisplayTextContents {
 									"(...maximum bereikte uitvoeringstijd)",
 									"(...annuleer ontvangen)",
 									"Maak suggestie onbruikbaar",
-									"%1\n\nJava application %2 copyright (C) by %3 and other contributors.\n%4\n\nVersion %5\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
+									"Java application %1 copyright (C) by %2 and other contributors.\n%3\n\nVersion %4\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
 									"English",
 									"Vietnamese",
 									"Chinese",
@@ -309,6 +312,7 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		}),
 
 		new LanguageDisplayText("Français" ,
@@ -352,7 +356,7 @@ public class UIDisplayTextContents {
 									"(…Durée max)",
 									"Annuler  résultats",
 									"Désactiver suggestions",
-									"%1\n\nJava application %2 copyright (C) by %3 and other contributors.\n%4\n\nVersion %5\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
+									"Java application %1 copyright (C) by %2 and other contributors.\n%3\n\nVersion %4\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
 									"Anglais",
 									"Vietnamien",
 									"Chinois",
@@ -382,6 +386,7 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		}),
 
 		new LanguageDisplayText("Greek" ,
@@ -425,7 +430,7 @@ public class UIDisplayTextContents {
 									"(...ανώτατος χρόνος εκτέλεσης που επιτυγχάνεται)",
 									"(...ακυρώστε λαμβανόμενος)",
 									"Θέστε εκτός λειτουργίας την πρόταση",
-									"%1\n\nJava application %2 copyright (C) by %3 and other contributors.\n%4\n\nVersion %5\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
+									"Java application %1 copyright (C) by %2 and other contributors.\n%3\n\nVersion %4\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
 									"English",
 									"Vietnamese",
 									"Chinese",
@@ -455,6 +460,7 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		}),
 
 		new LanguageDisplayText("Deutsch" ,
@@ -498,7 +504,7 @@ public class UIDisplayTextContents {
 									"(... Max Rechenzeit)",
 									"(... Ergebnisse loeschen)",
 									"Vorschläge deaktivieren",
-									"%1\n\nJava application %2 copyright (C) by %3 and other contributors.\n%4\n\nVersion %5\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
+									"Java application %1 copyright (C) by %2 and other contributors.\n%3\n\nVersion %4\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
 									"Englisch",
 									"Vietnamesisch",
 									"Chinesisch",
@@ -528,6 +534,7 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		}),
 
 		new LanguageDisplayText("Italiano" ,
@@ -571,7 +578,7 @@ public class UIDisplayTextContents {
 									"(…Tempo massimo di esecuzione)",
 									"(...annulla ricevuto)",
 									"Disabilita suggerimenti",
-									"",
+									"Java application %1 copyright (C) by %2 and other contributors.\n%3\n\nVersion %4\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
 									"Inglese",
 									"Vietnamita",
 									"Cinese",
@@ -601,6 +608,7 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		}),
 
 		new LanguageDisplayText("Japanese" ,
@@ -644,7 +652,7 @@ public class UIDisplayTextContents {
 									"(...達される最高の実行時間)",
 									"(...受け取られる取り消し)",
 									"ディスエイブルの提案",
-									"%1\n\nJava application %2 copyright (C) by %3 and other contributors.\n%4\n\nVersion %5\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
+									"Java application %1 copyright (C) by %2 and other contributors.\n%3\n\nVersion %4\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
 									"English",
 									"Vietnamese",
 									"Chinese",
@@ -674,6 +682,7 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		}),
 
 		new LanguageDisplayText("Russian" ,
@@ -717,7 +726,7 @@ public class UIDisplayTextContents {
 									"(... достигнутое время выполнения Макса)",
 									"(... отменяют полученный), ",
 									"Повредите предложение",
-									"%1\n\nJava application %2 copyright (C) by %3 and other contributors.\n%4\n\nVersion %5\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
+									"Java application %1 copyright (C) by %2 and other contributors.\n%3\n\nVersion %4\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
 									"English",
 									"Vietnamese",
 									"Chinese",
@@ -747,6 +756,7 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		}),
 
 		new LanguageDisplayText("Español" ,
@@ -790,7 +800,7 @@ public class UIDisplayTextContents {
 									"(... tiempo de ejecución de máximo alcanzado)",
 									"(... anulan recibido)",
 									"Incapacite sugerencia",
-									"%1\n\nJava application %2 copyright (C) by %3 and other contributors.\n%4\n\nVersion %5\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
+									"Java application %1 copyright (C) by %2 and other contributors.\n%3\n\nVersion %4\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
 									"English",
 									"Vietnamese",
 									"Chinese",
@@ -820,6 +830,7 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		}),
 
 		new LanguageDisplayText("Czech" ,
@@ -863,7 +874,7 @@ public class UIDisplayTextContents {
 									"(...maximální dosažený čas hledání)",
 									"(...zrušeno)",
 									"zrušit zobrazování nabídky",
-									"%1\n\nAplikace Java %2 copyright (C) by %3 a jiných přispívatelu.\n%4\n\nVerze %5\n\nGNU General Public License platí pro %2 Java aplikaci. Čtete soubor COPYING.\n",
+									"Aplikace Java %1 copyright (C) by %2 a jiných přispívatelu.\n%3\n\nVerze %4\n\nGNU General Public License platí pro %1 Java aplikaci. Čtete soubor COPYING.\n",
 									"Angličtina",
 									"Vietnamčina",
 									"Čínština",
@@ -893,6 +904,7 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		}),
 
 		new LanguageDisplayText("Slovak" ,
@@ -936,7 +948,7 @@ public class UIDisplayTextContents {
 									"(...maximálny dosiahnutý čas hľadania)",
 									"(...zrušené)",
 									"zrušiť zobrazovania ponuky",
-									"%1\n\nAplikácia Java %2 copyright (C) by %3 a iných prispievateľov.\n%4\n\nVerzia %5\n\nGNU General Public License platí pre %2 Java aplikáciu. Čítajte súbor COPYING.\n",
+									"Aplikácia Java %1 copyright (C) by %2 a iných prispievateľov.\n%3\n\nVerzia %4\n\nGNU General Public License platí pre %1 Java aplikáciu. Čítajte súbor COPYING.\n",
 									"Angličtina",
 									"Vietnamčina",
 									"Čínština",
@@ -966,6 +978,7 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		}),
 
 		new LanguageDisplayText("Portugês [who can translate ?]" ,
@@ -1009,7 +1022,7 @@ public class UIDisplayTextContents {
 									"(...max execution time reached)",
 									"(...cancel received)",
 									"Disable suggestions",
-									"%1\n\nJava application %2 copyright (C) by %3 and other contributors.\n%4\n\nVersion %5\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
+									"Java application %1 copyright (C) by %2 and other contributors.\n%3\n\nVersion %4\n\nGNU General Public License applies for %2 Java application. See file COPYING.\n",
 									"English",
 									"Vietnamese",
 									"Chinese",
@@ -1039,9 +1052,10 @@ public class UIDisplayTextContents {
 									"bitmap font",
 									"%1: %2 entries",
 									"Size: %1 kB",
+									"DictionaryForMIDs",
 		})
 	};
 
-	public static int totalNumberItemsInLanguage = 68;
+	public static int totalNumberItemsInLanguage = 69;
 
 }
