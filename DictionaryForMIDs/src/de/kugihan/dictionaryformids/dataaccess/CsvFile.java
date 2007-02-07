@@ -360,7 +360,7 @@ class CsvFileCache {
 		InputStream csvStream = null;
 		// check if file is in the cache
 		if ((cachedFile != null) && fileName.equals(fileNameParam)) {
-			System.out.println("cache hit " + fileNameParam);  // todo
+			System.out.println("cache hit " + fileNameParam);  // to be removed for final implementation
 			// skip additional bytes
 			int numberOfBytesToBeSkipped = startPosition - lastPositionInStream;
 			if (numberOfBytesToBeSkipped < 0) {
@@ -397,10 +397,11 @@ class CsvFileCache {
 					throw new DictionaryException("CSV file: skipped only " + skippedBytes + " bytes");
 				}
 				// put file into cache, but only when the stream supports marks
-				if (csvStream.markSupported()) {
-					csvStream.mark(20000);  // for the moment just assume 20000 bytes to remember
-					// cachedFile = csvStream; temporary: don't put into cache (= cache deactivated) 
-				}
+				// currently: don't put into cache (= cache deactivated) 
+				// if (csvStream.markSupported()) {
+				//	csvStream.mark(20000);  // for the moment just assume 20000 bytes to remember
+				//  cachedFile = csvStream;
+				//}
 			}
 			else {
 				throw new DictionaryException("Could not open file " + fileName);
