@@ -38,6 +38,7 @@ import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.DfMCommand;
 import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.DfMForm;
 import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.DfMStringItem;
 import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.DfMTextField;
+import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.ResourceHandler;
 import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.StringColourItem;
 import de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext.LanguageUI;
 import de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext.UIDisplayTextItem;
@@ -96,7 +97,6 @@ public class MainForm
 										    // translation list is currently shown
 	
 	public MainForm(DictionaryForMIDs DictionaryForMIDsMidletParam) {
-		setTitle(DictionaryForMIDs.applicationName);
 		/*
 		 * Initialisation of required objects
 		 */
@@ -147,6 +147,8 @@ public class MainForm
 
 		displayStatisticItems();
 
+		readDisplayTextProperties();
+		
 		showStartupDisplay();
 		
 		// special workaround for SE OutOfMemoryError
@@ -346,9 +348,10 @@ public class MainForm
 			versionStatusString = new String("");
 		else
 			versionStatusString = "/ " + versionStatusString;
-		UIDisplayTextItem infoText = UIDisplayTextItems.InfoTextContent;
+		UIDisplayTextItem infoText = UIDisplayTextItems.DfMInfoText;
+//		DictionaryDataFile.infoText,
+												
 		infoText.setAllParameterValues( new String [] { 
-												DictionaryDataFile.infoText,
 												dictionaryForMIDsMidlet.applicationName,
 												"Gert Nuber (dict@kugihan.de)",
 												"http://dictionarymid.sourceforge.net",
@@ -403,10 +406,12 @@ public class MainForm
 		
 		// create new toBeTranslatedWordTextField 
 		toBeTranslatedWordTextField = mainFormItemsObj.createToBeTranslatedWordTextField(); 
-		updateSelectedLanguage();
 		insert(indexOfToBeTranslatedWordTextField, toBeTranslatedWordTextField);
 		indexOfFirstTranslationItem = indexOfToBeTranslatedWordTextField + 1; 
 		
+		// update the display of the selected language
+		updateSelectedLanguage();
+
 		// redisplay translation results
 		refreshAllTranslationResults();
 		
@@ -423,21 +428,21 @@ public class MainForm
 	public void updateSelectedLanguage() 
 				throws DictionaryException {
 		if (DictionarySettings.numberOfSearchableInputLanguages() == 1) {  
-			// only one input language: no need to indicate translation direction
-			toBeTranslatedWordTextField.setLabel(UIDisplayTextItems.WordForTranslation);
+			// only one input language: no need to indicate translation direction; use application name instead
+			setTitleUIDisplayTextItem(UIDisplayTextItems.DictionaryForMIDsApplicationName);
 		}
 		else  {
 			if ((DictionarySettings.isDictionaryAvailable()) && 
 				(dictionarySettingFormObj != null)) { // in order to set from/to language the settings must be available 
 				                                      // more than one input language: indicate translation direction
 				UIDisplayTextItem inputLanguageUIDisplayTextItem = 
-					LanguageUI.getUI().getLanguageUIDisplayTextItem(DictionaryDataFile.supportedLanguages[DictionarySettings.getInputLanguage()].languageDisplayText);
+					LanguageUI.getUI().getLanguageDisplayTextItem(DictionaryDataFile.supportedLanguages[DictionarySettings.getInputLanguage()].languageDisplayText);
 				UIDisplayTextItem outputLanguageUIDisplayTextItem = 
-					LanguageUI.getUI().getLanguageUIDisplayTextItem(DictionaryDataFile.supportedLanguages[DictionarySettings.determineOutputLanguage()].languageDisplayText);
+					LanguageUI.getUI().getLanguageDisplayTextItem(DictionaryDataFile.supportedLanguages[DictionarySettings.determineOutputLanguage()].languageDisplayText);
 				UIDisplayTextItems.FromLanguageToLanguage.setAllParameterValues(
 														new Object [] { inputLanguageUIDisplayTextItem, 
 																        outputLanguageUIDisplayTextItem });
-				toBeTranslatedWordTextField.setLabel(UIDisplayTextItems.FromLanguageToLanguage);
+				setTitleUIDisplayTextItem(UIDisplayTextItems.FromLanguageToLanguage);
 			}
 		}
 	}
@@ -495,7 +500,7 @@ public class MainForm
 			throw new DictionaryException("Translation list item not found");
 		int indexSingleTranslation = indexItemForTranslation - indexOfFirstTranslationItem;
 		SingleTranslation singleTranslation = 
-					(SingleTranslation) lastResultOfTranslation.translations.elementAt(indexSingleTranslation);
+					lastResultOfTranslation.getTranslationAt(indexSingleTranslation);
 		deletePreviousTranslationResult();
 		displaySingleTranslation(singleTranslation, true);
 		translationResultStatus.setLabel(UIDisplayTextItems.EmptyText);
@@ -522,8 +527,8 @@ public class MainForm
 			indexOfLastTranslationItem = indexOfFirstTranslationItem - 1;
 			stringColourItemWidth = this.getWidth();
 			UIDisplayTextItem translationResultSatus = UIDisplayTextItems.EmptyText;
-			if (resultOfTranslation.translationFound) {
-				Enumeration translationsEnum = resultOfTranslation.translations.elements();
+			if (resultOfTranslation.translationFound()) {
+				Enumeration translationsEnum = resultOfTranslation.getAllTranslations();
 				while (translationsEnum.hasMoreElements()) {
 					SingleTranslation singleTranslation = (SingleTranslation) translationsEnum.nextElement();
 					displaySingleTranslation(singleTranslation, false);
@@ -546,7 +551,7 @@ public class MainForm
 			
 			Util.memCheck("results displayed: ");
 			if (DictionarySettings.getShowStatistic()) {
-				String hitsText = String.valueOf(resultOfTranslation.numberOfHits);
+				String hitsText = String.valueOf(resultOfTranslation.numberOfFoundTranslations());
 				statisticItem.setText(hitsText);
 				responseTimeItem.setText(String.valueOf(resultOfTranslation.executionTime));
 				System.gc();
@@ -609,14 +614,43 @@ public class MainForm
 			throws DictionaryException {
 		deletePreviousTranslationResult();
 		if (lastResultOfTranslation != null) {
-			int len = lastResultOfTranslation.translations.size();
+			int len = lastResultOfTranslation.numberOfFoundTranslations();
 			for (int i = 0; i < len; i++) {
-				SingleTranslation st = (SingleTranslation) lastResultOfTranslation.translations.elementAt(i);
+				SingleTranslation st = (SingleTranslation) lastResultOfTranslation.getTranslationAt(i);
 				displaySingleTranslation(st, false);
 			}
 		}
 	}
 
+	/*
+	 * Initialisation of UIDisplayTextItems from the property file
+	 */
+	public static String dictionaryTitleDisplayText   		= "dictionaryTitleDisplayText";
+	public static String dictionaryMaintainerDisplayText   	= "dictionaryMaintainerDisplayText";
+	public static String dictionarySetupByDisplayText		= "dictionarySetupByDisplayText";
+
+	static String [] displayTextProperties = { 
+										dictionaryTitleDisplayText,
+										dictionaryMaintainerDisplayText,
+										dictionarySetupByDisplayText
+									         };
+			
+	protected void readDisplayTextProperties() 
+				throws DictionaryException {
+		for (int displayTextCounter = 0; displayTextCounter < displayTextProperties.length; ++displayTextCounter) {
+			generateUIDisplayTextItem(displayTextProperties[displayTextCounter]);
+		}
+	}
+
+	protected void generateUIDisplayTextItem(String propertyName)
+			throws DictionaryException {
+		String displayText = DictionaryDataFile.getDisplayText(propertyName);
+		if (displayText != null) {
+			LanguageUI.getUI().getUIDisplayTextItem(propertyName, displayText);
+		}
+	}
+
+	
 	/*
 	 * Startup display
 	 */
@@ -633,15 +667,51 @@ public class MainForm
 		Font startupDisplayFont = Font.getFont(Font.getDefaultFont().getFace(), 
 				                               Font.STYLE_BOLD, 
 				                               Font.getDefaultFont().getSize());
-		// display info text of the dictionary
-		DfMStringItem infoTextItem = new DfMStringItem(DictionaryDataFile.infoText);
-		infoTextItem.setLayout(Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2);
-		infoTextItem.setFont(startupDisplayFont);
-		++indexOfLastItemStartupDisplay;
-		/* don't show for the moment insert(indexOfLastItemStartupDisplay, infoTextItem); */
-		Spacer space = new Spacer(0, getHeight()/10 + 5);
-		space.setLayout(Item.LAYOUT_2 | Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_NEWLINE_AFTER);
-		insert(indexOfLastItemStartupDisplay, space);
+		// display application name
+		DfMStringItem applicationNameItem = new DfMStringItem(UIDisplayTextItems.DictionaryForMIDsApplicationName);
+		applicationNameItem.setLayout(Item.LAYOUT_2 | Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_NEWLINE_AFTER | Item.LAYOUT_CENTER);
+		appendStartupDisplayItem(applicationNameItem);
+		// display application logo
+		int bestApplicationIconSize = getWidth()/2;  // size should be half of the display width
+		Image applicationIcon = UIDisplayTextItems.DictionaryForMIDsApplicationName.getIcon
+						                      (ResourceHandler.getResourceHandlerObj().iconSizeGroupLarge, 
+						                       bestApplicationIconSize, 
+						                       bestApplicationIconSize);
+		ImageItem applicationIconItem = new ImageItem(null, applicationIcon, Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_CENTER | Item.LAYOUT_VCENTER | Item.LAYOUT_2, null);
+		appendStartupDisplayItem(applicationIconItem);
+
+		// leave some space
+		Spacer spaceBeforeDictionary = new Spacer(0, bestApplicationIconSize/10);
+		spaceBeforeDictionary.setLayout(Item.LAYOUT_2 | Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_NEWLINE_AFTER);
+		appendStartupDisplayItem(spaceBeforeDictionary);
+		
+		// display the maintainer and the title of the dictionary
+		UIDisplayTextItem dictionaryMaintainer = LanguageUI.getUI().existingUIDisplayTextItem(dictionaryMaintainerDisplayText, true);
+		UIDisplayTextItem dictionaryTitle = LanguageUI.getUI().existingUIDisplayTextItem(dictionaryTitleDisplayText, true);
+		UIDisplayTextItem firstUIItem = null;
+		UIDisplayTextItem secondUIItem  = null;
+		if (dictionaryMaintainer != null) {
+			firstUIItem = dictionaryMaintainer;
+			secondUIItem = dictionaryTitle;
+		}
+		else {
+			firstUIItem = dictionaryTitle;
+		}
+		if ((firstUIItem != null) && (dictionaryTitle != null)) {
+			DfMStringItem firstItem = new DfMStringItem(firstUIItem);
+			firstItem.setLayout(Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2);
+			firstItem.setFont(startupDisplayFont);
+			appendStartupDisplayItem(firstItem);
+			if (secondUIItem != null) {
+				Spacer spaceBeforeSecondItem = new Spacer(5, 0);
+				appendStartupDisplayItem(spaceBeforeSecondItem);
+				DfMStringItem secondItem = new DfMStringItem(secondUIItem);
+				secondItem.setLayout(Item.LAYOUT_NEWLINE_AFTER | Item.LAYOUT_2);
+				secondItem.setFont(startupDisplayFont);
+				appendStartupDisplayItem(secondItem);
+			}
+		}
+
 		// display the number of entries for each input language
 		for (int languageCounter = 0; languageCounter < DictionaryDataFile.numberOfAvailableLanguages; ++languageCounter) {
 			LanguageDefinition language = DictionaryDataFile.supportedLanguages[languageCounter]; 
@@ -663,16 +733,16 @@ public class MainForm
 				// first create icon
 				int iconSizeHeight = startupDisplayFont.getBaselinePosition();
 				int iconSizeWidth = (startupDisplayFont.getBaselinePosition()*4)/3; // flag icons have a bigger width than height
-				Image icon = entriesUIDisplayTextItem.getIcon("small", iconSizeHeight, iconSizeWidth);
+				Image icon = entriesUIDisplayTextItem.getIcon(ResourceHandler.getResourceHandlerObj().iconSizeGroupSmall, 
+						                                      iconSizeHeight, 
+						                                      iconSizeWidth);
 				ImageItem iconItem = new ImageItem(null, icon, Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_CENTER | Item.LAYOUT_VCENTER | Item.LAYOUT_2, null);
-				++indexOfLastItemStartupDisplay;
-				insert(indexOfLastItemStartupDisplay, iconItem);
+				appendStartupDisplayItem(iconItem);
 				// second create display text
 				DfMStringItem numberOfEntriesForLanguageItem = new DfMStringItem(entriesUIDisplayTextItem);
 				numberOfEntriesForLanguageItem.setLayout(Item.LAYOUT_2);
 				numberOfEntriesForLanguageItem.setFont(startupDisplayFont);
-				++indexOfLastItemStartupDisplay;
-				insert(indexOfLastItemStartupDisplay, numberOfEntriesForLanguageItem);
+				appendStartupDisplayItem(numberOfEntriesForLanguageItem);
 			}
 		}
 		startupDisplayIsShown = true;
@@ -690,6 +760,10 @@ public class MainForm
 		}
 	}
 	
+	void appendStartupDisplayItem(Item item) {
+		++indexOfLastItemStartupDisplay;
+		insert(indexOfLastItemStartupDisplay, item);
+	}
 
 	// Hope someone will solve this SonyEricsson problem, so that the following workaround will
 	// not be necessary any more !
