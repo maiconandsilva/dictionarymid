@@ -121,11 +121,11 @@ public class LanguageUI {
 	}
 	
 	// Returns an existing UIDisplayTextItem object  
-	public UIDisplayTextItem existingUIDisplayTextItem(String uiDisplayTextItemID, boolean testExist) 
+	public UIDisplayTextItem existingUIDisplayTextItem(String uiDisplayTextItemID, boolean optional) 
 							throws DictionaryException {
 		UIDisplayTextItem foundUIDisplayTextItem;
 		foundUIDisplayTextItem = (UIDisplayTextItem) uiDisplayTextItemTable.get(uiDisplayTextItemID);
-		if ((! testExist) && (foundUIDisplayTextItem == null)) {
+		if ((! optional) && (foundUIDisplayTextItem == null)) {
 			throw new DictionaryException("No UIDisplayTextItem for " + uiDisplayTextItemID);
 		}
 		return foundUIDisplayTextItem;
@@ -135,7 +135,7 @@ public class LanguageUI {
 	 * Getting specific UIDisplayTextItems
 	 */
 	// Language UIDisplayTextItems
-	public UIDisplayTextItem getLanguageUIDisplayTextItem(String language) 
+	public UIDisplayTextItem getLanguageDisplayTextItem(String language) 
 			throws DictionaryException {
 		String languageID  = uiDisplayTextItemReference + 
 							 uiDisplayTextItemPrefixLanguage + 
