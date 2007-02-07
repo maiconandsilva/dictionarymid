@@ -58,7 +58,7 @@ public class Translation {
 		return word.substring(0, positionFirstWildcardCharacter(word));
 	}
 
-	TranslationResult resultOfTranslation = new TranslationResult();
+	protected TranslationResult resultOfTranslation;
 	
 	long startTime;
 	
@@ -66,7 +66,7 @@ public class Translation {
 	
 	public TranslationResult getTranslationResult(String toBeTranslatedWord) {
 
-		resultOfTranslation.numberOfHits = 0;
+		resultOfTranslation = new TranslationResult();
 		startTime = System.currentTimeMillis();
 		Util.memCheck("start translation: ");
 		
@@ -469,7 +469,7 @@ public class Translation {
 	}
 	
 	public void getTranslation(DirectoryFileLocation directoryFileLocation, boolean foundAtBeginOfExpression) 
-	throws DictionaryException
+			throws DictionaryException
 	{
 		String dictionaryFileName = DictionaryDataFile.getPathDataFiles() + 
 							        DictionaryDataFile.prefixDictionaryFile +
@@ -533,9 +533,7 @@ public class Translation {
 				}
 				else if (translationsCompared < 0) {
 					// insert new translation at current position
-					resultOfTranslation.translations.insertElementAt(newSingleTranslation, indexTranslation);
-					resultOfTranslation.translationFound = true;	
-					++resultOfTranslation.numberOfHits;
+					resultOfTranslation.insertTranslationAt(newSingleTranslation, indexTranslation);
 					break;
 				} 
 				else {
@@ -545,13 +543,13 @@ public class Translation {
 			}
 			if (indexTranslation == numberOfTranslations) {
 				// add new translation at end
-				resultOfTranslation.translations.addElement(newSingleTranslation);
+				resultOfTranslation.addTranslation(newSingleTranslation);
 			}
 		}
 	}
 
 	boolean translationBreakCondition() {
-		if (resultOfTranslation.numberOfHits >= DictionarySettings.getMaxHits()) { 
+		if (resultOfTranslation.numberOfFoundTranslations() >= DictionarySettings.getMaxHits()) { 
 			resultOfTranslation.translationBreakOccurred = true;
 			resultOfTranslation.translationBreakReason = TranslationResult.BreakReasonCancelMaxNrOfHitsReached;
 			return true;
