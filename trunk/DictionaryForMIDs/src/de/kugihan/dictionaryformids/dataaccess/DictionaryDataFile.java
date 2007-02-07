@@ -17,6 +17,7 @@ import de.kugihan.dictionaryformids.general.DictionaryClassNotLoadedException;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.hmi_j2me.DictionarySettings;
+import de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext.LanguageUI;
 import de.kugihan.dictionaryformids.translation.normation.Normation;
 
 public class DictionaryDataFile  {
@@ -76,7 +77,7 @@ public class DictionaryDataFile  {
 		 * values from resource file 
 		 * */
 		Util utilObj = Util.getUtil();
-		utilObj.openProperties();
+		utilObj.openProperties();  // property file is never closed, because properties may be read at any time
 		infoText = utilObj.getDictionaryPropertyString("infoText");
 		dictionaryAbbreviation = utilObj.getDictionaryPropertyString("dictionaryAbbreviation", true);
 		checkForEmptyProperty(dictionaryAbbreviation);
@@ -243,8 +244,7 @@ public class DictionaryDataFile  {
 		if (fileEncodingFormat == null) {
 			fileEncodingFormat = new String("plain_format1");
 		}
-		utilObj.closeProperties();
-
+		
 		/* 
 		 * load normation classes and create normation objects; same for dictionaryUpdate classes/objects
 		 */
@@ -334,6 +334,32 @@ public class DictionaryDataFile  {
 		int blue = determineColourComponent(fontColourStringElements[2], propertyName);
 		return new RGBColour(red, green, blue);
 	}
+
+	/*
+	 * Access to display text properties
+	 */
+	public static String getDisplayText(String propertyName)
+			throws DictionaryException {
+		Util utilObj = Util.getUtil(); 
+		String displayText;
+		String displayTextString = utilObj.getDictionaryPropertyString(propertyName, true);
+		if (displayTextString != null) {
+			// displayTextString is of the following format: "standard translation";language"language translation";...
+			if ((displayTextString.charAt(0) != '\"') || (displayTextString.charAt(displayTextString.length()-1)) != '\"') {
+				throwContentException("String must start with \" and end with \"", propertyName);
+			}
+			displayText = displayTextString.substring(1, displayTextString.length()-1);
+			if (displayText.indexOf('\"') != -1) {
+				throwContentException("String must not contain a \"-character", propertyName);
+			}
+			// translations are not yet handled: needs to be implemented
+		}
+		else {
+			displayText = null;
+		}
+		return displayText;
+	}
+
 
 	protected static void throwContentException(String message, String propertyName) 
 					throws DictionaryException {
