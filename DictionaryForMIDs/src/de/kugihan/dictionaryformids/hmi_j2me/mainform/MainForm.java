@@ -8,6 +8,7 @@ GPL applies - see file COPYING for copyright statement.
 package de.kugihan.dictionaryformids.hmi_j2me.mainform;
 
 import java.util.Enumeration;
+import java.util.Vector;
 
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.AlertType;
@@ -348,10 +349,33 @@ public class MainForm
 			versionStatusString = new String("");
 		else
 			versionStatusString = "/ " + versionStatusString;
-		UIDisplayTextItem infoText = UIDisplayTextItems.DfMInfoText;
-//		DictionaryDataFile.infoText,
-												
-		infoText.setAllParameterValues( new String [] { 
+		UIDisplayTextItem infoText = UIDisplayTextItems.InfoTextContent;
+		// collect information about dictionary
+		Vector dictionaryInfoItems = new Vector();
+		for (int displayTextCounter = 0; displayTextCounter < displayTextProperties.length; ++displayTextCounter) {
+			UIDisplayTextItem dictionaryDisplayTextItem = 
+					LanguageUI.getUI().existingUIDisplayTextItem(displayTextProperties[displayTextCounter], true);
+			if (dictionaryDisplayTextItem != null) {
+				if (dictionaryInfoItems.size() > 0) {
+				// todo	dictionaryInfoItems.addElement(LanguageUI.getUI().uiDisplayTextItemNewline);
+				}
+				dictionaryInfoItems.addElement(dictionaryDisplayTextItem);
+			}
+		}
+		Object dictionaryInformation;
+		dictionaryInfoItems.removeAllElements() ; // todo: currently deactivated
+		if (dictionaryInfoItems.size() != 0) {
+			dictionaryInformation = dictionaryInfoItems;
+		}
+		else {
+			// for support of legacy configuration files: use infoText when no dictionary information is there.
+			dictionaryInformation = DictionaryDataFile.infoText;
+		}
+		if (dictionaryInformation == null) {
+			throw new DictionaryException("No dictionary display texts configured");
+		}
+		infoText.setAllParameterValues( new Object [] { 
+												dictionaryInformation,
 												dictionaryForMIDsMidlet.applicationName,
 												"Gert Nuber (dict@kugihan.de)",
 												"http://dictionarymid.sourceforge.net",
@@ -703,7 +727,7 @@ public class MainForm
 			firstItem.setFont(startupDisplayFont);
 			appendStartupDisplayItem(firstItem);
 			if (secondUIItem != null) {
-				Spacer spaceBeforeSecondItem = new Spacer(5, 0);
+				Spacer spaceBeforeSecondItem = new Spacer(8, 0);
 				appendStartupDisplayItem(spaceBeforeSecondItem);
 				DfMStringItem secondItem = new DfMStringItem(secondUIItem);
 				secondItem.setLayout(Item.LAYOUT_NEWLINE_AFTER | Item.LAYOUT_2);
