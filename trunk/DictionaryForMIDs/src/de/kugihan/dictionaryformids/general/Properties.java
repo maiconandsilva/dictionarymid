@@ -400,7 +400,8 @@ label   = Name:\\u0020</pre>
 	  while (! endOfLineReached);
 
 	  String readLineReturnValue;
-	  if (readValue == -1) {
+	  // Gert Nuber: last line was ignored if not followed by empty line; modified from "if (readValue == -1)"
+	  if ((readValue == -1) && (readLine.length() == 0)) { 
 		  readLineReturnValue = null;
 	  }
 	  else {
