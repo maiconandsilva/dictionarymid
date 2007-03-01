@@ -29,7 +29,7 @@
   <target name="compile">
     <mkdir dir="${JC}/bin"/>
     <mkdir dir="${DG}/bin"/>
-    <mkdir dir="${DfM}/bin"/>
+    <mkdir dir="${DfM.classdir}"/>
     <mkdir dir="${J2SE}/bin"/>
  
     <wtkbuild srcdir="${DfM}/src" target="1.1" source="1.2"  encoding="UTF-8" destdir="${DfM.classdir}" />
@@ -39,7 +39,7 @@
   </target>
 
   <target name="clean">
-    <delete dir="${DfM}/bin"/>
+    <delete dir="${DfM.classdir}"/>
     <delete dir="${DG}/bin"/>
     <delete dir="${JC}/bin"/>
     <delete dir="${J2SE}/bin"/>
