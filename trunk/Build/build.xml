@@ -1,32 +1,41 @@
 <!-- This file build.xml should be located in directory Build -->
-<!-- You must set _path_ to your WTK installation directory -->
-<!-- this version generates DictionaryGeneration.jar  and JarCreator.jar -->
+<!-- You must set wtk.home to your WTK installation directory -->
+<!-- this version generates DictionaryForMIDs.jar/jad, DictionaryGeneration.jar and JarCreator.jar -->
 <!-- using: run ant in directory Build  -->
 <!-- it runs well on both platforms windows/linux -->
-<!-- version 1.0 -->
+<!-- version 1.1 -->
 
-<project name="allwork" default="create_jars">
+<project name="allwork" default="all">
 
   <property name="DfM" location="../DictionaryForMIDs"/>
   <property name="DG"  location="../DictionaryGeneration"/>
   <property name="J2SE"  location="../J2SE"/>
   <property name="JC"  location="../JarCreator"/>
 
-	<property name="_path_"  location="D:\WTK25"/>
-	<!-- <property name="_path_"  location="/home/peto/.netbeans/5.5beta2/emulators/wtk22_linux/emulator/wtk22"/> -->
-  <property name="jars"  location="${_path_}\lib\midpapi20.jar;${_path_}\lib\cldcapi11.jar;${_path_}\lib\jsr75.jar"/>
-  <!-- <property environment="env"/> -->
+  <property name="wtk.cldc.version"  value="1.1"/>
+  <property name="wtk.midp.version"  value="2.0"/>
+  <property name="wtk.optionalpda.enabled"  value="true"/>
 
-  <target name="compile" depends="clean">
+	<!-- <property name="wtk.home"  location="D:\WTK25"/> -->
+	<property name="wtk.home"  location="c:\programme\WTK"/>
+	<!-- <property name="wtk.home"  location="/home/peto/.netbeans/5.5beta2/emulators/wtk22_linux/emulator/wtk22"/> -->
+	
+	<property name="DfM.classdir"     location="${DfM}/classes"/>        <!-- WTK puts the class files to classes -->
+	<property name="DfM.resdir"       location="${DfM}/res"/>            <!-- WTK puts the resource files to res -->
+	<property name="DfM.jadfile"      location="DictionaryForMIDs.jad"/> <!-- Put the file in the home directory (WTK puts the jad file to bin) -->
+
+	<taskdef resource="antenna.properties" classpath="./antenna-bin-0.9.14.jar"/>
+	
+  <target name="compile">
     <mkdir dir="${JC}/bin"/>
     <mkdir dir="${DG}/bin"/>
     <mkdir dir="${DfM}/bin"/>
     <mkdir dir="${J2SE}/bin"/>
  
-    <javac srcdir="${DfM}/src"   classpath="${jars}" encoding="UTF-8" destdir="${DfM}/bin" />
-    <javac srcdir="${J2SE}/src"  classpath="${jars};${DfM}/bin" encoding="UTF-8" destdir="${J2SE}/bin" />
-    <javac srcdir="${DG}/src"    classpath="${jars};${J2SE}/bin;${DfM}/bin" encoding="UTF-8" destdir="${DG}/bin" />
-    <javac srcdir="${JC}/src"    classpath="${jars};${J2SE}/bin;${DfM}/bin;${DG}/bin" encoding="UTF-8" destdir="${JC}/bin" />
+    <wtkbuild srcdir="${DfM}/src" target="1.1" source="1.2"  encoding="UTF-8" destdir="${DfM.classdir}" />
+    <javac srcdir="${J2SE}/src"  classpath="${DfM.classdir};${DfM}/bin" encoding="UTF-8" destdir="${J2SE}/bin" />
+    <javac srcdir="${DG}/src"    classpath="${DfM.classdir};${J2SE}/bin;${DfM}/bin" encoding="UTF-8" destdir="${DG}/bin" />
+    <javac srcdir="${JC}/src"    classpath="${DfM.classdir};${J2SE}/bin;${DfM}/bin;${DG}/bin" encoding="UTF-8" destdir="${JC}/bin"/>
   </target>
 
   <target name="clean">
@@ -36,7 +45,43 @@
     <delete dir="${J2SE}/bin"/>
   </target>
 
+
   <target name="create_jars" depends="compile">
+  	
+  	<!-- DictionaryForMIDs Java ME -->
+	<property name="DfM.MIDlet-Name" value="DictionaryForMIDs"/> 
+    <property name="DfM.MIDlet-Version" value="3.1.0"/>
+    <property name="DfM.MicroEdition-Profile" value="MIDP-2.0"/>
+    <property name="DfM.MicroEdition-Configuration" value="CLDC-1.0"/>
+    <property name="DfM.Built-By" value="${user.name}"/>
+    <property name="DfM.MIDlet-Vendor" value="Gert Nuber (dict@kugihan.de) et al."/>
+    <property name="DfM.MIDlet-1" value="DictionaryForMIDs, /icons/Application/DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_j2me.DictionaryForMIDs"/>
+    <jar destfile="DictionaryForMIDs.jar">
+      <fileset dir="${DfM.classdir}"/>
+      <fileset dir="${DfM.resdir}"/>
+      <manifest>
+	      <attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
+	      <attribute name="MIDlet-Version" value="${DfM.MIDlet-Version}"/>
+	      <attribute name="MicroEdition-Profile" value="${DfM.MicroEdition-Profile}"/>
+	      <attribute name="MicroEdition-Configuration" value="${DfM.MicroEdition-Configuration}"/>
+	      <attribute name="Built-By" value="${user.name}"/>
+	      <attribute name="MIDlet-Vendor" value="${DfM.MIDlet-Vendor}"/>
+	      <attribute name="MIDlet-1" value="${DfM.MIDlet-1}"/>
+      </manifest>
+    </jar>
+    <wtkjad jadfile="${DfM.jadfile}" jarfile="DictionaryForMIDs.jar">
+	      <attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
+	      <attribute name="MIDlet-Version" value="${DfM.MIDlet-Version}"/>
+	      <attribute name="MicroEdition-Profile" value="${DfM.MicroEdition-Profile}"/>
+	      <attribute name="MicroEdition-Configuration" value="${DfM.MicroEdition-Configuration}"/>
+	      <attribute name="Built-By" value="${user.name}"/>
+	      <attribute name="MIDlet-Vendor" value="${DfM.MIDlet-Vendor}"/>
+	      <attribute name="MIDlet-1" value="${DfM.MIDlet-1}"/>
+	      <attribute name="MIDlet-Jar-URL" value="DictionaryForMIDs.jar"/>
+	      <attribute name="MIDlet-Permissions" value="javax.microedition.io.Connector.file.read"/>
+	      <attribute name="logLevel" value="0"/>
+  	</wtkjad>
+
     <!-- <jar destfile="${JC}/JarCreator.jar"  > -->
     <jar destfile="JarCreator.jar"  >
       <fileset dir="${DfM}/bin"  includes="de/kugihan/dictionaryformids/**"  />
@@ -63,6 +108,8 @@
       </manifest>
     </jar>
   </target>
+
+  <target name="all" depends="create_jars"/>
   
 </project>
 
