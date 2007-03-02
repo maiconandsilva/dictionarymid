@@ -12,8 +12,8 @@ import javax.microedition.lcdui.*;
 
 import de.kugihan.dictionaryformids.dataaccess.DfMInputStream;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
-import de.kugihan.dictionaryformids.hmi_j2me.DictionaryForMIDs;
-import de.kugihan.dictionaryformids.hmi_j2me.DictionarySettings;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 
 
 public class UtilMid extends Util {

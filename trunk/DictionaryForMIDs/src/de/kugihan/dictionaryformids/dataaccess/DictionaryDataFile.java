@@ -16,8 +16,8 @@ import de.kugihan.dictionaryformids.dataaccess.content.SelectionMode;
 import de.kugihan.dictionaryformids.general.DictionaryClassNotLoadedException;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
-import de.kugihan.dictionaryformids.hmi_j2me.DictionarySettings;
-import de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext.LanguageUI;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
+import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
 import de.kugihan.dictionaryformids.translation.normation.Normation;
 
 public class DictionaryDataFile  {
