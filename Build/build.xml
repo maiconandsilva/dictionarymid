@@ -3,113 +3,156 @@
 <!-- this version generates DictionaryForMIDs.jar/jad, DictionaryGeneration.jar and JarCreator.jar -->
 <!-- using: run ant in directory Build  -->
 <!-- it runs well on both platforms windows/linux -->
-<!-- version 1.1 -->
+<!-- Note: the jar-tool must be in the path ! -->
+<!-- version 3.1 -->
 
-<project name="allwork" default="all">
-
-  <property name="DfM" location="../DictionaryForMIDs"/>
-  <property name="DG"  location="../DictionaryGeneration"/>
-  <property name="J2SE"  location="../J2SE"/>
-  <property name="JC"  location="../JarCreator"/>
-
-  <property name="wtk.cldc.version"  value="1.1"/>
-  <property name="wtk.midp.version"  value="2.0"/>
-  <property name="wtk.optionalpda.enabled"  value="true"/>
+<project name="allwork" default="build_all">
 
 	<!-- <property name="wtk.home"  location="D:\WTK25"/> -->
 	<property name="wtk.home"  location="c:\programme\WTK"/>
 	<!-- <property name="wtk.home"  location="/home/peto/.netbeans/5.5beta2/emulators/wtk22_linux/emulator/wtk22"/> -->
-	
-	<property name="DfM.classdir"     location="${DfM}/classes"/>        <!-- WTK puts the class files to classes -->
-	<property name="DfM.resdir"       location="${DfM}/res"/>            <!-- WTK puts the resource files to res -->
-	<property name="DfM.jadfile"      location="DictionaryForMIDs.jad"/> <!-- Put the file in the home directory (WTK puts the jad file to bin) -->
+
+	<property name="wtk.cldc.version"  value="1.1"/>
+	<property name="wtk.midp.version"  value="2.0"/>
+	<property name="wtk.optionalpda.enabled"  value="true"/>
 
 	<taskdef resource="antenna.properties" classpath="./antenna-bin-0.9.14.jar"/>
 	
-  <target name="compile">
-    <mkdir dir="${JC}/bin"/>
-    <mkdir dir="${DG}/bin"/>
-    <mkdir dir="${DfM.classdir}"/>
-    <mkdir dir="${J2SE}/bin"/>
- 
-    <wtkbuild srcdir="${DfM}/src" target="1.1" source="1.2"  encoding="UTF-8" destdir="${DfM.classdir}" />
-    <javac srcdir="${J2SE}/src"  classpath="${DfM.classdir};${DfM}/bin" encoding="UTF-8" destdir="${J2SE}/bin" />
-    <javac srcdir="${DG}/src"    classpath="${DfM.classdir};${J2SE}/bin;${DfM}/bin" encoding="UTF-8" destdir="${DG}/bin" />
-    <javac srcdir="${JC}/src"    classpath="${DfM.classdir};${J2SE}/bin;${DfM}/bin;${DG}/bin" encoding="UTF-8" destdir="${JC}/bin"/>
-  </target>
+  	<property name="DfM" 			location="../DictionaryForMIDs"/>
+	<property name="DfM.classdir"   location="${DfM}/classes"/>        <!-- WTK puts the class files to classes -->
+	<property name="DfM.resdir"     location="${DfM}/res"/>            <!-- WTK puts the resource files to res -->
+	<property name="DfM.jarfile"    location="DictionaryForMIDs.jar"/> <!-- Put the file in the home directory (WTK puts the jar file to bin) -->
+	<property name="DfM.jadfile"    location="DictionaryForMIDs.jad"/> <!-- Put the file in the home directory (WTK puts the jad file to bin) -->
 
-  <target name="clean">
-    <delete dir="${DfM.classdir}"/>
-    <delete dir="${DG}/bin"/>
-    <delete dir="${JC}/bin"/>
-    <delete dir="${J2SE}/bin"/>
-  </target>
+	<property name="JavaSE"  		location="../JavaSE"/>
+	<property name="JavaSE.classdir" location="${JavaSE}/bin"/>
+	<property name="JavaSE.jarfile" location="DictionaryForMIDsPC.jar"/> <!-- todo: need to check with Stefan on name ! -->
 
+	<property name="JC"  			location="../JarCreator"/>
+	<property name="JC.classdir"    location="${JC}/bin"/>
+	<property name="JC.jarfile"     location="JarCreator.jar"/>
+	
+	<property name="DG"  			location="../DictionaryGeneration"/>
+	<property name="DG.classdir"    location="${DG}/bin"/>
+	<property name="DG.jarfile"     location="DictionaryGeneration.jar"/>
 
-  <target name="create_jars" depends="compile">
+	<property name="DfM.team"  value="Gert Nuber (dict@kugihan.de) et al."/> <!-- need to occasionally find something better -->
+
+	
+	<target name="clean_all">
+	    <delete dir="${DfM.classdir}"/>
+	    <delete dir="${DG.classdir}"/>
+	    <delete dir="${JC.classdir}"/>
+	    <delete dir="${JavaSE.classdir}"/>
+	</target>
+
+  	<!-- 
+  		DictionaryForMIDs Java ME 
+  	-->
+	<target name="compile_dfm_java_me">
+	    <mkdir dir="${DfM.classdir}"/>	 
+	    <wtkbuild srcdir="${DfM}/src" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${DfM.classdir}" />
+	</target>
+
+	<target name="build_dfm_java_me" depends="compile_dfm_java_me"> 
+		<property name="DfM.MIDlet-Name" value="DictionaryForMIDs"/> 
+	    <property name="DfM.MIDlet-Version" value="3.1.0"/>
+	    <property name="DfM.MicroEdition-Profile" value="MIDP-2.0"/>
+	    <property name="DfM.MicroEdition-Configuration" value="CLDC-1.0"/>
+	    <property name="DfM.Built-By" value="${user.name}"/>
+	    <property name="DfM.MIDlet-1" value="DictionaryForMIDs, /icons/Application/DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs"/>
+	    <wtkjad jadfile="${DfM.jadfile}">
+		      <attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
+		      <attribute name="MIDlet-Version" value="${DfM.MIDlet-Version}"/>
+		      <attribute name="MicroEdition-Profile" value="${DfM.MicroEdition-Profile}"/>
+		      <attribute name="MicroEdition-Configuration" value="${DfM.MicroEdition-Configuration}"/>
+		      <attribute name="Built-By" value="${user.name}"/>
+		      <attribute name="MIDlet-Vendor" value="${DfM.team}"/>
+		      <attribute name="MIDlet-1" value="${DfM.MIDlet-1}"/>
+		      <attribute name="MIDlet-Jar-URL" value="DictionaryForMIDs.jar"/>
+		      <attribute name="MIDlet-Permissions" value="javax.microedition.io.Connector.file.read"/>
+		      <attribute name="logLevel" value="0"/>
+	  	</wtkjad>
+		<!-- note: the following wtkpackage task will fail on preverification if the jar tool is not in the path -->
+	    <wtkpackage jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}" preverify="true">
+	      <fileset dir="${DfM.classdir}"/>
+	      <fileset dir="${DfM.resdir}"/>
+	      <manifest>
+		      <attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
+		      <attribute name="MIDlet-Version" value="${DfM.MIDlet-Version}"/>
+		      <attribute name="MicroEdition-Profile" value="${DfM.MicroEdition-Profile}"/>
+		      <attribute name="MicroEdition-Configuration" value="${DfM.MicroEdition-Configuration}"/>
+		      <attribute name="Built-By" value="${user.name}"/>
+		      <attribute name="MIDlet-Vendor" value="${DfM.team}"/>
+		      <attribute name="MIDlet-1" value="${DfM.MIDlet-1}"/>
+	      </manifest>
+	    </wtkpackage>
+	</target>
+		
   	
-  	<!-- DictionaryForMIDs Java ME -->
-	<property name="DfM.MIDlet-Name" value="DictionaryForMIDs"/> 
-    <property name="DfM.MIDlet-Version" value="3.1.0"/>
-    <property name="DfM.MicroEdition-Profile" value="MIDP-2.0"/>
-    <property name="DfM.MicroEdition-Configuration" value="CLDC-1.0"/>
-    <property name="DfM.Built-By" value="${user.name}"/>
-    <property name="DfM.MIDlet-Vendor" value="Gert Nuber (dict@kugihan.de) et al."/>
-    <property name="DfM.MIDlet-1" value="DictionaryForMIDs, /icons/Application/DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_j2me.DictionaryForMIDs"/>
-    <jar destfile="DictionaryForMIDs.jar">
-      <fileset dir="${DfM.classdir}"/>
-      <fileset dir="${DfM.resdir}"/>
-      <manifest>
-	      <attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
-	      <attribute name="MIDlet-Version" value="${DfM.MIDlet-Version}"/>
-	      <attribute name="MicroEdition-Profile" value="${DfM.MicroEdition-Profile}"/>
-	      <attribute name="MicroEdition-Configuration" value="${DfM.MicroEdition-Configuration}"/>
-	      <attribute name="Built-By" value="${user.name}"/>
-	      <attribute name="MIDlet-Vendor" value="${DfM.MIDlet-Vendor}"/>
-	      <attribute name="MIDlet-1" value="${DfM.MIDlet-1}"/>
-      </manifest>
-    </jar>
-    <wtkjad jadfile="${DfM.jadfile}" jarfile="DictionaryForMIDs.jar">
-	      <attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
-	      <attribute name="MIDlet-Version" value="${DfM.MIDlet-Version}"/>
-	      <attribute name="MicroEdition-Profile" value="${DfM.MicroEdition-Profile}"/>
-	      <attribute name="MicroEdition-Configuration" value="${DfM.MicroEdition-Configuration}"/>
-	      <attribute name="Built-By" value="${user.name}"/>
-	      <attribute name="MIDlet-Vendor" value="${DfM.MIDlet-Vendor}"/>
-	      <attribute name="MIDlet-1" value="${DfM.MIDlet-1}"/>
-	      <attribute name="MIDlet-Jar-URL" value="DictionaryForMIDs.jar"/>
-	      <attribute name="MIDlet-Permissions" value="javax.microedition.io.Connector.file.read"/>
-	      <attribute name="logLevel" value="0"/>
-  	</wtkjad>
+  	<!-- 
+  		DictionaryForMIDs Java SE
+  	-->
+	<target name="compile_dfm_java_se" depends="compile_dfm_java_me">
+	    <mkdir dir="${JavaSE.classdir}"/>	 
+	    <javac srcdir="${JavaSE}/src"  classpath="${DfM.classdir}" encoding="UTF-8" destdir="${JavaSE.classdir}" />
+	</target>
 
-    <!-- <jar destfile="${JC}/JarCreator.jar"  > -->
-    <jar destfile="JarCreator.jar"  >
-      <fileset dir="${DfM}/bin"  includes="de/kugihan/dictionaryformids/**"  />
-      <fileset dir="${JC}/bin"  includes="de/kugihan/jarCreator/JarCreator.class"  />
-      <fileset dir="${DG}/bin"  includes="de/kugihan/dictionaryformids/**"  />
-      
-      <manifest>
-        <attribute name="Built-By" value="${user.name}"/>
-        <attribute name="Created-By" value="Mathis Karmann"/>
-        <attribute name="Main-Class" value="de.kugihan.jarCreator.JarCreator"/>
-      </manifest>
-    </jar>
+	<target name="build_dfm_java_se" depends="compile_dfm_java_se"> 
+	    <jar destfile="${JavaSE.jarfile}"  >
+			<fileset dir="${DfM.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
+	      	<fileset dir="${JavaSE.classdir}"      includes="de/kugihan/dictionaryformids/**"  />
+	      	<manifest>
+	        	<attribute name="Built-By" value="${user.name}"/>
+	        	<attribute name="Created-By" value="Stefan Martens"/>
+	        	<attribute name="Main-Class" value="de.kugihan.dictionaryformids.hmi_java_se.DictionaryForSE"/>
+	      	</manifest>
+	    </jar>
+	</target>
+  	
+  	<!-- 
+  		JarCreator
+  	-->
+	<target name="compile_jc" depends="compile_dfm_java_me,compile_dfm_java_se">
+	    <mkdir dir="${JC.classdir}"/>
+	    <javac srcdir="${JC}/src" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${JC.classdir}"/>
+	</target>
 
-    <!-- <jar destfile="${DG}/DictionaryGeneration.jar"  > -->
-    <jar destfile="DictionaryGeneration.jar"  >
-      <fileset dir="${DfM}/bin"    includes="de/kugihan/dictionaryformids/**"   />
-      <fileset dir="${DG}/bin"    includes="de/kugihan/dictionaryformids/**"  />
-      <fileset dir="${J2SE}/bin"  includes="de/kugihan/dictionaryformids/**"  />
-      <manifest>
-        <attribute name="Manifest-Version" value="1.0"/>
-        <attribute name="Built-By" value="${user.name}"/>
-        <attribute name="Created-By" value="Gert Nuber"/>
-        <attribute name="Main-Class" value="de.kugihan.dictionaryformids.dictgen.DictionaryGeneration"/>
-      </manifest>
-    </jar>
-  </target>
+	<target name="build_jc" depends="compile_jc"> 
+	    <jar destfile="${JC.jarfile}"  >
+	      	<fileset dir="${DfM.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
+	      	<fileset dir="${JC.classdir}"      includes="de/kugihan/jarCreator/JarCreator.class"  />
+	      	<fileset dir="${JavaSE.classdir}"  includes="de/kugihan/dictionaryformids/**"  />
+	      	<manifest>
+	        	<attribute name="Built-By" value="${user.name}"/>
+	        	<attribute name="Created-By" value="Mathis Karmann"/>
+	        	<attribute name="Main-Class" value="de.kugihan.jarCreator.JarCreator"/>
+	      	</manifest>
+	    </jar>
+	</target>
 
-  <target name="all" depends="create_jars"/>
-  
+  	<!-- 
+  		DictionaryGeneration
+  	-->
+	<target name="compile_dg" depends="compile_dfm_java_me,compile_dfm_java_se">
+	    <mkdir dir="${DG.classdir}"/>
+	    <javac srcdir="${DG}/src" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${DG.classdir}" />
+	</target>
+	
+	<target name="build_dg" depends="compile_dg"> 
+	    <jar destfile="${DG.jarfile}"  >
+	      	<fileset dir="${DfM.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
+	      	<fileset dir="${DG.classdir}"      includes="de/kugihan/dictionaryformids/**"  />
+	      	<fileset dir="${JavaSE.classdir}"  includes="de/kugihan/dictionaryformids/**"  />
+	      	<manifest>
+	        	<attribute name="Built-By" value="${user.name}"/>
+	        	<attribute name="Created-By" value="Gert Nuber"/>
+	        	<attribute name="Main-Class" value="de.kugihan.dictionaryformids.dictgen.DictionaryGeneration"/>
+	      	</manifest>
+	    </jar>
+	</target>
+
+	<target name="build_all" depends="build_dg,build_jc,build_dfm_java_se,build_dfm_java_me"/>
+
 </project>
 
