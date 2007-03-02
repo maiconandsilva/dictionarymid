@@ -27,10 +27,10 @@ import java.util.zip.ZipEntry;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
-import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.ResourceHandler;
-import de.kugihan.dictionaryformids.hmi_j2me.lcdui_extension.ResourceHandler.IconSize;
-import de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext.LanguageUI;
-import de.kugihan.dictionaryformids.j2se.UtilWin;
+import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.ResourceHandler;
+import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.ResourceHandler.IconSize;
+import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
+import de.kugihan.dictionaryformids.general.UtilWin;
 
 public class JarCreator {
 public static final String EXTENSION_JAR = ".jar";
@@ -237,7 +237,7 @@ public static final String versionNumber = "3.0.4";
 	}
 	
 	static String buildMidlet1Name(String midletName) {
-		return midletName + ", DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_j2me.DictionaryForMIDs";		
+		return midletName + ", DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs";		
 	}
 	
 	static boolean isLanguageIconFileNotNeeded(String fileName) {
