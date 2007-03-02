@@ -67,8 +67,8 @@ public class DictionaryUpdate
 			}
 			String keyWordsSplitUp = keyWordsExpression.substring(posStartKeyWords, posEndKeyWords); 
 			DictionaryUpdateLib.addKeyWordExpressions(keyWordsSplitUp, keyWordVector);
-			// todo: create property value to alternatively use splitKeyWords as alternative method to create
-			// keyWordVector
+			// future enhancement: create property value to alternatively use splitKeyWords as alternative
+			// method to create keyWordVector
 			// Vector keyWordVector = Util.splitKeyWords(keyWordsCleanedUp);
 			posStartKeyWords = posEndKeyWords + 1;
 		}

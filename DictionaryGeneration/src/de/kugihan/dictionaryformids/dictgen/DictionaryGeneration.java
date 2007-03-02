@@ -29,15 +29,15 @@ import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.hmi_common.content.ContentParser;
 import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
-import de.kugihan.dictionaryformids.j2se.FileCsvFile;
-import de.kugihan.dictionaryformids.j2se.FileDfMInputStream;
-import de.kugihan.dictionaryformids.j2se.UtilWin;
+import de.kugihan.dictionaryformids.dataaccess.FileCsvFile;
+import de.kugihan.dictionaryformids.dataaccess.FileDfMInputStream;
+import de.kugihan.dictionaryformids.general.UtilWin;
 import de.kugihan.dictionaryformids.translation.SearchIndicator;
 import de.kugihan.dictionaryformids.translation.normation.Normation;
 
 public class DictionaryGeneration {
 
-	static final String versionNumber = "3.0.7";
+	static final String versionNumber = "3.0.8";
 	static String FILE_SEPARATOR = System.getProperty("file.separator");
 	
 	static String sourceFile;

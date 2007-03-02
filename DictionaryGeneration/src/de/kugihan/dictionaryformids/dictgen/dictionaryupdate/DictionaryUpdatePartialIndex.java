@@ -12,7 +12,7 @@ import de.kugihan.dictionaryformids.dictgen.dictionaryupdate.DictionaryUpdateEng
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
 
-public class DictionaryUpdatePartialIndex extends DictionaryUpdateEngDef {
+public class DictionaryUpdatePartialIndex extends DictionaryUpdate {
 	
 	final String delimiterStart = "{{";
 	final String delimiterEnd = "}}";
@@ -52,7 +52,8 @@ public class DictionaryUpdatePartialIndex extends DictionaryUpdateEngDef {
 		return returnString;
 	}
 		
-	public String removeNonSearchParts(String expression) {
+	public String removeNonSearchParts(String expression) 
+			throws DictionaryException {
 		boolean replacementDone;
 		StringBuffer expressionUpdated = new StringBuffer(expression);
 		do {
