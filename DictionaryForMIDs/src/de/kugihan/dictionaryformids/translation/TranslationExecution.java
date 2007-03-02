@@ -8,7 +8,7 @@ GPL applies - see file COPYING for copyright statement.
 package de.kugihan.dictionaryformids.translation;
 
 import de.kugihan.dictionaryformids.general.*;
-import de.kugihan.dictionaryformids.hmi_j2me.DictionarySettings;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 
 public class TranslationExecution {
 

@@ -10,7 +10,7 @@ import java.util.Vector;
 import de.kugihan.dictionaryformids.dataaccess.*;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
-import de.kugihan.dictionaryformids.hmi_j2me.*;
+import de.kugihan.dictionaryformids.hmi_java_me.*;
 import de.kugihan.dictionaryformids.translation.normation.Normation;
 
 public class Translation {

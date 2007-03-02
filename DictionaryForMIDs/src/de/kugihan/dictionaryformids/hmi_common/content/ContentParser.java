@@ -14,7 +14,7 @@ import de.kugihan.dictionaryformids.dataaccess.content.ContentDefinition;
 import de.kugihan.dictionaryformids.dataaccess.content.ContentLib;
 import de.kugihan.dictionaryformids.dataaccess.content.PredefinedContent;
 import de.kugihan.dictionaryformids.general.DictionaryException;
-import de.kugihan.dictionaryformids.hmi_j2me.DictionarySettings;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 
 public class ContentParser {
 

@@ -11,8 +11,8 @@ import javax.microedition.rms.*;
 import javax.microedition.lcdui.*; 
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
-import de.kugihan.dictionaryformids.hmi_j2me.DictionaryForMIDs;
-import de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext.LanguageUI;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs;
+import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
 
 public class SettingsStore {
 
