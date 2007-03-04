@@ -25,6 +25,8 @@ import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileDfMInputStreamAccess;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.ResourceHandler;
@@ -37,7 +39,7 @@ public static final String EXTENSION_JAR = ".jar";
 public static final String EXTENSION_JAD = ".jad";
 public static final String FILE_EMPTY_JAR_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAR;
 public static final String FILE_EMPTY_JAD_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAD;
-public static final String versionNumber = "3.0.4";
+public static final String versionNumber = "3.1.0";
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, DictionaryException {
 		printCopyrightNotice();
@@ -71,14 +73,11 @@ public static final String versionNumber = "3.0.4";
 		UtilWin utilObj = new UtilWin();
 		Util.setUtil(utilObj);
 		String propertyPath = dictionarydirectory;
-		utilObj.setPropertyPath(propertyPath);
-		// check if property file can be read
-		if (! (new File(utilObj.buildPropertyFileName())).canRead()) {
-			System.err.println("Property-file cannot be accessed: " + utilObj.buildPropertyFileName());  
+		/* read properties */
+		if (! utilObj.readProperties(propertyPath, false)) {
+			System.err.println("Property-file cannot be accessed: " + utilObj.buildPropertyFileName(propertyPath));  
 			System.exit(1);
 		}
-		/* read properties */
-		DictionaryDataFile.initValues(false);
 
 		File dictDir = new File(dictionarydirectory);
 		String fileNameEmptyJar = emptydictionaryformids + FILE_EMPTY_JAR_NAME;
@@ -209,29 +208,26 @@ public static final String versionNumber = "3.0.4";
 	}
 
 	// create suffix for unique application name from the language postfixes plus dictionary abbreviation
-	static String buildApplicationUniqueIdentifier(String propertyPath) {
+	static String buildApplicationUniqueIdentifier(String propertyPath) throws DictionaryException {
 		UtilWin utilObj = new UtilWin();
 		Util.setUtil(utilObj);
 		String applicationUniqueIdentifier = new String("_");
-		try {
-			utilObj.setPropertyPath(propertyPath);
-			DictionaryDataFile.initValues(false);
-			for (int indexLanguage = 0;
-			     indexLanguage < DictionaryDataFile.numberOfAvailableLanguages;
-			     ++indexLanguage) {
-				applicationUniqueIdentifier = applicationUniqueIdentifier + 
-											  DictionaryDataFile.supportedLanguages[indexLanguage].languageFilePostfix;
-			}
-			if (DictionaryDataFile.dictionaryAbbreviation != null) {
-				applicationUniqueIdentifier = applicationUniqueIdentifier + "_" + 
-											  DictionaryDataFile.dictionaryAbbreviation;
-			}
-			else {
-				System.err.println("Warning: property dictionaryAbbreviation is not set");  
-			}
+		if (! utilObj.readProperties(propertyPath, false)) {
+			System.err.println("Property-file cannot be accessed: " + utilObj.buildPropertyFileName(propertyPath));  
+			System.exit(1);
 		}
-		catch (Throwable t) {
-			Util.getUtil().log(t);
+		for (int indexLanguage = 0;
+		     indexLanguage < DictionaryDataFile.numberOfAvailableLanguages;
+		     ++indexLanguage) {
+			applicationUniqueIdentifier = applicationUniqueIdentifier + 
+										  DictionaryDataFile.supportedLanguages[indexLanguage].languageFilePostfix;
+		}
+		if (DictionaryDataFile.dictionaryAbbreviation != null) {
+			applicationUniqueIdentifier = applicationUniqueIdentifier + "_" + 
+										  DictionaryDataFile.dictionaryAbbreviation;
+		}
+		else {
+			System.err.println("Warning: property dictionaryAbbreviation is not set");  
 		}
 		return applicationUniqueIdentifier;
 	}

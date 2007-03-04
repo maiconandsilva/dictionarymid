@@ -7,8 +7,13 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.dataaccess;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.InterruptedIOException;
 
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.DictionaryInterruptedException;
 import de.kugihan.dictionaryformids.general.Util;
@@ -61,7 +66,7 @@ public class CsvFile {
 
 		try {
 			long startTime = System.currentTimeMillis();
-			InputStream csvStream =	DfMInputStream.getDfMInputStream().getInputStream(fileName);  // done in derived class
+			InputStream csvStream =	FileAccessHandler.getDictionaryDataFileISAccess().getInputStream(fileName);
 			Util.getUtil().logTime("open file", startTime);
 			startTime = System.currentTimeMillis();
 			if (csvStream != null) {
@@ -365,7 +370,7 @@ class CsvFileCache {
 			int numberOfBytesToBeSkipped = startPosition - lastPositionInStream;
 			if (numberOfBytesToBeSkipped < 0) {
 				// stream needs to be reopened
-				DfMInputStream.getDfMInputStream().getInputStream(fileNameParam);
+				FileAccessHandler.getDictionaryDataFileISAccess().getInputStream(fileNameParam);
 				numberOfBytesToBeSkipped = startPosition;
 			}
 			else {
@@ -387,7 +392,7 @@ class CsvFileCache {
 			if (cachedFile != null)
 				cachedFile.close();
 			// open new file 
-			csvStream =	DfMInputStream.getDfMInputStream().getInputStream(fileName);  // to be done in specific class
+			csvStream =	FileAccessHandler.getDictionaryDataFileISAccess().getInputStream(fileName);  // to be done in specific class
 			Util.getUtil().logTime("open file", startTime);
 			startTime = System.currentTimeMillis();
 			if (csvStream != null) {

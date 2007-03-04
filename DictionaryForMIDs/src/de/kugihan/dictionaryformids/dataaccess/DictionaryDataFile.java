@@ -17,7 +17,6 @@ import de.kugihan.dictionaryformids.general.DictionaryClassNotLoadedException;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
-import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
 import de.kugihan.dictionaryformids.translation.normation.Normation;
 
 public class DictionaryDataFile  {
@@ -66,9 +65,8 @@ public class DictionaryDataFile  {
 	public static long   dictionaryGenerationMinNumberOfEntriesPerIndexFile;
 	
 	public static String fileEncodingFormat; // for "special use" - currently ignored
-	
-	public static String dictionaryPath; // used for dictionaries that are accessed via the file system
-	
+
+	public static boolean useStandardPath = true;  // indicates that the property file is located in pathNameDataFiles
 
 	public static void initValues(boolean initDictionaryGenerationValues)
 				throws DictionaryException
@@ -77,7 +75,7 @@ public class DictionaryDataFile  {
 		 * values from resource file 
 		 * */
 		Util utilObj = Util.getUtil();
-		utilObj.openProperties();  // property file is never closed, because properties may be read at any time
+		utilObj.openProperties(getPathDataFiles());  // property file is never closed, because properties may be read at any time
 		infoText = utilObj.getDictionaryPropertyString("infoText");
 		dictionaryAbbreviation = utilObj.getDictionaryPropertyString("dictionaryAbbreviation", true);
 		checkForEmptyProperty(dictionaryAbbreviation);
@@ -206,15 +204,15 @@ public class DictionaryDataFile  {
 					                                                   expressionSplitString);
 	    }
 		searchListCharEncoding = utilObj.getDictionaryPropertyString("searchListCharEncoding");
-		Util.setDeviceCharEncoding(searchListCharEncoding);
+		searchListCharEncoding = utilObj.getDeviceCharEncoding(searchListCharEncoding);
 		searchListFileSeparationCharacter = utilObj.getDictionaryPropertyChar("searchListFileSeparationCharacter");
 		searchListFileMaxSize = utilObj.getDictionaryPropertyIntDefault("searchListFileMaxSize", 10000);
 		indexCharEncoding = utilObj.getDictionaryPropertyString("indexCharEncoding");
-		Util.setDeviceCharEncoding(indexCharEncoding);
+		indexCharEncoding = utilObj.getDeviceCharEncoding(indexCharEncoding);
 		indexFileSeparationCharacter = utilObj.getDictionaryPropertyChar("indexFileSeparationCharacter");
 		indexFileMaxSize = utilObj.getDictionaryPropertyIntDefault("indexFileMaxSize", 10000);
 		dictionaryCharEncoding = utilObj.getDictionaryPropertyString("dictionaryCharEncoding");
-		Util.setDeviceCharEncoding(dictionaryCharEncoding);
+		dictionaryCharEncoding = utilObj.getDeviceCharEncoding(dictionaryCharEncoding);
 		dictionaryFileSeparationCharacter = utilObj.getDictionaryPropertyChar("dictionaryFileSeparationCharacter");			
 		dictionaryFileMaxSize = utilObj.getDictionaryPropertyIntDefault("dictionaryFileMaxSize", 10000);
 		String backgroundColourProperty = "backgroundColour";
@@ -380,6 +378,9 @@ public class DictionaryDataFile  {
 	
 	public static String getPathDataFiles()
 	{
-		return "/" + pathNameDataFiles + "/";
+		if (useStandardPath)
+			return "/" + pathNameDataFiles + "/";
+		else 
+			return "";
 	}
 }

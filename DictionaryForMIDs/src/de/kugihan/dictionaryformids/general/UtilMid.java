@@ -7,12 +7,10 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.general;
 
-import java.io.*;
-import javax.microedition.lcdui.*;
+import javax.microedition.lcdui.Form;
+import javax.microedition.lcdui.Item;
+import javax.microedition.lcdui.StringItem;
 
-import de.kugihan.dictionaryformids.dataaccess.DfMInputStream;
-import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
-import de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs;
 import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 
 
@@ -20,37 +18,9 @@ public class UtilMid extends Util {
 
 	private static Form logForm;
 
-	private Properties dictionaryForMIDsProperties;
-	
 	private static boolean oldStyleEncoding;
 	public  static final String  oldStyleISO88591 = "ISO8859_1";
 		
-	public void openProperties() throws DictionaryException {
-		dictionaryForMIDsProperties = new Properties();
-		String propertyFileName = DictionaryDataFile.getPathDataFiles() + DictionaryDataFile.propertyFileName;
-		InputStream propertyStream;
-		try {
-			propertyStream = DfMInputStream.getDfMInputStream().getInputStream(propertyFileName);
-		}
-		catch (DictionaryException exception) {
-			throw new CouldNotOpenPropertyFileException();
-		}
-		try {
-			dictionaryForMIDsProperties.load(propertyStream);
-		}
-		catch (IOException exception) {
-			throw new DictionaryException("Property file could not be read " + DictionaryDataFile.propertyFileName);
-		}
-	}
-
-	public void closeProperties() throws DictionaryException {
-		dictionaryForMIDsProperties = null;
-	}
-
-	public String getDictionaryProperty(String propertyName) {
-		return dictionaryForMIDsProperties.getProperty(propertyName);
-	}	
-	
 	public static void setLogForm(Form logFormParam) {
 		logForm = logFormParam;
 	}
@@ -62,7 +32,7 @@ public class UtilMid extends Util {
 	}
 
 	// old CLDC 1.0 phones sometimes use the string ISO8859_1 instead of ISO-8859-1
-	public static void determineCharEncoding() throws DictionaryException {
+	public void determineCharEncoding() throws DictionaryException {
 		oldStyleEncoding = false;
 		if (! DictionarySettings.isCldc11()) {
 			String supportedEncoding = System.getProperty("microedition.encoding");
@@ -75,11 +45,12 @@ public class UtilMid extends Util {
 		}
 	}
 	
-	public static void setDeviceCharEncoding(String charEncoding) {
+	public String getDeviceCharEncoding(String charEncoding) {
 		if (charEncoding.equals("ISO-8859-1")) {
 			if (oldStyleEncoding) {
 				charEncoding = oldStyleISO88591;
 			}
 		}
+		return charEncoding;
 	}
 }

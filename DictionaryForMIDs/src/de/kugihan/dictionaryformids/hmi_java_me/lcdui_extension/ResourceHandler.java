@@ -11,7 +11,7 @@ import java.io.InputStream;
 
 import javax.microedition.lcdui.Image;
 
-import de.kugihan.dictionaryformids.dataaccess.ResourceDfMInputStream;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.ResourceDfMInputStreamAccess;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 
 /*
@@ -28,10 +28,10 @@ public class ResourceHandler {
 	}
 
 	ResourceHandler() {
-		resourceDfMInputStream = new ResourceDfMInputStream();
+		resourceDfMInputStream = new ResourceDfMInputStreamAccess();
 	}
 	
-	protected ResourceDfMInputStream resourceDfMInputStream;  // resources are all read from the JAR-file
+	protected ResourceDfMInputStreamAccess resourceDfMInputStream;  // resources are all read from the JAR-file
 	
 	public final static String pathSeparator = "/";
 	/*

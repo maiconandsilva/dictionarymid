@@ -7,6 +7,12 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.general;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
+
 public abstract class Util {
 
 	private static Util utilObj; 
@@ -332,16 +338,34 @@ public abstract class Util {
 	 * Prperty handling methods
 	 */
 	
-	public void openProperties() throws DictionaryException  {
-		// default is to do nothing
-	}
-
-	public void closeProperties() throws DictionaryException  {
-		// default is to do nothing
-	}
-
-	public abstract String getDictionaryProperty(String propertyName);
+	private Properties dictionaryForMIDsProperties;
 	
+	public void openProperties(String propertyPath) throws DictionaryException {
+		dictionaryForMIDsProperties = new Properties();
+		String propertyFileName = propertyPath + DictionaryDataFile.propertyFileName;
+		InputStream propertyStream;
+		try {
+			propertyStream = FileAccessHandler.getDictionaryDataFileISAccess().getInputStream(propertyFileName);
+		}
+		catch (DictionaryException exception) {
+			throw new CouldNotOpenPropertyFileException();
+		}
+		try {
+			dictionaryForMIDsProperties.load(propertyStream);
+		}
+		catch (IOException exception) {
+			throw new DictionaryException("Property file could not be read " + DictionaryDataFile.propertyFileName);
+		}
+	}
+
+	public void closeProperties() throws DictionaryException {
+		dictionaryForMIDsProperties = null;
+	}
+
+	public String getDictionaryProperty(String propertyName) {
+		return dictionaryForMIDsProperties.getProperty(propertyName);
+	}	
+		
 	public String getDictionaryPropertyString(String propertyName, boolean optional) throws DictionaryException {
 		String propertyValue = getDictionaryProperty(propertyName);
 		if ((propertyValue == null) && (! optional)) {
@@ -478,14 +502,15 @@ public abstract class Util {
 	}
 	
 	// For some devices the charset encoding that is configurated for DictionaryForMIDs
-	// needs to be replaces with a device specific string. This is done with a call to
-	// setDeviceCharEncoding. At initialisation determineCharEncoding needs to be called
-	public static void determineCharEncoding() throws DictionaryException {
+	// needs to be replaced with a device specific string. This is done with a call to
+	// getDeviceCharEncoding. At initialisation determineCharEncoding needs to be called
+	public void determineCharEncoding() throws DictionaryException {
 		// default is to do nothing
 	}
 	
-	public static void setDeviceCharEncoding(String charEncoding) {
-		// default is to do nothing
+	public String getDeviceCharEncoding(String charEncoding) {
+		// default is to return the charEncoding unchanged
+		return charEncoding;
 	}
 	
 }

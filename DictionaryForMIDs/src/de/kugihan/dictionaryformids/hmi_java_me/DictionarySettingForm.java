@@ -202,6 +202,7 @@ public class DictionarySettingForm
 			// temporary: this is a temporary solution for the partial file system dictionary support.
 			dictionaryPathTextField.setDefaultCommand(selectDictionaryPathCommand);
 			dictionaryPathTextField.setItemCommandListener(this);
+			DictionarySettings.setDictionaryPath(SettingsStore.getSettingsStore().getDictionaryPath());
 		}
 		
 		/* 
@@ -270,7 +271,7 @@ public class DictionarySettingForm
 
 		// dictionaryPathTextField
 		if (DictionarySettings.isUseFileAccessJSR75()) {
-			dictionaryPathTextField.setString(DictionaryDataFile.dictionaryPath);
+			dictionaryPathTextField.setString(DictionarySettings.getDictionaryPath());
 		}
 		
 		// fontSizeChoiceGroup: use only if bitmap font is not active
@@ -441,8 +442,8 @@ public class DictionarySettingForm
 
 		// path to dictionary
 		if (DictionarySettings.isUseFileAccessJSR75()) {
-			DictionaryDataFile.dictionaryPath = dictionaryPathTextField.getString();
-			SettingsStore.getSettingsStore().setDictionaryPath(DictionaryDataFile.dictionaryPath);
+			DictionarySettings.setDictionaryPath(dictionaryPathTextField.getString());
+			SettingsStore.getSettingsStore().setDictionaryPath(DictionarySettings.getDictionaryPath());
 		}
 		
 		// Performance settings

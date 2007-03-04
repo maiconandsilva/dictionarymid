@@ -122,7 +122,7 @@ public class Properties extends Hashtable
    */
   public Properties()
   {
-	UtilMid.setDeviceCharEncoding(propertyCharEncoding);
+	propertyCharEncoding = Util.getUtil().getDeviceCharEncoding(propertyCharEncoding);
   }
 
   /**
@@ -133,7 +133,7 @@ public class Properties extends Hashtable
   public Properties(Properties defaults)
   {
     this.defaults = defaults;
-	UtilMid.setDeviceCharEncoding(propertyCharEncoding);
+	propertyCharEncoding = Util.getUtil().getDeviceCharEncoding(propertyCharEncoding);
   }
 
   /**

@@ -4,22 +4,30 @@ Copyright (C) 2005, 2006 Gert Nuber (dict@kugihan.de)
 
 GPL applies - see file COPYING for copyright statement.
 */
-package de.kugihan.dictionaryformids.dataaccess;
+package de.kugihan.dictionaryformids.dataaccess.fileaccess;
 
 import java.io.IOException;
 import java.io.InputStream;
 import javax.microedition.io.Connector;
 import javax.microedition.io.file.FileConnection;
+
+import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.CouldNotOpenFileException;
 
-public class JSR75InputStream extends DfMInputStream {
+public class JSR75InputStreamAccess extends DfMInputStreamAccess {
 
+	protected String baseDirectory;
+	
+	public JSR75InputStreamAccess(String baseDirectoryParam) {
+		baseDirectory = baseDirectoryParam; 
+	}
+	
 	public InputStream getInputStream(String fileName)
 			throws DictionaryException {
 		InputStream streamFromJSR75File;
 		try {
-			String fileLocation = DictionaryDataFile.dictionaryPath + fileName;
+			String fileLocation = baseDirectory + fileName;
 			FileConnection file = (FileConnection) Connector.open(fileLocation, Connector.READ);
 		     if (! file.exists())
 		         throw new CouldNotOpenFileException("File does not exist: " + fileLocation);
