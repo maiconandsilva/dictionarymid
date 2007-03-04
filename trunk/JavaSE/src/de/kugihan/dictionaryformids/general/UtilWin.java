@@ -7,10 +7,11 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.general;
 
-import java.util.*;
-import java.io.*;
+import java.io.File;
 
-import de.kugihan.dictionaryformids.general.Util;
+import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileDfMInputStreamAccess;
 
 public class UtilWin extends Util {
 
@@ -18,27 +19,23 @@ public class UtilWin extends Util {
 		System.out.println(message);
 	}
 
-	protected String propertyPath;
-	
 	public static final String propertyFileName = "DictionaryForMIDs.properties";
 	
-	public void setPropertyPath(String propertyPathParam) {
-		propertyPath = propertyPathParam;
-	}
-
-	public String buildPropertyFileName() {
+	public String buildPropertyFileName(String propertyPath) {
 		return propertyPath + "/" + propertyFileName;
 	}
 	
-	public String getDictionaryProperty(String propertyName) {
-		Properties prop = new Properties();
-		try {
-			prop.load(new FileInputStream(buildPropertyFileName()));
+	public boolean readProperties(String propertyPath, 
+			                      boolean initDictionaryGenerationValues) 
+			throws DictionaryException {
+		boolean propertyFileAccessible = new File(buildPropertyFileName(propertyPath)).canRead();
+		if (propertyFileAccessible) {
+			FileDfMInputStreamAccess dfmInputStreamObj = new FileDfMInputStreamAccess(propertyPath);
+			FileAccessHandler.setDictionaryDataFileISAccess(dfmInputStreamObj);
+			DictionaryDataFile.useStandardPath = false;
+			DictionaryDataFile.initValues(initDictionaryGenerationValues);
 		}
-		catch (Exception e) {
-			log(e);
-		} 
-		String propertyValue = prop.getProperty(propertyName);
-	    return propertyValue;
+		return propertyFileAccessible;
 	}
+	
 }

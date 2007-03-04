@@ -30,14 +30,15 @@ import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.hmi_common.content.ContentParser;
 import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
 import de.kugihan.dictionaryformids.dataaccess.FileCsvFile;
-import de.kugihan.dictionaryformids.dataaccess.FileDfMInputStream;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileDfMInputStreamAccess;
 import de.kugihan.dictionaryformids.general.UtilWin;
 import de.kugihan.dictionaryformids.translation.SearchIndicator;
 import de.kugihan.dictionaryformids.translation.normation.Normation;
 
 public class DictionaryGeneration {
 
-	static final String versionNumber = "3.0.8";
+	static final String versionNumber = "3.1.0";
 	static String FILE_SEPARATOR = System.getProperty("file.separator");
 	
 	static String sourceFile;
@@ -73,10 +74,6 @@ public class DictionaryGeneration {
 				UtilWin utilObj = new UtilWin();
 				Util.setUtil(utilObj);
 				try {
-					// Create object for reading InputStreams
-					FileDfMInputStream dfmInputStreamObj = new FileDfMInputStream();
-					FileDfMInputStream.setDfMInputStream(dfmInputStreamObj);
-					
 					if (!directoryDestination.endsWith(FILE_SEPARATOR))
 					{
 						directoryDestination = directoryDestination + FILE_SEPARATOR;
@@ -94,18 +91,16 @@ public class DictionaryGeneration {
 						printArgumentError("Outputdirectory cannot be accessed: " + directoryDestination);
 						fileAccessError = true;
 					}
-					utilObj.setPropertyPath(propertyPath);
-					if (! (new File(utilObj.buildPropertyFileName())).canRead()) {
-						printArgumentError("Property-file cannot be accessed: " + utilObj.buildPropertyFileName());
+					/* read properties */
+					if (! utilObj.readProperties(propertyPath, true)) {
+						System.err.println("Property-file cannot be accessed: " + utilObj.buildPropertyFileName(propertyPath));  
 						fileAccessError = true;
 					}
 					if (! fileAccessError) {
-						/* read properties */
-						DictionaryDataFile.initValues(true);
 						/* generate the files */
 						generateDictionaryFiles();
 						/* copy the property file */
-						copyPropertyFile(utilObj.buildPropertyFileName(), directoryDestination);
+						copyPropertyFile(utilObj.buildPropertyFileName(propertyPath), directoryDestination);
 						System.out.println("Complete\n");
 					}
 				}
@@ -158,6 +153,8 @@ public class DictionaryGeneration {
 		 * Create dictionary files
 		 */
 		System.out.println("Creating: dictionary files");
+		FileDfMInputStreamAccess dfmInputStreamObj = new FileDfMInputStreamAccess("");
+		FileAccessHandler.setDictionaryDataFileISAccess(dfmInputStreamObj);
 		CsvFile source = new FileCsvFile(sourceFile,
 				                         DictionaryDataFile.dictionaryGenerationSeparatorCharacter,
 										 DictionaryDataFile.dictionaryGenerationInputCharEncoding);

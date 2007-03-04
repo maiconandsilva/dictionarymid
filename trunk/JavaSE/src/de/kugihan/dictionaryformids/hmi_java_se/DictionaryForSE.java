@@ -1,24 +1,73 @@
 package de.kugihan.dictionaryformids.hmi_java_se;
 
-import java.awt.*;
-import java.awt.datatransfer.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.*;
-import java.util.jar.*;
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
-import javax.swing.table.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Event;
+import java.awt.FileDialog;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Enumeration;
+import java.util.Properties;
+import java.util.Vector;
+import java.util.jar.JarFile;
 
-import de.kugihan.dictionaryformids.dataaccess.*;
+import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
-import de.kugihan.dictionaryformids.dataaccess.content.*;
+import de.kugihan.dictionaryformids.dataaccess.content.FontStyle;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.JarInputStreamAccess;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
-import de.kugihan.dictionaryformids.hmi_common.content.*;
-import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 import de.kugihan.dictionaryformids.general.UtilWin;
+import de.kugihan.dictionaryformids.hmi_common.content.ContentParser;
+import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
+import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 import de.kugihan.dictionaryformids.translation.SingleTranslation;
 import de.kugihan.dictionaryformids.translation.TranslationExecution;
 import de.kugihan.dictionaryformids.translation.TranslationExecutionCallback;
@@ -120,7 +169,6 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		fillTableColums();
 		createGUI();
 		TranslationExecution.setTranslationExecutionCallback(this);
-		DfMInputStream.setDfMInputStream(new JarCsvFile());
 		lStatus.setText("Welcome to DictionaryForMIDs " + VERSION + " (c) by Stefan Martens & Gert Nuber");
 	}
 	
@@ -422,7 +470,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 				
 			}
 			catch (Throwable t)
-			{
+			{ 
 				loadLanguages();
 				showDictionaryError(t.toString());
 			}
@@ -581,6 +629,8 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 			if (check.exists())
 			{
 				jar = new JarFile(check);
+				// use this jar-file for access to dictionary data files:
+				FileAccessHandler.setDictionaryDataFileISAccess(new JarInputStreamAccess(jar));
 				return true;
 			}
 			return false;

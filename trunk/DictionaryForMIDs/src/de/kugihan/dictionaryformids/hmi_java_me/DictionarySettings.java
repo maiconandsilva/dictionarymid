@@ -34,6 +34,7 @@ public class DictionarySettings
 	private static boolean cldc11 = false;
 	private static boolean useFileAccessJSR75 = false; 
 	private static boolean dictionaryAvailable;
+	private static String dictionaryPath;
 	
 	public static boolean isMicroedition()
 	{
@@ -213,5 +214,11 @@ public class DictionarySettings
 	}
 	public static void setDictionaryAvailable(boolean dictionaryAvailable) {
 		DictionarySettings.dictionaryAvailable = dictionaryAvailable;
+	}
+	public static String getDictionaryPath() {
+		return dictionaryPath;
+	}
+	public static void setDictionaryPath(String dictionaryPath) {
+		DictionarySettings.dictionaryPath = dictionaryPath;
 	}
 }

@@ -5,14 +5,14 @@ Copyright (C) 2005, 2006 Gert Nuber (dict@kugihan.de)
 GPL applies - see file COPYING for copyright statement.
 */
 
-package de.kugihan.dictionaryformids.dataaccess;
+package de.kugihan.dictionaryformids.dataaccess.fileaccess;
 import java.io.InputStream;
 
 import de.kugihan.dictionaryformids.general.CouldNotOpenFileException;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
 
-public class ResourceDfMInputStream extends DfMInputStream {
+public class ResourceDfMInputStreamAccess extends DfMInputStreamAccess {
 	
 	public InputStream getInputStream(String fileName) 
 			throws DictionaryException {

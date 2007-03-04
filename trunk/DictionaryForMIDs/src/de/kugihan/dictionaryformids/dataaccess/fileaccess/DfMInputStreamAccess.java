@@ -5,23 +5,13 @@ Copyright (C) 2006 Gert Nuber (dict@kugihan.de)
 GPL applies - see file COPYING for copyright statement.
 */
 
-package de.kugihan.dictionaryformids.dataaccess;
+package de.kugihan.dictionaryformids.dataaccess.fileaccess;
 
 import java.io.InputStream;
 
 import de.kugihan.dictionaryformids.general.DictionaryException;
 
-public abstract class DfMInputStream {
-
-	private static DfMInputStream dfmInputStreamObj; 
-
-	public static DfMInputStream getDfMInputStream() {
-		return dfmInputStreamObj;
-	}
-
-	public static void setDfMInputStream(DfMInputStream newDfMInputStreamObj) {
-		dfmInputStreamObj = newDfMInputStreamObj;
-	}
+public abstract class DfMInputStreamAccess {
 
 	public abstract InputStream getInputStream(String fileName) throws DictionaryException;
 

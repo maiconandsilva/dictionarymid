@@ -11,10 +11,11 @@ import java.io.InputStream;
 
 import javax.microedition.midlet.MIDlet;
 
-import de.kugihan.dictionaryformids.dataaccess.DfMInputStream;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
-import de.kugihan.dictionaryformids.dataaccess.JSR75InputStream;
-import de.kugihan.dictionaryformids.dataaccess.ResourceDfMInputStream;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.JSR75InputStreamAccess;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.ResourceDfMInputStreamAccess;
 import de.kugihan.dictionaryformids.general.CouldNotOpenPropertyFileException;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.SettingsStore;
@@ -75,17 +76,16 @@ public class DictionaryForMIDs
 			DictionarySettings.setUseFileAccessJSR75(determineFileAccessJSR75());
 			
 			// Create object for reading InputStreams
-			DfMInputStream dfmInputStreamObj;
+			DfMInputStreamAccess dfmInputStreamObj;
 			if (DictionarySettings.isUseFileAccessJSR75()) {
 				// access files from file system
-				dfmInputStreamObj = new JSR75InputStream();
-				DictionaryDataFile.dictionaryPath = SettingsStore.getSettingsStore().getDictionaryPath();				
+				dfmInputStreamObj = new JSR75InputStreamAccess(SettingsStore.getSettingsStore().getDictionaryPath());
 			}
 			else {
 				// access files from JAR-file
-				dfmInputStreamObj = new ResourceDfMInputStream();
+				dfmInputStreamObj = new ResourceDfMInputStreamAccess();
 			}
-			DfMInputStream.setDfMInputStream(dfmInputStreamObj);
+			FileAccessHandler.setDictionaryDataFileISAccess(dfmInputStreamObj);
 			
 			utilObj.determineCharEncoding();
 
