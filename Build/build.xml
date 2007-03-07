@@ -1,10 +1,14 @@
-<!-- This file build.xml should be located in directory Build -->
-<!-- You must set wtk.home to your WTK installation directory -->
-<!-- this version generates DictionaryForMIDs.jar/jad, DictionaryGeneration.jar and JarCreator.jar -->
-<!-- using: run ant in directory Build  -->
-<!-- it runs well on both platforms windows/linux -->
-<!-- Note: the jar-tool must be in the path ! -->
-<!-- version 3.1 -->
+<!-- 
+This file build.xml should be located in directory Build
+You must have Sun's Wireless Toolkit (WTK) installed (can be downloaded from http://java.sun.com/products/sjwtoolkit/download-2_5.html)
+You must set wtk.home to your WTK installation directory
+The current version of build.xml generates DictionaryForMIDs.jar/jad, DictionaryGeneration.jar and JarCreator.jar
+Using: run ant in directory Build
+It runs well on both platforms windows/linux
+The jar-tool must be in the path. Otherwise there will be an error during the preverifier run.
+You also must have the antenna-bin-xxx.jar file in the Build directory (the file antenna-bin-xxx.jar is part of the Build CVS project)
+Version 3.1 
+-->
 
 <project name="allwork" default="build_all">
 
@@ -19,10 +23,11 @@
 	<taskdef resource="antenna.properties" classpath="./antenna-bin-0.9.14.jar"/>
 	
   	<property name="DfM" 			location="../DictionaryForMIDs"/>
-	<property name="DfM.classdir"   location="${DfM}/classes"/>        <!-- WTK puts the class files to classes -->
-	<property name="DfM.resdir"     location="${DfM}/res"/>            <!-- WTK puts the resource files to res -->
-	<property name="DfM.jarfile"    location="DictionaryForMIDs.jar"/> <!-- Put the file in the home directory (WTK puts the jar file to bin) -->
-	<property name="DfM.jadfile"    location="DictionaryForMIDs.jad"/> <!-- Put the file in the home directory (WTK puts the jad file to bin) -->
+	<property name="DfM.classdir"   location="${DfM}/classes"/>        	<!-- WTK puts the class files to classes -->
+	<property name="DfM.resdir"     location="${DfM}/res"/>            	<!-- WTK puts the resource files to res -->
+	<property name="DfM.manifest"   location="${DfM}/bin/MANIFEST.MF"/>	<!-- WTK puts the resource files to bin -->
+	<property name="DfM.jarfile"    location="DictionaryForMIDs.jar"/> 	<!-- Put the file in the home directory (WTK puts the jar file to bin) -->
+	<property name="DfM.jadfile"    location="DictionaryForMIDs.jad"/> 	<!-- Put the file in the home directory (WTK puts the jad file to bin) -->
 
 	<property name="JavaSE"  		location="../JavaSE"/>
 	<property name="JavaSE.classdir" location="${JavaSE}/bin"/>
@@ -54,7 +59,7 @@
 	    <wtkbuild srcdir="${DfM}/src" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${DfM.classdir}" />
 	</target>
 
-	<target name="build_dfm_java_me" depends="compile_dfm_java_me"> 
+	<target name="create_dfm_java_me_jadfile_and_manifest"> 
 		<property name="DfM.MIDlet-Name" value="DictionaryForMIDs"/> 
 	    <property name="DfM.MIDlet-Version" value="3.1.0"/>
 	    <property name="DfM.MicroEdition-Profile" value="MIDP-2.0"/>
@@ -62,33 +67,68 @@
 	    <property name="DfM.Built-By" value="${user.name}"/>
 	    <property name="DfM.MIDlet-1" value="DictionaryForMIDs, /icons/Application/DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs"/>
 	    <wtkjad jadfile="${DfM.jadfile}">
-		      <attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
-		      <attribute name="MIDlet-Version" value="${DfM.MIDlet-Version}"/>
-		      <attribute name="MicroEdition-Profile" value="${DfM.MicroEdition-Profile}"/>
-		      <attribute name="MicroEdition-Configuration" value="${DfM.MicroEdition-Configuration}"/>
-		      <attribute name="Built-By" value="${user.name}"/>
-		      <attribute name="MIDlet-Vendor" value="${DfM.team}"/>
-		      <attribute name="MIDlet-1" value="${DfM.MIDlet-1}"/>
-		      <attribute name="MIDlet-Jar-URL" value="DictionaryForMIDs.jar"/>
-		      <attribute name="MIDlet-Permissions" value="javax.microedition.io.Connector.file.read"/>
-		      <attribute name="logLevel" value="0"/>
+		    <attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
+		    <attribute name="MIDlet-Version" value="${DfM.MIDlet-Version}"/>
+		    <attribute name="MicroEdition-Profile" value="${DfM.MicroEdition-Profile}"/>
+		    <attribute name="MicroEdition-Configuration" value="${DfM.MicroEdition-Configuration}"/>
+		    <attribute name="Built-By" value="${user.name}"/>
+		    <attribute name="MIDlet-Vendor" value="${DfM.team}"/>
+		    <attribute name="MIDlet-1" value="${DfM.MIDlet-1}"/>
+		    <attribute name="MIDlet-Jar-URL" value="DictionaryForMIDs.jar"/>
+		    <attribute name="MIDlet-Permissions" value="javax.microedition.io.Connector.file.read"/>
+		    <attribute name="logLevel" value="0"/>
 	  	</wtkjad>
+      	<manifest file="${DfM.manifest}">
+	      	<attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
+	      	<attribute name="MIDlet-Version" value="${DfM.MIDlet-Version}"/>
+	      	<attribute name="MicroEdition-Profile" value="${DfM.MicroEdition-Profile}"/>
+	      	<attribute name="MicroEdition-Configuration" value="${DfM.MicroEdition-Configuration}"/>
+	      	<attribute name="Built-By" value="${user.name}"/>
+	      	<attribute name="MIDlet-Vendor" value="${DfM.team}"/>
+	      	<attribute name="MIDlet-1" value="${DfM.MIDlet-1}"/>
+      	</manifest>
+	</target>
+
+	<target name="build_dfm_java_me" depends="compile_dfm_java_me,create_dfm_java_me_jadfile_and_manifest"> 
 		<!-- note: the following wtkpackage task will fail on preverification if the jar tool is not in the path -->
-	    <wtkpackage jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}" preverify="true">
-	      <fileset dir="${DfM.classdir}"/>
-	      <fileset dir="${DfM.resdir}"/>
-	      <manifest>
-		      <attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
-		      <attribute name="MIDlet-Version" value="${DfM.MIDlet-Version}"/>
-		      <attribute name="MicroEdition-Profile" value="${DfM.MicroEdition-Profile}"/>
-		      <attribute name="MicroEdition-Configuration" value="${DfM.MicroEdition-Configuration}"/>
-		      <attribute name="Built-By" value="${user.name}"/>
-		      <attribute name="MIDlet-Vendor" value="${DfM.team}"/>
-		      <attribute name="MIDlet-1" value="${DfM.MIDlet-1}"/>
-	      </manifest>
+	    <wtkpackage jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}" manifest="${DfM.manifest}" preverify="true">
+	      	<fileset dir="${DfM.classdir}"/>
+	      	<fileset dir="${DfM.resdir}"/>
 	    </wtkpackage>
 	</target>
-		
+
+	<target name="do_obfuscate_dfm_java_me"> 
+	    <wtkobfuscate jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}">
+			<preserve class="de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs"/>
+			<preserve class="de.kugihan.dictionaryformids.translation.normation.Normation"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationLat"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationGer"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationFil"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationEng"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationEng2"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationJpn"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationLat"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationRus"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationVie"/>
+	    </wtkobfuscate>
+		<!-- need to preverify again -->
+		<wtkpreverify jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}"/>
+	</target>
+  	
+	<target name="obfuscate_dfm_java_me" depends="build_dfm_java_me"> 
+		<antcall target="do_obfuscate_dfm_java_me"/>
+	</target>
+	
+	<target name="create_minimal_size_dfm_java_me" depends="create_dfm_java_me_jadfile_and_manifest"> 
+	    <wtkpackage jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}" manifest="${DfM.manifest}">
+	      	<fileset dir="${DfM.classdir}"/>
+	      	<fileset dir="${DfM.resdir}">
+	      		<!-- do not include any icons -->
+	      		<exclude name="icons/**"/>
+	      	</fileset>
+	    </wtkpackage>
+		<antcall target="do_obfuscate_dfm_java_me"/>
+	</target>
   	
   	<!-- 
   		DictionaryForMIDs Java SE
@@ -100,12 +140,12 @@
 
 	<target name="build_dfm_java_se" depends="compile_dfm_java_se"> 
 	    <jar destfile="${JavaSE.jarfile}"  >
-			<fileset dir="${DfM.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${JavaSE.classdir}"      includes="de/kugihan/dictionaryformids/**"  />
+			<fileset dir="${DfM.classdir}"     	includes="de/kugihan/dictionaryformids/**"  />
+	      	<fileset dir="${JavaSE.classdir}"  	includes="de/kugihan/dictionaryformids/**"  />
 	      	<manifest>
-	        	<attribute name="Built-By" value="${user.name}"/>
-	        	<attribute name="Created-By" value="Stefan Martens"/>
-	        	<attribute name="Main-Class" value="de.kugihan.dictionaryformids.hmi_java_se.DictionaryForSE"/>
+	        	<attribute name="Built-By" 		value="${user.name}"/>
+	        	<attribute name="Created-By" 	value="Stefan Martens"/>
+	        	<attribute name="Main-Class" 	value="de.kugihan.dictionaryformids.hmi_java_se.DictionaryForSE"/>
 	      	</manifest>
 	    </jar>
 	</target>
