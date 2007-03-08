@@ -103,6 +103,7 @@ SettingsFontBitmapFont    ; selection font size for bitmap fonts
 StartDisplayLanguageNumberOfEntries, 2  ; on the start display the number of entries for a language: %1 is the language / %2 is the number of entries
 StartDisplaySizeOfDictionaryInKb ; size of the dictionary in kB: %1 is the size
 DictionaryForMIDsApplicationName ; this is the name of the DictionaryForMIDs application. Should be set to "[no translation]" for most languages (Chinese and Japanese may be an exception)
+MessageNoDictionaryLoaded ; this is displayed when no dictionary is loaded in JSR-75 mode
 ================================================================================
 #English, en
 
@@ -174,6 +175,7 @@ bitmap font
 %1: %2 entries
 Size: %1 kB
 DictionaryForMIDs
+No dictionary loaded
 ================================================================================
 #Việt Nam, vi
 

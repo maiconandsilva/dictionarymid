@@ -23,6 +23,7 @@ import javax.microedition.lcdui.Item;
 import javax.microedition.lcdui.ItemCommandListener;
 import javax.microedition.lcdui.ItemStateListener;
 import javax.microedition.lcdui.Spacer;
+import javax.microedition.lcdui.StringItem;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dataaccess.LanguageDefinition;
@@ -107,6 +108,9 @@ public class MainForm
 		contentParserObj = new ContentParser();
 		wordHistoryObj = new WordHistory();
 		systemBackgroundColour = display.getColor(0);
+
+		// special workaround for SE OutOfMemoryError
+		checkForSonyEricssonWorkaround();
 	}
 
 	public void initialiseForm() 
@@ -151,9 +155,6 @@ public class MainForm
 		readDisplayTextProperties();
 		
 		showStartupDisplay();
-		
-		// special workaround for SE OutOfMemoryError
-		checkForSonyEricssonWorkaround();
 	}
 	
 	public void startForm() {
@@ -251,14 +252,16 @@ public class MainForm
 	public void translateWord(String word,
 			  				  boolean executeInBackground)  
 			throws DictionaryException {
-		// for JSR75 support this needs to be done in a separate thread
-		if (DictionarySettings.isUseFileAccessJSR75())
-			executeInBackground = true;
-		TranslationExecution.executeTranslation(addSearchCharacters(word),  
-											    executeInBackground);
-		setFocusToBeTranslatedWordTextField(); 	
-		translatedWord = word;
-		indexOfSelectedItem = -1;
+		if (DictionarySettings.isDictionaryAvailable()) {
+			// for JSR75 support this needs to be done in a separate thread
+			if (DictionarySettings.isUseFileAccessJSR75())
+				executeInBackground = true;
+			TranslationExecution.executeTranslation(addSearchCharacters(word),  
+												    executeInBackground);
+			setFocusToBeTranslatedWordTextField(); 	
+			translatedWord = word;
+			indexOfSelectedItem = -1;
+		}
 	}
 
 	//used for selectionWord
@@ -451,7 +454,11 @@ public class MainForm
 	
 	public void updateSelectedLanguage() 
 				throws DictionaryException {
-		if (DictionarySettings.numberOfSearchableInputLanguages() == 1) {  
+		if (! DictionarySettings.isDictionaryAvailable()) {
+			// no dictionary loaded
+			setTitleUIDisplayTextItem(UIDisplayTextItems.MessageNoDictionaryLoaded);
+		}
+		else if (DictionarySettings.numberOfSearchableInputLanguages() == 1) {  
 			// only one input language: no need to indicate translation direction; use application name instead
 			setTitleUIDisplayTextItem(UIDisplayTextItems.DictionaryForMIDsApplicationName);
 		}
@@ -687,6 +694,16 @@ public class MainForm
 			throws DictionaryException {
 		indexOfFirstItemStartupDisplay = indexOfFirstTranslationItem;
 		indexOfLastItemStartupDisplay = indexOfFirstItemStartupDisplay - 1;
+		if (sonyEricssonWorkaroundRequired) {
+			StringItem seMessage = new StringItem("Sony Ericsson cell phone:", 
+					                              "There seems to be a bug in the firmware " +
+					                              "of several Sony Ericsson cell phones. For this " +
+					                              "reason some of the features of DictionaryForMIDs " +
+					                              "are disabled on this cell phone.");
+			appendStartupDisplayItem(seMessage);
+			startupDisplayIsShown = true;
+			return;
+		}
 		// use bold font
 		Font startupDisplayFont = Font.getFont(Font.getDefaultFont().getFace(), 
 				                               Font.STYLE_BOLD, 
@@ -702,7 +719,9 @@ public class MainForm
 						                       bestApplicationIconSize, 
 						                       bestApplicationIconSize);
 		ImageItem applicationIconItem = new ImageItem(null, applicationIcon, Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_CENTER | Item.LAYOUT_VCENTER | Item.LAYOUT_2, null);
-		appendStartupDisplayItem(applicationIconItem);
+		if (applicationIconItem != null) {
+			appendStartupDisplayItem(applicationIconItem);
+		}
 
 		// leave some space
 		Spacer spaceBeforeDictionary = new Spacer(0, bestApplicationIconSize/10);
@@ -739,7 +758,7 @@ public class MainForm
 		// display the number of entries for each input language
 		for (int languageCounter = 0; languageCounter < DictionaryDataFile.numberOfAvailableLanguages; ++languageCounter) {
 			LanguageDefinition language = DictionaryDataFile.supportedLanguages[languageCounter]; 
-			if (language.isSearchable) {
+			if (language.isSearchable && (language.indexNumberOfSourceEntries > 0)) {
 				// prepare required UIDisplayTextItems
 				String languageDisplayText = DictionaryDataFile.supportedLanguages[languageCounter].languageDisplayText;
 				UIDisplayTextItem inputLanguageTextItem = 
@@ -760,8 +779,10 @@ public class MainForm
 				Image icon = entriesUIDisplayTextItem.getIcon(ResourceHandler.getResourceHandlerObj().iconSizeGroupSmall, 
 						                                      iconSizeHeight, 
 						                                      iconSizeWidth);
-				ImageItem iconItem = new ImageItem(null, icon, Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_CENTER | Item.LAYOUT_VCENTER | Item.LAYOUT_2, null);
-				appendStartupDisplayItem(iconItem);
+				if (icon != null) {
+					ImageItem iconItem = new ImageItem(null, icon, Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_CENTER | Item.LAYOUT_VCENTER | Item.LAYOUT_2, null);
+					appendStartupDisplayItem(iconItem);
+				}
 				// second create display text
 				DfMStringItem numberOfEntriesForLanguageItem = new DfMStringItem(entriesUIDisplayTextItem);
 				numberOfEntriesForLanguageItem.setLayout(Item.LAYOUT_2);
@@ -796,7 +817,7 @@ public class MainForm
 	// items at the beginning of executeTranslation.
 	// The workaround is to display an info-dialog after the translation result has been displayed
 	// It seems that then no OutOfMemoryError is thrown.
-	boolean sonyEricssonWorkaroundRequired = false;
+	public static boolean sonyEricssonWorkaroundRequired = false;
 	void checkForSonyEricssonWorkaround() {
 		String platform = System.getProperty("microedition.platform");
 		if (platform != null) {
@@ -806,6 +827,7 @@ public class MainForm
 				}
 			}
 		}
+//		sonyEricssonWorkaroundRequired = false; // uncomment for SE bug testing
 	}
 	void applySonyEricssonWorkaround() {
 		if (sonyEricssonWorkaroundRequired) {

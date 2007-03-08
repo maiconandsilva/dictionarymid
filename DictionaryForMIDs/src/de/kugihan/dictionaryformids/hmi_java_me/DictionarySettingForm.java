@@ -649,12 +649,11 @@ public class DictionarySettingForm
 	 * Check to see if the bitmap font setting should be shown
 	 */
 	void checkBitmapFontAvailable() {
-		StringColourItemTextPart part = new StringColourItemTextPart("test",
-				new RGBColour(0, 0, 0), new FontStyle(FontStyle.plain),
-				new SelectionMode(SelectionMode.none));
-		StringColourItemText text = new StringColourItemText();
-		text.addItemTextPart(part);
-		bitmapFontExists = new BitmapFontCanvas(text, 50, false).fontExists();
+		if (MainForm.sonyEricssonWorkaroundRequired) {
+			bitmapFontExists = false;
+			return;
+		}
+		bitmapFontExists = BitmapFontCanvas.fontExistsStatic();
 	}
 }
 
