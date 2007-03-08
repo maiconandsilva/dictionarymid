@@ -8,7 +8,11 @@ package de.kugihan.dictionaryformids.hmi_java_me.mainform.bitmapfont;
 
 import javax.microedition.lcdui.*;
 
+import de.kugihan.dictionaryformids.dataaccess.content.FontStyle;
+import de.kugihan.dictionaryformids.dataaccess.content.RGBColour;
+import de.kugihan.dictionaryformids.dataaccess.content.SelectionMode;
 import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
+import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart;
 
 public class BitmapFontCanvas extends CustomItem {
 
@@ -43,6 +47,15 @@ public class BitmapFontCanvas extends CustomItem {
 		return true;
 	}
 
+	public static boolean fontExistsStatic() {
+		StringColourItemTextPart part = new StringColourItemTextPart("test",
+				new RGBColour(0, 0, 0), new FontStyle(FontStyle.plain),
+				new SelectionMode(SelectionMode.none));
+		StringColourItemText text = new StringColourItemText();
+		text.addItemTextPart(part);		
+		return new BitmapFontCanvas(text, 50, false).fontExists();
+	}
+	
 	protected int getMinContentHeight() {
 		return totalHeightPixels;
 	}

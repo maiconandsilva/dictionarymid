@@ -13,6 +13,7 @@ import javax.microedition.lcdui.Image;
 
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.ResourceDfMInputStreamAccess;
 import de.kugihan.dictionaryformids.general.DictionaryException;
+import de.kugihan.dictionaryformids.hmi_java_me.mainform.MainForm;
 
 /*
  * The class ResourceHandler provides access to Icons, Images, Animations, etc.
@@ -135,6 +136,8 @@ public class ResourceHandler {
 	public Image getImage(String path,    
 			              String imageName) 
 			throws DictionaryException {
+		if (MainForm.sonyEricssonWorkaroundRequired)
+			return null;
 		String resourceLocation = getResourceLocation(path, imageName); 
 		InputStream imageInputStream = resourceDfMInputStream.getInputStream(resourceLocation);
 		Image imageFromResource;
