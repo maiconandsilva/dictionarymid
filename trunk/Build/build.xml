@@ -132,6 +132,37 @@ Version 3.1
 	    </wtkpackage>
 	</target>
 
+	<target name="package_dfm_java_me_empty" depends="build_dfm_java_me"> 
+		<property name="packaging.java_me_executeable.subdir" value="files_for_packaging/executeable_distribution"/>
+		<antcall target="replace_keywords_readme">
+			<param name="sourcebasedir" 		value="${DfM.inputbasedir}"/>
+			<param name="destinationbasedir" 	value="${DfM.outputbasedir}"/>
+			<param name="packaging.subdir" 		value="${packaging.java_me_executeable.subdir}"/>
+		</antcall>
+		<property name="DfM.zipfile_empty"	location="${DfM.outputbasedir}/DictionaryForMIDs_${version}_empty.zip"/>
+		<zip destfile="${DfM.zipfile_empty}">
+			<zipfileset file="${DfM.jarfile}"/>
+			<zipfileset file="${DfM.jadfile}"/>
+			<zipfileset file="${packaging.copyrightfile}"/>
+			<zipfileset file="${DfM.outputbasedir}/${packaging.java_me_executeable.subdir}/${packaging.readmefilename}"/>
+		</zip>
+	</target>
+
+	<target name="package_dfm_java_me_sources" depends="build_dfm_java_me"> 
+		<!-- todo: this needs to be updated: -->
+		<antcall target="replace_keywords_readme">
+			<param name="sourcebasedir" 		value="${DfM.inputbasedir}"/>
+			<param name="destinationbasedir" 	value="${DfM.outputbasedir}"/>
+		</antcall>
+		<property name="DfM.zipfile_empty"	location="${DfM.outputbasedir}/DictionaryForMIDs_${version}_empty.zip"/>
+		<zip destfile="${DfM.zipfile_empty}">
+			<zipfileset file="${DfM.jarfile}"/>
+			<zipfileset file="${DfM.jadfile}"/>
+			<zipfileset file="${packaging.copyrightfile}"/>
+			<zipfileset file="${DfM.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
+		</zip>
+	</target>
+
 	<target name="do_obfuscate_dfm_java_me"> 
 	    <wtkobfuscate jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}">
 			<preserve class="de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs"/>
