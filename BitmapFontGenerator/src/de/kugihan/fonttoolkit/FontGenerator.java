@@ -118,7 +118,7 @@ public class FontGenerator {
 		g.setFont(this.derivedFont);
 		g.setColor(this.currentColor);
 		char[] characters = text.toCharArray();
-		int y = (int) (fontMetrics.getHeight() - fontMetrics.getMaxDescent());
+		int y = (int) (fontMetrics.getMaxAscent());
 		int x = 0;
 
 		for (int i = 0; i < characters.length; i++) {
