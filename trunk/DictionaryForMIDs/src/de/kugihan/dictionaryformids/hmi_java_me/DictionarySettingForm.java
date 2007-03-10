@@ -10,8 +10,8 @@ package de.kugihan.dictionaryformids.hmi_java_me;
 
 import java.util.Enumeration;
 
+import javax.microedition.io.file.FileSystemRegistry;
 import javax.microedition.lcdui.Choice;
-import javax.microedition.lcdui.ChoiceGroup;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
@@ -22,18 +22,12 @@ import javax.microedition.lcdui.Item;
 import javax.microedition.lcdui.ItemCommandListener;
 import javax.microedition.lcdui.ItemStateListener;
 import javax.microedition.lcdui.TextField;
-import javax.microedition.io.file.FileSystemRegistry;
 
 import de.kugihan.dictionaryformids.dataaccess.CsvFile;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
-import de.kugihan.dictionaryformids.dataaccess.content.FontStyle;
-import de.kugihan.dictionaryformids.dataaccess.content.RGBColour;
-import de.kugihan.dictionaryformids.dataaccess.content.SelectionMode;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.SettingsStore;
 import de.kugihan.dictionaryformids.general.Util;
-import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
-import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.DfMChoiceGroup;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.DfMCommand;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.DfMForm;

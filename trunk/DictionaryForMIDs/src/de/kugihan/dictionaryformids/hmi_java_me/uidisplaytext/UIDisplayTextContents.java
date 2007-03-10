@@ -91,6 +91,7 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		}),
 
 		new LanguageDisplayText("Việt Nam" ,
@@ -165,6 +166,7 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		}),
 
 		new LanguageDisplayText("Chinese" ,
@@ -239,6 +241,7 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		}),
 
 		new LanguageDisplayText("Dutch" ,
@@ -313,6 +316,7 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		}),
 
 		new LanguageDisplayText("Français" ,
@@ -387,6 +391,7 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		}),
 
 		new LanguageDisplayText("Greek" ,
@@ -461,6 +466,7 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		}),
 
 		new LanguageDisplayText("Deutsch" ,
@@ -535,6 +541,7 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		}),
 
 		new LanguageDisplayText("Italiano" ,
@@ -609,6 +616,7 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		}),
 
 		new LanguageDisplayText("Japanese" ,
@@ -683,6 +691,7 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		}),
 
 		new LanguageDisplayText("Russian" ,
@@ -757,6 +766,7 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		}),
 
 		new LanguageDisplayText("Español" ,
@@ -831,6 +841,7 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		}),
 
 		new LanguageDisplayText("Czech" ,
@@ -905,6 +916,7 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		}),
 
 		new LanguageDisplayText("Slovak" ,
@@ -979,6 +991,7 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		}),
 
 		new LanguageDisplayText("Portugês [who can translate ?]" ,
@@ -1053,9 +1066,10 @@ public class UIDisplayTextContents {
 									"%1: %2 entries",
 									"Size: %1 kB",
 									"DictionaryForMIDs",
+									"No dictionary loaded",
 		})
 	};
 
-	public static int totalNumberItemsInLanguage = 69;
+	public static int totalNumberItemsInLanguage = 70;
 
 }
