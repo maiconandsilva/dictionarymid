@@ -22,7 +22,7 @@ public class BitmapFontViewer {
 
 	private int linesPainted;
 
-	private final short[] xPositions;
+	private final int[] xPositions;
 
 	private final byte[] usedCharactersWidths;
 
@@ -74,7 +74,7 @@ public class BitmapFontViewer {
 	 * 
 	 */
 	public BitmapFontViewer(Image image, int[] indeces, RGBColour[] colours,
-			short[] xPositions, byte[] characterWidths, int fontHeight,
+			int[] xPositions, byte[] characterWidths, int fontHeight,
 			int spaceIndex, int verticalPadding, int maxWidthPixels,
 			boolean colouredMode) {
 		this.image = image;
@@ -87,7 +87,7 @@ public class BitmapFontViewer {
 		this.lineWidths = new short[20];
 		this.originalLineIndeces = new short[20];
 		this.verticalPadding = verticalPadding;
-		this.xPositions = new short[indeces.length];
+		this.xPositions = new int[indeces.length];
 		this.usedCharactersWidths = new byte[indeces.length];
 		short currentLineWidth = 0;
 		short maxLineWidth = 0;
