@@ -146,8 +146,7 @@ public class LanguageUI {
 	// Language UIDisplayTextItems
 	public UIDisplayTextItem getLanguageDisplayTextItem(String language) 
 			throws DictionaryException {
-		String languageID  = uiDisplayTextItemReference + 
-							 uiDisplayTextItemPrefixLanguage + 
+		String languageID  = uiDisplayTextItemPrefixLanguage + 
 							 language;
 		UIDisplayTextItem languageUIDisplayTextItem = LanguageUI.getUI().getUIDisplayTextItem(languageID, language);
 		return languageUIDisplayTextItem;
