@@ -211,18 +211,18 @@ public class BitmapFontViewer {
 			Image theCharacter = Image.createImage(image, this.xPositions[i],
 					0, characterWidth, this.fontHeight, Sprite.TRANS_NONE);
 
-			int w = theCharacter.getWidth();
-			int h = theCharacter.getHeight();
-			int[] rgbValues = new int[w * h];
-			theCharacter.getRGB(rgbValues, 0, w, 0, 0, w, h);
-			for (int k = 0; k < rgbValues.length; k++) {
-				int argb = rgbValues[k];
-				int red = (argb >> 16) & 0xff;
-				int green = (argb >> 8) & 0xff;
-				int blue = argb & 0xff;
-				int alpha = (argb >> 24) & 0xff;
-				if (rgbValues[k] != 0) {
-					if (colouredMode) {
+			if (colouredMode) {		
+				int w = theCharacter.getWidth();
+				int h = theCharacter.getHeight();
+				int[] rgbValues = new int[w * h];
+				theCharacter.getRGB(rgbValues, 0, w, 0, 0, w, h);
+				for (int k = 0; k < rgbValues.length; k++) {
+					int argb = rgbValues[k];
+					int red = (argb >> 16) & 0xff;
+					int green = (argb >> 8) & 0xff;
+					int blue = argb & 0xff;
+					int alpha = (argb >> 24) & 0xff;
+					if (rgbValues[k] != 0) {
 						// set foreground to coloured
 						try {
 							// try to set colours...
@@ -238,24 +238,18 @@ public class BitmapFontViewer {
 						}
 						alpha = 255;
 					} else {
-						// set foreground to black
-						red = 0;
-						blue = 0;
-						green = 0;
+						// set background to white
+						red = 255;
+						blue = 255;
+						green = 255;
 						alpha = 255;
 					}
-				} else {
-					// set background to white
-					red = 255;
-					blue = 255;
-					green = 255;
-					alpha = 255;
+					argb = (alpha << 24) | (red << 16) | (green << 8) | blue;
+					rgbValues[k] = argb;
 				}
-				argb = (alpha << 24) | (red << 16) | (green << 8) | blue;
-				rgbValues[k] = argb;
-			}
 
-			theCharacter = Image.createRGBImage(rgbValues, w, h, false);
+				theCharacter = Image.createRGBImage(rgbValues, w, h, false);
+			}
 
 			// g.drawImage(this.image, imageX, y, Graphics.TOP | Graphics.LEFT);
 
