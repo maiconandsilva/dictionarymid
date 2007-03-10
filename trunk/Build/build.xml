@@ -6,7 +6,7 @@ The current version of build.xml generates DictionaryForMIDs.jar/jad, Dictionary
 Using: run ant in directory Build
 It runs well on both platforms windows/linux
 The jar-tool must be in the path. Otherwise there will be an error during the preverifier run.
-You also must have the antenna-bin-xxx.jar file in the Build directory (the file antenna-bin-xxx.jar is part of the Build CVS project)
+You also must have the antenna-bin-xxx.jar file in the Build directory (the file antenna-bin-xxx.jar is part of the Build CVS project; can also be downloaded from http://antenna.sourceforge.net)
 Version 3.1 
 -->
 
@@ -16,39 +16,73 @@ Version 3.1
 	<property name="wtk.home"  location="c:\programme\WTK"/>
 	<!-- <property name="wtk.home"  location="/home/peto/.netbeans/5.5beta2/emulators/wtk22_linux/emulator/wtk22"/> -->
 
-	<property name="wtk.cldc.version"  value="1.1"/>
-	<property name="wtk.midp.version"  value="2.0"/>
-	<property name="wtk.optionalpda.enabled"  value="true"/>
+	<property name="wtk.cldc.version"  			value="1.1"/>
+	<property name="wtk.midp.version"  			value="2.0"/>
+	<property name="wtk.optionalpda.enabled"  	value="true"/>
 
-	<taskdef resource="antenna.properties" classpath="./antenna-bin-0.9.14.jar"/>
+	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-0.9.14.jar"/>
+	<property name="antenna.jarfilename"  		value="antenna-bin-0.9.14.jar"/>
+
+    <property name="version" 			value="3.1.0"/>	<!-- version of tools / applications -->
+
+  	<property name="Build" 				location="."/> 				<!-- current directory -->
+  	<property name="Build.buildfilename" value="build.xml"/> 		<!-- name of this file -->
+  	<property name="Build.buildfile" 	location="${Build}/${Build.buildfilename}"/> <!-- location of this file -->
 	
-  	<property name="DfM" 			location="../DictionaryForMIDs"/>
-	<property name="DfM.classdir"   location="${DfM}/classes"/>        	<!-- WTK puts the class files to classes -->
-	<property name="DfM.resdir"     location="${DfM}/res"/>            	<!-- WTK puts the resource files to res -->
-	<property name="DfM.manifest"   location="${DfM}/bin/MANIFEST.MF"/>	<!-- WTK puts the resource files to bin -->
-	<property name="DfM.jarfile"    location="DictionaryForMIDs.jar"/> 	<!-- Put the file in the home directory (WTK puts the jar file to bin) -->
-	<property name="DfM.jadfile"    location="DictionaryForMIDs.jad"/> 	<!-- Put the file in the home directory (WTK puts the jad file to bin) -->
+  	<property name="DfM.inputbasedir" 	location="../DictionaryForMIDs"/>
+  	<property name="DfM.outputbasedir" 	location="${Build}/DictionaryForMIDs"/>
+	<property name="DfM.srcdir"     	location="${DfM.inputbasedir}/src"/>            		<!-- WTK reads the resource files from src -->
+	<property name="DfM.resdir"     	location="${DfM.inputbasedir}/res"/>            		<!-- WTK reads the resource files from res -->
+	<property name="DfM.classdir"   	location="${DfM.outputbasedir}/classes"/>        		<!-- WTK puts the class files to classes -->
+	<property name="DfM.bindir"   		location="${DfM.outputbasedir}/bin"/>					<!-- WTK puts the resource files to bin -->
+	<property name="DfM.manifest"   	location="${DfM.bindir}/MANIFEST.MF"/>					<!-- WTK puts the resource files to bin -->
+	<property name="DfM.jarfile"    	location="${DfM.outputbasedir}/DictionaryForMIDs.jar"/> <!-- Put the file in the home directory (WTK puts the jar file to bin) -->
+	<property name="DfM.jadfile"    	location="${DfM.outputbasedir}/DictionaryForMIDs.jad"/> <!-- Put the file in the home directory (WTK puts the jad file to bin) -->
 
-	<property name="JavaSE"  		location="../JavaSE"/>
-	<property name="JavaSE.classdir" location="${JavaSE}/bin"/>
-	<property name="JavaSE.jarfile" location="DictionaryForMIDsPC.jar"/> <!-- todo: need to check with Stefan on name ! -->
+	<property name="JavaSE.inputbasedir"  location="../JavaSE"/>
+	<property name="JavaSE.outputbasedir" location="${Build}/JavaSE"/>
+	<property name="JavaSE.srcdir" 		location="${JavaSE.inputbasedir}/src"/>
+	<property name="JavaSE.classdir" 	location="${JavaSE.outputbasedir}/bin"/>
+	<property name="JavaSE.jarfile" 	location="${JavaSE.outputbasedir}/DictionaryForMIDsPC.jar"/> <!-- todo: need to check with Stefan on name ! -->
 
-	<property name="JC"  			location="../JarCreator"/>
-	<property name="JC.classdir"    location="${JC}/bin"/>
-	<property name="JC.jarfile"     location="JarCreator.jar"/>
+	<property name="JC.inputbasedir"  	location="../JarCreator"/>
+	<property name="JC.outputbasedir" 	location="${Build}/JarCreator"/>
+	<property name="JC.srcdir" 			location="${JC.inputbasedir}/src"/>
+	<property name="JC.classdir"    	location="${JC.outputbasedir}/bin"/>
+	<property name="JC.jarfile"     	location="${JC.outputbasedir}/JarCreator.jar"/>
 	
-	<property name="DG"  			location="../DictionaryGeneration"/>
-	<property name="DG.classdir"    location="${DG}/bin"/>
-	<property name="DG.jarfile"     location="DictionaryGeneration.jar"/>
+	<property name="DG.inputbasedir"  	location="../DictionaryGeneration"/>
+	<property name="DG.outputbasedir"  	location="${Build}/DictionaryGeneration"/>
+	<property name="DG.srcdir"  		location="${DG.inputbasedir}/src"/>
+	<property name="DG.classdir"    	location="${DG.outputbasedir}/bin"/>
+	<property name="DG.jarfile"     	location="${DG.outputbasedir}/DictionaryGeneration.jar"/>
 
-	<property name="DfM.team"  value="Gert Nuber (dict@kugihan.de) et al."/> <!-- need to occasionally find something better -->
+	<property name="packaging.subdir"  			value="files_for_packaging"/>
+	<property name="packaging.readmefilename" 	value="README"/>
+	<property name="packaging.gplfilename" 		value="COPYING"/>
+	<property name="packaging.copyrightfile" 	value="${Build}/${packaging.subdir}/${packaging.gplfilename}"/>
+
+	<property name="DfM.team"  			value="Gert Nuber (dict@kugihan.de) et al."/> <!-- need to occasionally find something better -->
+	<property name="DfM.copyrightyear"  value="2005, 2006, 2007"/>
 
 	
-	<target name="clean_all">
-	    <delete dir="${DfM.classdir}"/>
-	    <delete dir="${DG.classdir}"/>
-	    <delete dir="${JC.classdir}"/>
-	    <delete dir="${JavaSE.classdir}"/>
+	<target name="clean_DfM">
+	    <delete dir="${DfM.outputbasedir}"/>
+	</target>
+
+	<target name="clean_JavaSE">
+	    <delete dir="${JavaSE.outputbasedir}"/>
+	</target>
+	
+	<target name="clean_JC">
+	    <delete dir="${JC.outputbasedir}"/>
+	</target>
+	
+	<target name="clean_DG">
+	    <delete dir="${DG.outputbasedir}"/>
+	</target>
+
+	<target name="clean_all" depends="clean_DfM,clean_JavaSE,clean_JC,clean_DG">
 	</target>
 
   	<!-- 
@@ -56,12 +90,13 @@ Version 3.1
   	-->
 	<target name="compile_dfm_java_me">
 	    <mkdir dir="${DfM.classdir}"/>	 
-	    <wtkbuild srcdir="${DfM}/src" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${DfM.classdir}" />
+	    <mkdir dir="${DfM.bindir}"/>	 
+	    <wtkbuild srcdir="${DfM.srcdir}" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${DfM.classdir}" />
 	</target>
 
 	<target name="create_dfm_java_me_jadfile_and_manifest"> 
 		<property name="DfM.MIDlet-Name" value="DictionaryForMIDs"/> 
-	    <property name="DfM.MIDlet-Version" value="3.1.0"/>
+	    <property name="DfM.MIDlet-Version" value="${version}"/>
 	    <property name="DfM.MicroEdition-Profile" value="MIDP-2.0"/>
 	    <property name="DfM.MicroEdition-Configuration" value="CLDC-1.0"/>
 	    <property name="DfM.Built-By" value="${user.name}"/>
@@ -120,7 +155,7 @@ Version 3.1
 	</target>
 	
 	<target name="create_minimal_size_dfm_java_me" depends="create_dfm_java_me_jadfile_and_manifest"> 
-	    <wtkpackage jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}" manifest="${DfM.manifest}">
+	    <wtkpackage jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}" manifest="${DfM.manifest}" level="9">
 	      	<fileset dir="${DfM.classdir}"/>
 	      	<fileset dir="${DfM.resdir}">
 	      		<!-- do not include any icons -->
@@ -135,7 +170,7 @@ Version 3.1
   	-->
 	<target name="compile_dfm_java_se" depends="compile_dfm_java_me">
 	    <mkdir dir="${JavaSE.classdir}"/>	 
-	    <javac srcdir="${JavaSE}/src"  classpath="${DfM.classdir}" encoding="UTF-8" destdir="${JavaSE.classdir}" />
+	    <javac srcdir="${JavaSE.srcdir}"  classpath="${DfM.classdir}" encoding="UTF-8" destdir="${JavaSE.classdir}" />
 	</target>
 
 	<target name="build_dfm_java_se" depends="compile_dfm_java_se"> 
@@ -155,7 +190,7 @@ Version 3.1
   	-->
 	<target name="compile_jc" depends="compile_dfm_java_me,compile_dfm_java_se">
 	    <mkdir dir="${JC.classdir}"/>
-	    <javac srcdir="${JC}/src" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${JC.classdir}"/>
+	    <javac srcdir="${JC.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${JC.classdir}"/>
 	</target>
 
 	<target name="build_jc" depends="compile_jc"> 
@@ -171,12 +206,29 @@ Version 3.1
 	    </jar>
 	</target>
 
+	<target name="package_jc" depends="build_jc">
+		<antcall target="replace_keywords_readme">
+			<param name="sourcebasedir" 		value="${JC.inputbasedir}"/>
+			<param name="destinationbasedir" 	value="${JC.outputbasedir}"/>
+		</antcall>
+		<property name="JC.zipfile"	location="${JC.outputbasedir}/DictionaryForMIDs_JarCreator_${version}.zip"/>
+		<zip destfile="${JC.zipfile}">
+			<zipfileset file="${JC.jarfile}"/>
+			<zipfileset file="${packaging.copyrightfile}"/>
+			<zipfileset file="${JC.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
+			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
+			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs"/>
+			<zipfileset dir="${JavaSE.srcdir}" prefix="source/JavaSE"/>
+			<zipfileset dir="${JC.srcdir}" prefix="source/JarCreator"/>
+		</zip>
+	</target>
+	
   	<!-- 
   		DictionaryGeneration
   	-->
 	<target name="compile_dg" depends="compile_dfm_java_me,compile_dfm_java_se">
 	    <mkdir dir="${DG.classdir}"/>
-	    <javac srcdir="${DG}/src" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${DG.classdir}" />
+	    <javac srcdir="${DG.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${DG.classdir}" />
 	</target>
 	
 	<target name="build_dg" depends="compile_dg"> 
@@ -192,6 +244,37 @@ Version 3.1
 	    </jar>
 	</target>
 
+	<target name="replace_keywords_readme">
+	    <property name="destinationdir"  	location="${destinationbasedir}/${packaging.subdir}"/>	 
+	    <property name="destinationfile" 	location="${destinationdir}/${packaging.readmefilename}"/>
+	    <property name="sourcefile" 		location="${sourcebasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
+	    <mkdir dir="${destinationdir}"/>
+		<copy file="${sourcefile}" tofile="${destinationfile}"/>
+		<replace file="${destinationfile}">
+			<replacefilter token="$PackageVersion$" 		value="${version}"/>
+			<replacefilter token="$CopyrightYear$" 			value="${DfM.copyrightyear}"/>
+			<replacefilter token="$CopyrightGPLFilename$" 	value="${packaging.gplfilename}"/>
+			<replacefilter token="$CopyrightBy$" 			value="${DfM.team}"/>
+		</replace>
+	</target>
+		
+	<target name="package_dg" depends="build_dg">
+		<antcall target="replace_keywords_readme">
+			<param name="sourcebasedir" 		value="${DG.inputbasedir}"/>
+			<param name="destinationbasedir" 	value="${DG.outputbasedir}"/>
+		</antcall>
+		<property name="DG.zipfile"	location="${DG.outputbasedir}/DictionaryForMIDs_DictionaryGeneration_${version}.zip"/>
+		<zip destfile="${DG.zipfile}">
+			<zipfileset file="${DG.jarfile}"/>
+			<zipfileset file="${packaging.copyrightfile}"/>
+			<zipfileset file="${DG.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
+			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
+			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs"/>
+			<zipfileset dir="${JavaSE.srcdir}" prefix="source/JavaSE"/>
+			<zipfileset dir="${DG.srcdir}" prefix="source/DictionaryGeneration"/>
+		</zip>
+	</target>
+	
 	<target name="build_all" depends="build_dg,build_jc,build_dfm_java_se,build_dfm_java_me"/>
 
 </project>
