@@ -28,7 +28,7 @@ public final class BitmapFont {
 
 	private byte[] characterWidths;
 
-	private short[] xPositions;
+	private int[] xPositions;
 
 	private String characterMap;
 
@@ -49,7 +49,7 @@ public final class BitmapFont {
 	}
 
 	public int getLineHeightPixels() {
-		return lineHeightPixels;
+		 return fontHeight + 1;
 	}
 
 	/**
@@ -78,8 +78,8 @@ public final class BitmapFont {
 				this.spaceIndex = map.indexOf(' ');
 				int length = map.length();
 				this.characterWidths = new byte[length];
-				this.xPositions = new short[length];
-				short xPos = 0;
+				this.xPositions = new int[length];
+				int xPos = 0;
 				for (int i = 0; i < length; i++) {
 					byte width = dataIn.readByte();
 					this.characterWidths[i] = width;
@@ -126,20 +126,23 @@ public final class BitmapFont {
 		RGBColour[] colours = new RGBColour[totalLength];
 
 		// finally, process the data
+		int thePartsTotalLength = 0;
+		
 		for (int j = 0; j < size; j++) {
 			StringColourItemTextPart currentPart = (StringColourItemTextPart) theParts
 					.elementAt(j);
 			int length = currentPart.getText().length();
 			for (int i = length - 1; i >= 0; i--) {
 				char inputCharacter = currentPart.charAt(i);
-				indeces[i] = this.characterMap.indexOf(inputCharacter);
-				colours[i] = currentPart.getColour();
-				if (indeces[i] == -1) {
-					indeces[i] = this.characterMap.indexOf("?");
+				indeces[i + thePartsTotalLength] = this.characterMap.indexOf(inputCharacter);
+				colours[i + thePartsTotalLength] = currentPart.getColour();
+				if (indeces[i + thePartsTotalLength] == -1) {
+					indeces[i + thePartsTotalLength] = this.characterMap.indexOf("?");
 					System.out.println("BitmapFont: " + inputCharacter
 							+ " not found - substituting with ?");
 				}
 			}
+			thePartsTotalLength += length;
 		}
 		return new BitmapFontViewer(this.fontImage, indeces, colours,
 				this.xPositions, this.characterWidths, this.fontHeight,
