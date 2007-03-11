@@ -113,7 +113,7 @@ public class DictionaryGeneration {
 
 	static public void printCopyrightNotice() {
 		System.out.print(
-				"\n\nDictionaryForMIDs/DictionaryGeneration, Copyright (C) 2005, 2006  Gert Nuber (dict@kugihan.de)\n" +
+				"\n\nDictionaryForMIDs/DictionaryGeneration, Copyright (C) 2005, 2006, 2007  Gert Nuber (dict@kugihan.de) et al\n" +
 				"Version : " + versionNumber + "\n\n" +
 				"This program comes with ABSOLUTELY NO WARRANTY\n\n" +
 				"This program is free software under the terms and conditions of the GPL " + 
@@ -121,7 +121,7 @@ public class DictionaryGeneration {
 				"If you did not receive the\nGNU General Public License along with this program " +
                 "(file COPYING), write\nto the Free Software Foundation, Inc., " +
 				"59 Temple Place, Suite 330, Boston,\nMA  02111-1307  USA\n\n" +
-				"Source code is available from http://sourceforge.net/projects/dictionarymid\n\n\n");
+				"Documentation and source code is available from http://dictionarymid.sourceforge.net\n\n\n");
 	}
 	
 	static public void printUsage() {
