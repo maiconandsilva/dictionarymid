@@ -172,9 +172,6 @@ public static final String versionNumber = "3.1.0";
 		}
 		in.close();
 		
-		ZipEntry dictionaryDir= new ZipEntry(DictionaryDataFile.pathNameDataFiles + "/"); // are these two
-		out.putNextEntry(dictionaryDir);												  // lines neccessary?
-		
 		File[] dictFiles= dictDir.listFiles();
 		for(int i=0; i<dictFiles.length; i++) 
 		{ 
@@ -233,7 +230,7 @@ public static final String versionNumber = "3.1.0";
 	}
 	
 	static String buildMidlet1Name(String midletName) {
-		return midletName + ", DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs";		
+		return midletName + ", /icons/Application/DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs";		
 	}
 	
 	static boolean isLanguageIconFileNotNeeded(String fileName) {
@@ -289,7 +286,7 @@ public static final String versionNumber = "3.1.0";
 	
 	static public void printCopyrightNotice() {
 		System.out.print(
-				"\n\nDictionaryForMIDs/JarCreator, Copyright (C) 2005 Mathis Karmann\n" +
+				"\n\nDictionaryForMIDs/JarCreator, Copyright (C) 2005-2007 Mathis Karmann et al\n" +
 				"Version : " + versionNumber + "\n\n" +
 				"This program comes with ABSOLUTELY NO WARRANTY\n\n" +
 				"This program is free software under the terms and conditions of the GPL " + 
@@ -297,6 +294,6 @@ public static final String versionNumber = "3.1.0";
 				"If you did not receive the\nGNU General Public License along with this program " +
                 "(file COPYING), write\nto the Free Software Foundation, Inc., " +
 				"59 Temple Place, Suite 330, Boston,\nMA  02111-1307  USA\n\n" +
-				"Source code is availble from http://sourceforge.net/projects/dictionarymid\n\n\n");
+				"Documentation and source code is available from http://dictionarymid.sourceforge.net\n\n\n");
 	}
 }
