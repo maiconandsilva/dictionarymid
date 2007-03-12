@@ -91,7 +91,7 @@ Version 3.1
 	<target name="compile_dfm_java_me">
 	    <mkdir dir="${DfM.classdir}"/>	 
 	    <mkdir dir="${DfM.bindir}"/>	 
-	    <wtkbuild srcdir="${DfM.srcdir}" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${DfM.classdir}" />
+	    <wtkbuild srcdir="${DfM.srcdir}" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${DfM.classdir}" debug="on"/>
 	</target>
 
 	<target name="create_dfm_java_me_jadfile_and_manifest"> 
@@ -186,7 +186,7 @@ Version 3.1
 	</target>
 	
 	<target name="create_minimal_size_dfm_java_me" depends="create_dfm_java_me_jadfile_and_manifest"> 
-	    <wtkpackage jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}" manifest="${DfM.manifest}" level="9">
+	    <wtkpackage jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}" manifest="${DfM.manifest}">
 	      	<fileset dir="${DfM.classdir}"/>
 	      	<fileset dir="${DfM.resdir}">
 	      		<!-- do not include any icons -->
@@ -201,7 +201,7 @@ Version 3.1
   	-->
 	<target name="compile_dfm_java_se" depends="compile_dfm_java_me">
 	    <mkdir dir="${JavaSE.classdir}"/>	 
-	    <javac srcdir="${JavaSE.srcdir}"  classpath="${DfM.classdir}" encoding="UTF-8" destdir="${JavaSE.classdir}" />
+	    <javac srcdir="${JavaSE.srcdir}"  classpath="${DfM.classdir}" encoding="UTF-8" destdir="${JavaSE.classdir}" debug="on" />
 	</target>
 
 	<target name="build_dfm_java_se" depends="compile_dfm_java_se"> 
@@ -221,7 +221,7 @@ Version 3.1
   	-->
 	<target name="compile_jc" depends="compile_dfm_java_me,compile_dfm_java_se">
 	    <mkdir dir="${JC.classdir}"/>
-	    <javac srcdir="${JC.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${JC.classdir}"/>
+	    <javac srcdir="${JC.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${JC.classdir}" debug="on"/>
 	</target>
 
 	<target name="build_jc" depends="compile_jc"> 
@@ -259,7 +259,7 @@ Version 3.1
   	-->
 	<target name="compile_dg" depends="compile_dfm_java_me,compile_dfm_java_se">
 	    <mkdir dir="${DG.classdir}"/>
-	    <javac srcdir="${DG.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${DG.classdir}" />
+	    <javac srcdir="${DG.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${DG.classdir}" debug="on"/>
 	</target>
 	
 	<target name="build_dg" depends="compile_dg"> 
