@@ -19,6 +19,9 @@ public class FileDfMInputStreamAccess extends DfMInputStreamAccess {
 
 	protected String baseDirectory;
 	
+	public FileDfMInputStreamAccess() {
+		baseDirectory = ""; 
+	}
 	public FileDfMInputStreamAccess(String baseDirectoryParam) {
 		baseDirectory = baseDirectoryParam; 
 	}
