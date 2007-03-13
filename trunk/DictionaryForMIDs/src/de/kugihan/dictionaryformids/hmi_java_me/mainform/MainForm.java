@@ -700,7 +700,7 @@ public class MainForm
 					                              "of several Sony Ericsson cell phones. For this " +
 					                              "reason some of the features of DictionaryForMIDs " +
 					                              "are disabled on this cell phone.");
-			appendStartupDisplayItem(seMessage);
+			// appendStartupDisplayItem(seMessage);
 			startupDisplayIsShown = true;
 			return;
 		}
