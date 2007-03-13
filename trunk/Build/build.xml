@@ -122,6 +122,7 @@ Version 3.1
 		    <attribute name="MIDlet-Jar-URL" value="DictionaryForMIDs.jar"/>
 		    <attribute name="MIDlet-Permissions" value="javax.microedition.io.Connector.file.read"/>
 		    <attribute name="logLevel" value="0"/>
+		    <attribute name="versionStatus" value="Testversion 1"/>
 	  	</wtkjad>
       	<manifest file="${DfM.manifest}">
 	      	<attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
@@ -142,7 +143,7 @@ Version 3.1
 	    </wtkpackage>
 	</target>
 
-	<target name="package_dfm_java_me_empty" depends="build_dfm_java_me"> 
+	<target name="package_dfm_java_me_empty" depends="obfuscate_dfm_java_me"> 
 		<property name="packaging.java_me_executeable.subdir" value="files_for_packaging/executeable_distribution"/>
 		<antcall target="replace_keywords_readme">
 			<param name="sourcebasedir" 		value="${DfM.inputbasedir}"/>
