@@ -57,6 +57,12 @@ Version 3.1
 	<property name="DG.classdir"    	location="${DG.outputbasedir}/bin"/>
 	<property name="DG.jarfile"     	location="${DG.outputbasedir}/DictionaryGeneration.jar"/>
 
+	<property name="BFG.inputbasedir"  	location="../BitmapFontGenerator"/>
+	<property name="BFG.outputbasedir"  location="${Build}/BitmapFontGenerator"/>
+	<property name="BFG.srcdir"  		location="${BFG.inputbasedir}/src"/>
+	<property name="BFG.classdir"    	location="${BFG.outputbasedir}/bin"/>
+	<property name="BFG.jarfile"     	location="${BFG.outputbasedir}/fontgenerator.jar"/>
+
 	<property name="packaging.subdir"  			value="files_for_packaging"/>
 	<property name="packaging.readmefilename" 	value="README"/>
 	<property name="packaging.gplfilename" 		value="COPYING"/>
@@ -66,23 +72,27 @@ Version 3.1
 	<property name="DfM.copyrightyear"  value="2005, 2006, 2007"/>
 
 	
-	<target name="clean_DfM">
+	<target name="clean_dfm">
 	    <delete dir="${DfM.outputbasedir}"/>
 	</target>
 
-	<target name="clean_JavaSE">
+	<target name="clean_java_se">
 	    <delete dir="${JavaSE.outputbasedir}"/>
 	</target>
 	
-	<target name="clean_JC">
+	<target name="clean_jc">
 	    <delete dir="${JC.outputbasedir}"/>
 	</target>
 	
-	<target name="clean_DG">
+	<target name="clean_dg">
 	    <delete dir="${DG.outputbasedir}"/>
 	</target>
 
-	<target name="clean_all" depends="clean_DfM,clean_JavaSE,clean_JC,clean_DG">
+	<target name="clean_bfg">
+	    <delete dir="${BFG.outputbasedir}"/>
+	</target>
+
+	<target name="clean_all" depends="clean_dfm,clean_java_se,clean_jc,clean_dg,clean_bfg">
 	</target>
 
   	<!-- 
@@ -306,7 +316,43 @@ Version 3.1
 		</zip>
 	</target>
 	
-	<target name="build_all" depends="build_dg,build_jc,build_dfm_java_se,build_dfm_java_me"/>
+  	<!-- 
+  		BitmapFontGenerator
+  	-->
+	<target name="compile_bfg">
+	    <mkdir dir="${BFG.classdir}"/>
+	    <javac srcdir="${BFG.srcdir}" encoding="UTF-8" destdir="${BFG.classdir}" debug="on"/>
+	</target>
+	
+	<target name="build_bfg" depends="compile_bfg"> 
+	    <jar destfile="${BFG.jarfile}"  >
+	      	<fileset dir="${BFG.classdir}"      includes="de/kugihan/fonttoolkit/**"  />
+	      	<manifest>
+	        	<attribute name="Built-By" value="${user.name}"/>
+	        	<attribute name="Created-By" value="Sean Kernohan"/>
+	        	<attribute name="Main-Class" value="de.kugihan.fonttoolkit.FontToolkit"/>
+	      	</manifest>
+	    </jar>
+	</target>
+
+	<target name="package_bfg" depends="build_bfg">
+		<antcall target="replace_keywords_readme">
+			<param name="sourcebasedir" 		value="${BFG.inputbasedir}"/>
+			<param name="destinationbasedir" 	value="${BFG.outputbasedir}"/>
+		</antcall>
+		<property name="BFG.zipfile"	location="${BFG.outputbasedir}/DictionaryForMIDs_BitmapFontGenerator_${version}.zip"/>
+		<zip destfile="${BFG.zipfile}">
+			<zipfileset file="${BFG.jarfile}"/>
+			<zipfileset file="${packaging.copyrightfile}"/>
+			<zipfileset file="${BFG.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
+			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
+			<zipfileset dir="${BFG.srcdir}" prefix="source/BitmapFontGenerator"/>
+		</zip>
+	</target>
+	
+	<target name="build_all" depends="build_dg,build_jc,build_bfg,build_dfm_java_se,build_dfm_java_me"/>
+	
+	<target name="package_all" depends="package_dg,package_jc,package_bfg,package_dfm_java_me_empty"/>
 
 </project>
 
