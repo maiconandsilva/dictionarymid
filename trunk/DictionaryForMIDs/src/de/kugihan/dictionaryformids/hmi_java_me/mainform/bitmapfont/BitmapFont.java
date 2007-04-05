@@ -102,7 +102,7 @@ public final class BitmapFont {
 				} catch (IOException e) {
 					// #debug error
 					System.out
-							.println("Unable to close bitmap-font stream" + e);
+							.println("Unable to close bitmap-font stream: " + e);
 				}
 				// #endif
 			}
