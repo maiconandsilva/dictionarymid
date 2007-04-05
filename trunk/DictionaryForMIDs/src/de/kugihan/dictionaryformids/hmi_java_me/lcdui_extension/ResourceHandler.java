@@ -136,18 +136,26 @@ public class ResourceHandler {
 	public Image getImage(String path,    
 			              String imageName) 
 			throws DictionaryException {
-		if (MainForm.sonyEricssonWorkaroundRequired)
-			return null;
+		//if (MainForm.sonyEricssonWorkaroundRequired)
+		//	return null;
 		String resourceLocation = getResourceLocation(path, imageName); 
 		InputStream imageInputStream = resourceDfMInputStream.getInputStream(resourceLocation);
 		Image imageFromResource;
 		try {
 			imageFromResource = Image.createImage(imageInputStream);
-			imageInputStream.close();
 		}
 		catch (IOException e) {
-			throw new DictionaryException("Image file could not be read:" + resourceLocation);
+			throw new DictionaryException("Image file could not be read: " + resourceLocation);
 		}
+		finally{
+			try {
+				imageInputStream.close();
+			} catch (IOException e) {
+				//Sony Ericsson firmware bug: the Image.createImage(imageInputStream);
+				//already closes the stream
+				System.out.println("Unable to close Image file stream: " + resourceLocation);
+			}
+		}		
 		return imageFromResource;
 	}
 	
