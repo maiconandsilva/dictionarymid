@@ -330,6 +330,7 @@ public class MainForm
 	
 	public void dictionarySetting() {
 		removeStartupDisplay();
+		deletePreviousTranslationResult();
 		Display.getDisplay(dictionaryForMIDsMidlet).setCurrent(dictionarySettingFormObj);	
 	}
 	
@@ -442,7 +443,8 @@ public class MainForm
 		// redisplay translation results
 		refreshAllTranslationResults();
 		
-		display.setCurrentItem(toBeTranslatedWordTextField); 
+		//Causes an error on SonyEricsson devices when called before the midlet is started
+		//display.setCurrentItem(toBeTranslatedWordTextField); 
 	}
 
 	// update the fonts of the translated texts:
