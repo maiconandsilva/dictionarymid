@@ -643,10 +643,10 @@ public class DictionarySettingForm
 	 * Check to see if the bitmap font setting should be shown
 	 */
 	void checkBitmapFontAvailable() {
-		if (MainForm.sonyEricssonWorkaroundRequired) {
-			bitmapFontExists = false;
-			return;
-		}
+		//if (MainForm.sonyEricssonWorkaroundRequired) {
+		//	bitmapFontExists = false;
+		//	return;
+		//}
 		bitmapFontExists = BitmapFontCanvas.fontExistsStatic();
 	}
 }
