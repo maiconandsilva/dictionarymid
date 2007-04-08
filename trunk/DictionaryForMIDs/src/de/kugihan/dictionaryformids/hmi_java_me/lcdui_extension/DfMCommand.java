@@ -8,7 +8,7 @@ public class DfMCommand extends Command  {
 
 	UIDisplayTextItem languageUILabel = null;
 	
-	DfMCommand(UIDisplayTextItem languageUILabelParam, int commandType, int priority) 
+	public DfMCommand(UIDisplayTextItem languageUILabelParam, int commandType, int priority) 
 	 						throws DictionaryException {
 		super(languageUILabelParam.getItemDisplayText(), commandType, priority);
 		languageUILabel = languageUILabelParam;
