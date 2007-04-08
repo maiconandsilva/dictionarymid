@@ -82,4 +82,13 @@ public class DfMForm extends Form implements
 		return newCommand;
 	}
 
+	public DfMCommand updateItemCommand(Item item,
+										DfMCommand oldCommand,
+										DfMCommand newCommand) throws DictionaryException {
+		if (oldCommand != null)
+			item.removeCommand(oldCommand);
+		item.setDefaultCommand(newCommand);
+		return newCommand;
+	}
+
 }
