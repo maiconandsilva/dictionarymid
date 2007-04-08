@@ -17,6 +17,7 @@ import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
+import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.ImageItem;
 import javax.microedition.lcdui.Item;
@@ -700,16 +701,7 @@ public class MainForm
 			throws DictionaryException {
 		indexOfFirstItemStartupDisplay = indexOfFirstTranslationItem;
 		indexOfLastItemStartupDisplay = indexOfFirstItemStartupDisplay - 1;
-		if (sonyEricssonWorkaroundRequired) {
-			StringItem seMessage = new StringItem("Sony Ericsson cell phone:", 
-					                              "There seems to be a bug in the firmware " +
-					                              "of several Sony Ericsson cell phones. For this " +
-					                              "reason some of the features of DictionaryForMIDs " +
-					                              "are disabled on this cell phone.");
-			// appendStartupDisplayItem(seMessage);
-			startupDisplayIsShown = true;
-			return;
-		}
+		
 		// use bold font
 		Font startupDisplayFont = Font.getFont(Font.getDefaultFont().getFace(), 
 				                               Font.STYLE_BOLD, 
@@ -816,13 +808,8 @@ public class MainForm
 		insert(indexOfLastItemStartupDisplay, item);
 	}
 
-	// Hope someone will solve this SonyEricsson problem, so that the following workaround will
-	// not be necessary any more !
-	//
-	// Workaround for SonyEricsson OutOfMemoryError that occurs when deleting old translation
-	// items at the beginning of executeTranslation.
-	// The workaround is to display an info-dialog after the translation result has been displayed
-	// It seems that then no OutOfMemoryError is thrown.
+	// SonyEricsson-workaround for the problem that after a translation the display is not correctly refreshed.
+	// The workaround is to display an empty form after the translation result has been displayed
 	public static boolean sonyEricssonWorkaroundRequired = false;
 	void checkForSonyEricssonWorkaround() {
 		String platform = System.getProperty("microedition.platform");
@@ -837,14 +824,22 @@ public class MainForm
 	}
 	void applySonyEricssonWorkaround() {
 		if (sonyEricssonWorkaroundRequired) {
-			showSonyEricssonWorkaroundInfo();
+			showSonyEricssonWorkaroundForm();
+			Display.getDisplay(dictionaryForMIDsMidlet).callSerially(new SEWorkaroundTask());
 		}
 	}
-	public void showSonyEricssonWorkaroundInfo() {
-		String workaroundText = new String("SE workaround");
-		Alert workaroundPage = new Alert("workaround", workaroundText, null, AlertType.INFO);
-		workaroundPage.setTimeout(10);  // display with duration of 10 ms
-		Display.getDisplay(dictionaryForMIDsMidlet).setCurrent(workaroundPage, this);
+	class SEWorkaroundTask extends Thread {
+		public void run() {
+			removeSonyEricsssonWorkaroundForm();
+		}
 	}
-
+	void showSonyEricssonWorkaroundForm() {
+		Form seWorkaroundForm;
+		seWorkaroundForm = new Form("SE workaround");
+		Display.getDisplay(dictionaryForMIDsMidlet).setCurrent(seWorkaroundForm);
+	}
+	void removeSonyEricsssonWorkaroundForm() {
+		Display.getDisplay(dictionaryForMIDsMidlet).setCurrent(this);
+	}
+	
 }
