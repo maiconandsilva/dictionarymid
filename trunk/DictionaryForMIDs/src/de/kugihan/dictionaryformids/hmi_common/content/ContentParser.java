@@ -27,6 +27,7 @@ public class ContentParser {
 			                                              boolean changeInputAndOutputContent) 
 				throws DictionaryException {
 		stringColourItemText = new StringColourItemText();
+		int currentContentNumber = 0;
 		ContentDefinition[] contents = DictionaryDataFile.supportedLanguages[languageIndex].contents;
 		// default content is the outmost level:
 		pushNewContent(contents[0], languageIndex, changeInputAndOutputContent);
@@ -42,6 +43,7 @@ public class ContentParser {
 						throwContentFormatException("Start of content ("+ContentLib.startOfContentChar+ ") without complete content number");
 					int contentNumber = getStartContentDigitValue(contentString.charAt(charCount+1))*10 +
 										getStartContentDigitValue(contentString.charAt(charCount+2));
+					currentContentNumber = contentNumber;
 					charCount += 2;
 					addStringColourItemTextPart();
 					if ((contentNumber < 1) || (contentNumber >= contents.length)) {
@@ -67,7 +69,9 @@ public class ContentParser {
 					}
 				}
 				else {
-					addText(contentChar);
+					if (DictionarySettings.getContentIsShown(languageIndex, currentContentNumber - 1)){
+						addText(contentChar);
+					}
 				}
 			}			
 			else {
