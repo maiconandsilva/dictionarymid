@@ -8,6 +8,7 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.hmi_java_me;
 
+import java.io.InputStream;
 import java.util.Enumeration;
 
 import javax.microedition.io.file.FileSystemRegistry;
@@ -57,6 +58,7 @@ public class DictionarySettingForm
 	DfMChoiceGroup fontSizeChoiceGroup;
 	DfMChoiceGroup uiLanguageChoiceGroup;
 	DfMChoiceGroup performanceChoiceGroup;
+	DfMChoiceGroup contentChoiceGroup;
 	static TextField   dictionaryPathTextField = null;
 	
 	protected final int indexFontSizeCGDefault    = 0;
@@ -231,6 +233,33 @@ public class DictionarySettingForm
 		CsvFile.selectedBypassCharsetDecoding = SettingsStore.getSettingsStore().getBypassCharsetDecoding();
 		append(performanceChoiceGroup);
 		
+		/*
+		 * display contents
+		 */
+		contentChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsContent,
+                Choice.MULTIPLE,
+                null);
+		int contentIndex = 0;
+		String[] contents = new String[10];
+		for (int i = 0; i < DictionaryDataFile.supportedLanguages.length; i++) {		
+			if (DictionaryDataFile.supportedLanguages[i].contentDefinitionAvailable) {				
+				for (int j = 1; j < DictionaryDataFile.supportedLanguages[i].contents.length; j++){
+					contents[contentIndex] = DictionaryDataFile.supportedLanguages[i].contents[j].contentDisplayText;
+					contentIndex++;
+				}				
+			}
+		}
+		if (contentIndex != 0) {
+			String[] newContents = new String[contentIndex];
+			for (int i= 0; i < contentIndex; i++){
+				newContents[i] = contents[i];			
+			}
+			DictionarySettings.loadContent(contentIndex);			
+			contentChoiceGroup.setAll(UIDisplayTextItems.createContentToggle(newContents));
+//			DictionarySettings.setUILanguage(SettingsStore.getSettingsStore().getUILanguage());
+			append(contentChoiceGroup);
+		}
+		
 		// set the values of the created items
 		setItemsToSettingValues();
 		
@@ -367,7 +396,7 @@ public class DictionarySettingForm
 		outputLanguageChoiceGroup.getSelectedFlags(outputLanguageSettingsSelectedIndexes);
 		setOutputLanguage(outputLanguageSettingsSelectedIndexes);
 		
-		// font size: save only when bitmap font is not activated
+		// font size:
 		if (! lastSettingUseBitmapFont) {
 			int newFontSize = fontSizeChoiceGroup.getSelectedIndex();
 			if (newFontSize != DictionarySettings.getFontSize()) {
@@ -376,7 +405,16 @@ public class DictionarySettingForm
 				// update font size on display
 				MainForm.applicationMainForm.updateFonts();
 			}
-		}
+		}else {
+			String newBitmapFontSize = fontSizeChoiceGroup.getString(fontSizeChoiceGroup.getSelectedIndex());
+			if (newBitmapFontSize != DictionarySettings.getBitmapFontSize()) {
+				DictionarySettings.setBitmapFontSize(newBitmapFontSize);
+				//TODO: save also in settings store
+				//SettingsStore.getSettingsStore().setFontSize(DictionarySettings.getFontSize());
+				// update font size on display
+				MainForm.applicationMainForm.updateFonts();
+			}
+		}	
 		
 		// user interface language:
 		setUILanguage(true);
@@ -446,6 +484,11 @@ public class DictionarySettingForm
 		// BypassCharsetDecoding:
 		CsvFile.selectedBypassCharsetDecoding = perfCGFlags[indexPerfCGBypassCharsetDecoding];
 		SettingsStore.getSettingsStore().setBypassCharsetDecoding(CsvFile.selectedBypassCharsetDecoding);
+	
+		//display content settings
+		boolean [] contentCGFlags = new boolean[contentChoiceGroup.size()];
+		contentChoiceGroup.getSelectedFlags(contentCGFlags);
+		DictionarySettings.setContentIsShown(contentCGFlags);
 	}
 	
 	protected void cancelSettings() throws DictionaryException {
@@ -479,7 +522,27 @@ public class DictionarySettingForm
 			throw new DictionaryException("Invalid font size index");
 		return fontSize;
 	}
-
+	
+	///Basti
+	public String[] getBitmapFontSizes() {		
+		String[] newStrings = new String[16];
+		int j = 0;
+		for (int i = 8; i <= 36; i = i + 2){
+			String size = Integer.toString(i);
+			InputStream in = null;
+			in = this.getClass().getResourceAsStream(
+					"/fonts/" + size + "/font.bmf");
+			if (in != null) {
+				newStrings[j] = size;
+				j++;
+			}
+		}
+		String[] bitmapFontSizes = new String[j];
+		for (int k = 0; k < j; k++) {			
+			bitmapFontSizes[k] = newStrings[k];
+		}
+		return bitmapFontSizes;
+	}
 	
 	public void setUILanguage(boolean updateSettingsStore) throws DictionaryException {
 		int newSelectedLanguage = uiLanguageChoiceGroup.getSelectedIndex();
@@ -616,9 +679,12 @@ public class DictionarySettingForm
 	void setFontSizeCGDisplayTextItems(boolean useBitmapFont) throws DictionaryException {
 		UIDisplayTextItem[] fontSizeStrings;
 		if (useBitmapFont) {
-			// when bitmap fonts are used, then the size of the font cannot be changed:
-			fontSizeStrings = new UIDisplayTextItem [] 
-	                                 { UIDisplayTextItems.SettingsFontBitmapFont};
+			String[] bitmapFontSizes = getBitmapFontSizes();
+			if (getBitmapFontSizes().length != 0){
+				fontSizeStrings = UIDisplayTextItems.createBitmapFontSizes(bitmapFontSizes);
+			} else {
+				fontSizeStrings = new UIDisplayTextItem []{UIDisplayTextItems.SettingsFontBitmapFont};
+			}
 		}
 		else {
 			fontSizeStrings = new UIDisplayTextItem [] 
@@ -643,11 +709,11 @@ public class DictionarySettingForm
 	 * Check to see if the bitmap font setting should be shown
 	 */
 	void checkBitmapFontAvailable() {
-		//if (MainForm.sonyEricssonWorkaroundRequired) {
-		//	bitmapFontExists = false;
-		//	return;
-		//}
-		bitmapFontExists = BitmapFontCanvas.fontExistsStatic();
+		if (getBitmapFontSizes().length != 0) {
+			bitmapFontExists = true;
+			DictionarySettings.setBitmapFontSize(getBitmapFontSizes()[0]);
+		}
+		else bitmapFontExists = false;
 	}
 }
 
