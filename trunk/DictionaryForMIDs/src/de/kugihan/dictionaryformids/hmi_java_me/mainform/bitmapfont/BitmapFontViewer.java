@@ -4,21 +4,22 @@ package de.kugihan.dictionaryformids.hmi_java_me.mainform.bitmapfont;
  * Copyright (c) 2004-2005 Robert Virkus / Enough Software
  *
  * Modified by Sean Kernohan (webmaster@seankernohan.com)
+ * Last Modified by Sebastian Loziczky (bastil@gmx.at)
  */
 
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
-import javax.microedition.lcdui.game.Sprite;
 
 import de.kugihan.dictionaryformids.dataaccess.content.RGBColour;
+//import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 
 public class BitmapFontViewer {
 
 	protected final static byte ABSOLUTE_LINE_BREAK = -2;
 
 	protected final static byte ARTIFICAL_LINE_BREAK = -3;
-
-	private final Image image;
+	
+	private Image[] characterImage;
 
 	private int linesPainted;
 
@@ -41,6 +42,10 @@ public class BitmapFontViewer {
 	private short[] lineWidths;
 
 	private final int[] indeces;
+	
+// 	private RGBColour backgroundColour;
+// 	
+// 	private boolean isUseBackgroundColour;
 
 	private final RGBColour[] colours;
 
@@ -57,8 +62,8 @@ public class BitmapFontViewer {
 	/**
 	 * Views a specific input string with a specific bitmap font.
 	 * 
-	 * @param image
-	 *            the basic font-image
+	 * @param charsImage
+	 *            the basic character-images
 	 * @param indeces
 	 *            array of the x-positions of the to-be-displayed characters
 	 * @param xPositions
@@ -73,11 +78,12 @@ public class BitmapFontViewer {
 	 *            the padding between two lines
 	 * 
 	 */
-	public BitmapFontViewer(Image image, int[] indeces, RGBColour[] colours,
+	public BitmapFontViewer(Image[] charsImage, int[] indeces, RGBColour[] colours,
 			int[] xPositions, byte[] characterWidths, int fontHeight,
 			int spaceIndex, int verticalPadding, int maxWidthPixels,
 			boolean colouredMode) {
-		this.image = image;
+
+		this.characterImage = charsImage;
 		this.colouredMode = colouredMode;
 		this.maxWidthPixels = maxWidthPixels;
 		this.indeces = indeces;
@@ -94,7 +100,6 @@ public class BitmapFontViewer {
 		short linesIndex = 0;
 		for (int i = 0; i < indeces.length; i++) {
 			int index = indeces[i];
-			// System.out.println("character [" + i + "] is index " + index );
 			if (index == ABSOLUTE_LINE_BREAK) {
 				// line is too long - add line break
 				if (currentLineWidth > maxLineWidth) {
@@ -178,8 +183,6 @@ public class BitmapFontViewer {
 		int lineIndex = 0;
 		for (int i = 0; i < this.xPositions.length; i++) {
 			byte characterWidth = this.usedCharactersWidths[i];
-			// System.out.println("character-width[" + i + "] = " +
-			// characterWidth + " xPos=" + this.xPositions[i]);
 			if (characterWidth == 0) {
 				continue;
 			} else if ((x + characterWidth) > maxWidthPixels) {
@@ -200,18 +203,11 @@ public class BitmapFontViewer {
 				continue;
 			}
 			g.clipRect(x, y, characterWidth, this.fontHeight);
-			int imageX = x - this.xPositions[i];
-			// System.out.println("clipping " + x + ", " + y + ", "
-			// + characterWidth + ", " + this.fontHeight
-			// + ") imageStartX=" + (x - this.xPositions[i]) + " imageX="
-			// + imageX);
-
-			RGBColour colour = colours[i];
-
-			Image theCharacter = Image.createImage(image, this.xPositions[i],
-					0, characterWidth, this.fontHeight, Sprite.TRANS_NONE);
-
-			if (colouredMode) {		
+		
+			Image theCharacter = characterImage[indeces[i]];
+						
+			if (colouredMode) {
+				RGBColour colour = colours[i];
 				int w = theCharacter.getWidth();
 				int h = theCharacter.getHeight();
 				int[] rgbValues = new int[w * h];
@@ -222,7 +218,8 @@ public class BitmapFontViewer {
 					int green = (argb >> 8) & 0xff;
 					int blue = argb & 0xff;
 					int alpha = (argb >> 24) & 0xff;
-					if (rgbValues[k] != 0) {
+					///Basti
+					if (rgbValues[k] < 0) {
 						// set foreground to coloured
 						try {
 							// try to set colours...
@@ -238,6 +235,14 @@ public class BitmapFontViewer {
 						}
 						alpha = 255;
 					} else {
+						//TODO: use the devices background colour
+//						isUseBackgroundColour = DictionarySettings.isUseBackgroundColour();
+//					  	if(isUseBackgroundColour) backgroundColour = DictionarySettings.getBackgroundColour();
+//					  	red = backgroundColour.red;
+//					  	blue = backgroundColour.blue;
+//					  	green = backgroundColour.green;
+//						alpha = 255;
+						
 						// set background to white
 						red = 255;
 						blue = 255;
@@ -247,12 +252,9 @@ public class BitmapFontViewer {
 					argb = (alpha << 24) | (red << 16) | (green << 8) | blue;
 					rgbValues[k] = argb;
 				}
-
 				theCharacter = Image.createRGBImage(rgbValues, w, h, false);
 			}
-
-			// g.drawImage(this.image, imageX, y, Graphics.TOP | Graphics.LEFT);
-
+			
 			g.drawImage(theCharacter, x, y, Graphics.TOP | Graphics.LEFT);
 			x += characterWidth;
 			// reset clip:
