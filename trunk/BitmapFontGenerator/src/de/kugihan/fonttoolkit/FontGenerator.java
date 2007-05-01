@@ -12,6 +12,7 @@ import java.awt.font.*;
 import java.awt.geom.*;
 import java.awt.image.*;
 import java.io.*;
+import java.math.*;
 
 import javax.imageio.*;
 
@@ -21,8 +22,16 @@ public class FontGenerator {
 	private Font derivedFont;
 
 	private String text = "?";
+	
+	private final int charactersPerPng = 50;
 
 	private float currentSize;
+	
+	private int clipTop;
+	
+	private int clipBottom;
+	
+	private int sizePoints;
 
 	private Color currentColor = Color.BLACK;
 
@@ -30,11 +39,14 @@ public class FontGenerator {
 
 	private int characterSpacing = 0;
 
-	public FontGenerator(File fontFile, String chars, int size)
+	public FontGenerator(File fontFile, String chars, int size, int top, int bottom)
 			throws IOException {
 		super();
 
 		currentSize = size;
+		this.clipTop = top;
+		this.clipBottom = bottom;
+		this.sizePoints = size;
 
 		InputStream in = new FileInputStream(fontFile);
 		try {
@@ -51,44 +63,63 @@ public class FontGenerator {
 		return this.derivedFont;
 	}
 
-	public void saveBitMapFont(File file) throws IOException {
+	public void saveBitMapFont(String fontDir) throws IOException {
 		// FIXME
 		// ADD CHARSPACING FIELD
-		BufferedImage image = createImage();
+		BufferedImage image = createImage(this.text);
+		
+		boolean status;
+		
+		///TODO: try catch block
+		status = new File(fontDir + "\\fonts\\" + sizePoints + "\\").mkdirs();
+		System.out.println(status ? "directory created" : "directory not created");
+		
+		File file = new File(fontDir + "\\fonts\\" + sizePoints + "\\font.bmf");
+		
 		FileOutputStream out = new FileOutputStream(file);
 		String text = this.text;
 		DataOutputStream dataOut = new DataOutputStream(out);
-		// write the line height plus 2 pixels padding
-		int size = (int)currentSize + 2;
-		dataOut.writeInt(size);
-		// write whether there are mixed case characters included:
-		boolean hasMixedCase = true;
-		dataOut.writeBoolean(hasMixedCase);
+		int fontHeightPixels = image.getHeight();
+		dataOut.writeInt(fontHeightPixels);
+		dataOut.writeInt(charactersPerPng);
+		int fontImagesTotalNumber = (text.length() / charactersPerPng) + 1;
+		dataOut.writeInt(fontImagesTotalNumber);
 		// write the character-map:
 		String charMap = text;
 		dataOut.writeUTF(charMap);
-		// write the widths of each character:
+		
+		//write the widths of each character:
 		Graphics2D g = image.createGraphics();
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_OFF);
 		FontRenderContext fc = g.getFontRenderContext();
-		for (int i = 0; i < text.length(); i++) {
-			String substring = text.substring(i, i + 1);
+		for (int k = 0; k < text.length(); k++) {
+			String substring = text.substring(k, k + 1);
 			Rectangle2D bounds = this.derivedFont
 					.getStringBounds(substring, fc);
 			dataOut
 					.writeByte((int) (bounds.getWidth() + this.characterSpacing));
 		}
-		// write the image itself:
-		ImageIO.write(image, "png", out);
+		// write the images itself:
+		int totalLength = text.length();
+		String allCharacters = text;
+		int i = 0;
+		int j = 0;
+			
+		while (j < totalLength){
+			text = allCharacters.substring(j, Math.min(totalLength, j + charactersPerPng));
+			BufferedImage imagePart = createImage(text);
+			File outFile = new File(fontDir + "\\fonts\\" + sizePoints + "\\" + String.valueOf(i)  + ".png");
+			ImageIO.write(imagePart, "png", outFile);
+			j = j + charactersPerPng;
+			i++;
+			
+		}
 		out.close();
 	}
 
-	public BufferedImage createImage() {
-		if (this.externalImage != null) {
-			return this.externalImage;
-		}
-		String text = this.text;
+	public BufferedImage createImage(String text) {
+		
 		if (text.length() == 0) {
 			return null;
 		}
@@ -102,9 +133,7 @@ public class FontGenerator {
 		Font fontToShow = getFont();
 		FontMetrics fontMetrics = g.getFontMetrics(fontToShow);
 
-		double height = (fontMetrics.getHeight()); // +
-		// fontMetrics.getMaxDescent()
-		// );
+		double height = (fontMetrics.getHeight()) - this.clipBottom - this.clipTop;
 		double width = fontMetrics.stringWidth(text)
 				+ (text.length() * this.characterSpacing);
 		image = new BufferedImage((int) width, (int) height,
@@ -122,7 +151,7 @@ public class FontGenerator {
 		int x = 0;
 
 		for (int i = 0; i < characters.length; i++) {
-			g.drawChars(characters, i, 1, x, y);
+			g.drawChars(characters, i, 1, x, y - clipTop);
 			x += (int) fontMetrics.stringWidth(text.substring(i, i + 1))
 					+ this.characterSpacing;
 		}
