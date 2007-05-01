@@ -11,8 +11,6 @@ import java.awt.event.*;
 import java.io.*;
 
 public class FontToolkit extends JFrame implements ActionListener, Callback {
-	static final String versionNumber = "3.1.0";
-
 	private static final long serialVersionUID = 1L;
 
 	private boolean debugMode = false;
@@ -31,12 +29,22 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 
 	private String[] fontSizes = { "8", "10", "12", "14", "16", "18", "20",
 			"22", "24", "26", "28", "30", "32", "34", "36" };
+	
+	private String[] pixelsUp = { "0", "1", "2", "3", "4"};
+	
+	private String[] pixelsBottom = { "0", "1", "2", "3", "4"};
 
 	private JComboBox fontList = new JComboBox(fontSizes);
+	
+	private JComboBox pixelsTopBox = new JComboBox(pixelsUp);
+	
+	private JComboBox pixelsBottomBox = new JComboBox(pixelsBottom);
 
 	private JButton startButton = new JButton("Start");
 
 	private JLabel fontLabel = new JLabel("Path to font file");
+	
+	private JLabel pixelsLabel = new JLabel("Clip Pixels from Top / Bottom (default = 0)");
 
 	private JLabel dictionaryLabel = new JLabel("Path to dictionary");
 
@@ -58,7 +66,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 	}
 
 	public void run() {
-		this.setTitle("Bitmap font generator v" + versionNumber);
+		this.setTitle("Bitmap font generator v3.0.3");
 		this.setJMenuBar(getJMenuBar());
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 
@@ -67,6 +75,8 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 				screenSize.height / 2 - this.getHeight() / 2);
 
 		fontList.setSelectedIndex(2);
+		pixelsTopBox.setSelectedIndex(0);
+		pixelsBottomBox.setSelectedIndex(0);
 
 		this.setVisible(true);
 		this.add(panel);
@@ -78,19 +88,26 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 		panel.add(dictionaryField);
 		panel.add(dictionaryButton);
 		panel.add(fontList);
+		panel.add(pixelsTopBox);
+		panel.add(pixelsBottomBox);
 		panel.add(startButton);
 		panel.add(fontLabel);
+		panel.add(pixelsLabel);
 		panel.add(dictionaryLabel);
 		panel.add(fontSizeLabel);
 
 		fontField.setBounds(50, 40, 250, 20);
 		fontLabel.setBounds(50, 20, 250, 20);
+		pixelsLabel.setBounds(50, 150, 250, 20);
 		fontButton.setBounds(310, 40, 100, 20);
 		dictionaryField.setBounds(50, 80, 250, 20);
 		dictionaryLabel.setBounds(50, 60, 250, 20);
 		dictionaryButton.setBounds(310, 80, 100, 20);
 		fontSizeLabel.setBounds(50, 100, 250, 20);
 		fontList.setBounds(50, 120, 250, 20);
+		
+		pixelsTopBox.setBounds(50, 170, 50, 20);
+		pixelsBottomBox.setBounds(200, 170, 50, 20);
 		startButton.setBounds(310, 200, 100, 20);
 
 		progressBar.setFont(new Font("monospaced", Font.PLAIN, 12));
@@ -167,15 +184,16 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 		File inFile = new File(fontField.getText());
 		if (!inFile.canRead())
 			throw new FileNotFoundException();
-		File outFile = new File(dictionaryField.getText() + "\\font.bmf");
-		if (outFile.isDirectory())
-			throw new FileNotFoundException();
+
 		File dirFile = new File(dictionaryField.getText());
 		if (!dirFile.isDirectory() || !dirFile.canRead())
 			throw new FileNotFoundException();
 
 		int f = Integer.parseInt(fontList.getSelectedItem().toString());
-		c = new Core(inFile, outFile, dirFile, this, f);
+		int clipTop = Integer.parseInt(pixelsTopBox.getSelectedItem().toString());
+		int clipBottom = Integer.parseInt(pixelsBottomBox.getSelectedItem().toString());
+		String fontDirectory = dictionaryField.getText();
+		c = new Core(inFile, dirFile, fontDirectory, this, f, clipTop, clipBottom);
 		c.start();
 	}
 
@@ -242,7 +260,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 		JOptionPane
 				.showMessageDialog(
 						null,
-						"DictionaryForMIDs\nBitmap font generator v"+ versionNumber + "\n\nBy Sean Kernohan (webmaster@seankernohan.com)",
+						"DictionaryForMIDs\nBitmap font generator v3.0.3\n\nBy Sean Kernohan (webmaster@seankernohan.com)",
 						"About", JOptionPane.INFORMATION_MESSAGE);
 	}
 
