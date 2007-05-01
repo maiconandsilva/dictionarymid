@@ -5,6 +5,7 @@ import javax.microedition.lcdui.TextField;
 
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.DfMTextField;
 import de.kugihan.dictionaryformids.hmi_java_me.mainform.bitmapfont.BitmapFontCanvas;
 
@@ -28,7 +29,9 @@ public class MainFormItemsBitmap implements MainFormItems {
 
 	public Item createTranslationItem(
 			StringColourItemText stringColourItemText, boolean fromItem, int screenWidth) {
-		Item translationItem = new BitmapFontCanvas(stringColourItemText, screenWidth, colouredMode);
+		String bitmapFontSize = DictionarySettings.getBitmapFontSize();
+		Item translationItem = new BitmapFontCanvas(
+				stringColourItemText, bitmapFontSize, screenWidth, colouredMode);
 		return translationItem;
 	}
 
