@@ -8,7 +8,9 @@ package de.kugihan.fonttoolkit;
 import java.io.*;
 
 public class Core extends Thread {
-	private String theCharacters = "?"; // must contain question mark
+	private String theCharacters = "?abcdef*ghi#jklmnopqrstuvwxyzABCDEFGH" +
+			"IJKLMNOPQRSTUVWXYZüäüöß.:,;()!0123456789=+-āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ`"; 
+	// must contain question mark at the beginning
 
 	private Callback cb;
 
@@ -18,7 +20,13 @@ public class Core extends Thread {
 
 	private File dictionaryDirectory;
 	
+	private String fontDirectory;
+	
 	private int size;
+	
+	private int clipTop;
+	
+	private int clipBottom;
 
 	private Core() {
 	}
@@ -37,12 +45,14 @@ public class Core extends Thread {
 		}
 	}
 
-	public Core(File inputFile, File outputFile, File directory, Callback cb, int size) {
+	public Core(File inputFile, File directory, String fontDir, Callback cb, int size, int top, int bottom) {
 		this.size = size;
+		this.clipTop = top;
+		this.clipBottom = bottom;
 		this.cb = cb;
 		this.inputFile = inputFile;
-		this.outputFile = outputFile;
 		this.dictionaryDirectory = directory;
+		this.fontDirectory = fontDir;
 	}
 
 	// TODO: validate the file parameters
@@ -86,7 +96,7 @@ public class Core extends Thread {
 	}
 
 	private void process() throws IOException {
-		FontGenerator fg = new FontGenerator(inputFile, theCharacters, size);
-		fg.saveBitMapFont(outputFile);
+		FontGenerator fg = new FontGenerator(inputFile, theCharacters, size, clipTop, clipBottom);
+		fg.saveBitMapFont(fontDirectory);
 	}
 }
