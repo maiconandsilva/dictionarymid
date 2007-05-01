@@ -4,6 +4,7 @@ package de.kugihan.dictionaryformids.hmi_java_me.mainform.bitmapfont;
  * Copyright (c) 2004-2005 Robert Virkus / Enough Software
  *
  * Modified by Sean Kernohan (webmaster@seankernohan.com)
+ * Last Modified by Sebastian Loziczky (bastil@gmx.at)
  */
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.Hashtable;
 import java.util.Vector;
 
 import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.game.Sprite;
 
 import de.kugihan.dictionaryformids.dataaccess.content.RGBColour;
 import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
@@ -20,23 +22,29 @@ import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart;
 public final class BitmapFont {
 	private static Hashtable fontsByUrl = new Hashtable();
 
-	private static final String bitmapFontFilename = "/fonts/font.bmf";
+	private String bitmapFontDir;
+	
+	private String fontUrl;
+	
+	private boolean charsLoaded = false;
+	
+	private Image[] characterImage;
 
-	private Image fontImage;
-
-	private boolean hasMixedCase;
+	private int fontImagesTotalNumber;
+	
+	private int totalNumberOfCharacters;
 
 	private byte[] characterWidths;
 
 	private int[] xPositions;
 
 	private String characterMap;
-
-	private int fontHeight;
+	
+	private int fontHeightPixels;
+	
+	private int charactersPerPng;
 
 	private int spaceIndex;
-
-	private int lineHeightPixels;
 
 	/**
 	 * Creates a new bitmap font.
@@ -44,12 +52,14 @@ public final class BitmapFont {
 	 * @param fontUrl
 	 *            the url of the *.bmf file containing the font-specification.
 	 */
-	private BitmapFont() {
+	private BitmapFont(String fontDirectory, String fontUrl) {
 		super();
+		this.fontUrl = fontUrl;
+		this.bitmapFontDir = fontDirectory;
 	}
 
 	public int getLineHeightPixels() {
-		 return fontHeight + 1;
+		 return fontHeightPixels;
 	}
 
 	/**
@@ -61,53 +71,6 @@ public final class BitmapFont {
 	 */
 	public BitmapFontViewer getViewer(StringColourItemText stringItem,
 			int maxWidthPixels, boolean colouredMode) throws Exception {
-		if (this.fontImage == null) {
-			// try to load the *.bmf file:
-			InputStream in = null;
-			try {
-				in = this.getClass().getResourceAsStream(
-						this.bitmapFontFilename);
-				if (in == null) {
-					return null;
-				}
-				DataInputStream dataIn = new DataInputStream(in);
-				this.lineHeightPixels = dataIn.readInt();
-				this.hasMixedCase = dataIn.readBoolean();
-				String map = dataIn.readUTF();
-				this.characterMap = map;
-				this.spaceIndex = map.indexOf(' ');
-				int length = map.length();
-				this.characterWidths = new byte[length];
-				this.xPositions = new int[length];
-				int xPos = 0;
-				for (int i = 0; i < length; i++) {
-					byte width = dataIn.readByte();
-					this.characterWidths[i] = width;
-					this.xPositions[i] = xPos;
-					xPos += width;
-				}
-				// #ifdef polish.midp2
-				this.fontImage = Image.createImage(in);
-				// #endif
-				this.fontHeight = this.fontImage.getHeight();
-			} catch (IOException e) {
-				// #debug error
-				System.out.println("Unable to load bitmap-font ["
-						+ this.bitmapFontFilename + "]" + e);
-				return null;
-				// #ifndef polish.Bugs.ImageIOStreamAutoClose
-			} finally {
-				try {
-					in.close();
-				} catch (IOException e) {
-					// #debug error
-					System.out
-							.println("Unable to close bitmap-font stream: " + e);
-				}
-				// #endif
-			}
-		}
-
 		// we need to know how many characters long the current item is...
 		// get number of stringcolouritemtextparts
 		int size = stringItem.size();
@@ -144,24 +107,152 @@ public final class BitmapFont {
 			}
 			thePartsTotalLength += length;
 		}
-		return new BitmapFontViewer(this.fontImage, indeces, colours,
-				this.xPositions, this.characterWidths, this.fontHeight,
-				this.spaceIndex, 1, maxWidthPixels, colouredMode);
+		
+		//load the remaining char images for this stringItem 
+		if (characterImage == null) this.characterImage = new Image[totalNumberOfCharacters];
+		                                                      
+		for (int i = 0; i < totalLength; i++){
+			int l = indeces[i] / charactersPerPng;
+			try {
+				if (characterImage[indeces[i]] == null) {
+					InputStream pngIn = this.getClass().getResourceAsStream(
+							bitmapFontDir + String.valueOf(l) + ".png");
+					Image image = Image.createImage(pngIn);
+					if (this.characterWidths[indeces[i]] != 0) {
+						this.characterImage[indeces[i]] = Image.createImage(image, this.xPositions[indeces[i]],
+							0, this.characterWidths[indeces[i]], this.fontHeightPixels, Sprite.TRANS_NONE);
+					}
+					try {
+						pngIn.close();
+					}catch (IOException e) {
+						System.out.println("Unable to close bitmap-font stream: " +
+									bitmapFontDir + String.valueOf(l) + ".png " + e);
+					}
+				}
+			} catch (IOException e) {
+				System.out.println("Unable to open bitmap-font stream: " +
+						bitmapFontDir + String.valueOf(l) + ".png " + e);
+			}
+		}
+		return new BitmapFontViewer(this.characterImage, indeces, colours,
+				this.xPositions, this.characterWidths, this.fontHeightPixels,
+				this.spaceIndex, 0, maxWidthPixels, colouredMode);
 	}
-
+	/**
+	 * Loads the the index-file and the font properties
+	 * */
+	public boolean loadFont() throws Exception {
+		if (this.xPositions == null) {
+			// try to load the *.bmf file:
+			InputStream in = null;
+			try {
+				in = this.getClass().getResourceAsStream(
+						this.fontUrl);
+				if (in == null) {
+					return false;
+				}			
+				DataInputStream dataIn = new DataInputStream(in);
+				this.fontHeightPixels = dataIn.readInt();
+				this.charactersPerPng = dataIn.readInt();
+				this.fontImagesTotalNumber = dataIn.readInt();
+				String map = dataIn.readUTF();		
+				this.characterMap = map;
+				this.spaceIndex = map.indexOf(' ');
+				this.totalNumberOfCharacters = map.length();
+				this.characterWidths = new byte[totalNumberOfCharacters];
+				this.xPositions = new int[totalNumberOfCharacters];
+				if (characterImage == null) {
+					this.characterImage = new Image[totalNumberOfCharacters];
+				}
+				
+				for (int l = 0; l < fontImagesTotalNumber; l++){
+					int xPos = 0;
+					for (int i = l * charactersPerPng; (i < ((l + 1) * charactersPerPng)) 
+													&& (i < totalNumberOfCharacters) ; i++) {
+						byte width = dataIn.readByte();
+						this.characterWidths[i] = width;
+						this.xPositions[i] = xPos;
+						xPos += width;
+					}
+				}				
+			} catch (IOException e) {
+				System.out.println("Unable to load bitmap-font ["
+						+ this.fontUrl + "]" + e);
+				return false;
+			} finally {
+				try {
+					in.close();
+				} catch (IOException e) {
+					System.out
+							.println("Unable to close bitmap-font stream: " + e);
+				}
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Loads the first 120 chars of the font into the cache.
+	 * */
+	public boolean loadChars() throws Exception {
+		if (this.charsLoaded == true)
+			return false;
+		
+		if (characterImage == null) {
+			this.characterImage = new Image[totalNumberOfCharacters];
+		}
+		Image image = null;		
+		int currentImage = 5;
+		boolean currentImageChanged;
+		for (int i =0; i < totalNumberOfCharacters && i < 120; i++){
+			int newCurrentImage = i / this.charactersPerPng;
+			if (newCurrentImage == currentImage) currentImageChanged = false;
+			else currentImageChanged = true;
+			currentImage = newCurrentImage;
+			
+			if (currentImageChanged){
+				InputStream pngIn = this.getClass().getResourceAsStream(
+						bitmapFontDir + String.valueOf(currentImage) + ".png");
+				image = Image.createImage(pngIn);
+				try {
+					pngIn.close();
+				}catch (IOException e) {
+					System.out.println("Unable to close bitmap-font stream: " +
+							bitmapFontDir + String.valueOf(currentImage) + ".png " + e);
+				}
+			}
+			//TODO: try catch block?
+			if (this.characterWidths[i] != 0){
+				this.characterImage[i] = Image.createImage(image, this.xPositions[i],
+						0, this.characterWidths[i], this.fontHeightPixels, Sprite.TRANS_NONE);
+			}
+		}
+		this.charsLoaded = true;
+		return true;
+	}	
+	
 	/**
 	 * Gets the instance of the specified font.
 	 * 
 	 * @param url
-	 *            the url of the font
+	 *            the url of the font	 * 			
 	 * @return the corresponding bitmap font.
 	 */
-	public static BitmapFont getInstance() {
-		BitmapFont font = (BitmapFont) fontsByUrl.get(bitmapFontFilename);
+	public static BitmapFont getInstance(String fontDirectory, String url) {
+		BitmapFont font = (BitmapFont) fontsByUrl.get(url);
 		if (font == null) {
-			font = new BitmapFont();
-			fontsByUrl.put(bitmapFontFilename, font);
+			font = new BitmapFont(fontDirectory, url);
+			fontsByUrl.put(url, font);
 		}
 		return font;
+	}
+	
+	/**
+	 * Removes the instance of the specified font from the internal cache.
+	 * 
+	 * @param url the url of the font
+	 */
+	public static void removeInstance(String url) {
+		fontsByUrl.remove( url );
 	}
 }
