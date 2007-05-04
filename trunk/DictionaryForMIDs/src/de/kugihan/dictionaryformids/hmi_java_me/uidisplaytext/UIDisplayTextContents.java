@@ -92,6 +92,7 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		}),
 
 		new LanguageDisplayText("Việt Nam" ,
@@ -167,6 +168,7 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		}),
 
 		new LanguageDisplayText("Chinese" ,
@@ -242,6 +244,7 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		}),
 
 		new LanguageDisplayText("Dutch [who can update ?]" ,
@@ -317,6 +320,7 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		}),
 
 		new LanguageDisplayText("Français" ,
@@ -392,6 +396,7 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		}),
 
 		new LanguageDisplayText("Greek [who can update ?]" ,
@@ -467,6 +472,7 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		}),
 
 		new LanguageDisplayText("Deutsch" ,
@@ -542,6 +548,7 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		}),
 
 		new LanguageDisplayText("Italiano" ,
@@ -617,6 +624,7 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		}),
 
 		new LanguageDisplayText("Japanese" ,
@@ -692,6 +700,7 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		}),
 
 		new LanguageDisplayText("Russian [who can update ?]" ,
@@ -767,6 +776,7 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		}),
 
 		new LanguageDisplayText("Español [who can update ?]" ,
@@ -842,6 +852,7 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		}),
 
 		new LanguageDisplayText("Czech" ,
@@ -917,6 +928,7 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		}),
 
 		new LanguageDisplayText("Slovak" ,
@@ -992,6 +1004,7 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		}),
 
 		new LanguageDisplayText("Portugês [who can translate ?]" ,
@@ -1067,9 +1080,10 @@ public class UIDisplayTextContents {
 									"Size: %1 kB",
 									"DictionaryForMIDs",
 									"No dictionary loaded",
+									"Back",
 		})
 	};
 
-	public static int totalNumberItemsInLanguage = 70;
+	public static int totalNumberItemsInLanguage = 71;
 
 }

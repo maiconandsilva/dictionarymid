@@ -30,7 +30,7 @@ public class DictionaryForMIDs
 		public static String applicationName = "DictionaryForMIDs";
 		public static String versionNumber;
 		public static String versionStatus;
-		public static byte   versionRMSStructure = 20;
+		public static byte   versionRMSStructure = 21;
 	
 	public DictionaryForMIDs() throws DictionaryException {
 		/*
