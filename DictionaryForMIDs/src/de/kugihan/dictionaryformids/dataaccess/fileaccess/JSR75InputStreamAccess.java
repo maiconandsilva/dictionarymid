@@ -27,7 +27,7 @@ public class JSR75InputStreamAccess extends DfMInputStreamAccess {
 			throws DictionaryException {
 		InputStream streamFromJSR75File;
 		try {
-			String fileLocation = baseDirectory + fileName;
+			String fileLocation = getFileLocation(fileName); 
 			FileConnection file = (FileConnection) Connector.open(fileLocation, Connector.READ);
 		     if (! file.exists())
 		         throw new CouldNotOpenFileException("File does not exist: " + fileLocation);
@@ -41,4 +41,21 @@ public class JSR75InputStreamAccess extends DfMInputStreamAccess {
 		 return streamFromJSR75File;
 	}
 
+	public boolean fileExists(String fileName) throws DictionaryException {
+		boolean returnValue;
+		try {
+			String fileLocation = getFileLocation(fileName); 
+			FileConnection file = (FileConnection) Connector.open(fileLocation, Connector.READ);
+			returnValue = file.exists();
+			file.close();
+		}
+		catch (Exception exception) {
+		 	throw new CouldNotOpenFileException(exception);
+		}
+		return returnValue;
+	}
+
+	protected String getFileLocation(String fileName) {
+		return baseDirectory + fileName;
+	}
 }

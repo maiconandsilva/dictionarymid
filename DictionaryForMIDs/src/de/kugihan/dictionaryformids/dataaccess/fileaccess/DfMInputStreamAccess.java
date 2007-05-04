@@ -15,4 +15,6 @@ public abstract class DfMInputStreamAccess {
 
 	public abstract InputStream getInputStream(String fileName) throws DictionaryException;
 
+	public abstract boolean fileExists(String fileName) throws DictionaryException;
+
 }

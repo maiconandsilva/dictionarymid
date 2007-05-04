@@ -24,5 +24,11 @@ public class ResourceDfMInputStreamAccess extends DfMInputStreamAccess {
 		return resourceInputStream;			
 	}
 
+	public boolean fileExists(String fileName) throws DictionaryException {
+		boolean returnValue;
+		InputStream resourceInputStream = getClass().getResourceAsStream(fileName);
+		returnValue = (resourceInputStream != null);
+		return returnValue;
+	}
 
 }
