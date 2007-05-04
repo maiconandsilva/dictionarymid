@@ -26,6 +26,7 @@ import javax.microedition.lcdui.TextField;
 
 import de.kugihan.dictionaryformids.dataaccess.CsvFile;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.SettingsStore;
 import de.kugihan.dictionaryformids.general.Util;
@@ -33,7 +34,6 @@ import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.DfMChoiceGroup;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.DfMCommand;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.DfMForm;
 import de.kugihan.dictionaryformids.hmi_java_me.mainform.MainForm;
-import de.kugihan.dictionaryformids.hmi_java_me.mainform.bitmapfont.BitmapFontCanvas;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.UIDisplayTextItem;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.UIDisplayTextItems;
@@ -209,6 +209,7 @@ public class DictionarySettingForm
 				                                 null);
 		setFontSizeCGDisplayTextItems(DictionarySettings.getUseBitmapFont());
 		DictionarySettings.setFontSize(SettingsStore.getSettingsStore().getFontSize());
+		DictionarySettings.setBitmapFontSize(SettingsStore.getSettingsStore().getBitmapFontSize());
 		append(fontSizeChoiceGroup);
 
 		/* 
@@ -266,7 +267,7 @@ public class DictionarySettingForm
 		setItemStateListener(this);
 	}
 	
-	protected void setItemsToSettingValues() {
+	protected void setItemsToSettingValues() throws DictionaryException {
 		// InputLanguageChoiceGroup
 		setInputLanguageChoiceGroup();
 
@@ -297,7 +298,7 @@ public class DictionarySettingForm
 			dictionaryPathTextField.setString(DictionarySettings.getDictionaryPath());
 		}
 		
-		// fontSizeChoiceGroup: use only if bitmap font is not active
+		// fontSizeChoiceGroup
 		setFontSizeCGSelectedIndex(DictionarySettings.getUseBitmapFont());
 
 		// uiLanguageChoiceGroup
@@ -397,24 +398,27 @@ public class DictionarySettingForm
 		setOutputLanguage(outputLanguageSettingsSelectedIndexes);
 		
 		// font size:
+		boolean fontSizeChanged = false;
 		if (! lastSettingUseBitmapFont) {
 			int newFontSize = fontSizeChoiceGroup.getSelectedIndex();
 			if (newFontSize != DictionarySettings.getFontSize()) {
+				fontSizeChanged = true;
 				DictionarySettings.setFontSize(newFontSize);
 				SettingsStore.getSettingsStore().setFontSize(DictionarySettings.getFontSize());
-				// update font size on display
-				MainForm.applicationMainForm.updateFonts();
 			}
-		}else {
-			String newBitmapFontSize = fontSizeChoiceGroup.getString(fontSizeChoiceGroup.getSelectedIndex());
-			if (newBitmapFontSize != DictionarySettings.getBitmapFontSize()) {
+		} else {
+			int newBitmapFontSizeIndex = fontSizeChoiceGroup.getSelectedIndex();
+			String newBitmapFontSize = getBitmapFontSizes()[newBitmapFontSizeIndex];
+			if (! newBitmapFontSize.equals(DictionarySettings.getBitmapFontSize())) {
+				fontSizeChanged = true;
 				DictionarySettings.setBitmapFontSize(newBitmapFontSize);
-				//TODO: save also in settings store
-				//SettingsStore.getSettingsStore().setFontSize(DictionarySettings.getFontSize());
-				// update font size on display
-				MainForm.applicationMainForm.updateFonts();
+				SettingsStore.getSettingsStore().setBitmapFontSize(DictionarySettings.getBitmapFontSize());
 			}
 		}	
+		if (fontSizeChanged) {
+			// update font size on display
+			MainForm.applicationMainForm.updateFonts();
+		}
 		
 		// user interface language:
 		setUILanguage(true);
@@ -524,15 +528,15 @@ public class DictionarySettingForm
 	}
 	
 	///Basti
-	public String[] getBitmapFontSizes() {		
+	public static String[] getBitmapFontSizes() throws DictionaryException {		
 		String[] newStrings = new String[16];
 		int j = 0;
 		for (int i = 8; i <= 36; i = i + 2){
 			String size = Integer.toString(i);
-			InputStream in = null;
-			in = this.getClass().getResourceAsStream(
+			boolean fileExists;
+			fileExists = FileAccessHandler.getDictionaryDataFileISAccess().fileExists(
 					"/fonts/" + size + "/font.bmf");
-			if (in != null) {
+			if (fileExists) {
 				newStrings[j] = size;
 				j++;
 			}
@@ -680,7 +684,7 @@ public class DictionarySettingForm
 		UIDisplayTextItem[] fontSizeStrings;
 		if (useBitmapFont) {
 			String[] bitmapFontSizes = getBitmapFontSizes();
-			if (getBitmapFontSizes().length != 0){
+			if (getBitmapFontSizes().length != 0) {
 				fontSizeStrings = UIDisplayTextItems.createBitmapFontSizes(bitmapFontSizes);
 			} else {
 				fontSizeStrings = new UIDisplayTextItem []{UIDisplayTextItems.SettingsFontBitmapFont};
@@ -695,23 +699,36 @@ public class DictionarySettingForm
 		}
 		fontSizeChoiceGroup.setAll(fontSizeStrings);
 	}
-	   
-	void setFontSizeCGSelectedIndex(boolean useBitmapFont) {
+
+	void setFontSizeCGSelectedIndex(boolean useBitmapFont) throws DictionaryException {
 		if (! useBitmapFont) {
 			fontSizeChoiceGroup.setSelectedIndex(DictionarySettings.getFontSize(), true);
 		}
 		else {
-			fontSizeChoiceGroup.setSelectedIndex(indexFontSizeCGBitmapFont, true);
+			String[] bitmapFontSizes = getBitmapFontSizes();
+			String selectedBitmapFontSize = DictionarySettings.getBitmapFontSize();
+			boolean bitmapFontSizeIndexFound = false;
+			int bitmapFontSizeIndex = -1;
+			for (int bitmapFontSizeCounter = 0; 
+			     bitmapFontSizeCounter < bitmapFontSizes.length; 
+			     ++bitmapFontSizeCounter) {
+				if (bitmapFontSizes[bitmapFontSizeCounter].equals(selectedBitmapFontSize)) {
+					bitmapFontSizeIndexFound = true;
+					bitmapFontSizeIndex = bitmapFontSizeCounter;
+				}
+			}
+			if (! bitmapFontSizeIndexFound)
+				throw new DictionaryException("Incorrect bitmap font size setting: " + selectedBitmapFontSize);
+			fontSizeChoiceGroup.setSelectedIndex(bitmapFontSizeIndex, true);
 		}
 	}
 
 	/**
 	 * Check to see if the bitmap font setting should be shown
 	 */
-	void checkBitmapFontAvailable() {
+	void checkBitmapFontAvailable() throws DictionaryException {
 		if (getBitmapFontSizes().length != 0) {
 			bitmapFontExists = true;
-			DictionarySettings.setBitmapFontSize(getBitmapFontSizes()[0]);
 		}
 		else bitmapFontExists = false;
 	}

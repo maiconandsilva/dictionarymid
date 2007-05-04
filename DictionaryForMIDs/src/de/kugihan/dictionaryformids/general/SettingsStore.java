@@ -6,12 +6,19 @@ GPL applies - see file COPYING for copyright statement.
 */
 
 package de.kugihan.dictionaryformids.general;
-import java.io.*; 
-import javax.microedition.rms.*; 
-import javax.microedition.lcdui.*; 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import javax.microedition.rms.RecordStore;
+import javax.microedition.rms.RecordStoreException;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettingForm;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
 
 public class SettingsStore {
@@ -28,7 +35,8 @@ public class SettingsStore {
 	private final int rms_index_incrementalSearchEnabled = rms_index_bypassCharsetDecoding + 1;
 	private final int rms_index_maxHits = rms_index_incrementalSearchEnabled + 1;
 	private final int rms_index_fontSize = rms_index_maxHits + 1;
-	private final int rms_index_uiLanguage = rms_index_fontSize + 1;
+	private final int rms_index_bitmapFontSize = rms_index_fontSize + 1;
+	private final int rms_index_uiLanguage = rms_index_bitmapFontSize + 1;
 	private final int rms_index_showTranslationList = rms_index_uiLanguage + 1;
 	private final int rms_index_findExactMatches = rms_index_showTranslationList + 1;
 	private final int rms_index_addAtBeginNoSearchSubExpressionCharacter = rms_index_findExactMatches + 1;
@@ -36,7 +44,8 @@ public class SettingsStore {
 	private final int rms_index_colouredItems = rms_index_addAtEndWildcardAnySeriesOfCharacter + 1;
 	private final int rms_index_useBitmapFont = rms_index_colouredItems + 1;
 	private final int rms_index_dictionaryPath = rms_index_useBitmapFont + 1;
-	private final int rms_max_index = rms_index_dictionaryPath;
+	private final int rms_index_contentIsShown = rms_index_dictionaryPath + 1;
+	private final int rms_max_index = rms_index_contentIsShown;
 
 	private final String rmsStoreName = "DictionaryForMIDs";
 	
@@ -92,10 +101,13 @@ public class SettingsStore {
 				// maxHits settings: 30
 				addIntValue(30);
 				
-				// Font settings: device default settings (= value 0)
+				// fontSize: device default settings (= value 0)
 				addIntValue(0);
 				
-				// Current User Interface Lenguage
+				// bitmapFontSize:
+				addStringValue(""); // will be set later in setDefaultValues
+				
+				// Current User Interface Language
 				addIntValue(0);  // will be set later in setDefaultValues  // todo: will not be saved when no dictionary is available
 				
 				// showTranslationList: switched off
@@ -118,6 +130,10 @@ public class SettingsStore {
 				
 				// dictionaryPath: empty string
 				addStringValue("");
+				
+				// contentIsShown
+				addBooleanArrayValue(new boolean[0]); // will be set later in setDefaultValues
+
 			}
 		}
 		catch (RecordStoreException e) {
@@ -186,6 +202,14 @@ public class SettingsStore {
 			}
 		}
 		setUILanguage(uiLanguage);
+		
+		// bitmap font size
+		String [] bitmapFontSizes = DictionarySettingForm.getBitmapFontSizes(); // todo sebastian: DictionarySettingForm muss durch eine BitmapFont-Klasse ersetzt werden
+		if (bitmapFontSizes.length > 0) {
+			setBitmapFontSize(bitmapFontSizes[0]); // set the first font size of the available font sizes
+		}
+
+		// todo: contentIsShown
 		
 		// default values had been set
 		setDefaultValuesSet(true);
@@ -276,6 +300,15 @@ public class SettingsStore {
 	public void setFontSize(int fontSize) throws DictionaryException  {
 		setIntValue(rms_index_fontSize,
 				    fontSize);
+	}
+	
+	public String getBitmapFontSize() throws DictionaryException  {
+		return getStringValue(rms_index_bitmapFontSize);
+	}
+	
+	public void setBitmapFontSize(String bitmapFontSize) throws DictionaryException  {
+		setStringValue(rms_index_bitmapFontSize,
+				       bitmapFontSize);
 	}
 	
 	public int getUILanguage() throws DictionaryException  {
