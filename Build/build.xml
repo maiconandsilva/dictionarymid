@@ -2,11 +2,14 @@
 This file build.xml should be located in directory Build
 You must have Sun's Wireless Toolkit (WTK) installed (can be downloaded from http://java.sun.com/products/sjwtoolkit/download-2_5.html)
 You must set wtk.home to your WTK installation directory
-The current version of build.xml generates DictionaryForMIDs.jar/jad, DictionaryGeneration.jar and JarCreator.jar
+This build.xml can generate DictionaryForMIDs (Java ME and Java SE), DictionaryGeneration, JarCreator and BitmapFontGenerator
 Using: run ant in directory Build
 It runs well on both platforms windows/linux
 The jar-tool must be in the path. Otherwise there will be an error during the preverifier run.
 You also must have the antenna-bin-xxx.jar file in the Build directory (the file antenna-bin-xxx.jar is part of the Build CVS project; can also be downloaded from http://antenna.sourceforge.net)
+
+Important note: the source files are UTF-8 encoded. In Sun's WTK, you must set in the file ktools.properties (found somewhere under wtklib) the following property:
+javac.encoding=UTF-8
 -->
 
 <project name="allwork" default="build_all">
@@ -170,6 +173,7 @@ You also must have the antenna-bin-xxx.jar file in the Build directory (the file
 		<zip destfile="${DfM.zipfile_source}">
 			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs/src"/>
 			<zipfileset dir="${DfM.resdir}" prefix="source/DictionaryForMIDs/res"/>
+			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
 			<zipfileset file="${packaging.copyrightfile}"/>
 			<zipfileset file="${DfM.outputbasedir}/${packaging.java_me_source.subdir}/${packaging.readmefilename}"/>
 		</zip>
