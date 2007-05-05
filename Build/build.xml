@@ -7,7 +7,6 @@ Using: run ant in directory Build
 It runs well on both platforms windows/linux
 The jar-tool must be in the path. Otherwise there will be an error during the preverifier run.
 You also must have the antenna-bin-xxx.jar file in the Build directory (the file antenna-bin-xxx.jar is part of the Build CVS project; can also be downloaded from http://antenna.sourceforge.net)
-Version 3.1 
 -->
 
 <project name="allwork" default="build_all">
@@ -23,7 +22,7 @@ Version 3.1
 	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-0.9.14.jar"/>
 	<property name="antenna.jarfilename"  		value="antenna-bin-0.9.14.jar"/>
 
-    <property name="version" 			value="3.1.0"/>	<!-- version of tools / applications -->
+    <property name="version" 			value="3.1.1"/>	<!-- version of tools / applications -->
 
   	<property name="Build" 				location="."/> 				<!-- current directory -->
   	<property name="Build.buildfilename" value="build.xml"/> 		<!-- name of this file -->
@@ -159,18 +158,20 @@ Version 3.1
 		</zip>
 	</target>
 
-	<target name="package_dfm_java_me_sources" depends="build_dfm_java_me"> 
-		<!-- todo: this needs to be updated: -->
+	<target name="package_dfm_java_me_sources" depends="build_dfm_java_me">  <!-- dependency on build_dfm_java_me is included 
+	                                                                              to ensure that the source compiles -->
+		<property name="packaging.java_me_source.subdir" value="files_for_packaging/source_distribution"/>
 		<antcall target="replace_keywords_readme">
 			<param name="sourcebasedir" 		value="${DfM.inputbasedir}"/>
 			<param name="destinationbasedir" 	value="${DfM.outputbasedir}"/>
+			<param name="packaging.subdir" 		value="${packaging.java_me_source.subdir}"/>
 		</antcall>
-		<property name="DfM.zipfile_empty"	location="${DfM.outputbasedir}/DictionaryForMIDs_${version}_empty.zip"/>
-		<zip destfile="${DfM.zipfile_empty}">
-			<zipfileset file="${DfM.jarfile}"/>
-			<zipfileset file="${DfM.jadfile}"/>
+		<property name="DfM.zipfile_source"	location="${DfM.outputbasedir}/DictionaryForMIDs_${version}_source.zip"/>
+		<zip destfile="${DfM.zipfile_source}">
+			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs/src"/>
+			<zipfileset dir="${DfM.resdir}" prefix="source/DictionaryForMIDs/res"/>
 			<zipfileset file="${packaging.copyrightfile}"/>
-			<zipfileset file="${DfM.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
+			<zipfileset file="${DfM.outputbasedir}/${packaging.java_me_source.subdir}/${packaging.readmefilename}"/>
 		</zip>
 	</target>
 
@@ -259,9 +260,9 @@ Version 3.1
 			<zipfileset file="${packaging.copyrightfile}"/>
 			<zipfileset file="${JC.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
 			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
-			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs"/>
-			<zipfileset dir="${JavaSE.srcdir}" prefix="source/JavaSE"/>
-			<zipfileset dir="${JC.srcdir}" prefix="source/JarCreator"/>
+			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs/src"/>
+			<zipfileset dir="${JavaSE.srcdir}" prefix="source/JavaSE/src"/>
+			<zipfileset dir="${JC.srcdir}" prefix="source/JarCreator/src"/>
 		</zip>
 	</target>
 	
@@ -311,9 +312,9 @@ Version 3.1
 			<zipfileset file="${packaging.copyrightfile}"/>
 			<zipfileset file="${DG.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
 			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
-			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs"/>
-			<zipfileset dir="${JavaSE.srcdir}" prefix="source/JavaSE"/>
-			<zipfileset dir="${DG.srcdir}" prefix="source/DictionaryGeneration"/>
+			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs/src"/>
+			<zipfileset dir="${JavaSE.srcdir}" prefix="source/JavaSE/src"/>
+			<zipfileset dir="${DG.srcdir}" prefix="source/DictionaryGeneration/src"/>
 		</zip>
 	</target>
 	
@@ -347,7 +348,7 @@ Version 3.1
 			<zipfileset file="${packaging.copyrightfile}"/>
 			<zipfileset file="${BFG.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
 			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
-			<zipfileset dir="${BFG.srcdir}" prefix="source/BitmapFontGenerator"/>
+			<zipfileset dir="${BFG.srcdir}" prefix="source/BitmapFontGenerator/src"/>
 		</zip>
 	</target>
 	
