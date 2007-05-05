@@ -1,0 +1,23 @@
+README for the DictionaryForMIDs source code package, version $PackageVersion$
+This package can be downloaded from http://dictionarymid.sourceforge.net
+
+DictionaryForMIDs comes with ABSOLUTELY NO WARRANTY
+
+Copyright notice for the DictionaryForMIDs Java application:
+============================================================
+
+Copyright (C) $CopyrightYear$ $CopyrightBy$
+Contact via http://dictionarymid.sourceforge.net
+
+This program is free software under the terms and conditions of the GPL
+(GNU General Public License) version 2. See file $CopyrightGPLFilename$.
+
+
+Note:
+
+The files are UTF-8 encoded. In Sun's WTK, you must set in the file ktools.properties 
+(found somewhere under wtklib) the following property:
+javac.encoding=UTF-8
+
+Also read the instructions provided at at http://dictionarymid.sourceforge.net/development.html#source
+
