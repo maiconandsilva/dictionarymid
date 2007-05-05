@@ -36,7 +36,7 @@ public class DictionarySettings
 	private static boolean useFileAccessJSR75 = false; 
 	private static boolean dictionaryAvailable;
 	private static String dictionaryPath;
-	private static boolean[] contentIsShown;
+//	private static boolean[] contentIsShown;
 	
 	public static boolean isMicroedition()
 	{
@@ -231,24 +231,24 @@ public class DictionarySettings
 	public static void setDictionaryPath(String dictionaryPath) {
 		DictionarySettings.dictionaryPath = dictionaryPath;
 	}
-	public static void setContentIsShown(boolean[] contentShown) {
-		if (contentIsShown == null){
-			contentIsShown = new boolean[contentShown.length];		
-		}
-		contentIsShown = contentShown;
-	}
-	public static boolean getContentIsShown(int lang, int contentNum) {
-		if (contentNum == -1) 
-			return true;
-		for (int i = 0; i < lang; i++){
-			contentNum += DictionaryDataFile.supportedLanguages[i].contents.length;
-		}		
-		return contentIsShown[contentNum];		
-	}
-	public static void loadContent(int contentIndex){
-		if (contentIsShown == null){
-			contentIsShown = new boolean[contentIndex];
-			for (int i = 0; i < contentIsShown.length; i++)contentIsShown[i] = true;
-		}
-	}
+//	public static void setContentIsShown(boolean[] contentShown) {
+//		if (contentIsShown == null){
+//			contentIsShown = new boolean[contentShown.length];		
+//		}
+//		contentIsShown = contentShown;
+//	}
+//	public static boolean getContentIsShown(int lang, int contentNum) {
+//		if (contentNum == -1) 
+//			return true;
+//		for (int i = 0; i < lang; i++){
+//			contentNum += DictionaryDataFile.supportedLanguages[i].contents.length;
+//		}		
+//		return contentIsShown[contentNum];		
+//	}
+//	public static void loadContent(int contentIndex){
+//		if (contentIsShown == null){
+//			contentIsShown = new boolean[contentIndex];
+//			for (int i = 0; i < contentIsShown.length; i++)contentIsShown[i] = true;
+//		}
+//	}
 }

@@ -88,7 +88,7 @@ public class UIDisplayTextItems {
 	public static final UIDisplayTextItem DictionaryForMIDsApplicationName = LanguageUI.getUI().createNewUIDisplayTextItem("DictionaryForMIDsApplicationName", 68, 0);
 	public static final UIDisplayTextItem MessageNoDictionaryLoaded = LanguageUI.getUI().createNewUIDisplayTextItem("MessageNoDictionaryLoaded", 69, 0);
 	public static final UIDisplayTextItem CommandBack = LanguageUI.getUI().createNewUIDisplayTextItem("CommandBack", 70, 0);
-	public static final UIDisplayTextItem SettingsContent = LanguageUI.getUI().createNewUIDisplayTextItem("SettingsContent", "Display Content");
+//	public static final UIDisplayTextItem SettingsContent = LanguageUI.getUI().createNewUIDisplayTextItem("SettingsContent", "Display Content");
 	
 	public static final UIDisplayTextItem[] createBitmapFontSizes(String[] sizes) {
 		UIDisplayTextItem[] newUIDisplayTextItem = new UIDisplayTextItem[sizes.length];
@@ -98,12 +98,12 @@ public class UIDisplayTextItems {
 		return newUIDisplayTextItem;
 	
 	}	
-	public static final UIDisplayTextItem[] createContentToggle(String[] contentDef) {
-		UIDisplayTextItem[] newUIDisplayTextItem = new UIDisplayTextItem[contentDef.length];
-		for(int i = 0; i <= contentDef.length - 1; i++){
-			newUIDisplayTextItem[i] = LanguageUI.getUI().createNewUIDisplayTextItem(
-					"Content" + contentDef[i], contentDef[i]);
-		}
-		return newUIDisplayTextItem;	
-	}
+//	public static final UIDisplayTextItem[] createContentToggle(String[] contentDef) {
+//		UIDisplayTextItem[] newUIDisplayTextItem = new UIDisplayTextItem[contentDef.length];
+//		for(int i = 0; i <= contentDef.length - 1; i++){
+//			newUIDisplayTextItem[i] = LanguageUI.getUI().createNewUIDisplayTextItem(
+//					"Content" + contentDef[i], contentDef[i]);
+//		}
+//		return newUIDisplayTextItem;	
+//	}
 }

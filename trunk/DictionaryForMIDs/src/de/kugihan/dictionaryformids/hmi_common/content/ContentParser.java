@@ -69,9 +69,9 @@ public class ContentParser {
 					}
 				}
 				else {
-					if (DictionarySettings.getContentIsShown(languageIndex, currentContentNumber - 1)){
+//					if (DictionarySettings.getContentIsShown(languageIndex, currentContentNumber - 1)){
 						addText(contentChar);
-					}
+//					}
 				}
 			}			
 			else {
