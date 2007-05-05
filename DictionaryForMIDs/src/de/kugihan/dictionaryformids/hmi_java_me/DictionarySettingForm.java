@@ -528,6 +528,10 @@ public class DictionarySettingForm
 	}
 	
 	public static String[] getBitmapFontSizes() throws DictionaryException {		
+		if (! DictionarySettings.isDictionaryAvailable())  {
+			// no bitmap font file is accessible
+			return new String[0];
+		}
 		String[] newStrings = new String[16];
 		int j = 0;
 		for (int i = 8; i <= 36; i = i + 2){
