@@ -58,7 +58,7 @@ public class DictionarySettingForm
 	DfMChoiceGroup fontSizeChoiceGroup;
 	DfMChoiceGroup uiLanguageChoiceGroup;
 	DfMChoiceGroup performanceChoiceGroup;
-	DfMChoiceGroup contentChoiceGroup;
+//	DfMChoiceGroup contentChoiceGroup;
 	static TextField   dictionaryPathTextField = null;
 	
 	protected final int indexFontSizeCGDefault    = 0;
@@ -234,32 +234,32 @@ public class DictionarySettingForm
 		CsvFile.selectedBypassCharsetDecoding = SettingsStore.getSettingsStore().getBypassCharsetDecoding();
 		append(performanceChoiceGroup);
 		
-		/*
-		 * display contents
-		 */
-		contentChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsContent,
-                Choice.MULTIPLE,
-                null);
-		int contentIndex = 0;
-		String[] contents = new String[10];
-		for (int i = 0; i < DictionaryDataFile.supportedLanguages.length; i++) {		
-			if (DictionaryDataFile.supportedLanguages[i].contentDefinitionAvailable) {				
-				for (int j = 1; j < DictionaryDataFile.supportedLanguages[i].contents.length; j++){
-					contents[contentIndex] = DictionaryDataFile.supportedLanguages[i].contents[j].contentDisplayText;
-					contentIndex++;
-				}				
-			}
-		}
-		if (contentIndex != 0) {
-			String[] newContents = new String[contentIndex];
-			for (int i= 0; i < contentIndex; i++){
-				newContents[i] = contents[i];			
-			}
-			DictionarySettings.loadContent(contentIndex);			
-			contentChoiceGroup.setAll(UIDisplayTextItems.createContentToggle(newContents));
-//			DictionarySettings.setUILanguage(SettingsStore.getSettingsStore().getUILanguage());
-			append(contentChoiceGroup);
-		}
+//		/*
+//		 * display contents
+//		 */
+//		contentChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsContent,
+//                Choice.MULTIPLE,
+//                null);
+//		int contentIndex = 0;
+//		String[] contents = new String[10];
+//		for (int i = 0; i < DictionaryDataFile.supportedLanguages.length; i++) {		
+//			if (DictionaryDataFile.supportedLanguages[i].contentDefinitionAvailable) {				
+//				for (int j = 1; j < DictionaryDataFile.supportedLanguages[i].contents.length; j++){
+//					contents[contentIndex] = DictionaryDataFile.supportedLanguages[i].contents[j].contentDisplayText;
+//					contentIndex++;
+//				}				
+//			}
+//		}
+//		if (contentIndex != 0) {
+//			String[] newContents = new String[contentIndex];
+//			for (int i= 0; i < contentIndex; i++){
+//				newContents[i] = contents[i];			
+//			}
+//			DictionarySettings.loadContent(contentIndex);			
+//			contentChoiceGroup.setAll(UIDisplayTextItems.createContentToggle(newContents));
+////			DictionarySettings.setUILanguage(SettingsStore.getSettingsStore().getUILanguage());
+//			append(contentChoiceGroup);
+//		}
 		
 		// set the values of the created items
 		setItemsToSettingValues();
@@ -489,10 +489,10 @@ public class DictionarySettingForm
 		CsvFile.selectedBypassCharsetDecoding = perfCGFlags[indexPerfCGBypassCharsetDecoding];
 		SettingsStore.getSettingsStore().setBypassCharsetDecoding(CsvFile.selectedBypassCharsetDecoding);
 	
-		//display content settings
-		boolean [] contentCGFlags = new boolean[contentChoiceGroup.size()];
-		contentChoiceGroup.getSelectedFlags(contentCGFlags);
-		DictionarySettings.setContentIsShown(contentCGFlags);
+//		//display content settings
+//		boolean [] contentCGFlags = new boolean[contentChoiceGroup.size()];
+//		contentChoiceGroup.getSelectedFlags(contentCGFlags);
+//		DictionarySettings.setContentIsShown(contentCGFlags);
 	}
 	
 	protected void cancelSettings() throws DictionaryException {
@@ -527,7 +527,6 @@ public class DictionarySettingForm
 		return fontSize;
 	}
 	
-	///Basti
 	public static String[] getBitmapFontSizes() throws DictionaryException {		
 		String[] newStrings = new String[16];
 		int j = 0;
