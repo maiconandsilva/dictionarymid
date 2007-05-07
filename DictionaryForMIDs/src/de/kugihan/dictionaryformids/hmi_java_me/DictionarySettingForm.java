@@ -666,8 +666,12 @@ public class DictionarySettingForm
 		UIDisplayTextItem[] fontSizeStrings;
 		if (useBitmapFont) {
 			String[] bitmapFontSizes = getBitmapFontSizes();
-			if (getBitmapFontSizes().length != 0) {
-				fontSizeStrings = UIDisplayTextItems.createBitmapFontSizes(bitmapFontSizes);
+			if (bitmapFontSizes.length != 0) {				
+				fontSizeStrings = new UIDisplayTextItem[bitmapFontSizes.length];
+				for (int i = 0; i < bitmapFontSizes.length; ++i) {						
+						fontSizeStrings[i] = LanguageUI.getUI().getUIDisplayTextItem
+						                       ("SettingsFont" + bitmapFontSizes[i], bitmapFontSizes[i]);											
+				}				
 			} else {
 				fontSizeStrings = new UIDisplayTextItem []{UIDisplayTextItems.SettingsFontBitmapFont};
 			}
