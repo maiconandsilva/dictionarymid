@@ -8,7 +8,6 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.hmi_java_me;
 
-import java.io.InputStream;
 import java.util.Enumeration;
 
 import javax.microedition.io.file.FileSystemRegistry;
@@ -26,7 +25,6 @@ import javax.microedition.lcdui.TextField;
 
 import de.kugihan.dictionaryformids.dataaccess.CsvFile;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
-import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.SettingsStore;
 import de.kugihan.dictionaryformids.general.Util;
@@ -34,6 +32,7 @@ import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.DfMChoiceGroup;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.DfMCommand;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.DfMForm;
 import de.kugihan.dictionaryformids.hmi_java_me.mainform.MainForm;
+import de.kugihan.dictionaryformids.hmi_java_me.mainform.bitmapfont.BitmapFontCanvas;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.UIDisplayTextItem;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.UIDisplayTextItems;
@@ -528,27 +527,7 @@ public class DictionarySettingForm
 	}
 	
 	public static String[] getBitmapFontSizes() throws DictionaryException {		
-		if (! DictionarySettings.isDictionaryAvailable())  {
-			// no bitmap font file is accessible
-			return new String[0];
-		}
-		String[] newStrings = new String[16];
-		int j = 0;
-		for (int i = 8; i <= 36; i = i + 2){
-			String size = Integer.toString(i);
-			boolean fileExists;
-			fileExists = FileAccessHandler.getDictionaryDataFileISAccess().fileExists(
-					"/fonts/" + size + "/font.bmf");
-			if (fileExists) {
-				newStrings[j] = size;
-				j++;
-			}
-		}
-		String[] bitmapFontSizes = new String[j];
-		for (int k = 0; k < j; k++) {			
-			bitmapFontSizes[k] = newStrings[k];
-		}
-		return bitmapFontSizes;
+		return BitmapFontCanvas.getBitmapFontSizes();
 	}
 	
 	public void setUILanguage(boolean updateSettingsStore) throws DictionaryException {
@@ -708,7 +687,7 @@ public class DictionarySettingForm
 			fontSizeChoiceGroup.setSelectedIndex(DictionarySettings.getFontSize(), true);
 		}
 		else {
-			String[] bitmapFontSizes = getBitmapFontSizes();
+			String[] bitmapFontSizes = getBitmapFontSizes();		
 			String selectedBitmapFontSize = DictionarySettings.getBitmapFontSize();
 			boolean bitmapFontSizeIndexFound = false;
 			int bitmapFontSizeIndex = -1;
@@ -730,10 +709,12 @@ public class DictionarySettingForm
 	 * Check to see if the bitmap font setting should be shown
 	 */
 	void checkBitmapFontAvailable() throws DictionaryException {
-		if (getBitmapFontSizes().length != 0) {
-			bitmapFontExists = true;
+		bitmapFontExists = BitmapFontCanvas.bitmapFontExists();
+		if (bitmapFontExists) {
+			SettingsStore.getSettingsStore().setBitmapFontSize(BitmapFontCanvas.getDefaultSize());
+		} else {
+			SettingsStore.getSettingsStore().setUseBitmapFont(bitmapFontExists);
 		}
-		else bitmapFontExists = false;
 	}
 }
 
