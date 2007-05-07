@@ -149,9 +149,9 @@ public class DictionarySettings
 	{
 		return useBitmapFont;
 	}
-	public static void setUseBitmapFont(boolean useBitmapFont)
+	public static void setUseBitmapFont(boolean useBitmapFonts)
 	{
-		DictionarySettings.useBitmapFont = useBitmapFont;
+		DictionarySettings.useBitmapFont = useBitmapFonts;
 	}
 	public static boolean getShowTranslationList()
 	{
