@@ -217,8 +217,7 @@ public class BitmapFontViewer {
 					int red = (argb >> 16) & 0xff;
 					int green = (argb >> 8) & 0xff;
 					int blue = argb & 0xff;
-					int alpha = (argb >> 24) & 0xff;
-					///Basti
+					int alpha = (argb >> 24) & 0xff;				
 					if (rgbValues[k] < 0) {
 						// set foreground to coloured
 						try {
