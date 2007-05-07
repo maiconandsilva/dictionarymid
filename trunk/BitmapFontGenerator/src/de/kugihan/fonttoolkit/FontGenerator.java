@@ -16,6 +16,8 @@ import java.math.*;
 
 import javax.imageio.*;
 
+//import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
+
 public class FontGenerator {
 	private final Font basicFont;
 
@@ -116,6 +118,32 @@ public class FontGenerator {
 			
 		}
 		out.close();
+	//create or extend bitmapfontsize bmf-file
+		File file2 = new File(fontDir + "\\fonts\\sizes.bmf");		
+		FileOutputStream out2 = new FileOutputStream(file2);		
+		DataOutputStream dataOut2 = new DataOutputStream(out2);	
+		
+		int numberOfBitmapFontSizes = 0;
+		for (int l = 8; l <= 36; l = l + 2){
+			String size = Integer.toString(l);		
+			boolean dirExists;
+			dirExists = new File(fontDir + "\\fonts\\" + size).isDirectory();
+			if (dirExists) {
+				numberOfBitmapFontSizes++;
+			}
+		}
+		dataOut2.writeInt(numberOfBitmapFontSizes);
+		for (int l = 8; l <= 36; l = l + 2){
+			String size = Integer.toString(l);			
+			boolean dirExists;
+			dirExists = new File(fontDir + "\\fonts\\" + size).isDirectory();
+			if (dirExists) {
+				dataOut2.writeInt(l);
+			}			
+		}
+		dataOut2.writeInt(sizePoints);		
+		out2.close();
+		
 	}
 
 	public BufferedImage createImage(String text) {
