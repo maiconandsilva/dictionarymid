@@ -8,11 +8,11 @@ package de.kugihan.dictionaryformids.hmi_java_me.mainform.bitmapfont;
 
 import javax.microedition.lcdui.*;
 
-//import de.kugihan.dictionaryformids.dataaccess.content.FontStyle;
-//import de.kugihan.dictionaryformids.dataaccess.content.RGBColour;
-//import de.kugihan.dictionaryformids.dataaccess.content.SelectionMode;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
 import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
-//import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart;
+import java.io.InputStream;
+import java.io.DataInputStream;
+
 
 public class BitmapFontCanvas extends CustomItem {
 
@@ -23,6 +23,12 @@ public class BitmapFontCanvas extends CustomItem {
 	private StringColourItemText stringItem;
 	
 	private String bitmapFontSize;
+	
+	private static String bitmapFontSizesFile = "/fonts/sizes.bmf";
+	
+	private static String[] availableSizes;
+	
+	private static String defaultSize;
 
 	private int lineHeightPixels;
 
@@ -47,21 +53,44 @@ public class BitmapFontCanvas extends CustomItem {
 		} catch (Exception e) {
 		}
 	}
-
-//	public boolean fontExists() {
-//		if (viewer == null)
-//			return false;
-//		return true;
-//	}
-
-//	public static boolean fontExistsStatic() {
-//		StringColourItemTextPart part = new StringColourItemTextPart("test",
-//				new RGBColour(0, 0, 0), new FontStyle(FontStyle.plain),
-//				new SelectionMode(SelectionMode.none));
-//		StringColourItemText text = new StringColourItemText();
-//		text.addItemTextPart(part);		
-//		return new BitmapFontCanvas(text, 50, false).fontExists();
-//	}
+	
+	public static boolean bitmapFontExists() {
+		boolean fileExists = false;	
+		try {
+			fileExists = FileAccessHandler.getDictionaryDataFileISAccess().fileExists(bitmapFontSizesFile);
+		} catch (Exception e){
+			return false;
+		}		
+		return fileExists;			
+	}
+	
+	public static String[] getBitmapFontSizes() {
+		if (availableSizes == null) loadSizes();
+		return availableSizes;
+	}
+	
+	public static String getDefaultSize() {
+		if (defaultSize == null) loadSizes();
+		return defaultSize;
+	}
+	
+	private static void loadSizes(){
+		InputStream in = null;
+		try{
+			in = FileAccessHandler.getDictionaryDataFileISAccess().getInputStream(bitmapFontSizesFile);			
+			DataInputStream dataIn = new DataInputStream(in);
+			int bitmapFontSizesTotalNumber = dataIn.readInt();
+			availableSizes = new String[bitmapFontSizesTotalNumber];			
+			for (int i = 0; i < bitmapFontSizesTotalNumber; i++){				
+				availableSizes[i] = Integer.toString(dataIn.readInt());
+			}
+			defaultSize = Integer.toString(dataIn.readInt());
+			dataIn.close();
+		}catch (Exception e) {
+			System.out.println("Unable to load bitmap-font-sizes-file ["
+					+ bitmapFontSizesFile + "]" + e);
+		}
+	}
 	
 	protected int getMinContentHeight() {
 		return totalHeightPixels;
