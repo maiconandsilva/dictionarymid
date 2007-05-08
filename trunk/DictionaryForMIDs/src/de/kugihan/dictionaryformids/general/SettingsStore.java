@@ -19,6 +19,7 @@ import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs;
 import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettingForm;
 import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
+import de.kugihan.dictionaryformids.hmi_java_me.mainform.bitmapfont.BitmapFontCanvas;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
 
 public class SettingsStore {
@@ -204,9 +205,8 @@ public class SettingsStore {
 		setUILanguage(uiLanguage);
 		
 		// bitmap font size
-		String [] bitmapFontSizes = DictionarySettingForm.getBitmapFontSizes(); // todo sebastian: DictionarySettingForm muss durch eine BitmapFont-Klasse ersetzt werden
-		if (bitmapFontSizes.length > 0) {
-			setBitmapFontSize(bitmapFontSizes[0]); // set the first font size of the available font sizes
+		if (BitmapFontCanvas.bitmapFontExists()){
+			setBitmapFontSize(BitmapFontCanvas.getDefaultSize());
 		}
 
 		// todo: contentIsShown
