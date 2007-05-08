@@ -714,12 +714,6 @@ public class DictionarySettingForm
 	 */
 	void checkBitmapFontAvailable() throws DictionaryException {
 		bitmapFontExists = BitmapFontCanvas.bitmapFontExists();
-//		if (bitmapFontExists) {
-//			SettingsStore.getSettingsStore().setBitmapFontSize(BitmapFontCanvas.getDefaultSize());
-//		} 
-		if (!bitmapFontExists) {
-			SettingsStore.getSettingsStore().setUseBitmapFont(false);
-		}
 	}
 }
 
