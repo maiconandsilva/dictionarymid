@@ -9,7 +9,7 @@ import java.io.*;
 
 public class Core extends Thread {
 	private String theCharacters = "?abcdef*ghi#jklmnopqrstuvwxyzABCDEFGH" +
-			"IJKLMNOPQRSTUVWXYZüäüöß.:,;()!0123456789=+-āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ`"; 
+			"IJKLMNOPQRSTUVWXYZüäüöß.:,;()!0123456789=+-āáǎàēéěè²īíǐìōóǒòūúǔùǖǘǚǜ`"; 
 	// must contain question mark at the beginning
 
 	private Callback cb;
