@@ -543,6 +543,9 @@ public class MainForm
 		displaySingleTranslation(singleTranslation, true);
 		translationResultStatus.setLabel(UIDisplayTextItems.EmptyText);
 		setFocusToBeTranslatedWordTextField();
+
+		// specific handling for SonyEricsson devices
+		applySonyEricssonWorkaround();
 	}
 	
 	/*
