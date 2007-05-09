@@ -11,6 +11,8 @@ import java.awt.event.*;
 import java.io.*;
 
 public class FontToolkit extends JFrame implements ActionListener, Callback {
+	static final String versionNumber = "3.1.1";
+	
 	private static final long serialVersionUID = 1L;
 
 	private boolean debugMode = false;
@@ -66,7 +68,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 	}
 
 	public void run() {
-		this.setTitle("Bitmap font generator v3.0.3");
+		this.setTitle("Bitmap font generator "+ versionNumber);
 		this.setJMenuBar(getJMenuBar());
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 
@@ -260,7 +262,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 		JOptionPane
 				.showMessageDialog(
 						null,
-						"DictionaryForMIDs\nBitmap font generator v3.0.3\n\nBy Sean Kernohan (webmaster@seankernohan.com)",
+						"DictionaryForMIDs\nBitmap font generator " + versionNumber +"\n\nBy Sean Kernohan (webmaster@seankernohan.com)",
 						"About", JOptionPane.INFORMATION_MESSAGE);
 	}
 
