@@ -124,7 +124,7 @@ javac.encoding=UTF-8
 		    <attribute name="MIDlet-Jar-URL" value="DictionaryForMIDs.jar"/>
 		    <attribute name="MIDlet-Permissions" value="javax.microedition.io.Connector.file.read"/>
 		    <attribute name="logLevel" value="0"/>
-		    <attribute name="versionStatus" value="Testversion 1"/>
+		    <!-- <attribute name="versionStatus" value="Testversion 1"/> -->
 	  	</wtkjad>
       	<manifest file="${DfM.manifest}">
 	      	<attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
