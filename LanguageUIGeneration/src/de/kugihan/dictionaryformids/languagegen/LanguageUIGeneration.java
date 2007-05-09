@@ -34,7 +34,7 @@ public class LanguageUIGeneration {
 	static final String uiDisplayTextItemParameterSeparator = ",";  // separtor for parameters for display text items
 	static final String languageCodeSeparator = ",";  // for #-lines: separator between language title and ISO 639 language codes
 	static final String languageSeparatorStartsWith = "==============";
-	static final String uiDisplayTextPackage = "de.kugihan.dictionaryformids.hmi_j2me.uidisplaytext";
+	static final String uiDisplayTextPackage = "de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext";
 	
 	public static void main(String[] args) {
 		boolean fileAccessError = false;
