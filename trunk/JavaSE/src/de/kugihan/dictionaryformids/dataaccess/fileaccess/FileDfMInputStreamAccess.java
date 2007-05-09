@@ -28,10 +28,28 @@ public class FileDfMInputStreamAccess extends DfMInputStreamAccess {
 	
 	public InputStream getInputStream(String fileName) throws DictionaryException {
 		try {
-			return new FileInputStream(baseDirectory + fileName);
+			String fileLocation = getFileLocation(fileName); 
+			return new FileInputStream(fileLocation);
 		}
 		catch (FileNotFoundException e) {
 			throw new CouldNotOpenFileException(e);
 		}
 	}
+
+	public boolean fileExists(String fileName) {
+		boolean returnValue = true;
+		try {
+			String fileLocation = getFileLocation(fileName); 
+			new FileInputStream(fileLocation);
+		}
+		catch (FileNotFoundException e) {
+			returnValue = false;
+		}
+		return returnValue;
+	}
+
+	protected String getFileLocation(String fileName) {
+		return baseDirectory + fileName;
+	}
+
 }
