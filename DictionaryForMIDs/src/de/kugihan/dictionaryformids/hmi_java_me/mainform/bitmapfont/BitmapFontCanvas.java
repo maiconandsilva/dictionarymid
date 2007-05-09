@@ -24,7 +24,7 @@ public class BitmapFontCanvas extends CustomItem {
 	
 	private String bitmapFontSize;
 	
-	private static String bitmapFontSizesFile = "/dictionary/fonts/sizes.bmf";
+	private static String bitmapFontSizesFile = "/fonts/sizes.bmf";
 	
 	private static String[] availableSizes;
 	
@@ -43,7 +43,7 @@ public class BitmapFontCanvas extends CustomItem {
 		this.bitmapFontSize = fontSize;
 		try {
 			String fontDir;
-			fontDir = "/dictionary/fonts/" + bitmapFontSize + "/";
+			fontDir = "/fonts/" + bitmapFontSize + "/";
 			font = BitmapFont.getInstance(fontDir, fontDir + "font.bmf");
 			font.loadFont();
 			font.loadChars();
