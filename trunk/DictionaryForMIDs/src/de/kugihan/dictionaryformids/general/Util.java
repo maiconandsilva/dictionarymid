@@ -74,6 +74,29 @@ public abstract class Util {
 			getUtil().log(message + ": " + String.valueOf(Runtime.getRuntime().freeMemory()));
 		}
 	}
+
+	final String versionNumberPropertyName = "VersionNumber";
+	final String versionStatusPropertyName = "VersionStatus";
+	final String applicationPropertyFileLocation = "/Application.properties";
+	static String applicationVersionString = null;
+	public String getApplicationVersionString() throws DictionaryException {
+		if (applicationVersionString == null) {
+			try {
+				Properties applicationProperties = new Properties();
+				applicationProperties.load(getClass().getResourceAsStream(applicationPropertyFileLocation));
+				String versionNumberString = applicationProperties.getProperty(versionNumberPropertyName);
+				String versionStatusString = applicationProperties.getProperty(versionStatusPropertyName);
+				applicationVersionString = versionNumberString;
+				if ((versionStatusString != null) && (versionStatusString.length() != 0)) {
+					applicationVersionString = applicationVersionString + "/ " + versionStatusString;
+				}
+			}
+			catch (IOException e) {
+				throw new DictionaryException(e);
+			}
+		}
+		return applicationVersionString;
+	}
 	
 	public static boolean isSeparatorCharacter(char character) {
 		return charIsLineWhitespace(character) ||

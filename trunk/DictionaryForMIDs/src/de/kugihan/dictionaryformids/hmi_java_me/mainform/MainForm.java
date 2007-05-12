@@ -351,42 +351,43 @@ public class MainForm
 	}
 	
 	public void showInfo() throws DictionaryException {
-		String versionStatusString = dictionaryForMIDsMidlet.versionStatus;
-		if (versionStatusString == null)
-			versionStatusString = new String("");
-		else
-			versionStatusString = "/ " + versionStatusString;
 		UIDisplayTextItem infoText = UIDisplayTextItems.InfoTextContent;
 		// collect information about dictionary
+		Object dictionaryInformation;
 		Vector dictionaryInfoItems = new Vector();
-		for (int displayTextCounter = 0; displayTextCounter < displayTextProperties.length; ++displayTextCounter) {
-			UIDisplayTextItem dictionaryDisplayTextItem = 
-					LanguageUI.getUI().existingUIDisplayTextItem(displayTextProperties[displayTextCounter], true);
-			if (dictionaryDisplayTextItem != null) {
-				if (dictionaryInfoItems.size() > 0) {
-				// todo	dictionaryInfoItems.addElement(LanguageUI.getUI().uiDisplayTextItemNewline);
+		if (DictionarySettings.isDictionaryAvailable()) {
+			for (int displayTextCounter = 0; displayTextCounter < displayTextProperties.length; ++displayTextCounter) {
+				UIDisplayTextItem dictionaryDisplayTextItem = 
+						LanguageUI.getUI().existingUIDisplayTextItem(displayTextProperties[displayTextCounter], true);
+				if (dictionaryDisplayTextItem != null) {
+					if (dictionaryInfoItems.size() > 0) {
+					// todo	dictionaryInfoItems.addElement(LanguageUI.getUI().uiDisplayTextItemNewline);
+					}
+					dictionaryInfoItems.addElement(dictionaryDisplayTextItem);
 				}
-				dictionaryInfoItems.addElement(dictionaryDisplayTextItem);
+			}
+			dictionaryInfoItems.removeAllElements() ; // todo: currently deactivated
+			if (dictionaryInfoItems.size() != 0) {
+				dictionaryInformation = dictionaryInfoItems;
+			}
+			else {
+				// for support of legacy configuration files: use infoText when no dictionary information is there.
+				dictionaryInformation = DictionaryDataFile.infoText;
 			}
 		}
-		Object dictionaryInformation;
-		dictionaryInfoItems.removeAllElements() ; // todo: currently deactivated
-		if (dictionaryInfoItems.size() != 0) {
-			dictionaryInformation = dictionaryInfoItems;
-		}
 		else {
-			// for support of legacy configuration files: use infoText when no dictionary information is there.
-			dictionaryInformation = DictionaryDataFile.infoText;
+			// no dictionary loaded
+			dictionaryInformation = UIDisplayTextItems.MessageNoDictionaryLoaded;
 		}
 		if (dictionaryInformation == null) {
 			throw new DictionaryException("No dictionary display texts configured");
 		}
 		infoText.setAllParameterValues( new Object [] { 
 												dictionaryInformation,
-												dictionaryForMIDsMidlet.applicationName,
+												UIDisplayTextItems.DictionaryForMIDsApplicationName,
 												"Gert Nuber (dict@kugihan.de)",
 												"http://dictionarymid.sourceforge.net",
-												dictionaryForMIDsMidlet.versionNumber + versionStatusString
+												Util.getUtil().getApplicationVersionString()
 								              } );		
 		DfMAlert infoPage = new DfMAlert(UIDisplayTextItems.CommandInfo, infoText, AlertType.INFO);
 		infoPage.setTimeout(Alert.FOREVER);

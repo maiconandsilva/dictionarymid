@@ -27,16 +27,16 @@ import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
 public class DictionaryForMIDs 
     extends MIDlet  {
 
-		public static String applicationName = "DictionaryForMIDs";
-		public static String versionNumber;
-		public static String versionStatus;
-		public static byte   versionRMSStructure = 21;
+		public static String 		      applicationName = "DictionaryForMIDs";
+		public static byte   		      versionRMSStructure = 21;
+		public static DictionaryForMIDs   dictionaryForMIDsMidlet;
 	
 	public DictionaryForMIDs() throws DictionaryException {
 		/*
 		 *  initialise the application
 		 */
 		super();
+		dictionaryForMIDsMidlet = this;
 		
 		MainForm applicationMainForm = new MainForm(this);			
 
@@ -115,9 +115,6 @@ public class DictionaryForMIDs
 			// initialise the main form:
 			applicationMainForm.initialiseForm();
 			
-			versionNumber = getAppProperty("MIDlet-Version");
-			versionStatus = getAppProperty("versionStatus");
-
 			utilObj.log("construct application complete", Util.logLevelMax);
 			Util.memCheck("End of DictionaryForMIDs constructor");
 		}
