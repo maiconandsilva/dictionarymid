@@ -39,9 +39,10 @@ public static final String EXTENSION_JAR = ".jar";
 public static final String EXTENSION_JAD = ".jad";
 public static final String FILE_EMPTY_JAR_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAR;
 public static final String FILE_EMPTY_JAD_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAD;
-public static final String versionNumber = "3.1.0";
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, DictionaryException {
+		UtilWin utilObj = new UtilWin();
+		Util.setUtil(utilObj);
 		printCopyrightNotice();
 		if (args.length!=3){
 			System.err.println("USAGE: java -jar JarCreator.jar dictionarydirectory emptyjar outputdirectory\n\n"+
@@ -70,8 +71,6 @@ public static final String versionNumber = "3.1.0";
 		String fileNameOutputJad = outputdirectory + midletName + EXTENSION_JAD;
 
 		// open property file 
-		UtilWin utilObj = new UtilWin();
-		Util.setUtil(utilObj);
 		String propertyPath = dictionarydirectory;
 		/* read properties */
 		if (! utilObj.readProperties(propertyPath, false)) {
@@ -277,10 +276,10 @@ public static final String versionNumber = "3.1.0";
 		return ! fileIsNeeded;
 	}
 	
-	static public void printCopyrightNotice() {
+	static public void printCopyrightNotice() throws DictionaryException {
 		System.out.print(
 				"\n\nDictionaryForMIDs/JarCreator, Copyright (C) 2005-2007 Mathis Karmann et al\n" +
-				"Version : " + versionNumber + "\n\n" +
+				"Version : " + Util.getUtil().getApplicationVersionString() + "\n\n" +
 				"This program comes with ABSOLUTELY NO WARRANTY\n\n" +
 				"This program is free software under the terms and conditions of the GPL " + 
 				"(GNU \nGeneral Public License) version 2. See file COPYING. " +
