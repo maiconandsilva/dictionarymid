@@ -5,14 +5,32 @@
  */
 package de.kugihan.fonttoolkit;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import de.kugihan.dictionaryformids.general.DictionaryException;
+import de.kugihan.dictionaryformids.general.Util;
+import de.kugihan.dictionaryformids.general.UtilWin;
 
 public class FontToolkit extends JFrame implements ActionListener, Callback {
-	static final String versionNumber = "3.1.1";
-	
 	private static final long serialVersionUID = 1L;
 
 	private boolean debugMode = false;
@@ -63,12 +81,14 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 
 	private Core c;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws DictionaryException {
 		new FontToolkit().run();
 	}
 
-	public void run() {
-		this.setTitle("Bitmap font generator "+ versionNumber);
+	public void run() throws DictionaryException {
+		UtilWin utilObj = new UtilWin();
+		Util.setUtil(utilObj);
+		this.setTitle("Bitmap font generator "+ Util.getUtil().getApplicationVersionString());
 		this.setJMenuBar(getJMenuBar());
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 
@@ -161,7 +181,11 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 		} else if (arg0.getSource() == quitItem) {
 			System.exit(0);
 		} else if (arg0.getSource() == aboutItem) {
-			showAbout();
+			try {
+				showAbout();
+			} catch (Exception e) {
+				showFatalError(e);
+			}
 		}
 	}
 
@@ -258,11 +282,11 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
-	public void showAbout() {
+	public void showAbout() throws DictionaryException {
 		JOptionPane
 				.showMessageDialog(
 						null,
-						"DictionaryForMIDs\nBitmap font generator " + versionNumber +"\n\nBy Sean Kernohan (webmaster@seankernohan.com)",
+						"DictionaryForMIDs\nBitmap font generator " + Util.getUtil().getApplicationVersionString() +"\n\nBy Sean Kernohan (webmaster@seankernohan.com)",
 						"About", JOptionPane.INFORMATION_MESSAGE);
 	}
 

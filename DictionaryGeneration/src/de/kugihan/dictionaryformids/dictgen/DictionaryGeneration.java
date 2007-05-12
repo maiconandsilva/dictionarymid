@@ -38,7 +38,6 @@ import de.kugihan.dictionaryformids.translation.normation.Normation;
 
 public class DictionaryGeneration {
 
-	static final String versionNumber = "3.1.0";
 	static String FILE_SEPARATOR = System.getProperty("file.separator");
 	
 	static String sourceFile;
@@ -55,7 +54,9 @@ public class DictionaryGeneration {
 	// content parser object for syntax checking of content:
 	static ContentParser contentParserObj;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws DictionaryException {
+		UtilWin utilObj = new UtilWin();
+		Util.setUtil(utilObj);
 		boolean fileAccessError = false;
 		printCopyrightNotice();
 		if (args.length != 3) {
@@ -71,8 +72,6 @@ public class DictionaryGeneration {
 				printUsage();
 			}
 			else {
-				UtilWin utilObj = new UtilWin();
-				Util.setUtil(utilObj);
 				try {
 					if (!directoryDestination.endsWith(FILE_SEPARATOR))
 					{
@@ -111,10 +110,10 @@ public class DictionaryGeneration {
 		}
 	}
 
-	static public void printCopyrightNotice() {
+	static public void printCopyrightNotice() throws DictionaryException {
 		System.out.print(
 				"\n\nDictionaryForMIDs/DictionaryGeneration, Copyright (C) 2005, 2006, 2007  Gert Nuber (dict@kugihan.de) et al\n" +
-				"Version : " + versionNumber + "\n\n" +
+				"Version : " + Util.getUtil().getApplicationVersionString() + "\n\n" +
 				"This program comes with ABSOLUTELY NO WARRANTY\n\n" +
 				"This program is free software under the terms and conditions of the GPL " + 
 				"(GNU \nGeneral Public License) version 2. See file COPYING. " +

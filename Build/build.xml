@@ -25,7 +25,8 @@ javac.encoding=UTF-8
 	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-0.9.14.jar"/>
 	<property name="antenna.jarfilename"  		value="antenna-bin-0.9.14.jar"/>
 
-    <property name="version" 			value="3.1.1"/>	<!-- version of tools / applications -->
+    <property name="VersionNumber" 		value="3.2.0"/>	<!-- version of tools / applications -->
+    <property name="VersionStatus" 		value="Testversion 1"/>	<!-- status of version, e.g. "beta", "testversion 2" -->
 
   	<property name="Build" 				location="."/> 				<!-- current directory -->
   	<property name="Build.buildfilename" value="build.xml"/> 		<!-- name of this file -->
@@ -70,6 +71,8 @@ javac.encoding=UTF-8
 	<property name="packaging.gplfilename" 		value="COPYING"/>
 	<property name="packaging.copyrightfile" 	value="${Build}/${packaging.subdir}/${packaging.gplfilename}"/>
 
+	<property name="app.propertyfilename" 		value="Application.properties"/> 
+
 	<property name="DfM.team"  			value="Gert Nuber (dict@kugihan.de) et al."/> <!-- need to occasionally find something better -->
 	<property name="DfM.copyrightyear"  value="2005, 2006, 2007"/>
 
@@ -108,7 +111,7 @@ javac.encoding=UTF-8
 
 	<target name="create_dfm_java_me_jadfile_and_manifest"> 
 		<property name="DfM.MIDlet-Name" value="DictionaryForMIDs"/> 
-	    <property name="DfM.MIDlet-Version" value="${version}"/>
+	    <property name="DfM.MIDlet-Version" value="${VersionNumber}"/>
 	    <property name="DfM.MicroEdition-Profile" value="MIDP-2.0"/>
 	    <property name="DfM.MicroEdition-Configuration" value="CLDC-1.0"/>
 	    <property name="DfM.Built-By" value="${user.name}"/>
@@ -124,7 +127,6 @@ javac.encoding=UTF-8
 		    <attribute name="MIDlet-Jar-URL" value="DictionaryForMIDs.jar"/>
 		    <attribute name="MIDlet-Permissions" value="javax.microedition.io.Connector.file.read"/>
 		    <attribute name="logLevel" value="0"/>
-		    <!-- <attribute name="versionStatus" value="Testversion 1"/> -->
 	  	</wtkjad>
       	<manifest file="${DfM.manifest}">
 	      	<attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
@@ -138,10 +140,14 @@ javac.encoding=UTF-8
 	</target>
 
 	<target name="build_dfm_java_me" depends="compile_dfm_java_me,create_dfm_java_me_jadfile_and_manifest"> 
+		<antcall target="create_application_property_file">
+			<param name="destinationbasedir" 	value="${DfM.outputbasedir}"/>
+		</antcall>
 		<!-- note: the following wtkpackage task will fail on preverification if the jar tool is not in the path -->
 	    <wtkpackage jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}" manifest="${DfM.manifest}" preverify="true">
 	      	<fileset dir="${DfM.classdir}"/>
 	      	<fileset dir="${DfM.resdir}"/>
+	      	<fileset dir="${DfM.outputbasedir}" includes="${app.propertyfilename}"/>
 	    </wtkpackage>
 	</target>
 
@@ -201,9 +207,13 @@ javac.encoding=UTF-8
 		<antcall target="do_obfuscate_dfm_java_me"/>
 	</target>
 	
-	<target name="create_minimal_size_dfm_java_me" depends="create_dfm_java_me_jadfile_and_manifest"> 
+	<target name="create_minimal_size_dfm_java_me" depends="compile_dfm_java_me,create_dfm_java_me_jadfile_and_manifest"> 
+		<antcall target="create_application_property_file">
+			<param name="destinationbasedir" 	value="${DfM.outputbasedir}"/>
+		</antcall>
 	    <wtkpackage jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}" manifest="${DfM.manifest}">
 	      	<fileset dir="${DfM.classdir}"/>
+	      	<fileset dir="${DfM.outputbasedir}" includes="${app.propertyfilename}"/>
 	      	<fileset dir="${DfM.resdir}">
 	      		<!-- do not include any icons -->
 	      		<exclude name="icons/**"/>
@@ -221,9 +231,13 @@ javac.encoding=UTF-8
 	</target>
 
 	<target name="build_dfm_java_se" depends="compile_dfm_java_se"> 
+		<antcall target="create_application_property_file">
+			<param name="destinationbasedir" 	value="${JavaSE.outputbasedir}"/>
+		</antcall>
 	    <jar destfile="${JavaSE.jarfile}"  >
 			<fileset dir="${DfM.classdir}"     	includes="de/kugihan/dictionaryformids/**"  />
 	      	<fileset dir="${JavaSE.classdir}"  	includes="de/kugihan/dictionaryformids/**"  />
+	      	<fileset dir="${JavaSE.outputbasedir}" includes="${app.propertyfilename}"/>
 	      	<manifest>
 	        	<attribute name="Built-By" 		value="${user.name}"/>
 	        	<attribute name="Created-By" 	value="Stefan Martens"/>
@@ -241,10 +255,14 @@ javac.encoding=UTF-8
 	</target>
 
 	<target name="build_jc" depends="compile_jc"> 
+		<antcall target="create_application_property_file">
+			<param name="destinationbasedir" 	value="${JC.outputbasedir}"/>
+		</antcall>
 	    <jar destfile="${JC.jarfile}"  >
 	      	<fileset dir="${DfM.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
 	      	<fileset dir="${JC.classdir}"      includes="de/kugihan/jarCreator/JarCreator.class"  />
 	      	<fileset dir="${JavaSE.classdir}"  includes="de/kugihan/dictionaryformids/**"  />
+	      	<fileset dir="${JC.outputbasedir}" includes="${app.propertyfilename}"/>
 	      	<manifest>
 	        	<attribute name="Built-By" value="${user.name}"/>
 	        	<attribute name="Created-By" value="Mathis Karmann"/>
@@ -279,10 +297,14 @@ javac.encoding=UTF-8
 	</target>
 	
 	<target name="build_dg" depends="compile_dg"> 
+		<antcall target="create_application_property_file">
+			<param name="destinationbasedir" 	value="${DG.outputbasedir}"/>
+		</antcall>
 	    <jar destfile="${DG.jarfile}"  >
 	      	<fileset dir="${DfM.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
 	      	<fileset dir="${DG.classdir}"      includes="de/kugihan/dictionaryformids/**"  />
 	      	<fileset dir="${JavaSE.classdir}"  includes="de/kugihan/dictionaryformids/**"  />
+	      	<fileset dir="${DG.outputbasedir}" includes="${app.propertyfilename}"  />
 	      	<manifest>
 	        	<attribute name="Built-By" value="${user.name}"/>
 	        	<attribute name="Created-By" value="Gert Nuber"/>
@@ -291,20 +313,6 @@ javac.encoding=UTF-8
 	    </jar>
 	</target>
 
-	<target name="replace_keywords_readme">
-	    <property name="destinationdir"  	location="${destinationbasedir}/${packaging.subdir}"/>	 
-	    <property name="destinationfile" 	location="${destinationdir}/${packaging.readmefilename}"/>
-	    <property name="sourcefile" 		location="${sourcebasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
-	    <mkdir dir="${destinationdir}"/>
-		<copy file="${sourcefile}" tofile="${destinationfile}"/>
-		<replace file="${destinationfile}">
-			<replacefilter token="$PackageVersion$" 		value="${version}"/>
-			<replacefilter token="$CopyrightYear$" 			value="${DfM.copyrightyear}"/>
-			<replacefilter token="$CopyrightGPLFilename$" 	value="${packaging.gplfilename}"/>
-			<replacefilter token="$CopyrightBy$" 			value="${DfM.team}"/>
-		</replace>
-	</target>
-		
 	<target name="package_dg" depends="build_dg">
 		<antcall target="replace_keywords_readme">
 			<param name="sourcebasedir" 		value="${DG.inputbasedir}"/>
@@ -325,14 +333,20 @@ javac.encoding=UTF-8
   	<!-- 
   		BitmapFontGenerator
   	-->
-	<target name="compile_bfg">
+	<target name="compile_bfg" depends="compile_dfm_java_me,compile_dfm_java_se">
 	    <mkdir dir="${BFG.classdir}"/>
-	    <javac srcdir="${BFG.srcdir}" encoding="UTF-8" destdir="${BFG.classdir}" debug="on"/>
+	    <javac srcdir="${BFG.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${BFG.classdir}" debug="on"/>
 	</target>
 	
 	<target name="build_bfg" depends="compile_bfg"> 
+		<antcall target="create_application_property_file">
+			<param name="destinationbasedir" 	value="${BFG.outputbasedir}"/>
+		</antcall>
 	    <jar destfile="${BFG.jarfile}"  >
+	      	<fileset dir="${DfM.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
 	      	<fileset dir="${BFG.classdir}"      includes="de/kugihan/fonttoolkit/**"  />
+	      	<fileset dir="${JavaSE.classdir}"  includes="de/kugihan/dictionaryformids/**"  />
+	      	<fileset dir="${BFG.outputbasedir}" includes="${app.propertyfilename}"/>
 	      	<manifest>
 	        	<attribute name="Built-By" value="${user.name}"/>
 	        	<attribute name="Created-By" value="Sean Kernohan"/>
@@ -355,7 +369,32 @@ javac.encoding=UTF-8
 			<zipfileset dir="${BFG.srcdir}" prefix="source/BitmapFontGenerator/src"/>
 		</zip>
 	</target>
-	
+
+	<!-- 
+		general procedures that are called with antcall 
+	-->
+	<target name="replace_keywords_readme">
+	    <property name="destinationdir"  	location="${destinationbasedir}/${packaging.subdir}"/>	 
+	    <property name="destinationfile" 	location="${destinationdir}/${packaging.readmefilename}"/>
+	    <property name="sourcefile" 		location="${sourcebasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
+	    <mkdir dir="${destinationdir}"/>
+		<copy file="${sourcefile}" tofile="${destinationfile}"/>
+		<replace file="${destinationfile}">
+			<replacefilter token="$PackageVersion$" 		value="${version}"/>
+			<replacefilter token="$CopyrightYear$" 			value="${DfM.copyrightyear}"/>
+			<replacefilter token="$CopyrightGPLFilename$" 	value="${packaging.gplfilename}"/>
+			<replacefilter token="$CopyrightBy$" 			value="${DfM.team}"/>
+		</replace>
+	</target>
+		
+	<target name="create_application_property_file">
+	    <property name="destinationfile" 	location="${destinationbasedir}/${app.propertyfilename}"/>
+		<propertyfile file="${destinationfile}" comment="The file is automatically created from build.xml">
+		    <entry key="VersionNumber" value="${VersionNumber}"/>
+		    <entry key="VersionStatus" value="${VersionStatus}"/>
+		</propertyfile>
+	</target>
+		
 	<target name="build_all" depends="build_dg,build_jc,build_bfg,build_dfm_java_se,build_dfm_java_me"/>
 	
 	<target name="package_all" depends="package_dg,package_jc,package_bfg,package_dfm_java_me_empty"/>

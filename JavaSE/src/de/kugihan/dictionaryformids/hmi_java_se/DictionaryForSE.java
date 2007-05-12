@@ -85,7 +85,6 @@ import de.kugihan.dictionaryformids.translation.TranslationResult;
 public class DictionaryForSE extends JFrame
 implements ActionListener, TranslationExecutionCallback, MouseListener, DocumentListener
 {
-	public static String VERSION = "3.1.0 Beta 1";
 	private static String CONFIG_NAME = "DictionaryForMIDs.ini";
 	
 	private JPanel pMainFrame = (JPanel)getContentPane();
@@ -142,17 +141,19 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	private JComboBox cbFont;
 	private String fontName = "SansSerif";
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws DictionaryException
 	{
+		UtilWin utilObj = new UtilWin();
+		Util.setUtil(utilObj);
 		DictionaryForSE frame = new DictionaryForSE();
-		frame.setTitle("DictionaryForMIDs " + VERSION);
+		frame.setTitle("DictionaryForMIDs " + Util.getUtil().getApplicationVersionString());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(600,400);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 	
-	public DictionaryForSE()
+	public DictionaryForSE() throws DictionaryException
 	{
 		initGUI();
 		
@@ -169,7 +170,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		fillTableColums();
 		createGUI();
 		TranslationExecution.setTranslationExecutionCallback(this);
-		lStatus.setText("Welcome to DictionaryForMIDs " + VERSION + " (c) by Stefan Martens & Gert Nuber");
+		lStatus.setText("Welcome to DictionaryForMIDs " + Util.getUtil().getApplicationVersionString() + " (c) by Stefan Martens & Gert Nuber");
 	}
 	
 	private void initGUI()
@@ -757,7 +758,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 			prop.setProperty("InputLanguage", languages.elementAt(0).toString());
 			prop.setProperty("OutputLanguage", languages.elementAt(1).toString());
 			
-			prop.store(new FileOutputStream(CONFIG_NAME, false), "DictionaryForMIDs " + VERSION);
+			prop.store(new FileOutputStream(CONFIG_NAME, false), "DictionaryForMIDs " + Util.getUtil().getApplicationVersionString());
 		}
 		catch (Exception e)
 		{
@@ -844,7 +845,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 
 		try
 		{
-			prop.store(new FileOutputStream(CONFIG_NAME, false), VERSION);
+			prop.store(new FileOutputStream(CONFIG_NAME, false), Util.getUtil().getApplicationVersionString());
 		}
 		catch (Exception e)
 		{
@@ -1116,10 +1117,15 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		}
 		else if (e.getActionCommand().equals("about"))
 		{
-			JOptionPane.showMessageDialog(this,
-					"DictionaryForMIDs " + VERSION + " (11.02.2007)\n(c) 2005-2007 by Stefan Martens & Gert Nuber\n\nVisit our homepages:\nhttp://dictionarymid.sourceforge.net/\nhttp://www.stefan1200.de",
-					"About",
-					JOptionPane.INFORMATION_MESSAGE);
+			try {
+				JOptionPane.showMessageDialog(this,
+						"DictionaryForMIDs " + Util.getUtil().getApplicationVersionString() + " (11.02.2007)\n(c) 2005-2007 by Stefan Martens & Gert Nuber\n\nVisit our homepages:\nhttp://dictionarymid.sourceforge.net/\nhttp://www.stefan1200.de",
+						"About",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+			catch(Exception exception) {
+				exception.printStackTrace();
+			}
 		}
 		else if (e.getActionCommand().equals("quit"))
 		{
