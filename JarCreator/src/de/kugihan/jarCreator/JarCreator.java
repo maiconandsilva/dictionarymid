@@ -175,21 +175,14 @@ public static final String versionNumber = "3.1.0";
 		File[] dictFiles= dictDir.listFiles();
 		for(int i=0; i<dictFiles.length; i++) 
 		{ 
-		      FileInputStream fis = new FileInputStream(dictFiles[i]); 
-					if (dictFiles[i].getName().equals("font.bmf")){
-						// out.putNextEntry(new ZipEntry(DictionaryDataFile.pathNameFonts + "/"+dictFiles[i].getName())); 
-						out.putNextEntry(new ZipEntry("fonts" + "/"+dictFiles[i].getName())); 
-						while((readBytes = fis.read(b)) != -1) { 
-								out.write(b, 0, readBytes); 
-						}
-					}
-					else{
-						out.putNextEntry(new ZipEntry(DictionaryDataFile.pathNameDataFiles + "/"+dictFiles[i].getName())); 
-						while((readBytes = fis.read(b)) != -1) { 
-								out.write(b, 0, readBytes); 
-						}
-					}
-		      fis.close(); 
+			if (!dictFiles[i].isDirectory()){
+			      FileInputStream fis = new FileInputStream(dictFiles[i]); 						
+							out.putNextEntry(new ZipEntry(DictionaryDataFile.pathNameDataFiles + "/"+dictFiles[i].getName())); 
+							while((readBytes = fis.read(b)) != -1) { 
+									out.write(b, 0, readBytes); 
+							}						
+			      fis.close(); 
+			}
 		}
 		out.close();
 		return jarOutputFile.length();
