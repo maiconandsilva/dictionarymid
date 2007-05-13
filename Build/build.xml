@@ -2,7 +2,7 @@
 This file build.xml should be located in directory Build
 You must have Sun's Wireless Toolkit (WTK) installed (can be downloaded from http://java.sun.com/products/sjwtoolkit/download-2_5.html)
 You must set wtk.home to your WTK installation directory
-This build.xml can generate DictionaryForMIDs (Java ME and Java SE), DictionaryGeneration, JarCreator and BitmapFontGenerator
+This build.xml can generate DictionaryForMIDs (Java ME and Java SE), DictionaryGeneration, JarCreator, BitmapFontGenerator and LanguageUIGeneration
 Using: run ant in directory Build
 It runs well on both platforms windows/linux
 The jar-tool must be in the path. Otherwise there will be an error during the preverifier run.
@@ -26,7 +26,10 @@ javac.encoding=UTF-8
 	<property name="antenna.jarfilename"  		value="antenna-bin-0.9.14.jar"/>
 
     <property name="VersionNumber" 		value="3.2.0"/>	<!-- version of tools / applications -->
-    <property name="VersionStatus" 		value="Testversion 1"/>	<!-- status of version, e.g. "beta", "testversion 2" -->
+    <property name="VersionStatus" 		value="pre-release 1"/>	<!-- e.g. "beta", "testversion 2"; uncomment this line for official releases -->
+    <condition property="ApplicationVersion" 	value="${VersionNumber}_${VersionStatus}" else="${VersionNumber}">
+    	<isset property="VersionStatus"/>
+	</condition>
 
   	<property name="Build" 				location="."/> 				<!-- current directory -->
   	<property name="Build.buildfilename" value="build.xml"/> 		<!-- name of this file -->
@@ -66,6 +69,12 @@ javac.encoding=UTF-8
 	<property name="BFG.classdir"    	location="${BFG.outputbasedir}/bin"/>
 	<property name="BFG.jarfile"     	location="${BFG.outputbasedir}/fontgenerator.jar"/>
 
+	<property name="LG.inputbasedir"  	location="../LanguageUIGeneration"/>
+	<property name="LG.outputbasedir"   location="${Build}/LanguageUIGeneration"/>
+	<property name="LG.srcdir"  		location="${LG.inputbasedir}/src"/>
+	<property name="LG.classdir"    	location="${LG.outputbasedir}/bin"/>
+	<property name="LG.jarfile"     	location="${LG.outputbasedir}/LanguageUIGeneration.jar"/>
+
 	<property name="packaging.subdir"  			value="files_for_packaging"/>
 	<property name="packaging.readmefilename" 	value="README"/>
 	<property name="packaging.gplfilename" 		value="COPYING"/>
@@ -97,7 +106,11 @@ javac.encoding=UTF-8
 	    <delete dir="${BFG.outputbasedir}"/>
 	</target>
 
-	<target name="clean_all" depends="clean_dfm,clean_java_se,clean_jc,clean_dg,clean_bfg">
+	<target name="clean_lg">
+	    <delete dir="${LG.outputbasedir}"/>
+	</target>
+
+	<target name="clean_all" depends="clean_dfm,clean_java_se,clean_jc,clean_dg,clean_bfg,clean_lg">
 	</target>
 
   	<!-- 
@@ -158,7 +171,7 @@ javac.encoding=UTF-8
 			<param name="destinationbasedir" 	value="${DfM.outputbasedir}"/>
 			<param name="packaging.subdir" 		value="${packaging.java_me_executeable.subdir}"/>
 		</antcall>
-		<property name="DfM.zipfile_empty"	location="${DfM.outputbasedir}/DictionaryForMIDs_${version}_empty.zip"/>
+		<property name="DfM.zipfile_empty"	location="${DfM.outputbasedir}/DictionaryForMIDs_${ApplicationVersion}_empty.zip"/>
 		<zip destfile="${DfM.zipfile_empty}">
 			<zipfileset file="${DfM.jarfile}"/>
 			<zipfileset file="${DfM.jadfile}"/>
@@ -175,7 +188,7 @@ javac.encoding=UTF-8
 			<param name="destinationbasedir" 	value="${DfM.outputbasedir}"/>
 			<param name="packaging.subdir" 		value="${packaging.java_me_source.subdir}"/>
 		</antcall>
-		<property name="DfM.zipfile_source"	location="${DfM.outputbasedir}/DictionaryForMIDs_${version}_source.zip"/>
+		<property name="DfM.zipfile_source"	location="${DfM.outputbasedir}/DictionaryForMIDs_${ApplicationVersion}_source.zip"/>
 		<zip destfile="${DfM.zipfile_source}">
 			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs/src"/>
 			<zipfileset dir="${DfM.resdir}" prefix="source/DictionaryForMIDs/res"/>
@@ -246,6 +259,8 @@ javac.encoding=UTF-8
 	    </jar>
 	</target>
   	
+	<!-- a package_dfm_java_se target still needs to be implemented -->
+	
   	<!-- 
   		JarCreator
   	-->
@@ -276,7 +291,7 @@ javac.encoding=UTF-8
 			<param name="sourcebasedir" 		value="${JC.inputbasedir}"/>
 			<param name="destinationbasedir" 	value="${JC.outputbasedir}"/>
 		</antcall>
-		<property name="JC.zipfile"	location="${JC.outputbasedir}/DictionaryForMIDs_JarCreator_${version}.zip"/>
+		<property name="JC.zipfile"	location="${JC.outputbasedir}/DictionaryForMIDs_JarCreator_${ApplicationVersion}.zip"/>
 		<zip destfile="${JC.zipfile}">
 			<zipfileset file="${JC.jarfile}"/>
 			<zipfileset file="${packaging.copyrightfile}"/>
@@ -318,7 +333,7 @@ javac.encoding=UTF-8
 			<param name="sourcebasedir" 		value="${DG.inputbasedir}"/>
 			<param name="destinationbasedir" 	value="${DG.outputbasedir}"/>
 		</antcall>
-		<property name="DG.zipfile"	location="${DG.outputbasedir}/DictionaryForMIDs_DictionaryGeneration_${version}.zip"/>
+		<property name="DG.zipfile"	location="${DG.outputbasedir}/DictionaryForMIDs_DictionaryGeneration_${ApplicationVersion}.zip"/>
 		<zip destfile="${DG.zipfile}">
 			<zipfileset file="${DG.jarfile}"/>
 			<zipfileset file="${packaging.copyrightfile}"/>
@@ -360,13 +375,53 @@ javac.encoding=UTF-8
 			<param name="sourcebasedir" 		value="${BFG.inputbasedir}"/>
 			<param name="destinationbasedir" 	value="${BFG.outputbasedir}"/>
 		</antcall>
-		<property name="BFG.zipfile"	location="${BFG.outputbasedir}/DictionaryForMIDs_BitmapFontGenerator_${version}.zip"/>
+		<property name="BFG.zipfile"	location="${BFG.outputbasedir}/DictionaryForMIDs_BitmapFontGenerator_${ApplicationVersion}.zip"/>
 		<zip destfile="${BFG.zipfile}">
 			<zipfileset file="${BFG.jarfile}"/>
 			<zipfileset file="${packaging.copyrightfile}"/>
 			<zipfileset file="${BFG.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
 			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
 			<zipfileset dir="${BFG.srcdir}" prefix="source/BitmapFontGenerator/src"/>
+		</zip>
+	</target>
+
+  	<!-- 
+  		LanguageUIGeneration
+  	-->
+	<target name="compile_lg" depends="compile_dfm_java_me,compile_dfm_java_se">
+	    <mkdir dir="${LG.classdir}"/>
+	    <javac srcdir="${LG.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${LG.classdir}" debug="on"/>
+	</target>
+	
+	<target name="build_lg" depends="compile_lg"> 
+		<antcall target="create_application_property_file">
+			<param name="destinationbasedir" 	value="${LG.outputbasedir}"/>
+		</antcall>
+	    <jar destfile="${LG.jarfile}"  >
+	      	<fileset dir="${DfM.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
+	      	<fileset dir="${LG.classdir}"      includes="de/kugihan/dictionaryformids/languagegen/**"  />
+	      	<fileset dir="${JavaSE.classdir}"  includes="de/kugihan/dictionaryformids/**"  />
+	      	<fileset dir="${LG.outputbasedir}" includes="${app.propertyfilename}"/>
+	      	<manifest>
+	        	<attribute name="Built-By" value="${user.name}"/>
+	        	<attribute name="Created-By" value="Gert Nuber"/>
+	        	<attribute name="Main-Class" value="de.kugihan.dictionaryformids.languagegen.LanguageUIGeneration"/>
+	      	</manifest>
+	    </jar>
+	</target>
+
+	<target name="package_lg" depends="build_lg">
+		<antcall target="replace_keywords_readme">
+			<param name="sourcebasedir" 		value="${LG.inputbasedir}"/>
+			<param name="destinationbasedir" 	value="${LG.outputbasedir}"/>
+		</antcall>
+		<property name="LG.zipfile"	location="${LG.outputbasedir}/DictionaryForMIDs_LanguageUIGeneration_${ApplicationVersion}.zip"/>
+		<zip destfile="${LG.zipfile}">
+			<zipfileset file="${LG.jarfile}"/>
+			<zipfileset file="${packaging.copyrightfile}"/>
+			<zipfileset file="${LG.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
+			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
+			<zipfileset dir="${LG.srcdir}" prefix="source/LanguageUIGeneration/src"/>
 		</zip>
 	</target>
 
@@ -380,7 +435,7 @@ javac.encoding=UTF-8
 	    <mkdir dir="${destinationdir}"/>
 		<copy file="${sourcefile}" tofile="${destinationfile}"/>
 		<replace file="${destinationfile}">
-			<replacefilter token="$PackageVersion$" 		value="${version}"/>
+			<replacefilter token="$PackageVersion$" 		value="${VersionNumber}"/>
 			<replacefilter token="$CopyrightYear$" 			value="${DfM.copyrightyear}"/>
 			<replacefilter token="$CopyrightGPLFilename$" 	value="${packaging.gplfilename}"/>
 			<replacefilter token="$CopyrightBy$" 			value="${DfM.team}"/>
@@ -395,9 +450,9 @@ javac.encoding=UTF-8
 		</propertyfile>
 	</target>
 		
-	<target name="build_all" depends="build_dg,build_jc,build_bfg,build_dfm_java_se,build_dfm_java_me"/>
+	<target name="build_all" depends="build_dg,build_jc,build_bfg,build_lg,build_dfm_java_se,build_dfm_java_me"/>
 	
-	<target name="package_all" depends="package_dg,package_jc,package_bfg,package_dfm_java_me_empty"/>
+	<target name="package_all" depends="package_dg,package_jc,package_bfg,package_lg,package_dfm_java_me_empty"/>
 
 </project>
 
