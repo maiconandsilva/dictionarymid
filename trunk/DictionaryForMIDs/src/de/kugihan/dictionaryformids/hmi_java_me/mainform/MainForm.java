@@ -86,7 +86,7 @@ public class MainForm
 	DfMCommand backWordCommand = null;
 	DfMCommand forwardWordCommand = null;
 	DfMCommand changeInputLanguageCommand = null;
-	DfMCommand backToTranslationList = null; // todo: to be implemented
+	DfMCommand backToTranslationList = null;
 	
 	public Display display;
 	DictionaryForMIDs dictionaryForMIDsMidlet;
@@ -94,10 +94,18 @@ public class MainForm
 	ContentParser contentParserObj;
 	WordHistory wordHistoryObj;
 	
-	TranslationResult lastResultOfTranslation = null ;  // contains the result from 
-														// the last translation
-	boolean translationListIsShown = false; // is set to true when the 
-										    // translation list is currently shown
+	// contains the result from the last translation:
+	TranslationResult lastResultOfTranslation = null ;  
+
+	// used when DictionarySettings.getShowTranslationList() is true:
+	// - when translationListDisplayList is true then the translation list is currently shown
+	// - when translationListDisplayList is false then a single translation is currently shown
+	boolean translationListDisplayList;
+	
+	// when a translation for an item in the translation list is requested, then the index of this
+	// item is saved in translationListFocusedItem;
+	int		translationListFocusedItemIndex;
+	
 	
 	public MainForm(DictionaryForMIDs DictionaryForMIDsMidletParam) {
 		/*
@@ -116,6 +124,9 @@ public class MainForm
 
 	public void initialiseForm() 
 	             throws DictionaryException {
+		// load the settings
+		DictionarySettingForm.loadSettings();
+
 		/*
 		 *  create display items
 		 */
@@ -165,27 +176,94 @@ public class MainForm
 		TranslationExecution.setTranslationExecutionCallback(this);
 	}
 	
-	// sets up the commands for this form:
+	/*
+	 *  sets up the commands for this form:
+	 */
 	public void setupCommands() throws DictionaryException {
 		super.setupCommands();
 		settingsCommand = updateCommand(settingsCommand, UIDisplayTextItems.CommandSettings, Command.SCREEN, 6);
 		helpCommand = updateCommand(helpCommand, UIDisplayTextItems.CommandHelp, Command.SCREEN, 8);
 		infoCommand = updateCommand(infoCommand, UIDisplayTextItems.CommandInfo, Command.SCREEN, 9);
-		translateCommand = updateCommand(translateCommand, UIDisplayTextItems.CommandTranslate, Command.ITEM, 1);
 		newWordCommand = updateCommand(newWordCommand, UIDisplayTextItems.CommandNewWord, Command.SCREEN, 3);
 		forwardWordCommand = updateCommand(forwardWordCommand, UIDisplayTextItems.CommandForwardWord, Command.SCREEN, 5);
 		backWordCommand = updateCommand(backWordCommand, UIDisplayTextItems.CommandBackWord, Command.SCREEN, 4);
 		changeInputLanguageCommand = updateCommand(changeInputLanguageCommand, UIDisplayTextItems.CommandChangeInputLanguage, Command.SCREEN, 2);
-		
 		// for the exitCommand Command.EXIT is not used, because typically the devices reserve a high-priority 
 		// location for this and several users requested to put this command at a lower-priority location (usually
 		// somewhere in the option menu):
 		exitCommand = updateCommand(exitCommand, UIDisplayTextItems.CommandExit, Command.SCREEN, 7);   
 		
-		// Set the translationListItemCommand for all translationList items that are displayed
-		if (translationListIsShown) {
+		removeTranslationCommandScreen(); // remove translation command screen (if there was one)
+
+		// set up commands for the form's items
+		setupItemCommands();
+
+		addTranslationCommandScreen();    // add translation command screen (if there is one required)		
+	}
+
+	// adds the translation command to the form
+	void addTranslationCommandScreen() throws DictionaryException {
+		if (! DictionarySettings.getShowTranslationList()) {
+			translateCommand = updateCommand(translateCommand, UIDisplayTextItems.CommandTranslate, Command.SCREEN, 1);
+		}
+	}
+
+	// removes the translation command from the form
+	void removeTranslationCommandScreen()  throws DictionaryException {
+		removeCommand(translateCommand);
+	}
+
+	/*
+	 *  sets up the item commands for this form:
+	 */
+	public void setupItemCommands() throws DictionaryException {
+		// remove old commands (if there are any)
+		removeToBeTranslatedWordTextFieldCommand();
+		for (int itemCount = indexOfFirstTranslationItem; itemCount <= indexOfLastTranslationItem; ++itemCount) {
+			removeTranslationItemCommand(get(itemCount));
+		}
+		if (DictionarySettings.getShowTranslationList()) {
+			// create new commands
+			translateCommand = new DfMCommand(UIDisplayTextItems.CommandTranslate, Command.ITEM, 1);
+			backToTranslationList = new DfMCommand(UIDisplayTextItems.CommandBack, Command.ITEM, 1);
+			// set new commands
+			setToBeTranslatedWordTextFieldCommand();
+			// Set the translationListItemCommand for all translationList items that are displayed
 			for (int itemCount = indexOfFirstTranslationItem; itemCount <= indexOfLastTranslationItem; ++itemCount) {
-				get(itemCount).setDefaultCommand(translateCommand);
+				setTranslationItemCommand(get(itemCount));
+			}
+		}
+	}
+	
+	void removeToBeTranslatedWordTextFieldCommand()  {
+		toBeTranslatedWordTextField.removeCommand(translateCommand);
+	}
+
+	void setToBeTranslatedWordTextFieldCommand() 
+			throws DictionaryException {
+		if (DictionarySettings.getShowTranslationList()) {
+			updateItemCommand(toBeTranslatedWordTextField, null, translateCommand);
+		}
+	}
+
+	void removeTranslationItemCommand(Item item) 
+			throws DictionaryException {
+		if (translationListDisplayList) {
+			item.removeCommand(translateCommand);
+		}
+		else {
+			item.removeCommand(backToTranslationList);
+		}
+	}
+	
+	void setTranslationItemCommand(Item item) 
+			throws DictionaryException {
+		if (DictionarySettings.getShowTranslationList()) {
+			if (translationListDisplayList) {
+				updateItemCommand(item, null, translateCommand);
+			}
+			else {
+				updateItemCommand(item, null, backToTranslationList);
 			}
 		}
 	}
@@ -220,7 +298,15 @@ public class MainForm
 		try
 		{
 			if (c == translateCommand) {
-				displayTranslationForListItem(item);
+				if (item == toBeTranslatedWordTextField) { 
+					translateToBeTranslatedWordTextField(false);
+				}
+				else {
+					displayTranslationForListItem(item);
+				}
+			}
+			else if (c == backToTranslationList) {
+				displayItemsInTranslationList();
 			}
 		}
 		catch (Throwable t)
@@ -242,7 +328,7 @@ public class MainForm
 			Util.getUtil().log(t);
 		}
 	}
-	
+
 	public void translateToBeTranslatedWordTextField(boolean executeInBackground) 
 			throws DictionaryException {
 		removeStartupDisplay();
@@ -438,6 +524,8 @@ public class MainForm
 		
 		// create new toBeTranslatedWordTextField 
 		toBeTranslatedWordTextField = mainFormItemsObj.createToBeTranslatedWordTextField(); 
+		setToBeTranslatedWordTextFieldCommand();
+		toBeTranslatedWordTextField.setItemCommandListener(this);
 		insert(indexOfToBeTranslatedWordTextField, toBeTranslatedWordTextField);
 		indexOfFirstTranslationItem = indexOfToBeTranslatedWordTextField + 1; 
 		
@@ -484,6 +572,22 @@ public class MainForm
 				setTitleUIDisplayTextItem(UIDisplayTextItems.FromLanguageToLanguage);
 			}
 		}
+	}
+	
+	// switchTranslationListDisplay is called when the settings for showTranslationList is changed
+	public void switchTranslationListDisplay() throws DictionaryException {
+		if (DictionarySettings.getShowTranslationList()) {
+			// display of translation list is enabled
+			translationListDisplayList = true;
+		}
+		else {
+			// display of translation list is disabled
+			translationListDisplayList = false;
+		}
+		// refresh command settings
+		setupCommands();
+		// update all items of the translation result:
+		refreshAllTranslationResults();
 	}
 	
 	// redisplay the labels of all forms
@@ -537,16 +641,23 @@ public class MainForm
 		}
 		if (indexItemForTranslation == -1)
 			throw new DictionaryException("Translation list item not found");
+		// remember index of focused item
+		translationListFocusedItemIndex = indexItemForTranslation;
 		int indexSingleTranslation = indexItemForTranslation - indexOfFirstTranslationItem;
 		SingleTranslation singleTranslation = 
 					lastResultOfTranslation.getTranslationAt(indexSingleTranslation);
 		deletePreviousTranslationResult();
-		displaySingleTranslation(singleTranslation, true);
+		translationListDisplayList = false;
+		displaySingleTranslation(singleTranslation);
+		// set the focus on the newly created translation item
+		if (indexOfLastTranslationItem >= indexOfFirstTranslationItem) {
+			display.setCurrentItem(get(indexOfFirstTranslationItem)); 
+		}
 		translationResultStatus.setLabel(UIDisplayTextItems.EmptyText);
-		setFocusToBeTranslatedWordTextField();
-
-		// specific handling for SonyEricsson devices
+		
+                // specific handling for SonyEricsson devices
 		applySonyEricssonWorkaround();
+
 	}
 	
 	/*
@@ -566,6 +677,7 @@ public class MainForm
 	public void newTranslationResult(TranslationResult resultOfTranslation) {
 		try {
 			// display result of new translation
+			translationListDisplayList = true; // if translationList is activated, then display result in a list
 			indexOfLastTranslationItem = indexOfFirstTranslationItem - 1;
 			stringColourItemWidth = this.getWidth();
 			UIDisplayTextItem translationResultSatus = UIDisplayTextItems.EmptyText;
@@ -573,7 +685,7 @@ public class MainForm
 				Enumeration translationsEnum = resultOfTranslation.getAllTranslations();
 				while (translationsEnum.hasMoreElements()) {
 					SingleTranslation singleTranslation = (SingleTranslation) translationsEnum.nextElement();
-					displaySingleTranslation(singleTranslation, false);
+					displaySingleTranslation(singleTranslation);
 				}
 				wordHistoryObj.saveHistoryWord();
 			}
@@ -612,9 +724,8 @@ public class MainForm
 	}
 
 	void displaySingleTranslation
-					(SingleTranslation singleTranslation,
-			         boolean           displayTranslationListContent)  // true when the result for one translation 
-																	   // list item shall be displayed
+					(SingleTranslation singleTranslation)  
+
 				throws DictionaryException {
 		String translationFromString = singleTranslation.fromText.toString();
 		String translationToString   = singleTranslation.toText.toString();
@@ -636,14 +747,16 @@ public class MainForm
 		translationToItem   = mainFormItemsObj.createTranslationItem(translationToItemText, false, width); 
 
 		addTranslationItem(translationFromItem);
-		if (DictionarySettings.getShowTranslationList() && (! displayTranslationListContent)) {
-			translationListIsShown = true;
-			translationFromItem.setDefaultCommand(translateCommand);
+		if (DictionarySettings.getShowTranslationList()) {
+			setTranslationItemCommand(translationFromItem);
 			translationFromItem.setItemCommandListener(this);
 		}
-		else {
-			translationListIsShown = false;
+		if ((! DictionarySettings.getShowTranslationList()) || (! translationListDisplayList)) {
 			addTranslationItem(translationToItem);
+			if (DictionarySettings.getShowTranslationList()) {
+				setTranslationItemCommand(translationToItem);
+				translationToItem.setItemCommandListener(this);
+			}
 		}
 	}
 	
@@ -659,9 +772,17 @@ public class MainForm
 			int len = lastResultOfTranslation.numberOfFoundTranslations();
 			for (int i = 0; i < len; i++) {
 				SingleTranslation st = (SingleTranslation) lastResultOfTranslation.getTranslationAt(i);
-				displaySingleTranslation(st, false);
+				displaySingleTranslation(st);
 			}
 		}
+	}
+
+	void displayItemsInTranslationList() 
+			throws DictionaryException {
+		translationListDisplayList = true;
+		refreshAllTranslationResults();
+		// restore focus on last focused item
+		display.setCurrentItem(get(translationListFocusedItemIndex));
 	}
 
 	/*

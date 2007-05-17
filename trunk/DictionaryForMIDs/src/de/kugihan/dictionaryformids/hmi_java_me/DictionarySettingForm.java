@@ -81,230 +81,18 @@ public class DictionarySettingForm
 	public DictionarySettingForm(Display displayParam,
 			                     Form callingFormParam) 
 			          throws DictionaryException {
-		setTitleUIDisplayTextItem(UIDisplayTextItems.CommandSettings);
-
 		callingForm = callingFormParam;
 		display = displayParam;
-		setupCommands();
+
+		// register form as listerner
 		setCommandListener(this);
+		setItemStateListener(this);
 
-		checkBitmapFontAvailable();
-		
-		/* 
-		 * input language
-		 */
-		UIDisplayTextItem[] inputLanguageTextItem = new UIDisplayTextItem[DictionaryDataFile.numberOfInputLanguages];
-		int inputLanguage = 0;
-		for (int language = 0; language < DictionaryDataFile.numberOfAvailableLanguages; ++language) {
-			if (DictionaryDataFile.supportedLanguages[language].isSearchable) {
-				String languageDisplayText = DictionaryDataFile.supportedLanguages[language].languageDisplayText;
-				inputLanguageTextItem[inputLanguage] = LanguageUI.getUI().getUIDisplayTextItem
-				                       (LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + languageDisplayText, 
-				                        languageDisplayText);
-				++inputLanguage;
-			}
-		}
-		if ((inputLanguage == 0) && (DictionaryDataFile.numberOfAvailableLanguages > 0)) {
-			throw new DictionaryException("No searchable languages defined");
-		}
-		inputLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsFromLanguage,
-										              Choice.EXCLUSIVE,
-										              inputLanguageTextItem);
-		if (DictionarySettings.isDictionaryAvailable()) {
-			DictionarySettings.setInputLanguage(SettingsStore.getSettingsStore().getInputLanguage());
-		}
-		append(inputLanguageChoiceGroup);
-
-		/* 
-		 * output language
-		 */
-		UIDisplayTextItem[] outputLanguageTextItem = new UIDisplayTextItem [DictionaryDataFile.numberOfAvailableLanguages];
-		for (int languageIndex = 0; 
-		     languageIndex < DictionaryDataFile.numberOfAvailableLanguages;
-		     ++languageIndex) {
-			String languageDisplayText = DictionaryDataFile.supportedLanguages[languageIndex].languageDisplayText;
-			outputLanguageTextItem[languageIndex] = LanguageUI.getUI().getUIDisplayTextItem
-            								(LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + languageDisplayText, 
-                                             languageDisplayText);
-		}
-		outputLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsToLanguage,
-									       			   Choice.EXCLUSIVE, // could also be Choice.MULTIPLE for multiple language output
-												       outputLanguageTextItem);
-		if (DictionarySettings.isDictionaryAvailable()) {
-			DictionarySettings.setOutputLanguage(SettingsStore.getSettingsStore().getOutputLanguage());
-		}
-		append(outputLanguageChoiceGroup);
-
-		/*
-		 * search options 
-		 */
-		UIDisplayTextItem [] searchStrings = new UIDisplayTextItem[]  
-		                                            { UIDisplayTextItems.SettingsIncrementalSearchEnabled,
-				  									  UIDisplayTextItems.SettingsFindMatchWordOnly, 
-													  UIDisplayTextItems.SettingsEndWildcardAnySeriesOfCharacter,
-													  UIDisplayTextItems.SettingsBeginNoSearchSubExpressionCharacter};
-		UIDisplayTextItems.SettingsEndWildcardAnySeriesOfCharacter.setParameterValue
-											(1, String.valueOf(Util.wildcardAnySeriesOfCharacter));
-		UIDisplayTextItems.SettingsBeginNoSearchSubExpressionCharacter.setParameterValue
-											(1, String.valueOf(Util.noSearchSubExpressionCharacter));
-		
-		searchChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsSearchOptions,
-				                               Choice.MULTIPLE,
-				                               searchStrings);
-		DictionarySettings.setIncrementalSearchEnabled
-		                    (SettingsStore.getSettingsStore().getIncrementalSearchEnabled());
-		DictionarySettings.setFindExactMatches
-							(SettingsStore.getSettingsStore().getFindExactMatches());
-		DictionarySettings.setAddAtEndWildcardAnySeriesOfCharacter
-		            		(SettingsStore.getSettingsStore().getAddAtEndWildcardAnySeriesOfCharacter());
-		DictionarySettings.setAddAtBeginNoSearchSubExpressionCharacter
-							(SettingsStore.getSettingsStore().getAddAtBeginNoSearchSubExpressionCharacter());
-		append(searchChoiceGroup);
-		
-		
-		/*
-		 * display options 
-		 */
-		UIDisplayTextItem[] displayStrings;
-		if (bitmapFontExists)
-			displayStrings = new UIDisplayTextItem[] {
-					UIDisplayTextItems.SettingsShowTranslationList,
-					UIDisplayTextItems.SettingsColouredItems,
-					UIDisplayTextItems.SettingsShowStatistics,
-					UIDisplayTextItems.SettingsUseBitmapFont };
-		else
-			displayStrings = new UIDisplayTextItem[] {
-					UIDisplayTextItems.SettingsShowTranslationList,
-					UIDisplayTextItems.SettingsColouredItems,
-					UIDisplayTextItems.SettingsShowStatistics };
-		displayChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsDisplayOptions,
-				                               Choice.MULTIPLE,
-				                               displayStrings);
-		DictionarySettings.setShowTranslationList(SettingsStore.getSettingsStore().getShowTranslationList());
-		displayChoiceGroup.setSelectedIndex(indexDisplayCGShowTranslationList, DictionarySettings.getShowTranslationList());
-		DictionarySettings.setColouredItems(SettingsStore.getSettingsStore().getColouredItems());
-		DictionarySettings.setShowStatistic(SettingsStore.getSettingsStore().getShowStatistic());
-		DictionarySettings.setUseBitmapFont(SettingsStore.getSettingsStore().getUseBitmapFont());
-		append(displayChoiceGroup);
-		
-		/* 
-		 * Path to dictionary (when file system access is used)
-		 */
-		if (DictionarySettings.isUseFileAccessJSR75()) {
-			dictionaryPathTextField = new TextField("Dictionary path", null, 300, TextField.URL); // temporary: change to UIDisplayText label
-			// DictionaryDataFile.dictionaryPath was already set in the constructor of class DictionaryForMIDs
-			append(dictionaryPathTextField);
-			// temporary: this is a temporary solution for the partial file system dictionary support.
-			dictionaryPathTextField.setDefaultCommand(selectDictionaryPathCommand);
-			dictionaryPathTextField.setItemCommandListener(this);
-			DictionarySettings.setDictionaryPath(SettingsStore.getSettingsStore().getDictionaryPath());
-		}
-		
-		/* 
-		 * Font size
-		 */
-		fontSizeChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsFontSize,
-				                                 Choice.POPUP,
-				                                 null);
-		setFontSizeCGDisplayTextItems(DictionarySettings.getUseBitmapFont());
-		DictionarySettings.setFontSize(SettingsStore.getSettingsStore().getFontSize());
-		DictionarySettings.setBitmapFontSize(SettingsStore.getSettingsStore().getBitmapFontSize());
-		append(fontSizeChoiceGroup);
-
-		/* 
-		 * Select user Interface Language
-		 */
-		String[] uiLanguageStrings = LanguageUI.getUI().getLanguageTitle();
-		uiLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsUILanguage,
-				                                   Choice.POPUP,
-				                                   uiLanguageStrings,
-				                                   null);
-		DictionarySettings.setUILanguage(SettingsStore.getSettingsStore().getUILanguage());
-		append(uiLanguageChoiceGroup);
-		
-		/* 
-		 * performance
-		 */
-		UIDisplayTextItem [] performanceStrings = new UIDisplayTextItem[] 
-		                                            { UIDisplayTextItems.SettingsBypassCharsetDecoding };
-		performanceChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsPerformanceOptions,
-				                                    Choice.MULTIPLE,
-				                                    performanceStrings);
-		CsvFile.selectedBypassCharsetDecoding = SettingsStore.getSettingsStore().getBypassCharsetDecoding();
-		append(performanceChoiceGroup);
-		
-//		/*
-//		 * display contents
-//		 */
-//		contentChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsContent,
-//                Choice.MULTIPLE,
-//                null);
-//		int contentIndex = 0;
-//		String[] contents = new String[10];
-//		for (int i = 0; i < DictionaryDataFile.supportedLanguages.length; i++) {		
-//			if (DictionaryDataFile.supportedLanguages[i].contentDefinitionAvailable) {				
-//				for (int j = 1; j < DictionaryDataFile.supportedLanguages[i].contents.length; j++){
-//					contents[contentIndex] = DictionaryDataFile.supportedLanguages[i].contents[j].contentDisplayText;
-//					contentIndex++;
-//				}				
-//			}
-//		}
-//		if (contentIndex != 0) {
-//			String[] newContents = new String[contentIndex];
-//			for (int i= 0; i < contentIndex; i++){
-//				newContents[i] = contents[i];			
-//			}
-//			DictionarySettings.loadContent(contentIndex);			
-//			contentChoiceGroup.setAll(UIDisplayTextItems.createContentToggle(newContents));
-////			DictionarySettings.setUILanguage(SettingsStore.getSettingsStore().getUILanguage());
-//			append(contentChoiceGroup);
-//		}
+		// create each of the user interface items
+		createItems();
 		
 		// set the values of the created items
 		setItemsToSettingValues();
-		
-		setItemStateListener(this);
-	}
-	
-	protected void setItemsToSettingValues() throws DictionaryException {
-		// InputLanguageChoiceGroup
-		setInputLanguageChoiceGroup();
-
-		// OutputLanguageChoiceGroup
-		setOutputLanguageChoiceGroup();
-
-		// searchChoiceGroup
-		searchChoiceGroup.setSelectedIndex(indexSearchCGIncrementalSearchEnabled, 
-										   DictionarySettings.isIncrementalSearchEnabled());
-		searchChoiceGroup.setSelectedIndex(indexSearchCGFindExactMatches, 
-						   				   DictionarySettings.isFindExactMatches());
-		searchChoiceGroup.setSelectedIndex(indexSearchCGEndWildcardAnySeriesOfCharacter, 
-										   DictionarySettings.isAddAtEndWildcardAnySeriesOfCharacter());
-		searchChoiceGroup.setSelectedIndex(indexSearchCGBeginNoSearchSubExpressionCharacter, 
-				   						   DictionarySettings.isAddAtBeginNoSearchSubExpressionCharacter());
-
-		// displayChoiceGroup
-		displayChoiceGroup.setSelectedIndex(indexDisplayCGColouredItems, DictionarySettings.isColouredItems());
-		displayChoiceGroup.setSelectedIndex(indexDisplayCGShowStatistic, DictionarySettings.getShowStatistic());
-		if (bitmapFontExists) {
-			boolean useBitmapFont = DictionarySettings.getUseBitmapFont();
-			displayChoiceGroup.setSelectedIndex(indexDisplayCGUseBitmapFont, useBitmapFont);
-			lastSettingUseBitmapFont = useBitmapFont;
-		}
-
-		// dictionaryPathTextField
-		if (DictionarySettings.isUseFileAccessJSR75()) {
-			dictionaryPathTextField.setString(DictionarySettings.getDictionaryPath());
-		}
-		
-		// fontSizeChoiceGroup
-		setFontSizeCGSelectedIndex(DictionarySettings.getUseBitmapFont());
-
-		// uiLanguageChoiceGroup
-		uiLanguageChoiceGroup.setSelectedIndex(DictionarySettings.getUILanguage(), true);
-		
-		// performanceChoiceGroup
-		performanceChoiceGroup.setSelectedIndex(indexPerfCGBypassCharsetDecoding, CsvFile.selectedBypassCharsetDecoding);
 	}
 
 	// sets up the commands for this form:
@@ -383,6 +171,242 @@ public class DictionarySettingForm
 		}
 	}
 
+	public static void loadSettings() 
+			          throws DictionaryException {
+	    // InputLanguage
+	    if (DictionarySettings.isDictionaryAvailable()) {
+			DictionarySettings.setInputLanguage(SettingsStore.getSettingsStore().getInputLanguage());
+		}
+	    // OutputLanguage
+		if (DictionarySettings.isDictionaryAvailable()) {
+			DictionarySettings.setOutputLanguage(SettingsStore.getSettingsStore().getOutputLanguage());
+		}
+	    // Search options
+		DictionarySettings.setIncrementalSearchEnabled
+		                    (SettingsStore.getSettingsStore().getIncrementalSearchEnabled());
+		DictionarySettings.setFindExactMatches
+							(SettingsStore.getSettingsStore().getFindExactMatches());
+		DictionarySettings.setAddAtEndWildcardAnySeriesOfCharacter
+		            		(SettingsStore.getSettingsStore().getAddAtEndWildcardAnySeriesOfCharacter());
+		DictionarySettings.setAddAtBeginNoSearchSubExpressionCharacter
+							(SettingsStore.getSettingsStore().getAddAtBeginNoSearchSubExpressionCharacter());
+		// Display options
+		DictionarySettings.setShowTranslationList(SettingsStore.getSettingsStore().getShowTranslationList());
+		DictionarySettings.setColouredItems(SettingsStore.getSettingsStore().getColouredItems());
+		DictionarySettings.setShowStatistic(SettingsStore.getSettingsStore().getShowStatistic());
+		DictionarySettings.setUseBitmapFont(SettingsStore.getSettingsStore().getUseBitmapFont());
+		// Path to dictionary
+		if (DictionarySettings.isUseFileAccessJSR75()) {
+			DictionarySettings.setDictionaryPath(SettingsStore.getSettingsStore().getDictionaryPath());
+		}
+		// Font size
+		DictionarySettings.setFontSize(SettingsStore.getSettingsStore().getFontSize());
+		DictionarySettings.setBitmapFontSize(SettingsStore.getSettingsStore().getBitmapFontSize());
+		// Selected user interface language
+		DictionarySettings.setUILanguage(SettingsStore.getSettingsStore().getUILanguage());
+		// Performance settings
+		CsvFile.selectedBypassCharsetDecoding = SettingsStore.getSettingsStore().getBypassCharsetDecoding();
+		// Contents
+		// todo
+	}
+	
+	void createItems() throws DictionaryException {
+		setTitleUIDisplayTextItem(UIDisplayTextItems.CommandSettings);
+
+		setupCommands();
+
+		checkBitmapFontAvailable();
+		
+		/* 
+		 * input language
+		 */
+		UIDisplayTextItem[] inputLanguageTextItem = new UIDisplayTextItem[DictionaryDataFile.numberOfInputLanguages];
+		int inputLanguage = 0;
+		for (int language = 0; language < DictionaryDataFile.numberOfAvailableLanguages; ++language) {
+			if (DictionaryDataFile.supportedLanguages[language].isSearchable) {
+				String languageDisplayText = DictionaryDataFile.supportedLanguages[language].languageDisplayText;
+				inputLanguageTextItem[inputLanguage] = LanguageUI.getUI().getUIDisplayTextItem
+				                       (LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + languageDisplayText, 
+				                        languageDisplayText);
+				++inputLanguage;
+			}
+		}
+		if ((inputLanguage == 0) && (DictionaryDataFile.numberOfAvailableLanguages > 0)) {
+			throw new DictionaryException("No searchable languages defined");
+		}
+		inputLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsFromLanguage,
+										              Choice.EXCLUSIVE,
+										              inputLanguageTextItem);
+		append(inputLanguageChoiceGroup);
+
+		/* 
+		 * output language
+		 */
+		UIDisplayTextItem[] outputLanguageTextItem = new UIDisplayTextItem [DictionaryDataFile.numberOfAvailableLanguages];
+		for (int languageIndex = 0; 
+		     languageIndex < DictionaryDataFile.numberOfAvailableLanguages;
+		     ++languageIndex) {
+			String languageDisplayText = DictionaryDataFile.supportedLanguages[languageIndex].languageDisplayText;
+			outputLanguageTextItem[languageIndex] = LanguageUI.getUI().getUIDisplayTextItem
+            								(LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + languageDisplayText, 
+                                             languageDisplayText);
+		}
+		outputLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsToLanguage,
+									       			   Choice.EXCLUSIVE, // could also be Choice.MULTIPLE for multiple language output
+												       outputLanguageTextItem);
+		append(outputLanguageChoiceGroup);
+
+		/*
+		 * search options 
+		 */
+		UIDisplayTextItem [] searchStrings = new UIDisplayTextItem[]  
+		                                            { UIDisplayTextItems.SettingsIncrementalSearchEnabled,
+				  									  UIDisplayTextItems.SettingsFindMatchWordOnly, 
+													  UIDisplayTextItems.SettingsEndWildcardAnySeriesOfCharacter,
+													  UIDisplayTextItems.SettingsBeginNoSearchSubExpressionCharacter};
+		UIDisplayTextItems.SettingsEndWildcardAnySeriesOfCharacter.setParameterValue
+											(1, String.valueOf(Util.wildcardAnySeriesOfCharacter));
+		UIDisplayTextItems.SettingsBeginNoSearchSubExpressionCharacter.setParameterValue
+											(1, String.valueOf(Util.noSearchSubExpressionCharacter));
+		
+		searchChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsSearchOptions,
+				                               Choice.MULTIPLE,
+				                               searchStrings);
+		append(searchChoiceGroup);
+		
+		
+		/*
+		 * display options 
+		 */
+		UIDisplayTextItem[] displayStrings;
+		if (bitmapFontExists)
+			displayStrings = new UIDisplayTextItem[] {
+					UIDisplayTextItems.SettingsShowTranslationList,
+					UIDisplayTextItems.SettingsColouredItems,
+					UIDisplayTextItems.SettingsShowStatistics,
+					UIDisplayTextItems.SettingsUseBitmapFont };
+		else
+			displayStrings = new UIDisplayTextItem[] {
+					UIDisplayTextItems.SettingsShowTranslationList,
+					UIDisplayTextItems.SettingsColouredItems,
+					UIDisplayTextItems.SettingsShowStatistics };
+		displayChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsDisplayOptions,
+				                               Choice.MULTIPLE,
+				                               displayStrings);
+		append(displayChoiceGroup);
+		
+		/* 
+		 * Path to dictionary (when file system access is used)
+		 */
+		if (DictionarySettings.isUseFileAccessJSR75()) {
+			dictionaryPathTextField = new TextField("Dictionary path", null, 300, TextField.URL); // temporary: change to UIDisplayText label
+			// DictionaryDataFile.dictionaryPath was already set in the constructor of class DictionaryForMIDs
+			append(dictionaryPathTextField);
+			// temporary: this is a temporary solution for the partial file system dictionary support.
+			dictionaryPathTextField.setDefaultCommand(selectDictionaryPathCommand);
+			dictionaryPathTextField.setItemCommandListener(this);
+		}
+		
+		/* 
+		 * Font size
+		 */
+		fontSizeChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsFontSize,
+				                                 Choice.POPUP,
+				                                 null);
+		setFontSizeCGDisplayTextItems(DictionarySettings.getUseBitmapFont());
+		append(fontSizeChoiceGroup);
+
+		/* 
+		 * Select user Interface Language
+		 */
+		String[] uiLanguageStrings = LanguageUI.getUI().getLanguageTitle();
+		uiLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsUILanguage,
+				                                   Choice.POPUP,
+				                                   uiLanguageStrings,
+				                                   null);
+		append(uiLanguageChoiceGroup);
+		
+		/* 
+		 * performance
+		 */
+		UIDisplayTextItem [] performanceStrings = new UIDisplayTextItem[] 
+		                                            { UIDisplayTextItems.SettingsBypassCharsetDecoding };
+		performanceChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsPerformanceOptions,
+				                                    Choice.MULTIPLE,
+				                                    performanceStrings);
+		append(performanceChoiceGroup);
+		
+//		/*
+//		 * display contents
+//		 */
+//		contentChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsContent,
+//                Choice.MULTIPLE,
+//                null);
+//		int contentIndex = 0;
+//		String[] contents = new String[10];
+//		for (int i = 0; i < DictionaryDataFile.supportedLanguages.length; i++) {		
+//			if (DictionaryDataFile.supportedLanguages[i].contentDefinitionAvailable) {				
+//				for (int j = 1; j < DictionaryDataFile.supportedLanguages[i].contents.length; j++){
+//					contents[contentIndex] = DictionaryDataFile.supportedLanguages[i].contents[j].contentDisplayText;
+//					contentIndex++;
+//				}				
+//			}
+//		}
+//		if (contentIndex != 0) {
+//			String[] newContents = new String[contentIndex];
+//			for (int i= 0; i < contentIndex; i++){
+//				newContents[i] = contents[i];			
+//			}
+//			DictionarySettings.loadContent(contentIndex);			
+//			contentChoiceGroup.setAll(UIDisplayTextItems.createContentToggle(newContents));
+////			DictionarySettings.setUILanguage(SettingsStore.getSettingsStore().getUILanguage());
+//			append(contentChoiceGroup);
+//		}
+		
+	}
+	
+	protected void setItemsToSettingValues() throws DictionaryException {
+		// InputLanguageChoiceGroup
+		setInputLanguageChoiceGroup();
+
+		// OutputLanguageChoiceGroup
+		setOutputLanguageChoiceGroup();
+
+		// searchChoiceGroup
+		searchChoiceGroup.setSelectedIndex(indexSearchCGIncrementalSearchEnabled, 
+										   DictionarySettings.isIncrementalSearchEnabled());
+		searchChoiceGroup.setSelectedIndex(indexSearchCGFindExactMatches, 
+						   				   DictionarySettings.isFindExactMatches());
+		searchChoiceGroup.setSelectedIndex(indexSearchCGEndWildcardAnySeriesOfCharacter, 
+										   DictionarySettings.isAddAtEndWildcardAnySeriesOfCharacter());
+		searchChoiceGroup.setSelectedIndex(indexSearchCGBeginNoSearchSubExpressionCharacter, 
+				   						   DictionarySettings.isAddAtBeginNoSearchSubExpressionCharacter());
+
+		// displayChoiceGroup
+		displayChoiceGroup.setSelectedIndex(indexDisplayCGColouredItems, DictionarySettings.isColouredItems());
+		displayChoiceGroup.setSelectedIndex(indexDisplayCGShowStatistic, DictionarySettings.getShowStatistic());
+		displayChoiceGroup.setSelectedIndex(indexDisplayCGShowTranslationList, DictionarySettings.getShowTranslationList());
+		if (bitmapFontExists) {
+			boolean useBitmapFont = DictionarySettings.getUseBitmapFont();
+			displayChoiceGroup.setSelectedIndex(indexDisplayCGUseBitmapFont, useBitmapFont);
+			lastSettingUseBitmapFont = useBitmapFont;
+		}
+
+		// dictionaryPathTextField
+		if (DictionarySettings.isUseFileAccessJSR75()) {
+			dictionaryPathTextField.setString(DictionarySettings.getDictionaryPath());
+		}
+		
+		// fontSizeChoiceGroup
+		setFontSizeCGSelectedIndex(DictionarySettings.getUseBitmapFont());
+
+		// uiLanguageChoiceGroup
+		uiLanguageChoiceGroup.setSelectedIndex(DictionarySettings.getUILanguage(), true);
+		
+		// performanceChoiceGroup
+		performanceChoiceGroup.setSelectedIndex(indexPerfCGBypassCharsetDecoding, CsvFile.selectedBypassCharsetDecoding);
+	}
+
 	protected void saveSettings() throws DictionaryException {
 		// save settings in SettingStore
 		
@@ -455,7 +479,7 @@ public class DictionarySettingForm
 		DictionarySettings.setShowTranslationList(displayCGFlags[indexDisplayCGShowTranslationList]);
 		SettingsStore.getSettingsStore().setShowTranslationList(DictionarySettings.getShowTranslationList());
 		if (oldShowTranslationList != DictionarySettings.getShowTranslationList())
-			MainForm.applicationMainForm.refreshAllTranslationResults();
+			MainForm.applicationMainForm.switchTranslationListDisplay();
 		// colouredItems
 		boolean oldColouredItems = DictionarySettings.isColouredItems();
 		DictionarySettings.setColouredItems(displayCGFlags[indexDisplayCGColouredItems]);
