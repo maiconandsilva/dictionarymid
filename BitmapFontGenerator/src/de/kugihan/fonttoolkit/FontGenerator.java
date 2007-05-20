@@ -162,8 +162,10 @@ public class FontGenerator {
 		FontMetrics fontMetrics = g.getFontMetrics(fontToShow);
 
 		double height = (fontMetrics.getHeight()) - this.clipBottom - this.clipTop;
-		double width = fontMetrics.stringWidth(text)
-				+ (text.length() * this.characterSpacing);
+		double width = 0;
+		for (int i = 0; i < text.length(); i++) {
+			width += (int) fontMetrics.stringWidth(text.substring(i, i + 1));
+		}		
 		image = new BufferedImage((int) width, (int) height,
 				BufferedImage.TYPE_4BYTE_ABGR);
 		g = image.createGraphics();
