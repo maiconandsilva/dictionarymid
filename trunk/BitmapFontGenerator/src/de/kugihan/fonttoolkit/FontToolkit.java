@@ -240,8 +240,9 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 		popup.setVisible(false);
 		this.setVisible(true);
 		JOptionPane.showMessageDialog(null, "Success!\n\nWrote "
-				+ dictionaryField.getText() + "\\font.bmf", "Done",
-				JOptionPane.INFORMATION_MESSAGE);
+				+ dictionaryField.getText() + 
+				"\\fonts\\\n\nTo create more sizes, just choose another size and start again.", 
+				"Done",	JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void start() {
