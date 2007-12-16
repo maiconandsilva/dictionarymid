@@ -146,12 +146,13 @@ class TranslationThread implements Runnable {
 		translationIsCancelled = true;
 		
 		// forward cancelling to translate-object
-		if (translate != null)
+		if (translate != null) {
 			translate.cancelTranslation();
 		
-		// Send interrupt to translation thread
-		if (DictionarySettings.isCldc11()) {
-			ownExecutionThread.interrupt();
+			// Send interrupt to translation thread
+			if (DictionarySettings.isCldc11()) {
+				ownExecutionThread.interrupt();
+			}
 		}
 	}
 }
