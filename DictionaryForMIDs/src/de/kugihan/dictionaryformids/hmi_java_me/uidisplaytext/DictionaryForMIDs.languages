@@ -28,8 +28,6 @@
 ! The following User Interfaces are brought to you by ThreeSearch <http://vllp.sourceforge.net>
 ! Dutch
 ! Greek
-! Russian
-! Spanish
 ! 
 ================================================================================
 #UIDisplayTextItems,
@@ -658,7 +656,7 @@ OK
 キャンセル
 ビットマップフォントを使う
 ================================================================================
-#Russian [who can update ?], ru
+#Russian, ru
 
 Слово для перевода:
 Перевести
@@ -670,35 +668,35 @@ OK
 С языка
 На язык
 Размер шрифта
-Неплатеж устройства
+Определяется устройством
 Маленький
-Среда
+Средний
 Большой
 Варианты представления
-Статистика показа
-Обойдите расшифровку charset
-Ищите варианты
-[no translation]
-Найдите слово состязания только
-Применитесь
-Сделанный
+показать статистику
+Обойти расшифровку charset
+Варианты поиска
+Поиск по инкрименту
+Найти только соответствующее слово
+Применить
+Сделано
 Выберите язык
-Назад
-Отправить
-Варианты, если не найденные:
-Покажите соседние слова
-Слова предложения показа
-не найденный
-Время ответа [госпожа]:
+Назад на одно слово
+Вперед на одно слово
+Варианты, если не найдено:
+Показать соседние слова
+Показать предложенные слова
+не найдено
+Время ответа [мс]:
 Хиты:
 Свободная Память:
-Вы можете использовать wildchard характеры для ваших спичек search:\n* какой-нибудь ряд character\n? спички любые единственные character\n\nTo выключают подвыражение search:\n/как первый характер, запрещают поиск подвыражения в, начинаются из expression\n/, поскольку последний характер запрещает поиск подвыражения в конце выражения
+Использовать групповые символы для улучшения поиска:\n%1 соответствует любому ряду символов\n%2 соответствует любому единичному символу\n\nTo выключают подвыражение search:\n/как первый характер, запрещают поиск подвыражения в, начинаются из expression\n/, поскольку последний характер запрещает поиск подвыражения в конце выражения
 (... Макс номер достигнутых хитов)
 (... достигнутое время выполнения Макса)
 (... отменяют полученный), 
 Повредите предложение
 ================================================================================
-#Español [who can update ?], es
+#Español, es
 
 Palabra para traducción:
 Traducir
@@ -709,13 +707,13 @@ Ajustes
 Salida
 De lengua
 A lengua
-Tamaño de fuente
+Tamaño de carácter
 Falta de dispositivo
 Pequeño
 Medio
 Grande
 Opciones de vista
-Estadística de espectáculo
+Enseñar la estadística
 Evite el descifre de charset
 Opciones de búsqueda
 Búsqueda incremental
@@ -723,20 +721,20 @@ Encuentre la palabra de partido sólo
 Aplicar
 Hecho
 Seleccione lengua
-Hacia atrás
-Expedir
+Hacia atrás en una palabra
+Adelantar en una palabra
 Opciones cuando no encontrado:
 Muestre palabras cercanas
-Palabras de sugerencia de espectáculo
+Enseñar palabras ofrecidas
 no encontrado
-Tiempo de respuesta [Sra.]:
+Tiempo de respuesta [ms]:
 Golpes:
 Memoria Libre:
-¿Usted puede usar carácteres wildchard para sus partidos de search:\n* alguna serie de character\n? los partidos cualesquiera character\n\nTo solos apagan la subexpresión search:\n/como el primer carácter inhiben la búsqueda de subexpresión en comienzan de expression\n/cuando el último carácter inhibe la búsqueda de subexpresión al final de la expresión
+Use símboles especiales para precisar la búsqueda:\n%1 corresponde a alguna serie de carácteres\n%2 corresponde a cualquier carácter\n\n Controlar la búsqueda de subexpresion:\n%3 Mientras el primer carácter produce los resultados de la búsqueda de la primera palabra introducida\n%4 Después de que la introducción produce resultados en que se termina.
 (... máximo nr de golpes alcanzados)
-(... tiempo de ejecución de máximo alcanzado)
-(... anulan recibido)
-Incapacite sugerencia
+(... máximo tiempo de ejecución alcanzada)
+(... anulaciones recibidos)
+Incapacitar sugerencias
 ================================================================================
 #Czech, cz
 					
