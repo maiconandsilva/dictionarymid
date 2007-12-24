@@ -386,7 +386,12 @@ public abstract class Util {
 	}
 
 	public String getDictionaryProperty(String propertyName) {
-		return dictionaryForMIDsProperties.getProperty(propertyName);
+		String propertyValue = dictionaryForMIDsProperties.getProperty(propertyName);
+		// added trim(), because trailing whitespaces can cause confusion
+		if (propertyValue != null) {
+			propertyValue = propertyValue.trim();
+		}
+		return propertyValue; 
 	}	
 		
 	public String getDictionaryPropertyString(String propertyName, boolean optional) throws DictionaryException {
