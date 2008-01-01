@@ -191,6 +191,36 @@ public class CsvFile {
 	}
 	
 	// Note: this method is declared as final only for the reason of better performance
+	public final StringBuffer getRestOfLine() {
+		int charactersInFile = fileStorageObj.getCharactersInFile();
+		StringBuffer line = new StringBuffer();
+		boolean endOfLineFound = false;
+		line.setLength(0); 
+		if (position < charactersInFile) {
+			do {
+				char currentCharacter = fileStorageObj.readCharacterAt(position);
+				if (currentCharacter == '\n') {
+					columnNumber = 0;
+					endOfLineFound = true;
+					++position;
+				} else {
+					// add character if not carriage return
+					if (currentCharacter != '\r') {
+						line.append(currentCharacter);
+					}
+					++position;
+				}
+				if (position == charactersInFile) {
+					endOfLineFound = true;
+					endOfDictionaryReached = true;
+				}
+			}
+			while (! endOfLineFound);
+		}
+		return line;
+	}
+
+	// Note: this method is declared as final only for the reason of better performance
 	public final StringBuffer getWord() {
 		int charactersInFile = fileStorageObj.getCharactersInFile();
 		StringBuffer word = new StringBuffer();  // check performance impact of creating a new StringBuffer-object 

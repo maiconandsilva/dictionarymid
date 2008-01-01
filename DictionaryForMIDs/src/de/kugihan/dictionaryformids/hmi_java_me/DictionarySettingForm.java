@@ -334,7 +334,11 @@ public class DictionarySettingForm
 		performanceChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsPerformanceOptions,
 				                                    Choice.MULTIPLE,
 				                                    performanceStrings);
-		append(performanceChoiceGroup);
+		// display the performanceChoiceGroup only when the property useBypassCharsetDecoding is set
+		String useBypassCharsetDecoding = DictionaryForMIDs.dictionaryForMIDsMidlet.getAppProperty("useBypassCharsetDecoding");
+		if (useBypassCharsetDecoding != null) {
+			append(performanceChoiceGroup);
+		}
 		
 //		/*
 //		 * display contents
