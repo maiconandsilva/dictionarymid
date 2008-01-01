@@ -251,7 +251,7 @@ public class Translation {
 				else if (indexEntry.startsWith(searchExpression)) {
 					if (noWildcardMatchRest(searchExpression, indexEntry)) {
 						// entry found
-						indexStringLine = indexFile.getWord().toString();
+						indexStringLine = indexFile.getRestOfLine().toString();
 						getDictionaryEntry(indexStringLine);
 					}
 					else {
@@ -280,7 +280,7 @@ public class Translation {
 						          0, 
 								  searchExpression.length())) {
 					// Strings matched
-					indexStringLine = indexFile.getWord().toString();
+					indexStringLine = indexFile.getRestOfLine().toString();
 					getDictionaryEntry(indexStringLine);
 				}
 				else {
