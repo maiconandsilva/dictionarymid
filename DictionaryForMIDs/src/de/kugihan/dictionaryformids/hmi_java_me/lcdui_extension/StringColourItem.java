@@ -256,9 +256,10 @@ protected void sizeChanged(int w,  int h){
   	String rowText;
   	String itemText;
   	String selectedWordSplit;
-  	if(isUseBackgroundColour)  	g.setColor(backgroundColour.red, backgroundColour.green, backgroundColour.blue);
-    	else g.setColor(systemBackgroundColour);
+  	if(isUseBackgroundColour) {
+  		g.setColor(backgroundColour.red, backgroundColour.green, backgroundColour.blue);
     	g.fillRect(0, 0, width, height);
+  	}
   	int row = -1;
    	int firstRowPos = 0;
     	int lastRowPos = 0;    		
