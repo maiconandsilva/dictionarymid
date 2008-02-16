@@ -26,7 +26,7 @@ javac.encoding=UTF-8
 	<property name="antenna.jarfilename"  		value="antenna-bin-0.9.14.jar"/>
 
     <property name="VersionNumber" 		value="3.2.0"/>	<!-- version of tools / applications -->
-    <property name="VersionStatus" 		value="pre-release 1"/>	<!-- e.g. "beta", "testversion 2"; uncomment this line for official releases -->
+	<property name="VersionStatus" 		value="final"/>	 <!--  e.g. "beta", "testversion 2"  -->
     <condition property="ApplicationVersion" 	value="${VersionNumber}_${VersionStatus}" else="${VersionNumber}">
     	<isset property="VersionStatus"/>
 	</condition>
@@ -82,7 +82,9 @@ javac.encoding=UTF-8
 
 	<property name="app.propertyfilename" 		value="Application.properties"/> 
 
-	<property name="DfM.team"  			value="Gert Nuber (dict@kugihan.de) et al."/> <!-- need to occasionally find something better -->
+	<property name="DfM.team"  			value="Gert Nuber and Contributors"/> <!-- Must not be longer than 32 characters --> 
+	                                                                          <!-- otherwise an Application Error will occur --> 
+	                                                                          <!-- on some Motorola devices -->
 	<property name="DfM.copyrightyear"  value="2005, 2006, 2007"/>
 
 	
