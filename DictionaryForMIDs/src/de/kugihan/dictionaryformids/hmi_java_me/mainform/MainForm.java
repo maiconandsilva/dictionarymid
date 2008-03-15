@@ -108,6 +108,7 @@ public class MainForm
 	
 	
 	public MainForm(DictionaryForMIDs DictionaryForMIDsMidletParam) {
+		super();
 		/*
 		 * Initialisation of required objects
 		 */
@@ -320,12 +321,30 @@ public class MainForm
 		{
 			if (item == toBeTranslatedWordTextField) {
 				// start background translation ("incremental translation")
-				translateToBeTranslatedWordTextField(true);
+				
+				// for Blackberries this needs to be done via callSerially, otherwise
+				// there may be a deadlock due to a Blackberry internal lock
+				display.callSerially(new TranslateRunnable());
 			}
 		}
 		catch (Throwable t)
 		{
 			Util.getUtil().log(t);
+		}
+	}
+
+	// This is a helper class that is used as a workaround for Blackberrys.
+	// Its run method starts a translation
+	class TranslateRunnable implements Runnable {
+		public void run() {
+			try
+			{
+				applicationMainForm.translateToBeTranslatedWordTextField(true);			
+			}
+			catch (Throwable t)
+			{
+				Util.getUtil().log(t);
+			}
 		}
 	}
 
