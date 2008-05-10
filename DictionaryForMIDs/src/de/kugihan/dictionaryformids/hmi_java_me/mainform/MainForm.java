@@ -9,6 +9,8 @@ package de.kugihan.dictionaryformids.hmi_java_me.mainform;
 
 import java.util.Enumeration;
 import java.util.Vector;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.AlertType;
@@ -24,7 +26,6 @@ import javax.microedition.lcdui.Item;
 import javax.microedition.lcdui.ItemCommandListener;
 import javax.microedition.lcdui.ItemStateListener;
 import javax.microedition.lcdui.Spacer;
-import javax.microedition.lcdui.StringItem;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dataaccess.LanguageDefinition;
@@ -316,15 +317,26 @@ public class MainForm
 		}
 	}
 	
+	boolean doDelayIntrementalSearch = true;
+	long    delayIntrementalSearch = 1000; // ms
+	RescheduleTimer translateTimer = new RescheduleTimer();
+	
 	public void itemStateChanged(Item item) {
 		try
 		{
 			if (item == toBeTranslatedWordTextField) {
 				// start background translation ("incremental translation")
 				
-				// for Blackberries this needs to be done via callSerially, otherwise
-				// there may be a deadlock due to a Blackberry internal lock
-				display.callSerially(new TranslateRunnable());
+				// check if the incremental search should be delayed (to avoid
+				// disruption of for example T9 input)
+				long searchDelay = 0;
+				if (doDelayIntrementalSearch) {
+					searchDelay = delayIntrementalSearch;
+				}
+				// the translation is always started via a TimerTask, even if
+				// searchDelay is 0. The reason for this is that on Blackberries
+				// otherwise there may be a deadlock due to a Blackberry internal lock
+				translateTimer.reschedule(new TranslateTimerTask(), searchDelay);
 			}
 		}
 		catch (Throwable t)
@@ -333,9 +345,22 @@ public class MainForm
 		}
 	}
 
-	// This is a helper class that is used as a workaround for Blackberrys.
-	// Its run method starts a translation
-	class TranslateRunnable implements Runnable {
+	// SingleTimer ensures in its method reschedule, that only one TimerTask is scheduled.
+	// Previously scheduled tasks will be cancelled.
+	class RescheduleTimer extends Timer {
+		TimerTask lastTimerTask = null;
+		public void reschedule(TimerTask task, long delay) {
+			if (lastTimerTask != null) {
+				// cancel last timer task
+				lastTimerTask.cancel();
+			}
+			schedule(task, delay);
+			lastTimerTask = task;
+		}
+	}
+	
+	// The TimerTask starts a translation
+	class TranslateTimerTask extends TimerTask {
 		public void run() {
 			try
 			{
