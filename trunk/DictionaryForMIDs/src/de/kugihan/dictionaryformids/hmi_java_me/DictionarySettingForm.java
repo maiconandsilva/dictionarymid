@@ -81,6 +81,7 @@ public class DictionarySettingForm
 	public DictionarySettingForm(Display displayParam,
 			                     Form callingFormParam) 
 			          throws DictionaryException {
+		super();
 		callingForm = callingFormParam;
 		display = displayParam;
 
