@@ -88,4 +88,5 @@ public class UIDisplayTextItems {
 	public static final UIDisplayTextItem DictionaryForMIDsApplicationName = LanguageUI.getUI().createNewUIDisplayTextItem("DictionaryForMIDsApplicationName", 68, 0);
 	public static final UIDisplayTextItem MessageNoDictionaryLoaded = LanguageUI.getUI().createNewUIDisplayTextItem("MessageNoDictionaryLoaded", 69, 0);
 	public static final UIDisplayTextItem CommandBack = LanguageUI.getUI().createNewUIDisplayTextItem("CommandBack", 70, 0);
+	public static final UIDisplayTextItem SearchAllLanguages = LanguageUI.getUI().createNewUIDisplayTextItem("SearchAllLanguages", 71, 0);
 }
