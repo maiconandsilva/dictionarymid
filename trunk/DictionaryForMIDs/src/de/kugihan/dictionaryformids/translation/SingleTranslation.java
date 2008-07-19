@@ -50,8 +50,9 @@ public class SingleTranslation {
 	int compareTo(SingleTranslation otherSingleTranslation) {
 		int compareResult;
 		int directoryFileLocationCompared = directoryFileLocation.compareTo(otherSingleTranslation.directoryFileLocation);
-		if (directoryFileLocationCompared == 0) {
-			// translations are identical
+		if ((directoryFileLocationCompared == 0) &&
+		    (fromText.getLanguageIndex() == otherSingleTranslation.getFromText().getLanguageIndex())) {
+			// translations are identical (same location and same translation direction)
 			compareResult = directoryFileLocationCompared;
 		}
 		else {

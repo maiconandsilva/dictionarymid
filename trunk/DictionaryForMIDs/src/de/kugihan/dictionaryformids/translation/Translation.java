@@ -543,7 +543,7 @@ public class Translation {
 						new SingleTranslation(fromText, 
 						                      toTexts,
 							                  foundAtBeginOfExpression,
-							                  0, // primarySortNumber is currently not used
+							                  fromText.getLanguageIndex(), // primary sorting according to language of fromText
 							                  directoryFileLocation);
 		// sort entries and remove duplicates 
 		// optimization: this needs to be implemented more efficiently; current implementation is

@@ -97,7 +97,7 @@ StartDisplaySizeOfDictionaryInKb ; size of the dictionary in kB: %1 is the size
 DictionaryForMIDsApplicationName ; this is the name of the DictionaryForMIDs application. Should be set to "[no translation]" for most languages (Chinese and Japanese may be an exception)
 MessageNoDictionaryLoaded ; this is displayed when no dictionary is loaded in JSR-75 mode
 CommandBack
-SearchAllLanguages ; this will be shown in the title bar of the application instead of FromLanguageToLanguage if all languages are searched
+SearchAllLanguages ; this will be shown in the title bar and in the settings dialogue
 ================================================================================
 #English, en
 

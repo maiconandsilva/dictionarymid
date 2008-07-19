@@ -8,9 +8,9 @@ GPL applies - see file COPYING for copyright statement.
 package de.kugihan.dictionaryformids.hmi_java_me.mainform;
 
 import java.util.Enumeration;
-import java.util.Vector;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Vector;
 
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.AlertType;
@@ -48,9 +48,11 @@ import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.UIDisplayTextItem;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.UIDisplayTextItems;
 import de.kugihan.dictionaryformids.translation.SingleTranslation;
+import de.kugihan.dictionaryformids.translation.TextOfLanguage;
 import de.kugihan.dictionaryformids.translation.Translation;
 import de.kugihan.dictionaryformids.translation.TranslationExecution;
 import de.kugihan.dictionaryformids.translation.TranslationExecutionCallback;
+import de.kugihan.dictionaryformids.translation.TranslationParameters;
 import de.kugihan.dictionaryformids.translation.TranslationResult;
 
 public class MainForm 
@@ -387,8 +389,33 @@ public class MainForm
 			// for JSR75 support this needs to be done in a separate thread
 			if (DictionarySettings.isUseFileAccessJSR75())
 				executeInBackground = true;
-			TranslationExecution.executeTranslation(addSearchCharacters(word),  
-												    executeInBackground);
+			// set parameters for translation:
+			boolean [] inputLanguages = new boolean[DictionaryDataFile.numberOfAvailableLanguages];
+			boolean [] outputLanguages;
+			if (DictionarySettings.getInputLanguage() != DictionarySettings.inputLanguageAll) {
+				for (int languageCount = 0; languageCount < DictionaryDataFile.numberOfAvailableLanguages; ++languageCount) 
+					inputLanguages[languageCount] = false;
+				inputLanguages[DictionarySettings.getInputLanguage()] = true;
+				outputLanguages = DictionarySettings.getOutputLanguage();
+			}
+			else {
+				outputLanguages = new boolean[DictionaryDataFile.numberOfAvailableLanguages];
+				for (int languageCount = 0; languageCount < DictionaryDataFile.numberOfAvailableLanguages; ++languageCount) {
+					// search over all languages
+					inputLanguages[languageCount] = true;
+					outputLanguages[languageCount] = true;
+				}
+			}
+
+			TranslationParameters translationParametersObj = 
+						new TranslationParameters(addSearchCharacters(word),
+								                  inputLanguages,
+								                  outputLanguages,
+								                  executeInBackground,
+								                  DictionarySettings.getMaxHits(),
+								                  DictionarySettings.getDurationForCancelSearch());
+			// execute translation:
+			TranslationExecution.executeTranslation(translationParametersObj);
 			setFocusToBeTranslatedWordTextField(); 	
 			translatedWord = word;
 			indexOfSelectedItem = -1;
@@ -456,7 +483,7 @@ public class MainForm
 	public void changeInputLanguage() 
 			throws DictionaryException {
 		// chooses the next input language
-		dictionarySettingFormObj.selectNextInputLanguage();
+		dictionarySettingFormObj.changeTranslationDirection();
 	}
 	
 	public void dictionarySetting() {
@@ -605,15 +632,21 @@ public class MainForm
 		else  {
 			if ((DictionarySettings.isDictionaryAvailable()) && 
 				(dictionarySettingFormObj != null)) { // in order to set from/to language the settings must be available 
-				                                      // more than one input language: indicate translation direction
-				UIDisplayTextItem inputLanguageUIDisplayTextItem = 
-					LanguageUI.getUI().getLanguageDisplayTextItem(DictionaryDataFile.supportedLanguages[DictionarySettings.getInputLanguage()].languageDisplayText);
-				UIDisplayTextItem outputLanguageUIDisplayTextItem = 
-					LanguageUI.getUI().getLanguageDisplayTextItem(DictionaryDataFile.supportedLanguages[DictionarySettings.determineOutputLanguage()].languageDisplayText);
-				UIDisplayTextItems.FromLanguageToLanguage.setAllParameterValues(
-														new Object [] { inputLanguageUIDisplayTextItem, 
-																        outputLanguageUIDisplayTextItem });
-				setTitleUIDisplayTextItem(UIDisplayTextItems.FromLanguageToLanguage);
+				if (DictionarySettings.getInputLanguage() == DictionarySettings.inputLanguageAll) {
+					// search over all input languages:
+					setTitleUIDisplayTextItem(UIDisplayTextItems.SearchAllLanguages);
+				}
+				else {                                      
+					// indicate translation direction
+					UIDisplayTextItem inputLanguageUIDisplayTextItem = 
+						LanguageUI.getUI().getLanguageDisplayTextItem(DictionaryDataFile.supportedLanguages[DictionarySettings.getInputLanguage()].languageDisplayText);
+					UIDisplayTextItem outputLanguageUIDisplayTextItem = 
+						LanguageUI.getUI().getLanguageDisplayTextItem(DictionaryDataFile.supportedLanguages[DictionarySettings.determineOutputLanguage()].languageDisplayText);
+					UIDisplayTextItems.FromLanguageToLanguage.setAllParameterValues(
+															new Object [] { inputLanguageUIDisplayTextItem, 
+																	        outputLanguageUIDisplayTextItem });
+					setTitleUIDisplayTextItem(UIDisplayTextItems.FromLanguageToLanguage);
+				}
 			}
 		}
 	}
@@ -769,37 +802,39 @@ public class MainForm
 
 	void displaySingleTranslation
 					(SingleTranslation singleTranslation)  
-
 				throws DictionaryException {
-		String translationFromString = singleTranslation.fromText.toString();
-		String translationToString   = singleTranslation.toText.toString();
+		// display of "from text":
+		TextOfLanguage fromText = singleTranslation.getFromText();		
 		Item translationFromItem;
-		Item translationToItem;
-
-		boolean useBitmapFont = DictionarySettings.getUseBitmapFont();
-
 		StringColourItemText translationFromItemText = 
-			contentParserObj.determineItemsFromContent(translationFromString, 
-													   DictionarySettings.getInputLanguage(),
-													   true);
-		StringColourItemText translationToItemText   = 
-			contentParserObj.determineItemsFromContent(translationToString, 
-													   DictionarySettings.determineOutputLanguage(),
-													   true); 
+			contentParserObj.determineItemsFromContent(fromText, true, true);
 		int width = this.getWidth();
 		translationFromItem = mainFormItemsObj.createTranslationItem(translationFromItemText, true, width); 
-		translationToItem   = mainFormItemsObj.createTranslationItem(translationToItemText, false, width); 
 
 		addTranslationItem(translationFromItem);
 		if (DictionarySettings.getShowTranslationList()) {
 			setTranslationItemCommand(translationFromItem);
 			translationFromItem.setItemCommandListener(this);
 		}
+		
+		// display of "to texts":
 		if ((! DictionarySettings.getShowTranslationList()) || (! translationListDisplayList)) {
-			addTranslationItem(translationToItem);
-			if (DictionarySettings.getShowTranslationList()) {
-				setTranslationItemCommand(translationToItem);
-				translationToItem.setItemCommandListener(this);
+			Enumeration  toTextsEnum = singleTranslation.getToTexts().elements();
+			while (toTextsEnum.hasMoreElements()) {
+				TextOfLanguage toText = (TextOfLanguage) toTextsEnum.nextElement();
+				// if search over all languages was done, then don't display toTexts in the same language as the fromText
+				if (!((DictionarySettings.getInputLanguage() == DictionarySettings.inputLanguageAll) &&
+					  (toText.getLanguageIndex() == fromText.getLanguageIndex()))) {
+					Item translationToItem;
+					StringColourItemText translationToItemText = 
+						contentParserObj.determineItemsFromContent(toText, true, false); 
+					translationToItem   = mainFormItemsObj.createTranslationItem(translationToItemText, false, width); 
+					addTranslationItem(translationToItem);
+					if (DictionarySettings.getShowTranslationList()) {
+						setTranslationItemCommand(translationToItem);
+						translationToItem.setItemCommandListener(this);
+					}
+				}
 			}
 		}
 	}

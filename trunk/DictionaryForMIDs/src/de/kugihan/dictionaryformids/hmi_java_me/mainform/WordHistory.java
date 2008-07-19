@@ -78,7 +78,7 @@ public class WordHistory {
 		MainForm.applicationMainForm.toBeTranslatedWordTextField.setString(historyWord[curHistoryPos]);
 		MainForm.applicationMainForm.dictionarySettingFormObj.setInputLanguage(fromLanguageHistory[curHistoryPos]);
 		MainForm.applicationMainForm.dictionarySettingFormObj.setOutputLanguage(toLanguageHistory[curHistoryPos]);
-		TranslationExecution.executeTranslation(historyWord[curHistoryPos], false);		
+		MainForm.applicationMainForm.translateWord(historyWord[curHistoryPos], false);		
 		saveFlag = true;
 	}
 
