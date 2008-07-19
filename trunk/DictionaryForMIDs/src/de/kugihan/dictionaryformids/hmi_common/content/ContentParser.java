@@ -15,6 +15,7 @@ import de.kugihan.dictionaryformids.dataaccess.content.ContentLib;
 import de.kugihan.dictionaryformids.dataaccess.content.PredefinedContent;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
+import de.kugihan.dictionaryformids.translation.TextOfLanguage;
 
 public class ContentParser {
 
@@ -22,15 +23,17 @@ public class ContentParser {
 	Stack  		 contentHierarchy = new Stack();
 	StringBuffer text = new StringBuffer();
 	
-	public StringColourItemText determineItemsFromContent(String  contentString, 
-			                                              int     languageIndex, 
-			                                              boolean changeInputAndOutputContent) 
+	public StringColourItemText determineItemsFromContent(TextOfLanguage contentText, 
+			                                              boolean changeInputAndOutputContent,
+			                                              boolean isInput) 
 				throws DictionaryException {
+		int languageIndex = contentText.getLanguageIndex();
+		String contentString = contentText.getText();
 		stringColourItemText = new StringColourItemText();
 		int currentContentNumber = 0;
 		ContentDefinition[] contents = DictionaryDataFile.supportedLanguages[languageIndex].contents;
 		// default content is the outmost level:
-		pushNewContent(contents[0], languageIndex, changeInputAndOutputContent);
+		pushNewContent(contents[0], changeInputAndOutputContent, isInput);
 		
 		int contentStringLength = contentString.length();
 		int charCount = 0;
@@ -49,7 +52,7 @@ public class ContentParser {
 					if ((contentNumber < 1) || (contentNumber >= contents.length)) {
 						throwContentFormatException("Incorrect content number: " + contentNumber);
 					}
-					pushNewContent(contents[contentNumber], languageIndex, changeInputAndOutputContent);
+					pushNewContent(contents[contentNumber], changeInputAndOutputContent, isInput);
 				}
 				else if (contentChar == ContentLib.endOfContentChar) {
 					addStringColourItemTextPart();
@@ -84,14 +87,14 @@ public class ContentParser {
 	}
 	
 	void pushNewContent(ContentDefinition newContent,
-			            int languageIndex,
-                        boolean changeInputAndOutputContent) throws DictionaryException {
+                        boolean changeInputAndOutputContent,
+                        boolean isInput) throws DictionaryException {
 		if (changeInputAndOutputContent) {
 			// if newContent is the contentNoDefinitionProvided, then replace by contentInput/OutputLanguage if applicable
 			if (newContent == PredefinedContent.getContentNoDefinitionProvided()) {
-				if (languageIndex == DictionarySettings.getInputLanguage())
+				if (isInput)
 					newContent = PredefinedContent.getContentInputLanguage();
-				else if (languageIndex == DictionarySettings.determineOutputLanguage())
+				else // output
 					newContent = PredefinedContent.getContentOutputLanguage();
 	        }
 		}
