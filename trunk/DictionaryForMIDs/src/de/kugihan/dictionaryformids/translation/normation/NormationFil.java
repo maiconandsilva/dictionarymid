@@ -10,9 +10,18 @@ import de.kugihan.dictionaryformids.general.Util;
 
 public class NormationFil extends Normation {
 
+	NormationLat normationLatObj = null;
+	
+	NormationLat getNormationLatObj() {
+		if (normationLatObj == null)
+			normationLatObj = new NormationLat();
+		return normationLatObj;
+	}
+	
 	public StringBuffer normateWord(StringBuffer nonNormatedWord,
                                     boolean      fromUserInput) {
-		StringBuffer defaultNormatedWord = NormationLib.defaultNormation(nonNormatedWord, fromUserInput);
+		// apply NormationLat, because some Filipino use accents
+		StringBuffer defaultNormatedWord = getNormationLatObj().normateWord(nonNormatedWord, fromUserInput);
 		StringBuffer normatedWord = new StringBuffer();
 		for (int charPos = 0; charPos < defaultNormatedWord.length(); ++charPos) {
 			if (defaultNormatedWord.charAt(charPos) == 'b') {
