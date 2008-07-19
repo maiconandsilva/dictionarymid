@@ -26,26 +26,17 @@ public class DictionarySettings
 	private static boolean addAtBeginNoSearchSubExpressionCharacter;
 	private static boolean addAtEndWildcardAnySeriesOfCharacter;
 	private static int maxHits = 30;   // currently not set from this dialog
-	private static int durationForCancelSearch = 60*1000;  // in milliseconds // currently not set from this dialog
+	private static int durationForCancelSearch = 60*1000;  // in milliseconds; currently hard set value
 	private static int fontSize;
 	private static int uiLanguage;
 	private static RGBColour backgroundColour;  // background colour for the display
 	private static boolean useBackgroundColour;
-	private static boolean microedition = true;
 	private static boolean cldc11 = false;
 	private static boolean useFileAccessJSR75 = false; 
 	private static boolean dictionaryAvailable;
 	private static String dictionaryPath;
 //	private static boolean[] contentIsShown;
 	
-	public static boolean isMicroedition()
-	{
-		return microedition;
-	}
-	public static void setMicroedition(boolean microedition)
-	{
-		DictionarySettings.microedition = microedition;
-	}
 	public static int getDurationForCancelSearch()
 	{
 		return durationForCancelSearch;
@@ -86,6 +77,7 @@ public class DictionarySettings
 	{
 		DictionarySettings.bitmapFontSize = bitmapSize;
 	}
+	public static final int inputLanguageAll = -1; // search over all languages
 	public static int getInputLanguage()
 	{
 		return inputLanguage;
