@@ -20,12 +20,12 @@ public class TranslationExecution {
 		translationResultHMIObj = translationResultHMIObjParam;
 	}
 	
-	public synchronized static void executeTranslation(String toBeTranslatedWordTextParam, boolean executeInBackground)
+	public synchronized static void executeTranslation(TranslationParameters translationParametersObj)
 	throws DictionaryException
 	{
 		cancelLastTranslation();
-		TranslationThread newTranslationThread = new TranslationThread(toBeTranslatedWordTextParam, executeInBackground);
-	    if (executeInBackground) {
+		TranslationThread newTranslationThread = new TranslationThread(translationParametersObj);
+	    if (translationParametersObj.isExecuteInBackground()) {
 	    	// start new translation thread
 	    	Thread executionThread = new Thread(newTranslationThread);
 	    	newTranslationThread.setOwnExecutionThread(executionThread);
@@ -51,13 +51,10 @@ class TranslationThread implements Runnable {
 	protected volatile boolean translationIsCancelled = false;  // indicates whether the running translation should be aborted
 	protected Translation translate = null;
 	protected Thread ownExecutionThread;
-	protected String toBeTranslatedWordText;
-	protected boolean executeInBackground;
+	protected TranslationParameters translationParametersObj;
 	
-	public TranslationThread(String toBeTranslatedWordTextParam,
-			                 boolean executeInBackgroundParam) {
-		toBeTranslatedWordText = toBeTranslatedWordTextParam;
-		executeInBackground = executeInBackgroundParam;
+	public TranslationThread(TranslationParameters translationParametersObjParam) {
+		translationParametersObj = translationParametersObjParam;
 	}
 	
 	public void setOwnExecutionThread(Thread threadParam) {
@@ -93,42 +90,18 @@ class TranslationThread implements Runnable {
 				TranslationExecution.translationResultHMIObj.deletePreviousTranslationResult();
 		}
 		
-		if (executeInBackground) {
+		if (translationParametersObj.isExecuteInBackground()) {
 		    // set a low priority for the thread
 			ownExecutionThread.setPriority(Thread.NORM_PRIORITY - 2);
 		}
 		
-		toBeTranslatedWordText = Util.removeSuperflousSearchCharacters(toBeTranslatedWordText);
-
 		// get new translation
-		if (toBeTranslatedWordText.length() > 0) {
-			// check if there is the noSearchSubExpression at the beginning or the end of the
-			// to be translated word
-			boolean searchSubExpressionStart = true;
-			boolean searchSubExpressionEnd = true;
-			if (toBeTranslatedWordText.charAt(0) == Translation.noSearchSubExpressionCharacter) {
-				searchSubExpressionStart = false;
-				if (toBeTranslatedWordText.length() > 1)
-					toBeTranslatedWordText = toBeTranslatedWordText.substring(1);
-				else
-					toBeTranslatedWordText = new String("");
-			}
-			else {
-				searchSubExpressionStart = true;
-			}
-			if ((toBeTranslatedWordText.length() > 0) && 
-			    (toBeTranslatedWordText.charAt(toBeTranslatedWordText.length() - 1) == Translation.noSearchSubExpressionCharacter)) {
-				searchSubExpressionEnd = false;
-				toBeTranslatedWordText = toBeTranslatedWordText.substring(0, toBeTranslatedWordText.length() - 1);
-			}
-			else {
-				searchSubExpressionEnd = true;
-			}
-			translate = new Translation(searchSubExpressionStart, searchSubExpressionEnd);
+		if (! translationParametersObj.toBeTranslatedWordTextIsEmpty()) {
+			translate = new Translation(translationParametersObj);
 			TranslationResult resultOfTranslation = null;
 			
 			if (!translationIsCancelled)
-				resultOfTranslation = translate.getTranslationResult(toBeTranslatedWordText);
+				resultOfTranslation = translate.getTranslationResult();
 			
 			// display new result
 			synchronized(this) {

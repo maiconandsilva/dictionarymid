@@ -7,23 +7,25 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.translation;
 
+import java.util.Vector;
+
 import de.kugihan.dictionaryformids.general.Util;
 
 public class SingleTranslation {
-	public    StringBuffer fromText;
-	public    StringBuffer toText;
-	protected boolean      foundAtBeginOfExpression;
+	protected TextOfLanguage fromText;
+	protected Vector 	     toTexts;  // Vector of TextOfLanguage-elements
+	protected boolean        foundAtBeginOfExpression;
 	protected DirectoryFileLocation directoryFileLocation;
-	protected int primarySortNumber;
-	protected int internalSortNumber;
+	protected int 			 primarySortNumber;
+	protected int 			 internalSortNumber;
 	
-	public SingleTranslation(StringBuffer          fromTextParam, 
-			                 StringBuffer          toTextParam,
+	public SingleTranslation(TextOfLanguage        fromTextParam, 
+			                 Vector          	   toTextsParam,
 			                 boolean      		   foundAtBeginOfExpressionParam,
 			                 int 				   primarySortNumberParam,
 			                 DirectoryFileLocation directoryFileLocationParam) {
 		fromText = fromTextParam;
-		toText = toTextParam;
+		toTexts = toTextsParam;
 		foundAtBeginOfExpression = foundAtBeginOfExpressionParam;
 		primarySortNumber = primarySortNumberParam;
 		directoryFileLocation = directoryFileLocationParam;
@@ -34,8 +36,8 @@ public class SingleTranslation {
 		// count the number of words in fromText
 		int numberOfWords = 1;
 		boolean inSeparator = false;
-		for (int charCount = 0; charCount < fromText.length(); ++charCount) {
-			boolean isSeparatorCharacter = Util.isSeparatorCharacter(fromText.charAt(charCount));
+		for (int charCount = 0; charCount < fromText.text.length(); ++charCount) {
+			boolean isSeparatorCharacter = Util.isSeparatorCharacter(fromText.text.charAt(charCount));
 			if (! inSeparator) {
 				if (isSeparatorCharacter)
 					++numberOfWords;
@@ -84,6 +86,14 @@ public class SingleTranslation {
 			}
 		}
 		return compareResult;
+	}
+
+	public TextOfLanguage getFromText() {
+		return fromText;
+	}
+
+	public Vector getToTexts() {
+		return toTexts;
 	}
 
 }
