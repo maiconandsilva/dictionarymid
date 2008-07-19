@@ -69,8 +69,10 @@ import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
 import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart;
 import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 import de.kugihan.dictionaryformids.translation.SingleTranslation;
+import de.kugihan.dictionaryformids.translation.TextOfLanguage;
 import de.kugihan.dictionaryformids.translation.TranslationExecution;
 import de.kugihan.dictionaryformids.translation.TranslationExecutionCallback;
+import de.kugihan.dictionaryformids.translation.TranslationParameters;
 import de.kugihan.dictionaryformids.translation.TranslationResult;
 
 /**
@@ -165,7 +167,6 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		
 		timerStatus.setRepeats(false);
 		
-		DictionarySettings.setMicroedition(false);
 		DictionarySettings.setMaxHits(10000);
 		fillTableColums();
 		createGUI();
@@ -543,8 +544,8 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	// Method create a boolean for selecting only one output language!
 	private boolean[] createBooleanArray(int sel, int max)
 	{
-		boolean[] retValue = new boolean[max+1];
-		for (int i=0; i<=max; i++)
+		boolean[] retValue = new boolean[max]; // Gert: was [max+1], but this caused problems because of incorrect array element count
+		for (int i=0; i<max; i++)
 		{
 			if (i == sel)
 			{
@@ -693,7 +694,19 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 				try
 				{
 					lStatus.setText("Searching...");
-					TranslationExecution.executeTranslation(lastSearch, false);
+					boolean [] inputLanguages = new boolean[DictionaryDataFile.numberOfAvailableLanguages];
+					for (int languageCount = 0; languageCount < DictionaryDataFile.numberOfAvailableLanguages; ++languageCount)
+						inputLanguages[languageCount] = false;
+					inputLanguages[DictionarySettings.getInputLanguage()] = true;
+					boolean [] outputLanguages = DictionarySettings.getOutputLanguage();
+					TranslationParameters translationParametersObj = 
+								new TranslationParameters(lastSearch,
+										                  inputLanguages,
+										                  outputLanguages,
+										                  false,  // no background execution
+										                  DictionarySettings.getMaxHits(),
+										                  DictionarySettings.getDurationForCancelSearch());
+					TranslationExecution.executeTranslation(translationParametersObj);
 				}
 				catch (Throwable t)
 				{
@@ -916,7 +929,8 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		try
 		{
 			ContentParser cp = new ContentParser();
-			StringColourItemText result = cp.determineItemsFromContent(text, languageIndex, true);
+			StringColourItemText result = 
+							cp.determineItemsFromContent(new TextOfLanguage(text, languageIndex), false, false);
 			StringBuffer returnString = new StringBuffer();
 			String lastColour = null;
 			
@@ -1006,16 +1020,18 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 			{
 				tmp.clear();
 				SingleTranslation singleTranslation = (SingleTranslation)translationsEnum.nextElement();
+				String fromTextString = ((TextOfLanguage) singleTranslation.getFromText()).getText();
+				String toTextString = ((TextOfLanguage) singleTranslation.getToTexts().elementAt(0)).getText(); // only use 1st element
 				// Add results to Vector
 				if (rightSearch)
 				{
-					tmp.addElement(getColouredHTMLText(singleTranslation.toText.toString(), languagesAll.indexOf(languages.elementAt(0))));
-					tmp.addElement(getColouredHTMLText(singleTranslation.fromText.toString(), languagesAll.indexOf(languages.elementAt(1))));
+					tmp.addElement(getColouredHTMLText(toTextString, languagesAll.indexOf(languages.elementAt(0))));
+					tmp.addElement(getColouredHTMLText(fromTextString, languagesAll.indexOf(languages.elementAt(1))));
 				}
 				else
 				{
-					tmp.addElement(getColouredHTMLText(singleTranslation.fromText.toString(), languagesAll.indexOf(languages.elementAt(0))));
-					tmp.addElement(getColouredHTMLText(singleTranslation.toText.toString(), languagesAll.indexOf(languages.elementAt(1))));
+					tmp.addElement(getColouredHTMLText(fromTextString, languagesAll.indexOf(languages.elementAt(0))));
+					tmp.addElement(getColouredHTMLText(toTextString, languagesAll.indexOf(languages.elementAt(1))));
 				}
 				addTableRow(tmp);
 			}
