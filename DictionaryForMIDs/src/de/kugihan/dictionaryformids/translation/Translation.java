@@ -15,13 +15,28 @@ import de.kugihan.dictionaryformids.translation.normation.Normation;
 
 public class Translation {
 
-	boolean searchSubExpressionStart = true;
-	boolean searchSubExpressionEnd = true;
+	public String  		toBeTranslatedWordText; 
+	public boolean[]	inputLanguages;  
+	public boolean[]	outputLanguages; 
+	boolean 			searchSubExpressionStart;
+	boolean 			searchSubExpressionEnd;
+	int					maxHits;
+	int 				durationForCancelSearch;
 	
-	public Translation(boolean searchSubExpressionStartParam, 
-					   boolean searchSubExpressionEndParam) {
-		searchSubExpressionStart = searchSubExpressionStartParam;
-		searchSubExpressionEnd = searchSubExpressionEndParam;
+	public Translation(TranslationParameters translationParametersObj) 
+						throws DictionaryException  {
+		toBeTranslatedWordText = translationParametersObj.getToBeTranslatedWordText();
+		inputLanguages = translationParametersObj.getInputLanguages();
+		outputLanguages = translationParametersObj.getOutputLanguages();
+		searchSubExpressionStart = translationParametersObj.isSearchSubExpressionStart();
+		searchSubExpressionEnd = translationParametersObj.isSearchSubExpressionEnd();
+		maxHits = translationParametersObj.getMaxHits();
+		durationForCancelSearch = translationParametersObj.getDurationForCancelSearch();
+		
+		if ((inputLanguages.length != DictionaryDataFile.numberOfAvailableLanguages) || 
+			(outputLanguages.length != DictionaryDataFile.numberOfAvailableLanguages)) {
+			throw  new DictionaryException("Incorrect number of array elements for inputLanguages/outputLanguages"); 
+		}
 	}
 	
 	// 'shortcuts' for the characters with a special meaning for search: 
@@ -63,24 +78,32 @@ public class Translation {
 	long startTime;
 	
 	volatile boolean translationIsCancelled = false;
+
 	
-	public TranslationResult getTranslationResult(String toBeTranslatedWord) {
+	public TranslationResult getTranslationResult() {
 
 		resultOfTranslation = new TranslationResult();
 		startTime = System.currentTimeMillis();
 		Util.memCheck("start translation: ");
 		
 		try { 
-			Normation normationObj = DictionaryDataFile.supportedLanguages[DictionarySettings.getInputLanguage()].normationObj;
-			// determine search words from the to be translated word
-			Vector searchWords = normationObj.searchWord(toBeTranslatedWord);
-			// get translation for each searchWord
-			for (int wordCount = 0; wordCount < searchWords.size(); ++wordCount) {
-				SearchedWord searchWord = (SearchedWord) searchWords.elementAt(wordCount);
-				String nonNormatedWord = searchWord.word;
-				String toBeTranslatedWordNormated = normationObj.normateWord(new StringBuffer(nonNormatedWord), true).toString();
-				if (toBeTranslatedWordNormated.length() > 0) {
-					searchTranslationForNormatedWord(toBeTranslatedWordNormated);
+			for (int languageCount = 0; languageCount < DictionaryDataFile.numberOfAvailableLanguages; ++languageCount) {
+				LanguageDefinition languageDefinitionObj = DictionaryDataFile.supportedLanguages[languageCount];
+				if (languageDefinitionObj.isSearchable && inputLanguages[languageCount]) {
+					// search for this language
+					int inputLanguageForSearch = languageCount; 
+					Normation normationObj = DictionaryDataFile.supportedLanguages[inputLanguageForSearch].normationObj;
+					// determine search words from the to be translated word
+					Vector searchWords = normationObj.searchWord(toBeTranslatedWordText);
+					// get translation for each searchWord
+					for (int wordCount = 0; wordCount < searchWords.size(); ++wordCount) {
+						SearchedWord searchWord = (SearchedWord) searchWords.elementAt(wordCount);
+						String nonNormatedWord = searchWord.word;
+						String toBeTranslatedWordNormated = normationObj.normateWord(new StringBuffer(nonNormatedWord), true).toString();
+						if (toBeTranslatedWordNormated.length() > 0) {
+							searchTranslationForNormatedWord(inputLanguageForSearch, toBeTranslatedWordNormated);
+						}
+					}
 				}
 			}
 		}
@@ -94,7 +117,7 @@ public class Translation {
 		return resultOfTranslation;
 	}
 	
-	public void searchTranslationForNormatedWord(String toBeTranslatedWordNormated) 
+	public void searchTranslationForNormatedWord(int inputLanguageForSearch, String toBeTranslatedWordNormated) 
 						throws DictionaryException  {
 		String initialSearchExpression;
 		boolean containsWildcard = (positionFirstWildcardCharacter(toBeTranslatedWordNormated) >= 0);
@@ -107,7 +130,7 @@ public class Translation {
 		/* 
 		 * read searchlist file
 		 */
-		String languagePostfix = DictionaryDataFile.supportedLanguages[DictionarySettings.getInputLanguage()].languageFilePostfix;
+		String languagePostfix = DictionaryDataFile.supportedLanguages[inputLanguageForSearch].languageFilePostfix;
 		String searchListFileName = DictionaryDataFile.getPathDataFiles() + 
 								    DictionaryDataFile.prefixSearchListFile + 
 									languagePostfix +
@@ -132,19 +155,19 @@ public class Translation {
 				if (firstPartWordInIndex.startsWith(initialSearchExpression)) {
 					if (! lastIndexFileSearched) {
 						if (indexFileNumber != null) {
-							if (searchInIndexFileBreakCondition(toBeTranslatedWordNormated, indexFileNumber))
+							if (searchInIndexFileBreakCondition(inputLanguageForSearch, toBeTranslatedWordNormated, indexFileNumber))
 								break;
 						}
 					}
 					indexFileNumber = searchListFile.getWord().toString();
-					if (searchInIndexFileBreakCondition(toBeTranslatedWordNormated, indexFileNumber))
+					if (searchInIndexFileBreakCondition(inputLanguageForSearch, toBeTranslatedWordNormated, indexFileNumber))
 						break;
 					lastIndexFileSearched = true;
 				}
 				else if (firstPartWordInIndex.compareTo(initialSearchExpression) > 0) {
 					if (! lastIndexFileSearched)
 						if (indexFileNumber != null) {
-							if (searchInIndexFileBreakCondition(toBeTranslatedWordNormated, indexFileNumber))
+							if (searchInIndexFileBreakCondition(inputLanguageForSearch, toBeTranslatedWordNormated, indexFileNumber))
 								break;
 						}
 					break;
@@ -157,7 +180,7 @@ public class Translation {
 				if (wordInIndex.compareTo(initialSearchExpression) >= 0) {
 					// the last index file was the right one
 					if (indexFileNumber != null) {
-						if (searchInIndexFileBreakCondition(toBeTranslatedWordNormated, indexFileNumber))
+						if (searchInIndexFileBreakCondition(inputLanguageForSearch, toBeTranslatedWordNormated, indexFileNumber))
 							break;
 					}
 					// the search is continued 
@@ -190,26 +213,26 @@ public class Translation {
 
 		if (searchListFile.endOfDictionaryReached && (! lastIndexFileSearched)) {
 			// search in the last index file
-			searchInIndexFileBreakCondition(toBeTranslatedWordNormated, indexFileNumber);
+			searchInIndexFileBreakCondition(inputLanguageForSearch, toBeTranslatedWordNormated, indexFileNumber);
 		}
 		searchListFile = null; // to allow garbage collection
 	}
 	
-	public boolean searchInIndexFileBreakCondition(String toBeTranslatedWordNormated, String indexFileNumber) 
+	public boolean searchInIndexFileBreakCondition(int inputLanguageForSearch, String toBeTranslatedWordNormated, String indexFileNumber) 
 							throws DictionaryException  {
 		if (translationBreakCondition()) {
 			return true;
 		}
 		else {
-			searchInIndexFile(toBeTranslatedWordNormated, indexFileNumber);
+			searchInIndexFile(inputLanguageForSearch, toBeTranslatedWordNormated, indexFileNumber);
 			return translationBreakCondition();
 		}
 	}
 	
-	public void searchInIndexFile(String toBeTranslatedWordNormated, String indexFileNumber) 
+	public void searchInIndexFile(int inputLanguageForSearch, String toBeTranslatedWordNormated, String indexFileNumber) 
 	                        throws DictionaryException  {
 		Util.getUtil().logDebug("indexFileNumber " + indexFileNumber);
-		String languagePostfix = DictionaryDataFile.supportedLanguages[DictionarySettings.getInputLanguage()].languageFilePostfix;
+		String languagePostfix = DictionaryDataFile.supportedLanguages[inputLanguageForSearch].languageFilePostfix;
 		String indexFileName = DictionaryDataFile.getPathDataFiles() + 
 	                           DictionaryDataFile.prefixIndexFile +
 							   languagePostfix +
@@ -252,7 +275,7 @@ public class Translation {
 					if (noWildcardMatchRest(searchExpression, indexEntry)) {
 						// entry found
 						indexStringLine = indexFile.getRestOfLine().toString();
-						getDictionaryEntry(indexStringLine);
+						getDictionaryEntry(inputLanguageForSearch, indexStringLine);
 					}
 					else {
 						indexFile.skipRestOfLine();
@@ -281,7 +304,7 @@ public class Translation {
 								  searchExpression.length())) {
 					// Strings matched
 					indexStringLine = indexFile.getRestOfLine().toString();
-					getDictionaryEntry(indexStringLine);
+					getDictionaryEntry(inputLanguageForSearch, indexStringLine);
 				}
 				else {
 					indexFile.skipRestOfLine();
@@ -400,7 +423,7 @@ public class Translation {
 		return false;
 	}
 
-	public void getDictionaryEntry(String indexStringLine) 
+	public void getDictionaryEntry(int inputLanguageForSearch, String indexStringLine) 
 					throws DictionaryException {
 		int posIndexFileSeparatorIndexEntries;
 		int posFirstCharIndexString = 0;
@@ -437,7 +460,7 @@ public class Translation {
 			else {
 				// ok, get the corresponding dictionary entry 
 				String postfixDictionaryFile;
-				LanguageDefinition supportedLanguage = DictionaryDataFile.supportedLanguages[DictionarySettings.getInputLanguage()]; 
+				LanguageDefinition supportedLanguage = DictionaryDataFile.supportedLanguages[inputLanguageForSearch]; 
 				if (supportedLanguage.hasSeparateDictionaryFile) {
 					// use the file postfix also for the dictionary file
 					postfixDictionaryFile =
@@ -457,7 +480,8 @@ public class Translation {
 						             new DirectoryFileLocation(directoryFileNumber,
 														       postfixDictionaryFile,
 														       positionInDirectoryFile);
-					getTranslation(directoryFileLocation, 
+					getTranslation(inputLanguageForSearch, 
+							       directoryFileLocation, 
 							       searchIndicatorObj.isBeginOfExpression());
 				}
 				else {
@@ -468,7 +492,9 @@ public class Translation {
 		while (posIndexFileSeparatorIndexEntries > 0);
 	}
 	
-	public void getTranslation(DirectoryFileLocation directoryFileLocation, boolean foundAtBeginOfExpression) 
+	public void getTranslation(int inputLanguageForSearch, 
+			                   DirectoryFileLocation directoryFileLocation, 
+			                   boolean foundAtBeginOfExpression) 
 			throws DictionaryException
 	{
 		String dictionaryFileName = DictionaryDataFile.getPathDataFiles() + 
@@ -485,76 +511,75 @@ public class Translation {
 											 directoryFileLocation.positionInDirectoryFile);
 
 		Util.memCheck("dictionaryfile open: ");
-		StringBuffer fromText = null; 
-		StringBuffer toText = null; 
+		TextOfLanguage fromText = null; 		
+		Vector toTexts = new Vector();
 		
-		int indexOutputLanguage = DictionarySettings.determineOutputLanguage();
 		for (int indexLanguage = 0;
   	         indexLanguage < DictionaryDataFile.numberOfAvailableLanguages;
 	         ++indexLanguage) {
 			StringBuffer word = dictionaryFile.getWord();
 			
-			if (DictionarySettings.getInputLanguage() == indexLanguage)
-				fromText = word;
-			if (indexOutputLanguage  == indexLanguage) { // should be extended to handle more than one language
-				toText = word;
+			if (inputLanguageForSearch == indexLanguage) {
+				Util.getUtil().convertFieldAndLineSeparatorChars(word);
+				fromText = new TextOfLanguage(word.toString(), indexLanguage);
+			}
+			if (outputLanguages[indexLanguage]) {
+				Util.getUtil().convertFieldAndLineSeparatorChars(word);
+				toTexts.addElement(new TextOfLanguage(word.toString(), indexLanguage));
 			}
 		}
-		addTranslation(fromText, toText, foundAtBeginOfExpression, directoryFileLocation);
+		addTranslation(fromText, 
+				       toTexts, 
+				       foundAtBeginOfExpression, 
+				       directoryFileLocation);
 		dictionaryFile = null; // to allow garbage collection
 	}
 	
-	public void addTranslation(StringBuffer 		 fromText, 
-			                   StringBuffer 		 toText,
-			                   boolean               foundAtBeginOfExpression,
+	public void addTranslation(TextOfLanguage 	fromText, 
+			                   Vector		 	toTexts,
+			                   boolean          foundAtBeginOfExpression,
 			                   DirectoryFileLocation directoryFileLocation) {
-		if (toText == null) // one-language dictionaries don't have a toText
-			toText = new StringBuffer();
-		if (toText.length() > 0) {
-			Util.getUtil().convertFieldAndLineSeparatorChars(fromText);
-			Util.getUtil().convertFieldAndLineSeparatorChars(toText);
-			SingleTranslation newSingleTranslation = 
-							new SingleTranslation(fromText, 
-							                      toText,
-								                  foundAtBeginOfExpression,
-								                  0, // primarySortNumber is currently not used
-								                  directoryFileLocation);
-			// sort entries and remove duplicates 
-			// optimization: this needs to be implemented more efficiently; current implementation is
-			//               slow if many results exist
-			int indexTranslation = 0;
-			int numberOfTranslations = resultOfTranslation.translations.size();
-			while (indexTranslation < numberOfTranslations) {
-				SingleTranslation translation = (SingleTranslation) resultOfTranslation.translations.elementAt(indexTranslation);
-				int translationsCompared = newSingleTranslation.compareTo(translation);
-				if (translationsCompared == 0) {
-					// duplicate entry: new translation is ignored
-					break;
-				}
-				else if (translationsCompared < 0) {
-					// insert new translation at current position
-					resultOfTranslation.insertTranslationAt(newSingleTranslation, indexTranslation);
-					break;
-				} 
-				else {
-					// continue to search for the right position 
-				}
-				++indexTranslation;
+		SingleTranslation newSingleTranslation = 
+						new SingleTranslation(fromText, 
+						                      toTexts,
+							                  foundAtBeginOfExpression,
+							                  0, // primarySortNumber is currently not used
+							                  directoryFileLocation);
+		// sort entries and remove duplicates 
+		// optimization: this needs to be implemented more efficiently; current implementation is
+		//               slow if many results exist
+		int indexTranslation = 0;
+		int numberOfTranslations = resultOfTranslation.translations.size();
+		while (indexTranslation < numberOfTranslations) {
+			SingleTranslation translation = (SingleTranslation) resultOfTranslation.translations.elementAt(indexTranslation);
+			int translationsCompared = newSingleTranslation.compareTo(translation);
+			if (translationsCompared == 0) {
+				// duplicate entry: new translation is ignored
+				break;
 			}
-			if (indexTranslation == numberOfTranslations) {
-				// add new translation at end
-				resultOfTranslation.addTranslation(newSingleTranslation);
+			else if (translationsCompared < 0) {
+				// insert new translation at current position
+				resultOfTranslation.insertTranslationAt(newSingleTranslation, indexTranslation);
+				break;
+			} 
+			else {
+				// continue to search for the right position 
 			}
+			++indexTranslation;
+		}
+		if (indexTranslation == numberOfTranslations) {
+			// add new translation at end
+			resultOfTranslation.addTranslation(newSingleTranslation);
 		}
 	}
 
 	boolean translationBreakCondition() {
-		if (resultOfTranslation.numberOfFoundTranslations() >= DictionarySettings.getMaxHits()) { 
+		if (resultOfTranslation.numberOfFoundTranslations() >= maxHits) { 
 			resultOfTranslation.translationBreakOccurred = true;
 			resultOfTranslation.translationBreakReason = TranslationResult.BreakReasonCancelMaxNrOfHitsReached;
 			return true;
 		}
-		else if (System.currentTimeMillis() - startTime >= DictionarySettings.getDurationForCancelSearch()) {
+		else if (System.currentTimeMillis() - startTime >= durationForCancelSearch) {
 			resultOfTranslation.translationBreakOccurred = true;
 			resultOfTranslation.translationBreakReason = TranslationResult.BreakReasonMaxExecutionTimeReached;
 			return true;
