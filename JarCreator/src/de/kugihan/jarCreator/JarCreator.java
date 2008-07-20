@@ -262,21 +262,19 @@ public static final String FILE_EMPTY_JAD_NAME = DictionaryDataFile.applicationF
 				}
 				if (fileIsLanguageIconFile) {
 					for (int language = 0; language < DictionaryDataFile.numberOfAvailableLanguages; ++language) {
-						if (DictionaryDataFile.supportedLanguages[language].isSearchable) {
-							String languageDisplayText = DictionaryDataFile.supportedLanguages[language].languageDisplayText;
-							String languageIconLocation = 
-								resourceHandlerObj.getResourceLocation(
-										resourceHandlerObj.buildIconPathName(iconSize.iconArea,
-																			 iconSize.iconSizeGroup,
-																			 iconSizeInPixel),
-							          	resourceHandlerObj.buildIconFileName(LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + 
-							          			                             languageDisplayText));
-							languageIconLocation = languageIconLocation.substring(1); // remove starting / -character
-							if (languageIconLocation.equalsIgnoreCase(fileName)) {
-								fileIsNeeded = true;
-								searchDone = true;
-								break;
-							}
+						String languageDisplayText = DictionaryDataFile.supportedLanguages[language].languageDisplayText;
+						String languageIconLocation = 
+							resourceHandlerObj.getResourceLocation(
+									resourceHandlerObj.buildIconPathName(iconSize.iconArea,
+																		 iconSize.iconSizeGroup,
+																		 iconSizeInPixel),
+						          	resourceHandlerObj.buildIconFileName(LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + 
+						          			                             languageDisplayText));
+						languageIconLocation = languageIconLocation.substring(1); // remove starting / -character
+						if (languageIconLocation.equalsIgnoreCase(fileName)) {
+							fileIsNeeded = true;
+							searchDone = true;
+							break;
 						}
 					}
 					if (searchDone)
@@ -290,7 +288,7 @@ public static final String FILE_EMPTY_JAD_NAME = DictionaryDataFile.applicationF
 	
 	static public void printCopyrightNotice() throws DictionaryException {
 		System.out.print(
-				"\n\nDictionaryForMIDs/JarCreator, Copyright (C) 2005-2007 Mathis Karmann et al\n" +
+				"\n\nDictionaryForMIDs/JarCreator, Copyright (C) 2005-2008 Mathis Karmann et al\n" +
 				"Version : " + Util.getUtil().getApplicationVersionString() + "\n\n" +
 				"This program comes with ABSOLUTELY NO WARRANTY\n\n" +
 				"This program is free software under the terms and conditions of the GPL " + 
