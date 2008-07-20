@@ -424,15 +424,35 @@ public class DictionarySettingForm
 		// save settings in SettingStore
 		
 		// input language:
-		int inputLanguageSettingsSelectedIndex = 
-			inputLanguageChoiceGroupToSettings(inputLanguageChoiceGroup.getSelectedIndex());
-		setInputLanguage(inputLanguageSettingsSelectedIndex);
+		if (inputLanguageChoiceGroup != null) {
+			int inputLanguageSettingsSelectedIndex = 
+				inputLanguageChoiceGroupToSettings(inputLanguageChoiceGroup.getSelectedIndex());
+			setInputLanguage(inputLanguageSettingsSelectedIndex);
+		}
 		
 		// output language:
-		boolean [] outputLanguageSettingsSelectedIndexes = new boolean [DictionaryDataFile.numberOfAvailableLanguages];
-		outputLanguageChoiceGroup.getSelectedFlags(outputLanguageSettingsSelectedIndexes);
-		setOutputLanguage(outputLanguageSettingsSelectedIndexes);
-		
+		if (outputLanguageChoiceGroup !=  null) {
+			boolean [] outputLanguageSettingsSelectedIndexes = new boolean [DictionaryDataFile.numberOfAvailableLanguages];
+			outputLanguageChoiceGroup.getSelectedFlags(outputLanguageSettingsSelectedIndexes);
+			setOutputLanguage(outputLanguageSettingsSelectedIndexes);
+		}
+		else if (inputLanguageChoiceGroup != null) {
+			// the choice group for input language exists, but not the choice group for the output language
+			// set output language to the non-input language
+			boolean [] outputLanguageSettingsSelectedIndexes = new boolean [DictionaryDataFile.numberOfAvailableLanguages];
+			if (DictionarySettings.getInputLanguage() == 0) {
+				// first language is selected as input language: use second language as output language
+				outputLanguageSettingsSelectedIndexes[0] = false;
+				outputLanguageSettingsSelectedIndexes[1] = true;
+			}
+			else {
+				// second language is selected as input language: use first language as output language
+				outputLanguageSettingsSelectedIndexes[0] = true;
+				outputLanguageSettingsSelectedIndexes[1] = false;
+			}
+			setOutputLanguage(outputLanguageSettingsSelectedIndexes);			
+		}
+			
 		// font size:
 		boolean fontSizeChanged = false;
 		if (! lastSettingUseBitmapFont) {
@@ -631,48 +651,25 @@ public class DictionarySettingForm
 		}
 	}
 
-	// currently not used:
-	public void selectNextInputLanguage() 
-			throws DictionaryException {
-		int inputLanguage = DictionarySettings.getInputLanguage();
-		int newInputLanguage = DictionaryDataFile.numberOfAvailableLanguages;
-		for (int language = DictionaryDataFile.numberOfAvailableLanguages -1; language >= 0 ; --language) {
-			if (language == inputLanguage) {
-				if (newInputLanguage != DictionaryDataFile.numberOfAvailableLanguages) {
-					// new input language was found before
-					break;
-				}
-			}
-			if (DictionaryDataFile.supportedLanguages[language].isSearchable) {
-				newInputLanguage = language;
-			}
-		}
-		setInputLanguage(newInputLanguage);
-		
-		// also update the selection of the output language:
-		selectNextOutputLanguage();
-		boolean [] outputLanguageSettingsSelectedIndexes = new boolean [DictionaryDataFile.numberOfAvailableLanguages];
-		outputLanguageChoiceGroup.getSelectedFlags(outputLanguageSettingsSelectedIndexes);
-		setOutputLanguage(outputLanguageSettingsSelectedIndexes);
-	}
-	
 	protected void selectNextOutputLanguage() {
-		int newSelectedInputLanguage = inputLanguageChoiceGroup.getSelectedIndex(); 
-		if (newSelectedInputLanguage == inputLanguageChoiceGroup.size() -1) {
-			// search over all languages: leave output language unchanged
-		}
-		else {
-			boolean [] currentSelectedOutputLanguage = new boolean [DictionaryDataFile.numberOfAvailableLanguages];
-			outputLanguageChoiceGroup.getSelectedFlags(currentSelectedOutputLanguage);
-			if (currentSelectedOutputLanguage[newSelectedInputLanguage]) {
-				currentSelectedOutputLanguage[newSelectedInputLanguage] = false;
-				int newSelectedOutputLanguage = newSelectedInputLanguage + 1;
-				if (newSelectedOutputLanguage == outputLanguageChoiceGroup.size())
-					newSelectedOutputLanguage = 0;
-				currentSelectedOutputLanguage[newSelectedOutputLanguage] = true;
-				outputLanguageChoiceGroup.setSelectedFlags(currentSelectedOutputLanguage);
+		if (outputLanguageChoiceGroup != null) {
+			int newSelectedInputLanguage = inputLanguageChoiceGroup.getSelectedIndex(); 
+			if (newSelectedInputLanguage == inputLanguageChoiceGroup.size() -1) {
+				// search over all languages: leave output language unchanged
 			}
-		}		
+			else {
+				boolean [] currentSelectedOutputLanguage = new boolean [DictionaryDataFile.numberOfAvailableLanguages];
+				outputLanguageChoiceGroup.getSelectedFlags(currentSelectedOutputLanguage);
+				if (currentSelectedOutputLanguage[newSelectedInputLanguage]) {
+					currentSelectedOutputLanguage[newSelectedInputLanguage] = false;
+					int newSelectedOutputLanguage = newSelectedInputLanguage + 1;
+					if (newSelectedOutputLanguage == outputLanguageChoiceGroup.size())
+						newSelectedOutputLanguage = 0;
+					currentSelectedOutputLanguage[newSelectedOutputLanguage] = true;
+					outputLanguageChoiceGroup.setSelectedFlags(currentSelectedOutputLanguage);
+				}
+			}		
+		}
 	}
 	
 	/* exchange inputLanguage and outputLanguage */
@@ -681,14 +678,16 @@ public class DictionarySettingForm
 		int inputLanguage = DictionarySettings.getInputLanguage();
 		int outputLanguage = DictionarySettings.determineOutputLanguage();
 
-		int newInputLanguage = outputLanguage;
-		if (DictionaryDataFile.supportedLanguages[newInputLanguage].isSearchable) {
-			setInputLanguage(newInputLanguage);
-			boolean [] newOutputLanguage = new boolean [DictionaryDataFile.numberOfAvailableLanguages];
-			for (int language = 0;  language < newOutputLanguage.length; ++language) 
-				newOutputLanguage[language] = false;
-			newOutputLanguage[inputLanguage] = true;
-			setOutputLanguage(newOutputLanguage);
+		if (DictionarySettings.getInputLanguage() != DictionarySettings.inputLanguageAll) {
+			int newInputLanguage = outputLanguage;
+			if (DictionaryDataFile.supportedLanguages[newInputLanguage].isSearchable) {
+				setInputLanguage(newInputLanguage);
+				boolean [] newOutputLanguage = new boolean [DictionaryDataFile.numberOfAvailableLanguages];
+				for (int language = 0;  language < newOutputLanguage.length; ++language) 
+					newOutputLanguage[language] = false;
+				newOutputLanguage[inputLanguage] = true;
+				setOutputLanguage(newOutputLanguage);
+			}
 		}
 	}
 	
