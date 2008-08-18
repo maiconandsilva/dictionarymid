@@ -1,72 +1,24 @@
 package de.kugihan.dictionaryformids.hmi_java_se;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Event;
-import java.awt.FileDialog;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.Enumeration;
-import java.util.Properties;
-import java.util.Vector;
-import java.util.jar.JarFile;
+import java.awt.*;
+import java.awt.datatransfer.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+import java.util.jar.*;
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.event.*;
+import javax.swing.table.*;
 
-import javax.swing.ButtonGroup;
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.KeyStroke;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.border.Border;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-
-import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
-import de.kugihan.dictionaryformids.dataaccess.content.FontStyle;
+import de.kugihan.dictionaryformids.dataaccess.*;
+import de.kugihan.dictionaryformids.dataaccess.content.*;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.JarInputStreamAccess;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.general.UtilWin;
-import de.kugihan.dictionaryformids.hmi_common.content.ContentParser;
-import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
-import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart;
+import de.kugihan.dictionaryformids.hmi_common.content.*;
 import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 import de.kugihan.dictionaryformids.translation.SingleTranslation;
 import de.kugihan.dictionaryformids.translation.TextOfLanguage;
@@ -77,16 +29,17 @@ import de.kugihan.dictionaryformids.translation.TranslationResult;
 
 /**
 * J2SE Version of DictionaryForMids
-* Copyright (C) 2005-2007 Stefan Martens (stefan@stefan1200.de)
+* Copyright (C) 2005-2008 Stefan Martens (stefan@stefan1200.de)
 * 
 * GPL applies - see file COPYING for copyright statement.
 *
 * @author Stefan "Stefan1200" Martens
-* @version 3.1.0 ALPHA 3 (11.02.2007)
+* @version 3.3.0 Beta 1 (17.08.2008)
 */
 public class DictionaryForSE extends JFrame
 implements ActionListener, TranslationExecutionCallback, MouseListener, DocumentListener
 {
+	public static String VERSION = "3.3.0 Beta 1";
 	private static String CONFIG_NAME = "DictionaryForMIDs.ini";
 	
 	private JPanel pMainFrame = (JPanel)getContentPane();
@@ -109,14 +62,15 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		}
 	};
 	private JTable table = new SortedTable(dtm);
+	private JScrollPane spTable = new JScrollPane(table);
 	private AWTFileDialog fd = new AWTFileDialog();
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu leftLangSubMenu;
 	private JMenu rightLangSubMenu;
-	private JMenu dictHistoryMenu = new JMenu("Dictionary History");
-	private JCheckBoxMenuItem colourTextMenu = new JCheckBoxMenuItem("Coloured Text", true);
-	private JPopupMenu pmListL = createPopupMenu("L");
-	private JPopupMenu pmListR = createPopupMenu("R");
+	private JMenu dictHistoryMenu;
+	private JCheckBoxMenuItem colourTextMenu;
+	private JPopupMenu pmListL;;
+	private JPopupMenu pmListR;;
 	private ButtonGroup bgLeftLang;
 	private ButtonGroup bgRightLang;
 	
@@ -134,6 +88,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	private String oldStatus = "";
 	private Thread searchThread;
 	private Properties prop = new Properties();
+	private AppTranslation lang = new AppTranslation();
 	public static JarFile jar;
 	
 	private JDialog ppd;
@@ -143,20 +98,18 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	private JComboBox cbFont;
 	private String fontName = "SansSerif";
 
-	public static void main(String[] args) throws DictionaryException
+	public static void main(String[] args)
 	{
-		UtilWin utilObj = new UtilWin();
-		Util.setUtil(utilObj);
 		DictionaryForSE frame = new DictionaryForSE();
-		frame.setTitle("DictionaryForMIDs " + Util.getUtil().getApplicationVersionString());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(600,400);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 	
-	public DictionaryForSE() throws DictionaryException
+	public DictionaryForSE()
 	{
+		lang.loadTranslation();
 		initGUI();
 		
 		loadPrefs();
@@ -165,26 +118,61 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 			loadDictionary();
 		}
 		
+		this.addComponentListener(new ComponentAdapter()
+		{
+			public void componentResized(ComponentEvent e)
+			{
+				if (table.getRowCount() == 0)
+				{
+					setTableWidth();
+				}
+			}
+		});
+		
 		timerStatus.setRepeats(false);
 		
-		DictionarySettings.setMaxHits(10000);
+		DictionarySettings.setMaxHits(1000);
 		fillTableColums();
 		createGUI();
 		TranslationExecution.setTranslationExecutionCallback(this);
-		lStatus.setText("Welcome to DictionaryForMIDs " + Util.getUtil().getApplicationVersionString() + " (c) by Stefan Martens & Gert Nuber");
+		lStatus.setText(lang.getTranslationString("Welcome", "Welcome to %1", "DictionaryForMIDs " + getAppVersion()) + " (c) by Stefan Martens & Gert Nuber");
+		setTitle("DictionaryForMIDs " + getAppVersion());
+	}
+	
+	private void setTableWidth()
+	{
+		int width = spTable.getViewport().getWidth();
+		table.getColumnModel().getColumn(0).setPreferredWidth(width/2);
+		table.getColumnModel().getColumn(1).setPreferredWidth(width/2);
+	}
+	
+	private void setTableComparator()
+	{
+		if (colourText)
+		{
+			((SortedTable)table).setDefaultComparator(String.class, new HTMLStringComparator());
+		}
+		else
+		{
+			((SortedTable)table).setDefaultComparator(String.class, new IgnoreCaseComparator());
+		}
 	}
 	
 	private void initGUI()
 	{
+		pmListL = createPopupMenu("L");
+		pmListR = createPopupMenu("R");
+		
+		dictHistoryMenu = new JMenu(lang.getTranslationString("DictionaryHistory", "Dictionary History", null));
+		colourTextMenu = new JCheckBoxMenuItem(lang.getTranslationString("ColouredText", "Coloured Text", null), true);
+		
 		menuBar.add(createFileMenu());
 		menuBar.add(createPrefsMenu());
 		setJMenuBar(menuBar);
 		
-		tfLeft.setToolTipText("Type a search word here and press enter");
 		tfLeft.addActionListener(this);
 		tfLeft.addMouseListener(this);
 		tfLeft.getDocument().addDocumentListener(this);
-		tfRight.setToolTipText("Type a search word here and press enter");
 		tfRight.addActionListener(this);
 		tfRight.addMouseListener(this);
 		tfRight.getDocument().addDocumentListener(this);
@@ -196,11 +184,12 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		table.setRowSelectionAllowed(true);
 		table.setShowGrid(false);
 		table.setShowHorizontalLines(true);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.setDefaultRenderer(String.class, new MyTableCellRenderer());
 		((SortedTable)table).setResortOnModelChange(false);
 		JTableHeader th = table.getTableHeader();
 		th.setDefaultRenderer(new MyHeaderCellRenderer());
+		((SortedTable)table).setScrollPane(spTable);
 	}
 	
 	private void createGUI()
@@ -208,7 +197,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		pMainFrame.setLayout(new GridBagLayout());
 		pMainFrame.add(tfLeft, getGBC(0,0,1,1,10,0, new Insets(1,1,1,5)));
 		pMainFrame.add(tfRight, getGBC(1,0,1,1,10,0, new Insets(1,5,1,1)));
-		pMainFrame.add(new JScrollPane(table), getGBC(0,1,2,1,10,10, new Insets(1,1,1,1)));
+		pMainFrame.add(spTable, getGBC(0,1,2,1,10,10, new Insets(1,1,1,1)));
 		pMainFrame.add(lStatus, getGBC(0,2,2,1,10,0, new Insets(1,1,1,1)));
 	}
 
@@ -219,17 +208,17 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	
 	private JMenu createFileMenu()
 	{
-        JMenu ret = new JMenu("File");
+        JMenu ret = new JMenu(lang.getTranslationString("File", "File", null));
         ret.setMnemonic('F');
         JMenuItem mi;
 		//Open Dictionary
-        mi = new JMenuItem("Open Dictionary", 'o');
+        mi = new JMenuItem(lang.getTranslationString("OpenDictionary", "Open Dictionary", null), 'o');
         setCtrlAccelerator(mi, 'O');
         mi.setActionCommand("openDict");
         mi.addActionListener(this);
         ret.add(mi);
 		//Dictionary Information
-        mi = new JMenuItem("Dictionary Information", 'i');
+        mi = new JMenuItem(lang.getTranslationString("DictionaryInformation", "Dictionary Information", null), 'i');
         setCtrlAccelerator(mi, 'I');
         mi.setActionCommand("dictInfo");
         mi.addActionListener(this);
@@ -239,14 +228,14 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
         //Separator
         ret.addSeparator();
         //About
-        mi = new JMenuItem("About", 'a');
+        mi = new JMenuItem(lang.getTranslationString("About", "About", null), 'a');
         mi.setActionCommand("about");
         mi.addActionListener(this);
         ret.add(mi);
         //Separator
         ret.addSeparator();
         //Quit
-        mi = new JMenuItem("Quit", 'q');
+        mi = new JMenuItem(lang.getTranslationString("Quit", "Quit", null), 'q');
         setCtrlAccelerator(mi, 'Q');
         mi.setActionCommand("quit");
         mi.addActionListener(this);
@@ -256,11 +245,11 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	
 	private JMenu createPrefsMenu()
 	{
-        JMenu ret = new JMenu("Preferences");
+        JMenu ret = new JMenu(lang.getTranslationString("Preferences", "Preferences", null));
         JMenuItem mi;
         ret.setMnemonic('F');
         //Change Font
-        mi = new JMenuItem("Change Font", 'f');
+        mi = new JMenuItem(lang.getTranslationString("ChangeFont", "Change Font", null), 'f');
         setCtrlAccelerator(mi, 'F');
         mi.setActionCommand("changeFont");
         mi.addActionListener(this);
@@ -274,7 +263,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
         //Separator
         ret.addSeparator();
 		//Save Prefs
-        mi = new JMenuItem("Save Preferences", 's');
+        mi = new JMenuItem(lang.getTranslationString("SavePreferences", "Save Preferences", null), 's');
         setCtrlAccelerator(mi, 'S');
         mi.setActionCommand("savePrefs");
         mi.addActionListener(this);
@@ -284,7 +273,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	
 	private JMenu createLeftLangSubMenu()
 	{
-		leftLangSubMenu = new JMenu("Left Language");
+		leftLangSubMenu = new JMenu(lang.getTranslationString("LeftLanguage", "Left Language", null));
         JRadioButtonMenuItem rbm;
         bgLeftLang = new ButtonGroup();
 		
@@ -302,7 +291,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	
 	private JMenu createRightLangSubMenu()
 	{
-		rightLangSubMenu = new JMenu("Right Language");
+		rightLangSubMenu = new JMenu(lang.getTranslationString("RightLanguage", "Right Language", null));
         JRadioButtonMenuItem rbm;
         bgRightLang = new ButtonGroup();
 		
@@ -325,7 +314,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		
         if (dictHistory.size() == 0)
         {
-        	mi = new JMenuItem("Nothing");
+        	mi = new JMenuItem(lang.getTranslationString("Nothing", "Nothing", null));
         	mi.setEnabled(false);
         	dictHistoryMenu.add(mi);
         }
@@ -341,7 +330,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
         }
         
         dictHistoryMenu.addSeparator();
-    	mi = new JMenuItem("Clear History", 'c');
+    	mi = new JMenuItem(lang.getTranslationString("ClearHistory", "Clear History", null), 'c');
     	mi.addActionListener(this);
     	mi.setActionCommand("clearHistory");
     	dictHistoryMenu.add(mi);
@@ -357,27 +346,27 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		JMenuItem mi;
 
 		// Copy
-		mi = new JMenuItem("Copy", 'c');
+		mi = new JMenuItem(lang.getTranslationString("Copy", "Copy", null), 'c');
 		mi.setActionCommand(ident + "pmCopy");
 		mi.addActionListener(this);
 		pm.add(mi);
 		// Copy All
-		mi = new JMenuItem("Copy All", 'a');
+		mi = new JMenuItem(lang.getTranslationString("CopyAll", "Copy All", null), 'a');
 		mi.setActionCommand(ident + "pmCopyAll");
 		mi.addActionListener(this);
 		pm.add(mi);
 		// Cut
-		mi = new JMenuItem("Cut");
+		mi = new JMenuItem(lang.getTranslationString("Cut", "Cut", null));
 		mi.setActionCommand(ident + "pmCut");
 		mi.addActionListener(this);
 		pm.add(mi);
 		// Paste
-		mi = new JMenuItem("Paste", 'p');
+		mi = new JMenuItem(lang.getTranslationString("Paste", "Paste", null), 'p');
 		mi.setActionCommand(ident + "pmPaste");
 		mi.addActionListener(this);
 		pm.add(mi);
 		// Paste & Replace
-		mi = new JMenuItem("Paste & Replace", 'p');
+		mi = new JMenuItem(lang.getTranslationString("PasteReplace", "Paste & Replace", null), 'p');
 		mi.setActionCommand(ident + "pmPasteReplace");
 		mi.addActionListener(this);
 		pm.add(mi);
@@ -401,6 +390,11 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		
 		tfLeft.setEnabled(DictionaryDataFile.supportedLanguages[languagesAll.indexOf(languages.elementAt(0))].isSearchable);
 		tfRight.setEnabled(DictionaryDataFile.supportedLanguages[languagesAll.indexOf(languages.elementAt(1))].isSearchable);
+		
+		tfLeft.setToolTipText(lang.getTranslationString("InputSearchTooltip", "Type a search word (%1) here and press enter", languages.elementAt(0).toString()));
+		tfRight.setToolTipText(lang.getTranslationString("InputSearchTooltip", "Type a search word (%1) here and press enter", languages.elementAt(1).toString()));
+		
+		setTableWidth();
 	}
 	
 	private String getMenuFilename(String path)
@@ -434,9 +428,21 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		dtm.setRowCount(0);
 	}
 	
+	private String getAppVersion()
+	{
+		try
+		{
+			return Util.getUtil().getApplicationVersionString();
+		}
+		catch (Throwable t)
+		{
+			return VERSION;
+		}
+	}
+	
 	private void loadDictionary()
 	{
-		loadDictionary(fd.show("Choose DictionaryForMIDs jar file", "LOAD", null, "DictionaryForMIDs.jar"));
+		loadDictionary(fd.show(lang.getTranslationString("ChooseJarFile", "Choose DictionaryForMIDs jar file to open", null), "LOAD", null, "DictionaryForMIDs.jar"));
 	}
 	
 	private void loadDictionary(String fileName)
@@ -448,7 +454,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 				loadLanguages();
 			}
 		}
-		else if (DictionaryForSE.loadJar(fileName))
+		else if (loadJar(fileName))
 		{
 			utilObj = new UtilWin();
 			Util.setUtil(utilObj);
@@ -464,15 +470,15 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 				}
 
 				loadLanguages();
-				lStatus.setText("Dictionary successfully loaded: " + (new File(fileName)).getName());
+				lStatus.setText(lang.getTranslationString("DictionarySuccessfullyLoaded", "Dictionary successfully loaded: %1", (new File(fileName)).getName()));
 				if (configLoaded)
 				{
 					saveDictHistory(fileName, false);
 				}
-				
 			}
 			catch (Throwable t)
-			{ 
+			{
+				//t.printStackTrace();
 				loadLanguages();
 				showDictionaryError(t.toString());
 			}
@@ -514,6 +520,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 			{
 				colourText = colourSupportNeeded;
 			}
+			setTableComparator();
 			
 			if (languagesAll.size() == 0)
 			{
@@ -544,7 +551,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	// Method create a boolean for selecting only one output language!
 	private boolean[] createBooleanArray(int sel, int max)
 	{
-		boolean[] retValue = new boolean[max]; // Gert: was [max+1], but this caused problems because of incorrect array element count
+		boolean[] retValue = new boolean[max];
 		for (int i=0; i<max; i++)
 		{
 			if (i == sel)
@@ -584,7 +591,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 
 		if (copyToClip(tmp))
 		{
-			setStatus(5000, "Selected text \"" + tmp + "\" copied!");
+			setStatus(5000, lang.getTranslationString("SelectedTextCopied", "Selected text \"%1\" copied!", tmp));
 		}
 	}
 	
@@ -618,7 +625,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		timerStatus.start();
 	}
 	
-	private static boolean loadJar(String jarFile)
+	private boolean loadJar(String jarFile)
 	{
 		try
 		{
@@ -647,24 +654,24 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	private void showDictionaryError(String error)
 	{
 		JOptionPane.showMessageDialog(this,
-				"You choose an incompatible dictionary!\nPlease make sure that you use an up to date version of DictionaryForMIDs!\nError: " + error,
-				"Error",
+				lang.getTranslationString("DictionaryError", "You choose an incompatible dictionary!\nPlease make sure that you use an up to date version of DictionaryForMIDs!\nError: %1", error),
+				lang.getTranslationString("Error", "Error", null),
 				JOptionPane.WARNING_MESSAGE);
 	}
 	
 	private void showDictInitError()
 	{
 		JOptionPane.showMessageDialog(this,
-				"The dictionary uses own programcode and may not work as expected.\nPlease check for an update of the 'DictionaryForMIDs on PC' version!",
-				"Error",
+				lang.getTranslationString("DictionaryErrorOwnCode", "The dictionary uses own programcode and may not work as expected.\nPlease check for an update of the 'DictionaryForMIDs on PC' version!", null),
+				lang.getTranslationString("Error", "Error", null),
 				JOptionPane.WARNING_MESSAGE);
 	}
 	
 	private void showSearchInProgress()
 	{
 		JOptionPane.showMessageDialog(this,
-				"Search is already in progress!",
-				"Information",
+				lang.getTranslationString("SearchInProgress", "Search is already in progress!", null),
+				lang.getTranslationString("Information", "Information", null),
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 	
@@ -672,15 +679,15 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	{
 		JOptionPane.showMessageDialog(this,
 				DictionaryDataFile.infoText,
-				"Dictionary Information",
+				lang.getTranslationString("DictionaryInformation", "Dictionary Information", null),
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	private void showErrorFileNotFound(String path)
 	{
 		JOptionPane.showMessageDialog(this,
-				"Dictionary File not found!\n" + path,
-				"Error",
+				lang.getTranslationString("DictionaryNotFound", "Dictionary File not found!\n%1", path),
+				lang.getTranslationString("Error", "Error", null),
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
@@ -693,7 +700,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 			{
 				try
 				{
-					lStatus.setText("Searching...");
+					lStatus.setText(lang.getTranslationString("Searching", "Searching, please wait...", null));
 					boolean [] inputLanguages = new boolean[DictionaryDataFile.numberOfAvailableLanguages];
 					for (int languageCount = 0; languageCount < DictionaryDataFile.numberOfAvailableLanguages; ++languageCount)
 						inputLanguages[languageCount] = false;
@@ -710,7 +717,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 				}
 				catch (Throwable t)
 				{
-					lStatus.setText("Error while searching...");
+					lStatus.setText(lang.getTranslationString("SearchError", "Error while searching!", null));
 					showDictionaryError(t.toString());
 				}
 			}
@@ -730,6 +737,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 			
 			colourText = new Boolean(prop.getProperty("ColourText", new Boolean(colourText).toString())).booleanValue();
 			colourTextMenu.setSelected(colourText);
+			setTableComparator();
 			
 			languages.clear();
 			languages.addElement(prop.getProperty("InputLanguage"));
@@ -771,11 +779,11 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 			prop.setProperty("InputLanguage", languages.elementAt(0).toString());
 			prop.setProperty("OutputLanguage", languages.elementAt(1).toString());
 			
-			prop.store(new FileOutputStream(CONFIG_NAME, false), "DictionaryForMIDs " + Util.getUtil().getApplicationVersionString());
+			prop.store(new FileOutputStream(CONFIG_NAME, false), "DictionaryForMIDs " + getAppVersion());
 		}
 		catch (Exception e)
 		{
-			lStatus.setText("Can't save configuration file to disk! Maybe write protected?");
+			lStatus.setText(lang.getTranslationString("ErrorConfigNotSaved", "Can't save configuration file to disk! Maybe write protected?", null));
 		}
 	}
 	
@@ -819,7 +827,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		dictHistory.clear();
 	}
 
-	void saveDictHistory(String path, boolean clear) // Wird von JUNetwork.clientConnection aufgerufen
+	void saveDictHistory(String path, boolean clear)
 	{
 		if (path != null)
 		{
@@ -832,7 +840,6 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 			}
 		}
 
-//		Properties propTmp = new Properties();
 		prop.clear();
 		File checkConfig = new File(CONFIG_NAME);
 
@@ -858,7 +865,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 
 		try
 		{
-			prop.store(new FileOutputStream(CONFIG_NAME, false), Util.getUtil().getApplicationVersionString());
+			prop.store(new FileOutputStream(CONFIG_NAME, false), getAppVersion());
 		}
 		catch (Exception e)
 		{
@@ -868,21 +875,21 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	}
 	
 	/**
-	 * Open the Prefs Dialog for the print output!
+	 * Open the Prefs Dialog for changing the font!
 	 */
 	private void openFontPrefsDialog()
 	{
 		// Get the Font list from OS
 		String[] fontNames = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
 
-		ppd = new JDialog(this, "Font Prefs Dialog", true);
+		ppd = new JDialog(this, lang.getTranslationString("FontPrefsDialog", "Font Prefs Dialog", null), true);
 		ppd.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
 		JPanel ppdRoot = (JPanel)ppd.getContentPane();
-		lFontTest = new JLabel("Demo Text: JDiskDBPro");
-		bUse = new JButton("Use");
+		lFontTest = new JLabel(lang.getTranslationString("DemoText", "Demo Text: DictionaryForMIDs", null));
+		bUse = new JButton(lang.getTranslationString("Use", "Use", null));
 		bUse.addActionListener(this);
-		bCancelPrefs = new JButton("Cancel");
+		bCancelPrefs = new JButton(lang.getTranslationString("Cancel", "Cancel", null));
 		bCancelPrefs.addActionListener(this);
 		JToolBar tbBottom = new JToolBar();
 		cbFont = new JComboBox(fontNames);
@@ -902,14 +909,14 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		ppdRoot.add(cbFont, BorderLayout.CENTER);
 		ppdRoot.add(tbBottom, BorderLayout.SOUTH);
 
-		ppd.setSize(200,110);
+		ppd.setSize(300,110);
 		ppd.setLocationRelativeTo(this);
 		ppd.setResizable(false);
 		ppd.setVisible(true);
 	}
 	
 	/**
-	 * Close the print prefs dialog
+	 * Close the font prefs dialog
 	 */
 	private void closeFontPrefsDialog()
 	{
@@ -929,8 +936,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		try
 		{
 			ContentParser cp = new ContentParser();
-			StringColourItemText result = 
-							cp.determineItemsFromContent(new TextOfLanguage(text, languageIndex), false, false);
+			StringColourItemText result = cp.determineItemsFromContent(new TextOfLanguage(text, languageIndex), false, false);
 			StringBuffer returnString = new StringBuffer();
 			String lastColour = null;
 			
@@ -999,15 +1005,6 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	{
 		deleteTable();
 	}
-
-	// Method from TranslationExecutionCallback Interface
-//	public void newTranslationResult(TranslationResult resultOfTranslation)
-//	{
-//		Vector tmp = new Vector();
-//		tmp.addElement(getColouredHTMLText("", languagesAll.indexOf(languages.elementAt(0))));
-//		tmp.addElement(getColouredHTMLText("", languagesAll.indexOf(languages.elementAt(1))));
-//		addTableRow(tmp);
-//	}
 	
 	public void newTranslationResult(TranslationResult resultOfTranslation)
 	{
@@ -1036,12 +1033,16 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 				addTableRow(tmp);
 			}
 			
-			lStatus.setText(Long.toString(resultOfTranslation.numberOfFoundTranslations()) + " entries found in " + Double.toString(resultOfTranslation.executionTime/1000.0) + " seconds!");
+			lStatus.setText(lang.getTranslationString("OptimizeColumnWidth", "Optimize column width, please wait...", null));
+			((SortedTable)table).sizeColumnsOptimal();
+			String[] replace = {Long.toString(resultOfTranslation.numberOfFoundTranslations()), Double.toString(resultOfTranslation.executionTime/1000.0)};
+			lStatus.setText(lang.getTranslationStringArray("SearchResult", "%1 entries found in %2 seconds!", replace));
 		}
 		else
 		{
 			// Nothing found
-			lStatus.setText("Nothing found for \"" + lastSearch + "\"!");
+			lStatus.setText(lang.getTranslationString("NothingFound", "Nothing found for \"%1\"!", lastSearch));
+			setTableWidth();
 		}
 	}
 	
@@ -1100,6 +1101,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		else if (e.getSource().equals(colourTextMenu))
 		{
 			colourText = colourTextMenu.isSelected();
+			setTableComparator();
 		}
 		else if (e.getSource().equals(timerStatus))
 		{
@@ -1133,15 +1135,10 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		}
 		else if (e.getActionCommand().equals("about"))
 		{
-			try {
-				JOptionPane.showMessageDialog(this,
-						"DictionaryForMIDs " + Util.getUtil().getApplicationVersionString() + " (11.02.2007)\n(c) 2005-2007 by Stefan Martens & Gert Nuber\n\nVisit our homepages:\nhttp://dictionarymid.sourceforge.net/\nhttp://www.stefan1200.de",
-						"About",
-						JOptionPane.INFORMATION_MESSAGE);
-			}
-			catch(Exception exception) {
-				exception.printStackTrace();
-			}
+			JOptionPane.showMessageDialog(this,
+					"DictionaryForMIDs " + getAppVersion() + " (17.08.2008)\n(c) 2005-2008 by Stefan Martens & Gert Nuber\n\n" + lang.getTranslationString("Language", "Language: English", null) + "\n" + lang.getTranslationString("TransBy", "Translation by Stefan1200", null) + "\n\n" + lang.getTranslationString("VisitHomepages", "Visit our homepages:", null) + "\nhttp://dictionarymid.sourceforge.net\nhttp://www.stefan1200.de",
+					lang.getTranslationString("About", "About", null),
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if (e.getActionCommand().equals("quit"))
 		{
@@ -1504,5 +1501,33 @@ class AWTFileDialog extends Frame
 		{
 			return null;
 		}
+	}
+}
+
+/**
+ * Class for better ignore case sorting
+ */
+class IgnoreCaseComparator
+implements Comparator
+{
+	public int compare(Object o1, Object o2)
+	{
+		String s1 = (String)o1;
+		String s2 = (String)o2;
+		return s1.toLowerCase().compareTo(s2.toLowerCase());
+	}
+}
+
+/**
+ * Class for HTML string and ignore case sorting
+ */
+class HTMLStringComparator
+implements Comparator
+{
+	public int compare(Object o1, Object o2)
+	{
+		String s1 = (String)o1;
+		String s2 = (String)o2;
+		return s1.replaceAll("<[\\/\\!]*?[^<>]*?>", "").toLowerCase().compareTo(s2.replaceAll("<[\\/\\!]*?[^<>]*?>", "").toLowerCase());
 	}
 }

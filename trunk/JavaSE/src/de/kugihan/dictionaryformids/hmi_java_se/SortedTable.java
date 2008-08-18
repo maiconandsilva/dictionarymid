@@ -1,5 +1,6 @@
 package de.kugihan.dictionaryformids.hmi_java_se;
 
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.Collator;
@@ -8,12 +9,14 @@ import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 /**
@@ -47,6 +50,8 @@ public class SortedTable extends JTable{
    private boolean reactionResort = true;
 
    private boolean doNotAlterSortingDirection = true;
+   
+   private JScrollPane sp = null;
 
    /**
     * Standardkonstruktor
@@ -700,4 +705,125 @@ public class SortedTable extends JTable{
          return ((Comparable)o1).compareTo( o2 );
       }
    }
+   
+   /**
+	 * Setzt für alle Spalten die optimale Spaltenbreite.
+	 * 
+	 */
+	void sizeColumnsOptimal()
+	{
+		Point upperRow = null;
+		Point lowerRow = null;
+
+		// Bestimme die Anzahl der zu optimierenden Spalten.
+		int optimizingColumns = getColumnCount();
+
+		// Die verbrauchte Gesamtbreite
+		int usedWidth = 0;
+
+		for (int index = 0; index < optimizingColumns; index++)
+		{
+			// Bestimme die zu optimierenden Zeilen
+			int fromRow = 0;
+			int toRow = getRowCount();
+
+			usedWidth += sizeColumnOptimal(index, fromRow, toRow);
+		} // for 0..columnCount
+
+		// Wenn die letzte Spalte nicht optimiert worden ist
+		if (optimizingColumns < getColumnCount()
+			&& getColumnCount() >= 0
+			&& getScrollPane() != null
+			&& getScrollPane().getViewport() != null)
+		{
+			// Ermittle die zur Verfügung stehende Breite
+			int useableWidth = getScrollPane().getViewport().getWidth();
+
+			// Setze die letzte Spalte auf die verbleibende Breite
+			int remainingWidth = Math.max(0, useableWidth - usedWidth);
+			TableColumn column = getColumnModel().getColumn(getColumnCount() - 1);
+
+			column.setPreferredWidth(remainingWidth);
+			column.setWidth(remainingWidth);
+		}
+	}
+
+
+	/**
+	 * Stellt für eine Spalte eine optimale Breite ein
+	 * @param index der Index der Spalte
+	 * @param fromRow die erste zu optimierende Zeile
+	 * @param toRow die letzte zu optimierende Zeile
+	 * @return die ermittelte Breite
+	 */
+	public int sizeColumnOptimal(int index, int fromRow, int toRow)
+	{
+		TableColumn col = getColumnModel().getColumn(index);
+		int prefSize = 0;
+
+		if (col.getHeaderRenderer() != null)
+		{
+			prefSize =
+				col
+					.getHeaderRenderer()
+					.getTableCellRendererComponent(
+						null,
+						col.getHeaderValue(),
+						false,
+						false,
+						0,
+						0)
+					.getPreferredSize()
+					.width;
+		}
+		else
+		{
+			prefSize =
+				getDefaultRenderer(String.class)
+					.getTableCellRendererComponent(
+						this,
+						col.getHeaderValue(),
+						false,
+						false,
+						0,
+						0)
+					.getPreferredSize()
+					.width;
+		}
+
+		for (int rowIndex = fromRow; rowIndex < toRow; rowIndex++)
+		{
+			prefSize =
+				Math.max(
+					prefSize,
+					getCellRenderer(rowIndex, index)
+						.getTableCellRendererComponent(
+							this,
+							getValueAt(rowIndex, index),
+							false,
+							false,
+							rowIndex,
+							index)
+						.getPreferredSize()
+						.width);
+		}
+
+		// Für die Optik
+		prefSize += getIntercellSpacing().width;
+
+		col.setPreferredWidth(prefSize);
+		col.setWidth(prefSize);
+
+		return prefSize;
+	}
+	
+	public void setScrollPane(JScrollPane sp)
+	{
+		this.sp = sp;
+	}
+	
+	public JScrollPane getScrollPane()
+	{
+		return sp;
+	}
 }
