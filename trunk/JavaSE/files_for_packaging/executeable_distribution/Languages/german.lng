@@ -1,0 +1,109 @@
+# Translation for DictionaryForMIDs - Java SE Version
+#
+#
+# Information about this translation:
+# Language: <your language>
+Language = Sprache: Deutsch
+# Translation by <your name>
+TransBy = Übersetzung von Stefan1200
+#
+#
+# Menu Entries
+# About
+About = Über
+# File
+File = Datei
+# Open Dictionary
+OpenDictionary = Wörterbuch öffnen
+# Dictionary Information
+DictionaryInformation = Wörterbuch Informationen
+# Quit
+Quit = Beenden
+# Preferences
+Preferences = Einstellungen
+# Change Font
+ChangeFont = Schriftart ändern
+# Save Preferences
+SavePreferences = Einstellungen speichern
+# Left Language
+LeftLanguage = Linke Sprache
+# Right Language
+RightLanguage = Rechte Sprache
+# Nothing
+Nothing = Leer
+# Clear History
+ClearHistory = Verlauf löschen
+# Dictionary History
+DictionaryHistory = Wörterbuch Verlauf
+# Coloured Text
+ColouredText = Farbige Texte
+#
+# Popup Menu Entries
+# Copy
+Copy = Kopieren
+# Copy All
+CopyAll = Alles kopieren
+# Cut
+Cut = Ausschneiden
+# Paste
+Paste = Einfügen
+# Paste & Replace
+PasteReplace = Einfügen & Ersetzen
+#
+# Status Texts
+# Dictionary successfully loaded: %1
+# %1 = Filename of the dictionary
+DictionarySuccessfullyLoaded = Wörterbuch erfolgreich geladen: %1
+# Selected text "%1" copied!
+# %1 = The copied word
+SelectedTextCopied = Ausgewählter Text "%1" wurde kopiert!
+# Searching, please wait...
+Searching = Suche, bitte warten...
+# Error while searching!
+SearchError = Fehler beim Suchen!
+# Can't save configuration file to disk! Maybe write protected?
+ErrorConfigNotSaved = Die Konfigurationsdatei kann nicht auf den Datenträger abgespeichert werden! Vielleicht schreibgeschützt?
+# Optimize column width, please wait...
+OptimizeColumnWidth = Optimiere Spaltenbreite, bitte warten...
+# %1 entries found in %2 seconds!
+# %1 = Result Count
+# %2 = Time needed
+SearchResult = %1 Einträge in %2 Sekunden gefunden!
+# Nothing found for "%1"!
+# %1 = The search string
+NothingFound = Nichts für "%1" gefunden!
+# Welcome to %1
+# %1 = Application name and version number
+Welcome = Willkommen zu %1
+#
+# Font Prefs Dialog
+FontPrefsDialog = Schriftart Einstellungsdialog
+# Demo Text: DictionaryForMIDs
+DemoText = Demo Text: DictionaryForMIDs
+# Use
+Use = Benutzen
+# Cancel
+Cancel = Abbrechen
+#
+# Info & Error Dialog Windows
+# Error
+Error = Fehler
+# You choose an incompatible dictionary!\nPlease make sure that you use an up to date version of DictionaryForMIDs!\nError: %1
+# %1 = Java Error Message
+DictionaryError = Es wurde ein nicht nicht kompatibeles Wörterbuch ausgewählt!\nBitte sicherstellen, das eine aktuelle Version von DictionaryForMIDs eingesetzt wird!\nFehler: %1
+# The dictionary uses own programcode and may not work as expected.\nPlease check for an update of the 'DictionaryForMIDs on PC' version!
+DictionaryErrorOwnCode = Das Wörterbuch verwendet eigenen Programmcode und funktioniert vielleicht nicht wie erwartet.\nBitte überprüfen ob eine neuere Version von 'DictionaryForMIDs on PC' existiert!
+# Search is already in progress!
+SearchInProgress = Eine Suche läuft bereits!
+# Dictionary File not found!\n%1
+# %1 = Path to the dictionary file
+DictionaryNotFound = Wörterbuch Datei nicht gefunden!\n%1
+# Visit our homepages:
+VisitHomepages = Besuche unsere Homepages:
+#
+# Other
+# Choose DictionaryForMIDs jar file to open
+ChooseJarFile = Wähle eine DictionaryForMIDs jar Datei zum Öffnen aus
+# Type a search word (%1) here and press enter
+# %1 = language name
+InputSearchTooltip = Gebe hier ein Suchwort (%1) ein und drücke Enter
