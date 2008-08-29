@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.Vector;
 
 /**
  * A simple class for loading and returning translations for programs.<br>
@@ -13,12 +14,12 @@ import java.util.Properties;
  * simply call loadTranslation() one time.<br>
  * <br>
  * On a german os, this class try by default to open the translation file in
- * <b>Language/german.lng</b><br>
+ * <b>Languages/german.lng</b><br>
  * <br>
  * The directory, file prefix and suffix can be changed.
  * 
  * @author Stefan1200
- * @version 1.0 (17.08.2008)
+ * @version 1.1 (27.08.2008)
  */
 public class AppTranslation
 {
@@ -27,6 +28,18 @@ public class AppTranslation
 	private String languageFileSuffix = ".lng";
 	private String fileSeparator = System.getProperty("file.separator","\\");
 	private Properties language = new Properties();
+	
+	/**
+	 * Returns a translation String from an already loaded Properties file.
+	 * 
+	 * @param key The Properties key in the translation file.
+	 * @param defaultString The default String to be returned, if key does not exists.
+	 * @return The translated String or the defaultString, if no translation was found.  
+	 */
+	public String getTranslationString(String key, String defaultString)
+	{
+		return getTranslationStringArray(key, defaultString, null);
+	}
 	
 	/**
 	 * Returns a translation String from an already loaded Properties file.
@@ -198,5 +211,47 @@ public class AppTranslation
 	public void setLanguageFileSuffix(String languageFileSuffix)
 	{
 		this.languageFileSuffix = languageFileSuffix;
+	}
+	
+	/**
+	 * Returns an array with available translation languages.
+	 * @return String array with the list of available translation languages.
+	 */
+	public String[] getAvailableLanguages()
+	{
+		File dir = new File(getLanguageDirectory());
+		String[] dirList = dir.list();
+		Vector langList = new Vector();
+		
+		int posP = 0;
+		int posS = 0;
+		
+		for (int i=0; i<dirList.length; i++)
+		{
+			if ((getLanguageFilePrefix() != null && dirList[i].startsWith(getLanguageFilePrefix())) && (getLanguageFileSuffix() != null && dirList[i].endsWith(getLanguageFileSuffix())))
+			{
+				if (getLanguageFilePrefix() != null)
+				{
+					posP = getLanguageFilePrefix().length();
+				}
+				else
+				{
+					posP = 0;
+				}
+				
+				if (getLanguageFileSuffix() != null)
+				{
+					posS = dirList[i].length() - getLanguageFileSuffix().length();
+				}
+				else
+				{
+					posS = dirList[i].length() - 1;
+				}
+				
+				langList.addElement(dirList[i].substring(posP, posS));
+			}
+		}
+		
+		return (String[])langList.toArray(new String[0]);
 	}
 }
