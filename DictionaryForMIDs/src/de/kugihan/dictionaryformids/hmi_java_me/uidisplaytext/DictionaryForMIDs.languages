@@ -719,6 +719,79 @@ Tamaño: %1 kB
 No dictionary loaded
 Hacia atrás
 ================================================================================
+#Português, pt
+
+Palavras para traduzir:
+Procurar
+Nova Palavra
+Informação
+Ajuda
+Configurações
+Sair
+De língua
+Para língua
+Tamanho da Fonte
+Padrão do aparelho
+Pequeno
+Médio
+Grande
+Opções de Display
+Mostrar Estatísticas
+Omitir decodificação do Charset
+Opções de Busca
+Busca Incrementada
+Achar Somente palavras exatas
+Aplicar
+OK
+Seleção de Língua
+Palavra anterior
+Palavra posterior
+Opções quando não encontrado
+Mostrar palavras semelhantes
+Mostrar sugestões
+Não encontrado
+Tempo de resposta [ms]:
+Encontrado:
+Memória livre:
+Use caracteres especias para refinar sua busca:\n%1 corresponde a alguma série de caracteres\n%2 corresponde a qualquer caracter\n\n par acontralar a busca em sub-expressões:\n%3 como primeiro caracter produz resultados na busca da primeira palavra introduzida\n%4 pespois da palavra produz resultados no final da palavra.
+(... nr máximo de acertos excedido)
+(... tempo de execução excedido)
+(... Cancelado)
+Desabilitar sugestões
+[no translation]
+Inglês
+Vietnamês
+Chinês
+Japonês
+Tailandês
+Hindu
+Indonesiano
+Francês
+Espanhol
+Alemão
+Italiano
+Latin
+Russo
+Árabe
+Preformance
+Lista de tradução
+Mostra Cores
+Busca Caracteres
+%1 no final
+%1 no início
+Muda direção
+[no translation]
+Cancela
+Usa fonte BITMAP
+Tcheco
+Eslovaco
+fonte BITMAP
+%1: %2 entradas
+Tamanho: %1 kB
+Didionário para MIDs
+Nenhum Dicionário carregado
+Volta
+================================================================================
 #Czech, cz
 					
 Slovo k překladu:
