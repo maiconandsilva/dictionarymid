@@ -25,7 +25,7 @@ javac.encoding=UTF-8
 	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-0.9.14.jar"/>
 	<property name="antenna.jarfilename"  		value="antenna-bin-0.9.14.jar"/>
 
-    <property name="VersionNumber" 		value="3.2.0"/>	<!-- version of tools / applications -->
+    <property name="VersionNumber" 		value="3.3.0"/>	<!-- version of tools / applications -->
 	<property name="VersionStatus" 		value="final"/>	 <!--  e.g. "beta", "testversion 2"  -->
     <condition property="ApplicationVersion" 	value="${VersionNumber}_${VersionStatus}" else="${VersionNumber}">
     	<isset property="VersionStatus"/>
@@ -85,7 +85,7 @@ javac.encoding=UTF-8
 	<property name="DfM.team"  			value="Gert Nuber and Contributors"/> <!-- Must not be longer than 32 characters --> 
 	                                                                          <!-- otherwise an Application Error will occur --> 
 	                                                                          <!-- on some Motorola devices -->
-	<property name="DfM.copyrightyear"  value="2005, 2006, 2007"/>
+	<property name="DfM.copyrightyear"  value="2005, 2006, 2007, 2008, 2009"/>
 
 	
 	<target name="clean_dfm">
