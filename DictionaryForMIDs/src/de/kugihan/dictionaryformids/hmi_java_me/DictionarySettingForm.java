@@ -28,6 +28,8 @@ import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.SettingsStore;
 import de.kugihan.dictionaryformids.general.Util;
+import de.kugihan.dictionaryformids.hmi_java_me.filebrowser.DirectoryChooserListener;
+import de.kugihan.dictionaryformids.hmi_java_me.filebrowser.FileBrowser;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.DfMChoiceGroup;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.DfMCommand;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.DfMForm;
@@ -41,14 +43,17 @@ public class DictionarySettingForm
    extends    DfMForm 
    implements CommandListener,
 			  ItemCommandListener,
-			  ItemStateListener {
+			  ItemStateListener,
+			  DirectoryChooserListener {
 	
 	DfMCommand applyCommand;
 	DfMCommand cancelCommand;
-	Command    selectDictionaryPathCommand = new Command("List root devices", Command.ITEM, 4); // temporary solution for preliminaty file system access
+	DfMCommand selectDictionaryCommand = new DfMCommand(UIDisplayTextItems.CommandBrowse, Command.ITEM, 4);
 
 	Form callingForm;
 	Display display;
+	
+	FileBrowser fileBrowserForm; // for selecting a 'loadable dictionary'
 
 	DfMChoiceGroup inputLanguageChoiceGroup = null;
 	DfMChoiceGroup outputLanguageChoiceGroup = null;
@@ -94,6 +99,9 @@ public class DictionarySettingForm
 		
 		// set the values of the created items
 		setItemsToSettingValues();
+		
+		// create file file browser form
+		fileBrowserForm = new FileBrowser(this,display);
 	}
 
 	// sets up the commands for this form:
@@ -102,8 +110,9 @@ public class DictionarySettingForm
 		applyCommand = updateCommand(applyCommand, UIDisplayTextItems.CommandApply, Command.OK, 4);
 		cancelCommand = updateCommand(cancelCommand, UIDisplayTextItems.CommandCancel, Command.CANCEL, 5);
 		// temporary: this is a temporary solution for the partial file system dictionary support.
-		if (dictionaryPathTextField != null)
-			dictionaryPathTextField.setDefaultCommand(selectDictionaryPathCommand);
+		if (dictionaryPathTextField != null) {
+			dictionaryPathTextField.setDefaultCommand(selectDictionaryCommand);
+		}
 	}
 	
 	public void commandAction (Command c, Displayable s)  {
@@ -128,9 +137,8 @@ public class DictionarySettingForm
 	public void commandAction(Command c, Item item) {
 		try
 		{
-			if (c == selectDictionaryPathCommand) {
-				SelectDictionaryPath selectDictionaryPath = new SelectDictionaryPath();
-				selectDictionaryPath.start();
+			if (c == selectDictionaryCommand) {
+				display.setCurrent(fileBrowserForm);
 			}
 		}
 		catch (Throwable t)
@@ -170,6 +178,15 @@ public class DictionarySettingForm
 		catch (DictionaryException e) {
 			Util.getUtil().log(e);
 		}
+	}
+
+	public void dirSelected(int status, String selected)
+	{
+		if (status == FileBrowser.ACCEPTED)
+		{
+			dictionaryPathTextField.setString(selected);
+		}
+		display.setCurrent(this);
 	}
 
 	public static void loadSettings() 
@@ -312,7 +329,7 @@ public class DictionarySettingForm
 			// DictionaryDataFile.dictionaryPath was already set in the constructor of class DictionaryForMIDs
 			append(dictionaryPathTextField);
 			// temporary: this is a temporary solution for the partial file system dictionary support.
-			dictionaryPathTextField.setDefaultCommand(selectDictionaryPathCommand);
+			dictionaryPathTextField.setDefaultCommand(selectDictionaryCommand);
 			dictionaryPathTextField.setItemCommandListener(this);
 		}
 		
@@ -786,20 +803,3 @@ public class DictionarySettingForm
 		bitmapFontExists = BitmapFontCanvas.bitmapFontExists();
 	}
 }
-
-class SelectDictionaryPath extends Thread {
-	final String urlFilePrefix = "file:///"; 
-	
-	public void run() {
-		// currently only the rootdevices are listed
-		String rootdevicesString = new String();
-		Enumeration rootdevices = FileSystemRegistry.listRoots();
-		while (rootdevices.hasMoreElements()) {
-			rootdevicesString += urlFilePrefix + ((String) rootdevices.nextElement());
-			if (rootdevices.hasMoreElements())
-				rootdevicesString += " ";
-		}
-		DictionarySettingForm.dictionaryPathTextField.setString(rootdevicesString);
-	}
-}
-	

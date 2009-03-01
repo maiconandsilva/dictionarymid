@@ -89,4 +89,7 @@ public class UIDisplayTextItems {
 	public static final UIDisplayTextItem MessageNoDictionaryLoaded = LanguageUI.getUI().createNewUIDisplayTextItem("MessageNoDictionaryLoaded", 69, 0);
 	public static final UIDisplayTextItem CommandBack = LanguageUI.getUI().createNewUIDisplayTextItem("CommandBack", 70, 0);
 	public static final UIDisplayTextItem SearchAllLanguages = LanguageUI.getUI().createNewUIDisplayTextItem("SearchAllLanguages", 71, 0);
+	public static final UIDisplayTextItem CommandBrowse = LanguageUI.getUI().createNewUIDisplayTextItem("CommandBrowse", 72, 0);
+	public static final UIDisplayTextItem CommandSelect = LanguageUI.getUI().createNewUIDisplayTextItem("CommandSelect", 73, 0);
+	public static final UIDisplayTextItem DictionaryPath = LanguageUI.getUI().createNewUIDisplayTextItem("DictionaryPath", 74, 0);
 }
