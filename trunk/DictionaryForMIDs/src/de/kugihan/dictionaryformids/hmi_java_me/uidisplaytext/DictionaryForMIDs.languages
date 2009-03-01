@@ -98,6 +98,9 @@ DictionaryForMIDsApplicationName ; this is the name of the DictionaryForMIDs app
 MessageNoDictionaryLoaded ; this is displayed when no dictionary is loaded in JSR-75 mode
 CommandBack
 SearchAllLanguages ; this will be shown in the title bar and in the settings dialogue
+CommandBrowse
+CommandSelect
+DictionaryPath ; Path/filename of a loaded dictionary
 ================================================================================
 #English, en
 
@@ -172,6 +175,9 @@ DictionaryForMIDs
 No dictionary loaded
 Back
 All languages
+Browse
+Select
+Dictionary Path
 ================================================================================
 #Việt Nam, vi
 

@@ -94,6 +94,9 @@ public class UIDisplayTextContents {
 									"No dictionary loaded",
 									"Back",
 									"All languages",
+									"Browse",
+									"Select",
+									"Dictionary Path",
 		}),
 
 		new LanguageDisplayText("Việt Nam" ,
@@ -171,6 +174,9 @@ public class UIDisplayTextContents {
 									"No dictionary loaded",
 									"Back",
 									"All languages",
+									"Browse",
+									"Select",
+									"Dictionary Path",
 		}),
 
 		new LanguageDisplayText("Chinese" ,
@@ -248,6 +254,9 @@ public class UIDisplayTextContents {
 									"No dictionary loaded",
 									"Back",
 									"All languages",
+									"Browse",
+									"Select",
+									"Dictionary Path",
 		}),
 
 		new LanguageDisplayText("Français" ,
@@ -325,6 +334,9 @@ public class UIDisplayTextContents {
 									"No dictionary loaded",
 									"Back",
 									"All languages",
+									"Browse",
+									"Select",
+									"Dictionary Path",
 		}),
 
 		new LanguageDisplayText("Deutsch" ,
@@ -402,6 +414,9 @@ public class UIDisplayTextContents {
 									"No dictionary loaded",
 									"Back",
 									"All languages",
+									"Browse",
+									"Select",
+									"Dictionary Path",
 		}),
 
 		new LanguageDisplayText("Italiano" ,
@@ -479,6 +494,9 @@ public class UIDisplayTextContents {
 									"No dictionary loaded",
 									"Back",
 									"All languages",
+									"Browse",
+									"Select",
+									"Dictionary Path",
 		}),
 
 		new LanguageDisplayText("Japanese" ,
@@ -556,6 +574,9 @@ public class UIDisplayTextContents {
 									"No dictionary loaded",
 									"Back",
 									"All languages",
+									"Browse",
+									"Select",
+									"Dictionary Path",
 		}),
 
 		new LanguageDisplayText("Russian" ,
@@ -633,6 +654,9 @@ public class UIDisplayTextContents {
 									"Не загружено словарей",
 									"Назад",
 									"All languages",
+									"Browse",
+									"Select",
+									"Dictionary Path",
 		}),
 
 		new LanguageDisplayText("Español" ,
@@ -710,6 +734,9 @@ public class UIDisplayTextContents {
 									"No dictionary loaded",
 									"Hacia atrás",
 									"All languages",
+									"Browse",
+									"Select",
+									"Dictionary Path",
 		}),
 
 		new LanguageDisplayText("Português" ,
@@ -787,6 +814,9 @@ public class UIDisplayTextContents {
 									"Nenhum Dicionário carregado",
 									"Volta",
 									"All languages",
+									"Browse",
+									"Select",
+									"Dictionary Path",
 		}),
 
 		new LanguageDisplayText("Czech" ,
@@ -864,6 +894,9 @@ public class UIDisplayTextContents {
 									"No dictionary loaded",
 									"Back",
 									"All languages",
+									"Browse",
+									"Select",
+									"Dictionary Path",
 		}),
 
 		new LanguageDisplayText("Slovak" ,
@@ -941,9 +974,12 @@ public class UIDisplayTextContents {
 									"No dictionary loaded",
 									"Back",
 									"All languages",
+									"Browse",
+									"Select",
+									"Dictionary Path",
 		})
 	};
 
-	public static int totalNumberItemsInLanguage = 72;
+	public static int totalNumberItemsInLanguage = 75;
 
 }

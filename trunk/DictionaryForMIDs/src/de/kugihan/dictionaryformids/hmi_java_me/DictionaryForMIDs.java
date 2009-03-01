@@ -16,6 +16,7 @@ import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.JSR75InputStreamAccess;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.ResourceDfMInputStreamAccess;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.ZipInputStreamAccess;
 import de.kugihan.dictionaryformids.general.CouldNotOpenPropertyFileException;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.SettingsStore;
@@ -78,8 +79,14 @@ public class DictionaryForMIDs
 			// Create object for reading InputStreams
 			DfMInputStreamAccess dfmInputStreamObj;
 			if (DictionarySettings.isUseFileAccessJSR75()) {
-				// access files from file system
-				dfmInputStreamObj = new JSR75InputStreamAccess(SettingsStore.getSettingsStore().getDictionaryPath());
+				String dictionaryStore = SettingsStore.getSettingsStore().getDictionaryPath();
+				if (Util.convertToLowerCase(new StringBuffer(dictionaryStore)).toString().endsWith(".jar")) {
+					// access files from a zipped dictionary - Zz85
+					dfmInputStreamObj = new ZipInputStreamAccess(dictionaryStore);
+				} else {
+					// access files from file system
+					dfmInputStreamObj = new JSR75InputStreamAccess(dictionaryStore);
+				}
 			}
 			else {
 				// access files from JAR-file
