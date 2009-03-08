@@ -98,10 +98,7 @@ public class DictionarySettingForm
 		createItems();
 		
 		// set the values of the created items
-		setItemsToSettingValues();
-		
-		// create file file browser form
-		fileBrowserForm = new FileBrowser(this,display);
+		setItemsToSettingValues();		
 	}
 
 	// sets up the commands for this form:
@@ -325,6 +322,9 @@ public class DictionarySettingForm
 		 * Path to dictionary (when file system access is used)
 		 */
 		if (DictionarySettings.isUseFileAccessJSR75()) {
+			// create file file browser form
+			fileBrowserForm = new FileBrowser(this,display);
+			// create field for path of dictionary
 			dictionaryPathTextField = new TextField("Dictionary path", null, 300, TextField.URL); // temporary: change to UIDisplayText label
 			// DictionaryDataFile.dictionaryPath was already set in the constructor of class DictionaryForMIDs
 			append(dictionaryPathTextField);
