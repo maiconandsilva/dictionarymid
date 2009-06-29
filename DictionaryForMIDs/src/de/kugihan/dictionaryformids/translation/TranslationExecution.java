@@ -8,7 +8,6 @@ GPL applies - see file COPYING for copyright statement.
 package de.kugihan.dictionaryformids.translation;
 
 import de.kugihan.dictionaryformids.general.*;
-import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 
 public class TranslationExecution {
 
@@ -122,10 +121,9 @@ class TranslationThread implements Runnable {
 		if (translate != null) {
 			translate.cancelTranslation();
 		
-			// Send interrupt to translation thread
-			if (DictionarySettings.isCldc11()) {
-				ownExecutionThread.interrupt();
-			}
+			// Send interrupt to translation thread 
+			// (Thread.interrupt requires at minimum CLDC 1.1)
+			ownExecutionThread.interrupt();
 		}
 	}
 }

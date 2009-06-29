@@ -16,7 +16,6 @@ import de.kugihan.dictionaryformids.dataaccess.content.SelectionMode;
 import de.kugihan.dictionaryformids.general.DictionaryClassNotLoadedException;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
-import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 import de.kugihan.dictionaryformids.translation.normation.Normation;
 
 public class DictionaryDataFile  {
@@ -57,6 +56,9 @@ public class DictionaryDataFile  {
 	public static String applicationFileNamePrefix = "DictionaryForMIDs";
 	public static String propertyFileName = applicationFileNamePrefix + ".properties";
 	public static char   contentFontColourSeparationCharacter = ',';
+
+	private static RGBColour backgroundColour;  // background colour for the display
+	private static boolean   useBackgroundColour;
 
 	// properties used by DictionaryGeneration only
 	public static String dictionaryGenerationInputCharEncoding;
@@ -218,16 +220,16 @@ public class DictionaryDataFile  {
 		String backgroundColourProperty = "backgroundColour";
 		String backgroundColourString = utilObj.getDictionaryPropertyString(backgroundColourProperty, true);
 		if (backgroundColourString == null) {
-			DictionarySettings.setUseBackgroundColour(false);
-			DictionarySettings.setBackgroundColour(null);
+			setUseBackgroundColour(false);
+			setBackgroundColour(null);
 		}
 		else {
-			DictionarySettings.setUseBackgroundColour(true);
+			setUseBackgroundColour(true);
 			if (Util.stringEqualIgnoreCase(backgroundColourString, PredefinedContent.backgroundColourDefaultName)) {
-				DictionarySettings.setBackgroundColour(PredefinedContent.backgroundColourDefault);
+				setBackgroundColour(PredefinedContent.backgroundColourDefault);
 			}
 			else { 
-				DictionarySettings.setBackgroundColour(determineRGBColourFromProperty(backgroundColourString, backgroundColourProperty));
+				setBackgroundColour(determineRGBColourFromProperty(backgroundColourString, backgroundColourProperty));
 			}
 		}
 
@@ -383,4 +385,21 @@ public class DictionaryDataFile  {
 		else 
 			return "";
 	}
+
+	public static RGBColour getBackgroundColour() {
+		return backgroundColour;
+	}
+
+	public static void setBackgroundColour(RGBColour backgroundColour) {
+		DictionaryDataFile.backgroundColour = backgroundColour;
+	}
+
+	public static boolean isUseBackgroundColour() {
+		return useBackgroundColour;
+	}
+
+	public static void setUseBackgroundColour(boolean useBackgroundColour) {
+		DictionaryDataFile.useBackgroundColour = useBackgroundColour;
+	}
+
 }

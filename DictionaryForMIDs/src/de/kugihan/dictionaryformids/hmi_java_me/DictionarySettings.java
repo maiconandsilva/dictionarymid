@@ -29,9 +29,6 @@ public class DictionarySettings
 	private static int durationForCancelSearch = 60*1000;  // in milliseconds; currently hard set value
 	private static int fontSize;
 	private static int uiLanguage;
-	private static RGBColour backgroundColour;  // background colour for the display
-	private static boolean useBackgroundColour;
-	private static boolean cldc11 = false;
 	private static boolean useFileAccessJSR75 = false; 
 	private static boolean dictionaryAvailable;
 	private static String dictionaryPath;
@@ -161,12 +158,6 @@ public class DictionarySettings
 	{
 		DictionarySettings.uiLanguage = uiLanguage;
 	}
-	public static boolean isCldc11() {
-		return cldc11;
-	}
-	public static void setCldc11(boolean cldc11) {
-		DictionarySettings.cldc11 = cldc11;
-	}
 	public static boolean isColouredItems() {
 		return colouredItems;
 	}
@@ -192,18 +183,6 @@ public class DictionarySettings
 	public static void setAddAtEndWildcardAnySeriesOfCharacter(
 			boolean addAtEndWildcardAnySeriesOfCharacter) {
 		DictionarySettings.addAtEndWildcardAnySeriesOfCharacter = addAtEndWildcardAnySeriesOfCharacter;
-	}
-	public static RGBColour getBackgroundColour() {
-		return backgroundColour;
-	}
-	public static void setBackgroundColour(RGBColour backgroundColour) {
-		DictionarySettings.backgroundColour = backgroundColour;
-	}
-	public static boolean isUseBackgroundColour() {
-		return useBackgroundColour;
-	}
-	public static void setUseBackgroundColour(boolean useBackgroundColour) {
-		DictionarySettings.useBackgroundColour = useBackgroundColour;
 	}
 	public static boolean isUseFileAccessJSR75() {
 		return useFileAccessJSR75;

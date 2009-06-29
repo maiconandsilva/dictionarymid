@@ -34,14 +34,12 @@ public class UtilMid extends Util {
 	// old CLDC 1.0 phones sometimes use the string ISO8859_1 instead of ISO-8859-1
 	public void determineCharEncoding() throws DictionaryException {
 		oldStyleEncoding = false;
-		if (! DictionarySettings.isCldc11()) {
-			String supportedEncoding = System.getProperty("microedition.encoding");
-			if (supportedEncoding == null) {
-				throw new DictionaryException("System property microedition.encoding could not be read");
-			}
-			if (supportedEncoding.equals(oldStyleISO88591)) {
-				oldStyleEncoding = true;
-			}
+		String supportedEncoding = System.getProperty("microedition.encoding");
+		if (supportedEncoding == null) {
+			throw new DictionaryException("System property microedition.encoding could not be read");
+		}
+		if (supportedEncoding.equals(oldStyleISO88591)) {
+			oldStyleEncoding = true;
 		}
 	}
 	

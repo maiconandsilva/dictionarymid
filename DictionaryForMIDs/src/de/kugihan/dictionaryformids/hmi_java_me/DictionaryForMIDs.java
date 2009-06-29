@@ -63,13 +63,6 @@ public class DictionaryForMIDs
 				Thread.sleep(3000);
 			}
 
-			// check for supported CLDC version
-			String supportedCldcConfiguration = System.getProperty("microedition.configuration");
-			if (supportedCldcConfiguration.startsWith("CLDC-1.0"))
-				DictionarySettings.setCldc11(false);
-			else 
-				DictionarySettings.setCldc11(true);
-
 			// initialize SettingsStore
 			SettingsStore.getSettingsStore().initValues();
 
