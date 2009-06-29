@@ -11,6 +11,7 @@ import javax.microedition.lcdui.CustomItem;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 
+import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dataaccess.content.FontStyle;
 import de.kugihan.dictionaryformids.dataaccess.content.PredefinedContent;
 import de.kugihan.dictionaryformids.dataaccess.content.RGBColour;
@@ -18,10 +19,7 @@ import de.kugihan.dictionaryformids.dataaccess.content.SelectionMode;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
 import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart;
-import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 import de.kugihan.dictionaryformids.hmi_java_me.mainform.MainForm;
-
-import javax.microedition.lcdui.*;
 
 public  class StringColourItem extends CustomItem  {
   	private int width;
@@ -65,8 +63,8 @@ public  class StringColourItem extends CustomItem  {
   	nItems = stringColourItemText.size();
   	itemTextWrap = new String[nItems];
   	itemLeft = new int[nItems];
-  	isUseBackgroundColour = DictionarySettings.isUseBackgroundColour();
-  	if(isUseBackgroundColour) backgroundColour = DictionarySettings.getBackgroundColour();
+  	isUseBackgroundColour = DictionaryDataFile.isUseBackgroundColour();
+  	if(isUseBackgroundColour) backgroundColour = DictionaryDataFile.getBackgroundColour();
   	systemBackgroundColour = applicationMainForm.systemBackgroundColour;
   	initValue();
   	// height
