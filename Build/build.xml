@@ -15,7 +15,7 @@ javac.encoding=UTF-8
 <project name="allwork" default="build_all">
 
 	<!-- <property name="wtk.home"  location="D:\WTK25"/> -->
-	<property name="wtk.home"  location="c:\programme\WTK"/>
+	<property name="wtk.home"  location="C:\Projects\Java_ME_platform_SDK_3.0"/>
 	<!-- <property name="wtk.home"  location="/home/peto/.netbeans/5.5beta2/emulators/wtk22_linux/emulator/wtk22"/> -->
 
 	<property name="wtk.cldc.version"  			value="1.1"/>
@@ -25,8 +25,8 @@ javac.encoding=UTF-8
 	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-0.9.14.jar"/>
 	<property name="antenna.jarfilename"  		value="antenna-bin-0.9.14.jar"/>
 
-    <property name="VersionNumber" 		value="3.3.0"/>	<!-- version of tools / applications -->
-	<property name="VersionStatus" 		value="final"/>	 <!--  e.g. "beta", "testversion 2"  -->
+    <property name="VersionNumber" 		value="3.3.1"/>	<!-- version of tools / applications -->
+	<property name="VersionStatus" 		value="development version"/>	 <!--  e.g. "beta", "testversion 2"  -->
     <condition property="ApplicationVersion" 	value="${VersionNumber}_${VersionStatus}" else="${VersionNumber}">
     	<isset property="VersionStatus"/>
 	</condition>
@@ -38,18 +38,23 @@ javac.encoding=UTF-8
   	<property name="DfM.inputbasedir" 	location="../DictionaryForMIDs"/>
   	<property name="DfM.outputbasedir" 	location="${Build}/DictionaryForMIDs"/>
 	<property name="DfM.srcdir"     	location="${DfM.inputbasedir}/src"/>            		<!-- WTK reads the resource files from src -->
-	<property name="DfM.resdir"     	location="${DfM.inputbasedir}/res"/>            		<!-- WTK reads the resource files from res -->
 	<property name="DfM.classdir"   	location="${DfM.outputbasedir}/classes"/>        		<!-- WTK puts the class files to classes -->
-	<property name="DfM.bindir"   		location="${DfM.outputbasedir}/bin"/>					<!-- WTK puts the resource files to bin -->
-	<property name="DfM.manifest"   	location="${DfM.bindir}/MANIFEST.MF"/>					<!-- WTK puts the resource files to bin -->
-	<property name="DfM.jarfile"    	location="${DfM.outputbasedir}/DictionaryForMIDs.jar"/> <!-- Put the file in the home directory (WTK puts the jar file to bin) -->
-	<property name="DfM.jadfile"    	location="${DfM.outputbasedir}/DictionaryForMIDs.jad"/> <!-- Put the file in the home directory (WTK puts the jad file to bin) -->
+
+	<property name="JavaME.inputbasedir"  location="../JavaME"/>
+	<property name="JavaME.outputbasedir" location="${Build}/JavaME"/>
+	<property name="JavaME.srcdir" 		location="${JavaME.inputbasedir}/src"/>
+	<property name="JavaME.classdir" 	location="${JavaME.outputbasedir}/bin"/>
+	<property name="JavaME.resdir"     	location="${JavaME.inputbasedir}/res"/>            		<!-- WTK reads the resource files from res -->
+	<property name="JavaME.bindir"   	location="${JavaME.outputbasedir}/bin"/>				<!-- WTK puts the resource files to bin -->
+	<property name="JavaME.jarfile"    	location="${JavaME.outputbasedir}/DictionaryForMIDs.jar"/> <!-- Put the file in the home directory (WTK puts the jar file to bin) -->
+	<property name="JavaME.jadfile"    	location="${JavaME.outputbasedir}/DictionaryForMIDs.jad"/> <!-- Put the file in the home directory (WTK puts the jad file to bin) -->
+	<property name="JavaME.manifest"   	location="${JavaME.bindir}/MANIFEST.MF"/>				   <!-- WTK puts the resource files to bin -->
 
 	<property name="JavaSE.inputbasedir"  location="../JavaSE"/>
 	<property name="JavaSE.outputbasedir" location="${Build}/JavaSE"/>
 	<property name="JavaSE.srcdir" 		location="${JavaSE.inputbasedir}/src"/>
 	<property name="JavaSE.classdir" 	location="${JavaSE.outputbasedir}/bin"/>
-	<property name="JavaSE.jarfile" 	location="${JavaSE.outputbasedir}/DictionaryForMIDsPC.jar"/> <!-- todo: need to check with Stefan on name ! -->
+	<property name="JavaSE.jarfile" 	location="${JavaSE.outputbasedir}/DictionaryForMIDsPC.jar"/>
 
 	<property name="JC.inputbasedir"  	location="../JarCreator"/>
 	<property name="JC.outputbasedir" 	location="${Build}/JarCreator"/>
@@ -116,69 +121,77 @@ javac.encoding=UTF-8
 	</target>
 
   	<!-- 
-  		DictionaryForMIDs Java ME 
+  		DictionaryForMIDs common parts 
   	-->
-	<target name="compile_dfm_java_me">
+	<target name="compile_dfm_common">
 	    <mkdir dir="${DfM.classdir}"/>	 
-	    <mkdir dir="${DfM.bindir}"/>	 
 	    <wtkbuild srcdir="${DfM.srcdir}" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${DfM.classdir}" debug="on"/>
 	</target>
 
+	<!-- 
+  		DictionaryForMIDs Java ME 
+  	-->
+	<target name="compile_dfm_java_me">
+	    <mkdir dir="${JavaME.classdir}"/>	 
+	    <mkdir dir="${JavaME.bindir}"/>	 
+	    <wtkbuild srcdir="${JavaME.srcdir}" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${JavaME.classdir}" debug="on"/>
+	</target>
+
 	<target name="create_dfm_java_me_jadfile_and_manifest"> 
-		<property name="DfM.MIDlet-Name" value="DictionaryForMIDs"/> 
-	    <property name="DfM.MIDlet-Version" value="${VersionNumber}"/>
-	    <property name="DfM.MicroEdition-Profile" value="MIDP-2.0"/>
-	    <property name="DfM.MicroEdition-Configuration" value="CLDC-1.0"/>
-	    <property name="DfM.Built-By" value="${user.name}"/>
-	    <property name="DfM.MIDlet-1" value="DictionaryForMIDs, /icons/Application/DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs"/>
-	    <wtkjad jadfile="${DfM.jadfile}">
-		    <attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
-		    <attribute name="MIDlet-Version" value="${DfM.MIDlet-Version}"/>
-		    <attribute name="MicroEdition-Profile" value="${DfM.MicroEdition-Profile}"/>
-		    <attribute name="MicroEdition-Configuration" value="${DfM.MicroEdition-Configuration}"/>
+		<property name="JavaME.MIDlet-Name" value="DictionaryForMIDs"/> 
+	    <property name="JavaME.MIDlet-Version" value="${VersionNumber}"/>
+	    <property name="JavaME.MicroEdition-Profile" value="MIDP-2.0"/>
+	    <property name="JavaME.MicroEdition-Configuration" value="CLDC-1.1"/>
+	    <property name="JavaME.Built-By" value="${user.name}"/>
+	    <property name="JavaME.MIDlet-1" value="DictionaryForMIDs, /icons/Application/DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs"/>
+	    <wtkjad jadfile="${JavaME.jadfile}">
+		    <attribute name="MIDlet-Name" value="${JavaME.MIDlet-Name}"/>
+		    <attribute name="MIDlet-Version" value="${JavaME.MIDlet-Version}"/>
+		    <attribute name="MicroEdition-Profile" value="${JavaME.MicroEdition-Profile}"/>
+		    <attribute name="MicroEdition-Configuration" value="${JavaME.MicroEdition-Configuration}"/>
 		    <attribute name="Built-By" value="${user.name}"/>
 		    <attribute name="MIDlet-Vendor" value="${DfM.team}"/>
-		    <attribute name="MIDlet-1" value="${DfM.MIDlet-1}"/>
+		    <attribute name="MIDlet-1" value="${JavaME.MIDlet-1}"/>
 		    <attribute name="MIDlet-Jar-URL" value="DictionaryForMIDs.jar"/>
 		    <attribute name="MIDlet-Permissions" value="javax.microedition.io.Connector.file.read"/>
 		    <attribute name="logLevel" value="0"/>
 	  	</wtkjad>
-      	<manifest file="${DfM.manifest}">
-	      	<attribute name="MIDlet-Name" value="${DfM.MIDlet-Name}"/>
-	      	<attribute name="MIDlet-Version" value="${DfM.MIDlet-Version}"/>
-	      	<attribute name="MicroEdition-Profile" value="${DfM.MicroEdition-Profile}"/>
-	      	<attribute name="MicroEdition-Configuration" value="${DfM.MicroEdition-Configuration}"/>
+      	<manifest file="${JavaME.manifest}">
+	      	<attribute name="MIDlet-Name" value="${JavaME.MIDlet-Name}"/>
+	      	<attribute name="MIDlet-Version" value="${JavaME.MIDlet-Version}"/>
+	      	<attribute name="MicroEdition-Profile" value="${JavaME.MicroEdition-Profile}"/>
+	      	<attribute name="MicroEdition-Configuration" value="${JavaME.MicroEdition-Configuration}"/>
 	      	<attribute name="Built-By" value="${user.name}"/>
 	      	<attribute name="MIDlet-Vendor" value="${DfM.team}"/>
-	      	<attribute name="MIDlet-1" value="${DfM.MIDlet-1}"/>
+	      	<attribute name="MIDlet-1" value="${JavaME.MIDlet-1}"/>
       	</manifest>
 	</target>
 
 	<target name="build_dfm_java_me" depends="compile_dfm_java_me,create_dfm_java_me_jadfile_and_manifest"> 
 		<antcall target="create_application_property_file">
-			<param name="destinationbasedir" 	value="${DfM.outputbasedir}"/>
+			<param name="destinationbasedir" 	value="${JavaME.outputbasedir}"/>
 		</antcall>
 		<!-- note: the following wtkpackage task will fail on preverification if the jar tool is not in the path -->
-	    <wtkpackage jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}" manifest="${DfM.manifest}" preverify="true">
-	      	<fileset dir="${DfM.classdir}"/>
-	      	<fileset dir="${DfM.resdir}"/>
-	      	<fileset dir="${DfM.outputbasedir}" includes="${app.propertyfilename}"/>
+	    <wtkpackage jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}" manifest="${JavaME.manifest}" preverify="true">
+	      	<fileset dir="${JavaME.classdir}"/>
+	      	<fileset dir="${JavaME.resdir}"/>
+	      	<fileset dir="${JavaME.outputbasedir}" includes="${app.propertyfilename}"/>
 	    </wtkpackage>
 	</target>
 
 	<target name="package_dfm_java_me_empty" depends="obfuscate_dfm_java_me"> 
 		<property name="packaging.java_me_executeable.subdir" value="files_for_packaging/executeable_distribution"/>
 		<antcall target="replace_keywords_readme">
-			<param name="sourcebasedir" 		value="${DfM.inputbasedir}"/>
-			<param name="destinationbasedir" 	value="${DfM.outputbasedir}"/>
+			<param name="sourcebasedir" 		value="${JavaME.inputbasedir}"/>
+			<param name="destinationbasedir" 	value="${JavaME.outputbasedir}"/>
 			<param name="packaging.subdir" 		value="${packaging.java_me_executeable.subdir}"/>
 		</antcall>
-		<property name="DfM.zipfile_empty"	location="${DfM.outputbasedir}/DictionaryForMIDs_${ApplicationVersion}_empty.zip"/>
-		<zip destfile="${DfM.zipfile_empty}">
-			<zipfileset file="${DfM.jarfile}"/>
-			<zipfileset file="${DfM.jadfile}"/>
+		<property name="JavaME.zipfile_empty"	location="${JavaME.outputbasedir}/DictionaryForMIDs_${ApplicationVersion}_empty.zip"/>
+		<zip destfile="${JavaME.zipfile_empty}">
+			<zipfileset file="${JavaME.jarfile}"/>
+			<zipfileset file="${JavaME.jadfile}"/>
 			<zipfileset file="${packaging.copyrightfile}"/>
-			<zipfileset file="${DfM.outputbasedir}/${packaging.java_me_executeable.subdir}/${packaging.readmefilename}"/>
+			<zipfileset file="${JavaME.outputbasedir}/${packaging.java_me_executeable.subdir}/${packaging.readmefilename}"/>
 		</zip>
 	</target>
 
@@ -186,22 +199,23 @@ javac.encoding=UTF-8
 	                                                                              to ensure that the source compiles -->
 		<property name="packaging.java_me_source.subdir" value="files_for_packaging/source_distribution"/>
 		<antcall target="replace_keywords_readme">
-			<param name="sourcebasedir" 		value="${DfM.inputbasedir}"/>
-			<param name="destinationbasedir" 	value="${DfM.outputbasedir}"/>
+			<param name="sourcebasedir" 		value="${JavaME.inputbasedir}"/>
+			<param name="destinationbasedir" 	value="${JavaME.outputbasedir}"/>
 			<param name="packaging.subdir" 		value="${packaging.java_me_source.subdir}"/>
 		</antcall>
-		<property name="DfM.zipfile_source"	location="${DfM.outputbasedir}/DictionaryForMIDs_${ApplicationVersion}_source.zip"/>
-		<zip destfile="${DfM.zipfile_source}">
+		<property name="DfM.zipfile_source"	location="${JavaME.outputbasedir}/DictionaryForMIDs_${ApplicationVersion}_source.zip"/>
+		<zip destfile="${JavaME.zipfile_source}">
+			<zipfileset dir="${JavaME.srcdir}" prefix="source/DictionaryForMIDs/src"/>
 			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs/src"/>
-			<zipfileset dir="${DfM.resdir}" prefix="source/DictionaryForMIDs/res"/>
+			<zipfileset dir="${JavaME.resdir}" prefix="source/DictionaryForMIDs/res"/>
 			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
 			<zipfileset file="${packaging.copyrightfile}"/>
-			<zipfileset file="${DfM.outputbasedir}/${packaging.java_me_source.subdir}/${packaging.readmefilename}"/>
+			<zipfileset file="${JavaME.outputbasedir}/${packaging.java_me_source.subdir}/${packaging.readmefilename}"/>
 		</zip>
 	</target>
 
 	<target name="do_obfuscate_dfm_java_me"> 
-	    <wtkobfuscate jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}">
+	    <wtkobfuscate jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}">
 			<preserve class="de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs"/>
 			<preserve class="de.kugihan.dictionaryformids.translation.normation.Normation"/>
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationLat"/>
@@ -215,7 +229,7 @@ javac.encoding=UTF-8
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationVie"/>
 	    </wtkobfuscate>
 		<!-- need to preverify again -->
-		<wtkpreverify jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}"/>
+		<wtkpreverify jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}"/>
 	</target>
   	
 	<target name="obfuscate_dfm_java_me" depends="build_dfm_java_me"> 
@@ -226,12 +240,13 @@ javac.encoding=UTF-8
 		<antcall target="create_application_property_file">
 			<param name="destinationbasedir" 	value="${DfM.outputbasedir}"/>
 		</antcall>
-	    <wtkpackage jarfile="${DfM.jarfile}" jadfile="${DfM.jadfile}" manifest="${DfM.manifest}">
-	      	<fileset dir="${DfM.classdir}"/>
-	      	<fileset dir="${DfM.outputbasedir}" includes="${app.propertyfilename}"/>
-	      	<fileset dir="${DfM.resdir}">
+	    <wtkpackage jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}" manifest="${JavaME.manifest}">
+	      	<fileset dir="${JavaME.classdir}"/>
+	      	<fileset dir="${JavaME.outputbasedir}" includes="${app.propertyfilename}"/>
+	      	<fileset dir="${JavaME.resdir}">
 	      		<!-- do not include any icons -->
 	      		<exclude name="icons/**"/>
+	      		<!-- further improvement: do not include zip classes -->
 	      	</fileset>
 	    </wtkpackage>
 		<antcall target="do_obfuscate_dfm_java_me"/>
@@ -240,7 +255,7 @@ javac.encoding=UTF-8
   	<!-- 
   		DictionaryForMIDs Java SE
   	-->
-	<target name="compile_dfm_java_se" depends="compile_dfm_java_me">
+	<target name="compile_dfm_java_se" depends="compile_dfm_common">
 	    <mkdir dir="${JavaSE.classdir}"/>	 
 	    <javac srcdir="${JavaSE.srcdir}"  classpath="${DfM.classdir}" encoding="UTF-8" destdir="${JavaSE.classdir}" debug="on" />
 	</target>
@@ -266,7 +281,7 @@ javac.encoding=UTF-8
   	<!-- 
   		JarCreator
   	-->
-	<target name="compile_jc" depends="compile_dfm_java_me,compile_dfm_java_se">
+	<target name="compile_jc" depends="compile_dfm_common,compile_dfm_java_se">
 	    <mkdir dir="${JC.classdir}"/>
 	    <javac srcdir="${JC.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${JC.classdir}" debug="on"/>
 	</target>
@@ -308,7 +323,7 @@ javac.encoding=UTF-8
   	<!-- 
   		DictionaryGeneration
   	-->
-	<target name="compile_dg" depends="compile_dfm_java_me,compile_dfm_java_se">
+	<target name="compile_dg" depends="compile_dfm_common,compile_dfm_java_se">
 	    <mkdir dir="${DG.classdir}"/>
 	    <javac srcdir="${DG.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${DG.classdir}" debug="on"/>
 	</target>
@@ -350,7 +365,7 @@ javac.encoding=UTF-8
   	<!-- 
   		BitmapFontGenerator
   	-->
-	<target name="compile_bfg" depends="compile_dfm_java_me,compile_dfm_java_se">
+	<target name="compile_bfg" depends="compile_dfm_common,compile_dfm_java_se">
 	    <mkdir dir="${BFG.classdir}"/>
 	    <javac srcdir="${BFG.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${BFG.classdir}" debug="on"/>
 	</target>
@@ -390,7 +405,7 @@ javac.encoding=UTF-8
   	<!-- 
   		LanguageUIGeneration
   	-->
-	<target name="compile_lg" depends="compile_dfm_java_me,compile_dfm_java_se">
+	<target name="compile_lg" depends="compile_dfm_common,compile_dfm_java_se">
 	    <mkdir dir="${LG.classdir}"/>
 	    <javac srcdir="${LG.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${LG.classdir}" debug="on"/>
 	</target>
