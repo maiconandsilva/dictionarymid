@@ -10,20 +10,20 @@ You also must have the antenna-bin-xxx.jar file in the Build directory (the file
 
 Important note: the source files are UTF-8 encoded. In Sun's WTK, you must set in the file ktools.properties (found somewhere under wtklib) the following property:
 javac.encoding=UTF-8
+
+Note for Sun Java ME SDK 3.0: the Sun Java ME SDK 3.0 is not yet supported by antenna; for usage with antenna-bin-0.9.14.jar Sun's WTK must be installed. 
 -->
 
 <project name="allwork" default="build_all">
 
 	<!-- <property name="wtk.home"  location="D:\WTK25"/> -->
-	<property name="wtk.home"  location="C:\Projects\Java_ME_platform_SDK_3.0"/>
-	<!-- <property name="wtk.home"  location="/home/peto/.netbeans/5.5beta2/emulators/wtk22_linux/emulator/wtk22"/> -->
+	<property name="wtk.home"  location="C:\Projects\WTK2.5.2_01"/>
 
 	<property name="wtk.cldc.version"  			value="1.1"/>
 	<property name="wtk.midp.version"  			value="2.0"/>
 	<property name="wtk.optionalpda.enabled"  	value="true"/>
 
-	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-0.9.14.jar"/>
-	<property name="antenna.jarfilename"  		value="antenna-bin-0.9.14.jar"/>
+	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-0.9.14.jar"/>  <!-- note that this version of antenna does not yet support the Sun Java ME SDK 3.0" -->
 
     <property name="VersionNumber" 		value="3.3.1"/>	<!-- version of tools / applications -->
 	<property name="VersionStatus" 		value="development version"/>	 <!--  e.g. "beta", "testversion 2"  -->
@@ -43,7 +43,7 @@ javac.encoding=UTF-8
 	<property name="JavaME.inputbasedir"  location="../JavaME"/>
 	<property name="JavaME.outputbasedir" location="${Build}/JavaME"/>
 	<property name="JavaME.srcdir" 		location="${JavaME.inputbasedir}/src"/>
-	<property name="JavaME.classdir" 	location="${JavaME.outputbasedir}/bin"/>
+	<property name="JavaME.classdir" 	location="${JavaME.outputbasedir}/classes"/>
 	<property name="JavaME.resdir"     	location="${JavaME.inputbasedir}/res"/>            		<!-- WTK reads the resource files from res -->
 	<property name="JavaME.bindir"   	location="${JavaME.outputbasedir}/bin"/>				<!-- WTK puts the resource files to bin -->
 	<property name="JavaME.jarfile"    	location="${JavaME.outputbasedir}/DictionaryForMIDs.jar"/> <!-- Put the file in the home directory (WTK puts the jar file to bin) -->
@@ -134,7 +134,7 @@ javac.encoding=UTF-8
 	<target name="compile_dfm_java_me">
 	    <mkdir dir="${JavaME.classdir}"/>	 
 	    <mkdir dir="${JavaME.bindir}"/>	 
-	    <wtkbuild srcdir="${JavaME.srcdir}" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${JavaME.classdir}" debug="on"/>
+	    <wtkbuild srcdir="${JavaME.srcdir}" classpath="${DfM.classdir}" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${JavaME.classdir}" debug="on"/>
 	</target>
 
 	<target name="create_dfm_java_me_jadfile_and_manifest"> 
@@ -173,6 +173,7 @@ javac.encoding=UTF-8
 		</antcall>
 		<!-- note: the following wtkpackage task will fail on preverification if the jar tool is not in the path -->
 	    <wtkpackage jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}" manifest="${JavaME.manifest}" preverify="true">
+			<fileset dir="${DfM.classdir}"     	includes="de/kugihan/dictionaryformids/**"  />
 	      	<fileset dir="${JavaME.classdir}"/>
 	      	<fileset dir="${JavaME.resdir}"/>
 	      	<fileset dir="${JavaME.outputbasedir}" includes="${app.propertyfilename}"/>
