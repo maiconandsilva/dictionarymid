@@ -294,6 +294,7 @@ Note for Sun Java ME SDK 3.0: the Sun Java ME SDK 3.0 is not yet supported by an
 	    <jar destfile="${JC.jarfile}"  >
 	      	<fileset dir="${DfM.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
 	      	<fileset dir="${JC.classdir}"      includes="de/kugihan/jarCreator/JarCreator.class"  />
+	      	<fileset dir="${JavaME.classdir}"  includes="de/kugihan/dictionaryformids/**"  />
 	      	<fileset dir="${JavaSE.classdir}"  includes="de/kugihan/dictionaryformids/**"  />
 	      	<fileset dir="${JC.outputbasedir}" includes="${app.propertyfilename}"/>
 	      	<manifest>
