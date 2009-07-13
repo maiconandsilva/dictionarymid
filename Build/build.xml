@@ -282,9 +282,9 @@ Note for Sun Java ME SDK 3.0: the Sun Java ME SDK 3.0 is not yet supported by an
   	<!-- 
   		JarCreator
   	-->
-	<target name="compile_jc" depends="compile_dfm_common,compile_dfm_java_se">
+	<target name="compile_jc" depends="compile_dfm_common,compile_dfm_java_se,compile_dfm_java_me">
 	    <mkdir dir="${JC.classdir}"/>
-	    <javac srcdir="${JC.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${JC.classdir}" debug="on"/>
+	    <javac srcdir="${JC.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir};${JavaME.classdir}" encoding="UTF-8" destdir="${JC.classdir}" debug="on"/>
 	</target>
 
 	<target name="build_jc" depends="compile_jc"> 
