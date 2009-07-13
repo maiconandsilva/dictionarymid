@@ -5,7 +5,7 @@ Copyright (C) 2005, 2006 Gert Nuber (dict@kugihan.de)
 GPL applies - see file COPYING for copyright statement.
 */
 
-package de.kugihan.dictionaryformids.general;
+package de.kugihan.dictionaryformids.hmi_java_me;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -14,6 +14,8 @@ import java.io.IOException;
 
 import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
+
+import de.kugihan.dictionaryformids.general.DictionaryException;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs;
