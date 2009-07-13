@@ -19,7 +19,7 @@ import de.kugihan.dictionaryformids.dataaccess.fileaccess.ResourceDfMInputStream
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.ZipInputStreamAccess;
 import de.kugihan.dictionaryformids.general.CouldNotOpenPropertyFileException;
 import de.kugihan.dictionaryformids.general.DictionaryException;
-import de.kugihan.dictionaryformids.general.SettingsStore;
+import de.kugihan.dictionaryformids.hmi_java_me.SettingsStore;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.general.UtilMid;
 import de.kugihan.dictionaryformids.hmi_java_me.mainform.MainForm;

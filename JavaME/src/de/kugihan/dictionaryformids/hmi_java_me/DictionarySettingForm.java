@@ -26,7 +26,7 @@ import javax.microedition.lcdui.TextField;
 import de.kugihan.dictionaryformids.dataaccess.CsvFile;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.general.DictionaryException;
-import de.kugihan.dictionaryformids.general.SettingsStore;
+import de.kugihan.dictionaryformids.hmi_java_me.SettingsStore;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.hmi_java_me.filebrowser.DirectoryChooserListener;
 import de.kugihan.dictionaryformids.hmi_java_me.filebrowser.FileBrowser;
