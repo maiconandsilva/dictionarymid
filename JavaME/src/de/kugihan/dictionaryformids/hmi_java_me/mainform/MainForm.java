@@ -30,7 +30,7 @@ import javax.microedition.lcdui.Spacer;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dataaccess.LanguageDefinition;
 import de.kugihan.dictionaryformids.general.DictionaryException;
-import de.kugihan.dictionaryformids.general.SettingsStore;
+import de.kugihan.dictionaryformids.hmi_java_me.SettingsStore;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.hmi_common.content.ContentParser;
 import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;

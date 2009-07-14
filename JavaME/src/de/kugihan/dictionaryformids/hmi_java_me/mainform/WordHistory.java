@@ -11,7 +11,7 @@ package de.kugihan.dictionaryformids.hmi_java_me.mainform;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.general.DictionaryException;
-import de.kugihan.dictionaryformids.general.SettingsStore;
+import de.kugihan.dictionaryformids.hmi_java_me.SettingsStore;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.translation.TranslationExecution;
 
