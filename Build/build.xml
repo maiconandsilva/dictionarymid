@@ -226,6 +226,7 @@ Note for Sun Java ME SDK 3.0: the Sun Java ME SDK 3.0 is not yet supported by an
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationEng2"/>
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationJpn"/>
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationLat"/>
+                <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationNor"/>
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationRus"/>
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationVie"/>
 	    </wtkobfuscate>
