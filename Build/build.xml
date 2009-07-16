@@ -1,30 +1,28 @@
 <!-- 
 This file build.xml should be located in directory Build
-You must have Sun's Wireless Toolkit (WTK) installed (can be downloaded from http://java.sun.com/products/sjwtoolkit/download-2_5.html)
-You must set wtk.home to your WTK installation directory
+You must have Sun's Java ME SDK installed (can be downloaded from http://java.sun.com)
+You must set wtk.home to your Sun Java ME SDK installation directory
 This build.xml can generate DictionaryForMIDs (Java ME and Java SE), DictionaryGeneration, JarCreator, BitmapFontGenerator and LanguageUIGeneration
 Using: run ant in directory Build
 It runs well on both platforms windows/linux
 The jar-tool must be in the path. Otherwise there will be an error during the preverifier run.
-You also must have the antenna-bin-xxx.jar file in the Build directory (the file antenna-bin-xxx.jar is part of the Build CVS project; can also be downloaded from http://antenna.sourceforge.net)
+You also must have the antenna-bin-xxx.jar file in the Build directory (the file antenna-bin-xxx.jar is part of the Build SVN subdirectory)
 
-Important note: the source files are UTF-8 encoded. In Sun's WTK, you must set in the file ktools.properties (found somewhere under wtklib) the following property:
+Important note: the source files are UTF-8 encoded. If you are using the old Sun WTK (for versions <= 2.5.2), you must set in the file ktools.properties (found somewhere under wtklib) the following property:
 javac.encoding=UTF-8
-
-Note for Sun Java ME SDK 3.0: the Sun Java ME SDK 3.0 is not yet supported by antenna; for usage with antenna-bin-0.9.14.jar Sun's WTK must be installed. 
 -->
 
 <project name="allwork" default="build_all">
 
 	<!-- <property name="wtk.home"  location="D:\WTK25"/> -->
-	<property name="wtk.home"  location="C:\Projects\WTK2.5.2_01"/>
+	<property name="wtk.home"  location="C:\Projects\Java_ME_platform_SDK_3.0"/>
 
 	<property name="wtk.cldc.version"  			value="1.1"/>
 	<property name="wtk.midp.version"  			value="2.0"/>
 	<property name="wtk.optionalpda.enabled"  	value="true"/>
 
-	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-0.9.14.jar"/>  <!-- note that this version of antenna does not yet support the Sun Java ME SDK 3.0" -->
-
+	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-1.1.0-sdk30.jar"/> <!-- This is a patched version of antenna: see http://eriksdiary.blogspot.com/2009/07/antenna-suport-for-java-me-sdk-30.html --> 
+	
     <property name="VersionNumber" 		value="3.3.1"/>	<!-- version of tools / applications -->
 	<property name="VersionStatus" 		value="development version"/>	 <!--  e.g. "beta", "testversion 2"  -->
     <condition property="ApplicationVersion" 	value="${VersionNumber}_${VersionStatus}" else="${VersionNumber}">
@@ -37,18 +35,18 @@ Note for Sun Java ME SDK 3.0: the Sun Java ME SDK 3.0 is not yet supported by an
 	
   	<property name="DfM.inputbasedir" 	location="../DictionaryForMIDs"/>
   	<property name="DfM.outputbasedir" 	location="${Build}/DictionaryForMIDs"/>
-	<property name="DfM.srcdir"     	location="${DfM.inputbasedir}/src"/>            		<!-- WTK reads the resource files from src -->
-	<property name="DfM.classdir"   	location="${DfM.outputbasedir}/classes"/>        		<!-- WTK puts the class files to classes -->
+	<property name="DfM.srcdir"     	location="${DfM.inputbasedir}/src"/>            		
+	<property name="DfM.classdir"   	location="${DfM.outputbasedir}/classes"/>        		
 
 	<property name="JavaME.inputbasedir"  location="../JavaME"/>
 	<property name="JavaME.outputbasedir" location="${Build}/JavaME"/>
 	<property name="JavaME.srcdir" 		location="${JavaME.inputbasedir}/src"/>
 	<property name="JavaME.classdir" 	location="${JavaME.outputbasedir}/classes"/>
-	<property name="JavaME.resdir"     	location="${JavaME.inputbasedir}/res"/>            		<!-- WTK reads the resource files from res -->
-	<property name="JavaME.bindir"   	location="${JavaME.outputbasedir}/bin"/>				<!-- WTK puts the resource files to bin -->
-	<property name="JavaME.jarfile"    	location="${JavaME.outputbasedir}/DictionaryForMIDs.jar"/> <!-- Put the file in the home directory (WTK puts the jar file to bin) -->
-	<property name="JavaME.jadfile"    	location="${JavaME.outputbasedir}/DictionaryForMIDs.jad"/> <!-- Put the file in the home directory (WTK puts the jad file to bin) -->
-	<property name="JavaME.manifest"   	location="${JavaME.bindir}/MANIFEST.MF"/>				   <!-- WTK puts the resource files to bin -->
+	<property name="JavaME.resdir"     	location="${JavaME.inputbasedir}/res"/>            		
+	<property name="JavaME.bindir"   	location="${JavaME.outputbasedir}/bin"/>				
+	<property name="JavaME.jarfile"    	location="${JavaME.outputbasedir}/DictionaryForMIDs.jar"/> <!-- Put the file in the home directory of Build/Java ME -->
+	<property name="JavaME.jadfile"    	location="${JavaME.outputbasedir}/DictionaryForMIDs.jad"/> <!-- Put the file in the home directory of Build/Java ME -->
+	<property name="JavaME.manifest"   	location="${JavaME.bindir}/MANIFEST.MF"/>				  
 
 	<property name="JavaSE.inputbasedir"  location="../JavaSE"/>
 	<property name="JavaSE.outputbasedir" location="${Build}/JavaSE"/>
@@ -131,7 +129,7 @@ Note for Sun Java ME SDK 3.0: the Sun Java ME SDK 3.0 is not yet supported by an
 	<!-- 
   		DictionaryForMIDs Java ME 
   	-->
-	<target name="compile_dfm_java_me">
+	<target name="compile_dfm_java_me" depends="compile_dfm_common">
 	    <mkdir dir="${JavaME.classdir}"/>	 
 	    <mkdir dir="${JavaME.bindir}"/>	 
 	    <wtkbuild srcdir="${JavaME.srcdir}" classpath="${DfM.classdir}" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${JavaME.classdir}" debug="on"/>
@@ -204,7 +202,7 @@ Note for Sun Java ME SDK 3.0: the Sun Java ME SDK 3.0 is not yet supported by an
 			<param name="destinationbasedir" 	value="${JavaME.outputbasedir}"/>
 			<param name="packaging.subdir" 		value="${packaging.java_me_source.subdir}"/>
 		</antcall>
-		<property name="DfM.zipfile_source"	location="${JavaME.outputbasedir}/DictionaryForMIDs_${ApplicationVersion}_source.zip"/>
+		<property name="JavaME.zipfile_source"	location="${JavaME.outputbasedir}/DictionaryForMIDs_${ApplicationVersion}_source.zip"/>
 		<zip destfile="${JavaME.zipfile_source}">
 			<zipfileset dir="${JavaME.srcdir}" prefix="source/DictionaryForMIDs/src"/>
 			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs/src"/>
@@ -226,7 +224,7 @@ Note for Sun Java ME SDK 3.0: the Sun Java ME SDK 3.0 is not yet supported by an
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationEng2"/>
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationJpn"/>
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationLat"/>
-                <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationNor"/>
+			<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationNor"/>
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationRus"/>
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationVie"/>
 	    </wtkobfuscate>
