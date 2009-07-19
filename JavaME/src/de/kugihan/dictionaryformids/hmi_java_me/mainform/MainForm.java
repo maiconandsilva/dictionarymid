@@ -463,13 +463,6 @@ public class MainForm
 		}	
 	}
 
-	public void updateStringColourItemWidth(int index, int width, int fontSize){
-		StringColourItemText itemText = ((StringColourItem) this.get(index)).getColourItem();
-		this.delete(index);
-		this.insert(index, new StringColourItem(itemText, width, fontSize, index, this));
-		stringColourItemWidth = width;
-	}
-	
 	public void newWord() {
 		// empties the to be translated word and sets the focus on that field 
 		toBeTranslatedWordTextField.setString("");

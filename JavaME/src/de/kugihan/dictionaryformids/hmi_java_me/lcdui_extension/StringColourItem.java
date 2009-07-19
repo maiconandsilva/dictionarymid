@@ -241,11 +241,14 @@ public boolean isSelectableWord(){
   }
   /*-------------------------------------------------------------------------------*/
 
-protected void sizeChanged(int w,  int h){
+/* Gert, 19.07.2009: uncommented this method, because a ClassCastException is thrown at 
+ * MainForm.updateStringColourItemWidth
+ * 
+ * protected void sizeChanged(int w,  int h){
 	if(width != w){
    		applicationMainForm.updateStringColourItemWidth(indexOfTranslationItem, w, fontSize);
    	}
-}
+} */
    public void paint(Graphics g, int w, int h) {
    	   	
   	Font currFont;

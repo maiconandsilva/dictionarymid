@@ -11,7 +11,7 @@ package de.kugihan.dictionaryformids.hmi_java_me.mainform;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.general.DictionaryException;
-import de.kugihan.dictionaryformids.hmi_java_me.SettingsStore;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.translation.TranslationExecution;
 
@@ -49,8 +49,8 @@ public class WordHistory {
 				curHistoryPos --;
 			}	
 			historyWord[curHistoryPos] = MainForm.applicationMainForm.toBeTranslatedWordTextField.getString();
-			fromLanguageHistory[curHistoryPos] = SettingsStore.getSettingsStore().getInputLanguage();
-			toLanguageHistory[curHistoryPos] = SettingsStore.getSettingsStore().getOutputLanguage();
+			fromLanguageHistory[curHistoryPos] = DictionarySettings.getInputLanguage();
+			toLanguageHistory[curHistoryPos] = DictionarySettings.getOutputLanguage();
 			maxHistoryPos = curHistoryPos;
 		}
 	}
