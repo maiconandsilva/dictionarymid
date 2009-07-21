@@ -25,14 +25,12 @@ import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
-import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
-import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileDfMInputStreamAccess;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
+import de.kugihan.dictionaryformids.general.UtilWin;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.ResourceHandler;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.ResourceHandler.IconSize;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
-import de.kugihan.dictionaryformids.general.UtilWin;
 
 public class JarCreator {
 public static final String EXTENSION_JAR = ".jar";
@@ -160,14 +158,27 @@ public static final String FILE_EMPTY_JAD_NAME = DictionaryDataFile.applicationF
 		int readBytes;
 		JarEntry nextOne;
 		while((nextOne=in.getNextJarEntry())!=null){
+			boolean includeEntry = true;
+			/* do not include entries that are on the exclude list */
+			String[] excludeEntries = { 
+										"de/kugihan/dictionaryformids/dataaccess/zip"  // zip library for decompression of dictionaries in the file system
+									  }; 
+			for (int i = 0; i < excludeEntries.length; ++i) {
+				if (nextOne.getName().startsWith(excludeEntries[i])) {
+					includeEntry = false;
+					break;
+				}
+			}
 			/* do not include language icons that are not needed (would be waste of space) */
 			if (isLanguageIconFileNotNeeded(nextOne.getName()))
-				continue;
-			out.putNextEntry(nextOne);
-			while(( readBytes= in.read(b,0,3000)) != -1) 
-	        { 
-	            out.write(b, 0, readBytes); 
-	        } 
+				includeEntry = false;
+			if (includeEntry) {
+				out.putNextEntry(nextOne);
+				while(( readBytes= in.read(b,0,3000)) != -1) 
+		        { 
+		            out.write(b, 0, readBytes); 
+		        }
+			}
 		}
 		in.close();
 
@@ -288,7 +299,7 @@ public static final String FILE_EMPTY_JAD_NAME = DictionaryDataFile.applicationF
 	
 	static public void printCopyrightNotice() throws DictionaryException {
 		System.out.print(
-				"\n\nDictionaryForMIDs/JarCreator, Copyright (C) 2005-2008 Mathis Karmann et al\n" +
+				"\n\nDictionaryForMIDs/JarCreator, Copyright (C) 2005-2009 Mathis Karmann et al\n" +
 				"Version : " + Util.getUtil().getApplicationVersionString() + "\n\n" +
 				"This program comes with ABSOLUTELY NO WARRANTY\n\n" +
 				"This program is free software under the terms and conditions of the GPL " + 
