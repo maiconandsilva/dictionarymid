@@ -40,7 +40,8 @@ public class TranslationParameters {
 		// to be translated word
 		searchSubExpressionStart = true;
 		searchSubExpressionEnd = true;
-		if (toBeTranslatedWordText.charAt(0) == Translation.noSearchSubExpressionCharacter) {
+		if ((toBeTranslatedWordText.length() > 0) &&
+			(toBeTranslatedWordText.charAt(0) == Translation.noSearchSubExpressionCharacter)) {
 			searchSubExpressionStart = false;
 			if (toBeTranslatedWordText.length() > 1)
 				toBeTranslatedWordText = toBeTranslatedWordText.substring(1);
