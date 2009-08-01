@@ -8,9 +8,6 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.hmi_java_me;
 
-import java.util.Enumeration;
-
-import javax.microedition.io.file.FileSystemRegistry;
 import javax.microedition.lcdui.Choice;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
