@@ -535,7 +535,7 @@ public class MainForm
 		infoText.setAllParameterValues( new Object [] { 
 												dictionaryInformation,
 												UIDisplayTextItems.DictionaryForMIDsApplicationName,
-												"Gert Nuber (dict@kugihan.de)",
+												"Gert Nuber",
 												"http://dictionarymid.sourceforge.net",
 												Util.getUtil().getApplicationVersionString()
 								              } );		
