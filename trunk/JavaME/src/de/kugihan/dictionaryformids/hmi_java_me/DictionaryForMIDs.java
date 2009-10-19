@@ -29,7 +29,7 @@ public class DictionaryForMIDs
     extends MIDlet  {
 
 		public static String 		      applicationName = "DictionaryForMIDs";
-		public static byte   		      versionRMSStructure = 21;
+		public static byte   		      versionRMSStructure = 22;
 		public static DictionaryForMIDs   dictionaryForMIDsMidlet;
 	
 	public DictionaryForMIDs() throws DictionaryException {
@@ -71,19 +71,28 @@ public class DictionaryForMIDs
 			
 			// Create object for reading InputStreams
 			DfMInputStreamAccess dfmInputStreamObj;
+			boolean dictionaryCanBeAccessed;
 			if (DictionarySettings.isUseFileAccessJSR75()) {
 				String dictionaryStore = SettingsStore.getSettingsStore().getDictionaryPath();
-				if (Util.convertToLowerCase(new StringBuffer(dictionaryStore)).toString().endsWith(".jar")) {
+				int fileType = JSR75InputStreamAccess.determineFileType(dictionaryStore);
+				if (fileType == JSR75InputStreamAccess.FileTypeFILE) {
 					// access files from a zipped dictionary - Zz85
 					dfmInputStreamObj = new ZipInputStreamAccess(dictionaryStore);
-				} else {
+					dictionaryCanBeAccessed = true;
+				} else if (fileType == JSR75InputStreamAccess.FileTypeDIRECTORY) {
 					// access files from file system
 					dfmInputStreamObj = new JSR75InputStreamAccess(dictionaryStore);
+					dictionaryCanBeAccessed = true;
+				} else {
+					// file cannot be accessed; still use file system access 
+					dfmInputStreamObj = new JSR75InputStreamAccess(dictionaryStore);
+					dictionaryCanBeAccessed = false;
 				}
 			}
 			else {
 				// access files from JAR-file
 				dfmInputStreamObj = new ResourceDfMInputStreamAccess();
+				dictionaryCanBeAccessed = true;
 			}
 			FileAccessHandler.setDictionaryDataFileISAccess(dfmInputStreamObj);
 			
@@ -96,6 +105,9 @@ public class DictionaryForMIDs
 			}
 			catch (CouldNotOpenPropertyFileException exception) {
 				// properties for DictionaryDataFiles could not be initialized
+				dictionaryCanBeAccessed = false;
+			}
+			if (dictionaryCanBeAccessed != true) {
 				DictionarySettings.setDictionaryAvailable(false);
 				utilObj.log("DictionaryDataFiles could not be initialized", Util.logLevel1);
 				DictionaryDataFile.setDictionaryNotAvailable();

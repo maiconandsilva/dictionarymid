@@ -11,7 +11,6 @@ import java.io.InputStream;
 import javax.microedition.io.Connector;
 import javax.microedition.io.file.FileConnection;
 
-import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.CouldNotOpenFileException;
 
@@ -51,6 +50,34 @@ public class JSR75InputStreamAccess extends DfMInputStreamAccess {
 		}
 		catch (Exception exception) {
 		 	throw new CouldNotOpenFileException(exception);
+		}
+		return returnValue;
+	}
+
+	// the following method is simply used to determine whether the fileLocation refers to 
+	// a true file or a directory or is not referring to anything accessible at all.
+	public static int FileTypeFILE = 1;
+	public static int FileTypeDIRECTORY = 2;
+	public static int FileTypeNOT_ACCESSIBLE = 3;
+	public static int determineFileType(String fileLocation) throws DictionaryException {
+		int returnValue;
+		if (fileLocation.length() == 0) {
+				returnValue = FileTypeNOT_ACCESSIBLE;
+		}
+		else {
+			try {
+				FileConnection file = (FileConnection) Connector.open(fileLocation, Connector.READ);
+				if (file.isDirectory()){
+					returnValue = FileTypeDIRECTORY;
+				}
+				else {
+					returnValue = FileTypeFILE;				
+				}
+				file.close();
+			}
+			catch (Exception exception) {
+				returnValue = FileTypeNOT_ACCESSIBLE;
+			}
 		}
 		return returnValue;
 	}
