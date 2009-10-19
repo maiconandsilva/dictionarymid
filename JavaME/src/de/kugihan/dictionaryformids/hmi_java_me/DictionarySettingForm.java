@@ -548,8 +548,18 @@ public class DictionarySettingForm
 
 		// path to dictionary
 		if (DictionarySettings.isUseFileAccessJSR75()) {
+			String oldDictionaryPath = DictionarySettings.getDictionaryPath();
 			DictionarySettings.setDictionaryPath(dictionaryPathTextField.getString());
 			SettingsStore.getSettingsStore().setDictionaryPath(DictionarySettings.getDictionaryPath());
+			if (! oldDictionaryPath.equals(DictionarySettings.getDictionaryPath())) {
+				// the path settings were changed: ensure that at the next application start the 
+				// default settings are newly set. This is a simple workaround to avoid that
+				// the language indexes become invalid with a newly selected dictionary.
+				// However there is one drawback with this quick workaround: when the default
+				// values are newly set at the next application start, then also the 
+				// UI language is reset to a default value.
+				SettingsStore.getSettingsStore().setDefaultValuesSet(false);
+			}
 		}
 		
 		// Performance settings
