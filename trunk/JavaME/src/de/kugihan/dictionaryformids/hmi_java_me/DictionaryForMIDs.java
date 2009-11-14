@@ -31,6 +31,7 @@ public class DictionaryForMIDs
 		public static String 		      applicationName = "DictionaryForMIDs";
 		public static byte   		      versionRMSStructure = 22;
 		public static DictionaryForMIDs   dictionaryForMIDsMidlet;
+		protected static boolean		  dictionaryCanBeAccessed = false;
 	
 	public DictionaryForMIDs() throws DictionaryException {
 		/*
@@ -70,34 +71,12 @@ public class DictionaryForMIDs
 			DictionarySettings.setUseFileAccessJSR75(determineFileAccessJSR75());
 			
 			// Create object for reading InputStreams
-			DfMInputStreamAccess dfmInputStreamObj;
-			boolean dictionaryCanBeAccessed;
-			if (DictionarySettings.isUseFileAccessJSR75()) {
-				String dictionaryStore = SettingsStore.getSettingsStore().getDictionaryPath();
-				int fileType = JSR75InputStreamAccess.determineFileType(dictionaryStore);
-				if (fileType == JSR75InputStreamAccess.FileTypeFILE) {
-					// access files from a zipped dictionary - Zz85
-					dfmInputStreamObj = new ZipInputStreamAccess(dictionaryStore);
-					dictionaryCanBeAccessed = true;
-				} else if (fileType == JSR75InputStreamAccess.FileTypeDIRECTORY) {
-					// access files from file system
-					dfmInputStreamObj = new JSR75InputStreamAccess(dictionaryStore);
-					dictionaryCanBeAccessed = true;
-				} else {
-					// file cannot be accessed; still use file system access 
-					dfmInputStreamObj = new JSR75InputStreamAccess(dictionaryStore);
-					dictionaryCanBeAccessed = false;
-				}
-			}
-			else {
-				// access files from JAR-file
-				dfmInputStreamObj = new ResourceDfMInputStreamAccess();
-				dictionaryCanBeAccessed = true;
-			}
-			FileAccessHandler.setDictionaryDataFileISAccess(dfmInputStreamObj);
+			doSetDictionaryDataFileISAccess();
 			
+			// determine the character encoding scheme that is used by the device
 			utilObj.determineCharEncoding();
 
+			// read the file DictionaryForMIDs.properties
 			try {
 				DictionaryDataFile.initValues(false);
 				utilObj.log("Initialized values", Util.logLevelMax);
@@ -135,30 +114,7 @@ public class DictionaryForMIDs
 		}
 	}
 
-	// returns true when the dictionary files are accessed in the file system via the JSR 75 API 
-	boolean determineFileAccessJSR75() {
-		boolean useFileAccessJSR75;
-		String fileConnectionVersion = System.getProperty("microedition.io.file.FileConnection.version");
-		if (fileConnectionVersion != null) {
-			// JSR 75 API is provided by the device
-			// next test is to check whether file DictionaryForMIDs.properties is found in the dictionary
-			// directory of the JAR-file
-			String propertyFileName = DictionaryDataFile.getPathDataFiles() + DictionaryDataFile.propertyFileName;
-			InputStream propertyStream = getClass().getResourceAsStream(propertyFileName);
-			if (propertyStream == null) {
-				// DictionaryForMIDs.properties not available: use file access via JSR75
-				useFileAccessJSR75 = true;
-			}
-			else {
-				useFileAccessJSR75 = false;
-			}
-		}
-		else {
-			useFileAccessJSR75 = false;
-		}
-		return useFileAccessJSR75;
-	}
-	
+
 	public void startApp() {
 		try {
 			MainForm.applicationMainForm.startForm();
@@ -178,4 +134,97 @@ public class DictionaryForMIDs
 			// do nothing
 		}
 	}	
+	
+	// returns true when the dictionary files are accessed in the file system via the JSR 75 API 
+	boolean determineFileAccessJSR75() {
+		boolean useFileAccessJSR75;
+		String fileConnectionVersion = System.getProperty("microedition.io.file.FileConnection.version");
+		if (fileConnectionVersion != null) {
+			// JSR 75 API is provided by the device
+			// next test is to check whether file DictionaryForMIDs.properties is found in the dictionary
+			// directory of the JAR-file
+			String propertyFileName = DictionaryDataFile.getDfMPropertyFileLocation("");
+			InputStream propertyStream = getClass().getResourceAsStream(propertyFileName);
+			if (propertyStream == null) {
+				// DictionaryForMIDs.properties not available: use file access via JSR75
+				useFileAccessJSR75 = true;
+			}
+			else {
+				useFileAccessJSR75 = false;
+			}
+		}
+		else {
+			useFileAccessJSR75 = false;
+		}
+		return useFileAccessJSR75;
+	}
+	
+	// sets the DfMInputStramAccess that is used for accessing the dictionary data files
+	protected void doSetDictionaryDataFileISAccess() 
+				throws DictionaryException {
+		DfMInputStreamAccess dfmInputStreamObj;
+		if (DictionarySettings.isUseFileAccessJSR75()) {
+			String dictionaryStore = SettingsStore.getSettingsStore().getDictionaryPath();
+			int fileType = JSR75InputStreamAccess.determineFileType(dictionaryStore);
+			if (fileType == JSR75InputStreamAccess.FileTypeFILE) {
+				// access files from a zipped dictionary - Zz85
+				dfmInputStreamObj = new ZipInputStreamAccess(dictionaryStore);
+				dictionaryCanBeAccessed = true;
+			} else if (fileType == JSR75InputStreamAccess.FileTypeDIRECTORY) {
+				// access files from file system
+				StringBuffer dictionaryDirectoryLocation = new StringBuffer(dictionaryStore);
+				determineJSR75DirectoryLocation(dictionaryDirectoryLocation); 
+				dfmInputStreamObj = new JSR75InputStreamAccess(dictionaryDirectoryLocation.toString());
+			} else {
+				// file cannot be accessed; still use file system access 
+				dfmInputStreamObj = new JSR75InputStreamAccess(dictionaryStore);
+				dictionaryCanBeAccessed = false;
+			}
+		}
+		else {
+			// access files from JAR-file
+			dfmInputStreamObj = new ResourceDfMInputStreamAccess();
+			dictionaryCanBeAccessed = true;
+		}
+		FileAccessHandler.setDictionaryDataFileISAccess(dfmInputStreamObj);
+	}
+	
+	
+	//
+	// The following code is a temporary workaround.
+	//
+	// The following method determineJSR75DirectoryLocation is a temporary workaround till there is 
+	// a final implementation that will automatically download the dictionaries to the correct directory.
+	// Currently the users manually select the dictionary path; there some users incorrectly select  
+	// the 'dictionary'-directory (one level above the 'dictionary'-directory must be selected);
+	// The method determineJSR75DirectoryLocation will remove the 'dictionary' from the path in
+	// case this exits.
+	protected void determineJSR75DirectoryLocation(StringBuffer dictionaryDirectoryLocation) 
+			throws DictionaryException {
+		// remove trailing slash if there is any
+		Util.getUtil().removeTrailingSlashFromPath(dictionaryDirectoryLocation);
+		// check whether file DictionaryForMIDs.properties can be accessed
+		String DfMPropertyFileLocation = DictionaryDataFile.getDfMPropertyFileLocation(dictionaryDirectoryLocation.toString());
+		if (JSR75InputStreamAccess.determineFileType(DfMPropertyFileLocation) == JSR75InputStreamAccess.FileTypeFILE) {
+			dictionaryCanBeAccessed = true;
+		}
+		else if (dictionaryDirectoryLocation.toString().endsWith(DictionaryDataFile.pathNameDataFiles)) {
+			// 'dictionary'-directory is incorrectly included: remove this part
+			dictionaryDirectoryLocation.setLength(dictionaryDirectoryLocation.length() - DictionaryDataFile.pathNameDataFiles.length());
+			Util.getUtil().removeTrailingSlashFromPath(dictionaryDirectoryLocation);
+			DfMPropertyFileLocation = DictionaryDataFile.getDfMPropertyFileLocation(dictionaryDirectoryLocation.toString());
+			// check whether file DictionaryForMIDs.properties can be accessed after removal of the incorrect 'dictionary'-part
+			if (JSR75InputStreamAccess.determineFileType(DfMPropertyFileLocation) == JSR75InputStreamAccess.FileTypeFILE) {
+				dictionaryCanBeAccessed = true;
+			}
+			else {
+				dictionaryCanBeAccessed = false;
+			}
+		}
+		else {
+			dictionaryCanBeAccessed = false;
+		}
+	}
+	
+
 }
