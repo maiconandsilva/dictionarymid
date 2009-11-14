@@ -67,11 +67,16 @@ public class JSR75InputStreamAccess extends DfMInputStreamAccess {
 		else {
 			try {
 				FileConnection file = (FileConnection) Connector.open(fileLocation, Connector.READ);
-				if (file.isDirectory()){
-					returnValue = FileTypeDIRECTORY;
+				if (file.exists()) {
+					if (file.isDirectory()){
+						returnValue = FileTypeDIRECTORY;
+					}
+					else {
+						returnValue = FileTypeFILE;				
+					}
 				}
 				else {
-					returnValue = FileTypeFILE;				
+					returnValue = FileTypeNOT_ACCESSIBLE;
 				}
 				file.close();
 			}
