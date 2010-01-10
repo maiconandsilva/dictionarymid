@@ -357,8 +357,17 @@ public abstract class Util {
 		return stringElements;
 	}
 	
+	//  removes a trailing slash from a path if there is a slash at the end:
+	public void removeTrailingSlashFromPath(StringBuffer pathname) {
+		int length = pathname.length();
+		if (pathname.charAt(pathname.length()-1) == '/') {
+			pathname.setLength(length-1);
+		}
+	}
+	
+
 	/*
-	 * Prperty handling methods
+	 * Property handling methods
 	 */
 	
 	private Properties dictionaryForMIDsProperties;
