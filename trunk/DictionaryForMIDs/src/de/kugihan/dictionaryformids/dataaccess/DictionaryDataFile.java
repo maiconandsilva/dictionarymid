@@ -386,6 +386,12 @@ public class DictionaryDataFile  {
 			return "";
 	}
 
+	public static String getDfMPropertyFileLocation(String dfmBaseDirectory) {
+		return 	dfmBaseDirectory.toString() +
+				getPathDataFiles() + 
+				propertyFileName;
+	}
+	
 	public static RGBColour getBackgroundColour() {
 		return backgroundColour;
 	}
