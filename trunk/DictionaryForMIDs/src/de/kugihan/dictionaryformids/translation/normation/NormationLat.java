@@ -10,20 +10,24 @@ package de.kugihan.dictionaryformids.translation.normation;
 public class NormationLat extends Normation {
 	
 	static final String valuesA = "àáâãäåæāăą";
-	static final String valuesU = "ùúûüũūŭůű";
+	static final String valuesU = "ùúûüũūŭůűų";
 	static final String valuesO = "òóôõöøōŏ";
-	static final String valuesE = "èéêëēĕėęě";
-	static final String valuesI = "ìíîïĩīĭ";
-	static final String valuesN = "ñň";
+	static final String valuesE = "èéêëēĕėęěæœ";
+	static final String valuesI = "ìíîïĩīĭįıĳ";
+	static final String valuesN = "ñňńņ";
 	static final String valuesC = "çćĉċč";
 	
-	static final String valuesD = "ď";
-	static final String valuesL = "ĺľ";
-	static final String valuesR = "ŕř";
-	static final String valuesS = "šś";
-	static final String valuesT = "ť";
-	static final String valuesY = "ý";
-	static final String valuesZ = "ž";
+	static final String valuesD = "ďđð";
+	static final String valuesG = "ğģġ";
+	static final String valuesH = "ħ";
+	static final String valuesK = "ķ";
+	static final String valuesL = "ĺľłļ";
+	static final String valuesR = "ŕřŗ";
+	static final String valuesS = "šśşș";
+	static final String valuesT = "ťţțþ";
+	static final String valuesY = "ýÿ";
+	
+	static final String valuesZ = "žżź";
 	
 	public StringBuffer normateWord(StringBuffer nonNormatedWord,
                                     boolean      fromUserInput) {
@@ -54,6 +58,15 @@ public class NormationLat extends Normation {
 			}
 			else if (valuesD.indexOf(character) != -1) {
 				normatedWord.append("d");
+			}
+			else if (valuesG.indexOf(character) != -1) {
+				normatedWord.append("g");
+			}
+			else if (valuesG.indexOf(character) != -1) {
+				normatedWord.append("h");
+			}
+			else if (valuesG.indexOf(character) != -1) {
+				normatedWord.append("k");
 			}
 			else if (valuesL.indexOf(character) != -1) {
 				normatedWord.append("l");
