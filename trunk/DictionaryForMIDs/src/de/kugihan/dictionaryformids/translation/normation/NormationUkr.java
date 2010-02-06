@@ -106,13 +106,13 @@ public class NormationUkr extends Normation {
 				normatedWord.append("oe");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ъ') {
-				normatedWord.append(".");
+				normatedWord.append("xx");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ы') {
-				normatedWord.append("y");
+				normatedWord.append("yx");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ь') {
-				normatedWord.append(".");
+				normatedWord.append("x");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'э') {
 				normatedWord.append("eh");

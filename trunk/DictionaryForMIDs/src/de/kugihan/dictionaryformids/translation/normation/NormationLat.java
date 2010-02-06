@@ -62,10 +62,10 @@ public class NormationLat extends Normation {
 			else if (valuesG.indexOf(character) != -1) {
 				normatedWord.append("g");
 			}
-			else if (valuesG.indexOf(character) != -1) {
+			else if (valuesH.indexOf(character) != -1) {
 				normatedWord.append("h");
 			}
-			else if (valuesG.indexOf(character) != -1) {
+			else if (valuesK.indexOf(character) != -1) {
 				normatedWord.append("k");
 			}
 			else if (valuesL.indexOf(character) != -1) {
