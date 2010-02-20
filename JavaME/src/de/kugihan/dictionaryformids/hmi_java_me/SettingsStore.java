@@ -16,6 +16,7 @@ import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
 
 import de.kugihan.dictionaryformids.general.DictionaryException;
+import de.kugihan.dictionaryformids.general.Util;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs;
@@ -101,8 +102,13 @@ public class SettingsStore {
 				// incremental search enabled settings: switched off
 				addBooleanValue(false);
 				
-				// maxHits settings: 30
-				addIntValue(30);
+				// maxHits settings: 30, unless the application property SearchMaxHits is defined
+				int searchMaxHits = 30;
+				String searchMaxHitsString = DictionaryForMIDs.dictionaryForMIDsMidlet.getAppProperty("searchMaxHits");
+				if (searchMaxHitsString != null) {
+					searchMaxHits = Integer.valueOf(searchMaxHitsString).intValue();
+				}
+				addIntValue(searchMaxHits);
 				
 				// fontSize: device default settings (= value 0)
 				addIntValue(0);

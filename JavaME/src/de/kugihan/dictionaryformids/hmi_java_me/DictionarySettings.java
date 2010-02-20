@@ -25,7 +25,7 @@ public class DictionarySettings
 	private static boolean findExactMatches;
 	private static boolean addAtBeginNoSearchSubExpressionCharacter;
 	private static boolean addAtEndWildcardAnySeriesOfCharacter;
-	private static int maxHits = 30;   // currently not set from this dialog
+	private static int maxHits;
 	private static int durationForCancelSearch = 60*1000;  // in milliseconds; currently hard set value
 	private static int fontSize;
 	private static int uiLanguage;

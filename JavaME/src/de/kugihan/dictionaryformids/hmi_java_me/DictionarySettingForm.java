@@ -216,8 +216,10 @@ public class DictionarySettingForm
 		DictionarySettings.setBitmapFontSize(SettingsStore.getSettingsStore().getBitmapFontSize());
 		// Selected user interface language
 		DictionarySettings.setUILanguage(SettingsStore.getSettingsStore().getUILanguage());
+		// search max hits (note: max hits are currently not set from this form)
+		DictionarySettings.setMaxHits(SettingsStore.getSettingsStore().getMaxHits());
 		// Performance settings
-		CsvFile.selectedBypassCharsetDecoding = SettingsStore.getSettingsStore().getBypassCharsetDecoding();
+		CsvFile.selectedBypassCharsetDecoding = SettingsStore.getSettingsStore().getBypassCharsetDecoding();		
 		// Contents
 		// todo
 	}
