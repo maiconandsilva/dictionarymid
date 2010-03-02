@@ -90,23 +90,17 @@ public class NormationRus2 extends Normation {
 			else if (defaultNormatedWord.charAt(charPos) == 'ч') {
 				normatedWord.append("ch");
 			}
-			else if (defaultNormatedWord.charAt(charPos) == 'ü') {
-				normatedWord.append("ue");
-			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ш') {
 				normatedWord.append("sh");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'щ') {
 				normatedWord.append("shh");
 			}
-			else if (defaultNormatedWord.charAt(charPos) == 'ö') {
-				normatedWord.append("oe");
-			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ъ') {
-				normatedWord.append("xx");
+				normatedWord.append("x");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ы') {
-				normatedWord.append("yx");
+				normatedWord.append("y");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ь') {
 				normatedWord.append("x");
