@@ -8,7 +8,7 @@ GPL applies - see file COPYING for copyright statement.
 package de.kugihan.dictionaryformids.translation.normation;
 import de.kugihan.dictionaryformids.general.Util;
 
-public class NormationUkr extends Normation {
+public class NormationRusC extends Normation {
 
 	public StringBuffer normateWord(StringBuffer nonNormatedWord,
                                     boolean      fromUserInput) {
@@ -25,7 +25,7 @@ public class NormationUkr extends Normation {
 				normatedWord.append("v");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'г') {
-				normatedWord.append("h");
+				normatedWord.append("g");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'д') {
 				normatedWord.append("d");
@@ -34,10 +34,10 @@ public class NormationUkr extends Normation {
 				normatedWord.append("e");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ё') {
-				normatedWord.append("yo");
+				normatedWord.append("jo");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ж') {
-				normatedWord.append("zh");
+				normatedWord.append("z");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'з') {
 				normatedWord.append("z");
@@ -45,11 +45,8 @@ public class NormationUkr extends Normation {
 			else if (defaultNormatedWord.charAt(charPos) == 'и') {
 				normatedWord.append("i");
 			}
-			else if (defaultNormatedWord.charAt(charPos) == 'ї') {
-				normatedWord.append("yi");
-			}
 			else if (defaultNormatedWord.charAt(charPos) == 'й') {
-				normatedWord.append("y");
+				normatedWord.append("j");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'к') {
 				normatedWord.append("k");
@@ -85,19 +82,19 @@ public class NormationUkr extends Normation {
 				normatedWord.append("f");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'х') {
-				normatedWord.append("kh");
+				normatedWord.append("ch");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ц') {
 				normatedWord.append("c");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ч') {
-				normatedWord.append("ch");
+				normatedWord.append("c");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ш') {
-				normatedWord.append("sh");
+				normatedWord.append("s");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'щ') {
-				normatedWord.append("shh");
+				normatedWord.append("sc");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ъ') {
 				normatedWord.append("x");
@@ -109,16 +106,13 @@ public class NormationUkr extends Normation {
 				normatedWord.append("x");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'э') {
-				normatedWord.append("eh");
+				normatedWord.append("e");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'ю') {
-				normatedWord.append("yu");
+				normatedWord.append("ju");
 			}
 			else if (defaultNormatedWord.charAt(charPos) == 'я') {
-				normatedWord.append("ya");
-			}
-			else if (defaultNormatedWord.charAt(charPos) == 'ґ') {
-				normatedWord.append("g");
+				normatedWord.append("ja");
 			}
 			else {
 				normatedWord.append(defaultNormatedWord.charAt(charPos));

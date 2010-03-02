@@ -24,9 +24,9 @@ public class NormationLat extends Normation {
 	static final String valuesL = "ĺľłļ";
 	static final String valuesR = "ŕřŗ";
 	static final String valuesS = "šśşș";
+	
 	static final String valuesT = "ťţțþ";
 	static final String valuesY = "ýÿ";
-	
 	static final String valuesZ = "žżź";
 	
 	public StringBuffer normateWord(StringBuffer nonNormatedWord,
