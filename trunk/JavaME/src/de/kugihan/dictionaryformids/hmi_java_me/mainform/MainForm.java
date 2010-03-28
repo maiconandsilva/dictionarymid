@@ -746,6 +746,9 @@ public class MainForm
 
 	public void newTranslationResult(TranslationResult resultOfTranslation) {
 		try {
+			// remove translation entries where all toTexts are empty because empty translations
+			// are not useful to the user
+			resultOfTranslation.removeTranslationsWithEmptyToTexts();
 			// display result of new translation
 			translationListDisplayList = true; // if translationList is activated, then display result in a list
 			indexOfLastTranslationItem = indexOfFirstTranslationItem - 1;
