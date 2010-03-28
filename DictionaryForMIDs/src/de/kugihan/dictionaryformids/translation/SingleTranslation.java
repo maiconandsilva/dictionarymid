@@ -97,4 +97,12 @@ public class SingleTranslation {
 		return toTexts;
 	}
 
+	public int getNumberOfToTexts() {
+		return toTexts.size();
+	}
+
+	public TextOfLanguage getToTextAt(int index) {
+		return (TextOfLanguage) toTexts.elementAt(index);
+	}
+
 }
