@@ -43,6 +43,40 @@ public class TranslationResult {
 	public void insertTranslationAt(SingleTranslation newSingleTranslation, int index) {
 		translations.insertElementAt(newSingleTranslation, index);
 	}
+	
+	public void removeTranslationAt(int index) {
+		translations.removeElementAt(index);
+	}
+	
+	/*
+	 * The method removeTranslationsWithEmptyToTexts checks each entry in the 
+	 * translation vector and removes those entries where all 'toTexts' are empty. 
+	 */
+	public void removeTranslationsWithEmptyToTexts() {
+		int indexTranslation = 0;
+		while (indexTranslation < numberOfFoundTranslations()) {
+			SingleTranslation translationEntry = getTranslationAt(indexTranslation); 
+			// check each toText for that translation
+			boolean allToTextsEmpty = true;
+			for (int indexToText = 0; indexToText < translationEntry.getNumberOfToTexts(); ++ indexToText) {
+				String toTextString = translationEntry.getToTextAt(indexToText).getText();
+				if ((toTextString == null) || (toTextString.length() == 0) ) {
+					// that entry of toTexts is empty: nothing to do 
+				}
+				else {
+					// that entry of toTexts is not empty
+					allToTextsEmpty = false;
+				}
+			}
+			if (allToTextsEmpty) {
+				// remove that translation from the translations vector
+				removeTranslationAt(indexTranslation);
+			}
+			else {
+				++indexTranslation;
+			}
+		}
+	}
 
 }
 
