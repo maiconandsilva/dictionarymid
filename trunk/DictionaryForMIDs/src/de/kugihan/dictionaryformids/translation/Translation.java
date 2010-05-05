@@ -517,7 +517,11 @@ public class Translation {
   	         indexLanguage < DictionaryDataFile.numberOfAvailableLanguages;
 	         ++indexLanguage) {
 			StringBuffer word = dictionaryFile.getWord();
-			
+
+        if ("weakCrypt".equals(DictionaryDataFile.fileEncodingFormat)) {
+          weakDecrypt(word);
+        }
+
 			if (inputLanguageForSearch == indexLanguage) {
 				Util.getUtil().convertFieldAndLineSeparatorChars(word);
 				fromText = new TextOfLanguage(word.toString(), indexLanguage);
@@ -533,7 +537,22 @@ public class Translation {
 				       directoryFileLocation);
 		dictionaryFile = null; // to allow garbage collection
 	}
-	
+
+
+  /**
+   * Very weak encrytion/decryption mechanism
+   * See http://dictionarymid.german-fighters.com/forum/index.php?topic=215.0
+   */
+  private static void weakDecrypt(StringBuffer word) {
+    int n = word.length();
+    while (--n>=0) {
+        char ch = word.charAt(n);
+        if (ch>=60 && ch<124) word.setCharAt(n, (char) (((ch-60)^'+') + 60));
+    }
+  }
+
+
+
 	public void addTranslation(TextOfLanguage 	fromText, 
 			                   Vector		 	toTexts,
 			                   boolean          foundAtBeginOfExpression,
