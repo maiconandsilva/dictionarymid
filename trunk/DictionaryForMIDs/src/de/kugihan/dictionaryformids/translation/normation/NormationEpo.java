@@ -1,6 +1,6 @@
 /*
 DictionaryForMIDs - a free multi-language dictionary for mobile devices.
-Copyright (C) 2005, 2006 Gert Nuber (dict@kugihan.de)
+Copyright (C) 2010 Jacob Nordfalk (jacob.nordfalk@gmail.com)
 
 GPL applies - see file COPYING for copyright statement.
 */
@@ -9,8 +9,9 @@ package de.kugihan.dictionaryformids.translation.normation;
 
 
 /**
- * Tiu ĉi klaso simple ignoras ĉiujn ĉapelojn kaj x-ojn. Tiel uzanto povas tajpi
- * 'cxar' aux 'car' por serĉi 'ĉar'.
+ * Tiu ĉi klaso simple ignoras ĉiujn ĉapelojn kaj x-ojn. 
+ * Tiel uzanto povas tajpi 'cxar' aux 'car' por serĉi 'ĉar'.
+ *
  * @author Jacob Nordfalk
  */
 public class NormationEpo extends Normation {
