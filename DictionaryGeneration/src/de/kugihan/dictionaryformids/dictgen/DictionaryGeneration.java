@@ -261,9 +261,9 @@ public class DictionaryGeneration {
 					dictionaryFileMaxSize = positionInDictionaryFile;
 				// write to file and increment counters
 
-        if ("weakCrypt".equals(DictionaryDataFile.fileEncodingFormat)) {
-          directoryOutput = weakEncrypt(directoryOutput);
-        }
+				if ("weakCrypt".equals(DictionaryDataFile.fileEncodingFormat)) {
+					directoryOutput = weakEncrypt(directoryOutput);
+				}
 
 				destination.write(directoryOutput);
 				++numberOfEntriesDictionaryTotal;
@@ -458,17 +458,17 @@ public class DictionaryGeneration {
 		outFileStream.close();
 	}
 
-  /**
-   * Very weak encrytion/decryption mechanism.
-   * See http://dictionarymid.german-fighters.com/forum/index.php?topic=215.0
-   */
-  private static String weakEncrypt(String directoryOutput) {
-    StringBuilder res = new StringBuilder(directoryOutput.length());
-    for (char ch : directoryOutput.toCharArray()) {
-        if (ch>=60 && ch<124) ch = (char) (((ch-60)^'+') + 60);
-        res.append(ch);
-    }
-    return res.toString();
-  }
+	/**
+	 * Very weak encrytion/decryption mechanism.
+	 * See http://dictionarymid.german-fighters.com/forum/index.php?topic=215.0
+	 */
+	private static String weakEncrypt(String directoryOutput) {
+		StringBuilder res = new StringBuilder(directoryOutput.length());
+		for (char ch : directoryOutput.toCharArray()) {
+			if (ch>=60 && ch<124) ch = (char) (((ch-60)^'+') + 60);
+			res.append(ch);
+		}
+		return res.toString();
+	}
 
 }
