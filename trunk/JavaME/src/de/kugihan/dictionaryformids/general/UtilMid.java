@@ -36,7 +36,12 @@ public class UtilMid extends Util {
 		oldStyleEncoding = false;
 		String supportedEncoding = System.getProperty("microedition.encoding");
 		if (supportedEncoding == null) {
-			throw new DictionaryException("System property microedition.encoding could not be read");
+			// Workaround for http://code.google.com/p/microemu/issues/detail?id=45.
+			// The old code can be restored when this bug is fixed and released in MicroEmu, probably 2011:
+			// Old code: throw new DictionaryException("System property microedition.encoding could not be read");
+			// New code:
+			System.err.println("System property microedition.encoding could not be read");
+			supportedEncoding = "ISO8859_1";
 		}
 		if (supportedEncoding.equals(oldStyleISO88591)) {
 			oldStyleEncoding = true;
