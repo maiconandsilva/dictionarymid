@@ -253,13 +253,18 @@ public class DictionaryGeneration {
 					if (indexLanguage < DictionaryDataFile.numberOfAvailableLanguages -1) 
 						directoryLine = directoryLine + DictionaryDataFile.dictionaryFileSeparationCharacter;
 				}
-				String directoryOutput = directoryLine + endOfLineString; 
+        String directoryOutput = directoryLine + endOfLineString;
 				 // calculate the number of used bytes
 				int lengthOfDictionaryEntry = directoryOutput.getBytes(DictionaryDataFile.dictionaryCharEncoding).length;
 				positionInDictionaryFile += lengthOfDictionaryEntry;
 				if (positionInDictionaryFile > dictionaryFileMaxSize)
 					dictionaryFileMaxSize = positionInDictionaryFile;
 				// write to file and increment counters
+
+        if ("weakCrypt".equals(DictionaryDataFile.fileEncodingFormat)) {
+          directoryOutput = weakEncrypt(directoryOutput);
+        }
+
 				destination.write(directoryOutput);
 				++numberOfEntriesDictionaryTotal;
 				++numberOfEntriesInDictionaryFile;
@@ -323,7 +328,7 @@ public class DictionaryGeneration {
 											  String.valueOf(indexFileNumber) +
 											  endOfLineString; 
 					int lengthOfSearchListEntry = searchListOutput.getBytes(DictionaryDataFile.searchListCharEncoding).length;
-					searchListFileMaxSize += lengthOfSearchListEntry; 
+					searchListFileMaxSize += lengthOfSearchListEntry;
 					searchListFile.write(searchListOutput);
 					++numberOfEntriesSearchListTotal;
 				}
@@ -335,7 +340,7 @@ public class DictionaryGeneration {
 				positionInIndexFile += lengthOfIndexEntry;
 				if (positionInIndexFile > indexFileMaxSize)
 					indexFileMaxSize = positionInIndexFile;
-				indexFile.write(indexOutput);
+        indexFile.write(indexOutput);
 				++numberOfEntriesIndexTotal;
 				++numberOfEntriesInIndexFile;
 			}
@@ -452,5 +457,18 @@ public class DictionaryGeneration {
 	public static void closeFile(OutputStreamWriter outFileStream, String fileName) throws IOException {
 		outFileStream.close();
 	}
+
+  /**
+   * Very weak encrytion/decryption mechanism.
+   * See http://dictionarymid.german-fighters.com/forum/index.php?topic=215.0
+   */
+  private static String weakEncrypt(String directoryOutput) {
+    StringBuilder res = new StringBuilder(directoryOutput.length());
+    for (char ch : directoryOutput.toCharArray()) {
+        if (ch>=60 && ch<124) ch = (char) (((ch-60)^'+') + 60);
+        res.append(ch);
+    }
+    return res.toString();
+  }
 
 }
