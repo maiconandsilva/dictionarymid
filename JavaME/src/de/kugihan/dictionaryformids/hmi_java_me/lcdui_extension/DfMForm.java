@@ -8,6 +8,7 @@ package de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension;
 
 import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Item;
+import javax.microedition.lcdui.Command;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.UIDisplayTextItem;
 
@@ -15,7 +16,15 @@ public class DfMForm extends Form implements
 			LanguageUISensitiveItem  {
 	
 	UIDisplayTextItem title = null;
-	
+
+	// Workaround for http://code.google.com/p/microemu/issues/detail?id=44.
+	// The method can be deleted when this bug is released in MicroEmu, probably end of 2010:
+
+	public void removeCommand(Command cmd)
+	{
+		if (cmd != null) super.removeCommand(cmd);
+	}
+
 	public DfMForm()  {
 		super(null);
 	}

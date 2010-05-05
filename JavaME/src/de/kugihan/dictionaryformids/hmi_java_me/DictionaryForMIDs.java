@@ -57,7 +57,9 @@ public class DictionaryForMIDs
 			
 			// check for supported MIDP version
 			String supportedMidpProfile = System.getProperty("microedition.profiles");
-			if (supportedMidpProfile.indexOf("MIDP-2.") == -1) {
+			// Workaround for http://code.google.com/p/microemu/issues/detail?id=45.
+			// "supportedMidpProfile != null && " code can be deleted when this bug is fixed and released in MicroEmu, probably 2011:
+			if (supportedMidpProfile != null && supportedMidpProfile.indexOf("MIDP-2.") == -1) {
 				// if MIDP 2.0 is not supported, then the application will not run
 				utilObj.log("MIDP 2.0 not supported by the device.\n" +
                             applicationName + " will not run correctly !");
