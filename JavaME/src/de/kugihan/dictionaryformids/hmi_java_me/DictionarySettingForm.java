@@ -231,6 +231,7 @@ public class DictionarySettingForm
 
 		checkBitmapFontAvailable();
 		
+		int choiceTypeLanguageSelection = Choice.EXCLUSIVE;
 		/* 
 		 * input language
 		 */
@@ -252,8 +253,17 @@ public class DictionarySettingForm
 				throw new DictionaryException("No searchable languages defined");
 			}
 			inputLanguageTextItem[inputLanguageTextItem.length-1] = UIDisplayTextItems.SearchAllLanguages;
+			
+			// Normally the inputLanguageChoiceGroup and the outputLanguageChoiceGroup are displayed in a 
+			// "RadioButton" style (Choice.EXCLUSIVE); however if there are many languages (> 6) to choose from,
+			// then a ComboBox style is used (Choice.POPUP).
+			int totalNumberOfLanguagesForSelection = inputLanguage + DictionaryDataFile.numberOfAvailableLanguages;
+			if (totalNumberOfLanguagesForSelection > 6) {
+				// if more than 6 languages are displayed, then a 'ComboBox' style is used: 
+				choiceTypeLanguageSelection = Choice.POPUP;
+			}
 			inputLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsFromLanguage,
-											              Choice.EXCLUSIVE,
+											              choiceTypeLanguageSelection,
 											              inputLanguageTextItem);
 			append(inputLanguageChoiceGroup);
 		}
@@ -273,7 +283,7 @@ public class DictionarySettingForm
 	                                             languageDisplayText);
 			}
 			outputLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsToLanguage,
-										       			   Choice.EXCLUSIVE, // could also be Choice.MULTIPLE for multiple language output
+										       			   choiceTypeLanguageSelection, // could also be Choice.MULTIPLE for multiple language output
 													       outputLanguageTextItem);
 			append(outputLanguageChoiceGroup);
 		}
