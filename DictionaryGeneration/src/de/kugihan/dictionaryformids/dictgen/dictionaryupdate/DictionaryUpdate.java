@@ -8,6 +8,7 @@ GPL applies - see file COPYING for copyright statement.
 package de.kugihan.dictionaryformids.dictgen.dictionaryupdate;
 import java.util.Vector;
 
+import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryUpdateIF;
 import de.kugihan.dictionaryformids.dictgen.DictionaryGeneration;
 import de.kugihan.dictionaryformids.general.DictionaryException;
@@ -17,17 +18,66 @@ public class DictionaryUpdate
 	implements DictionaryUpdateIF {
 
 	protected int indexLanguage;  // index to DictionaryDataFile.supportedLanguages
+
+	final String delimiterStart = "{{";
+	final String delimiterEnd = "}}";
 	
 	public String updateDictionaryExpression(String dictionaryExpression) 
 				throws DictionaryException {
-		// default is to do nothing
-		return dictionaryExpression;
+		String returnString;
+		if (DictionaryDataFile.dictionaryGenerationOmitParFromIndex) {
+			boolean replacementDone;
+			StringBuffer expressionUpdated = new StringBuffer(dictionaryExpression);
+			do {
+				replacementDone = false;
+				// remove all delimiterStart and delimiterEnd
+				int posDelimiterStart = expressionUpdated.toString().indexOf(delimiterStart);
+				if (posDelimiterStart >= 0) {
+					expressionUpdated.delete(posDelimiterStart, posDelimiterStart + delimiterStart.length());
+					replacementDone = true;
+				}
+				else {
+					int posDelimiterEnd = expressionUpdated.toString().indexOf(delimiterEnd);
+					if (posDelimiterEnd >= 0) {
+						expressionUpdated.delete(posDelimiterEnd, posDelimiterEnd + delimiterEnd.length());
+						replacementDone = true;					
+					}
+				}
+			}
+			while (replacementDone);
+			returnString = expressionUpdated.toString();
+		}
+		else {
+			// otherwise do nothing
+			returnString = dictionaryExpression;
+		}
+		return returnString;
 	}
 	
 	public String removeNonSearchParts(String expression)  
 				throws DictionaryException {
-		// default is to do nothing
-		return expression;
+		String returnString;
+		if (DictionaryDataFile.dictionaryGenerationOmitParFromIndex) {
+			boolean replacementDone;
+			StringBuffer expressionUpdated = new StringBuffer(expression);
+			do {
+				replacementDone = false;
+				// remove everything between delimiterStart and delimiterEnd
+				int posDelimiterStart = expressionUpdated.toString().indexOf(delimiterStart);
+				int posDelimiterEnd = expressionUpdated.toString().indexOf(delimiterEnd);
+				if ((posDelimiterStart >= 0) && (posDelimiterEnd > posDelimiterStart)) {
+					expressionUpdated.delete(posDelimiterStart, posDelimiterEnd + delimiterEnd.length());
+					replacementDone = true;
+				}
+			}
+			while (replacementDone);
+			returnString = expressionUpdated.toString();
+		}
+		else {
+			// otherwise do nothing
+			returnString = expression;
+		}
+		return returnString;
 	}
 
 	public void updateKeyWordVector(Vector keyWordVector)  
@@ -39,11 +89,17 @@ public class DictionaryUpdate
 				throws DictionaryException {
 		// default is to use the result from updateDictionaryExpression, remove content delimiters,
 		// remove field/line separator characters and remove non-search parts
-		String keyWordsExpression = updateDictionaryExpression(expression);
+		String keyWordsExpression;
+		if (DictionaryDataFile.dictionaryGenerationOmitParFromIndex) {
+			keyWordsExpression = expression;
+		}
+		else {
+			keyWordsExpression = updateDictionaryExpression(expression);
+		}
 		String keyWordsExpressionWithoutContentDelimiters = 
      		DictionaryGeneration.removeContentDelimiters(keyWordsExpression, indexLanguage);
 		StringBuffer keyWordsExpressionWithoutSeparatorChars = new StringBuffer(keyWordsExpressionWithoutContentDelimiters); 
-			Util.getUtil().replaceFieldAndLineSeparatorChars(keyWordsExpressionWithoutSeparatorChars);
+		Util.getUtil().replaceFieldAndLineSeparatorChars(keyWordsExpressionWithoutSeparatorChars);
 		String keyWordsCleanedUp = removeNonSearchParts(keyWordsExpressionWithoutSeparatorChars.toString());
 		return keyWordsCleanedUp;
 	}
