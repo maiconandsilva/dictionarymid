@@ -405,6 +405,9 @@ public abstract class Util {
 		
 	public String getDictionaryPropertyString(String propertyName, boolean optional) throws DictionaryException {
 		String propertyValue = getDictionaryProperty(propertyName);
+		if (propertyName != null)
+			if (propertyName.length() == 0)
+				propertyName = null;
 		if ((propertyValue == null) && (! optional)) {
 			propertyNotFound(propertyName);
 		}

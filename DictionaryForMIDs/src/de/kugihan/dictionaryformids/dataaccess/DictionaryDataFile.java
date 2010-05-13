@@ -65,8 +65,9 @@ public class DictionaryDataFile  {
 	public static char   dictionaryGenerationSeparatorCharacter;
 	public static long   dictionaryGenerationMinNumberOfEntriesPerDictionaryFile;
 	public static long   dictionaryGenerationMinNumberOfEntriesPerIndexFile;
+	public static boolean dictionaryGenerationOmitParFromIndex;
 	
-	public static String fileEncodingFormat; // for "special use" - currently ignored
+	public static String fileEncodingFormat; 
 
 	public static boolean useStandardPath = true;  // indicates that the property file is located in pathNameDataFiles
 
@@ -80,7 +81,6 @@ public class DictionaryDataFile  {
 		utilObj.openProperties(getPathDataFiles());  // property file is never closed, because properties may be read at any time
 		infoText = utilObj.getDictionaryPropertyString("infoText");
 		dictionaryAbbreviation = utilObj.getDictionaryPropertyString("dictionaryAbbreviation", true);
-		checkForEmptyProperty(dictionaryAbbreviation);
 		numberOfAvailableLanguages = utilObj.getDictionaryPropertyInt("numberOfAvailableLanguages");
 		numberOfInputLanguages = 0; // initialised with 0
 		supportedLanguages = new LanguageDefinition[numberOfAvailableLanguages];
@@ -97,15 +97,14 @@ public class DictionaryDataFile  {
 			boolean hasSeparateDictionaryFile = utilObj.getDictionaryPropertyBooleanDefault(languagePropertyPrefix + "HasSeparateDictionaryFile", false);
 			boolean generateIndex = utilObj.getDictionaryPropertyBooleanDefault(languagePropertyPrefix + "GenerateIndex", true);
 			String normationClassName = utilObj.getDictionaryPropertyString(languagePropertyPrefix + "NormationClassName", true);
-			checkForEmptyProperty(normationClassName);
 			String dictionaryUpdateClassName = utilObj.getDictionaryPropertyString(languagePropertyPrefix + "DictionaryUpdateClassName", true);
-			checkForEmptyProperty(dictionaryUpdateClassName);
 			int indexNumberOfSourceEntries = utilObj.getDictionaryPropertyIntDefault(languagePropertyPrefix + "IndexNumberOfSourceEntries", -1);
 			String expressionSplitString = null;
 			if (initDictionaryGenerationValues) {
 				expressionSplitString = utilObj.getDictionaryPropertyString("dictionaryGenerationLanguage" + indexLanguageString + "ExpressionSplitString", true);
-				checkForEmptyProperty(expressionSplitString);
 			}
+			String languageIcon = null; //utilObj.getDictionaryPropertyStringDefault(languagePropertyPrefix + "Icon", "");
+			
 			/* 
 			 * Content definitions for this language 
 			 */
@@ -203,7 +202,8 @@ public class DictionaryDataFile  {
 					                                                   content,
 					                                                   dictionaryUpdateClassName,
 					                                                   generateIndex,
-					                                                   expressionSplitString);
+					                                                   expressionSplitString,
+					                                                   languageIcon);
 	    }
 		searchListCharEncoding = utilObj.getDictionaryPropertyString("searchListCharEncoding");
 		searchListCharEncoding = utilObj.getDeviceCharEncoding(searchListCharEncoding);
@@ -238,6 +238,7 @@ public class DictionaryDataFile  {
 			dictionaryGenerationSeparatorCharacter = utilObj.getDictionaryPropertyCharDefault("dictionaryGenerationSeparatorCharacter", '\t');
 			dictionaryGenerationMinNumberOfEntriesPerDictionaryFile = utilObj.getDictionaryPropertyIntDefault("dictionaryGenerationMinNumberOfEntriesPerDictionaryFile", 200);
 			dictionaryGenerationMinNumberOfEntriesPerIndexFile = utilObj.getDictionaryPropertyIntDefault("dictionaryGenerationMinNumberOfEntriesPerIndexFile", 500);
+			dictionaryGenerationOmitParFromIndex = utilObj.getDictionaryPropertyBooleanDefault("dictionaryGenerationOmitParFromIndex", true);
 		}
 
 		fileEncodingFormat = utilObj.getDictionaryPropertyString("fileEncodingFormat", true);
@@ -364,13 +365,6 @@ public class DictionaryDataFile  {
 	protected static void throwContentException(String message, String propertyName) 
 					throws DictionaryException {
 		throw new DictionaryException(propertyName + ": " + message);
-	}
-	
-	// if property is provided but empty, then this is handled as if no property was provided:
-	static void checkForEmptyProperty(String propertyName) {
-		if (propertyName != null)
-			if (propertyName.length() == 0)
-				propertyName = null;
 	}
 	
 	// sets the values when no dictionary with a property file is available
