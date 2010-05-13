@@ -24,6 +24,8 @@ public class LanguageDefinition {
 	public DictionaryUpdateIF dictionaryUpdateObj;  // interface to DictionaryUpdate object
 	public boolean 			  generateIndex;        // true if index shall be generated for this language
 	public String			  expressionSplitString;  // separator string for multiple expressions, e.g. "," for "to choose, to select"
+	// the following properties are used only by the HMI layer
+	public String			  languageIcon;  // identifies the icon that the HMI layer should display for this language
 	
 	public LanguageDefinition(String  languageDisplayTextParam,
 			 		          String  languageFilePostfixParam,
@@ -35,7 +37,8 @@ public class LanguageDefinition {
 					          ContentDefinition contentsParam[],
 					          String  dictionaryUpdateClassNameParam,
 					          boolean generateIndexParam,
-					          String  expressionSplitStringParam) {
+					          String  expressionSplitStringParam,
+					          String  languageIconParam) {
 		languageDisplayText = languageDisplayTextParam;
 		languageFilePostfix = languageFilePostfixParam;
 		isSearchable = isSearchableParam;
@@ -47,5 +50,6 @@ public class LanguageDefinition {
 		generateIndex = generateIndexParam;
 		expressionSplitString = expressionSplitStringParam;
 		indexNumberOfSourceEntries = indexNumberOfSourceEntriesParam;
+		languageIcon = languageIconParam;
 	}
 }
