@@ -1048,7 +1048,7 @@ Brug jokertegn til at raffinere din søgning: \n%1 flere tegn\n%2 matcher et enk
 (... max søgetid er nået)
 (... søgningen afbrudt)
 Deaktiver forslag
-Java-applikation %2 copyright (C) %3 og andre bidragydere.\n%4\n \nVersion %5 \n \nGNU General Public License gælder for %2 Java-program. Se filen COPYING.\n\Ordbog: \n %1
+Java-applikation %2 copyright (C) %3 og andre bidragydere.\n%4\n \nVersion %5 \n \nGNU General Public License gælder for %2 Java-program. Se filen COPYING.\n\nOrdbog: \n %1
 Engelsk
 Vietnamesisk
 Kinesisk
