@@ -1180,7 +1180,7 @@ public class UIDisplayTextContents {
 									"(... max søgetid er nået)",
 									"(... søgningen afbrudt)",
 									"Deaktiver forslag",
-									"Java-applikation %2 copyright (C) %3 og andre bidragydere.\n%4\n \nVersion %5 \n \nGNU General Public License gælder for %2 Java-program. Se filen COPYING.\n\Ordbog: \n %1",
+									"Java-applikation %2 copyright (C) %3 og andre bidragydere.\n%4\n \nVersion %5 \n \nGNU General Public License gælder for %2 Java-program. Se filen COPYING.\n\nOrdbog: \n %1",
 									"Engelsk",
 									"Vietnamesisk",
 									"Kinesisk",
