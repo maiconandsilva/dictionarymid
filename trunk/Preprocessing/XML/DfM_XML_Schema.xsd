@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.kugihan.de/DfMSchema" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.kugihan.de/DfMSchema">
+
+	<element name="dictionary" type="tns:dictionaryType"></element>
+
+    <complexType name="dictionaryType">
+    	<sequence>
+			<element name="dictionaryProperties" type="tns:dictionaryPropertiesType"></element>
+    		<element name="dictionaryFile" type="tns:dictionaryFileType"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="dictionaryPropertiesType">
+    	<sequence>
+    		<element name="property" type="tns:propertyType" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="propertyType">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="value" type="string"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="dictionaryFileType">
+    	<sequence>
+    		<element name="translationOfDictionary" type="tns:translationOfDictionaryType" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="translationOfDictionaryType">
+    	<sequence>
+    		<element name="translationForLanguage"
+    			type="tns:translationForLanguageType" maxOccurs="unbounded" minOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="translationForLanguageType">
+    	<sequence>
+    		<element name="translationForLanguagePart"
+    			type="tns:translationForLanguagePartTyp" maxOccurs="unbounded"
+    			minOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="translationForLanguagePartTyp">
+    	<choice>
+    		<element name="partNonContent"
+    			type="tns:partNonContentType">
+    		</element>
+    		<element name="partContent"
+    			type="tns:partContentType">
+    		</element>
+    	</choice>
+    	<attribute name="includeInIndex" type="boolean" use="required" default="true"></attribute>
+    </complexType>
+    
+    <simpleType name="partNonContentType">
+    	<restriction base="string"></restriction>
+    </simpleType>
+
+    <complexType name="partContentType">
+    	<attribute name="contentNumber" type="integer" use="required" ></attribute>
+    </complexType>
+
+</schema>
