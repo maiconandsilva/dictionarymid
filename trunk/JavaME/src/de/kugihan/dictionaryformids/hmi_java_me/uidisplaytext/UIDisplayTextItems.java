@@ -92,4 +92,18 @@ public class UIDisplayTextItems {
 	public static final UIDisplayTextItem CommandBrowse = LanguageUI.getUI().createNewUIDisplayTextItem("CommandBrowse", 72, 0);
 	public static final UIDisplayTextItem CommandSelect = LanguageUI.getUI().createNewUIDisplayTextItem("CommandSelect", 73, 0);
 	public static final UIDisplayTextItem DictionaryPath = LanguageUI.getUI().createNewUIDisplayTextItem("DictionaryPath", 74, 0);
+	public static final UIDisplayTextItem LanguageBulgarian = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageBulgarian", 75, 0);
+	public static final UIDisplayTextItem LanguageCatalan = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageCatalan", 76, 0);
+	public static final UIDisplayTextItem LanguagePersian = LanguageUI.getUI().createNewUIDisplayTextItem("LanguagePersian", 77, 0);
+	public static final UIDisplayTextItem LanguageFinnish = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageFinnish", 78, 0);
+	public static final UIDisplayTextItem LanguageGreek = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageGreek", 79, 0);
+	public static final UIDisplayTextItem LanguageHebrew = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageHebrew", 80, 0);
+	public static final UIDisplayTextItem LanguageCroatian = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageCroatian", 81, 0);
+	public static final UIDisplayTextItem LanguageHungarian = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageHungarian", 82, 0);
+	public static final UIDisplayTextItem LanguageLithuanian = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageLithuanian", 83, 0);
+	public static final UIDisplayTextItem LanguageDutch = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageDutch", 84, 0);
+	public static final UIDisplayTextItem LanguagePolish = LanguageUI.getUI().createNewUIDisplayTextItem("LanguagePolish", 85, 0);
+	public static final UIDisplayTextItem LanguagePortuguese = LanguageUI.getUI().createNewUIDisplayTextItem("LanguagePortuguese", 86, 0);
+	public static final UIDisplayTextItem LanguageSwedish = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageSwedish", 87, 0);
+	public static final UIDisplayTextItem LanguageNorwegian = LanguageUI.getUI().createNewUIDisplayTextItem("LanguageNorwegian", 88, 0);
 }

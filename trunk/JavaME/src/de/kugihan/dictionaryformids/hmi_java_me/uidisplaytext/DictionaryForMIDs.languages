@@ -101,6 +101,20 @@ SearchAllLanguages ; this will be shown in the title bar and in the settings dia
 CommandBrowse
 CommandSelect
 DictionaryPath ; Path/filename of a loaded dictionary
+LanguageBulgarian  
+LanguageCatalan    
+LanguagePersian    
+LanguageFinnish    
+LanguageGreek      
+LanguageHebrew     
+LanguageCroatian   
+LanguageHungarian  
+LanguageLithuanian 
+LanguageDutch      
+LanguagePolish     
+LanguagePortuguese 
+LanguageSwedish    
+LanguageNorwegian  
 ================================================================================
 #English, en
 
@@ -178,6 +192,20 @@ All languages
 Browse
 Select
 Dictionary Path (experimental !!)
+Bulgarian  
+Catalan    
+Persian    
+Finnish    
+Greek      
+Hebrew     
+Croatian   
+Hungarian  
+Lithuanian 
+Dutch      
+Polish     
+Portuguese 
+Swedish    
+Norwegian  
 ================================================================================
 #Esperanto, eo
 
@@ -255,6 +283,20 @@ Malantaŭen
 Foliumi
 Elekti
 Vortara dosiernomo
+Bulgara
+Kataluna
+Persa
+Finna
+Greka
+Hebrea
+Kroata
+Hungara 
+Litova
+Nederlanda
+Pola
+Portugala
+Sveda
+Norvega
 ================================================================================
 #Việt Nam, vi
 
@@ -1085,6 +1127,20 @@ Alle sprog
 Gennemse
 Vælg
 Sti til ordliste
+Bulgarsk
+[no translation]
+Persisk
+Finsk
+Græsk
+Hebraisk
+Kroatisk
+Ungarsk 
+Litauisk
+Hollandsk
+Polsk
+Portugisisk
+Svensk
+Norsk
 ================================================================================
 #Norsk, no
 
@@ -1162,3 +1218,17 @@ Alle språk
 [no translation]
 Velg
 Sti til ordliste
+Bulgarsk
+[no translation]
+Persisk
+Finsk
+Græsk
+Hebraisk
+Kroatisk
+Ungarsk 
+Litauisk
+Hollandsk
+Polsk
+Portugisisk
+Svensk
+Norsk
