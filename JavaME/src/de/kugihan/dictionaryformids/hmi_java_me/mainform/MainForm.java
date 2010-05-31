@@ -978,7 +978,7 @@ public class MainForm
 						                                      iconSizeHeight, 
 						                                      iconSizeWidth);
 				if (icon != null) {
-					ImageItem iconItem = new ImageItem(null, icon, Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_CENTER | Item.LAYOUT_VCENTER | Item.LAYOUT_2, null);
+					ImageItem iconItem = new ImageItem(null, icon, Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2, null);
 					appendStartupDisplayItem(iconItem);
 				}
 				// second create display text
