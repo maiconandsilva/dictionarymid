@@ -23,8 +23,8 @@ javac.encoding=UTF-8
 
 	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-1.1.0-sdk30.jar"/> <!-- This is a patched version of antenna: see http://eriksdiary.blogspot.com/2009/07/antenna-suport-for-java-me-sdk-30.html --> 
 	
-    <property name="VersionNumber" 		value="3.3.1"/>	<!-- version of tools / applications -->
-	<property name="VersionStatus" 		value="development version"/>	 <!--  e.g. "beta", "testversion 2"  -->
+    <property name="VersionNumber" 		value="3.5.0"/>	<!-- version of tools / applications -->
+	<property name="VersionStatus" 		value="final"/>	 <!--  e.g. "beta", "testversion 2"  -->
     <condition property="ApplicationVersion" 	value="${VersionNumber}_${VersionStatus}" else="${VersionNumber}">
     	<isset property="VersionStatus"/>
 	</condition>
@@ -88,7 +88,7 @@ javac.encoding=UTF-8
 	<property name="DfM.team"  			value="Gert Nuber and Contributors"/> <!-- Must not be longer than 32 characters --> 
 	                                                                          <!-- otherwise an Application Error will occur --> 
 	                                                                          <!-- on some Motorola devices -->
-	<property name="DfM.copyrightyear"  value="2005, 2006, 2007, 2008, 2009"/>
+	<property name="DfM.copyrightyear"  value="2005, 2006, 2007, 2008, 2009, 2010"/>
 
 	
 	<target name="clean_dfm">
@@ -225,8 +225,13 @@ javac.encoding=UTF-8
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationJpn"/>
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationLat"/>
 			<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationNor"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationUkr"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationUkrC"/>
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationRus"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationRus2"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationRusC"/>
 	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationVie"/>
+	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationEpo"/>
 	    </wtkobfuscate>
 		<!-- need to preverify again -->
 		<wtkpreverify jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}"/>
