@@ -182,7 +182,7 @@ public class UIDisplayTextContents {
 									"Ĉeĥa",
 									"Slovaka",
 									"rastruma tiparo",
-									"%1: %2 trafoj",
+									"%1: %2 vortoj",
 									"Grando: %1 kB",
 									"DictionaryForMIDs",
 									"Mankas vortaro",
