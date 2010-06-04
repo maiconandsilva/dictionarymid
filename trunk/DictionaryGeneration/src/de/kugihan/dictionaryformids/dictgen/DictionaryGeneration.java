@@ -462,7 +462,7 @@ public class DictionaryGeneration {
 	 * Very weak encrytion/decryption mechanism.
 	 * See http://dictionarymid.german-fighters.com/forum/index.php?topic=215.0
 	 */
-	private static String weakEncrypt(String directoryOutput) {
+	private static String weakEncryptOld(String directoryOutput) {
 		StringBuilder res = new StringBuilder(directoryOutput.length());
 		for (char ch : directoryOutput.toCharArray()) {
 			if (ch>=60 && ch<124) ch = (char) (((ch-60)^'+') + 60);
@@ -471,4 +471,30 @@ public class DictionaryGeneration {
 		return res.toString();
 	}
 
+	// intentional misspelling "Espernato" for Esperanto
+	private static final char[] weakEncrypt_password = "EspernatoEstasBona".toCharArray();
+	/**
+	 * A little bit less weak encrytion/decryption mechanism.
+	 * See http://dictionarymid.german-fighters.com/forum/index.php?topic=215.0
+	 */
+	private static String weakEncrypt(String word) {
+		StringBuilder res = new StringBuilder(word.length());
+		// Assume we start on a word boundary and restart each time we encounter a char outside range 60-124
+		int n = 0;
+		for (char ch : word.toCharArray()) {
+			if (ch>=60 && ch<124) {
+				//char ch0 = ch;
+				ch = (char) ((((ch-60+weakEncrypt_password[n])%64)^'+') + 60);
+
+				//char ch2 = (char) ((((ch-60)^'+') -weakEncrypt_password[n]+256)%64+ 60);
+				//if (ch0 != ch2) throw new InternalError(word + " " + n + " " + ch + "!="+ ch2);
+
+				n  = (n+1) % weakEncrypt_password.length;
+			} else {
+				n = 0; // outside range - restart
+			}
+			res.append(ch);
+		}
+		return res.toString();
+	}
 }
