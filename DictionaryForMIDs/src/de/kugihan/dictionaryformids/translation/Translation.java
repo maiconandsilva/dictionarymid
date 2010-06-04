@@ -543,7 +543,7 @@ public class Translation {
 	 * Very weak encrytion/decryption mechanism
 	 * See http://dictionarymid.german-fighters.com/forum/index.php?topic=215.0
 	 */
-	private static void weakDecrypt(StringBuffer word) {
+	private static void weakDecryptOld(StringBuffer word) {
 		int n = word.length();
 		while (--n>=0) {
 			char ch = word.charAt(n);
@@ -551,6 +551,30 @@ public class Translation {
 		}
   }
 
+	// intentional misspelling "Espernato" for Esperanto
+	private static final char[] weakEncrypt_password = "EspernatoEstasBona".toCharArray();
+	/**
+	 * A little bit less weak encrytion/decryption mechanism.
+	 * See http://dictionarymid.german-fighters.com/forum/index.php?topic=215.0
+	 */
+	private static void weakDecrypt(StringBuffer word) {
+
+		//System.err.println("word = " + word);
+		// Assume we start on a word boundary and restart each time we encounter a char outside range 60-124
+		int n = 0;
+		int limit=word.length();
+		for (int i = 0; i<limit; i++) {
+			char ch = word.charAt(i);
+			if (ch>=60 && ch<124) {
+				ch = (char) ((((ch-60)^'+') -weakEncrypt_password[n]+256)%64+ 60);
+				word.setCharAt(i, ch);
+				n  = (n+1) % weakEncrypt_password.length;
+			} else {
+				n = 0; // outside range - restart
+			}
+		}
+		//System.err.println("word2 = " + word);
+	}
 
 	public void addTranslation(TextOfLanguage 	fromText, 
 			                   Vector		 	toTexts,
