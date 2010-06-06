@@ -58,19 +58,49 @@ public class DictionaryUpdate
 				throws DictionaryException {
 		String returnString;
 		if (DictionaryDataFile.dictionaryGenerationOmitParFromIndex) {
-			boolean replacementDone;
+			int nestingLevel = 0;
+			int posDelimiterStartAtNestingLevel0 = 0;
+			int posBehindLastDelimiter = 0;
+			int posDelimiterStart;
+			int posDelimiterEnd;
 			StringBuffer expressionUpdated = new StringBuffer(expression);
 			do {
-				replacementDone = false;
-				// remove everything between delimiterStart and delimiterEnd
-				int posDelimiterStart = expressionUpdated.toString().indexOf(delimiterStart);
-				int posDelimiterEnd = expressionUpdated.toString().indexOf(delimiterEnd);
-				if ((posDelimiterStart >= 0) && (posDelimiterEnd > posDelimiterStart)) {
-					expressionUpdated.delete(posDelimiterStart, posDelimiterEnd + delimiterEnd.length());
-					replacementDone = true;
+				if ((posBehindLastDelimiter >= expressionUpdated.length()) && (nestingLevel > 0)) {
+						throw new DictionaryException("Number of " + delimiterStart + " does not match " +  delimiterEnd + " at end of expression");
+				}
+				posDelimiterEnd = expressionUpdated.toString().indexOf(delimiterEnd, posBehindLastDelimiter);
+				posDelimiterStart = expressionUpdated.toString().indexOf(delimiterStart, posBehindLastDelimiter);
+				if ((posDelimiterStart == -1) && (posDelimiterEnd == -1)) {
+					if (nestingLevel > 0) {
+						throw new DictionaryException("Number of " + delimiterStart + " does not match " +  delimiterEnd + " at end of expression");
+					}
+				}
+				else if (posDelimiterEnd == -1) {
+						throw new DictionaryException(delimiterEnd + " without previous " +  delimiterStart);					
+				}
+				else if ((posDelimiterEnd < posDelimiterStart) || (posDelimiterStart == -1)) {
+					--nestingLevel;
+					posBehindLastDelimiter = posDelimiterEnd + delimiterEnd.length();
+					if (nestingLevel == 0) {
+						// remove everything between delimiterStart and delimiterEnd
+						expressionUpdated.delete(posDelimiterStartAtNestingLevel0, posBehindLastDelimiter);
+						// search with updated string
+						posDelimiterStartAtNestingLevel0 = 0;
+						posBehindLastDelimiter = 0;
+					}
+					else if (nestingLevel < 0) {
+						throw new DictionaryException(delimiterEnd + " without previous " +  delimiterStart);
+					}
+				}
+				else  { // (posDelimiterStart != -1) && (posDelimiterEnd > posDelimiterStart)
+					if (nestingLevel == 0) {
+						posDelimiterStartAtNestingLevel0 = posDelimiterStart;
+					}
+					++nestingLevel;
+					posBehindLastDelimiter = posDelimiterStart + delimiterStart.length();
 				}
 			}
-			while (replacementDone);
+			while (! ((posDelimiterStart == -1) && (posDelimiterEnd == -1)));
 			returnString = expressionUpdated.toString();
 		}
 		else {
