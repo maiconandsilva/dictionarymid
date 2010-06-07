@@ -177,6 +177,7 @@ public class DictionaryForMIDs
 				StringBuffer dictionaryDirectoryLocation = new StringBuffer(dictionaryStore);
 				determineJSR75DirectoryLocation(dictionaryDirectoryLocation); 
 				dfmInputStreamObj = new JSR75InputStreamAccess(dictionaryDirectoryLocation.toString());
+				dictionaryCanBeAccessed = true;
 			} else {
 				// file cannot be accessed; still use file system access 
 				dfmInputStreamObj = new JSR75InputStreamAccess(dictionaryStore);
