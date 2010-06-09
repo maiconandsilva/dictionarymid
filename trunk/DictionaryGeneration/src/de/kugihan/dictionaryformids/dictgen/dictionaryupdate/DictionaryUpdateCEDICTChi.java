@@ -22,7 +22,8 @@ public class DictionaryUpdateCEDICTChi extends DictionaryUpdate {
 	
 	// replaces the pronounciation part which is pinyin with tone numbers in the source
 	// with accented pinyin, by using Erik Peterson's conversion routines
-	public String updateDictionaryExpression(String dictionaryExpression) throws DictionaryException {
+	public String updateDictionaryExpression(String dictionaryExpressionParam) throws DictionaryException {
+		String dictionaryExpression = super.updateDictionaryExpression(dictionaryExpressionParam);
 		String updatedExpression;
 		int startBracket = dictionaryExpression.indexOf('[');
 		int endBracket = dictionaryExpression.toString().indexOf(']');
