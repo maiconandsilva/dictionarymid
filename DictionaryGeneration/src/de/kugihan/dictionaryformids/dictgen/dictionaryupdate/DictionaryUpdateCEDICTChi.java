@@ -9,6 +9,8 @@ package de.kugihan.dictionaryformids.dictgen.dictionaryupdate;
 
 import java.util.Vector;
 
+import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
+import de.kugihan.dictionaryformids.dictgen.DictionaryGeneration;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
 
@@ -20,17 +22,22 @@ public class DictionaryUpdateCEDICTChi extends DictionaryUpdate {
 	 * [01 is the start content delimiter 
 	 */
 	
+	final String startDelimiter = "[01";
+	final String endDelimiter = "]";
+	
 	// replaces the pronounciation part which is pinyin with tone numbers in the source
 	// with accented pinyin, by using Erik Peterson's conversion routines
 	public String updateDictionaryExpression(String dictionaryExpressionParam) throws DictionaryException {
 		String dictionaryExpression = super.updateDictionaryExpression(dictionaryExpressionParam);
 		String updatedExpression;
-		int startBracket = dictionaryExpression.indexOf('[');
-		int endBracket = dictionaryExpression.toString().indexOf(']');
-		if ((startBracket != -1) && (endBracket > startBracket)) {
-			String pronounciationToneNumbers = dictionaryExpression.substring(startBracket + 3, endBracket);  // + 3 because of [01
+		int posStartDelimiter = dictionaryExpression.indexOf(startDelimiter);
+		int posEndDelimiter = -1;
+		if (posStartDelimiter != -1)
+			posEndDelimiter = dictionaryExpression.toString().indexOf(endDelimiter, posStartDelimiter);
+		if ((posStartDelimiter != -1) && (posEndDelimiter > posStartDelimiter)) {
+			String pronounciationToneNumbers = dictionaryExpression.substring(posStartDelimiter + startDelimiter.length(), posEndDelimiter); 
 			String pronounciationAccented = addTones(pronounciationToneNumbers);
-			updatedExpression = dictionaryExpression.substring(0, startBracket) +
+			updatedExpression = dictionaryExpression.substring(0, posStartDelimiter) +
 							    "[" +
 							    pronounciationAccented +
 							    "]";
@@ -48,31 +55,59 @@ public class DictionaryUpdateCEDICTChi extends DictionaryUpdate {
 	//    - one time without tone numbers
 	//    - one time in the accented version using Erik's conversion routines  
 	// b) for the Chinese expression
-	public Vector createKeyWordVector(String expression, String expressionSplitString) {
+	public Vector createKeyWordVector(String expressionParam, String expressionSplitString) 
+				throws DictionaryException {
+	
+		String expression = createKeyWordsExpression(expressionParam);
 		
 		Vector keyWordVector = new Vector();
-		
-		int startBracket = expression.indexOf('[');
-		int endBracket = expression.toString().indexOf(']');
-
+		int posStartDelimiter = expression.indexOf(startDelimiter);
+		int posEndDelimiter = -1; 
+		if (posStartDelimiter != -1)
+			posEndDelimiter = expression.toString().indexOf(endDelimiter, posStartDelimiter);
 		String chineseExpression;
-		if ((startBracket != -1) && (endBracket > startBracket)) {
-			String pronounciationExpression = expression.substring(startBracket + 3, endBracket);
-			chineseExpression = expression.substring(0, startBracket);
-			DictionaryUpdateLib.addKeyWordExpressions(pronounciationExpression, keyWordVector);
-			String pronounciationWithoutNumbers = removeNumbers(pronounciationExpression);
-			DictionaryUpdateLib.addKeyWordExpressions(pronounciationWithoutNumbers, keyWordVector);
-			String pronounciationAccented = addTones(pronounciationExpression);
-			DictionaryUpdateLib.addKeyWordExpressions(pronounciationAccented, keyWordVector);
+		if ((posStartDelimiter != -1) && (posEndDelimiter > posStartDelimiter)) {
+			String pronounciationExpression = expression.substring(posStartDelimiter + startDelimiter.length(), posEndDelimiter);
+			chineseExpression = expression.substring(0, posStartDelimiter);
+			if (pronounciationExpression.length() > 0) {
+				DictionaryUpdateLib.addKeyWordExpressions(pronounciationExpression, keyWordVector);
+				String pronounciationWithoutNumbers = removeNumbers(pronounciationExpression);
+				DictionaryUpdateLib.addKeyWordExpressions(pronounciationWithoutNumbers, keyWordVector);
+				String pronounciationAccented = addTones(pronounciationExpression);
+				DictionaryUpdateLib.addKeyWordExpressions(pronounciationAccented, keyWordVector);
+			}
 		}
 		else {
 			chineseExpression = expression;
 		}
-		DictionaryUpdateLib.addKeyWordExpressions(chineseExpression, keyWordVector);
+		StringBuffer chineseExpressionWithoutContentDelimiters = 
+					new StringBuffer(DictionaryGeneration.removeContentDelimiters(chineseExpression, indexLanguage));
+		Util.filterSuperflousWhitespaces(chineseExpressionWithoutContentDelimiters);
+		if (chineseExpressionWithoutContentDelimiters.length() > 0) {
+			DictionaryUpdateLib.addKeyWordExpressions(chineseExpressionWithoutContentDelimiters.toString(), keyWordVector);
+		}
 
 		return keyWordVector;
 	}
 	
+	// compared to DictionaryUpdate.createKeyWordsExpression no call to DictionaryGeneration.removeContentDelimiters
+	// is done. This may have to be changed in the future in order to support more than one contents.
+	public String createKeyWordsExpression(String expression)  
+				throws DictionaryException {
+		String keyWordsExpression;
+		if (DictionaryDataFile.dictionaryGenerationOmitParFromIndex) {
+			keyWordsExpression = expression;
+		}
+		else {
+			keyWordsExpression = updateDictionaryExpression(expression);
+		}
+		String keyWordsExpressionWithoutContentDelimiters = keyWordsExpression;
+		StringBuffer keyWordsExpressionWithoutSeparatorChars = new StringBuffer(keyWordsExpressionWithoutContentDelimiters); 
+		Util.getUtil().replaceFieldAndLineSeparatorChars(keyWordsExpressionWithoutSeparatorChars);
+		String keyWordsCleanedUp = removeNonSearchParts(keyWordsExpressionWithoutSeparatorChars.toString());
+		return keyWordsCleanedUp;
+	}
+
 	protected String removeNumbers(String expression) {
 		StringBuffer output = new StringBuffer();
 		for (int pos = 0; pos < expression.length(); ++pos) {
