@@ -38,10 +38,8 @@ public class DictionaryUpdateCEDICTChi extends DictionaryUpdate {
 			String pronounciationToneNumbers = dictionaryExpression.substring(posStartDelimiter + startDelimiter.length(), posEndDelimiter); 
 			String pronounciationAccented = addTones(pronounciationToneNumbers);
 			updatedExpression = dictionaryExpression.substring(0, posStartDelimiter) +
-							    "[" +
-							    pronounciationAccented +
-							    "]";
-			updatedExpression = DictionaryUpdateLib.setContentPronounciation(updatedExpression, 1);
+							    DictionaryUpdateLib.setContentPronounciation("[" + pronounciationAccented + "]",
+							    										     1);
 		}
 		else {
 			updatedExpression = dictionaryExpression;
@@ -55,12 +53,9 @@ public class DictionaryUpdateCEDICTChi extends DictionaryUpdate {
 	//    - one time without tone numbers
 	//    - one time in the accented version using Erik's conversion routines  
 	// b) for the Chinese expression
-	public Vector createKeyWordVector(String expressionParam, String expressionSplitString) 
+	public void addKeyWordsSplitUpToKeyWordVector(String expression, 
+												  Vector keyWordVector) 
 				throws DictionaryException {
-	
-		String expression = createKeyWordsExpression(expressionParam);
-		
-		Vector keyWordVector = new Vector();
 		int posStartDelimiter = expression.indexOf(startDelimiter);
 		int posEndDelimiter = -1; 
 		if (posStartDelimiter != -1)
@@ -86,8 +81,6 @@ public class DictionaryUpdateCEDICTChi extends DictionaryUpdate {
 		if (chineseExpressionWithoutContentDelimiters.length() > 0) {
 			DictionaryUpdateLib.addKeyWordExpressions(chineseExpressionWithoutContentDelimiters.toString(), keyWordVector);
 		}
-
-		return keyWordVector;
 	}
 	
 	// compared to DictionaryUpdate.createKeyWordsExpression no call to DictionaryGeneration.removeContentDelimiters

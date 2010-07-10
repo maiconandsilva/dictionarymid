@@ -152,7 +152,7 @@ public class DictionaryUpdate
 				posEndKeyWords = keyWordsExpression.length();
 			}
 			String keyWordsSplitUp = keyWordsExpression.substring(posStartKeyWords, posEndKeyWords); 
-			DictionaryUpdateLib.addKeyWordExpressions(keyWordsSplitUp, keyWordVector);
+			addKeyWordsSplitUpToKeyWordVector(keyWordsSplitUp, keyWordVector);
 			// future enhancement: create property value to alternatively use splitKeyWords as alternative
 			// method to create keyWordVector
 			// Vector keyWordVector = Util.splitKeyWords(keyWordsCleanedUp);
@@ -160,6 +160,12 @@ public class DictionaryUpdate
 		}
 		while (posEndKeyWords < keyWordsExpression.length());
 		return keyWordVector;
+	}
+
+	public void addKeyWordsSplitUpToKeyWordVector(String keyWordsSplitUp,
+			                                      Vector keyWordVector)
+			throws DictionaryException {
+			DictionaryUpdateLib.addKeyWordExpressions(keyWordsSplitUp, keyWordVector);
 	}
 	
 	public void setIndexLanguage(int indexLanguageParam) {
