@@ -35,8 +35,7 @@ public class SettingsStore {
 	private final int rms_index_inputLanguage = rms_index_structureVersion + 1;
 	private final int rms_index_outputLanguage = rms_index_inputLanguage + 1;
 	private final int rms_index_showStatistic = rms_index_outputLanguage + 1;
-	private final int rms_index_bypassCharsetDecoding = rms_index_showStatistic + 1;
-	private final int rms_index_incrementalSearchEnabled = rms_index_bypassCharsetDecoding + 1;
+	private final int rms_index_incrementalSearchEnabled = rms_index_showStatistic + 1;
 	private final int rms_index_maxHits = rms_index_incrementalSearchEnabled + 1;
 	private final int rms_index_fontSize = rms_index_maxHits + 1;
 	private final int rms_index_bitmapFontSize = rms_index_fontSize + 1;
@@ -94,9 +93,6 @@ public class SettingsStore {
 				addBooleanArrayValue(new boolean[0]); // will be set later in setDefaultValues
 
 				// statistics settings: switched off 
-				addBooleanValue(false);
-				
-				// BypassCharsetDecoding settings: switched off 
 				addBooleanValue(false);
 				
 				// incremental search enabled settings: switched off
@@ -272,15 +268,6 @@ public class SettingsStore {
 	public void setShowStatistic(boolean showStatistic) throws DictionaryException  {
 		setBooleanValue(rms_index_showStatistic,
 						showStatistic);
-	}
-
-	public boolean getBypassCharsetDecoding() throws DictionaryException  {
-		return getBooleanValue(rms_index_bypassCharsetDecoding);
-	}
-	
-	public void setBypassCharsetDecoding(boolean bypassCharsetDecoding) throws DictionaryException  {
-		setBooleanValue(rms_index_bypassCharsetDecoding,
-						bypassCharsetDecoding);
 	}
 
 	public boolean getIncrementalSearchEnabled() throws DictionaryException  {
