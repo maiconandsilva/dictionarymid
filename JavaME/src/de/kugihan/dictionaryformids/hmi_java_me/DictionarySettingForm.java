@@ -58,7 +58,6 @@ public class DictionarySettingForm
 	DfMChoiceGroup displayChoiceGroup = null;
 	DfMChoiceGroup fontSizeChoiceGroup = null;
 	DfMChoiceGroup uiLanguageChoiceGroup = null;
-	DfMChoiceGroup performanceChoiceGroup = null;
 //	DfMChoiceGroup contentChoiceGroup;
 	static TextField   dictionaryPathTextField = null;
 	
@@ -75,7 +74,6 @@ public class DictionarySettingForm
 	protected final int indexDisplayCGColouredItems = 1;
 	protected final int indexDisplayCGShowStatistic = 2;
 	protected final int indexDisplayCGUseBitmapFont = 3;
-	protected final int indexPerfCGBypassCharsetDecoding = 0;
 
 	private boolean bitmapFontExists;
 	private boolean lastSettingUseBitmapFont; // last setting of use bitmap fonts
@@ -218,8 +216,6 @@ public class DictionarySettingForm
 		DictionarySettings.setUILanguage(SettingsStore.getSettingsStore().getUILanguage());
 		// search max hits (note: max hits are currently not set from this form)
 		DictionarySettings.setMaxHits(SettingsStore.getSettingsStore().getMaxHits());
-		// Performance settings
-		CsvFile.selectedBypassCharsetDecoding = SettingsStore.getSettingsStore().getBypassCharsetDecoding();		
 		// Contents
 		// todo
 	}
@@ -360,21 +356,7 @@ public class DictionarySettingForm
 				                                   uiLanguageStrings,
 				                                   null);
 		append(uiLanguageChoiceGroup);
-		
-		/* 
-		 * performance
-		 */
-		UIDisplayTextItem [] performanceStrings = new UIDisplayTextItem[] 
-		                                            { UIDisplayTextItems.SettingsBypassCharsetDecoding };
-		performanceChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsPerformanceOptions,
-				                                    Choice.MULTIPLE,
-				                                    performanceStrings);
-		// display the performanceChoiceGroup only when the property useBypassCharsetDecoding is set
-		String useBypassCharsetDecoding = DictionaryForMIDs.dictionaryForMIDsMidlet.getAppProperty("useBypassCharsetDecoding");
-		if (useBypassCharsetDecoding != null) {
-			append(performanceChoiceGroup);
-		}
-		
+				
 //		/*
 //		 * display contents
 //		 */
@@ -441,9 +423,6 @@ public class DictionarySettingForm
 
 		// uiLanguageChoiceGroup
 		uiLanguageChoiceGroup.setSelectedIndex(DictionarySettings.getUILanguage(), true);
-		
-		// performanceChoiceGroup
-		performanceChoiceGroup.setSelectedIndex(indexPerfCGBypassCharsetDecoding, CsvFile.selectedBypassCharsetDecoding);
 	}
 
 	protected void saveSettings() throws DictionaryException {
@@ -573,14 +552,7 @@ public class DictionarySettingForm
 				SettingsStore.getSettingsStore().setDefaultValuesSet(false);
 			}
 		}
-		
-		// Performance settings
-		boolean [] perfCGFlags = new boolean[performanceChoiceGroup.size()];
-		performanceChoiceGroup.getSelectedFlags(perfCGFlags); 
-		// BypassCharsetDecoding:
-		CsvFile.selectedBypassCharsetDecoding = perfCGFlags[indexPerfCGBypassCharsetDecoding];
-		SettingsStore.getSettingsStore().setBypassCharsetDecoding(CsvFile.selectedBypassCharsetDecoding);
-	
+			
 //		//display content settings
 //		boolean [] contentCGFlags = new boolean[contentChoiceGroup.size()];
 //		contentChoiceGroup.getSelectedFlags(contentCGFlags);

@@ -29,7 +29,7 @@ public class DictionaryForMIDs
     extends MIDlet  {
 
 		public static String 		      applicationName = "DictionaryForMIDs";
-		public static byte   		      versionRMSStructure = 22;
+		public static byte   		      versionRMSStructure = 23;
 		public static DictionaryForMIDs   dictionaryForMIDsMidlet;
 		protected static boolean		  dictionaryCanBeAccessed = false;
 	
