@@ -71,7 +71,7 @@ public abstract class Util {
 	public static void memCheck(String message) {
 		if (getUtil().logLevel > logLevel1) {
 			System.gc();
-			getUtil().log(message + ": " + String.valueOf(Runtime.getRuntime().freeMemory()));
+			getUtil().log(message + ": <todojs>");
 		}
 	}
 
@@ -83,7 +83,7 @@ public abstract class Util {
 		if (applicationVersionString == null) {
 			try {
 				Properties applicationProperties = new Properties();
-				applicationProperties.load(getClass().getResourceAsStream(applicationPropertyFileLocation));
+			//todojs	applicationProperties.load(getClass().getResourceAsStream(applicationPropertyFileLocation));
 				String versionNumberString = applicationProperties.getProperty(versionNumberPropertyName);
 				String versionStatusString = applicationProperties.getProperty(versionStatusPropertyName);
 				applicationVersionString = versionNumberString;
@@ -91,7 +91,7 @@ public abstract class Util {
 					applicationVersionString = applicationVersionString + "/ " + versionStatusString;
 				}
 			}
-			catch (IOException e) {
+			catch (Exception e) {
 				throw new DictionaryException(e);
 			}
 		}

@@ -1,6 +1,6 @@
 /*
 DictionaryForMIDs - a free multi-language dictionary for mobile devices.
-Copyright (C) 2005, 2006 Gert Nuber (dict@kugihan.de)
+Copyright (C) 2005 - 2011 Gert Nuber (dict@kugihan.de)
 
 GPL applies - see file COPYING for copyright statement.
 */
@@ -8,30 +8,25 @@ GPL applies - see file COPYING for copyright statement.
 package de.kugihan.dictionaryformids.dataaccess;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.InterruptedIOException;
 
-import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
-import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.DictionaryInterruptedException;
 import de.kugihan.dictionaryformids.general.Util;
 
 public class CsvFile {
 
-	public static boolean selectedBypassCharsetDecoding = false;
+	public static DefaultFileStorageReader fileStorageReader = new DefaultFileStorageReader();
 	
 	public boolean endOfDictionaryReached = false;	
-	protected fileStorage fileStorageObj;
+	
+	protected FileStorage fileStorageObj;
 	protected int position = 0;
 	protected int columnNumber = 0;
 	protected char separatorCharacter;	
 	protected String fileName;
 	protected int maxSizeOfFileData;
 	protected String  charEncoding;
-	
-	static CsvFileCache fileCache = new CsvFileCache();
 	
 	public CsvFile(String  fileNameParam,
 	       	       char    separatorCharacterParam,
@@ -47,7 +42,9 @@ public class CsvFile {
 		       	   int     maxSizeOfFileDataParam,
 		       	   int 	   startPositionParam) throws DictionaryException {
 		setParams(fileNameParam, separatorCharacterParam, charEncodingParam, maxSizeOfFileDataParam);
-		readCsvFileLine(startPositionParam);
+		fileStorageObj = fileStorageReader.readCsvFileLine(fileName,
+														   charEncoding,
+														   startPositionParam);
 	}
 
 	private void setParams(String  fileNameParam,
@@ -62,105 +59,12 @@ public class CsvFile {
 	
 	public void readCsvFileComplete() 
 	 						throws DictionaryException {
-		byte[] fileData = new byte[maxSizeOfFileData];
-
-		try {
-			long startTime = System.currentTimeMillis();
-			InputStream csvStream =	FileAccessHandler.getDictionaryDataFileISAccess().getInputStream(fileName);
-			Util.getUtil().logTime("open file", startTime);
-			startTime = System.currentTimeMillis();
-			if (csvStream != null) {
-				int sizeOfFile = 0;
-				int bytesRead;
-				do {
-					bytesRead = csvStream.read(fileData, sizeOfFile, fileData.length - sizeOfFile);
-					if (bytesRead != -1)
-						sizeOfFile += bytesRead;
-					if (sizeOfFile == fileData.length) {
-						// buffer is full: see if there is still more data to be read
-						int character = csvStream.read();
-						if (character != -1) {
-							// there is more data that had not been read
-							Util.getUtil().log("Warning: buffer size too small for file " + fileName);
-						}
-						break;
-					}
-				}
-				while (bytesRead != -1);
-				csvStream.close();
-				Util.getUtil().logTime("read file", startTime);
-				startTime = System.currentTimeMillis();
-				if (selectedBypassCharsetDecoding) {
-					fileStorageObj = new byteFileStorage(fileData,
-							                             sizeOfFile);					
-				}
-				else {
-					fileStorageObj = new stringFileStorage(fileData,
-							                               sizeOfFile,
-														   charEncoding);
-				}
-				Util.getUtil().logTime("parse file", startTime);
-			}
-			else
-			{
-				throw new DictionaryException("Could not open file " + fileName);
-			}
-		}
-		catch (InterruptedIOException e)
-		{
-			// Thread was interupted during IO operation
-			throw new DictionaryInterruptedException(e);
-		}
-		catch (IOException e)
-		{
-			throw new DictionaryException(e);
-		}
+		fileStorageObj = fileStorageReader.readFileToFileStorage
+									(fileName,
+									 charEncoding,
+				       	             maxSizeOfFileData);
 	}
 
-	// special method for reading a CSV file starting at byte position 
-	// startPosition and reading only one single line
-	public void readCsvFileLine(int startPosition)
-	 						throws DictionaryException {
-		if (!selectedBypassCharsetDecoding) {
-			try {
-				InputStream csvStream = fileCache.getCsvFile(fileName, startPosition, this);
-				long startTime = System.currentTimeMillis();
-				int sizeOfFile = 0;
-				StringBuffer csvLineString = new StringBuffer();
-				InputStreamReader csvStreamReader = new InputStreamReader(csvStream, charEncoding);
-				int character;
-				boolean endOfLineReached = false;
-				// read character by character till eiter newline or EOF is received:
-				do {
-					character = csvStreamReader.read();
-					if ((character != '\n') && (character != -1)) {
-						csvLineString.append((char) character);
-						++sizeOfFile;
-					}
-					else {
-						endOfLineReached = true;
-					}
-				} 
-				while (! endOfLineReached);
-				Util.getUtil().logTime("read/parse file-line", startTime);
-				fileStorageObj = new stringFileStorage(csvLineString);
-			}
-			catch (InterruptedIOException e)
-			{
-				// Thread was interupted during IO operation
-				throw new DictionaryInterruptedException(e);
-			}
-			catch (IOException e)
-			{
-				throw new DictionaryException(e);
-			}			
-		}
-		else {
-			// if BypassCharsetDecoding is selected, then it is faster to take the 'complete' CSV-Reader: 
-			readCsvFileComplete();
-			setPosition(startPosition);
-		}
-	}
 
 	public void setPosition(int newPosition) {
 		position = newPosition;
@@ -314,134 +218,5 @@ public class CsvFile {
 		while (true);
 		position = lastPositionBefore;
 		Util.getUtil().log("pos before: " + position, Util.logLevelMax);
-	}
-
-	// to be analyzed: readCharacterAt is called very frequently; calling this method through
-	// and interface may impact performance significantly; to improve performance possibly the
-	// byteFileStorage should be treated separately.
-	public interface fileStorage {
-		int  getCharactersInFile();
-		char readCharacterAt(int pos);
-	}
-	
-	public class byteFileStorage
-	 	implements fileStorage {
-
-		int charactersInFile;
-		byte[] byteStorage;
-
-		public byteFileStorage(byte[] content,
-				               int sizeOfFile) {
-			byteStorage = content;
-			charactersInFile = sizeOfFile;
-		}
-		
-		public int getCharactersInFile() {
-			return charactersInFile;
-		}
-		
-		public char readCharacterAt(int pos) {
-			return (char) byteStorage[pos];
-		}
-	}
-
-	public class stringFileStorage
-		implements fileStorage {
-
-		int charactersInFile;
-		public String stringStorage;
-
-		public  stringFileStorage(StringBuffer content)
-					throws IOException {
-			stringStorage = content.toString();
-			charactersInFile = stringStorage.length(); 
-		}
-		
-		public  stringFileStorage(byte[] content,
-                	              int sizeOfFile,
-                	              String charEncoding)
-					throws IOException {
-			stringStorage = new String(content, 0, sizeOfFile, charEncoding);
-			charactersInFile = stringStorage.length(); 
-		}
-	
-		public int  getCharactersInFile() {
-			return charactersInFile;
-		}
-		
-		public char readCharacterAt(int pos) {
-			return stringStorage.charAt(pos);
-		}
-	} 
-}
-
-
-class CsvFileCache {
-	// This is a sketch for simple caching where only the last read file is kept 
-	// in the cache. This is good enough for optimizing access to the directorynnn.csv-files.
-	// Should be extended for further caching, specifically for the searchfiles.
-	// This implementation is not yet complete: currently the file is re-opened
-	// each time 
-	// This cache is not yet active !
-	protected InputStream cachedFile = null;
-	protected String      fileName = null;
-	protected int         lastPositionInStream;
-
-	synchronized InputStream getCsvFile(String  fileNameParam,
-            					        int 	startPosition,
-            					        CsvFile csvFileObj) // last parameter obsolete when reading of files is separated 
-				throws IOException, DictionaryException {
-		long startTime = System.currentTimeMillis();
-		InputStream csvStream = null;
-		// check if file is in the cache
-		if ((cachedFile != null) && fileName.equals(fileNameParam)) {
-			System.out.println("cache hit " + fileNameParam);  // to be removed for final implementation
-			// skip additional bytes
-			int numberOfBytesToBeSkipped = startPosition - lastPositionInStream;
-			if (numberOfBytesToBeSkipped < 0) {
-				// stream needs to be reopened
-				FileAccessHandler.getDictionaryDataFileISAccess().getInputStream(fileNameParam);
-				numberOfBytesToBeSkipped = startPosition;
-			}
-			else {
-				// reset to the old file position
-				cachedFile.reset();
-			}
-			long skippedBytes = cachedFile.skip(numberOfBytesToBeSkipped);
-			if (skippedBytes != numberOfBytesToBeSkipped) {
-				throw new DictionaryException("CSV file: skipped only " + skippedBytes + " bytes");
-			}
-			lastPositionInStream = startPosition;
-			csvStream = cachedFile;
-		}
-		else {
-			// remember the file name and position into the cache
-			fileName = fileNameParam;
-			lastPositionInStream = startPosition;
-			// close the previously cached file
-			if (cachedFile != null)
-				cachedFile.close();
-			// open new file 
-			csvStream =	FileAccessHandler.getDictionaryDataFileISAccess().getInputStream(fileName);  // to be done in specific class
-			Util.getUtil().logTime("open file", startTime);
-			startTime = System.currentTimeMillis();
-			if (csvStream != null) {
-				long skippedBytes = csvStream.skip(startPosition);
-				Util.getUtil().logTime("position file", startTime);
-				if (skippedBytes != startPosition) {
-					throw new DictionaryException("CSV file: skipped only " + skippedBytes + " bytes");
-				}
-				// put file into cache, but only when the stream supports marks
-				// currently: don't put into cache (= cache deactivated) 
-				// if (csvStream.markSupported()) {
-				//	csvStream.mark(20000);  // for the moment just assume 20000 bytes to remember
-				//  cachedFile = csvStream;
-				//}
-			}
-			else {
-				throw new DictionaryException("Could not open file " + fileName);
-			}
-		}
-		return csvStream;
 	}
 }

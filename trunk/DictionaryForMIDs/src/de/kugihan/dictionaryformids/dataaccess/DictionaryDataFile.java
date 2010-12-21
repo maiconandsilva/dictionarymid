@@ -71,6 +71,8 @@ public class DictionaryDataFile  {
 
 	public static boolean useStandardPath = true;  // indicates that the property file is located in pathNameDataFiles
 
+	public static ObjectForClass objectForClassObj = new ObjectForClass();
+	
 	public static void initValues(boolean initDictionaryGenerationValues)
 				throws DictionaryException
 	{
@@ -270,7 +272,7 @@ public class DictionaryDataFile  {
 															   "de.kugihan.dictionaryformids.dictgen");
 				supportedLanguages[indexLanguage].dictionaryUpdateObj = dictionaryUpdateObj;				 
 			}
-		}
+		} 
 	}
 
 	protected static Object getObjectForClass(String className, 
@@ -282,12 +284,10 @@ public class DictionaryDataFile  {
 			// use fallbackClassName instead
 			className = fallbackClassName;
 		}
-		Class classToLoad;
 		Object classObj;
 		try
 		{
-			classToLoad = Class.forName(className);
-			classObj = classToLoad.newInstance(); 
+			classObj = objectForClassObj.createObjectForClass(className); 
 		}
 		catch (Exception e)
 		{
@@ -298,11 +298,10 @@ public class DictionaryDataFile  {
 				classNameNewPackage.delete(0, oldPackageName.length());
 				// prepend new package name:
 				String classNameNewPackageStr = newPackageName + classNameNewPackage.toString();
-				classToLoad = Class.forName(classNameNewPackageStr);
-				classObj = classToLoad.newInstance();
+				classObj = objectForClassObj.createObjectForClass(classNameNewPackageStr); 
 			}
 			catch (Exception e2) {
-				// did not work either:
+				// did not work neither:
 				throw new DictionaryClassNotLoadedException("Class could not be loaded: " + className);
 			}
 		}
