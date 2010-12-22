@@ -9,10 +9,10 @@ public class HTRInputStream extends InputStream {
 	
 	protected String fileContent;
 	protected int currentPosition = 0;
-	// public static String baseDirectory = "http://www.kugihan.de/dict/htmlapp/ChiEng_CEDICT";
-	public static String baseDirectory = "file:///C:/Projects/DictionaryForMIDs/DictionaryForMIDs_Javascript/Java_for_GWT/war/ChiEng_CEDICT";
-	// public static String baseDirectory = "http://dictionarymid.sourceforge.net/htmlApp/ChiEng_CEDICT/ChiEng_CEDICT";
-
+	protected static String baseDirectory = null;
+	protected static int htrStatusOK;
+	protected static final int htrStatusOKhttp = 200;
+	protected static final int htrStatusOKfile = 0;
 
 	public HTRInputStream(String fileName) 
 				throws DictionaryException {
@@ -24,7 +24,7 @@ public class HTRInputStream extends InputStream {
 	                              String charset) 
 				throws DictionaryException {
 		String url = buildURLFromFileName(fileName);
-		String readFileContent = readFileJS(url, charset);
+		String readFileContent = readFileJS(url, charset, htrStatusOK);
 		if (readFileContent == null) {
 			throw new DictionaryException("File data could not be read via XMLHttpRequest");
 		}
@@ -32,7 +32,8 @@ public class HTRInputStream extends InputStream {
 	}
 
 	protected static native String readFileJS(String url,
-	                                       String charset) /*-{
+	                                          String charset,
+											  int    htrStatusOK) /*-{
 		var req = new XMLHttpRequest();  
 		req.open('GET', url, false);  
 		var mimeType = 'text/plain; charset=' + charset;
@@ -43,8 +44,7 @@ public class HTRInputStream extends InputStream {
 		catch (e) {
 			alert("Exception bei XMLHttpRequest.send: "+e);
 		}
-		//if (req.status != 200) return null; // bei http  
-		if (req.status != 0) return null;  // bei lokalem Filezugriff
+		if (req.status != htrStatusOK) return null;
 		return req.responseText; 
 		}-*/;
 
@@ -87,5 +87,15 @@ public class HTRInputStream extends InputStream {
 
 	protected static String buildURLFromFileName(String fileName) {
 		return baseDirectory + fileName;
+	}
+
+	public static void setBaseDirectory(String baseDirectoryParam) {
+		baseDirectory = baseDirectoryParam;
+		if (baseDirectoryParam.toLowerCase().startsWith("http:")) {
+			htrStatusOK = htrStatusOKhttp;
+		}
+		else {
+			htrStatusOK = htrStatusOKfile;
+		}
 	}
 }
