@@ -8,6 +8,7 @@ This class provides a standard Java class for GWT
 */
 package java.util;
 
+// Hastable covers the HashMap which is used by JavaME
 public class Hashtable extends HashMap {
  
 }

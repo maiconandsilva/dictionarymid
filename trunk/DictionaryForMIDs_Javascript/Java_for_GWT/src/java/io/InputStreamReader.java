@@ -6,6 +6,14 @@ GPL applies - see file COPYING for copyright statement.
 
 This class provides a standard Java class for GWT
 */
+
+/*
+	Note: the methods of this class contain just some test code.
+	The code of class InputStreamReader is never called by the htmlApp.
+	But the class interface needs to be there in order to compile the
+	sources.
+*/
+
 package java.io;
 
 import de.kugihan.dictionaryformids.general.Util;
@@ -33,7 +41,6 @@ public class InputStreamReader
 		}
 		while (character != -1);
 		inputStreamContentAsString = new String(fileData , 0, sizeOfFile, encoding_name);
-		// Util.getUtil().log("isr content: " +  inputStreamContentAsString);
 	}
 
 	public int read() throws IOException
