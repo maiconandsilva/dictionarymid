@@ -1,0 +1,166 @@
+<!DOCTYPE HTML> 
+
+<!-- 
+
+	DictionaryForMIDs 
+	
+	mini_hmi
+	
+	For testing the Translation Layer
+
+ -->
+
+<html manifest="cache.manifest">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>DictionaryForMIDs htmlApp (mini_hmi - in development)</title>
+    
+    <!-- This is the Script for the Translation Layer: -->
+   <script type="text/javascript" src="../htmlApp/translationlayergwt/translationlayergwt.nocache.js"></script> 
+
+    <!-- And here some functions for the mini_hmi -->
+	<script type="text/javascript">
+		function newTranslationResult(resultOfTranslation) {
+			for (var currentTranslation = 0; 
+				 currentTranslation < resultOfTranslation.numberOfFoundTranslations(); 
+				 currentTranslation++) {
+				tr = translationResultsTable.insertRow(currentTranslation);
+				var singleTranslation = resultOfTranslation.getTranslationAt(currentTranslation);
+				var innerHTMLText;
+				var fromText = singleTranslation.getFromText();
+				innerHTMLText = createInnerHTML(fromText, true);
+				var tdElement;
+				tdElement = document.createElement('td');
+				tdElement.innerHTML = innerHTMLText;
+				tr.appendChild(tdElement);
+				for (var currentToText = 0; 
+					 currentToText < singleTranslation.getNumberOfToTexts(); 
+					 currentToText++) {
+						var toText = singleTranslation.getToTextAt(currentToText);
+						innerHTMLText = createInnerHTML(toText, false);
+						var tdElement = document.createElement('td');
+						tdElement.innerHTML = innerHTMLText;
+						tr.appendChild(tdElement);
+					
+				}
+			}
+		}
+
+		function createInnerHTML(textOfLanguage, 
+		                         isInput) {
+			var innerHTMLText = '';
+			var stringColourItemText = determineItemsFromContent(textOfLanguage, true, isInput);
+			for (var currentStringColourItemTextPart = 0; 
+				 currentStringColourItemTextPart < stringColourItemText.size(); 
+				 currentStringColourItemTextPart++) {
+				stringColourItemTextPart = stringColourItemText.getItemTextPart(currentStringColourItemTextPart);
+				var rgbString = stringColourItemTextPart.getColour().getHexValue();
+				innerHTMLText += '<font color=\"#' + rgbString + '\">' + stringColourItemTextPart.getText();
+			}
+			return innerHTMLText;
+		}
+
+		function deletePreviousTranslationResult() {
+			while (translationResultsTable.rows.length > 0) {
+				translationResultsTable.deleteRow(0);
+			}
+		}
+
+		function startTranslation() {
+			var text = document.getElementById('userInput').value;
+			var inputLanguages = new Array(false, true);
+			var outputLanguages = new Array(true, false);
+			executeTranslation(text,
+							   [false,true],
+							   [true,false],
+							   false,
+							   50,
+							   20000);
+		}
+
+		function outputMessage(message) {
+			alert(message);
+		}
+
+		function checkForBrowserCompatibility() {
+			// Check whether Application Cache is supported
+			var applicationCacheSupported = true;
+			try {
+				if (applicationCache == undefined) applicationCacheSupported = false;
+			}
+			catch (e) {applicationCacheSupported = false;}
+
+			// Check whether Local Storage is supported
+			var localStorageSupported = true;
+			try {
+				if (localStorage == undefined) localStorageSupported = false;
+			}
+			catch (e) {localStorageSupported = false;}
+
+			// Check whether XMLHttpRequest.overrideMimeType is supported
+			var htrOverrideMimeTypeSupported = true;
+			var htr = new XMLHttpRequest();
+			try {
+				if (htr.overrideMimeType == undefined) htrOverrideMimeTypeSupported = false;
+			}
+			catch (e) {htrOverrideMimeTypeSupported = false;}
+			if (!applicationCacheSupported) {
+				alert("Application Cache not supported by browser; download of dictionary not possible !");
+			}
+			if (!localStorageSupported) {
+				alert("Local Storage not supported by browser; you cannot save user settings");
+			}
+			if (!htrOverrideMimeTypeSupported) {
+				alert("XMLHttpRequest.overrideMimeType not supported by browser; DictionaryForMIDs will not run !");
+			}
+		}
+
+		function applicationCacheEventHandler(event) {
+			if (optionWindow != null) {
+				if (! optionWindow.closed) {
+					if (optionWindow.displayApplicationEvent != undefined) {
+						optionWindow.displayApplicationEvent(event.type,
+															 applicationCache.status);
+					}
+				}
+			}
+		}
+		
+		function openOptionWindow() {
+			optionWindow = open("../htmlApp/mini_hmi/OptionWindow.html", 
+			                    "Options", 
+								"location=no,height=300,width=200,left=100,top=100,toolbar=no,scrollbars=yes,resizable=yes");
+		}
+		
+		function initializeApplication() {
+			applicationCache.onchecking    	= applicationCacheEventHandler;
+			applicationCache.onerror       	= applicationCacheEventHandler;
+			applicationCache.onnoupdate    	= applicationCacheEventHandler;
+			applicationCache.ondownloading 	= applicationCacheEventHandler;
+			applicationCache.onprogress 	= applicationCacheEventHandler;
+			applicationCache.oncached 		= applicationCacheEventHandler;
+			applicationCache.onobsolete 	= applicationCacheEventHandler;
+			translationResultsTable = document.getElementById("translationResultsTable");
+		}
+		
+		checkForBrowserCompatibility();
+		optionWindow = null;
+		window.onload = initializeApplication; 
+    </script>
+  </head>
+
+  <body>
+    <noscript>
+        Your web browser must have JavaScript enabled in order for this application to work.
+    </noscript>
+
+    DictionaryForMIDs <button onClick='openOptionWindow();'>Cache Info</button>
+	<BR>
+	<input id='userInput'> 
+	<button onClick='startTranslation();'>Translate</button>
+	<BR>
+	<table id="translationResultsTable">
+	</table>
+  </body>
+</html>

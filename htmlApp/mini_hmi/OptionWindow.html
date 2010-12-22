@@ -1,0 +1,46 @@
+<!DOCTYPE HTML> 
+
+<!-- 
+
+	DictionaryForMIDs 
+	
+	Option Window
+	
+	For entering options and for displaying statusvalues
+
+ -->
+
+<html>
+  <head>
+  	<script type="text/javascript">
+		function displayApplicationEventFunction(eventText,
+		                                         applicationCacheStatusValue) {
+			document.body.innerHTML +=  eventText + "<br>";
+		}
+		
+		function displayApplicationCacheStatus(applicationCacheStatusValue) {
+			document.getElementById("applicationCacheStatus").innerHTML = applicationCacheStatusValue;
+		}
+		
+		function initializeApplication() {
+			displayApplicationCacheStatus(opener.applicationCache.status);
+		}
+
+		function closeOptionWindow() {
+			close();
+		}
+		
+		function onunloadOptionWindow() {
+			opener.optionWindow = null;
+		}
+		
+		displayApplicationEvent = displayApplicationEventFunction;
+		window.onload = initializeApplication;
+		window.onunload = onunloadOptionWindow;
+	</script>
+  </head>
+  <body>
+	<button onClick='closeOptionWindow();'>Close Window</button>
+    <p>Application Cache Status: </p> <p id="applicationCacheStatus"></p> 
+  </body>
+</html>
