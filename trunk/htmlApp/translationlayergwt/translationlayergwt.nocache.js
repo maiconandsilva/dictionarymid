@@ -256,16 +256,16 @@ function translationlayergwt(){
   $stats && $stats({moduleName:'translationlayergwt', sessionId:$sessionId_0, subSystem:'startup', evtGroup:'bootstrap', millis:(new Date).getTime(), type:'selectingPermutation'});
   if (!isHostedMode()) {
     try {
-      unflattenKeylistIntoAnswers(['safari'], '6E983AE4D69D9C7720AB0457E5CA75C7');
-      unflattenKeylistIntoAnswers(['ie6'], '71A21EFF719EA5D3CF6F2BD72127FBA0');
-      unflattenKeylistIntoAnswers(['ie8'], '71A21EFF719EA5D3CF6F2BD72127FBA0');
-      unflattenKeylistIntoAnswers(['ie6'], '71A21EFF719EA5D3CF6F2BD72127FBA0' + ':1');
-      unflattenKeylistIntoAnswers(['ie8'], '71A21EFF719EA5D3CF6F2BD72127FBA0' + ':1');
-      unflattenKeylistIntoAnswers(['opera'], 'CEF23DA1B24B4F8FCB758E55EF99C946');
-      unflattenKeylistIntoAnswers(['gecko'], 'F29945228A4431FFA304EFDF44565596');
-      unflattenKeylistIntoAnswers(['gecko1_8'], 'F29945228A4431FFA304EFDF44565596');
-      unflattenKeylistIntoAnswers(['gecko'], 'F29945228A4431FFA304EFDF44565596' + ':1');
-      unflattenKeylistIntoAnswers(['gecko1_8'], 'F29945228A4431FFA304EFDF44565596' + ':1');
+      unflattenKeylistIntoAnswers(['gecko'], '0DFD596AF51F4CC7A00293FBD296E92A');
+      unflattenKeylistIntoAnswers(['gecko1_8'], '0DFD596AF51F4CC7A00293FBD296E92A');
+      unflattenKeylistIntoAnswers(['gecko'], '0DFD596AF51F4CC7A00293FBD296E92A' + ':1');
+      unflattenKeylistIntoAnswers(['gecko1_8'], '0DFD596AF51F4CC7A00293FBD296E92A' + ':1');
+      unflattenKeylistIntoAnswers(['ie6'], '688A00B4C9356DCDA436BE1DA13D5CBA');
+      unflattenKeylistIntoAnswers(['ie8'], '688A00B4C9356DCDA436BE1DA13D5CBA');
+      unflattenKeylistIntoAnswers(['ie6'], '688A00B4C9356DCDA436BE1DA13D5CBA' + ':1');
+      unflattenKeylistIntoAnswers(['ie8'], '688A00B4C9356DCDA436BE1DA13D5CBA' + ':1');
+      unflattenKeylistIntoAnswers(['opera'], '720FBED404E45C61EFEA4E4AD451AB8F');
+      unflattenKeylistIntoAnswers(['safari'], '8EC125F3977CC8A7FC592AE673DBFB17');
       strongName = answers[computePropValue('user.agent')];
       var idx = strongName.indexOf(':');
       if (idx != -1) {
