@@ -25,12 +25,14 @@ public class TranslationLayerGWT implements EntryPoint , TranslationExecutionCal
 		UtilJs utilObj = new UtilJs();
 		Util.setUtil(utilObj);
 		exportStaticMethods();
+		exportPredefinedContent();
 		contentParserObj = new ContentParser();
 		  try {
 			HTRInputStream.setBaseDirectory(getBaseDirectory());
 			FileAccessHandler.setDictionaryDataFileISAccess(new HTRInputStreamAccess());
 			CsvFile.fileStorageReader = new HTRFileStorageReader();
 			DictionaryDataFile.initValues(false);
+			exportDictionaryDataFileDataStructures();
 			TranslationExecution.setTranslationExecutionCallback(this);
 		}
 		catch (Exception e) { 
@@ -120,8 +122,7 @@ public class TranslationLayerGWT implements EntryPoint , TranslationExecutionCal
 		$wnd.newTranslationResult(resultOfTranslation);
     }-*/;
 	 
-
-   protected static native void exportStaticMethods() /*-{
+	protected static native void exportStaticMethods() /*-{
 		function executeTranslationJs(toBeTranslatedWordTextInputParam,
 									 inputLanguagesParam,
 									 outputLanguagesParam,
@@ -168,6 +169,55 @@ public class TranslationLayerGWT implements EntryPoint , TranslationExecutionCal
 		$wnd.executeTranslation = executeTranslationJs;
 		$wnd.determineItemsFromContent = determineItemsFromContent;
     }-*/;
+
+	protected static native void exportDictionaryDataFileDataStructures() /*-{
+		function setJsFieldsForLanguageDefinition(supportedLanguageObj) {
+			supportedLanguageObj.languageDisplayText = 			supportedLanguageObj.@de.kugihan.dictionaryformids.dataaccess.LanguageDefinition::languageDisplayText;
+			supportedLanguageObj.languageFilePostfix = 			supportedLanguageObj.@de.kugihan.dictionaryformids.dataaccess.LanguageDefinition::languageFilePostfix;
+			supportedLanguageObj.normationClassName = 			supportedLanguageObj.@de.kugihan.dictionaryformids.dataaccess.LanguageDefinition::normationClassName;
+			supportedLanguageObj.isSearchable = 				supportedLanguageObj.@de.kugihan.dictionaryformids.dataaccess.LanguageDefinition::isSearchable;
+			supportedLanguageObj.normationObj = 				supportedLanguageObj.@de.kugihan.dictionaryformids.dataaccess.LanguageDefinition::normationObj;
+			supportedLanguageObj.indexNumberOfSourceEntries = 	supportedLanguageObj.@de.kugihan.dictionaryformids.dataaccess.LanguageDefinition::indexNumberOfSourceEntries;
+			supportedLanguageObj.contentDefinitionAvailable = 	supportedLanguageObj.@de.kugihan.dictionaryformids.dataaccess.LanguageDefinition::contentDefinitionAvailable;
+			supportedLanguageObj.languageIcon = 				supportedLanguageObj.@de.kugihan.dictionaryformids.dataaccess.LanguageDefinition::languageIcon;
+			supportedLanguageObj.contents = 					supportedLanguageObj.@de.kugihan.dictionaryformids.dataaccess.LanguageDefinition::contents;
+			// for each of the content, set the Javascript fields
+			for (var i=0; i < supportedLanguageObj.contents.length; ++i) {
+				setJsFieldsForContentDefinition(supportedLanguageObj.contents[i]);
+			}
+		}
+
+		function setJsFieldsForContentDefinition(contentObj) {
+			contentObj.contentDisplayText = 	contentObj.@de.kugihan.dictionaryformids.dataaccess.content.ContentDefinition::contentDisplayText;
+			contentObj.fontColour = 			contentObj.@de.kugihan.dictionaryformids.dataaccess.content.ContentDefinition::fontColour;
+			contentObj.fontStyle = 				contentObj.@de.kugihan.dictionaryformids.dataaccess.content.ContentDefinition::fontStyle;
+			contentObj.selectionMode = 			contentObj.@de.kugihan.dictionaryformids.dataaccess.content.ContentDefinition::selectionMode;
+			contentObj.displaySelectable = 		contentObj.@de.kugihan.dictionaryformids.dataaccess.content.ContentDefinition::displaySelectable;
+		}
+
+		$wnd.setJsFieldsForContentDefinition = setJsFieldsForContentDefinition;  // this method may be needed by the HMI
+		$wnd.DictionaryDataFile = new Object();
+		var dictionaryDataFile = $wnd.DictionaryDataFile;
+		dictionaryDataFile.numberOfAvailableLanguages = 	@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::numberOfAvailableLanguages;
+		dictionaryDataFile.numberOfInputLanguages = 		@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::numberOfInputLanguages;
+		dictionaryDataFile.infoText = 						@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::infoText;
+		dictionaryDataFile.dictionaryAbbreviation = 		@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::dictionaryAbbreviation;
+		dictionaryDataFile.applicationFileNamePrefix = 		@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::applicationFileNamePrefix;
+		dictionaryDataFile.supportedLanguages = 			@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::supportedLanguages;
+		var supportedLanguages = dictionaryDataFile.supportedLanguages;
+		// for each of the supportedLanguage, set the Javascript fields
+		for (var i=0; i < dictionaryDataFile.numberOfAvailableLanguages; ++i) {
+			setJsFieldsForLanguageDefinition(supportedLanguages[i]);
+		}
+    }-*/;
+	 			
+	protected static native void exportPredefinedContent() /*-{
+		$wnd.PredefinedContent = new Object();
+		var predefinedContent = $wnd.PredefinedContent;
+		predefinedContent.getPredefinedContent	= @de.kugihan.dictionaryformids.dataaccess.content.PredefinedContent::getPredefinedContent(*);
+    }-*/;
+
+
 
 	protected static native String getCurrentURLJs() /*-{
 		return $wnd.location.href;
