@@ -16,10 +16,38 @@
 		function displayApplicationEventFunction(eventText,
 		                                         applicationCacheStatusValue) {
 			document.body.innerHTML +=  eventText + "<br>";
+			displayApplicationCacheStatus(applicationCacheStatusValue);
 		}
 		
 		function displayApplicationCacheStatus(applicationCacheStatusValue) {
-			document.getElementById("applicationCacheStatus").innerHTML = applicationCacheStatusValue;
+			document.getElementById("applicationCacheStatus").innerHTML = getAppCacheStatusString(applicationCacheStatusValue);
+		}
+		
+		function getAppCacheStatusString(applicationCacheStatusValue) {
+			appCache = opener.applicationCache;
+			switch (applicationCacheStatusValue) {
+			  case appCache.UNCACHED: // UNCACHED == 0
+				return 'UNCACHED';
+				break;
+			  case appCache.IDLE: // IDLE == 1
+				return 'IDLE';
+				break;
+			  case appCache.CHECKING: // CHECKING == 2
+				return 'CHECKING';
+				break;
+			  case appCache.DOWNLOADING: // DOWNLOADING == 3
+				return 'DOWNLOADING';
+				break;
+			  case appCache.UPDATEREADY:  // UPDATEREADY == 5
+				return 'UPDATEREADY';
+				break;
+			  case appCache.OBSOLETE: // OBSOLETE == 5
+				return 'OBSOLETE';
+				break;
+			  default:
+				return 'UKNOWN CACHE STATUS';
+				break;
+			};
 		}
 		
 		function initializeApplication() {
