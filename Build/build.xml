@@ -23,7 +23,7 @@ javac.encoding=UTF-8
 
 	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-1.1.0-sdk30.jar"/> <!-- This is a patched version of antenna: see http://eriksdiary.blogspot.com/2009/07/antenna-suport-for-java-me-sdk-30.html --> 
 	
-    <property name="VersionNumber" 		value="3.5.7"/>	<!-- version of tools / applications -->
+    <property name="VersionNumber" 		value="3.5.8"/>	<!-- version of tools / applications -->
 	<property name="VersionStatus" 		value="final"/>	 <!--  e.g. "beta", "testversion 2"  -->
     <condition property="ApplicationVersion" 	value="${VersionNumber}_${VersionStatus}" else="${VersionNumber}">
     	<isset property="VersionStatus"/>
