@@ -7,6 +7,5 @@ public class DictionaryClassNotLoadedException extends DictionaryException {
 
 	public DictionaryClassNotLoadedException(String message) {
 		super(message);
-		Util.getUtil().log(this);
 	}
 }
