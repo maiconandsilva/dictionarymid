@@ -34,18 +34,54 @@ public class HTRInputStream extends InputStream {
 	protected static native String readFileJS(String url,
 	                                          String charset,
 											  int    htrStatusOK) /*-{
+		var isFirefoxBrowser 			= $wnd.navigator.userAgent.indexOf('Gecko/') != -1;
+		var isFileReaderSupported 		= typeof FileReader != 'undefined';
+		var isFileReaderSyncSupported 	= typeof FileReaderSync != 'undefined';
 		var req = new XMLHttpRequest();  
 		req.open('GET', url, false);  
-		var mimeType = 'text/plain; charset=' + charset;
-		req.overrideMimeType(mimeType);  
-		try {
-			req.send(null);  
+		if (isFirefoxBrowser || (!isFileReaderSupported && !isFileReaderSyncSupported)) {
+			// Firefox web browser or missing support for both FileReader and FileReaderSync
+			var mimeType = 'text/plain; charset=' + charset;
+			req.overrideMimeType(mimeType);  
+			try {
+				req.send(null);  
+			}
+			catch (e) {
+				alert("Exception bei XMLHttpRequest.send: "+e);
+			}
+			if (req.status != htrStatusOK) return null;
+			return req.responseText; 
+		} 
+		else {
+			// non-Firefox web browser and support for FileReader and/or FileReaderSync
+			var result = null;
+			req.asBlob = true;
+			try {
+				req.send(null); 
+			}
+			catch (e) {
+				alert("Exception bei XMLHttpRequest.send (blob): "+e);
+			}
+			if (req.status != htrStatusOK) return null;
+			var blob = req.responseBlob;
+			if (! isFileReaderSyncSupported) {
+				// this web brwoser does not yet support FileReaderSync: use FileReader and busy waiting instead
+				var reader = new FileReader();
+				reader.readAsBinaryString(blob);
+				do {
+					// do "busy-waiting" cause FileReader is not available for this web browser
+				} 
+				while (reader.readyState != FileReader.DONE);
+				result = reader.result;
+			}
+			else {
+				// web browser supports FileReaderSync for workers
+				var reader = new FileReaderSync();
+				reader.readAsBinaryString(blob);
+				result = reader.result;
+			}
+			return result;
 		}
-		catch (e) {
-			alert("Exception bei XMLHttpRequest.send: "+e);
-		}
-		if (req.status != htrStatusOK) return null;
-		return req.responseText; 
 		}-*/;
 
 	public int read() throws IOException {
