@@ -20,7 +20,10 @@ public class FileCsvFile extends CsvFile {
 		super(fileName, separatorCharacter, charEncoding, (int) new File(fileName).length());
 	}
 
-	void writeToFile(boolean crypted) throws DictionaryException {
+	/*
+	 * Seems the following method is not needed any more:
+	 * 
+	 void writeToFile(boolean crypted) throws DictionaryException {
 		try {
 			byte[] fileData = ((stringFileStorage) fileStorageObj).stringStorage.getBytes(charEncoding);
 			FileOutputStream fileStream = new FileOutputStream(fileName);
@@ -30,6 +33,6 @@ public class FileCsvFile extends CsvFile {
 		catch (IOException e) {
 			throw new DictionaryException(e);
 		}		
-	}
+	} */
 
 }
