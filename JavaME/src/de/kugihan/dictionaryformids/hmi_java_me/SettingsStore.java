@@ -127,8 +127,8 @@ public class SettingsStore {
 				// addAtEndWildcardAnySeriesOfCharacter: switched off
 				addBooleanValue(false);
 				
-				// colouredItems: switched on by default
-				addBooleanValue(true);				
+				// colouredItems: switched off by default, because some users reported problems with the class StringColourItem
+				addBooleanValue(false);				
 
 				// bitmap font: switched off
 				addBooleanValue(false);
