@@ -477,6 +477,10 @@ public class MainForm
 			throws DictionaryException {
 		// chooses the next input language
 		dictionarySettingFormObj.changeTranslationDirection();
+		// if incremental search is activated, then execute the translation with the new translation direction
+		if (DictionarySettings.isIncrementalSearchEnabled()) {
+			applicationMainForm.translateToBeTranslatedWordTextField(true);	
+		}
 	}
 	
 	public void dictionarySetting() {
