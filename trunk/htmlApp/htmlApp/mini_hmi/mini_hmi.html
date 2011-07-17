@@ -8,6 +8,7 @@
 	
 	For testing the Translation Layer
 
+
  -->
 
 <html manifest="cache.manifest">
@@ -17,15 +18,21 @@
     <title>DictionaryForMIDs htmlApp (mini_hmi - in development)</title>
     
     <!-- This is the Script for the Translation Layer: -->
-   <script type="text/javascript" src="../htmlApp/translationlayergwt/translationlayergwt.nocache.js"></script> 
+    <script type="text/javascript" src="../htmlApp/translationlayergwt/translationlayergwt.nocache.js"></script> 
+
+    <!-- Some includes for the mini_hmi -->
+	<script type="text/javascript" src="../htmlApp/mini_hmi/UserSettings.js"> </script>
 
     <!-- And here some functions for the mini_hmi -->
 	<script type="text/javascript">
+	
+		"use strict";
+		
 		function newTranslationResult(resultOfTranslation) {
 			for (var currentTranslation = 0; 
 				 currentTranslation < resultOfTranslation.numberOfFoundTranslations(); 
 				 currentTranslation++) {
-				tr = translationResultsTable.insertRow(currentTranslation);
+				var tr = translationResultsTable.insertRow(currentTranslation);
 				var singleTranslation = resultOfTranslation.getTranslationAt(currentTranslation);
 				var innerHTMLText;
 				var fromText = singleTranslation.getFromText();
@@ -54,7 +61,7 @@
 			for (var currentStringColourItemTextPart = 0; 
 				 currentStringColourItemTextPart < stringColourItemText.size(); 
 				 currentStringColourItemTextPart++) {
-				stringColourItemTextPart = stringColourItemText.getItemTextPart(currentStringColourItemTextPart);
+				var stringColourItemTextPart = stringColourItemText.getItemTextPart(currentStringColourItemTextPart);
 				var rgbString = stringColourItemTextPart.getColour().getHexValue();
 				innerHTMLText += '<font color=\"#' + rgbString + '\">' + stringColourItemTextPart.getText();
 			}
@@ -104,7 +111,13 @@
 			try {
 				if (htr.overrideMimeType == undefined) htrOverrideMimeTypeSupported = false;
 			}
-			catch (e) {htrOverrideMimeTypeSupported = false;}
+			catch (e) {htrOverrideMimeTypeSupported = false;}		
+			// Check whether FileReader is supported
+			var fileReaderSupported = true;
+			try {
+				if (FileReader == undefined) fileReaderSupported = false;
+			}
+			catch (e) {fileReaderSupported = false;}
 			if (!applicationCacheSupported) {
 				alert("Application Cache not supported by browser; download of dictionary not possible !");
 			}
@@ -112,7 +125,10 @@
 				alert("Local Storage not supported by browser; you cannot save user settings");
 			}
 			if (!htrOverrideMimeTypeSupported) {
-				alert("XMLHttpRequest.overrideMimeType not supported by browser; DictionaryForMIDs will not run !");
+				alert("XMLHttpRequest.overrideMimeType not supported by browser; DictionaryForMIDs will probably not run !");
+			}
+			if (!fileReaderSupported) {
+				alert("FileReader not supported by browser; translations can produce errors !");
 			}
 		}
 
@@ -141,11 +157,12 @@
 			applicationCache.onprogress 	= applicationCacheEventHandler;
 			applicationCache.oncached 		= applicationCacheEventHandler;
 			applicationCache.onobsolete 	= applicationCacheEventHandler;
-			translationResultsTable = document.getElementById("translationResultsTable");
+			this.translationResultsTable 	= document.getElementById("translationResultsTable");
+			this.userSettingsObj 			= new UserSettings(location.href);
 		}
 		
 		checkForBrowserCompatibility();
-		optionWindow = null;
+		var optionWindow = null;
 		window.onload = initializeApplication; 
     </script>
   </head>
