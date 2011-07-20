@@ -13,9 +13,12 @@
 <html>
   <head>
   	<script type="text/javascript">
+	
+		"use strict";
+		
 		function displayApplicationEventFunction(eventText,
 		                                         applicationCacheStatusValue) {
-			document.body.innerHTML +=  eventText + "<br>";
+			document.body.innerHTML +=  eventText + "; ";
 			displayApplicationCacheStatus(applicationCacheStatusValue);
 		}
 		
@@ -24,7 +27,7 @@
 		}
 		
 		function getAppCacheStatusString(applicationCacheStatusValue) {
-			appCache = opener.applicationCache;
+			var appCache = applicationCache;
 			switch (applicationCacheStatusValue) {
 			  case appCache.UNCACHED: // UNCACHED == 0
 				return 'UNCACHED';
@@ -50,11 +53,102 @@
 			};
 		}
 		
+		function numberOfSearchableInputLanguages() {
+			var number = 0;
+			for (var language = 0; language < DictionaryDataFile.numberOfAvailableLanguages; ++language) {
+				if (DictionaryDataFile.supportedLanguages[language].isSearchable) {
+					number++;
+				}
+			}
+			return number;
+		}
+		
 		function initializeApplication() {
+			this.DictionaryDataFile = opener.DictionaryDataFile;
+			this.numberOfAvailableLanguages = DictionaryDataFile.numberOfAvailableLanguages;
+			this.numberOfSearchableInputLanguages = numberOfSearchableInputLanguages();
+			this.inputLanguage = opener.userSettingsObj.getInputLanguage();
+			this.outputLanguage = opener.userSettingsObj.getOutputLanguage();
+			this.radioButtons = document.getElementsByName('languageSelection');
+			this.languageSelection1RadioButton = radioButtons[0];
+			this.languageSelection2RadioButton = radioButtons[1];
+			this.languageSelection1Text = languageSelection1RadioButton.nextSibling;
+			this.languageSelection2Text = languageSelection2RadioButton.nextSibling;
+			
 			displayApplicationCacheStatus(opener.applicationCache.status);
+			createItems();
+		}
+		
+		var languageSelectionTypeEnum = { none : 0, radioButtons : 1,  comboBoxes : 2 };
+		var languageSelectionType;
+		
+		function createItems() {
+			if (numberOfSearchableInputLanguages < 2) {
+				languageSelectionType = languageSelectionTypeEnum.none;
+				hideLanguageSelectionRadioButtons();
+				hideLanguageSelectionComboBoxes();
+			}
+			else if ((numberOfSearchableInputLanguages == 2) && (numberOfAvailableLanguages == 2)) {
+				languageSelectionType = languageSelectionTypeEnum.radioButtons;
+				var language0DisplayText = DictionaryDataFile.supportedLanguages[0].languageDisplayText;
+				var language1DisplayText = DictionaryDataFile.supportedLanguages[1].languageDisplayText;
+				languageSelection1Text.nodeValue = language0DisplayText + " > " + language1DisplayText;
+				languageSelection2Text.nodeValue = language1DisplayText + " > " + language0DisplayText;
+				hideLanguageSelectionComboBoxes();
+			}
+			else {
+				languageSelectionType = languageSelectionTypeEnum.comboBoxes;
+				hideLanguageSelectionRadioButtons();
+			}
+			setItemsToSettingValues();
+		}
+		
+		function hideLanguageSelectionRadioButtons() {
+			document.getElementById("languageSelectionRadioButtons").style.display = "none";
 		}
 
+		function hideLanguageSelectionComboBoxes() {
+			document.getElementById("languageSelectionComboBoxes").style.display = "none";
+		}
+		
+		function setItemsToSettingValues() {
+			if (languageSelectionType == languageSelectionTypeEnum.radioButtons) {
+				if (inputLanguage == 0) {
+					languageSelection1RadioButton.checked = true;
+					languageSelection2RadioButton.checked = false;
+				} 
+				else {
+					languageSelection1RadioButton.checked = false;
+					languageSelection2RadioButton.checked = true;
+				}
+			}
+			else if (languageSelectionType == languageSelectionTypeEnum.comboBoxes){
+				// todo
+			}
+		}
+		
+		function saveSettings() {
+			if (languageSelectionType == languageSelectionTypeEnum.radioButtons) {
+				if (languageSelection1RadioButton.checked) {
+					inputLanguage  = 0;
+					outputLanguage = 1;
+				}
+				else {
+					inputLanguage  = 1;
+					outputLanguage = 0;
+				}
+			}
+			else if (languageSelectionType == languageSelectionTypeEnum.comboBoxes){
+				// todo
+			}
+			if (languageSelectionType != languageSelectionTypeEnum.none) {
+				opener.userSettingsObj.setInputLanguage(inputLanguage);
+				opener.userSettingsObj.setOutputLanguage(outputLanguage);
+			}
+		}
+		
 		function closeOptionWindow() {
+			saveSettings();
 			close();
 		}
 		
@@ -62,13 +156,27 @@
 			opener.optionWindow = null;
 		}
 		
-		displayApplicationEvent = displayApplicationEventFunction;
+		this.displayApplicationEvent = displayApplicationEventFunction;
 		window.onload = initializeApplication;
 		window.onunload = onunloadOptionWindow;
 	</script>
   </head>
   <body>
-	<button onClick='closeOptionWindow();'>Close Window</button>
-    <p>Application Cache Status: </p> <p id="applicationCacheStatus"></p> 
+	<div>
+		<button onClick='closeOptionWindow();'>Close Window</button> 
+		<br>
+	</div>
+	<div id="languageSelectionRadioButtons">
+		<input type="radio" name="languageSelection" value="languageSelection1"> languageSelection1Text 
+		<br>
+		<input type="radio" name="languageSelection" value="languageSelection2"> languageSelection2Text
+	</div>
+	<div id="languageSelectionComboBoxes">
+		<p>todo</p>
+		<p>todo</p>
+	</div>
+	<div>
+		<p>Application Cache Status: </p> <p id="applicationCacheStatus"></p> 
+	</div>
   </body>
 </html>

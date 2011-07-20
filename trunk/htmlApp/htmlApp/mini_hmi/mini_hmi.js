@@ -137,10 +137,10 @@ function applicationCacheEventHandler(event) {
 }
 
 function openOptionWindow() { 
-//			optionWindow = open("../htmlApp/mini_hmi/OptionWindow.html", 
 		optionWindow = open(pathToHTML + "OptionWindow.html", 
-						"Options", 
-						"location=no,height=300,width=200,left=100,top=100,toolbar=no,scrollbars=yes,resizable=yes");
+							"Options", 
+							"location=no,height=300,width=200,left=100,top=100,toolbar=no,scrollbars=yes,resizable=yes");
+		optionWindow.focus();
 }
 
 function initializeApplication() {
