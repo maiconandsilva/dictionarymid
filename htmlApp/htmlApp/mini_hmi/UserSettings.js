@@ -1,6 +1,6 @@
 /*
 DictionaryForMIDs - a free multi-language dictionary for mobile devices.
-Copyright (C) 2010 Gert Nuber (dict@kugihan.de))
+Copyright (C) 2011 Gert Nuber (dict@kugihan.de))
 
 GPL applies - see file COPYING for copyright statement.
 */
@@ -9,8 +9,8 @@ GPL applies - see file COPYING for copyright statement.
 
 function UserSettings(dictionaryID) {
 
-	var settingInputLanguageIndex  = "inputLanguageIndex";
-	var settingOutputLanguageIndex = "ouputLanguageIndex";
+	var settingInputLanguage  = "inputLanguage";
+	var settingOutputLanguage = "ouputLanguage";
 	var settingVersionOfSettings   = "versionOfSettings";
 	var versionOfSettings = 0;
 	
@@ -33,20 +33,20 @@ function UserSettings(dictionaryID) {
 		return this.storageObj[keyPrefix + key];
 	}
 		
-	this.getInputLanguageIndex = function() {
-		return this.readStorage(settingInputLanguageIndex);
+	this.getInputLanguage = function() {
+		return this.readStorage(settingInputLanguage);
 	}
 	
-	this.setInputLanguageIndex = function(indexNumber) {
-		this.writeStorage(settingInputLanguageIndex, indexNumber);
+	this.setInputLanguage = function(indexNumber) {
+		this.writeStorage(settingInputLanguage, indexNumber);
 	}
 	
-	this.getOutputLanguageIndex = function() {
-		return this.readStorage(settingOutputLanguageIndex);
+	this.getOutputLanguage = function() {
+		return this.readStorage(settingOutputLanguage);
 	}
 	
-	this.setOutputLanguageIndex = function(indexNumber) {
-		this.writeStorage(settingOutputLanguageIndex, indexNumber);
+	this.setOutputLanguage = function(indexNumber) {
+		this.writeStorage(settingOutputLanguage, indexNumber);
 	}
 	
 	this.getVersionOfSettings = function() {
@@ -59,8 +59,8 @@ function UserSettings(dictionaryID) {
 	
 	this.buildInitialSettings = function() {
 		this.setVersionOfSettings(versionOfSettings);
-		this.setInputLanguageIndex(this.determineFirstInputLanguage());
-		this.setOutputLanguageIndex(this.determineFirstOutputLanguage());
+		this.setInputLanguage(this.determineFirstInputLanguage());
+		this.setOutputLanguage(this.determineFirstOutputLanguage());
 	}
 
 	this.determineFirstInputLanguage = function() {
