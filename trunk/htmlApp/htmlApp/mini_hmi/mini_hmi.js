@@ -128,19 +128,22 @@ function checkForBrowserCompatibility() {
 function applicationCacheEventHandler(event) {
 	if (optionWindow != null) {
 		if (! optionWindow.closed) {
-			if (optionWindow.displayApplicationEvent != undefined) {
-				optionWindow.displayApplicationEvent(event.type,
-													 applicationCache.status);
+			if (optionWindowInitializationComplete) {
+				if (optionWindow.displayApplicationEvent != undefined) {
+					optionWindow.displayApplicationEvent(event.type,
+														 applicationCache.status);
+				}
 			}
 		}
 	}
 }
 
 function openOptionWindow() { 
-		optionWindow = open(pathToHTML + "OptionWindow.html", 
-							"Options", 
-							"location=no,height=300,width=200,left=100,top=100,toolbar=no,scrollbars=yes,resizable=yes");
-		optionWindow.focus();
+	optionWindowInitializationComplete = false;
+	optionWindow = open(pathToHTML + "OptionWindow.html", 
+						"Options", 
+						"location=no,height=300,width=200,left=100,top=100,toolbar=no,scrollbars=yes,resizable=yes");
+	optionWindow.focus();
 }
 
 function initializeApplication() {
@@ -153,6 +156,8 @@ function initializeApplication() {
 	applicationCache.onobsolete 	= applicationCacheEventHandler;
 	this.translationResultsTable 	= document.getElementById("translationResultsTable");
 	this.userSettingsObj 			= new UserSettings(location.href);
+	this.optionWindowInitializationComplete = false;
+
 }
 
 var optionWindow = null;

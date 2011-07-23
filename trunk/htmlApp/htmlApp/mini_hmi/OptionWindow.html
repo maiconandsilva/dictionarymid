@@ -18,7 +18,7 @@
 		
 		function displayApplicationEventFunction(eventText,
 		                                         applicationCacheStatusValue) {
-			document.body.innerHTML +=  eventText + "; ";
+			document.getElementById("receivedApplicationCacheEvents").innerHTML +=  eventText + "; ";
 			displayApplicationCacheStatus(applicationCacheStatusValue);
 		}
 		
@@ -77,6 +77,7 @@
 			
 			displayApplicationCacheStatus(opener.applicationCache.status);
 			createItems();
+			opener.optionWindowInitializationComplete = true;
 		}
 		
 		var languageSelectionTypeEnum = { none : 0, radioButtons : 1,  comboBoxes : 2 };
@@ -176,7 +177,11 @@
 		<p>todo</p>
 	</div>
 	<div>
+		<br>
 		<p>Application Cache Status: </p> <p id="applicationCacheStatus"></p> 
+	</div>
+	<div>
+		<p>Application Cache Events: </p> <p id="receivedApplicationCacheEvents"></p> 
 	</div>
   </body>
 </html>
