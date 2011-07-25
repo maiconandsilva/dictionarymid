@@ -38,8 +38,11 @@ public class HTRInputStream extends InputStream {
 		var isFileReaderSupported 		= typeof FileReader != 'undefined';
 		var isFileReaderSyncSupported 	= typeof FileReaderSync != 'undefined';
 		var req = new XMLHttpRequest();  
+		var isResponseTypeSupported = (req.responseType != undefined);
 		req.open('GET', url, false);  
-		if (isFirefoxBrowser || (!isFileReaderSupported && !isFileReaderSyncSupported)) {
+		//   if (isFirefoxBrowser || !isFileReaderSupported || !isResponseTypeSupported) {
+		//   if (isFirefoxBrowser || (!isFileReaderSupported && !isFileReaderSyncSupported)) {
+		if (true) {
 			// Firefox web browser or missing support for both FileReader and FileReaderSync
 			var mimeType = 'text/plain; charset=' + charset;
 			req.overrideMimeType(mimeType);  
