@@ -1,3 +1,0 @@
-<Files "cache.manifest"> 
-AddType application/x-httpd-php .manifest
-</Files> 

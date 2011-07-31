@@ -1,7 +1,0 @@
-<?
-	header('Content-type: text/cache-manifest');
-	$a = file_get_contents("cache_dictionary.manifest");
-	echo $a;
-	$a = file_get_contents("http://dictionarymid.sourceforge.net/htmlApp/htmlApp/cache_htmlapp_files.manifest");
-	echo $a;
-?>
