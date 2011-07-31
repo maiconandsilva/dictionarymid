@@ -1,0 +1,3 @@
+<Files "cache_mini_hmi.manifest"> 
+AddType application/x-httpd-php .manifest
+</Files> 
