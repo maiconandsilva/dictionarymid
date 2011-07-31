@@ -2,6 +2,8 @@
 	header('Content-type: text/cache-manifest');
 	$a = file_get_contents("cache_dictionary.manifest");
 	echo $a;
-	$a = file_get_contents("http://dictionarymid.sourceforge.net/WebApp/Apps/cache_mini_hmi_files.manifest");
+	$a = file_get_contents("http://dictionarymid.sourceforge.net/WebApp/Apps/mini_hmi/cache_mini_hmi_files.manifest");
+	echo $a;
+	$a = file_get_contents("http://dictionarymid.sourceforge.net/WebApp/Apps/mini_hmi/cache_mini_hmi_files.manifest");
 	echo $a;
 ?>
