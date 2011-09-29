@@ -10,6 +10,7 @@ package de.kugihan.dictionaryformids.dictgen.dictionaryupdate;
 import java.util.Vector;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
+import de.kugihan.dictionaryformids.dataaccess.content.ContentLib;
 import de.kugihan.dictionaryformids.dictgen.DictionaryGeneration;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
@@ -36,10 +37,12 @@ public class DictionaryUpdateCEDICTChi extends DictionaryUpdate {
 			posEndDelimiter = dictionaryExpression.toString().indexOf(endDelimiter, posStartDelimiter);
 		if ((posStartDelimiter != -1) && (posEndDelimiter > posStartDelimiter)) {
 			String pronounciationToneNumbers = dictionaryExpression.substring(posStartDelimiter + startDelimiter.length(), posEndDelimiter); 
-			String pronounciationAccented = addTones(pronounciationToneNumbers);
-			updatedExpression = dictionaryExpression.substring(0, posStartDelimiter) +
-							    DictionaryUpdateLib.setContentPronounciation("[" + pronounciationAccented + "]",
-							    										     1);
+			StringBuffer pronounciationAccented = new StringBuffer(addTones(pronounciationToneNumbers));
+			ContentLib.addContentFormat(pronounciationAccented, 
+							    		1,
+							    		0,
+							    		pronounciationAccented.length()-1);
+			updatedExpression = dictionaryExpression.substring(0, posStartDelimiter) + pronounciationAccented.toString();
 		}
 		else {
 			updatedExpression = dictionaryExpression;
