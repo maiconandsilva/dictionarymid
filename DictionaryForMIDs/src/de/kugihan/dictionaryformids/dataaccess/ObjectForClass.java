@@ -40,8 +40,7 @@ public class ObjectForClass {
 		normationClassTable.put("NormationVie", 	new NormationVie() 	);
 	}
 	
-	public Object createObjectForClass(String className) 
-				throws DictionaryException {
+	public Object createObjectForClass(String className) {
 		Object classObj = null;
 		if (normationClassTable == null) {
 			initValues();
@@ -49,9 +48,6 @@ public class ObjectForClass {
 		if (className.indexOf(normationPackageString) == 0) {
 			String classNameWithoutPackagename = className.substring(normationPackageString.length());
 			classObj = normationClassTable.get(classNameWithoutPackagename);
-		}
-		if (classObj == null) {
-			throw new DictionaryClassNotLoadedException("Class could not be loaded: " + className);
 		}
 		return classObj;
 	}

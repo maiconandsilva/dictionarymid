@@ -263,13 +263,15 @@ public class DictionaryDataFile  {
 							                      "de.kugihan.dictionaryformids.translation");
 			supportedLanguages[indexLanguage].normationObj = normationObj;  
 			
+			// for loading the dictionaryUpdate class, do this via getObjectForClassDynamic, not via getObjectForClass 
 			if (initDictionaryGenerationValues) {
 				String dictionaryUpdateClassName = supportedLanguages[indexLanguage].dictionaryUpdateClassName;
 				DictionaryUpdateIF dictionaryUpdateObj =
-						(DictionaryUpdateIF) getObjectForClass(dictionaryUpdateClassName, 
-															   "de.kugihan.dictionaryformids.dictgen.dictionaryupdate.DictionaryUpdate",
-											                   "de.kugihan.dictionaryformids.dictgen.dictionaryupdate",
-															   "de.kugihan.dictionaryformids.dictgen");
+						(DictionaryUpdateIF) getObjectForClassDynamic
+						                         (dictionaryUpdateClassName, 
+												  "de.kugihan.dictionaryformids.dictgen.dictionaryupdate.DictionaryUpdate",
+											      "de.kugihan.dictionaryformids.dictgen.dictionaryupdate",
+												  "de.kugihan.dictionaryformids.dictgen");
 				supportedLanguages[indexLanguage].dictionaryUpdateObj = dictionaryUpdateObj;				 
 			}
 		} 
@@ -285,9 +287,41 @@ public class DictionaryDataFile  {
 			className = fallbackClassName;
 		}
 		Object classObj;
+		classObj = objectForClassObj.createObjectForClass(className); 
+		if (classObj == null) {
+			// try old package name
+			StringBuffer classNameNewPackage = new StringBuffer(className);
+			// delete old package name:
+			classNameNewPackage.delete(0, oldPackageName.length());
+			// prepend new package name:
+			String classNameNewPackageStr = newPackageName + classNameNewPackage.toString();
+			classObj = objectForClassObj.createObjectForClass(classNameNewPackageStr); 
+			if (classObj == null) {
+				// did not work neither:
+				throw new DictionaryClassNotLoadedException("Class could not be loaded: " + className);
+			}
+		}
+		return classObj;
+	}
+	
+	/*
+	 *  the method getObjectForClassDynamic does the same as getObjectForClass, but does not rely on already referenced classes
+	 */
+	protected static Object getObjectForClassDynamic(String className, 
+											         String fallbackClassName,
+											         String newPackageName,  // in support of pre 3.0 Jar-files for the PC-Version
+											         String oldPackageName)  // in support of pre 3.0 Jar-files for the PC-Version
+		throws DictionaryException {
+		if (className == null) {
+			// use fallbackClassName instead
+			className = fallbackClassName;
+		}
+		Class classToLoad;
+		Object classObj;
 		try
 		{
-			classObj = objectForClassObj.createObjectForClass(className); 
+			classToLoad = Class.forName(className);
+			classObj = classToLoad.newInstance(); 
 		}
 		catch (Exception e)
 		{
@@ -298,16 +332,17 @@ public class DictionaryDataFile  {
 				classNameNewPackage.delete(0, oldPackageName.length());
 				// prepend new package name:
 				String classNameNewPackageStr = newPackageName + classNameNewPackage.toString();
-				classObj = objectForClassObj.createObjectForClass(classNameNewPackageStr); 
+				classToLoad = Class.forName(classNameNewPackageStr);
+				classObj = classToLoad.newInstance();
 			}
 			catch (Exception e2) {
-				// did not work neither:
+				// did not work either:
 				throw new DictionaryClassNotLoadedException("Class could not be loaded: " + className);
 			}
 		}
 		return classObj;
 	}
-	
+		
 	public static int determineColourComponent(String rbgString, String propertyName) 
 					throws DictionaryException {
 		String rbgStringTrimmed = rbgString.trim();
