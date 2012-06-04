@@ -1,13 +1,13 @@
 <!--
 
 This build.xml file builds DfM-Creator and all its dependencies.
-Should propably be merged in the main build.xml that builds
-all the DfM tools in trunk/build/
+It Should propably be merged in the main build.xml that builds
+all the DfM tools in trunk/Build/ but i think its better to let
+in here.
 
 Since all we're interested in is to create and package
-DictionaryForMIDs-Creator, the default operation is to
-"package_all" what points to "package_dfm_creator", then to
-"clean_dfm,clean_java_se,clean_java_me"
+DictionaryForMIDs-Creator, the default operation is
+"package_all" what points to "package_dfm_creator".
 
 -->
 
