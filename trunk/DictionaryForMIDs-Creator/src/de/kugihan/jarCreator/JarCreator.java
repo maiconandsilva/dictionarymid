@@ -97,7 +97,7 @@ public static String getOutputDirectory(){
     // summarry before the actual jar creation.
     public static void showJarCreationSum(){
         JarCreationSummary cjpw = JarCreationSummary.getCJPWin();
-        //cjpw.setSize(298, 328);
+        cjpw.setSize(420, 360);
         cjpw.setLocation(screenSize.width / 2 - cjpw.getWidth() / 2,
                           screenSize.height / 2 - cjpw.getHeight() / 2);
         cjpw.setModal(true);

@@ -117,7 +117,7 @@ public class JarCreationSummary extends javax.swing.JDialog implements PropertyC
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 300;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
@@ -149,13 +149,14 @@ public class JarCreationSummary extends javax.swing.JDialog implements PropertyC
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 70;
+        gridBagConstraints.ipadx = 100;
         jPanel2.add(ProgBar, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 200;
         getContentPane().add(jPanel2, gridBagConstraints);
 
         pack();
