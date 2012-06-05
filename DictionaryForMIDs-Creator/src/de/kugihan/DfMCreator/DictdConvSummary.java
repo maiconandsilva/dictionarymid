@@ -78,12 +78,12 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
         java.awt.GridBagConstraints gridBagConstraints;
 
         SumPanel = new javax.swing.JPanel();
-        conversionProgBar = new javax.swing.JProgressBar(0, 100);
         jPanel1 = new javax.swing.JPanel();
         SumCancelButton = new javax.swing.JButton();
         SumProceedButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         SummaryTextPane = new javax.swing.JTextPane();
+        conversionProgBar = new javax.swing.JProgressBar(0, 100);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -91,17 +91,6 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         SumPanel.setLayout(new java.awt.GridBagLayout());
-
-        conversionProgBar.setValue(0);
-        conversionProgBar.setStringPainted(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 170;
-        gridBagConstraints.ipady = 25;
-        gridBagConstraints.insets = new java.awt.Insets(6, 15, 6, 15);
-        SumPanel.add(conversionProgBar, gridBagConstraints);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
@@ -135,10 +124,10 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 1, 0, 1);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(SumPanel, gridBagConstraints);
 
         SummaryTextPane.setEditable(false);
@@ -151,6 +140,8 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
         append(" " + newline + newline);
 
         append(I18n.tr("dbName.dictdConvSummary"));
+        append(newline);
+
         append(" " + sumDB() + newline);
         append(I18n.tr("dbDir.dictdConvSummary"));
         append(" " + sumDBFolder() + newline);
@@ -179,15 +170,25 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 180;
-        gridBagConstraints.ipady = 350;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 200;
+        gridBagConstraints.ipady = 200;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 1, 0, 1);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(jScrollPane1, gridBagConstraints);
+
+        conversionProgBar.setValue(0);
+        conversionProgBar.setStringPainted(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(conversionProgBar, gridBagConstraints);
 
         getAccessibleContext().setAccessibleDescription("");
     }
