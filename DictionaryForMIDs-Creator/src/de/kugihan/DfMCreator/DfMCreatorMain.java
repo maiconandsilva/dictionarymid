@@ -292,12 +292,9 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         setName("mainFrame");
         setResizable(false);
 
-        DictdConvPanel.setLayout(new java.awt.GridBagLayout());
-
-        dictdPanel.setLayout(new java.awt.GridBagLayout());
+        DictdConvPanel.setLayout(new java.awt.BorderLayout());
 
         ButtonsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        ButtonsPanel.setLayout(new java.awt.GridBagLayout());
 
         clearFieldsButton.setText(I18n.tr("clearFields.dfmCreatorMain")); // NOI18N
         clearFieldsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -305,13 +302,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 clearFieldsButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 39;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        ButtonsPanel.add(clearFieldsButton, gridBagConstraints);
 
         proceedButton.setText(I18n.tr("proceed.dfmCreatorMain")); // NOI18N
         proceedButton.addActionListener(new java.awt.event.ActionListener() {
@@ -319,251 +309,110 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 proceedButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 43;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        ButtonsPanel.add(proceedButton, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        dictdPanel.add(ButtonsPanel, gridBagConstraints);
+        javax.swing.GroupLayout ButtonsPanelLayout = new javax.swing.GroupLayout(ButtonsPanel);
+        ButtonsPanel.setLayout(ButtonsPanelLayout);
+        ButtonsPanelLayout.setHorizontalGroup(
+            ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ButtonsPanelLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addGroup(ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(clearFieldsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                    .addComponent(proceedButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+        ButtonsPanelLayout.setVerticalGroup(
+            ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ButtonsPanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(clearFieldsButton)
+                .addGap(4, 4, 4)
+                .addComponent(proceedButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         EncodingPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        EncodingPanel.setLayout(new java.awt.GridBagLayout());
 
         EncodingLabel.setText(I18n.tr("encoding.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(EncodingLabel, gridBagConstraints);
 
         UTFLable.setText("UTF-8");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(UTFLable, gridBagConstraints);
 
         UTFRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UTFRBActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(UTFRB, gridBagConstraints);
-        UTFRB.setSelected(true);
 
         UTF16Label.setText("UTF-16");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(UTF16Label, gridBagConstraints);
 
         UTF16RB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UTF16RBActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(UTF16RB, gridBagConstraints);
 
         UTFBELabel.setText("UTF-16BE");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(UTFBELabel, gridBagConstraints);
 
         UTFBERB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UTFBERBActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(UTFBERB, gridBagConstraints);
 
         UTFLELabel.setText("UTF-16LE");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(UTFLELabel, gridBagConstraints);
 
         OWNRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OWNRBActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(OWNRB, gridBagConstraints);
 
         ISO1RB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ISO1RBActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(ISO1RB, gridBagConstraints);
 
         ISO2RB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ISO2RBActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(ISO2RB, gridBagConstraints);
 
         IBMRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IBMRBActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(IBMRB, gridBagConstraints);
 
         ISO1Label.setText("ISO-8859-1");
         ISO1Label.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 ISO1LabelAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(ISO1Label, gridBagConstraints);
 
         ISO2Label.setText("ISO-8859-2");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(ISO2Label, gridBagConstraints);
 
         IBMLabel.setText("IBM-850");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(IBMLabel, gridBagConstraints);
 
         ISO50Label.setText("ISO-2022-50");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(ISO50Label, gridBagConstraints);
 
         ISO50RB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ISO50RBActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(ISO50RB, gridBagConstraints);
 
         UTFLERB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UTFLERBActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        EncodingPanel.add(UTFLERB, gridBagConstraints);
 
         jPanel7.setLayout(new java.awt.GridBagLayout());
 
@@ -594,25 +443,94 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel7.add(OwnEncLabel, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
-        EncodingPanel.add(jPanel7, gridBagConstraints);
+        javax.swing.GroupLayout EncodingPanelLayout = new javax.swing.GroupLayout(EncodingPanel);
+        EncodingPanel.setLayout(EncodingPanelLayout);
+        EncodingPanelLayout.setHorizontalGroup(
+            EncodingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EncodingPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(EncodingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EncodingPanelLayout.createSequentialGroup()
+                        .addComponent(UTF16RB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(UTF16Label, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(ISO2RB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(ISO2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EncodingPanelLayout.createSequentialGroup()
+                        .addComponent(UTFBERB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(UTFBELabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(IBMRB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(IBMLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EncodingPanelLayout.createSequentialGroup()
+                        .addComponent(UTFLERB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(UTFLELabel, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(ISO50RB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(ISO50Label, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EncodingPanelLayout.createSequentialGroup()
+                        .addComponent(OWNRB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EncodingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(EncodingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(EncodingPanelLayout.createSequentialGroup()
+                            .addComponent(UTFRB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(4, 4, 4)
+                            .addComponent(UTFLable, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(32, 32, 32)
+                            .addComponent(ISO1RB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(4, 4, 4)
+                            .addComponent(ISO1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(90, Short.MAX_VALUE))
+        );
+        EncodingPanelLayout.setVerticalGroup(
+            EncodingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EncodingPanelLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(EncodingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addGroup(EncodingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(UTFRB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UTFLable, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ISO1RB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ISO1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(EncodingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(UTF16RB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UTF16Label, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ISO2RB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ISO2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(EncodingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(UTFBERB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UTFBELabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IBMRB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IBMLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(EncodingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(UTFLERB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UTFLELabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ISO50RB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ISO50Label, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(EncodingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EncodingPanelLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(OWNRB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 5;
-        gridBagConstraints.ipady = 12;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        dictdPanel.add(EncodingPanel, gridBagConstraints);
+        UTFRB.setSelected(true);
 
         DBPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
-        DBPanel.setLayout(new java.awt.GridBagLayout());
+        DBPanel.setLayout(null);
 
         DBBrowseButton.setText("...");
         DBBrowseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -620,68 +538,30 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 DBBrowseButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 2, 5, 2);
-        DBPanel.add(DBBrowseButton, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 125;
-        gridBagConstraints.ipady = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        DBPanel.add(DBNameTextField, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 250;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        DBPanel.add(DBPathTextField, gridBagConstraints);
+        DBPanel.add(DBBrowseButton);
+        DBBrowseButton.setBounds(640, 40, 36, 29);
+        DBPanel.add(DBNameTextField);
+        DBNameTextField.setBounds(270, 10, 135, 28);
+        DBPanel.add(DBPathTextField);
+        DBPathTextField.setBounds(270, 40, 260, 27);
 
         DBBrowseLabel.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 2, 0, 2);
-        DBPanel.add(DBBrowseLabel, gridBagConstraints);
+        DBPanel.add(DBBrowseLabel);
+        DBBrowseLabel.setBounds(540, 40, 90, 20);
 
         DBPathLabel.setText(I18n.tr("dbDir.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        DBPanel.add(DBPathLabel, gridBagConstraints);
+        DBPanel.add(DBPathLabel);
+        DBPathLabel.setBounds(10, 50, 250, 17);
 
         OutCVSFilePathLabel.setText(I18n.tr("outputFileDir.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        DBPanel.add(OutCVSFilePathLabel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 250;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        DBPanel.add(OutCSVFileTextField, gridBagConstraints);
+        DBPanel.add(OutCVSFilePathLabel);
+        OutCVSFilePathLabel.setBounds(10, 80, 250, 17);
+        DBPanel.add(OutCSVFileTextField);
+        OutCSVFileTextField.setBounds(270, 70, 260, 27);
 
         OutCSVFileBrowseLabel.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 2, 0, 2);
-        DBPanel.add(OutCSVFileBrowseLabel, gridBagConstraints);
+        DBPanel.add(OutCSVFileBrowseLabel);
+        OutCSVFileBrowseLabel.setBounds(540, 70, 90, 20);
 
         OutCSVFileBrowseButton.setText("...");
         OutCSVFileBrowseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -689,132 +569,46 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 OutCSVFileBrowseButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 2, 5, 2);
-        DBPanel.add(OutCSVFileBrowseButton, gridBagConstraints);
+        DBPanel.add(OutCSVFileBrowseButton);
+        OutCSVFileBrowseButton.setBounds(640, 70, 36, 29);
 
         DBNameLabel.setText(I18n.tr("dbName.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        DBPanel.add(DBNameLabel, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 7;
-        gridBagConstraints.ipady = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        dictdPanel.add(DBPanel, gridBagConstraints);
+        DBPanel.add(DBNameLabel);
+        DBNameLabel.setBounds(10, 10, 250, 17);
 
         SCPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        SCPanel.setLayout(new java.awt.GridBagLayout());
 
         TabLabel.setText(I18n.tr("tab.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        SCPanel.add(TabLabel, gridBagConstraints);
 
         CarRetLabel.setText(I18n.tr("carRe.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        SCPanel.add(CarRetLabel, gridBagConstraints);
 
         FormFeedLabel.setText(I18n.tr("formFeed.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        SCPanel.add(FormFeedLabel, gridBagConstraints);
 
         TabRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TabRBActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        SCPanel.add(TabRB, gridBagConstraints);
 
         CRRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CRRBActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        SCPanel.add(CRRB, gridBagConstraints);
 
         FFRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FFRBActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        SCPanel.add(FFRB, gridBagConstraints);
 
         OwnSCRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OwnSCRBActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        SCPanel.add(OwnSCRB, gridBagConstraints);
 
         ChooseSCLabel.setText(I18n.tr("chooseSepChar.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        SCPanel.add(ChooseSCLabel, gridBagConstraints);
 
         jPanel8.setLayout(new java.awt.GridBagLayout());
 
@@ -845,49 +639,68 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
         jPanel8.add(OwnSCTextField, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        SCPanel.add(jPanel8, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 16;
-        gridBagConstraints.ipady = 37;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        dictdPanel.add(SCPanel, gridBagConstraints);
+        javax.swing.GroupLayout SCPanelLayout = new javax.swing.GroupLayout(SCPanel);
+        SCPanel.setLayout(SCPanelLayout);
+        SCPanelLayout.setHorizontalGroup(
+            SCPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SCPanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(SCPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ChooseSCLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(SCPanelLayout.createSequentialGroup()
+                        .addGroup(SCPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SCPanelLayout.createSequentialGroup()
+                                .addComponent(TabRB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(TabLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(SCPanelLayout.createSequentialGroup()
+                                .addComponent(CRRB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(CarRetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(SCPanelLayout.createSequentialGroup()
+                                .addComponent(FFRB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(FormFeedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(SCPanelLayout.createSequentialGroup()
+                                .addComponent(OwnSCRB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(17, 17, 17)
+                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        SCPanelLayout.setVerticalGroup(
+            SCPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SCPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(ChooseSCLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addGroup(SCPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TabRB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TabLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(SCPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CRRB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CarRetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(SCPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(FFRB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FormFeedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
+                .addGroup(SCPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SCPanelLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(OwnSCRB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         SLPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        SLPanel.setLayout(new java.awt.GridBagLayout());
 
         SLLabel.setText(I18n.tr("switchLang.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        SLPanel.add(SLLabel, gridBagConstraints);
 
         KTLabel.setText(I18n.tr("keepTab.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        SLPanel.add(KTLabel, gridBagConstraints);
 
         RSBLabel.setText(I18n.tr("removeSquare.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        SLPanel.add(RSBLabel, gridBagConstraints);
 
         SLCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -899,47 +712,55 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 SLCheckBoxActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        SLPanel.add(SLCheckBox, gridBagConstraints);
 
         KTCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 KTCheckBoxActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        SLPanel.add(KTCheckBox, gridBagConstraints);
 
         RSBCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RSBCheckBoxActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        SLPanel.add(RSBCheckBox, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 7;
-        gridBagConstraints.ipady = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        dictdPanel.add(SLPanel, gridBagConstraints);
+        javax.swing.GroupLayout SLPanelLayout = new javax.swing.GroupLayout(SLPanel);
+        SLPanel.setLayout(SLPanelLayout);
+        SLPanelLayout.setHorizontalGroup(
+            SLPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SLPanelLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(SLPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(KTLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                    .addComponent(SLLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(RSBLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(SLPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SLCheckBox)
+                    .addComponent(KTCheckBox)
+                    .addComponent(RSBCheckBox))
+                .addContainerGap())
+        );
+        SLPanelLayout.setVerticalGroup(
+            SLPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SLPanelLayout.createSequentialGroup()
+                .addGroup(SLPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SLPanelLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(SLLabel)
+                        .addGap(9, 9, 9)
+                        .addComponent(KTLabel)
+                        .addGap(9, 9, 9)
+                        .addComponent(RSBLabel))
+                    .addGroup(SLPanelLayout.createSequentialGroup()
+                        .addComponent(SLCheckBox)
+                        .addGap(2, 2, 2)
+                        .addComponent(KTCheckBox)
+                        .addGap(2, 2, 2)
+                        .addComponent(RSBCheckBox)))
+                .addGap(3, 3, 3))
+        );
 
         toolbar4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         toolbar4.setFloatable(false);
@@ -950,23 +771,44 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         jLabel12.setText("<html><font color=gray>DictdToDictionaryForMIDs</font>");
         toolbar4.add(jLabel12);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        dictdPanel.add(toolbar4, gridBagConstraints);
+        javax.swing.GroupLayout dictdPanelLayout = new javax.swing.GroupLayout(dictdPanel);
+        dictdPanel.setLayout(dictdPanelLayout);
+        dictdPanelLayout.setHorizontalGroup(
+            dictdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dictdPanelLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(dictdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(toolbar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DBPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dictdPanelLayout.createSequentialGroup()
+                        .addGroup(dictdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(SLPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(EncodingPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(dictdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(SCPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ButtonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+        dictdPanelLayout.setVerticalGroup(
+            dictdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dictdPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(toolbar4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DBPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(dictdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(EncodingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SCPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
+                .addGroup(dictdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(SLPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ButtonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                .addGap(7, 7, 7))
+        );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        DictdConvPanel.add(dictdPanel, gridBagConstraints);
+        DictdConvPanel.add(dictdPanel, java.awt.BorderLayout.CENTER);
 
         DFMBuilderTabbedPane.addTab("DictdToDictionaryForMIDs", DictdConvPanel);
 
@@ -975,33 +817,33 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         SourceFileLabel.setText(I18n.tr("dictGenLabel1.dfmCreatorMain")); // NOI18N
         jPanel1.add(SourceFileLabel);
-        SourceFileLabel.setBounds(10, 30, 260, 36);
+        SourceFileLabel.setBounds(10, 30, 240, 36);
         jPanel1.add(SourceFileTF);
-        SourceFileTF.setBounds(280, 30, 260, 27);
+        SourceFileTF.setBounds(260, 30, 290, 27);
 
         DirectoryDestinationLabel.setText(I18n.tr("dictGenLabel3.dfmCreatorMain")); // NOI18N
         jPanel1.add(DirectoryDestinationLabel);
-        DirectoryDestinationLabel.setBounds(10, 110, 260, 18);
+        DirectoryDestinationLabel.setBounds(10, 110, 240, 18);
         jPanel1.add(DirectoryDestinationTF);
-        DirectoryDestinationTF.setBounds(280, 110, 260, 27);
+        DirectoryDestinationTF.setBounds(260, 110, 290, 27);
 
         PropertyPathLabel.setText(I18n.tr("dictGenLabel2.dfmCreatorMain")); // NOI18N
         jPanel1.add(PropertyPathLabel);
-        PropertyPathLabel.setBounds(10, 70, 260, 36);
+        PropertyPathLabel.setBounds(10, 70, 240, 36);
         jPanel1.add(PropertyPathTF);
-        PropertyPathTF.setBounds(280, 70, 260, 27);
+        PropertyPathTF.setBounds(260, 70, 290, 27);
 
         SourceFileBrowseLB.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel1.add(SourceFileBrowseLB);
-        SourceFileBrowseLB.setBounds(550, 40, 110, 17);
+        SourceFileBrowseLB.setBounds(560, 40, 110, 17);
 
         DirectoryDestinationBrowseLB.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel1.add(DirectoryDestinationBrowseLB);
-        DirectoryDestinationBrowseLB.setBounds(550, 120, 110, 17);
+        DirectoryDestinationBrowseLB.setBounds(560, 120, 110, 17);
 
         PropertyPathBrowseLB.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel1.add(PropertyPathBrowseLB);
-        PropertyPathBrowseLB.setBounds(550, 80, 110, 17);
+        PropertyPathBrowseLB.setBounds(560, 80, 110, 17);
 
         SourceFileBrowseBT.setText("...");
         SourceFileBrowseBT.addActionListener(new java.awt.event.ActionListener() {
@@ -1010,7 +852,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel1.add(SourceFileBrowseBT);
-        SourceFileBrowseBT.setBounds(670, 30, 36, 29);
+        SourceFileBrowseBT.setBounds(680, 30, 36, 29);
 
         DirectoryDestinationBrowseBT.setText("...");
         DirectoryDestinationBrowseBT.addActionListener(new java.awt.event.ActionListener() {
@@ -1019,7 +861,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel1.add(DirectoryDestinationBrowseBT);
-        DirectoryDestinationBrowseBT.setBounds(670, 110, 36, 29);
+        DirectoryDestinationBrowseBT.setBounds(680, 110, 36, 29);
 
         PropertyPathBT.setText("...");
         PropertyPathBT.addActionListener(new java.awt.event.ActionListener() {
@@ -1028,7 +870,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel1.add(PropertyPathBT);
-        PropertyPathBT.setBounds(670, 70, 36, 29);
+        PropertyPathBT.setBounds(680, 70, 36, 29);
 
         jPanel5.setLayout(new java.awt.GridBagLayout());
         jPanel1.add(jPanel5);
@@ -1108,7 +950,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(DictGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(toolbar1, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
+                    .addComponent(toolbar1, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1121,7 +963,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         DFMBuilderTabbedPane.addTab("DictionaryGeneration", DictGenPanel);
@@ -1259,7 +1101,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton4);
-        jButton4.setBounds(90, 230, 220, 60);
+        jButton4.setBounds(110, 230, 220, 60);
 
         jButton1.setText(I18n.tr("clear.fields.dfmCreatorMain")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -1268,7 +1110,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton1);
-        jButton1.setBounds(320, 230, 80, 60);
+        jButton1.setBounds(340, 230, 80, 60);
 
         toolbar2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         toolbar2.setFloatable(false);
@@ -1288,7 +1130,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 .addGroup(JarCreatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(toolbar2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(100, 100, 100))
+                .addGap(119, 119, 119))
         );
         JarCreatorPanelLayout.setVerticalGroup(
             JarCreatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1297,7 +1139,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 .addComponent(toolbar2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         DFMBuilderTabbedPane.addTab("JarCreator", JarCreatorPanel);
@@ -1446,6 +1288,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         jMenu1.setText(I18n.tr("prefs.dfmCreatorMain")); // NOI18N
 
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem6.setText(I18n.tr("lookAndFeelSets.dfmCreatorMain")); // NOI18N
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1946,6 +1789,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      */
     private void showPrefsWin(){
         DfMCreatorPreferences prefs = DfMCreatorPreferences.getPrefsWin();
+        prefs.setSize(350, 400);
         prefs.setLocation(screenSize.width / 2 - prefs.getWidth() / 2,
                         screenSize.height / 2 - prefs.getHeight() / 2);
         prefs.setVisible(true);

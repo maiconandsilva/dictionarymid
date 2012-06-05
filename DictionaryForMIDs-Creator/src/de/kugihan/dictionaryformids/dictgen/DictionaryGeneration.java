@@ -105,7 +105,7 @@ public class DictionaryGeneration {
     // before lauching the dictionary generation process.
     public static void showDictGenSummary(){
         DictGenSummary dgensum = DictGenSummary.getDictGenSummary();
-        //dgensum.setSize(317, 375);
+        dgensum.setSize(380, 450);
         dgensum.setModal(true);
         dgensum.setLocation(screenSize.width / 2 - dgensum.getWidth() / 2,
                           screenSize.height / 2 - dgensum.getHeight() / 2);

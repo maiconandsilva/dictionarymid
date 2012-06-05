@@ -125,8 +125,6 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(SumPanel, gridBagConstraints);
 
@@ -139,9 +137,7 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
         append(I18n.tr("headline.dictdConvSummary"));
         append(" " + newline + newline);
 
-        append(I18n.tr("dbName.dictdConvSummary"));
-        append(newline);
-
+        append(I18n.tr("dbName.dictdConvSummary") + "\n");
         append(" " + sumDB() + newline);
         append(I18n.tr("dbDir.dictdConvSummary"));
         append(" " + sumDBFolder() + newline);
@@ -172,8 +168,8 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 200;
-        gridBagConstraints.ipady = 200;
+        gridBagConstraints.ipadx = 250;
+        gridBagConstraints.ipady = 300;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -186,7 +182,6 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(conversionProgBar, gridBagConstraints);
 
