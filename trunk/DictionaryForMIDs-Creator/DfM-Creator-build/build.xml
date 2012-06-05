@@ -143,7 +143,7 @@ DictionaryForMIDs-Creator, the default operation is
 			<zipfileset dir="${JavaSE.srcdir}" prefix="source/JavaSE/src"/>
 			<zipfileset dir="${JavaME.srcdir}" prefix="source/JavaME/src"/>
 			<zipfileset dir="${dfmc.srcdir}" prefix="source/DictionaryForMIDs-Creator/src"/>
-			<zipfileset dir="${dfmc.srcdir}" prefix="source/res"/>
+			<zipfileset dir="${dfmc.srcdir}" prefix="source/DictionaryForMIDs-Creator/res"/>
 		</zip>
 	</target>	
 	
@@ -371,7 +371,7 @@ DictionaryForMIDs-Creator, the default operation is
 	<target name="cli_tools_replace_keywords_readme">
 	    <property name="destinationdir"  	location="${destinationbasedir}/${dfmc_packaging.subdir}"/>	 
 	    <property name="destinationfile" 	location="${destinationdir}/${dfmc_packaging.readmefilename}"/>
-	    <property name="sourcefile" 		location="${sourcebasedir}/${dfmc_packaging.subdir}/${dfmc_packaging.readmefilename}"/>
+	    <property name="sourcefile" 		location="${dfmc_packaging.subdir}/${dfmc_packaging.readmefilename}"/>
 	    <mkdir dir="${destinationdir}"/>
 		<copy file="${sourcefile}" tofile="${destinationfile}"/>
 		<replace file="${destinationfile}">

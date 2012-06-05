@@ -356,7 +356,7 @@ javac.encoding=UTF-8
 	<target name="cli_tools_replace_keywords_readme">
 	    <property name="destinationdir"  	location="${destinationbasedir}/${dfmc_packaging.subdir}"/>	 
 	    <property name="destinationfile" 	location="${destinationdir}/${dfmc_packaging.readmefilename}"/>
-	    <property name="sourcefile" 		location="${sourcebasedir}/${dfmc_packaging.subdir}/${dfmc_packaging.readmefilename}"/>
+	    <property name="sourcefile" 		location="${dfmc_packaging.subdir}/${dfmc_packaging.readmefilename}"/>
 	    <mkdir dir="${destinationdir}"/>
 		<copy file="${sourcefile}" tofile="${destinationfile}"/>
 		<replace file="${destinationfile}">
@@ -685,9 +685,9 @@ javac.encoding=UTF-8
 		
 	<target name="build_all" depends="build_dg_cli,build_dtdfm_cli,build_jc_cli,build_bfg_cli,build_lg,build_dfm_java_se,build_dfm_java_me,build_dfm_creator"/>
 	
-	<target name="package_all" depends="package_dg_cli,package_jc_cli,package_bfg_cli,package_dtdfm_cli,package_lg,package_dfm_java_me_empty,package_dfm_creator"/>
+	<target name="package_all" depends="package_dg_cli,package_jc_cli,package_bfg_cli,package_dtdfm_cli,package_lg,package_dfm_java_me_empty,package_dfm_java_se,package_dfm_creator"/>
 
-    <target name="package_all_except_java_me" depends="package_dg_cli,package_jc_cli,package_bfg_cli,package_dtdfm_cli,package_lg,package_dfm_creator"/>
+    <target name="package_all_except_java_me" depends="package_dg_cli,package_jc_cli,package_bfg_cli,package_dtdfm_cli,package_lg,package_dfm_java_se,package_dfm_creator"/>
 
 </project>
 
