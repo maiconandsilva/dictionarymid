@@ -814,7 +814,7 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="dictGenOmitParFromIndex"/>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="dictionaryGenerationOmitParFromIndex.tooltiptext" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="dictGenOmitPar.tooltiptext" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>

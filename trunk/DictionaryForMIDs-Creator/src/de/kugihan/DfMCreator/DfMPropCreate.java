@@ -708,7 +708,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         jPanel5.add(jLabel8, gridBagConstraints);
 
         jLabel43.setText("dictGenOmitParFromIndex");
-        jLabel43.setToolTipText(I18n.tr("dictionaryGenerationOmitParFromIndex.tooltiptext")); // NOI18N
+        jLabel43.setToolTipText(I18n.tr("dictGenOmitPar.tooltiptext")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -1868,7 +1868,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
     private static String showInputDialog(String labelText){
         InputDialog id = InputDialog.getInputDialog();
         InputDialog.infoLabel.setText(labelText);
-        id.setSize(282, 135);
+        //id.setSize(300, 200);
         id.setLocation(screenSize.width / 2 - id.getWidth() / 2,
                        screenSize.height / 2 - id.getHeight() / 2);
         id.setModal(true);
