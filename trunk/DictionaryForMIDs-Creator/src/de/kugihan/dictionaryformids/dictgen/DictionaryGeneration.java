@@ -68,7 +68,12 @@ public class DictionaryGeneration {
 	// content parser object for syntax checking of content:
 	private static ContentParser contentParserObj;
         
+        // Size of the Screen
         private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        // String message shown in case
+        // java.lang.OutOfMemoryError occurs.
+        private static final String OutOfMemErrMsg = I18n.tr("outOfMemoryMsg.dictGenSummary");
                 
         // Getter and setter methods
         public static String getSourceFile(){
@@ -149,6 +154,9 @@ public class DictionaryGeneration {
                                                        I18n.tr("encErrWinTitle"), JOptionPane.ERROR_MESSAGE);
                             // print the exception in command line.
                             System.out.println(e + "\n");
+                        } catch (java.lang.OutOfMemoryError e){
+                            DfMCreatorMain.printAnyMsg(OutOfMemErrMsg, I18n.tr("outOfMemory.dictGenSummary")
+                                                                                 ,JOptionPane.ERROR_MESSAGE);
                         } catch (Throwable t){
                             DfMCreatorMain.printAnyMsg(I18n.tr("criticalErrMsg", new Object[]
                                         {t, t.getLocalizedMessage()}), I18n.tr("error"), JOptionPane.ERROR_MESSAGE);

@@ -219,10 +219,9 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         toolbar1 = new javax.swing.JToolBar();
         jLabel9 = new javax.swing.JLabel();
         bfgPanel = new javax.swing.JPanel();
@@ -241,7 +240,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         InputCSVFilesButton = new javax.swing.JButton();
         EmptyDfMDirButton = new javax.swing.JButton();
         OutputDirButton = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         toolbar2 = new javax.swing.JToolBar();
@@ -972,93 +970,38 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         DFMBuilderTabbedPane.addTab("DictdToDictionaryForMIDs", DictdConvPanel);
 
-        DictGenPanel.setLayout(new java.awt.GridBagLayout());
-
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        jPanel1.setLayout(null);
 
         SourceFileLabel.setText(I18n.tr("dictGenLabel1.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 61;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 25, 0, 0);
-        jPanel1.add(SourceFileLabel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 250;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 0, 0);
-        jPanel1.add(SourceFileTF, gridBagConstraints);
+        jPanel1.add(SourceFileLabel);
+        SourceFileLabel.setBounds(10, 30, 260, 36);
+        jPanel1.add(SourceFileTF);
+        SourceFileTF.setBounds(280, 30, 260, 27);
 
         DirectoryDestinationLabel.setText(I18n.tr("dictGenLabel3.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 71;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 25, 0, 0);
-        jPanel1.add(DirectoryDestinationLabel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 250;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 0, 0);
-        jPanel1.add(DirectoryDestinationTF, gridBagConstraints);
+        jPanel1.add(DirectoryDestinationLabel);
+        DirectoryDestinationLabel.setBounds(10, 110, 260, 18);
+        jPanel1.add(DirectoryDestinationTF);
+        DirectoryDestinationTF.setBounds(280, 110, 260, 27);
 
         PropertyPathLabel.setText(I18n.tr("dictGenLabel2.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 41;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 25, 0, 0);
-        jPanel1.add(PropertyPathLabel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 250;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 0, 0);
-        jPanel1.add(PropertyPathTF, gridBagConstraints);
+        jPanel1.add(PropertyPathLabel);
+        PropertyPathLabel.setBounds(10, 70, 260, 36);
+        jPanel1.add(PropertyPathTF);
+        PropertyPathTF.setBounds(280, 70, 260, 27);
 
         SourceFileBrowseLB.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 4, 0, 0);
-        jPanel1.add(SourceFileBrowseLB, gridBagConstraints);
+        jPanel1.add(SourceFileBrowseLB);
+        SourceFileBrowseLB.setBounds(550, 40, 110, 17);
 
         DirectoryDestinationBrowseLB.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 4, 0, 0);
-        jPanel1.add(DirectoryDestinationBrowseLB, gridBagConstraints);
+        jPanel1.add(DirectoryDestinationBrowseLB);
+        DirectoryDestinationBrowseLB.setBounds(550, 120, 110, 17);
 
         PropertyPathBrowseLB.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 4, 0, 0);
-        jPanel1.add(PropertyPathBrowseLB, gridBagConstraints);
+        jPanel1.add(PropertyPathBrowseLB);
+        PropertyPathBrowseLB.setBounds(550, 80, 110, 17);
 
         SourceFileBrowseBT.setText("...");
         SourceFileBrowseBT.addActionListener(new java.awt.event.ActionListener() {
@@ -1066,14 +1009,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 SourceFileBrowseBTActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 4, 0, 26);
-        jPanel1.add(SourceFileBrowseBT, gridBagConstraints);
+        jPanel1.add(SourceFileBrowseBT);
+        SourceFileBrowseBT.setBounds(670, 30, 36, 29);
 
         DirectoryDestinationBrowseBT.setText("...");
         DirectoryDestinationBrowseBT.addActionListener(new java.awt.event.ActionListener() {
@@ -1081,14 +1018,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 DirectoryDestinationBrowseBTActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 4, 0, 26);
-        jPanel1.add(DirectoryDestinationBrowseBT, gridBagConstraints);
+        jPanel1.add(DirectoryDestinationBrowseBT);
+        DirectoryDestinationBrowseBT.setBounds(670, 110, 36, 29);
 
         PropertyPathBT.setText("...");
         PropertyPathBT.addActionListener(new java.awt.event.ActionListener() {
@@ -1096,16 +1027,12 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 PropertyPathBTActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 4, 0, 26);
-        jPanel1.add(PropertyPathBT, gridBagConstraints);
+        jPanel1.add(PropertyPathBT);
+        PropertyPathBT.setBounds(670, 70, 36, 29);
 
         jPanel5.setLayout(new java.awt.GridBagLayout());
+        jPanel1.add(jPanel5);
+        jPanel5.setBounds(141, 131, 439, 0);
 
         GenDictFilesBT.setText(I18n.tr("generate.dfmCreatorMain")); // NOI18N
         GenDictFilesBT.addActionListener(new java.awt.event.ActionListener() {
@@ -1113,11 +1040,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 GenDictFilesBTActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 2, 5, 2);
-        jPanel5.add(GenDictFilesBT, gridBagConstraints);
+        jPanel1.add(GenDictFilesBT);
+        GenDictFilesBT.setBounds(130, 150, 170, 60);
 
         jButton2.setText(I18n.tr("clear.dfmCreatorMain")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -1125,11 +1049,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 2, 5, 2);
-        jPanel5.add(jButton2, gridBagConstraints);
+        jPanel1.add(jButton2);
+        jButton2.setBounds(310, 150, 70, 60);
 
         jButton5.setText(I18n.tr("checkCSVFile.dfmCreatorMain")); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -1137,83 +1058,38 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 2, 5, 2);
-        jPanel5.add(jButton5, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 103;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 114, 0, 0);
-        jPanel1.add(jPanel5, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        DictGenPanel.add(jPanel1, gridBagConstraints);
+        jPanel1.add(jButton5);
+        jButton5.setBounds(390, 150, 210, 60);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setLayout(new java.awt.GridBagLayout());
+        jPanel3.setLayout(null);
 
-        jPanel6.setLayout(new java.awt.GridBagLayout());
+        jLabel7.setText(I18n.tr("propsInfoLabel.dfmCreatorMain")); // NOI18N
+        jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.add(jLabel7);
+        jLabel7.setBounds(10, 10, 530, 140);
 
         jButton8.setText(I18n.tr("create.dfmCreatorMain")); // NOI18N
+        jButton8.setPreferredSize(new java.awt.Dimension(70, 40));
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel6.add(jButton8, gridBagConstraints);
+        jPanel3.add(jButton8);
+        jButton8.setBounds(550, 20, 170, 40);
 
         jButton3.setText(I18n.tr("editAnExisting.dfmCreatorMain")); // NOI18N
+        jButton3.setMinimumSize(new java.awt.Dimension(100, 60));
+        jButton3.setName("");
+        jButton3.setPreferredSize(new java.awt.Dimension(150, 60));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel6.add(jButton3, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 35;
-        gridBagConstraints.ipady = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 0, 75);
-        jPanel3.add(jPanel6, gridBagConstraints);
-
-        jLabel7.setText(I18n.tr("propsInfoLabel.dfmCreatorMain")); // NOI18N
-        jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 168;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 0, 0);
-        jPanel3.add(jLabel7, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        DictGenPanel.add(jPanel3, gridBagConstraints);
+        jPanel3.add(jButton3);
+        jButton3.setBounds(550, 70, 170, 70);
 
         toolbar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         toolbar1.setFloatable(false);
@@ -1224,15 +1100,29 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         jLabel9.setText("<html><font color=gray>DictionaryGeneration</font>");
         toolbar1.add(jLabel9);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        DictGenPanel.add(toolbar1, gridBagConstraints);
+        javax.swing.GroupLayout DictGenPanelLayout = new javax.swing.GroupLayout(DictGenPanel);
+        DictGenPanel.setLayout(DictGenPanelLayout);
+        DictGenPanelLayout.setHorizontalGroup(
+            DictGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DictGenPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(DictGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toolbar1, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        DictGenPanelLayout.setVerticalGroup(
+            DictGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DictGenPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(toolbar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
 
         DFMBuilderTabbedPane.addTab("DictionaryGeneration", DictGenPanel);
 
@@ -1296,85 +1186,44 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         fontTKPanel.setPreferredSize(new java.awt.Dimension(460, 300));
         fontTKPanel.setVisible(true);
 
-        JarCreatorPanel.setLayout(new java.awt.GridBagLayout());
-
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        jPanel2.setLayout(null);
 
         jLabel1.setText(I18n.tr("jarCreatorLabel1.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel2.add(jLabel1, gridBagConstraints);
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(20, 20, 310, 36);
 
         InputCSVFilesTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InputCSVFilesTFActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 300;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel2.add(InputCSVFilesTF, gridBagConstraints);
+        jPanel2.add(InputCSVFilesTF);
+        InputCSVFilesTF.setBounds(20, 60, 310, 27);
 
         jLabel2.setText(I18n.tr("jarCreatorLabel2.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel2.add(jLabel2, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 300;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel2.add(EmptyDfMDirTF, gridBagConstraints);
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(20, 90, 310, 36);
+        jPanel2.add(EmptyDfMDirTF);
+        EmptyDfMDirTF.setBounds(20, 130, 310, 27);
 
         jLabel3.setText(I18n.tr("jarCreatorLabel3.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel2.add(jLabel3, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.ipadx = 300;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel2.add(OutputDirTF, gridBagConstraints);
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(20, 170, 310, 18);
+        jPanel2.add(OutputDirTF);
+        OutputDirTF.setBounds(20, 190, 310, 27);
 
         jLabel4.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 2, 0, 2);
-        jPanel2.add(jLabel4, gridBagConstraints);
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(340, 200, 100, 17);
 
         jLabel5.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 2, 0, 2);
-        jPanel2.add(jLabel5, gridBagConstraints);
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(340, 140, 100, 17);
 
         jLabel6.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 2, 0, 2);
-        jPanel2.add(jLabel6, gridBagConstraints);
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(340, 70, 100, 17);
 
         InputCSVFilesButton.setText("...");
         InputCSVFilesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1382,13 +1231,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 InputCSVFilesButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 2, 5, 2);
-        jPanel2.add(InputCSVFilesButton, gridBagConstraints);
+        jPanel2.add(InputCSVFilesButton);
+        InputCSVFilesButton.setBounds(450, 60, 47, 29);
 
         EmptyDfMDirButton.setText("...");
         EmptyDfMDirButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1396,13 +1240,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 EmptyDfMDirButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 2, 5, 2);
-        jPanel2.add(EmptyDfMDirButton, gridBagConstraints);
+        jPanel2.add(EmptyDfMDirButton);
+        EmptyDfMDirButton.setBounds(450, 130, 47, 29);
 
         OutputDirButton.setText("...");
         OutputDirButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1410,15 +1249,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 OutputDirButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.ipadx = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 2, 5, 2);
-        jPanel2.add(OutputDirButton, gridBagConstraints);
-
-        jPanel4.setLayout(new java.awt.GridBagLayout());
+        jPanel2.add(OutputDirButton);
+        OutputDirButton.setBounds(450, 190, 47, 29);
 
         jButton4.setText(I18n.tr("packCSVFiles.dfmCreatorMain")); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -1426,11 +1258,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel4.add(jButton4, gridBagConstraints);
+        jPanel2.add(jButton4);
+        jButton4.setBounds(90, 230, 220, 60);
 
         jButton1.setText(I18n.tr("clear.fields.dfmCreatorMain")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -1438,28 +1267,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel4.add(jButton1, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel2.add(jPanel4, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 20;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        JarCreatorPanel.add(jPanel2, gridBagConstraints);
+        jPanel2.add(jButton1);
+        jButton1.setBounds(320, 230, 80, 60);
 
         toolbar2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         toolbar2.setFloatable(false);
@@ -1470,15 +1279,26 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         jLabel10.setText("<html><font color=gray>JarCreator</font>");
         toolbar2.add(jLabel10);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        JarCreatorPanel.add(toolbar2, gridBagConstraints);
+        javax.swing.GroupLayout JarCreatorPanelLayout = new javax.swing.GroupLayout(JarCreatorPanel);
+        JarCreatorPanel.setLayout(JarCreatorPanelLayout);
+        JarCreatorPanelLayout.setHorizontalGroup(
+            JarCreatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JarCreatorPanelLayout.createSequentialGroup()
+                .addContainerGap(127, Short.MAX_VALUE)
+                .addGroup(JarCreatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toolbar2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(100, 100, 100))
+        );
+        JarCreatorPanelLayout.setVerticalGroup(
+            JarCreatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JarCreatorPanelLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(toolbar2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
 
         DFMBuilderTabbedPane.addTab("JarCreator", JarCreatorPanel);
 
@@ -2099,9 +1919,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JTabbedPane jTabbedPane1;

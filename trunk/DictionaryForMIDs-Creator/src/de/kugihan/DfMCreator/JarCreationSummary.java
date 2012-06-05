@@ -71,17 +71,20 @@ public class JarCreationSummary extends javax.swing.JDialog implements PropertyC
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         outTA = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         StartBT = new javax.swing.JButton();
-        ProgBar = new javax.swing.JProgressBar();
         CancelBT = new javax.swing.JButton();
+        ProgBar = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -91,7 +94,7 @@ public class JarCreationSummary extends javax.swing.JDialog implements PropertyC
         jScrollPane2.setViewportView(outTA);
         outTA.setText("");
 
-        outTA.append(I18n.tr("headLine.jarCreationSummary"));
+        outTA.append(I18n.tr("headLine.jarCreationSummary") + "\n");
 
         outTA.append(I18n.tr("dictDir.jarCreationSummary"));
         outTA.append("\n" + JarCreator.getDictionaryDirectory() + "\n\n");
@@ -108,6 +111,19 @@ public class JarCreationSummary extends javax.swing.JDialog implements PropertyC
         jPanel1.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         jPanel4.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel1.add(jPanel4, java.awt.BorderLayout.PAGE_END);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipady = 300;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        getContentPane().add(jPanel1, gridBagConstraints);
+
+        jPanel2.setLayout(new java.awt.GridBagLayout());
 
         StartBT.setText(I18n.tr("start.jarCreationSummary")); // NOI18N
         StartBT.addActionListener(new java.awt.event.ActionListener() {
@@ -115,8 +131,9 @@ public class JarCreationSummary extends javax.swing.JDialog implements PropertyC
                 StartBTActionPerformed(evt);
             }
         });
-        jPanel4.add(StartBT);
-        jPanel4.add(ProgBar);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        jPanel2.add(StartBT, gridBagConstraints);
 
         CancelBT.setText(I18n.tr("cancel.jarCreationSummary")); // NOI18N
         CancelBT.addActionListener(new java.awt.event.ActionListener() {
@@ -124,11 +141,22 @@ public class JarCreationSummary extends javax.swing.JDialog implements PropertyC
                 CancelBTActionPerformed(evt);
             }
         });
-        jPanel4.add(CancelBT);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        jPanel2.add(CancelBT, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 70;
+        jPanel2.add(ProgBar, gridBagConstraints);
 
-        jPanel1.add(jPanel4, java.awt.BorderLayout.PAGE_END);
-
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        getContentPane().add(jPanel2, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -176,6 +204,7 @@ public class JarCreationSummary extends javax.swing.JDialog implements PropertyC
     private javax.swing.JProgressBar ProgBar;
     private javax.swing.JButton StartBT;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea outTA;

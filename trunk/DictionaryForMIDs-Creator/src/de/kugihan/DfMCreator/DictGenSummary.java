@@ -260,10 +260,8 @@ public class DictGenSummary extends javax.swing.JDialog implements PropertyChang
             // launching the dict generation.
             try {
                 DictionaryGeneration.generate();
-            } catch (java.lang.OutOfMemoryError e){
-            done = true;
-            DfMCreatorMain.printAnyMsg(OutOfMemErrMsg, I18n.tr("outOfMemory.dictGenSummary")
-                                                     , JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e){
+                // Ignored.
             }
             return null;
         }
@@ -335,10 +333,4 @@ public class DictGenSummary extends javax.swing.JDialog implements PropertyChang
         }
         return status;
     }
-    
-    // String message shown in case
-    // java.lang.OutOfMemoryError occurs.
-    private static final String OutOfMemErrMsg
-    = I18n.tr("outOfMemoryMsg.dictGenSummary");
-
 }
