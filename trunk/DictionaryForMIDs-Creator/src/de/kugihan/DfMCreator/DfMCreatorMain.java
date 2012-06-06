@@ -189,8 +189,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         OwnSCRB = new javax.swing.JRadioButton();
         ChooseSCLabel = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        OwnLabel = new javax.swing.JLabel();
         OwnSCTextField = new javax.swing.JTextField();
+        OwnLabel = new javax.swing.JLabel();
         SLPanel = new javax.swing.JPanel();
         SLLabel = new javax.swing.JLabel();
         KTLabel = new javax.swing.JLabel();
@@ -612,16 +612,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         jPanel8.setLayout(new java.awt.GridBagLayout());
 
-        OwnLabel.setText(I18n.tr("chooseYourOwn.dfmCreatorMain")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel8.add(OwnLabel, gridBagConstraints);
-
         OwnSCTextField.setEnabled(false);
         OwnSCTextField.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
@@ -638,6 +628,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
         jPanel8.add(OwnSCTextField, gridBagConstraints);
+
+        OwnLabel.setText(I18n.tr("chooseYourOwn.dfmCreatorMain")); // NOI18N
 
         javax.swing.GroupLayout SCPanelLayout = new javax.swing.GroupLayout(SCPanel);
         SCPanel.setLayout(SCPanelLayout);
@@ -658,13 +650,16 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                                 .addGap(4, 4, 4)
                                 .addComponent(CarRetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(SCPanelLayout.createSequentialGroup()
-                                .addComponent(FFRB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(SCPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(FFRB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(OwnSCRB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(4, 4, 4)
-                                .addComponent(FormFeedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(SCPanelLayout.createSequentialGroup()
-                                .addComponent(OwnSCRB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17)
-                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(SCPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(SCPanelLayout.createSequentialGroup()
+                                        .addComponent(OwnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(FormFeedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -687,10 +682,12 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                     .addComponent(FormFeedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addGroup(SCPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(SCPanelLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(OwnSCRB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(SCPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(OwnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(OwnSCRB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
