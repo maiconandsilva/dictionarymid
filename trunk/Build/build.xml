@@ -15,7 +15,7 @@ javac.encoding=UTF-8
 <project name="allwork" default="build_all">
 
 	<!-- <property name="wtk.home"  location="D:\WTK25"/> -->
-	<property name="wtk.home"  location="/home/kim/Bureau/Multimedia+/WTK-2.5.2"/>
+	<property name="wtk.home"  location="/media/MultimediaPlus/WTK-2.5.2"/>
 
 	<property name="wtk.cldc.version"  			value="1.1"/>
 	<property name="wtk.midp.version"  			value="2.0"/>
