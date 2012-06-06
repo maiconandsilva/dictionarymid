@@ -13,7 +13,7 @@ DictionaryForMIDs-Creator, the default operation is
 
 <project name="DictionaryForMIDs-Creator" default="build_dfm_creator">
 
-	<property name="wtk.home"  location="/home/kim/Bureau/Multimedia+/WTK-2.5.2"/>
+	<property name="wtk.home"  location="/media/MultimediaPlus/WTK-2.5.2"/>
 	<!-- <property name="wtk.home"  location="I:\Program Files\NetBeans 7.1\mobility\Java_ME_platform_SDK_3.0"/> -->
 
 	<property name="wtk.cldc.version"  			value="1.1"/>
