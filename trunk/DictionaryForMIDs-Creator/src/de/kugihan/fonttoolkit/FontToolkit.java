@@ -188,7 +188,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 		fontSizeLabel.setBounds(50, 126, 250, 25);
 		fontList.setBounds(50, 146, 250, 25);
                 
-		pixelsLabel.setBounds(50, 185, 290, 25);
+		pixelsLabel.setBounds(50, 185, 350, 25);
 		pixelsTopBox.setBounds(50, 205, 50, 25);
 		pixelsBottomBox.setBounds(250, 205, 50, 25);
                 
