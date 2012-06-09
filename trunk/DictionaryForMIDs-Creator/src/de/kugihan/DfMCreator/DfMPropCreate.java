@@ -1600,7 +1600,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
     }//GEN-LAST:event_langPostfixCB1ActionPerformed
 
     private void langPostfixCB2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_langPostfixCB2ItemStateChanged
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_langPostfixCB2ItemStateChanged
 
     private void langPostfixCB2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_langPostfixCB2ActionPerformed
