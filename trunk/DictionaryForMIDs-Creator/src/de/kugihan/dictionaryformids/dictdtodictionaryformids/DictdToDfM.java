@@ -142,7 +142,7 @@ public class DictdToDfM {
     // conversion.
     public static void printDictdConvSummary() {
         DictdConvSummary summary = DictdConvSummary.getInstance();
-        summary.setSize(400, 450);
+        summary.setSize(425, 500);
         summary.setModal(true);
         summary.setLocation(screenSize.width / 2 - summary.getWidth() / 2,
                           screenSize.height / 2 - summary.getHeight() / 2);

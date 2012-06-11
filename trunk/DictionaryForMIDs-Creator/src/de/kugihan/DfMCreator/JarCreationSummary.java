@@ -88,25 +88,12 @@ public class JarCreationSummary extends javax.swing.JDialog implements PropertyC
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
+        outTA.setBackground(new java.awt.Color(254, 242, 246));
         outTA.setColumns(20);
         outTA.setEditable(false);
         outTA.setRows(5);
         jScrollPane2.setViewportView(outTA);
-        outTA.setText("");
-
-        outTA.append(I18n.tr("headLine.jarCreationSummary") + "\n");
-
-        outTA.append(I18n.tr("dictDir.jarCreationSummary"));
-        outTA.append("\n" + JarCreator.getDictionaryDirectory() + "\n\n");
-
-        outTA.append(I18n.tr("emptyDfMDir.jarCreationSummary"));
-        outTA.append("\n" + JarCreator.getEmptyDictionaryForMID() + "\n\n");
-
-        outTA.append(I18n.tr("outputDir.jarCreationSummary"));
-        outTA.append("\n" + JarCreator.getOutputDirectory() + "\n\n");
-
-        outTA.append(I18n.tr("hitStart.jarCreationSummary"));
-        outTA.append("\n");
+        fillJarCreationSummaryTextArea();
 
         jPanel1.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
@@ -299,4 +286,22 @@ public class JarCreationSummary extends javax.swing.JDialog implements PropertyC
         }
     }
 
+    private void fillJarCreationSummaryTextArea() {
+        
+        outTA.setText("");
+
+        outTA.append(I18n.tr("headLine.jarCreationSummary") + "\n");
+
+        outTA.append(I18n.tr("dictDir.jarCreationSummary"));
+        outTA.append("\n" + JarCreator.getDictionaryDirectory() + "\n\n");
+
+        outTA.append(I18n.tr("emptyDfMDir.jarCreationSummary"));
+        outTA.append("\n" + JarCreator.getEmptyDictionaryForMID() + "\n\n");
+
+        outTA.append(I18n.tr("outputDir.jarCreationSummary"));
+        outTA.append("\n" + JarCreator.getOutputDirectory() + "\n\n");
+
+        outTA.append(I18n.tr("hitStart.jarCreationSummary"));
+        outTA.append("\n");
+    }
 }

@@ -130,39 +130,7 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
 
         SummaryTextPane.setEditable(false);
         jScrollPane1.setViewportView(SummaryTextPane);
-        /*
-        * Custom code that i wrote myself.
-        */
-        SummaryTextPane.setText("");
-        append(I18n.tr("headline.dictdConvSummary"));
-        append(" " + newline + newline);
-
-        append(I18n.tr("dbName.dictdConvSummary") + "\n");
-        append(" " + sumDB() + newline);
-        append(I18n.tr("dbDir.dictdConvSummary"));
-        append(" " + sumDBFolder() + newline);
-        append(I18n.tr("outputCSVfilePath.dictdConvSummary"));
-        append(" " + sumCSV() + newline);
-        append(I18n.tr("encoding.dictdConvSummary"));
-        append(" " + sumEncoding() + newline + newline);
-
-        append(I18n.tr("separatorCharacter.dictdConvSummary"));
-        append(" " + sumSeparator() + newline + newline);
-
-        append(I18n.tr("switchLanguages.dictdConvSummary"));
-        append(" " + sumSwitch() + newline);
-        append(I18n.tr("keepTabs.dictdConvSummary"));
-        append(" " + sumKeep() + newline);
-        append(I18n.tr("removeSquares.dictdConvSummary"));
-        append(" " + sumRemove() + newline + newline);
-
-        append(I18n.tr("end.dictdConvSummary"));
-        append(newline);
-        append(I18n.tr("clickToProceed.dictdConvSummary"));
-        append(newline);
-        /*
-        * End of my custom code.
-        */
+        fillDictdConvSummaryTextPane();
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -462,4 +430,34 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
         this.dispose();
     }
     
+    private void fillDictdConvSummaryTextPane() {
+        
+        SummaryTextPane.setText("");
+        append(I18n.tr("headline.dictdConvSummary"));
+        append(" " + newline + newline);
+
+        append(I18n.tr("dbName.dictdConvSummary") + " ");
+        append(" " + sumDB() + newline + newline);
+        append(I18n.tr("dbDir.dictdConvSummary"));
+        append(" " + sumDBFolder() + newline + newline);
+        append(I18n.tr("outputCSVfilePath.dictdConvSummary"));
+        append(" " + sumCSV() + newline + newline);
+        append(I18n.tr("encoding.dictdConvSummary"));
+        append(" " + sumEncoding() + newline + newline);
+
+        append(I18n.tr("separatorCharacter.dictdConvSummary"));
+        append(" " + sumSeparator() + newline + newline);
+
+        append(I18n.tr("switchLanguages.dictdConvSummary"));
+        append(" " + sumSwitch() + newline);
+        append(I18n.tr("keepTabs.dictdConvSummary"));
+        append(" " + sumKeep() + newline);
+        append(I18n.tr("removeSquares.dictdConvSummary"));
+        append(" " + sumRemove() + newline + newline);
+
+        append(I18n.tr("end.dictdConvSummary"));
+        append(newline);
+        append(I18n.tr("clickToProceed.dictdConvSummary"));
+        append(newline);
+    }
 }

@@ -144,21 +144,7 @@ public class DictGenSummary extends javax.swing.JDialog implements PropertyChang
         DictGenTA.setRows(5);
         DictGenTA.setTabSize(4);
         jScrollPane2.setViewportView(DictGenTA);
-        DictGenTA.append(I18n.tr("headline.dictGenSummary") + "\n\n");
-
-        DictGenTA.append(I18n.tr("inputFile.dictGenSummary") + "\n");
-
-        DictGenTA.append(DictionaryGeneration.getSourceFile() + "\n\n");
-
-        DictGenTA.append(I18n.tr("outputDir.dictGenSummary") + "\n");
-
-        DictGenTA.append(DictionaryGeneration.getDirectoryDestination() + "\n\n");
-
-        DictGenTA.append(I18n.tr("dfmPropsFile.dictGenSummary") + "\n");
-
-        DictGenTA.append(DictionaryGeneration.getPropertyPath() + "\n\n");
-
-        DictGenTA.append(I18n.tr("hitEnterToProceed.dictGenSummary") + "\n");
+        fillDictGenSummaryTextArea();
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -332,5 +318,23 @@ public class DictGenSummary extends javax.swing.JDialog implements PropertyChang
             status = false;
         }
         return status;
+    }
+    
+    private void fillDictGenSummaryTextArea() {
+        DictGenTA.append(I18n.tr("headline.dictGenSummary") + "\n\n");
+
+        DictGenTA.append(I18n.tr("inputFile.dictGenSummary") + "\n");
+
+        DictGenTA.append(DictionaryGeneration.getSourceFile() + "\n\n");
+
+        DictGenTA.append(I18n.tr("outputDir.dictGenSummary") + "\n");
+
+        DictGenTA.append(DictionaryGeneration.getDirectoryDestination() + "\n\n");
+
+        DictGenTA.append(I18n.tr("dfmPropsFile.dictGenSummary") + "\n");
+
+        DictGenTA.append(DictionaryGeneration.getPropertyPath() + "\n\n");
+
+        DictGenTA.append(I18n.tr("hitEnterToProceed.dictGenSummary") + "\n");
     }
 }

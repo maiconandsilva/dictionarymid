@@ -108,16 +108,12 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     public static final Preferences root = Preferences.userRoot();
     public static final Preferences node = root.node(pathName);
     public static final String LookAndFeel = node.get("DfMCreator.window.LookAndFeel",null);
-
-    private static void setTheLocale() {
-        //Locale locale = new Locale.Builder().setLanguage("en").setRegion("US").build();
-        //Locale locale = new Locale.Builder().setLanguage("fr").setRegion("FR").build();
-        Locale locale = Locale.getDefault();
-        
-        // debug
-        System.out.println(locale.toString());
-        I18n.setLocale(locale);
-    }
+    
+    // Creating an instance of the FontToolkit
+    public FontToolkit fontTK = new FontToolkit();
+    
+    // A public DfMCreatorMain instance
+    public static DfMCreatorMain dfmCreator;
 
     /**
      * Creates new form
@@ -859,8 +855,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         infotarea.setVisible(false);
         // Creating a new layout
         bfgPanel.setLayout(new java.awt.GridBagLayout());
-        // Creating an instance of the FontToolkit
-        FontToolkit fontTK = new FontToolkit();
+
         // Getting the FontToolkit panel
         JPanel fontTKPanel = fontTK.getJPanel();
 
@@ -1103,7 +1098,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem8.setText(I18n.tr("start.dfmCreatorMain")); // NOI18N
-        jMenuItem8.setEnabled(false);
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem8ActionPerformed(evt);
@@ -1458,10 +1452,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }//GEN-LAST:event_fontGenMenuMousePressed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        /*
-         * FontToolkit ft = new FontToolkit();
-         * ft.startButton.addActionListener(ft); ft.startButton.doClick();
-         */
+        fontTK.validateAndShowSum();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
@@ -1495,7 +1486,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                DfMCreatorMain dfmCreator = new DfMCreatorMain();
+                dfmCreator = new DfMCreatorMain();
                 dfmCreator.setLocation(screenSize.width / 2 - dfmCreator.getWidth() / 2,
                                      screenSize.height / 2 - dfmCreator.getHeight() / 2);
                 dfmCreator.setVisible(true);
@@ -1641,6 +1632,15 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * 
      */
     
+    private static void setTheLocale() {
+        //Locale locale = new Locale.Builder().setLanguage("en").setRegion("US").build();
+        //Locale locale = new Locale.Builder().setLanguage("fr").setRegion("FR").build();
+        Locale locale = Locale.getDefault();
+        
+        // debug
+        System.out.println(locale.toString());
+        I18n.setLocale(locale);
+    }
     
     /**
      * showPrefsWin gets the preferences window.

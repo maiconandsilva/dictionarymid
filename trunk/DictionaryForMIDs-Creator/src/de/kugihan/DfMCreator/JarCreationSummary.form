@@ -46,12 +46,15 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="outTA">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f6" green="f2" red="fe" type="rgb"/>
+                </Property>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="outTA.setText(&quot;&quot;);&#xa;&#xa;outTA.append(I18n.tr(&quot;headLine.jarCreationSummary&quot;) + &quot;\n&quot;);&#xa;&#xa;outTA.append(I18n.tr(&quot;dictDir.jarCreationSummary&quot;));&#xa;outTA.append(&quot;\n&quot; + JarCreator.getDictionaryDirectory() + &quot;\n\n&quot;);&#xa;&#xa;outTA.append(I18n.tr(&quot;emptyDfMDir.jarCreationSummary&quot;));&#xa;outTA.append(&quot;\n&quot; + JarCreator.getEmptyDictionaryForMID() + &quot;\n\n&quot;);&#xa;&#xa;outTA.append(I18n.tr(&quot;outputDir.jarCreationSummary&quot;));&#xa;outTA.append(&quot;\n&quot; + JarCreator.getOutputDirectory() + &quot;\n\n&quot;);&#xa;&#xa;outTA.append(I18n.tr(&quot;hitStart.jarCreationSummary&quot;));&#xa;outTA.append(&quot;\n&quot;);"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="fillJarCreationSummaryTextArea();"/>
               </AuxValues>
             </Component>
           </SubComponents>

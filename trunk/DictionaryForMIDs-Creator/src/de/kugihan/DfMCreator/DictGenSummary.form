@@ -110,7 +110,7 @@
                 <Property name="tabSize" type="int" value="4"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="DictGenTA.append(I18n.tr(&quot;headline.dictGenSummary&quot;) + &quot;\n\n&quot;);&#xa;&#xa;DictGenTA.append(I18n.tr(&quot;inputFile.dictGenSummary&quot;) + &quot;\n&quot;);&#xa;&#xa;DictGenTA.append(DictionaryGeneration.getSourceFile() + &quot;\n\n&quot;);&#xa;&#xa;DictGenTA.append(I18n.tr(&quot;outputDir.dictGenSummary&quot;) + &quot;\n&quot;);&#xa;&#xa;DictGenTA.append(DictionaryGeneration.getDirectoryDestination() + &quot;\n\n&quot;);&#xa;&#xa;DictGenTA.append(I18n.tr(&quot;dfmPropsFile.dictGenSummary&quot;) + &quot;\n&quot;);&#xa;&#xa;DictGenTA.append(DictionaryGeneration.getPropertyPath() + &quot;\n\n&quot;);&#xa;&#xa;DictGenTA.append(I18n.tr(&quot;hitEnterToProceed.dictGenSummary&quot;) + &quot;\n&quot;);"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="fillDictGenSummaryTextArea();"/>
               </AuxValues>
             </Component>
           </SubComponents>
