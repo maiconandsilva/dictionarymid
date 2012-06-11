@@ -42,11 +42,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 
-
-/**
- *
- * @author kioshi
- */
 public class DictGenSummary extends javax.swing.JDialog implements PropertyChangeListener {
     
     private static Task task;
@@ -320,7 +315,14 @@ public class DictGenSummary extends javax.swing.JDialog implements PropertyChang
         return status;
     }
     
+    /**
+     * fillDictGenSummaryTextArea() gets all the needed information
+     * and formats them correctly so as to have a clear and neat
+     * summary of the DictionaryGeneration preferences entered
+     * by the user.
+     */
     private void fillDictGenSummaryTextArea() {
+        
         DictGenTA.append(I18n.tr("headline.dictGenSummary") + "\n\n");
 
         DictGenTA.append(I18n.tr("inputFile.dictGenSummary") + "\n");

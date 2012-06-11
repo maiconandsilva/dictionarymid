@@ -430,6 +430,13 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
         this.dispose();
     }
     
+    
+    /**
+     * fillDictdConvSummaryTextPane() gets all the needed information
+     * and formats them correctly so as to have a clear and neat
+     * summary of the DictdToDictionaryForMIDs preferences entered
+     * by the user.
+     */
     private void fillDictdConvSummaryTextPane() {
         
         SummaryTextPane.setText("");

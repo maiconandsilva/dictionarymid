@@ -31,13 +31,10 @@
 
 package de.kugihan.DfMCreator;
 
-import edu.hws.eck.mdb.*;
+import edu.hws.eck.mdb.I18n;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author kioshi
- */
+
 public class DfMCreatorException {
     
     /*
