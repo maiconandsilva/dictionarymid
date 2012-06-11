@@ -170,8 +170,7 @@ public class DfMCreatorHelpWin extends JPanel
         DefaultMutableTreeNode docCategory = null;
         DefaultMutableTreeNode book = null;
 
-        /*
-        guiCategory = new DefaultMutableTreeNode("DictionaryForMIDs-Creator");
+        guiCategory = new DefaultMutableTreeNode("DfM-Creator - Quick Guide");
         top.add(guiCategory);
         
 	// GUI Documentation category
@@ -180,19 +179,19 @@ public class DfMCreatorHelpWin extends JPanel
         // Dictd Converter
         book = new DefaultMutableTreeNode(new BookInfo
             (I18n.tr("dictdConverter"),
-        path + "gui-DictdConv.html"));
+        path + "gui-DictdToDictionaryForMIDs.html"));
         guiCategory.add(book);
 
         // Dictionary Generator
         book = new DefaultMutableTreeNode(new BookInfo
             (I18n.tr("dictionaryGeneration"),
-        path + "gui-DictGen.html"));
+        path + "gui-DictionaryGeneration.html"));
         guiCategory.add(book);
 
         // Bitmap Font Generator
         book = new DefaultMutableTreeNode(new BookInfo
             (I18n.tr("bfg"),
-        path + "gui-BFG.html"));
+        path + "gui-BitmapFontGenerator.html"));
         guiCategory.add(book);
 
         // DfM's Jar Creator
@@ -201,8 +200,6 @@ public class DfMCreatorHelpWin extends JPanel
 	path + "gui-JarCreator.html"));
         guiCategory.add(book);
         
-        */
-
 	/*
 	 * Complete Documentation category
 	 */

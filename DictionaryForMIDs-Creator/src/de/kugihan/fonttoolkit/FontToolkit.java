@@ -25,6 +25,7 @@
  */
 package de.kugihan.fonttoolkit;
 
+import de.kugihan.DfMCreator.BFGSummary;
 import de.kugihan.DfMCreator.DfMCreatorException;
 import de.kugihan.DfMCreator.DfMCreatorException.CSVDictionaryFilesNotFound;
 import de.kugihan.DfMCreator.DfMCreatorException.dictionaryDirNotAccessible;
@@ -47,7 +48,85 @@ import javax.swing.*;
 
 
 public class FontToolkit extends JFrame implements ActionListener, Callback {
-	private static final long serialVersionUID = 1L;
+    
+    private static final long serialVersionUID = 1L;
+
+    private boolean debugMode = false;
+
+    private JPanel panel = new JPanel();
+
+    private JFrame popup = new JFrame();
+
+    private JTextField fontField = new JTextField(15);
+
+    private JButton fontButton = new JButton(I18n.tr("browse"));
+
+    private JTextField dictionaryField = new JTextField(15);
+
+    private JButton dictionaryButton = new JButton(I18n.tr("browse"));
+
+    private String[] fontSizes = { "8", "10", "12", "14", "16", "18", "20",
+                    "22", "24", "26", "28", "30", "32", "34", "36" };
+
+    private String[] pixelsUp = { "0", "1", "2", "3", "4"};
+
+    private String[] pixelsBottom = { "0", "1", "2", "3", "4"};
+
+    private JComboBox fontList = new JComboBox(fontSizes);
+
+    private JComboBox pixelsTopBox = new JComboBox(pixelsUp);
+
+    private JComboBox pixelsBottomBox = new JComboBox(pixelsBottom);
+
+    // Make it public to enable DfM-Creator to access to it.
+    public JButton startButton = new JButton(I18n.tr("start"));
+
+    private JLabel fontLabel = new JLabel(I18n.tr("fontPath"));
+
+    private JLabel pixelsLabel = new JLabel(I18n.tr("pixelsClip"));
+
+    private JLabel dictionaryLabel = new JLabel(I18n.tr("dictionaryPath"));
+
+    private JLabel fontSizeLabel = new JLabel(I18n.tr("fontPoints"));
+
+    private javax.swing.JProgressBar progressBar = new javax.swing.JProgressBar();
+
+    private JMenuItem quitItem;
+
+    private JMenuItem aboutItem;
+
+    private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+    private Core c;
+        
+        // Getter methods
+    
+        public String getFontFieldText() {
+            return fontField.getText();
+        }
+        
+        public String getDictionaryFieldText() {
+            return dictionaryField.getText();
+        }
+        
+        public String getFontSize() {
+            String fontSize = String.valueOf(fontList.getSelectedItem().toString());
+            return fontSize;
+        }
+        
+        public String getClipTob() {
+            String clipTop = String.valueOf(pixelsTopBox.getSelectedItem().toString());
+            return clipTop;
+        }
+        
+        public String getClipBottom() {
+            String clipBottom = String.valueOf(pixelsBottomBox.getSelectedItem().toString());
+            return clipBottom;
+        }
+                
+	public static void main (String[] args) throws DictionaryException {
+                new FontToolkit().run();
+	}
         
         // We will use this subroutine to test the existence of ".csv" files in the
         // selected dictionary directory and throw and exception if they dont exist.
@@ -64,181 +143,154 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
                 throw new CSVDictionaryFilesNotFound(I18n.tr("invalidDictDir"));
             }
 	}
-        
-
-	private boolean debugMode = false;
-
-	private JPanel panel = new JPanel();
-
-	private JFrame popup = new JFrame();
-
-	private JTextField fontField = new JTextField(15);
-
-	private JButton fontButton = new JButton(I18n.tr("browse"));
-
-	private JTextField dictionaryField = new JTextField(15);
-
-	private JButton dictionaryButton = new JButton(I18n.tr("browse"));
-
-	private String[] fontSizes = { "8", "10", "12", "14", "16", "18", "20",
-			"22", "24", "26", "28", "30", "32", "34", "36" };
-	
-	private String[] pixelsUp = { "0", "1", "2", "3", "4"};
-	
-	private String[] pixelsBottom = { "0", "1", "2", "3", "4"};
-
-	private JComboBox fontList = new JComboBox(fontSizes);
-	
-	private JComboBox pixelsTopBox = new JComboBox(pixelsUp);
-	
-	private JComboBox pixelsBottomBox = new JComboBox(pixelsBottom);
-        
-        // Make it public to enable DfM-Creator to access to it.
-	public JButton startButton = new JButton(I18n.tr("start"));
-
-	private JLabel fontLabel = new JLabel(I18n.tr("fontPath"));
-	
-	private JLabel pixelsLabel = new JLabel(I18n.tr("pixelsClip"));
-
-	private JLabel dictionaryLabel = new JLabel(I18n.tr("dictionaryPath"));
-
-	private JLabel fontSizeLabel = new JLabel(I18n.tr("fontPoints"));
-
-	private javax.swing.JProgressBar progressBar = new javax.swing.JProgressBar();
-
-	private JMenuItem quitItem;
-
-	private JMenuItem aboutItem;
-
-	private static Dimension screenSize = Toolkit.getDefaultToolkit()
-			.getScreenSize();
-
-	private Core c;
-                
-	public static void main (String[] args) throws DictionaryException {
-                new FontToolkit().run();
-	}
 
 	public void run() throws DictionaryException {
-		UtilWin utilObj = new UtilWin();
-		Util.setUtil(utilObj);
-		this.setTitle(I18n.tr("bitmapFonGenerator")+ Util.getUtil().getApplicationVersionString());
-		this.setJMenuBar(getJMenuBar());
-		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+            UtilWin utilObj = new UtilWin();
+            Util.setUtil(utilObj);
+            this.setTitle(I18n.tr("bitmapFonGenerator")+ Util.getUtil().getApplicationVersionString());
+            this.setJMenuBar(getJMenuBar());
+            this.setDefaultCloseOperation(FontToolkit.EXIT_ON_CLOSE);
 
-		this.setSize(460, 300);
-		this.setLocation(screenSize.width / 2 - this.getWidth() / 2,
-				screenSize.height / 2 - this.getHeight() / 2);
+            this.setSize(460, 300);
+            this.setLocation(screenSize.width / 2 - this.getWidth() / 2,
+                             screenSize.height / 2 - this.getHeight() / 2);
 
-		this.setVisible(true);
-		this.add(getJPanel());
-		this.setResizable(false);
+            this.setVisible(true);
+            this.add(getJPanel());
+            this.setResizable(false);
 
-		this.validate();
+            this.validate();
 	}
 
         @Override
 	public JMenuBar getJMenuBar() {
-		JMenuBar menuBar = new JMenuBar();
-		JMenu fileMenu = new JMenu(I18n.tr("fime.menuItem"));
-		JMenu helpMenu = new JMenu(I18n.tr("help.menuItem"));
-		quitItem = new JMenuItem(I18n.tr("quit.menuItem"));
-		aboutItem = new JMenuItem(I18n.tr("about.menuItem"));
-		menuBar.add(fileMenu);
-		fileMenu.add(quitItem);
-		menuBar.add(helpMenu);
-		helpMenu.add(aboutItem);
-
-		quitItem.addActionListener(this);
-		aboutItem.addActionListener(this);
-
-		return menuBar;               
-	}
-        
-                public JPanel getJPanel(){
+            JMenuBar menuBar = new JMenuBar();
+            JMenu fileMenu = new JMenu(I18n.tr("fime.menuItem"));
+            JMenu helpMenu = new JMenu(I18n.tr("help.menuItem"));
             
-		fontList.setSelectedIndex(2);
-		pixelsTopBox.setSelectedIndex(0);
-		pixelsBottomBox.setSelectedIndex(0);
+            quitItem = new JMenuItem(I18n.tr("quit.menuItem"));
+            aboutItem = new JMenuItem(I18n.tr("about.menuItem"));
+            
+            menuBar.add(fileMenu);
+            fileMenu.add(quitItem);
+            menuBar.add(helpMenu);
+            helpMenu.add(aboutItem);
+        
+            quitItem.addActionListener(this);
+            aboutItem.addActionListener(this);
+            
+            return menuBar;               
+	}
+        
+        public JPanel getJPanel(){
 
-		panel.setLayout(null);
-                panel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+            fontList.setSelectedIndex(2);
+            pixelsTopBox.setSelectedIndex(0);
+            pixelsBottomBox.setSelectedIndex(0);
 
-		panel.add(fontField);
-		panel.add(fontButton);
-		panel.add(dictionaryField);
-		panel.add(dictionaryButton);
-		panel.add(fontList);
-		panel.add(pixelsTopBox);
-		panel.add(pixelsBottomBox);
-		panel.add(startButton);
-		panel.add(fontLabel);
-		panel.add(pixelsLabel);
-		panel.add(dictionaryLabel);
-		panel.add(fontSizeLabel);
+            panel.setLayout(null);
+            panel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-		fontField.setBounds(50, 40, 250, 25);
-		fontLabel.setBounds(50, 20, 250, 25);
-		fontButton.setBounds(310, 40, 100, 25);
-                
-		dictionaryField.setBounds(50, 95, 250, 25);
-		dictionaryLabel.setBounds(50, 75, 250, 25);
-		dictionaryButton.setBounds(310, 95, 100, 25);
-                
-		fontSizeLabel.setBounds(50, 126, 250, 25);
-		fontList.setBounds(50, 146, 250, 25);
-                
-		pixelsLabel.setBounds(50, 185, 350, 25);
-		pixelsTopBox.setBounds(50, 205, 50, 25);
-		pixelsBottomBox.setBounds(250, 205, 50, 25);
-                
-		startButton.setBounds(160, 250, 150, 25);
+            panel.add(fontField);
+            panel.add(fontButton);
+            panel.add(dictionaryField);
+            panel.add(dictionaryButton);
+            panel.add(fontList);
+            panel.add(pixelsTopBox);
+            panel.add(pixelsBottomBox);
+            panel.add(startButton);
+            panel.add(fontLabel);
+            panel.add(pixelsLabel);
+            panel.add(dictionaryLabel);
+            panel.add(fontSizeLabel);
 
-		fontButton.addActionListener(this);
-		dictionaryButton.addActionListener(this);
-		startButton.addActionListener(this);
-                
-                return panel;
-            }
+            fontField.setBounds(50, 40, 250, 25);
+            fontLabel.setBounds(50, 20, 250, 25);
+            fontButton.setBounds(310, 40, 100, 25);
+
+            dictionaryField.setBounds(50, 95, 250, 25);
+            dictionaryLabel.setBounds(50, 75, 250, 25);
+            dictionaryButton.setBounds(310, 95, 100, 25);
+
+            fontSizeLabel.setBounds(50, 126, 250, 25);
+            fontList.setBounds(50, 146, 250, 25);
+
+            pixelsLabel.setBounds(50, 185, 350, 25);
+            pixelsTopBox.setBounds(50, 205, 50, 25);
+            pixelsBottomBox.setBounds(250, 205, 50, 25);
+
+            startButton.setBounds(130, 250, 210, 25);
+
+            fontButton.addActionListener(this);
+            dictionaryButton.addActionListener(this);
+            startButton.addActionListener(this);
+
+            return panel;
+        }
         
 
-    @Override
+        @Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == fontButton) {
-			fontField.setText(getFile(false));
-		} else if (arg0.getSource() == dictionaryButton) {
-			dictionaryField.setText(getFile(true));
-		} else if (arg0.getSource() == startButton) {
-			try {
-				validateFields();
-                                findCSVFiles(new File(dictionaryField.getText()));
-				beginProcess();
-                        } catch (CSVDictionaryFilesNotFound ex) {
-                            DfMCreatorMain.printAnyMsg(DfMCreatorException.CSVDictionaryFilesNotFoundMsg, I18n.tr("badDictDir"),
-                                                                       JOptionPane.ERROR_MESSAGE);
-                        } catch (fontFieldIsEmpty e){
-                            DfMCreatorMain.printAnyMsg(DfMCreatorException.fontFieldIsEmptyMsg, I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
-                        } catch (dictionaryFieldIsEmpty e){
-                            DfMCreatorMain.printAnyMsg(DfMCreatorException.dictionaryFielsIsEmptyMsg, I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
-                        } catch (fontNotAccessible e){
-                            DfMCreatorMain.printAnyMsg(DfMCreatorException.fontNotAccessibleMsg, I18n.tr("fontError"), JOptionPane.ERROR_MESSAGE);
-                        } catch (dictionaryDirNotAccessible e){
-                            DfMCreatorMain.printAnyMsg(DfMCreatorException.dictionaryDirNotAccessibleMsg, I18n.tr("notDictFiles"), JOptionPane.ERROR_MESSAGE);                            
-			} catch (NumberFormatException e) {
-				showSizeError(e);
-			} catch (Exception e) {
-				showFatalError(e);
-			}
-		} else if (arg0.getSource() == quitItem) {
-			System.exit(0);
-		} else if (arg0.getSource() == aboutItem) {
-			try {
-				showAbout();
-			} catch (Exception e) {
-				showFatalError(e);
-			}
-		}
+            if (arg0.getSource() == fontButton) {
+                    fontField.setText(getFile(false));
+            } else if (arg0.getSource() == dictionaryButton) {
+                    dictionaryField.setText(getFile(true));
+            } else if (arg0.getSource() == startButton) {
+                
+                // Validate the values entered and
+                // showing the bitmap font generation
+                // preferences summary which will enable
+                // us to actualy generate the font files.
+                validateAndShowSum();
+
+            } else if (arg0.getSource() == quitItem) {
+                    System.exit(0);
+            } else if (arg0.getSource() == aboutItem) {
+                try {
+                    showAbout();
+                } catch (Exception e) {
+                    showFatalError(e);
+                }
+            }
 	}
+    
+    public void showBFGsummary() {
+        BFGSummary bfgSum = BFGSummary.getBFGwindow(); 
+        bfgSum.setSize(400, 400);
+        bfgSum.setLocation(screenSize.width / 2 - bfgSum.getWidth() / 2,
+                           screenSize.height / 2 - bfgSum.getHeight() / 2);
+        
+        bfgSum.setVisible(true);
+    }
+    
+        public void validateAndShowSum() {
+            try {
+                validateFields();
+                findCSVFiles(new File(dictionaryField.getText()));
+                showBFGsummary();
+            } catch (CSVDictionaryFilesNotFound ex) {
+                    DfMCreatorMain.printAnyMsg(DfMCreatorException.CSVDictionaryFilesNotFoundMsg,
+                                               I18n.tr("badDictDir"), JOptionPane.ERROR_MESSAGE);
+            } catch (fontFieldIsEmpty e){
+                    DfMCreatorMain.printAnyMsg(DfMCreatorException.fontFieldIsEmptyMsg, I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
+            } catch (dictionaryFieldIsEmpty e){
+                    DfMCreatorMain.printAnyMsg(DfMCreatorException.dictionaryFielsIsEmptyMsg, I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
+            }  catch (NumberFormatException e) {
+                    showSizeError(e);
+            } catch (Exception e) {
+                    showFatalError(e);
+            }
+        }
+        
+        public void proceed() {
+            try {
+                beginProcess();
+            } catch (fontNotAccessible e){
+                    DfMCreatorMain.printAnyMsg(DfMCreatorException.fontNotAccessibleMsg, I18n.tr("fontError"), JOptionPane.ERROR_MESSAGE);
+            } catch (dictionaryDirNotAccessible e){
+                     DfMCreatorMain.printAnyMsg(DfMCreatorException.dictionaryDirNotAccessibleMsg, I18n.tr("notDictFiles"), JOptionPane.ERROR_MESSAGE);                            
+            }
+        }
 
 	public void validateFields() throws fontFieldIsEmpty, dictionaryFieldIsEmpty {
             
@@ -393,6 +445,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 		if (debugMode)
 			e.printStackTrace();
 	}
+
 }
     class FontFilter extends javax.swing.filechooser.FileFilter {
     @Override

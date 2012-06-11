@@ -32,7 +32,7 @@
 package de.kugihan.DfMCreator;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
-import edu.hws.eck.mdb.*;
+import edu.hws.eck.mdb.I18n;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
