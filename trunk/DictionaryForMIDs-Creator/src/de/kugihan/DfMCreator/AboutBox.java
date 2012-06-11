@@ -35,7 +35,6 @@ import java.io.IOException;
 import java.net.URL;
 
 
-
 public class AboutBox extends javax.swing.JDialog {
 
     private static URL gplURL;

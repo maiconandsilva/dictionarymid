@@ -43,10 +43,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
-/**
- *
- * @author leko
- */
+
 public class JarCreationSummary extends javax.swing.JDialog implements PropertyChangeListener {
     
     public static JarCreationSummary getCJPWin(){
@@ -286,6 +283,12 @@ public class JarCreationSummary extends javax.swing.JDialog implements PropertyC
         }
     }
 
+    /**
+     * fillJarCreationSummaryTextArea() gets all the needed information
+     * and formats them correctly so as to have a clear and neat
+     * summary of the Jar Creation preferences entered
+     * by the user.
+     */
     private void fillJarCreationSummaryTextArea() {
         
         outTA.setText("");

@@ -46,10 +46,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
-/**
- *
- * @author kioshi
- */
+
 public class CheckCSVFileIntegrity extends javax.swing.JFrame implements PropertyChangeListener {
     
     // Variables used by checkCsvFileFormat()

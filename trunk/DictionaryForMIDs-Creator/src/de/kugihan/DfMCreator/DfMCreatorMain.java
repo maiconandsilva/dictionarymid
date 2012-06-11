@@ -60,6 +60,7 @@ import de.kugihan.fonttoolkit.FontToolkit;
 import de.kugihan.jarCreator.JarCreator;
 import edu.hws.eck.mdb.I18n;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -838,49 +839,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         bfgPanel.add(infotarea, gridBagConstraints);
 
         DFMBuilderTabbedPane.addTab("BitmapFontGenerator", bfgPanel);
-        // Creating a toolbar
-        javax.swing.JToolBar bfgToolbar = new javax.swing.JToolBar();
-        bfgToolbar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        bfgToolbar.setFloatable(false);
-        bfgToolbar.setRollover(true);
-        bfgToolbar.setPreferredSize(new java.awt.Dimension(400, 15));
-        bfgToolbar.setRequestFocusEnabled(false);
-
-        // Creating a label for the toolbar
-        javax.swing.JLabel toolbarLabel = new javax.swing.JLabel();
-        toolbarLabel.setText("<html><font color=gray>BitmapFontGenerator</font>");
-        bfgToolbar.add(toolbarLabel);
-
-        // Hiding the little info text area
-        infotarea.setVisible(false);
-        // Creating a new layout
-        bfgPanel.setLayout(new java.awt.GridBagLayout());
-
-        // Getting the FontToolkit panel
-        JPanel fontTKPanel = fontTK.getJPanel();
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        bfgPanel.add(bfgToolbar, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        bfgPanel.add(fontTKPanel, gridBagConstraints);
-
-        fontTKPanel.setPreferredSize(new java.awt.Dimension(460, 300));
-        fontTKPanel.setVisible(true);
+        // Getting the font generator panel and displaying it.
+        addFontTKToDfMCreatorTabbedPane();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(null);
@@ -1632,6 +1592,70 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * 
      */
     
+    
+    /**
+     * addFontTKToDfMCreatorTabbedPane()
+     * The font generator tab holds the FontToolkit created by Sean Kernohan.
+     * When i started creating the DfM-Creator, i did not want to have to
+     * write a new GUI from scratch for the BitmapFontGenerator. So, i decided
+     * to modify the FontToolkit and integrate it in the DfM-Creator.
+     * The code below does what's necessary to get the FontToolkit to
+     * work with the DfM-Creator. 
+     */
+    private void addFontTKToDfMCreatorTabbedPane() {
+        // Creating a toolbar
+        javax.swing.JToolBar bfgToolbar = new javax.swing.JToolBar();
+        bfgToolbar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        bfgToolbar.setFloatable(false);
+        bfgToolbar.setRollover(true);
+        bfgToolbar.setPreferredSize(new java.awt.Dimension(400, 15));
+        bfgToolbar.setRequestFocusEnabled(false);
+
+        // Creating a label for the toolbar
+        javax.swing.JLabel toolbarLabel = new javax.swing.JLabel();
+        toolbarLabel.setText("<html><font color=gray>BitmapFontGenerator</font>");
+        bfgToolbar.add(toolbarLabel);
+
+        // Hiding the little info textarea that is visible
+        // during design and souldn't during runtime.
+        infotarea.setVisible(false);
+        
+        // Creating a new layout to override
+        // the one of the little info textarea.
+        bfgPanel.setLayout(new java.awt.GridBagLayout());
+
+        // Getting the FontToolkit panel
+        JPanel fontTKPanel = fontTK.getJPanel();
+
+        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        bfgPanel.add(bfgToolbar, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        bfgPanel.add(fontTKPanel, gridBagConstraints);
+
+        fontTKPanel.setPreferredSize(new java.awt.Dimension(460, 300));
+        fontTKPanel.setVisible(true);
+    }
+    
+    /**
+     * setTheLocale() gets and sets the default
+     * locale. It can also test other locales
+     * during debug sessions for example.
+     */
     private static void setTheLocale() {
         //Locale locale = new Locale.Builder().setLanguage("en").setRegion("US").build();
         //Locale locale = new Locale.Builder().setLanguage("fr").setRegion("FR").build();
@@ -1643,7 +1667,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }
     
     /**
-     * showPrefsWin gets the preferences window.
+     * showPrefsWin() gets the preferences window.
      */
     private void showPrefsWin(){
         DfMCreatorPreferences prefs = DfMCreatorPreferences.getPrefsWin();
@@ -1711,12 +1735,24 @@ public class DfMCreatorMain extends javax.swing.JFrame {
       }
    }
     
+    /**
+     * OwnTextFieldCheck() checks if the "Choose Your Own"
+     * radio button is selected in order to enable/disable
+     * the little text area that enables the user to provide
+     * her own choice instead of the ones given by default.
+     */
     private void OwnTextFieldCheck(){
         if (OwnSCTextField.isEnabled()) {
             OwnSCTextField.setEnabled(false);
         }        
     }
-    
+
+    /**
+     * OwnEncTextFieldCheck() checks if the "Choose Your Own"
+     * radio button is selected in order to enable/disable
+     * the little text area that enables the user to provide
+     * her own choice instead of the ones given by default.
+     */
     private void OwnEncTextFieldCheck(){
         if (OwnEncTextField.isEnabled()){
             OwnEncTextField.setEnabled(false);
@@ -1968,7 +2004,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }
     
     /**
-     * resets the setting.
+     * resets the setting for the
+     * DictdToDictionaryForMIDs tab.
      */
     private void clearFields() {
         DBNameTextField.setText("");
@@ -2013,7 +2050,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     
 
     /**
-     * gets the about window
+     * showAbout() gets the about window
      */
     private void showAbout() {
         AboutBox aboutbox = AboutBox.getAboutBox();
@@ -2025,7 +2062,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }
     
 
-    /*
+   /*
     * 
     * DictionaryGneration subroutines
     * 
@@ -2154,6 +2191,10 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
     }
     
+    /**
+     * resets the setting for the
+     * DictionaryGeneration tab.
+     */
     private void clearDGFields() {
         SourceFileTF.setText("");
         DirectoryDestinationTF.setText("");
@@ -2304,7 +2345,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }
 
     /**
-     * clearJCFields () resets the settings for JarCreator.
+     * resets the setting for the
+     * JarCreator tab.
      */
     private void clearJCFields() {
         InputCSVFilesTF.setText("");
