@@ -429,13 +429,14 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
                     e.printStackTrace();
 	}
 
-	public void showFatalError(Exception e) {
-		JOptionPane.showMessageDialog(null,
-				I18n.tr("unknownError"), I18n.tr("error"),
-				JOptionPane.ERROR_MESSAGE);
+	public void showFatalError(Throwable t) {
+		DfMCreatorMain.printAnyMsg(I18n.tr("criticalErrMsg", new Object[]
+                                 {t, t.getLocalizedMessage()}), I18n.tr("error"),
+                                                      JOptionPane.ERROR_MESSAGE);
+                System.out.println(t + "\n");
+                
 		if (debugMode)
-			e.printStackTrace();
-		System.exit(1);
+			t.printStackTrace();
 	}
 
 	public void showInvalidFileError(Exception e) {

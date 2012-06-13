@@ -879,7 +879,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel19.add(samplePropFile, gridBagConstraints);
 
-        createPropFile.setText(I18n.tr("createThePros.dfmPropCreate")); // NOI18N
+        createPropFile.setText(I18n.tr("createThePropsFile.dfmPropCreate")); // NOI18N
         createPropFile.setToolTipText(I18n.tr("createButton.toolTipText.dfmPropCreate")); // NOI18N
         createPropFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1083,7 +1083,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         jPanel1.add(jLabel37, gridBagConstraints);
 
         lab3.setText(I18n.tr("value")); // NOI18N
-        lab3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lab3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -1191,7 +1191,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         jPanel15.add(jLabel38, gridBagConstraints);
 
         lab4.setText(I18n.tr("value")); // NOI18N
-        lab4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lab4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -1199,7 +1199,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         jPanel15.add(lab4, gridBagConstraints);
 
         lab5.setText(I18n.tr("value")); // NOI18N
-        lab5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lab5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -1340,7 +1340,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         jPanel16.add(jLabel34, gridBagConstraints);
 
         lab1.setText(I18n.tr("value")); // NOI18N
-        lab1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lab1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -1348,7 +1348,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         jPanel16.add(lab1, gridBagConstraints);
 
         lab2.setText(I18n.tr("value")); // NOI18N
-        lab2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lab2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;

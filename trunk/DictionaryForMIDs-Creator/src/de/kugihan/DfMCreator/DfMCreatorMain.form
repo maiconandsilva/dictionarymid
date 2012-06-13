@@ -36,10 +36,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="miEditSettings">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+C"/>
+                  <KeyStroke key="Ctrl+F"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="clearAllFields.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="clear.fields.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -79,8 +79,9 @@
                   <KeyStroke key="Ctrl+Alt+C"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="createThePropsFile.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="createThePropsFile.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
@@ -101,8 +102,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+Alt+F"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="clear.fields.menu.item.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="clear.fields.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -111,6 +115,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+Alt+E"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="editAnExisting.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
@@ -118,6 +125,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+Alt+I"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="checkCSVFile.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
@@ -165,10 +175,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+Alt+P"/>
+                  <KeyStroke key="Shift+Ctrl+C"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="pack.jarCreator.menu.item" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="packCSVFiles.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
                 <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="pack.jarCreator.menu.item" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
@@ -180,8 +190,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+F"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="clear.fields.menu.item.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="clear.fields.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -200,7 +213,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+Alt+F"/>
+                  <KeyStroke key="Ctrl+Alt+L"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="lookAndFeelSets.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
@@ -344,9 +357,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="toolbar4" pref="35" max="32767" attributes="0"/>
+                          <Component id="toolbar4" pref="34" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="DBPanel" pref="110" max="32767" attributes="0"/>
+                          <Component id="DBPanel" pref="108" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="SCPanel" pref="200" max="32767" attributes="0"/>
@@ -379,7 +392,7 @@
                     <Component class="javax.swing.JButton" name="clearFieldsButton">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="clearFields.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                          <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="clear.fields.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -1077,7 +1090,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel3" pref="161" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel1" pref="222" max="32767" attributes="0"/>
+                      <Component id="jPanel1" pref="219" max="32767" attributes="0"/>
                       <EmptySpace pref="33" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -1256,7 +1269,7 @@
                 <Component class="javax.swing.JButton" name="jButton2">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="clear.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="clear.fields.html.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -1439,10 +1452,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                      <Component id="toolbar2" pref="35" max="32767" attributes="0"/>
+                      <Component id="toolbar2" pref="34" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel2" pref="302" max="32767" attributes="0"/>
-                      <EmptySpace pref="65" max="32767" attributes="0"/>
+                      <Component id="jPanel2" pref="301" max="32767" attributes="0"/>
+                      <EmptySpace pref="64" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1607,7 +1620,7 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="80" y="230" width="220" height="60"/>
+                      <AbsoluteConstraints x="50" y="245" width="220" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -1622,7 +1635,7 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="310" y="230" width="80" height="60"/>
+                      <AbsoluteConstraints x="275" y="245" width="150" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
