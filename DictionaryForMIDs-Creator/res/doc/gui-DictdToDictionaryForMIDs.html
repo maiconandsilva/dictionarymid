@@ -1,20 +1,22 @@
 ﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
+		<meta name="author" content="Karim" />
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" >
 		<meta http-equiv="Content-Style-Type" content="text/css">
 		<meta name="keywords" content="dictionary, language, MIDP, J2ME, Java, Midlet, mobile, cell phone, PDA">
 		<link rel="stylesheet" href="style.css" type="text/css">
-		<title>The DictdToDictionaryForMIDs GUI Documentation</title>
+		<title>The DictdToDictionaryForMIDs (GUI) Documentation</title>
 	</head>
 
 <body>
-<h1>The DictdToDictionaryForMIDs GUI Documentation.</h1>
+<h1>The DictdToDictionaryForMIDs (GUI) Documentation.</h1>
 <p>Let's see an exemple of how to convert a Dictd dictionary file into an input file for DictionaryGeneration.<br>
 Say we have a Dictd dictionary file from freedict.org called freedict-eng-fra that we would like to convert<br>
-into the DictionaryForMIDs format. Follow these steps:<br>
+into the DictionaryForMIDs format. We should follow these steps:<br>
 <ul>
-<li>Make sure you have the files <b>freedict-eng-fra.dict.dz</b> and <b>freedict-eng-fra.index</b><br>
+<li>Make sure we have the files <b>freedict-eng-fra.dict.dz</b> (if the file is compressed)<br>
+or <b>freedict-eng-fra.dict</b> (if it's not compressed) and <b>freedict-eng-fra.index</b><br>
 in a directory called <b>freedict-eng-fra</b>.</li><br>
 
 <li>Create a text file with the name <b>freedict-eng-fra.ini</b> and write the following in it:<br><br>
@@ -22,32 +24,36 @@ in a directory called <b>freedict-eng-fra</b>.</li><br>
 # The freedict-eng-fra Database<br>
 freedict-eng-fra.data=freedict-eng-fra.dict.dz<br>
 freedict-eng-fra.index=freedict-eng-fra.index<br><br>
+<i>Note that if the file is not compressed you should replace the line<br>
+freedict-eng-fra.data=freedict-eng-fra.dict.dz<br>
+with the line:<br>
+freedict-eng-fra.data=freedict-eng-fra.dict</i><br><br>
 
 You just created a configuration file that will be used by DictdToDictionaryForMIDs<br>
 to convert you input file. The first line (starting with a pound sign) is optional,<br>
-it's a comment and therefore is useful only for us (humans, not the computer).<br>
+it is a comment and therefore is useful only for us (humans, not for the computer).<br>
 The second and the third lines are all what we need to get started.</li><br>
 
 <li>Fill the database name, path and the output directory fields in. Peep the screen<br>
 shot below to have an idea about how to do that. You might manually provide the<br>
-paths by typing them in, you might also click the browse button to browse the directories.<br>
+paths by typing them in, you might also click the browse button to get the directory paths.<br>
 <img src="images/DBFields.png" alt="Filled database fields example" width="701" height="112">
 </li><br><br>
 
-<li>Choose the encoding charset for the output converted CSV dictionary file.<br>
-You can choose between the proposed ones or provide your own by clicking the<br>
-<i>Choose My Own</i> button. It is hightly recommended though, that you choose<br>
+<li>Choose the character encoding for the output converted CSV dictionary file.<br>
+You can choose between the default ones or provide your own by clicking the<br>
+<i>Choose My Own</i> button. It is highly recommended though, that you choose<br>
 between <b>UTF-8</b> and <b>ISO-8859-1</b>.<br>
 <img src="images/Encoding.png" alt="Encoding" width="338" height="205" >
 </li><br><br>
 
 <li>Choose a Separator Character.<br>
-Here also you can choose between the proposed ones or provide your own<br>
+Here also you can choose between the default ones or provide your own<br>
 by clicking the <i>Choose My Own</i> button. A tab character is the recommended choice.<br>
 <img src="images/SepChar.png" alt="Separator Characters" width="336" height="206" >
 </li><br><br>
 
-<li>Customize the following boolean variables with the checkboxes.<br><br>
+<li>Customize the following boolean variables with the CheckBoxes.<br><br>
 	<ul type="circle">
 		<li>Switch Languages: switches or keeps the languages' order in the output file.</li>
 		<li>Keep Tab And New Line Chars: keeps or removes the tabs and the new line characters</li>
@@ -66,13 +72,17 @@ that will enable you to go to the actual conversion process.<br>
 </p><br><br>
 
 <p>
-<h2>The conversion preferences summary window</h2>
+<h2>Launching the dictionary conversion preferences summary window</h2>
 <img src="images/ConversionSummary.png" alt="Conversion Preferences Window" width="427" height="529"><br><br>
-Click the <b>Proceed</b> button to convert the dictionary file.<br>
-You are done with the dictionary conversion process!<br><br>
+
+<h2>Converting the dictionary file</h2>
+Hit the <b>Proceed</b> button to convert the dictionary file.<br>
+If everything goes well you should find the file under the output<br>
+directory you provided, with the name of the database + '-converted.txt'<br>
+(i.e freedict-eng-fra-converted.txt)<br><br>
 
 <b><u>P.S:</u></b><br>
-There is a know bug during the dictionary conversion called Bug-09062012.<br>
+There is a known bug during the dictionary conversion (Bug-09062012).<br>
 It happens during the conversion of some freedict.org bilingual dictionaries.<br>
 The bug causes DictdToDictionaryForMIDs to write in the converted dictionary file<br>
 a line like the following:<br><br>

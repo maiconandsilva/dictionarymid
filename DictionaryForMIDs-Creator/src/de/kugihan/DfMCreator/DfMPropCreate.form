@@ -1126,7 +1126,7 @@
                 <Component class="javax.swing.JButton" name="createPropFile">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="createThePros.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="createThePropsFile.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="createButton.toolTipText.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
