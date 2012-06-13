@@ -78,8 +78,9 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 
     private JComboBox pixelsBottomBox = new JComboBox(pixelsBottom);
 
-    // Make it public to enable DfM-Creator to access to it.
-    public JButton startButton = new JButton(I18n.tr("start"));
+    private JButton startButton = new JButton(I18n.tr("start"));
+    
+    private JButton clearButton = new JButton(I18n.tr("clear.fields.dfmCreatorMain"));
 
     private JLabel fontLabel = new JLabel(I18n.tr("fontPath"));
 
@@ -199,6 +200,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
             panel.add(pixelsTopBox);
             panel.add(pixelsBottomBox);
             panel.add(startButton);
+            panel.add(clearButton);
             panel.add(fontLabel);
             panel.add(pixelsLabel);
             panel.add(dictionaryLabel);
@@ -219,11 +221,13 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
             pixelsTopBox.setBounds(50, 205, 50, 25);
             pixelsBottomBox.setBounds(250, 205, 50, 25);
 
-            startButton.setBounds(130, 250, 210, 25);
+            startButton.setBounds(45, 250, 210, 25);
+            clearButton.setBounds(265, 250, 150, 25);
 
             fontButton.addActionListener(this);
             dictionaryButton.addActionListener(this);
             startButton.addActionListener(this);
+            clearButton.addActionListener(this);
 
             return panel;
         }
@@ -232,9 +236,15 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
         @Override
 	public void actionPerformed(ActionEvent arg0) {
             if (arg0.getSource() == fontButton) {
-                    fontField.setText(getFile(false));
+                    String s = getFile(false);
+                    if (!"".equals(s)){
+                        fontField.setText(s);
+                    }
             } else if (arg0.getSource() == dictionaryButton) {
-                    dictionaryField.setText(getFile(true));
+                    String s = getFile(true);
+                    if (!"".equals(s)){
+                        dictionaryField.setText(s);
+                    }
             } else if (arg0.getSource() == startButton) {
                 
                 // Validate the values entered and
@@ -242,7 +252,9 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
                 // preferences summary which will enable
                 // us to actualy generate the font files.
                 validateAndShowSum();
-
+             
+            } else if (arg0.getSource() == clearButton){
+                    clearFields();
             } else if (arg0.getSource() == quitItem) {
                     System.exit(0);
             } else if (arg0.getSource() == aboutItem) {
@@ -253,6 +265,11 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
                 }
             }
 	}
+        
+    public void clearFields() {
+        fontField.setText("");
+        dictionaryField.setText("");
+    }
     
     public void showBFGsummary() {
         BFGSummary bfgSum = BFGSummary.getBFGwindow(); 
