@@ -252,6 +252,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         fontGenMenu = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jarCreatorMenu = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -397,10 +398,10 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         ISO1Label.setText("ISO-8859-1");
         ISO1Label.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 ISO1LabelAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -441,7 +442,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         OwnEncLabel.setMaximumSize(new java.awt.Dimension(140, 20));
         OwnEncLabel.setPreferredSize(new java.awt.Dimension(140, 20));
         EncodingPanel.add(OwnEncLabel);
-        OwnEncLabel.setBounds(30, 155, 140, 20);
+        OwnEncLabel.setBounds(30, 155, 155, 20);
 
         OwnEncTextField.setEnabled(false);
         OwnEncTextField.addInputMethodListener(new java.awt.event.InputMethodListener() {
@@ -452,9 +453,9 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         EncodingPanel.add(OwnEncTextField);
-        OwnEncTextField.setBounds(175, 155, 30, 25);
+        OwnEncTextField.setBounds(190, 155, 30, 25);
 
-        DBPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(0));
+        DBPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         DBPanel.setLayout(null);
 
         DBBrowseButton.setText("...");
@@ -558,7 +559,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         OwnLabel.setText(I18n.tr("chooseYourOwn.dfmCreatorMain")); // NOI18N
         SCPanel.add(OwnLabel);
-        OwnLabel.setBounds(35, 125, 140, 20);
+        OwnLabel.setBounds(35, 125, 155, 20);
 
         OwnSCTextField.setEnabled(false);
         OwnSCTextField.addInputMethodListener(new java.awt.event.InputMethodListener() {
@@ -569,7 +570,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         SCPanel.add(OwnSCTextField);
-        OwnSCTextField.setBounds(180, 125, 30, 25);
+        OwnSCTextField.setBounds(195, 125, 30, 25);
 
         SLPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         SLPanel.setLayout(null);
@@ -1039,11 +1040,11 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         dictGenMenu.add(jMenuItem3);
 
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem9.setText(I18n.tr("editAnExisting.dfmCreatorMain")); // NOI18N
+        jMenuItem9.setText(I18n.tr("editAnExistingProp.normal.dfmCreatorMain")); // NOI18N
         dictGenMenu.add(jMenuItem9);
 
         jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem10.setText(I18n.tr("checkCSVFile.dfmCreatorMain")); // NOI18N
+        jMenuItem10.setText(I18n.tr("checkCSVFile.normal.dfmCreatorMain")); // NOI18N
         dictGenMenu.add(jMenuItem10);
 
         dfmBuilderMenuBar.add(dictGenMenu);
@@ -1060,7 +1061,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem8.setText(I18n.tr("start.dfmCreatorMain")); // NOI18N
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1068,6 +1069,16 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         fontGenMenu.add(jMenuItem8);
+
+        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("de/kugihan/I18n-L10n/Bundle"); // NOI18N
+        jMenuItem11.setText(bundle.getString("clear.fields.dfmCreatorMain")); // NOI18N
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        fontGenMenu.add(jMenuItem11);
 
         dfmBuilderMenuBar.add(fontGenMenu);
 
@@ -1420,6 +1431,10 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         fontTK.validateAndShowSum();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        fontTK.clearFields();
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
     /**
      * printCopyrightNotice() prints a copyright
      * statement and the exits.
@@ -1566,6 +1581,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
