@@ -25,13 +25,13 @@
  */
 package de.kugihan.fonttoolkit;
 
-import de.kugihan.DfMCreator.BFGSummary;
-import de.kugihan.DfMCreator.DfMCreatorException;
-import de.kugihan.DfMCreator.DfMCreatorException.CSVDictionaryFilesNotFound;
-import de.kugihan.DfMCreator.DfMCreatorException.dictionaryDirNotAccessible;
-import de.kugihan.DfMCreator.DfMCreatorException.dictionaryFieldIsEmpty;
-import de.kugihan.DfMCreator.DfMCreatorException.fontFieldIsEmpty;
-import de.kugihan.DfMCreator.DfMCreatorException.fontNotAccessible;
+import de.kugihan.DfMCreator.SumWinBFG;
+import de.kugihan.DfMCreator.DfMCreatorExceptions;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.CSVDictionaryFilesNotFound;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.dictionaryDirNotAccessible;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.dictionaryFieldIsEmpty;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.fontFieldIsEmpty;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.fontNotAccessible;
 import de.kugihan.DfMCreator.DfMCreatorMain;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
@@ -272,7 +272,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
     }
     
     public void showBFGsummary() {
-        BFGSummary bfgSum = BFGSummary.getBFGwindow(); 
+        SumWinBFG bfgSum = SumWinBFG.getBFGwindow(); 
         bfgSum.setSize(400, 400);
         bfgSum.setLocation(screenSize.width / 2 - bfgSum.getWidth() / 2,
                            screenSize.height / 2 - bfgSum.getHeight() / 2);
@@ -286,12 +286,12 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
                 findCSVFiles(new File(dictionaryField.getText()));
                 showBFGsummary();
             } catch (CSVDictionaryFilesNotFound ex) {
-                    DfMCreatorMain.printAnyMsg(DfMCreatorException.CSVDictionaryFilesNotFoundMsg,
+                    DfMCreatorMain.printAnyMsg(DfMCreatorExceptions.CSVDictionaryFilesNotFoundMsg,
                                                I18n.tr("badDictDir"), JOptionPane.ERROR_MESSAGE);
             } catch (fontFieldIsEmpty e){
-                    DfMCreatorMain.printAnyMsg(DfMCreatorException.fontFieldIsEmptyMsg, I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
+                    DfMCreatorMain.printAnyMsg(DfMCreatorExceptions.fontFieldIsEmptyMsg, I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
             } catch (dictionaryFieldIsEmpty e){
-                    DfMCreatorMain.printAnyMsg(DfMCreatorException.dictionaryFielsIsEmptyMsg, I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
+                    DfMCreatorMain.printAnyMsg(DfMCreatorExceptions.dictionaryFielsIsEmptyMsg, I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
             }  catch (NumberFormatException e) {
                     showSizeError(e);
             } catch (Exception e) {
@@ -303,9 +303,9 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
             try {
                 beginProcess();
             } catch (fontNotAccessible e){
-                    DfMCreatorMain.printAnyMsg(DfMCreatorException.fontNotAccessibleMsg, I18n.tr("fontError"), JOptionPane.ERROR_MESSAGE);
+                    DfMCreatorMain.printAnyMsg(DfMCreatorExceptions.fontNotAccessibleMsg, I18n.tr("fontError"), JOptionPane.ERROR_MESSAGE);
             } catch (dictionaryDirNotAccessible e){
-                     DfMCreatorMain.printAnyMsg(DfMCreatorException.dictionaryDirNotAccessibleMsg, I18n.tr("notDictFiles"), JOptionPane.ERROR_MESSAGE);                            
+                     DfMCreatorMain.printAnyMsg(DfMCreatorExceptions.dictionaryDirNotAccessibleMsg, I18n.tr("notDictFiles"), JOptionPane.ERROR_MESSAGE);                            
             }
         }
 

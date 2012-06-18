@@ -51,7 +51,7 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
 
-public class DfMPropPreview extends JDialog implements ActionListener {
+public class PropertiesPreview extends JDialog implements ActionListener {
 
     //undo helpers
     protected UndoAction undoAction;
@@ -88,9 +88,9 @@ public class DfMPropPreview extends JDialog implements ActionListener {
     public JFileChooser fc = new JFileChooser();
     
     /**
-     * Creates new form DfMPropPreview
+     * Creates new form PropertiesPreview
      */
-    public DfMPropPreview() {
+    public PropertiesPreview() {
         initComponents();
     }
         
@@ -135,15 +135,15 @@ public class DfMPropPreview extends JDialog implements ActionListener {
         propTextPane.setBackground(new java.awt.Color(225, 255, 190));
         PropFileView.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         
-        PropFileView.setSize(500, 650);
+        PropFileView.setSize(500, 600);
         PropFileView.setLocation(screenSize.width / 2 - PropFileView.getWidth() / 2,
                                screenSize.height / 2 - PropFileView.getHeight() / 2);
         PropFileView.setModal(true);
         PropFileView.setResizable(false);
     }
     
-    public static DfMPropPreview getPropPreviewWin() {
-    	return new DfMPropPreview();
+    public static PropertiesPreview getPropPreviewWin() {
+    	return new PropertiesPreview();
     }
     
     public void appendText(String s) {

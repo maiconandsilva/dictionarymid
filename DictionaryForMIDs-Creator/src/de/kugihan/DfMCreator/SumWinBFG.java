@@ -33,12 +33,12 @@ package de.kugihan.DfMCreator;
 
 import edu.hws.eck.mdb.I18n;
 
-public class BFGSummary extends javax.swing.JFrame {
+public class SumWinBFG extends javax.swing.JFrame {
 
     /**
-     * Creates new form BFGSummary
+     * Creates new form SumWinBFG
      */
-    public BFGSummary() {
+    public SumWinBFG() {
         initComponents();
     }
 
@@ -95,7 +95,7 @@ public class BFGSummary extends javax.swing.JFrame {
 
             @Override
             public void run() {
-               // new BFGSummary().setVisible(true);
+               // new SumWinBFG().setVisible(true);
             }
         });
     }
@@ -106,8 +106,8 @@ public class BFGSummary extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     
-    public static BFGSummary getBFGwindow() {
-        return new BFGSummary();
+    public static SumWinBFG getBFGwindow() {
+        return new SumWinBFG();
     }
 
     /**

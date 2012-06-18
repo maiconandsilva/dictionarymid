@@ -29,7 +29,7 @@ It takes a dictd file, using jDictd, and converts it to a CSV-file.
 package de.kugihan.dictionaryformids.dictdtodictionaryformids;
 
 import de.kugihan.DfMCreator.DfMCreatorMain;
-import de.kugihan.DfMCreator.DictdConvSummary;
+import de.kugihan.DfMCreator.SumWinDictdToDfM;
 import edu.hws.eck.mdb.I18n;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -141,7 +141,7 @@ public class DictdToDfM {
     // of the conversion preferences before the actual
     // conversion.
     public static void printDictdConvSummary() {
-        DictdConvSummary summary = DictdConvSummary.getInstance();
+        SumWinDictdToDfM summary = SumWinDictdToDfM.getInstance();
         summary.setSize(425, 500);
         summary.setModal(true);
         summary.setLocation(screenSize.width / 2 - summary.getWidth() / 2,
@@ -221,7 +221,7 @@ public class DictdToDfM {
                     }
 			System.out.println(I18n.tr("done"));
 		} catch (UnsupportedEncodingException e){
-                            DictdConvSummary.done = true;
+                            SumWinDictdToDfM.done = true;
                             DfMCreatorMain.printAnyMsg(I18n.tr("encErrMsg", new Object[] {e.getLocalizedMessage()}),
                                                        I18n.tr("encErrWinTitle"), JOptionPane.ERROR_MESSAGE);
                             // print the exception in command line.

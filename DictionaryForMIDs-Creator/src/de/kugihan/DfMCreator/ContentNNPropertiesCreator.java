@@ -42,16 +42,16 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 
-public class ContentPropsEditor extends javax.swing.JDialog implements PropertyChangeListener {
+public class ContentNNPropertiesCreator extends javax.swing.JDialog implements PropertyChangeListener {
     
-    public static ContentPropsEditor getContentPropsEditor(){
-        return new ContentPropsEditor();
+    public static ContentNNPropertiesCreator getContentPropsEditor(){
+        return new ContentNNPropertiesCreator();
     }
 
     /**
-     * Creates new form ContentPropsEditor
+     * Creates new form ContentNNPropertiesCreator
      */
-    public ContentPropsEditor() {
+    public ContentNNPropertiesCreator() {
         initComponents();
     }
 
@@ -1579,7 +1579,7 @@ public class ContentPropsEditor extends javax.swing.JDialog implements PropertyC
 
             @Override
             public void run() {
-              //  new ContentPropsEditor().setVisible(true);
+              //  new ContentNNPropertiesCreator().setVisible(true);
             }
         });
     }
@@ -2076,12 +2076,12 @@ public class ContentPropsEditor extends javax.swing.JDialog implements PropertyC
     /**
      * setTheContentNNProperties() saves the content
      * settings into the content variables located as
-     * public static variables in the DfMPropCreate Class.
+     * public static variables in the PropertiesEditor Class.
      */
     private void setTheContentNNProperties() {
-        DfMPropCreate.language1NumberOfContentDeclarations = NumOfContentDecsCB1.getSelectedItem().toString();
-        DfMPropCreate.language2NumberOfContentDeclarations = NumOfContentDecsCB2.getSelectedItem().toString();
-        DfMPropCreate.language3NumberOfContentDeclarations = NumOfContentDecsCB3.getSelectedItem().toString();        
+        PropertiesEditor.language1NumberOfContentDeclarations = NumOfContentDecsCB1.getSelectedItem().toString();
+        PropertiesEditor.language2NumberOfContentDeclarations = NumOfContentDecsCB2.getSelectedItem().toString();
+        PropertiesEditor.language3NumberOfContentDeclarations = NumOfContentDecsCB3.getSelectedItem().toString();        
         
         ///////////////////////////////////////////
         //////////////// LANGUAGE-1 ///////////////
@@ -2089,68 +2089,68 @@ public class ContentPropsEditor extends javax.swing.JDialog implements PropertyC
         
         // language1Content1
         if (!"".equals(DisplayTextTextField1.getText())){
-            DfMPropCreate.language1Content1DisplayText = DisplayTextTextField1.getText();
+            PropertiesEditor.language1Content1DisplayText = DisplayTextTextField1.getText();
         }
         if (!"NONE".equals(FontColourComboBox.getSelectedItem().toString())){
-            DfMPropCreate.language1Content1FontColour = getRGBCodes(FontColourComboBox);
+            PropertiesEditor.language1Content1FontColour = getRGBCodes(FontColourComboBox);
         }
         if (!"NONE".equals(FontStyleComboBox1.getSelectedItem().toString())){
-            DfMPropCreate.language1Content1FontStyle = FontStyleComboBox1.getSelectedItem().toString();
+            PropertiesEditor.language1Content1FontStyle = FontStyleComboBox1.getSelectedItem().toString();
         }
         
         if (DisplaySelectableCheckBox1.isSelected()){
-            DfMPropCreate.language1Content1DisplaySelectable = "true";
+            PropertiesEditor.language1Content1DisplaySelectable = "true";
         } else {
-            DfMPropCreate.language1Content1DisplaySelectable = "false";
+            PropertiesEditor.language1Content1DisplaySelectable = "false";
         }
         // language1Content2
         switch (NumOfContentDecsCB1.getSelectedItem().toString()) {
             case "2":
                 if (!"".equals(DisplayTextTF1.getText())){
-                    DfMPropCreate.language1Content2DisplayText = DisplayTextTF1.getText();
+                    PropertiesEditor.language1Content2DisplayText = DisplayTextTF1.getText();
                 }
                 if (!"NONE".equals(FontColourCB1.getSelectedItem().toString())){
-                    DfMPropCreate.language1Content2FontColour = getRGBCodes(FontColourCB1);
+                    PropertiesEditor.language1Content2FontColour = getRGBCodes(FontColourCB1);
                 }
                 if (!"NONE".equals(FontStyleCB1.getSelectedItem().toString())){
-                    DfMPropCreate.language1Content2FontStyle = FontStyleCB1.getSelectedItem().toString();
+                    PropertiesEditor.language1Content2FontStyle = FontStyleCB1.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB1.isSelected()){
-                    DfMPropCreate.language1Content2DisplaySelectable = "true";
+                    PropertiesEditor.language1Content2DisplaySelectable = "true";
                 } else {
-                    DfMPropCreate.language1Content2DisplaySelectable = "false";
+                    PropertiesEditor.language1Content2DisplaySelectable = "false";
                 }
                 break;
             case "3":
                 if (!"".equals(DisplayTextTF2.getText())){
-                    DfMPropCreate.language1Content3DisplayText = DisplayTextTF2.getText();
+                    PropertiesEditor.language1Content3DisplayText = DisplayTextTF2.getText();
                 }
                 if (!"NONE".equals(FontColourCB2.getSelectedItem().toString())){
-                    DfMPropCreate.language1Content3FontColour = getRGBCodes(FontColourCB2);
+                    PropertiesEditor.language1Content3FontColour = getRGBCodes(FontColourCB2);
                 }
                 if (!"NONE".equals(FontStyleCB2.getSelectedItem().toString())){
-                    DfMPropCreate.language1Content3FontStyle = FontStyleCB2.getSelectedItem().toString();
+                    PropertiesEditor.language1Content3FontStyle = FontStyleCB2.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB2.isSelected()){
-                    DfMPropCreate.language1Content3DisplaySelectable = "true";
+                    PropertiesEditor.language1Content3DisplaySelectable = "true";
                 } else {
-                    DfMPropCreate.language1Content3DisplaySelectable = "false";
+                    PropertiesEditor.language1Content3DisplaySelectable = "false";
                 }
                 break;
             case "4":
                 if (!"".equals(DisplayTextTF3.getText())){
-                    DfMPropCreate.language1Content4DisplayText = DisplayTextTF3.getText();
+                    PropertiesEditor.language1Content4DisplayText = DisplayTextTF3.getText();
                 }
                 if (!"NONE".equals(FontColourCB3.getSelectedItem().toString())){
-                    DfMPropCreate.language1Content4FontColour = getRGBCodes(FontColourCB3);
+                    PropertiesEditor.language1Content4FontColour = getRGBCodes(FontColourCB3);
                 }
                 if (!"NONE".equals(FontStyleCB3.getSelectedItem().toString())){
-                    DfMPropCreate.language1Content4FontStyle = FontStyleCB3.getSelectedItem().toString();
+                    PropertiesEditor.language1Content4FontStyle = FontStyleCB3.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB3.isSelected()){
-                    DfMPropCreate.language1Content4DisplaySelectable = "true";
+                    PropertiesEditor.language1Content4DisplaySelectable = "true";
                 } else {
-                    DfMPropCreate.language1Content4DisplaySelectable = "false";
+                    PropertiesEditor.language1Content4DisplaySelectable = "false";
                 }
                 break;
         }
@@ -2159,69 +2159,69 @@ public class ContentPropsEditor extends javax.swing.JDialog implements PropertyC
         //////////////// LANGUAGE-2 ///////////////
         /////////////////////////////////////////// 
         if (!"".equals(DisplayTextTextField2.getText())){
-            DfMPropCreate.language2Content1DisplayText = DisplayTextTextField2.getText();
+            PropertiesEditor.language2Content1DisplayText = DisplayTextTextField2.getText();
         }
         
         if (!"NONE".equals(FontColourComboBox2.getSelectedItem().toString())){
-            DfMPropCreate.language2Content1FontColour = getRGBCodes(FontColourComboBox2);
+            PropertiesEditor.language2Content1FontColour = getRGBCodes(FontColourComboBox2);
         }
         
         if (!"NONE".equals(FontStyleComboBox2.getSelectedItem().toString())){
-            DfMPropCreate.language2Content1FontStyle = FontStyleComboBox2.getSelectedItem().toString();
+            PropertiesEditor.language2Content1FontStyle = FontStyleComboBox2.getSelectedItem().toString();
         }
         
         if (DisplaySelectableCheckBox2.isSelected()){
-            DfMPropCreate.language2Content1DisplaySelectable = "true";
+            PropertiesEditor.language2Content1DisplaySelectable = "true";
         } else {
-            DfMPropCreate.language2Content1DisplaySelectable = "false";
+            PropertiesEditor.language2Content1DisplaySelectable = "false";
         }
         switch (NumOfContentDecsCB2.getSelectedItem().toString()) {
             case "2":
                 if (!"".equals(DisplayTextTF4.getText())){
-                    DfMPropCreate.language2Content2DisplayText = DisplayTextTF4.getText();
+                    PropertiesEditor.language2Content2DisplayText = DisplayTextTF4.getText();
                 }
                 if (!"NONE".equals(FontColourCB4.getSelectedItem().toString())){
-                    DfMPropCreate.language2Content2FontColour = getRGBCodes(FontColourCB4);
+                    PropertiesEditor.language2Content2FontColour = getRGBCodes(FontColourCB4);
                 }
                 if (!"NONE".equals(FontStyleCB4.getSelectedItem().toString())){
-                    DfMPropCreate.language2Content2FontStyle = FontStyleCB4.getSelectedItem().toString();
+                    PropertiesEditor.language2Content2FontStyle = FontStyleCB4.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB4.isSelected()){
-                    DfMPropCreate.language2Content2DisplaySelectable = "true";
+                    PropertiesEditor.language2Content2DisplaySelectable = "true";
                 } else {
-                    DfMPropCreate.language2Content2DisplaySelectable = "false";
+                    PropertiesEditor.language2Content2DisplaySelectable = "false";
                 }
                 break;
             case "3":
                 if (!"".equals(DisplayTextTF5.getText())){
-                    DfMPropCreate.language2Content3DisplayText = DisplayTextTF5.getText();
+                    PropertiesEditor.language2Content3DisplayText = DisplayTextTF5.getText();
                 }
                 if (!"NONE".equals(FontColourCB5.getSelectedItem().toString())){
-                    DfMPropCreate.language2Content3FontColour = getRGBCodes(FontColourCB5);
+                    PropertiesEditor.language2Content3FontColour = getRGBCodes(FontColourCB5);
                 }
                 if (!"NONE".equals(FontStyleCB5.getSelectedItem().toString())){
-                    DfMPropCreate.language2Content3FontStyle = FontStyleCB5.getSelectedItem().toString();
+                    PropertiesEditor.language2Content3FontStyle = FontStyleCB5.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB5.isSelected()){
-                    DfMPropCreate.language2Content3DisplaySelectable = "true";
+                    PropertiesEditor.language2Content3DisplaySelectable = "true";
                 } else {
-                    DfMPropCreate.language2Content3DisplaySelectable = "false";
+                    PropertiesEditor.language2Content3DisplaySelectable = "false";
                 }
                 break;
             case "4":
                 if (!"".equals(DisplayTextTF6.getText())){
-                    DfMPropCreate.language2Content4DisplayText = DisplayTextTF6.getText();
+                    PropertiesEditor.language2Content4DisplayText = DisplayTextTF6.getText();
                 }
                 if (!"NONE".equals(FontColourCB6.getSelectedItem().toString())){
-                    DfMPropCreate.language2Content4FontColour = getRGBCodes(FontColourCB6);
+                    PropertiesEditor.language2Content4FontColour = getRGBCodes(FontColourCB6);
                 }
                 if (!"NONE".equals(FontStyleCB6.getSelectedItem().toString())){
-                    DfMPropCreate.language2Content4FontStyle = FontStyleCB6.getSelectedItem().toString();
+                    PropertiesEditor.language2Content4FontStyle = FontStyleCB6.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB6.isSelected()){
-                    DfMPropCreate.language2Content4DisplaySelectable = "true";
+                    PropertiesEditor.language2Content4DisplaySelectable = "true";
                 } else {
-                    DfMPropCreate.language2Content4DisplaySelectable = "false";
+                    PropertiesEditor.language2Content4DisplaySelectable = "false";
                 }
                 break;
         }
@@ -2230,69 +2230,69 @@ public class ContentPropsEditor extends javax.swing.JDialog implements PropertyC
         //////////////// LANGUAGE-3 ///////////////
         ///////////////////////////////////////////
         if (!"".equals(DisplayTextTextField3.getText())){
-            DfMPropCreate.language3Content1DisplayText = DisplayTextTextField3.getText();
+            PropertiesEditor.language3Content1DisplayText = DisplayTextTextField3.getText();
         }
         
         if (!"NONE".equals(FontColourComboBox3.getSelectedItem().toString())){
-            DfMPropCreate.language3Content1FontColour = getRGBCodes(FontColourComboBox3);
+            PropertiesEditor.language3Content1FontColour = getRGBCodes(FontColourComboBox3);
         }
 
         if (!"NONE".equals(FontStyleComboBox3.getSelectedItem().toString())){
-            DfMPropCreate.language3Content1FontStyle = FontStyleComboBox3.getSelectedItem().toString();
+            PropertiesEditor.language3Content1FontStyle = FontStyleComboBox3.getSelectedItem().toString();
         }
         
         if (DisplaySelectableCheckBox3.isSelected()){
-            DfMPropCreate.language3Content1DisplaySelectable = "true";
+            PropertiesEditor.language3Content1DisplaySelectable = "true";
         } else {
-            DfMPropCreate.language3Content1DisplaySelectable = "false";
+            PropertiesEditor.language3Content1DisplaySelectable = "false";
         }
         switch (NumOfContentDecsCB3.getSelectedItem().toString()) {
             case "2":
                 if (!"".equals(DisplayTextTF7.getText())){
-                    DfMPropCreate.language3Content2DisplayText = DisplayTextTF7.getText();
+                    PropertiesEditor.language3Content2DisplayText = DisplayTextTF7.getText();
                 }
                 if (!"NONE".equals(FontColourCB7.getSelectedItem().toString())){
-                    DfMPropCreate.language3Content2FontColour = getRGBCodes(FontColourCB7);
+                    PropertiesEditor.language3Content2FontColour = getRGBCodes(FontColourCB7);
                 }
                 if (!"NONE".equals(FontStyleCB7.getSelectedItem().toString())){
-                    DfMPropCreate.language3Content2FontStyle = FontStyleCB7.getSelectedItem().toString();
+                    PropertiesEditor.language3Content2FontStyle = FontStyleCB7.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB7.isSelected()){
-                    DfMPropCreate.language3Content2DisplaySelectable = "true";
+                    PropertiesEditor.language3Content2DisplaySelectable = "true";
                 } else {
-                    DfMPropCreate.language3Content2DisplaySelectable = "false";
+                    PropertiesEditor.language3Content2DisplaySelectable = "false";
                 }
                 break;
             case "3":
                 if (!"".equals(DisplayTextTF8.getText())){
-                    DfMPropCreate.language3Content3DisplayText = DisplayTextTF8.getText();
+                    PropertiesEditor.language3Content3DisplayText = DisplayTextTF8.getText();
                 }
                 if (!"NONE".equals(FontColourCB8.getSelectedItem().toString())){
-                    DfMPropCreate.language3Content3FontColour = getRGBCodes(FontColourCB8);
+                    PropertiesEditor.language3Content3FontColour = getRGBCodes(FontColourCB8);
                 }
                 if (!"NONE".equals(FontStyleCB8.getSelectedItem().toString())){
-                    DfMPropCreate.language3Content3FontStyle = FontStyleCB8.getSelectedItem().toString();
+                    PropertiesEditor.language3Content3FontStyle = FontStyleCB8.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB8.isSelected()){
-                    DfMPropCreate.language3Content3DisplaySelectable = "true";
+                    PropertiesEditor.language3Content3DisplaySelectable = "true";
                 } else {
-                    DfMPropCreate.language3Content3DisplaySelectable = "false";
+                    PropertiesEditor.language3Content3DisplaySelectable = "false";
                 }
                 break;
             case "4":
                 if (!"".equals(DisplayTextTF9.getText())){
-                    DfMPropCreate.language3Content4DisplayText = DisplayTextTF9.getText();
+                    PropertiesEditor.language3Content4DisplayText = DisplayTextTF9.getText();
                 }
                 if (!"NONE".equals(FontColourCB9.getSelectedItem().toString())){
-                    DfMPropCreate.language3Content4FontColour = getRGBCodes(FontColourCB9);
+                    PropertiesEditor.language3Content4FontColour = getRGBCodes(FontColourCB9);
                 }
                 if (!"NONE".equalsIgnoreCase(FontStyleCB9.getSelectedItem().toString())){
-                    DfMPropCreate.language3Content4FontStyle = FontStyleCB9.getSelectedItem().toString();
+                    PropertiesEditor.language3Content4FontStyle = FontStyleCB9.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB9.isSelected()){
-                    DfMPropCreate.language3Content4DisplaySelectable = "true";
+                    PropertiesEditor.language3Content4DisplaySelectable = "true";
                 } else {
-                    DfMPropCreate.language3Content4DisplaySelectable = "false";
+                    PropertiesEditor.language3Content4DisplaySelectable = "false";
                 }
                 break;
         }

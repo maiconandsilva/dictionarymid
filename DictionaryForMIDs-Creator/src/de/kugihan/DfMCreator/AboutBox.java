@@ -231,7 +231,7 @@ public class AboutBox extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     
     private void getGPLFile() {
-        String s = DfMCreatorHelpWin.path + I18n.tr("gplFileName.aboutBox");
+        String s = HelpContents.path + I18n.tr("gplFileName.aboutBox");
         gplURL = getClass().getResource(s);
         if (gplURL == null) {
             System.err.println(I18n.tr("couldntFindHelFile") + " " + s);

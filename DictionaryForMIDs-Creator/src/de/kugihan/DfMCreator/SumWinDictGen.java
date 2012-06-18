@@ -42,19 +42,19 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 
-public class DictGenSummary extends javax.swing.JDialog implements PropertyChangeListener {
+public class SumWinDictGen extends javax.swing.JDialog implements PropertyChangeListener {
     
     private static Task task;
     public static boolean done;
        
-    public static DictGenSummary getDictGenSummary(){
-        return new DictGenSummary();
+    public static SumWinDictGen getDictGenSummary(){
+        return new SumWinDictGen();
     }
 
     /**
-     * Creates new form DictGenSummary
+     * Creates new form SumWinDictGen
      */
-    public DictGenSummary() {
+    public SumWinDictGen() {
         initComponents();
     }
 
@@ -199,7 +199,7 @@ public class DictGenSummary extends javax.swing.JDialog implements PropertyChang
 
             @Override
             public void run() {
-              //  new DictGenSummary().setVisible(true);
+              //  new SumWinDictGen().setVisible(true);
             }
         });
     }

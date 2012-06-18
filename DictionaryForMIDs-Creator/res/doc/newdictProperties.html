@@ -11,47 +11,57 @@
 <body>
 
 
-<div id="menu">
-	<iframe src="menu.html" width="95%" height="450" frameborder=0></iframe>
-</div>
-
 <div id="content">
 
 		<a name="Setup"></a>
 		<h2><a name="SetupJADProperties"></a>Configuring the properties of 
 		the file DictionaryForMIDs.properties</h2>
-		<p>DictionaryForMIDs is customized via properties in 
+		<p>DictionaryForMIDs is customized via a set of properties in a file called
 		DictionaryForMIDs.properties. Each of the properties must be provided 
-		unless noted otherwise.</p>
-		<p>Here is the list of properties:</p>
+		unless otherwise noted.<br>
+		The PropertiesEditor of DictionaryForMIMs-Creator is a GUI that makes
+		it easier to create a DictionaryForMIDs.properties file. There, you will
+		use CheckBoxes, Comboboxes, Lists, Sliders and so on, to create the properties
+		file. When done, PropertiesEditor will save your options in a
+		DictionaryForMIDs.properties file.<br>
+		To launch the PropertiesEditor, go to the DictionaryGeneration tab and hit
+		the <b>Create</b> button.</p>
+		<img src="images/CreateButton-2.png" alt="Launching the PropertiesEditor window" ><br><br>
+		<h2>List of properties:</h2>
+		<i>infoText</i><br>
+		<img src="images/infoT.png" alt="infoText" >
 		<ul>
 		<li>infoText</li>
 		</ul>
-		<p>Text that is shown on the top of the info-dialog. Please provide here 
-		information about the dictionary. Obligatory, include here contact 
-		information for someone who can be contacted concerning the dictionary. 
-		That may be you (the person who set up this dictionary into 
-		DictionaryForMIDs) and/or the maintainer of the dictionary itself. 
-		Please include an email-address and/or homepage.<br>
-		Also obligatory, please put a copyright notice for the dictionary.<br>
+		<p>Text that is shown on top of the info-dialog. Please provide in this TextArea,
+		information about the dictionary, like contact information for someone who can be
+		contacted concerning the dictionary. That may be you (the person who set up this
+		dictionary into DictionaryForMIDs) and/or the maintainer of the dictionary itself. 
+		So, include an email-address and/or homepage. Also provide a copyright notice for the dictionary.<br>
 		&nbsp;</p>
+		<i>dictionaryAbbreviation and<br>
+		numberOfAvailableLanguages</i><br>
+		<img src="images/dictAbbrevAnNumOfAvLang.png" alt="DictAbbrevAndNumOfAvLang" >
 		<ul>
 		<li>dictionaryAbbreviation</li>
-		</ul>
-		<p>Short abbreviation for identifying the origin of the dictionary. This 
-		is an abbreviation for the name of the organization or project where the 
-		dictionary comes from, e.g. freedict for the dictionaries from 
-		freedict.org. Preferably only a few characters long. The JarCreator tool 
-		uses this property to form the application name.<br>
-		&nbsp;</p>
-		<ul>
 		<li>numberOfAvailableLanguages</li>
 		</ul>
-		<p>Defines how many languages are in the dictionary. For many 
-		dictionaries this will be 2. For each language the languageX-properties 
-		need to be defined as described below (X is a number starting from 1 to 
-		numberOfAvailableLanguages).<br>
+		<p>dictionaryAbbreviation is a short abbreviation for identifying the
+		origin of the dictionary. This is an abbreviation for the name of the
+		organization or project where the dictionary comes from, e.g. freedict
+		for the dictionaries from freedict.org. Preferably only a few characters
+		long. The JarCreator tab uses this property to form the application name.<br><br>
+		
+		numberOfAvailableLanguages defines how many languages are in the dictionary. For many 
+		dictionaries this will be 2. Here the ComboBox gives you 2 choices: 2 or 3 languages.
+		For each language the languageX-properties need to be defined as described below
+		(X is a number starting from 1 to numberOfAvailableLanguages).<br>
+		As an example, we selected	"2" in the ComboBox, so all the properties we will be
+		using are defined only for language1 and language2. Selecting "3" would also
+		define these properties for language3.<br>
 		&nbsp;</p>
+		<i>languageXDisplayText</i><br>
+		<img src="images/languageXDisplaryText.png" alt="languageXDisplaryText.png" >
 		<ul>
 		<li>languageXDisplayText</li>
 		</ul>
@@ -61,104 +71,146 @@
 		language1DisplayText: English<br>
 		language2DisplayText: Portuguese<br>
 		&nbsp;</p>
+		<i>languageXFilePostfix and<br>
+		dictionaryGenerationOmitParFromIndex</i><br>
+		<img src="images/PostFixAndOmitParFromInd.png" alt="PostFixAndOmitParFromInd.png" >
 		<ul>
 		<li>languageXFilePostfix</li>
+		<li>dictionaryGenerationOmitParFromIndex</li>
 		</ul>
-		<p>Text that is used in file names to identify searchfile and index 
-		files for a language. Typically a 3-letter text, such as Eng for 
-		English; as defined in the ISO 3-letter codes available
-		<a href="http://en.wikipedia.org/wiki/List_of_ISO_639-2_codes">here</a>.</p>
+		<p>languageXFilePostfix is the text that is used in file names to identify the
+		searchfile and the index files for a language. This is typically a 3-letter text,
+		such as Eng for English; as defined in the ISO 3-letter codes available
+		<a href="http://en.wikipedia.org/wiki/List_of_ISO_639-2_codes">here</a>.
+		As shown in the screen shot, the ComboBox comes with some default values.
+		If your choice is not included in the default values, then select <b>CHOOSE MY OWN</b>
+		in order to manually enter a value.<br><br>
 		
+		dictionaryGenerationOmitParFromIndex:
+		DictionaryGeneration excludes text within curly brackets from indexing (i.e.
+		the text within {{ and }} is not included in the index files, see
+		<a href="newdict.html#IndexFileSizeReduction">here</a> for more information). This 
+		behaviour can be switched off by setting 
+		dictionaryGenerationOmitParFromIndex to false. When 
+		dictionaryGenerationOmitParFromIndex is set to false, then also the text 
+		within {{ and }} will be included in the index.<br>
+		The property dictionaryGenerationOmitParFromIndex is optional. The 
+		default value is true. To switch true/false use the CheckBox, that is
+		switch select/deselect.
+		&nbsp;</p>		
+		<i>languageXIsSearchable</i><br>
+		<img src="images/LanguageXIsSearchable.png" alt="LanguageXIsSearchable.png" >
 		<ul>
 		<li>languageXIsSearchable</li>
 		</ul>
 		
-		<p>A boolean property with either the value true or the value false. Set 
-		to true when it is allowed to search for translations for that language. 
-		Normally this property is set to true for bi-directional translation 
-		dictionaries. For lookup dictionaries, e.g. for an acronym dictionary, 
-		where it is only possibly to search from the acronym to the explanation, 
-		this value is set false for the explanation language/column. For an 
+		<p>This is a boolean property with either the value true or false, that
+		is selected or deselected. Select the CheckBox when it is allowed to
+		search for translations for that language. Normally this property is
+		selected for bi-directional translation dictionaries. For lookup
+		dictionaries, e.g. for an acronym dictionary, where it is only
+		possible to search from the acronym to the explanation, this property
+		is set to false (deselected) for the explanation language/column. For an 
 		example see the elements dictionary from
 		<a href="dict.html">the download section</a>.</p>
 		
 		<p>Also for an unidirectional dictionary, which for example only translates 
-		English to Portuguese (but not Portuguese to English), you have to set 
-		languageXIsSearchable to false for Portuguese.<br>
+		from English to Portuguese (but not Portuguese to English), you have to set 
+		languageXIsSearchable to false (deselect the CheckBox) for Portuguese.<br>
 		This property is optional, the default value is true.<br>
 		&nbsp;</p>
+		<i>languageXGenerateIndex</i><br>
+		<img src="images/LanguageXGenerateIndex.png" alt="LanguageXGenerateIndex.png" >
 		<ul>
 		<li>languageXGenerateIndex</li>
 		</ul>
-		<p>A boolean property with either the value true or the value false. 
-		Tells DictionayGeneration whether to generate an index for this 
-		language.<br>
-		This property is optional, the default value is true.<br>
+		<p>This is a boolean property with either the value true or false,
+		that is selected or deselected. This tells DictionayGeneration whether
+		to generate an index for this language.<br>
+		This property is optional, the default value is true (selected).<br>
 		Normally this property has the same value as languageXIsSearchable.<br>
 		&nbsp;</p>
+		<i>languageXHasSeparateDictionaryFile</i><br>
+		<img src="images/LanguageXHasSeparateDictionaryFile.png" alt="LanguageXHasSeparateDictionaryFile.png" >
 		<ul>
 		<li>languageXHasSeparateDictionaryFile</li>
 		</ul>
-		<p>A boolean property with either the value true or the value false. Set 
-		to true, when there is a separate dictionaryXXX.csv file for this 
-		language (for an explanation about the files, see section 
-		<a href="newdictDictionaryGeneration.html">
+		<p>This is a boolean property with either the value true or false,
+		that is selected or deselected. Select this CheckBox when there is
+		a separate dictionaryXXX.csv file for this language (for an explanation
+		about the files, see section <a href="newdictDictionaryGeneration.html">
 		Files generated by the DictionaryGeneration tool</a>). Normally all 
 		languages use the same dictionaryXXX.csv files, namely for those 
 		dictionaries where expression ABC translates to XYZ and this means that 
 		XYZ translates back to ABC. For dictionaries where ABC translates to 
-		XYZ, however XYZ translates to DEF, this property is set to true. For an 
-		example, see the German-French freedict dictionary from 
-		<a href="dict.html">
-		the download section</a>.<br>
+		XYZ, however XYZ translates to DEF, this property is set to true that
+		is, the CheckBox is deselected. For an example, see the German-French
+		freedict dictionary from <a href="dict.html"> the download section</a>.<br>
 		For documentation, see <a href="newdictMultiple.html">here.</a><br>
-		This property is optional, the default value is false.<br>
+		This property is optional, the default value is false (deselected).<br>
 		&nbsp;</p>
+		<i>dictionaryGenerationSeparatorCharacter</i>,<br>
+		<i>indexFileSeparationCharacter</i>,<br>
+		<i>searchListFileSeparationCharacter</i> and<br>
+		<i>dictionaryFileSeparationCharacter</i><br>
+		<img src="images/SeparatorCharacters.png" alt="SeparatorCharacters.png" >
 		<ul>
 		<li>dictionaryGenerationSeparatorCharacter</li>
+		<li>indexFileSeparationCharacter</li>
+		<li>searchListFileSeparationCharacter</li>
+		<li>dictionaryFileSeparationCharacter</li>
 		</ul>
-		<p>Separation character for the input dictionary file that is read by 
-		DictionayGeneration. This character needs to be put in apostrophes, e.g. 
-		','. Can also be '\t' (backslash plus t) for a tab-character.<br>
-		This property is optional, the default value is \t (tab-character)<br>
-		&nbsp;</p>
-		<ul>
-		<li>
-		indexFileSeparationCharacter/searchListFileSeparationCharacter/dictionaryFileSeparationCharacter</li>
-		</ul>
-		<p>Separation character for the output csv files that are generated by 
-		DictionayGeneration. This character needs to be put in apostrophes, e.g. 
-		','. Can also be '\t' (backslash plus t) for a tab-character. Typically 
-		these properties are set to the same value as 
-		dictionaryGenerationSeparatorCharacter.<br>
-        &nbsp;</p>
+		<p>dictionaryGenerationSeparatorCharacter is the separation character
+		for the input dictionary file that is read by DictionayGeneration.<br>
+		indexFileSeparationCharacter, searchListFileSeparationCharacter,
+		dictionaryFileSeparationCharacter are the separation character for
+		the output csv files that are generated by DictionayGeneration.<br>
+		The separaton character for the above mentioned properties needs
+		to be put in apostrophes when manually writing/editing
+		the DictionaryForMIDs.properties file. Can be ',' or ';'. Can also be '\t'
+		(backslash plus t) for a tab-character.<br>
+		This property is optional, the default value is \t (tab-character).
+		Here, in the PropertiesEditor, some default values are provided in ComboBoxes.
+		Just choose between these values.<br>
+      &nbsp;</p>
+      <i>dictionaryGenerationLanguageXExpressionSplitString</i><br>
+		<img src="images/langExpSplitString.png" alt="langExpSplitString.png" >
 		<ul>
 		<li>dictionaryGenerationLanguageXExpressionSplitString</li>
 		</ul>
-		<p>Used by DictionaryGeneration: when for a language a read expression 
-		actually contains several expressions, then this property is set to the 
-		string that separates the expressions. <br>
-		Example: the expression &quot;to choose, to select, to pick&quot; contains not one 
-		but three expressions: (1) &quot;to choose&quot;, (2) &quot;to select&quot; and (3) &quot;to 
+		<p>This is used by DictionaryGeneration as follows: when for a language
+		an expression actually contains several sub-expressions, this property
+		is set to the string that separates these sub-expressions. <br>
+		Example: the expression &quot;to choose, to select, to pick&quot; contains
+		three sub-expressions: (1) &quot;to choose&quot;, (2) &quot;to select&quot; and (3) &quot;to 
 		pick&quot;. By setting dictionaryGenerationLanguageXExpressionSplitString to 
 		,&nbsp; for this language, DictionaryGeneration will extract these 3 
-		expressions. This is done for language2 with the following line:<br>
-		dictionaryGenerationLanguage2ExpressionSplitString=,<br>
-		This property is optional, the default value is 'property not set'.<br>
+		expressions. This is done by writing the SplitString for a language, in the
+		TextField that correspond to that language in the PropertiesEditor.<br>
+		This property is optional, the default value is blank (nothing is entered in the TextField).<br>
 		&nbsp;</p>
+		<i>dictionaryGenerationInputCharEncoding</i><br>
+		<img src="images/DictGenInputCharEnc.png" alt="DictGenInputCharEnc.png" >
 		<ul>
 		<li>dictionaryGenerationInputCharEncoding</li>
 		</ul>
 		<p>Character set encoding for the input dictionary file that is read by 
 		DictionaryGeneration.</p>
-		<p>Supported character set encodings are:<br>
+		<p>Supported character set encodings are provided in the ComboBox.<br>
+		As you can see them on the screen shot, they are:<br>
 		UTF-8<br>
 		ISO-8859-1<br>
 		US-ASCII</p>
-		<p>This property is optional, the default value is ISO-8859-1.<br>
+		<p>The default value is ISO-8859-1 but the first on the list is UTF-8. It works fine also.<br>
 		&nbsp;</p>
+		<i>indexCharEncoding</i>,<br>
+		<i>searchListCharEncoding</i> and<br>
+		<i>dictionaryCharEncoding</i><br>
+		<img src="images/charEncodings.png" alt="charEncodings.png" >
 		<ul>
-		<li>indexCharEncoding/searchListCharEncoding/dictionaryCharEncoding</li>
+		<li>indexCharEncoding</li>
+		<li>searchListCharEncoding</li>
+		<li>dictionaryCharEncoding</li>
 		</ul>
 		<p>These 3 properties define the character set encoding that is used for 
 		the output searchlist file/index files/dictionary files.</p>
@@ -166,10 +218,11 @@
 		UTF-8<br>
 		ISO-8859-1<br>
 		US-ASCII</p>
-		<p>Note: on very old mobiles/PDA devices UTF-8 may not yet be supported. 
-		We would expect that each model that was released recently supports 
-		UTF-8.<br>
+		<p>Note: on very old mobile/PDA devices UTF-8 may not be supported. 
+		normally recent models do support it.
 		&nbsp;</p>
+		<i>languageXDictionaryUpdateClassName</i><br>
+		<img src="images/DictUpdateClassName.png" alt="DictUpdateClassName.png" >
 		<ul>
 		<li>languageXDictionaryUpdateClassName</li>
 		</ul>
@@ -181,20 +234,22 @@
 		Generating the files for DictionaryForMIDs</a>.</p>
 		
 		<p>For example: DictionaryUpdateEngDef removes unneeded words from the 
-		indexes such as &quot;the&quot;, &quot;a&quot;, and &quot;at&quot;. These words are unneeded in the 
-		indexes and adds unnecessarily to the file size. When a user performs a 
-		search then these words will still be displayed in the definition, 
-		however.</p>
+		indexes such as &quot;the&quot;, &quot;a&quot;, and &quot;at&quot;.
+		These words are unneeded in the indexes and add unnecessary size
+		to the files. When a user performs a search, these words will
+		still be displayed in the definition, however.<br>
+		All the available DictionaryUpdate classes' names are provided in
+		the ComboBoxes.</p>
 		
 		<p>The property languageXDictionaryUpdateClassName is optional. Use this 
-		property only if you really need it, otherwise remove any 
-		languageXDictionaryUpdateClassName-lines in the property file !<br>
+		property only if you really need it, otherwise set the selected choicec in
+		the ComboBoxes to <b>NONE</b><br>
 		&nbsp;</p>
-		
+		<i>languageXNormationClassName</i><br>
+		<img src="images/Normation.png" alt="Normation.png" >
 		<ul>
 		<li><a name="Normation"></a>languageXNormationClassName</li>
-		</ul>
-		
+		</ul>		
 		<p>This is the name of a Java class that is used to 'normate' words. 
 		Whereas DictionaryUpdateClass changes dictionary files only when the 
 		dictionary is generated, NormationClass affects the words that the user 
@@ -208,7 +263,7 @@
 		<p>These changes in the dictionary files are done in 2 steps.&nbsp; 
 		First the DictionaryGeneration-tool calls the NormationClass to change 
 		the indexes to incorporate the phonetic changes (ä is changed to ae, for 
-		example).&nbsp; Then when the user searches, the NormationClass is 
+		example).&nbsp; Then when the user performs a search, the NormationClass is 
 		called again to make the phonetic changes to match the changes that were 
 		made earlier with the DictionaryGeneration-tool.</p>
 		
@@ -216,25 +271,21 @@
 		search features and phonetic search. A lot of power lies in these 
 		Normation classes !!<br>
 		Normation classes are available for several languages. For a list of 
-        available Normation classes see <a href="newdictNormationLang.html">here</a>.
-        <br>
-        If you intend to implement a new Normation classe, see the documentation 
-        of NormationClass<a href="newdictNormation.html">
-		here.</a><br>
-        The property languageXNormationClassName is optional.<br>
+      available Normation classes see <a href="newdictNormationLang.html">here</a>.
+      <br>
+      If you intend to implement a new Normation class, see the documentation 
+      of NormationClass<a href="newdictNormation.html">here.</a><br>
+      All the available Normation classes' names are provided in the ComboBoxes
+      but the property languageXNormationClassName is optional<br>
 		&nbsp;</p>
+		<i>searchListFileMaxSize</i>,<br>
+		<i>indexFileMaxSize</i>and <br>
+		<i>dictionaryFileMaxSize</i><br>
+		<img src="images/FilesMaxSizes.png" alt="FilesMaxSizes.png" >
 		<ul>
-		<li>languageXContentNN properties</li>
-		</ul>
-		<p>With the languageXContentNN properties you can specify the content of 
-		your dictionary. For example you can specify that there is a 
-		pronunciation part, an explanation part, etc.<br>
-		For more information on the languageXContentNN-properties, see <a href="newdictContent.html">
-        here</a>.<br>
-        The languageXContentNN properties are optional.<br>
-		&nbsp;</p>
-		<ul>
-		<li>searchListFileMaxSize/indexFileMaxSize/dictionaryFileMaxSize</li>
+		<li>searchListFileMaxSize</li>
+		<li>indexFileMaxSize</li>
+		<li>dictionaryFileMaxSize</li>
 		</ul>
 		<p>Defines the size in bytes of the biggest searchlist file/index 
 		file/dictionary file, as generated by DictionaryGeneration. These 
@@ -253,63 +304,82 @@
 		you set the dictionaryFileMaxSize to 50000 even if the biggest 
 		dictionary file is only 35000 bytes everything will work correctly. 
 		However DictionaryForMIDs will allocate 50000 bytes of heap memory, and 
-		keep in mind that specifically for older devices heap memory is scarce.<br>
+		keep in mind that specifically for older devices heap memory is scarce.</p>
+		
+		<p>Use the Sliders to adjust the values for these properties. If you find it
+		hard to enter a specific value with the sliders, choose no matter the value
+		and go on to the property preview/edit window by hitting the <b>Create the
+		Properties File</b> button. Once in the properties preview/edit window,
+		before saving the values to the properties file, hit the <b>Edit</b> button
+		below in order to be able to edit the properties. Finally, dentify the *MaxSize
+		properties and manually modify the values provided by the sliders. Below is
+		a screen shot of the properties preview/edit window. Hit the <b>Edit</b>
+		button and then modify the values in blue.<br><br>
+		<img src="images/propsPreview-EditWisard.png" alt="propsPreview-EditWisard.png" >
 		&nbsp;</p>
+		<i>dictionaryGenerationMinNumberOfEntriesPerIndexFile</i> and<br>
+		<i>dictionaryGenerationMinNumberOfEntriesPerDictionaryFile</i><br>
+		<img src="images/MinNumOfEntriesPerDictAndIndFile.png" alt="MinNumOfEntriesPerDictAndIndFile.png" >
 		<ul>
-		<li>
-		dictionaryGenerationMinNumberOfEntriesPerDictionaryFile/dictionaryGenerationMinNumberOfEntriesPerIndexFile</li>
+		<li>dictionaryGenerationMinNumberOfEntriesPerDictionaryFile</li>
+		<li>dictionaryGenerationMinNumberOfEntriesPerIndexFile</li>
 		</ul>
-		<p>Defines for DictionaryGeneration the number of entries (= lines) per 
+		<p>These define for DictionaryGeneration the number of entries (= lines) per 
 		dictionary file and per index file.<br>
 		These properties are optional, the default value for 
 		dictionaryGenerationMinNumberOfEntriesPerDictionaryFile is 200 and the 
-		default value for dictionaryGenerationMinNumberOfEntriesPerIndexFile is 
-		500.<br>
-        As a general hint, you could try to set these values so that the size of 
+		one for dictionaryGenerationMinNumberOfEntriesPerIndexFile is 500.<br>
+      As a general hint, you could try to set these values so that the size of 
 		a single directory file and the size of a single index file do not 
-		exceed 100 kB (size defined by properties 
-		searchListFileMaxSize/indexFileMaxSize/dictionaryFileMaxSize).<br>
-		If you set up a small dictionary that should support very old devices 
-		with very little heap memory, then set these values low enough, for 
-		example so that the biggest file does not exceed 10 kB.<br>
+		exceed 100 kB (size defined by properties searchListFileMaxSize,
+		indexFileMaxSize and dictionaryFileMaxSize).<br>
+		If you are setting up a dictionary for very old devices with very
+		little heap memory, then set these values low enough so that the
+		biggest file does not exceed 10 kB for example.<br>
 		&nbsp;</p>
-		<ul>
-		<li>dictionaryGenerationOmitParFromIndex</li>
-		</ul>
-		<p>DictionaryGeneration does exclude text within {{ and }} from indexing 
-        (i.e. the text within {{ and }} is not included in the index, see
-        <a href="newdict.html#IndexFileSizeReduction">here</a> for more information). This 
-        behaviour can be switched off by setting 
-        dictionaryGenerationOmitParFromIndex to false. When 
-        dictionaryGenerationOmitParFromIndex is set to false, then also the text 
-        within {{ and }} will be included in the index.<br>
-        The property dictionaryGenerationOmitParFromIndex is optional. The 
-        default value is true.</p>
-		
+		<i>languageXIndexNumberOfSourceEntries</i><br>
+		<img src="images/indexNumOfSourceEntries.png" alt="indexNumOfSourceEntries.png" >
 		<ul>
 		<li>languageXIndexNumberOfSourceEntries</li>
-		</ul>
-		
+		</ul>		
 		<p>This property is automatically generated by DictionaryGeneration. The 
 		value contains the number of 'begin of expression'-index entries. This 
 		value gives the number of words/expressions that the dictionary contains 
 		for languageX. The values of languageXIndexNumberOfSourceEntries are 
 		shown in the Info-Dialog (will be implemented in a future version).<br>
-        Note that when you merge a dictionary from two (or more) source 
+      Note that when you merge a dictionary from two (or more) source 
 		dictionaries and DictionaryGeneration is run once for each of these 
-		source dictionary, then you need to manually copy the entries for 
-		languageXIndexNumberOfSourceEntries into the final 
+		source dictionaries, then you need to manually copy the entries for 
+		languageXIndexNumberOfSourceEntries into the final
 		DictionaryForMIDs.properties file.<br>
 		&nbsp;</p>
 		<ul>
 		<li>logLevel</li>
 		</ul>
-		<p>Note: the logLevel is set in the file DictionaryForMIDs.jad (not 
-		DictionaryForMIDs.properties).<br>
-		Allows to switch on some debugging output. A logLevel of 0 switches 
-		debugging output off, a logLevel of 3 switches all debugging output on, 
-		and the levels 1 and 2 switch some debugging output on. A higher 
-		logLevel means more debugging output.<br>
+		<p>The property logLevel is set in the file DictionaryForMIDs.jad
+		(not DictionaryForMIDs.properties). It Allows to switch on/off
+		debugging information. A logLevel of 0 turns debugging output off,
+		a logLevel of 3 turns all debugging output on; the levels 1 and 2
+		turn some debugging output on.
+		&nbsp;</p>
+		<ul>
+		<li>languageXContentNN properties</li>
+		</ul>
+		<p>With the languageXContentNN properties you can specify the content of 
+		your dictionary. For example you can specify that there is a 
+		pronunciation part, an explanation part, etc.</p>
+		
+		<p>DictionaryForMIDs-Creator's <b>PropertiesEditor</b> window has a languageXContentNN Properties
+      window called <b>ContentNNProperties-Creator</b>. It makes it possible to create contentNN
+      properties and passe them to the <b>PropertiesEditor</b> which will enable you to save
+      them along with the other properties. The <b>PropertiesEditor</b> window is already large enough,
+      incorporating the languageXContentNN properties in it would render it's resolution larger than 1366X768.
+      That is why it was decided to create a separate application and window called <b>ContentNNProperties-Creator</b>.
+      To launch this window hit the button on the screen shot below.<br>
+      To see how to create languageXContentNN properties with the <b>PropertiesEditor</b> and the <b>ContentNNProperties-Creator</b>,
+      see the page dedicated to that <a href="newdictContent.html">here</a>.<br><br>
+      <img src="images/contentNNWindowLauncher.png" alt="contentNNWindowLauncher.png" ><br><br>
+      The languageXContentNN properties are optional.<br>
 		&nbsp;</p>
 		<p>Here is a sample DictionaryForMIDs.properties file:</p>
 	<pre>
@@ -348,8 +418,7 @@
 	</pre>
 		
 		<p>If you have any problem with setting up a new dictionary, just
-        <a href="contact.html">contact us</a> 
-        and we will try to help you !</p>
+        <a href="contact.html">contact us</a> and we will try to help you out!</p>
 
 </div>
 </body>

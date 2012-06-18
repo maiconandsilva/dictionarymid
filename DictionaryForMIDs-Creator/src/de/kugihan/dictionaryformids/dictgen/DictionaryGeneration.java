@@ -27,7 +27,7 @@ GPL applies - see file COPYING for copyright statement.
 package de.kugihan.dictionaryformids.dictgen;
 
 import de.kugihan.DfMCreator.DfMCreatorMain;
-import de.kugihan.DfMCreator.DictGenSummary;
+import de.kugihan.DfMCreator.SumWinDictGen;
 import de.kugihan.dictionaryformids.dataaccess.CsvFile;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dataaccess.FileCsvFile;
@@ -104,7 +104,7 @@ public class DictionaryGeneration {
     // that prints a summary of the preferences
     // before lauching the dictionary generation process.
     public static void showDictGenSummary(){
-        DictGenSummary dgensum = DictGenSummary.getDictGenSummary();
+        SumWinDictGen dgensum = SumWinDictGen.getDictGenSummary();
         dgensum.setSize(380, 450);
         dgensum.setModal(true);
         dgensum.setLocation(screenSize.width / 2 - dgensum.getWidth() / 2,
@@ -149,7 +149,7 @@ public class DictionaryGeneration {
 					System.out.println(I18n.tr("complete\n"));
 				}
 			} catch (UnsupportedEncodingException e){
-                            DictGenSummary.done = true;
+                            SumWinDictGen.done = true;
                             DfMCreatorMain.printAnyMsg(I18n.tr("encErrMsg", new Object[] {e.getLocalizedMessage()}),
                                                        I18n.tr("encErrWinTitle"), JOptionPane.ERROR_MESSAGE);
                             // print the exception in command line.

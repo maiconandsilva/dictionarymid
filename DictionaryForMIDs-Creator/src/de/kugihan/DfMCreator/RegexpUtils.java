@@ -35,7 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class DfMCreatorUtilsRegexp {
+public class RegexpUtils {
     
     /*
      * I took all the following regular
