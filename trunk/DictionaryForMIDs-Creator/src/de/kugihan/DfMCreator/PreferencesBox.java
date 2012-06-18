@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
 
-public class DfMCreatorPreferences extends javax.swing.JFrame {
+public class PreferencesBox extends javax.swing.JFrame {
     
     // Model used with the list of installed look and feels
     DefaultListModel listModel = new DefaultListModel();
@@ -45,9 +45,9 @@ public class DfMCreatorPreferences extends javax.swing.JFrame {
     ArrayList<String> lookAndFeelClassNames = new ArrayList<>();
 
     /**
-     * Creates new form DfMCreatorPreferences
+     * Creates new form PreferencesBox
      */
-    public DfMCreatorPreferences() {
+    public PreferencesBox() {
         initComponents();
     }
 
@@ -161,13 +161,13 @@ public class DfMCreatorPreferences extends javax.swing.JFrame {
 
             @Override
             public void run() {
-                //new DfMCreatorPreferences().setVisible(true);
+                //new PreferencesBox().setVisible(true);
             }
         });
     }
     
-    public static DfMCreatorPreferences getPrefsWin(){
-        return new DfMCreatorPreferences();
+    public static PreferencesBox getPrefsWin(){
+        return new PreferencesBox();
     }
     
     // The order of the index in the list from which

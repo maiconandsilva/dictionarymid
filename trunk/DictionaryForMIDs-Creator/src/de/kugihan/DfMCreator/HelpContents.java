@@ -46,7 +46,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
 
-public class DfMCreatorHelpWin extends JPanel
+public class HelpContents extends JPanel
                                implements TreeSelectionListener {
     
     public static String path = "doc" + "/";
@@ -54,7 +54,7 @@ public class DfMCreatorHelpWin extends JPanel
     public JTree tree;
     public URL helpURL;
     
-    public DfMCreatorHelpWin() {
+    public HelpContents() {
         super(new GridLayout(1,0));
 
         //Create the nodes.
@@ -157,7 +157,7 @@ public class DfMCreatorHelpWin extends JPanel
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         //Add content to the window.
-        frame.add(new DfMCreatorHelpWin());
+        frame.add(new HelpContents());
 
         //Display the window.
         frame.pack();

@@ -43,13 +43,13 @@ import javax.swing.JOptionPane;
 
 
 
-public class DfMPropCreate extends javax.swing.JFrame {
+public class PropertiesEditor extends javax.swing.JFrame {
         
-    public static DfMPropCreate getPropWin(){
-        return new DfMPropCreate();
+    public static PropertiesEditor getPropWin(){
+        return new PropertiesEditor();
     }
 
-    private static final DfMPropPreview ppWin = DfMPropPreview.getPropPreviewWin();
+    private static final PropertiesPreview ppWin = PropertiesPreview.getPropPreviewWin();
     
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
  
@@ -234,9 +234,9 @@ public class DfMPropCreate extends javax.swing.JFrame {
     
 
     /**
-     * Creates new form DfMPropCreate
+     * Creates new form PropertiesEditor
      */
-    public DfMPropCreate() {
+    public PropertiesEditor() {
         initComponents();
     }
 
@@ -707,7 +707,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         jPanel5.add(jLabel8, gridBagConstraints);
 
-        jLabel43.setText("dictGenOmitParFromIndex");
+        jLabel43.setText("dictionaryGenerationOmitParFromIndex");
         jLabel43.setToolTipText(I18n.tr("dictGenOmitPar.tooltiptext")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -938,7 +938,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 15, 2);
         jPanel8.add(jLabel16, gridBagConstraints);
 
-        jLabel22.setText("dictGen");
+        jLabel22.setText("dictionaryGeneration");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -986,14 +986,14 @@ public class DfMPropCreate extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
         jPanel8.add(jLabel26, gridBagConstraints);
 
-        jLabel28.setText("dictFile");
+        jLabel28.setText("dictionaryFile");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         jPanel8.add(jLabel28, gridBagConstraints);
 
-        jLabel31.setText("searchList");
+        jLabel31.setText("searchListFile");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -1083,7 +1083,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         jPanel1.add(jLabel37, gridBagConstraints);
 
         lab3.setText(I18n.tr("value")); // NOI18N
-        lab3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        lab3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -1191,7 +1191,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         jPanel15.add(jLabel38, gridBagConstraints);
 
         lab4.setText(I18n.tr("value")); // NOI18N
-        lab4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        lab4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -1199,7 +1199,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         jPanel15.add(lab4, gridBagConstraints);
 
         lab5.setText(I18n.tr("value")); // NOI18N
-        lab5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        lab5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -1340,7 +1340,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         jPanel16.add(jLabel34, gridBagConstraints);
 
         lab1.setText(I18n.tr("value")); // NOI18N
-        lab1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        lab1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -1348,7 +1348,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
         jPanel16.add(lab1, gridBagConstraints);
 
         lab2.setText(I18n.tr("value")); // NOI18N
-        lab2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        lab2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
@@ -1461,6 +1461,8 @@ public class DfMPropCreate extends javax.swing.JFrame {
         jPanel14.setLayout(new java.awt.GridBagLayout());
 
         jButton1.setText(I18n.tr("contentNNPropsEditorButton.dfmPropCreate")); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("de/kugihan/I18n-L10n/Bundle"); // NOI18N
+        jButton1.setToolTipText(bundle.getString("content.nn.props.creator.win.launcher.button.tooltiptext")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -1714,7 +1716,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
 
             @Override
             public void run() {
-              //  new DfMPropCreate().setVisible(true);
+              //  new PropertiesEditor().setVisible(true);
             }
         });
     }
@@ -2005,7 +2007,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
                 throw new UnsupportedOperationException();
             }
             String propFileName = file.getName();
-            if (!propFileName.equals(DfMPropPreview.PROPERTY_FILE_NAME)){
+            if (!propFileName.equals(PropertiesPreview.PROPERTY_FILE_NAME)){
                 throw new IllegalArgumentException();
             }
             ppWin.propTextPane.setText("");
@@ -2688,7 +2690,7 @@ public class DfMPropCreate extends javax.swing.JFrame {
     }
 
     private void showContentPropsEditor(){
-        ContentPropsEditor CPEdit = ContentPropsEditor.getContentPropsEditor();
+        ContentNNPropertiesCreator CPEdit = ContentNNPropertiesCreator.getContentPropsEditor();
         CPEdit.setSize(1100, 500);
         CPEdit.setLocation(screenSize.width / 2 - CPEdit.getWidth() / 2,
                         screenSize.height / 2 - CPEdit.getHeight() / 2);
@@ -2706,8 +2708,8 @@ public class DfMPropCreate extends javax.swing.JFrame {
         // or a link that will let the users of the generated
         // dictionary to know who's the maintainer of it of
         // how the contact the original authors or something else.            
-        v = DfMCreatorUtilsRegexp.validateEmail(s);            
-        w = DfMCreatorUtilsRegexp.validateURL(s);
+        v = RegexpUtils.validateEmail(s);            
+        w = RegexpUtils.validateURL(s);
         
         if (!v && !w){
             throw new IllegalArgumentException(I18n.tr("badInfoText.dfmPropCreate"));

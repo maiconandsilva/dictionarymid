@@ -31,28 +31,28 @@
 
 package de.kugihan.DfMCreator;
 
-import de.kugihan.DfMCreator.DfMCreatorException.BadDictDirNameException;
-import de.kugihan.DfMCreator.DfMCreatorException.CantCreateDestDir;
-import de.kugihan.DfMCreator.DfMCreatorException.DBFolderNotAccessible;
-import de.kugihan.DfMCreator.DfMCreatorException.DBINIFileNotAccessible;
-import de.kugihan.DfMCreator.DfMCreatorException.DBNameTextFieldIsEmpty;
-import de.kugihan.DfMCreator.DfMCreatorException.DBPathTextFieldIsEmpty;
-import de.kugihan.DfMCreator.DfMCreatorException.DictionaryDirectoryNotAccessible;
-import de.kugihan.DfMCreator.DfMCreatorException.DirectoryDestinationNotAccessible;
-import de.kugihan.DfMCreator.DfMCreatorException.DirectoryDestinationTFIsEmpty;
-import de.kugihan.DfMCreator.DfMCreatorException.EmptyDfMDirTFIsEmpty;
-import de.kugihan.DfMCreator.DfMCreatorException.EmptyDfMFileNotFound;
-import de.kugihan.DfMCreator.DfMCreatorException.EmptyDfMJarJadDirDoesNotExist;
-import de.kugihan.DfMCreator.DfMCreatorException.InputCSVFilesTFIsEmpty;
-import de.kugihan.DfMCreator.DfMCreatorException.OutCSVFileCantBeWritten;
-import de.kugihan.DfMCreator.DfMCreatorException.OutCSVFileTextFieldIsEmpty;
-import de.kugihan.DfMCreator.DfMCreatorException.OutputDirTFIsEmpty;
-import de.kugihan.DfMCreator.DfMCreatorException.OutputDirectoryNotAccessible;
-import de.kugihan.DfMCreator.DfMCreatorException.PropFileErrorException;
-import de.kugihan.DfMCreator.DfMCreatorException.PropertyPathNotAccessible;
-import de.kugihan.DfMCreator.DfMCreatorException.PropertyPathTFIsEmpty;
-import de.kugihan.DfMCreator.DfMCreatorException.SourceFileNotAccessible;
-import de.kugihan.DfMCreator.DfMCreatorException.SourceFileTFIsEmpty;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.BadDictDirNameException;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.CantCreateDestDir;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.DBFolderNotAccessible;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.DBINIFileNotAccessible;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.DBNameTextFieldIsEmpty;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.DBPathTextFieldIsEmpty;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.DictionaryDirectoryNotAccessible;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.DirectoryDestinationNotAccessible;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.DirectoryDestinationTFIsEmpty;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.EmptyDfMDirTFIsEmpty;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.EmptyDfMFileNotFound;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.EmptyDfMJarJadDirDoesNotExist;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.InputCSVFilesTFIsEmpty;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.OutCSVFileCantBeWritten;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.OutCSVFileTextFieldIsEmpty;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.OutputDirTFIsEmpty;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.OutputDirectoryNotAccessible;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.PropFileErrorException;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.PropertyPathNotAccessible;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.PropertyPathTFIsEmpty;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.SourceFileNotAccessible;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.SourceFileTFIsEmpty;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dictdtodictionaryformids.DictdToDfM;
 import de.kugihan.dictionaryformids.dictgen.DictionaryGeneration;
@@ -398,10 +398,10 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         ISO1Label.setText("ISO-8859-1");
         ISO1Label.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 ISO1LabelAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -1071,8 +1071,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         fontGenMenu.add(jMenuItem8);
 
         jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK));
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("de/kugihan/I18n-L10n/Bundle"); // NOI18N
-        jMenuItem11.setText(bundle.getString("clear.fields.dfmCreatorMain")); // NOI18N
+        jMenuItem11.setText(I18n.tr("clear.fields.dfmCreatorMain")); // NOI18N
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem11ActionPerformed(evt);
@@ -1691,7 +1690,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * showPrefsWin() gets the preferences window.
      */
     private void showPrefsWin(){
-        DfMCreatorPreferences prefs = DfMCreatorPreferences.getPrefsWin();
+        PreferencesBox prefs = PreferencesBox.getPrefsWin();
         prefs.setSize(350, 400);
         prefs.setLocation(screenSize.width / 2 - prefs.getWidth() / 2,
                         screenSize.height / 2 - prefs.getHeight() / 2);
@@ -1702,7 +1701,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * showHelpWindow() gets the help window
      */
     private void showHelpWindow() {
-        JFrame hw = DfMCreatorHelpWin.createAndShowGUI();
+        JFrame hw = HelpContents.createAndShowGUI();
         hw.setLocation(screenSize.width / 2 - hw.getWidth() / 2,
                         screenSize.height / 2 - hw.getHeight() / 2);
         hw.setVisible(true);        
@@ -1843,12 +1842,12 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * setDictdToDfMVals() checks the validity of the values entered by
      * the user and sets them up for DictdToDfM if they are valid.
      * @throws FileNotFoundException
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.DBNameTextFieldIsEmpty
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.DBPathTextFieldIsEmpty
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.OutCSVFileTextFieldIsEmpty
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.DBFolderNotAccessible
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.DBINIFileNotAccessible
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.OutCSVFileCantBeWritten 
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.DBNameTextFieldIsEmpty
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.DBPathTextFieldIsEmpty
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.OutCSVFileTextFieldIsEmpty
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.DBFolderNotAccessible
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.DBINIFileNotAccessible
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.OutCSVFileCantBeWritten 
      */
     private void setDictdToDfMVals() throws FileNotFoundException, DBNameTextFieldIsEmpty,
                                             DBPathTextFieldIsEmpty, OutCSVFileTextFieldIsEmpty,
@@ -2044,24 +2043,24 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             setDictdToDfMVals();
             DictdToDfM.printDictdConvSummary();            
         } catch (FileNotFoundException ex) {
-            DfMCreatorException.printErrorMsg();
+            DfMCreatorExceptions.printErrorMsg();
         } catch (DBNameTextFieldIsEmpty e){
-            printAnyMsg(DfMCreatorException.DBNameTextFieldIsEmptyMsg, I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.DBNameTextFieldIsEmptyMsg, I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (DBPathTextFieldIsEmpty e){
-            printAnyMsg(DfMCreatorException.DBPathTextFieldIsEmptyMsg, I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.DBPathTextFieldIsEmptyMsg, I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (OutCSVFileTextFieldIsEmpty e){
-            printAnyMsg(DfMCreatorException.OutCSVFileTextFieldIsEmptyMsg, I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.OutCSVFileTextFieldIsEmptyMsg, I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (DBFolderNotAccessible e){
-            printAnyMsg(DfMCreatorException.DBFolderNotAccessibleMsg, I18n.tr("dirNotAccessible.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.DBFolderNotAccessibleMsg, I18n.tr("dirNotAccessible.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (DBINIFileNotAccessible e){
-            printAnyMsg(DfMCreatorException.DBINIFileNotAccessibleMsg, I18n.tr("fileNotAccessible.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.DBINIFileNotAccessibleMsg, I18n.tr("fileNotAccessible.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (OutCSVFileCantBeWritten e){
-            printAnyMsg(DfMCreatorException.OutCSVFileCantBeWrittenMsg, I18n.tr("dirNotAccessible.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.OutCSVFileCantBeWrittenMsg, I18n.tr("dirNotAccessible.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (Throwable t){
         	printAnyMsg(I18n.tr("unknownException.dfmCreatorMain", new Object[] {t, t.getLocalizedMessage()}), I18n.tr("unknownExceptionTitle"), JOptionPane.ERROR_MESSAGE);
@@ -2091,11 +2090,11 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     
     /**
      * checkScreenResolution() checks the resolution
-     * of the screen just before calling DfMPropCreate
+     * of the screen just before calling PropertiesEditor
      */
     public void checkScreenResolution(){
-        if (screenSize.getHeight() < DfMPropCreate.Default_height_2_Langs ||
-            screenSize.getWidth() < DfMPropCreate.Default_width) {
+        if (screenSize.getHeight() < PropertiesEditor.Default_height_2_Langs ||
+            screenSize.getWidth() < PropertiesEditor.Default_width) {
             JOptionPane.showMessageDialog(null, I18n.tr("screenResolution.dfmCreatorMain"),
                                    I18n.tr("screenResolutionTitle.dfmCreatorMain"), JOptionPane.INFORMATION_MESSAGE);
         }
@@ -2103,10 +2102,10 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     
 
     /**
-     * showPropWin() gets the DfMPropCreate Window.
+     * showPropWin() gets the PropertiesEditor Window.
      */
     public void showPropWin(){
-        DfMPropCreate propWin = DfMPropCreate.getPropWin();        
+        PropertiesEditor propWin = PropertiesEditor.getPropWin();        
         // this subroutine will set the selected index
         // of the combo box to "2" languages and hide all
         // textfields, labels, buttons related to language-3
@@ -2122,7 +2121,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * DictionaryForMIDs.properties file.
      */
     public void editExistingPropFile(){
-        DfMPropCreate propWin = DfMPropCreate.getPropWin();
+        PropertiesEditor propWin = PropertiesEditor.getPropWin();
         propWin.setVisible(false);
         propWin.editExistingPropFile();
     }
@@ -2131,15 +2130,15 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * setDictGenVals() checks and sets the values up
      * for DictionaryGeneration
      * @throws FileNotFoundException
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.PropFileErrorException
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.SourceFileTFIsEmpty
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.DirectoryDestinationTFIsEmpty
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.PropertyPathTFIsEmpty
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.SourceFileNotAccessible
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.SourceFileNotAccessible
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.PropertyPathNotAccessible
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.DirectoryDestinationNotAccessible
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.CantCreateDestDir 
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.PropFileErrorException
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.SourceFileTFIsEmpty
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.DirectoryDestinationTFIsEmpty
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.PropertyPathTFIsEmpty
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.SourceFileNotAccessible
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.SourceFileNotAccessible
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.PropertyPathNotAccessible
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.DirectoryDestinationNotAccessible
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.CantCreateDestDir 
      */
     public void setDictGenVals() throws FileNotFoundException, PropFileErrorException,
                                      SourceFileTFIsEmpty, DirectoryDestinationTFIsEmpty,
@@ -2232,27 +2231,27 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             setDictGenVals();
             DictionaryGeneration.showDictGenSummary();
         } catch (FileNotFoundException ex) {
-            DfMCreatorException.printErrorMsg();
+            DfMCreatorExceptions.printErrorMsg();
         } catch (PropFileErrorException e) {
-            printAnyMsg(DfMCreatorException.PropFileErrorExceptionMsg, I18n.tr("propsFileError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.PropFileErrorExceptionMsg, I18n.tr("propsFileError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (SourceFileTFIsEmpty e){
-            printAnyMsg(DfMCreatorException.SourceFileTFIsEmptyMsg, I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.SourceFileTFIsEmptyMsg, I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (DirectoryDestinationTFIsEmpty e){
-            printAnyMsg(DfMCreatorException.DirectoryDestinationTFIsEmptyMsg, I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.DirectoryDestinationTFIsEmptyMsg, I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (PropertyPathTFIsEmpty e){
-            printAnyMsg(DfMCreatorException.PropertyPathTFIsEmptyMsg, I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.PropertyPathTFIsEmptyMsg, I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (SourceFileNotAccessible e){
-            printAnyMsg(DfMCreatorException.SourceFileNotAccessibleMsg, I18n.tr("fileNotAccessible.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.SourceFileNotAccessibleMsg, I18n.tr("fileNotAccessible.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (PropertyPathNotAccessible e){
-            printAnyMsg(DfMCreatorException.PropertyPathNotAccessibleMsg, I18n.tr("DictDirAccessError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.PropertyPathNotAccessibleMsg, I18n.tr("DictDirAccessError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (DirectoryDestinationNotAccessible e){
-            printAnyMsg(DfMCreatorException.DirectoryDestinationNotAccessibleMsg, I18n.tr("dictDirAccessError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.DirectoryDestinationNotAccessibleMsg, I18n.tr("dictDirAccessError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (CantCreateDestDir e){
             printAnyMsg(e.getLocalizedMessage(), I18n.tr("dictCreationError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
@@ -2283,15 +2282,15 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     /**
      * setJCVals() checks and sets the values up for JarCreator.
      * @throws FileNotFoundException
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.BadDictDirNameException
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.DictionaryDirectoryNotAccessible
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.PropFileErrorException
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.EmptyDfMJarJadDirDoesNotExist
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.EmptyDfMFileNotFound
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.OutputDirectoryNotAccessible
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.InputCSVFilesTFIsEmpty
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.EmptyDfMDirTFIsEmpty
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.OutputDirTFIsEmpty 
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.BadDictDirNameException
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.DictionaryDirectoryNotAccessible
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.PropFileErrorException
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.EmptyDfMJarJadDirDoesNotExist
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.EmptyDfMFileNotFound
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.OutputDirectoryNotAccessible
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.InputCSVFilesTFIsEmpty
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.EmptyDfMDirTFIsEmpty
+     * @throws de.kugihan.DfMCreator.DfMCreatorExceptions.OutputDirTFIsEmpty 
      */
     public void setJCVals() throws FileNotFoundException, BadDictDirNameException,
                                    DictionaryDirectoryNotAccessible, PropFileErrorException,
@@ -2385,33 +2384,33 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             setJCVals();
             JarCreator.showJarCreationSum();
         } catch (FileNotFoundException ex){
-            DfMCreatorException.printErrorMsg();
+            DfMCreatorExceptions.printErrorMsg();
         } catch (BadDictDirNameException e){
-            printAnyMsg(DfMCreatorException.BadDictDirNameExceptionMsg, I18n.tr("badDirNameTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.BadDictDirNameExceptionMsg, I18n.tr("badDirNameTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (PropFileErrorException e){
-            printAnyMsg(DfMCreatorException.PropFileErrorExceptionMsg, I18n.tr("propsFileErrorTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.PropFileErrorExceptionMsg, I18n.tr("propsFileErrorTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (EmptyDfMFileNotFound e){
-            printAnyMsg(DfMCreatorException.EmptyDfMFileNotFoundMsg, I18n.tr("emptyDfMTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.EmptyDfMFileNotFoundMsg, I18n.tr("emptyDfMTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (InputCSVFilesTFIsEmpty e){
-            printAnyMsg(DfMCreatorException.InputCSVFilesTFIsEmptyMsg, I18n.tr("filedEmptyErrorTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.InputCSVFilesTFIsEmptyMsg, I18n.tr("filedEmptyErrorTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (EmptyDfMDirTFIsEmpty e){
-            printAnyMsg(DfMCreatorException.EmptyDfMDirTFIsEmptyMsg, I18n.tr("fieldEmptyErrorTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.EmptyDfMDirTFIsEmptyMsg, I18n.tr("fieldEmptyErrorTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (OutputDirTFIsEmpty e){
-            printAnyMsg(DfMCreatorException.OutputDirTFIsEmptyMsg, I18n.tr("fieldEmptyErrorTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.OutputDirTFIsEmptyMsg, I18n.tr("fieldEmptyErrorTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (OutputDirectoryNotAccessible e){
-            printAnyMsg(DfMCreatorException.OutputDirectoryNotAccessibleMsg, I18n.tr("dictAccessTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.OutputDirectoryNotAccessibleMsg, I18n.tr("dictAccessTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (EmptyDfMJarJadDirDoesNotExist e){
-            printAnyMsg(DfMCreatorException.EmptyDfMJarJadDirDoesNotExistMsg, I18n.tr("emptyJarJadTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.EmptyDfMJarJadDirDoesNotExistMsg, I18n.tr("emptyJarJadTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (DictionaryDirectoryNotAccessible e){
-            printAnyMsg(DfMCreatorException.DictionaryDirectoryNotAccessibleMsg, I18n.tr("dictAccessTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
+            printAnyMsg(DfMCreatorExceptions.DictionaryDirectoryNotAccessibleMsg, I18n.tr("dictAccessTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
         } catch (Throwable t){
         	printAnyMsg(I18n.tr("unknownRuntimeError.dfmCreatorMain", new Object[] {t, t.getLocalizedMessage()}), I18n.tr("unknownRuntimeErrorTitle"), JOptionPane.ERROR_MESSAGE);

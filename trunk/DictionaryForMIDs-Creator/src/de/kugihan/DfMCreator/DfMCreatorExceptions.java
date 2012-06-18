@@ -35,7 +35,7 @@ import edu.hws.eck.mdb.I18n;
 import javax.swing.JOptionPane;
 
 
-public class DfMCreatorException {
+public class DfMCreatorExceptions {
     
     /*
      * 

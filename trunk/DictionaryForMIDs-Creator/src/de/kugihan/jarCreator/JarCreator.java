@@ -27,9 +27,9 @@ GPL applies - see file COPYING for copyright statement.
 */
 package de.kugihan.jarCreator;
 
-import de.kugihan.DfMCreator.DfMCreatorException;
+import de.kugihan.DfMCreator.DfMCreatorExceptions;
 import de.kugihan.DfMCreator.DfMCreatorMain;
-import de.kugihan.DfMCreator.JarCreationSummary;
+import de.kugihan.DfMCreator.SumWinJarCreator;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
@@ -96,7 +96,7 @@ public static String getOutputDirectory(){
     // window showing jar creation preferencies
     // summarry before the actual jar creation.
     public static void showJarCreationSum(){
-        JarCreationSummary cjpw = JarCreationSummary.getCJPWin();
+        SumWinJarCreator cjpw = SumWinJarCreator.getCJPWin();
         cjpw.setSize(420, 360);
         cjpw.setLocation(screenSize.width / 2 - cjpw.getWidth() / 2,
                           screenSize.height / 2 - cjpw.getHeight() / 2);
@@ -105,7 +105,7 @@ public static String getOutputDirectory(){
     }
 
 	public static void createJar() throws FileNotFoundException,
-                                              DfMCreatorException.CantCreatOutputJarJadDirectory,
+                                              DfMCreatorExceptions.CantCreatOutputJarJadDirectory,
                                               IOException, DictionaryException {
 
             	UtilWin utilObj = new UtilWin();
@@ -124,7 +124,7 @@ public static String getOutputDirectory(){
                 File jarAndJadDir = new File (outputdirectory + midletName);
                 if (!jarAndJadDir.exists()){
                     if (!jarAndJadDir.mkdirs()){
-                        throw new DfMCreatorException.CantCreatOutputJarJadDirectory(I18n.tr("outputDirCreationError", new Object[] {midletName}));
+                        throw new DfMCreatorExceptions.CantCreatOutputJarJadDirectory(I18n.tr("outputDirCreationError", new Object[] {midletName}));
                     }
                 }
 

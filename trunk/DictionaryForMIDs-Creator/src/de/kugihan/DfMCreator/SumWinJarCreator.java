@@ -44,19 +44,19 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 
-public class JarCreationSummary extends javax.swing.JDialog implements PropertyChangeListener {
+public class SumWinJarCreator extends javax.swing.JDialog implements PropertyChangeListener {
     
-    public static JarCreationSummary getCJPWin(){
-        return new JarCreationSummary();
+    public static SumWinJarCreator getCJPWin(){
+        return new SumWinJarCreator();
     }
     
     private Task task;
     public static boolean done;
 
     /**
-     * Creates new form JarCreationSummary
+     * Creates new form SumWinJarCreator
      */
-    public JarCreationSummary() {
+    public SumWinJarCreator() {
         initComponents();
     }
 
@@ -180,7 +180,7 @@ public class JarCreationSummary extends javax.swing.JDialog implements PropertyC
 
             @Override
             public void run() {
-              //  new JarCreationSummary().setVisible(true);
+              //  new SumWinJarCreator().setVisible(true);
             }
         });
     }
@@ -206,7 +206,7 @@ public class JarCreationSummary extends javax.swing.JDialog implements PropertyC
                 done = true;
                 DfMCreatorMain.printAnyMsg(e.getMessage() ,"Error", JOptionPane.ERROR_MESSAGE);
                 System.out.println(e.getMessage());             
-            } catch (DfMCreatorException.CantCreatOutputJarJadDirectory e){
+            } catch (DfMCreatorExceptions.CantCreatOutputJarJadDirectory e){
                 done = true;
                 DfMCreatorMain.printAnyMsg(e.getMessage() ,"Directory Creation Error", JOptionPane.ERROR_MESSAGE);
                 System.out.println(e.getMessage());

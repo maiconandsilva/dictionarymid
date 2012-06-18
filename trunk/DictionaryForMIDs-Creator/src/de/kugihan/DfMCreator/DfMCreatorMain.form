@@ -165,7 +165,7 @@
                   <KeyStroke key="Shift+F"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="clear.fields.dfmCreatorMain" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="clear.fields.dfmCreatorMain" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>

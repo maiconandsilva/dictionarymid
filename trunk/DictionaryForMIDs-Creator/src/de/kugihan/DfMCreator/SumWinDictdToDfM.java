@@ -54,16 +54,16 @@ import javax.swing.text.StyledDocument;
 
 
 
-public class DictdConvSummary extends javax.swing.JDialog implements ActionListener, DictdConvSteps,
+public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListener, DictdToDfMConvSteps,
                                                                      WindowListener, PropertyChangeListener {
     
     private Task task;
     public static boolean done;
   
     /**
-     * Creates new form DictdConvSummary
+     * Creates new form SumWinDictdToDfM
      */
-    public DictdConvSummary() {
+    public SumWinDictdToDfM() {
         initComponents();
     }
 
@@ -160,10 +160,10 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
 
     public void actionPerformed(java.awt.event.ActionEvent evt) {
         if (evt.getSource() == SumCancelButton) {
-            DictdConvSummary.this.SumCancelButtonActionPerformed(evt);
+            SumWinDictdToDfM.this.SumCancelButtonActionPerformed(evt);
         }
         else if (evt.getSource() == SumProceedButton) {
-            DictdConvSummary.this.SumProceedButtonActionPerformed(evt);
+            SumWinDictdToDfM.this.SumProceedButtonActionPerformed(evt);
         }
     }
 
@@ -171,14 +171,14 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
     }
 
     public void windowClosed(java.awt.event.WindowEvent evt) {
-        if (evt.getSource() == DictdConvSummary.this) {
-            DictdConvSummary.this.formWindowClosed(evt);
+        if (evt.getSource() == SumWinDictdToDfM.this) {
+            SumWinDictdToDfM.this.formWindowClosed(evt);
         }
     }
 
     public void windowClosing(java.awt.event.WindowEvent evt) {
-        if (evt.getSource() == DictdConvSummary.this) {
-            DictdConvSummary.this.formWindowClosing(evt);
+        if (evt.getSource() == SumWinDictdToDfM.this) {
+            SumWinDictdToDfM.this.formWindowClosing(evt);
         }
     }
 
@@ -223,8 +223,8 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
     // End of variables declaration//GEN-END:variables
 
 
-    public static DictdConvSummary getInstance(){
-        return new DictdConvSummary();
+    public static SumWinDictdToDfM getInstance(){
+        return new SumWinDictdToDfM();
     }
     
     // This method will be used to delete the
@@ -389,7 +389,7 @@ public class DictdConvSummary extends javax.swing.JDialog implements ActionListe
             try {
                 Files.move(csvpath, destcsvpath, REPLACE_EXISTING);
             } catch (IOException ex) {
-                Logger.getLogger(DictdConvSummary.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SumWinDictdToDfM.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

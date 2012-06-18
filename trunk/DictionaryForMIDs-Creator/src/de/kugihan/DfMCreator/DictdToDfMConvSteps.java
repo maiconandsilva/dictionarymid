@@ -33,7 +33,7 @@ package de.kugihan.DfMCreator;
 
 
 
-public interface DictdConvSteps {
+public interface DictdToDfMConvSteps {
     
     public void start();
     

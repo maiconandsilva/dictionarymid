@@ -11,8 +11,8 @@
 
 <body>
 <h1>The DictdToDictionaryForMIDs (GUI) Documentation.</h1>
-<p>Let's see an exemple of how to convert a Dictd dictionary file into an input file for DictionaryGeneration.<br>
-Say we have a Dictd dictionary file from freedict.org called freedict-eng-fra that we would like to convert<br>
+<p>Let's see an exemple of how to convert a Dictd dictionary file into an input file for DictionaryGeneration.
+Say we have a Dictd dictionary file from freedict.org called freedict-eng-fra that we would like to convert
 into the DictionaryForMIDs format. We should follow these steps:<br>
 <ul>
 <li>Make sure we have the files <b>freedict-eng-fra.dict.dz</b> (if the file is compressed)<br>
@@ -76,43 +76,26 @@ that will enable you to go to the actual conversion process.<br>
 <img src="images/ConversionSummary.png" alt="Conversion Preferences Window" width="427" height="529"><br><br>
 
 <h2>Converting the dictionary file</h2>
-Hit the <b>Proceed</b> button to convert the dictionary file.<br>
-If everything goes well you should find the file under the output<br>
-directory you provided, with the name of the database + '-converted.txt'<br>
+Hit the <b>Proceed</b> button to convert the dictionary file.
+If everything goes well you should find the file under the output
+directory you provided, with the name of the database + '-converted.txt'
 (i.e freedict-eng-fra-converted.txt)<br><br>
 
 <b><u>P.S:</u></b><br>
-There is a known bug during the dictionary conversion (Bug-09062012).<br>
-It happens during the conversion of some freedict.org bilingual dictionaries.<br>
-The bug causes DictdToDictionaryForMIDs to write in the converted dictionary file<br>
+There is a known bug during the dictionary conversion (Bug-09062012).
+It happens during the conversion of some freedict.org bilingual dictionaries.
+The bug causes DictdToDictionaryForMIDs to write in the converted dictionary file
 a line like the following:<br><br>
-<i>&lt;pre&gt;	java.lang.NullPointerException at org.dict.kernel.Database.readAll(Database.java:395)<br>
-at org.dict.kernel.Database.defineMatch(Database.java:52)<br>
-at org.dict.kernel.DictEngine.defineMatch(DictEngine.java:72)<br>
-at org.dict.kernel.DictEngine.lookup(DictEngine.java:149) (...)<br>
-at java.lang.Thread.run(Thread.java:722)\n\nAvailable dictionaries: freedict-eng-fra&lt;/pre&gt;</i><br><br>
+<i>&lt;pre&gt;	java.lang.NullPointerException at org.dict.kernel.Database.readAll(Database.java:395)
+at org.dict.kernel.Database.defineMatch(Database.java:52) at org.dict.kernel.DictEngine.defineMatch(DictEngine.java:72)
+at org.dict.kernel.DictEngine.lookup(DictEngine.java:149) (...) at java.lang.Thread.run(Thread.java:722)
+\n\nAvailable dictionaries: freedict-eng-fra&lt;/pre&gt;</i><br><br>
 
-This bug will be fixed in a future version of DictionaryForMIDs-Creator.<br>
-For the time being, the only way to get rid of those nasties is to edit the converted file manually.<br>
-So, if your input dictionary file is from freedict.org (is a freedict dictionary), open the converted<br>
-file and remove the line starting from <i>&lt;pre&gt;</i> to <i>&lt;/pre&gt;</i> along with all the text between them.<br>
-Be careful not to delete some text that actually belong to the dictionary.
+This bug will be fixed in a future version of DictionaryForMIDs-Creator.
+For the time being, the only way to get rid of those nasties is to edit the converted file manually.
+So, if your input dictionary file is from freedict.org (is a freedict dictionary), open the converted
+file and remove the line starting from <i>&lt;pre&gt;</i> to <i>&lt;/pre&gt;</i> along with all the text
+between them. Be careful not to delete some text that actually belong to the dictionary.
 </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
 </body>
 </html>
