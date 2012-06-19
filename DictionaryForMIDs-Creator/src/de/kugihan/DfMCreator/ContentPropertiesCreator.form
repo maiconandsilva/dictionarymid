@@ -47,7 +47,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="about.content.properties.creator.contentPropsEditor" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="about.content.properties.creator" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -61,7 +61,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Content Properties Creator"/>
+    <Property name="title" type="java.lang.String" value="ContentProperties-Creator"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -129,7 +129,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="FontColourLabel2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content1FontColour"/>
+                        <Property name="text" type="java.lang.String" value="language2Content01FontColour"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -140,23 +140,22 @@
                     <Component class="javax.swing.JComboBox" name="FontColourComboBox2">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="16">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="Maroon"/>
-                            <StringItem index="2" value="Red"/>
-                            <StringItem index="3" value="Yellow"/>
-                            <StringItem index="4" value="Green"/>
-                            <StringItem index="5" value="Lime"/>
-                            <StringItem index="6" value="Navy"/>
-                            <StringItem index="7" value="Blue"/>
-                            <StringItem index="8" value="Teal"/>
-                            <StringItem index="9" value="Aqua"/>
-                            <StringItem index="10" value="Purple"/>
-                            <StringItem index="11" value="Fuchsia"/>
-                            <StringItem index="12" value="Olive"/>
-                            <StringItem index="13" value="Gray"/>
-                            <StringItem index="14" value="Silver"/>
-                            <StringItem index="15" value="Black"/>
+                          <StringArray count="15">
+                            <StringItem index="0" value="Maroon"/>
+                            <StringItem index="1" value="Red"/>
+                            <StringItem index="2" value="Yellow"/>
+                            <StringItem index="3" value="Green"/>
+                            <StringItem index="4" value="Lime"/>
+                            <StringItem index="5" value="Navy"/>
+                            <StringItem index="6" value="Blue"/>
+                            <StringItem index="7" value="Teal"/>
+                            <StringItem index="8" value="Aqua"/>
+                            <StringItem index="9" value="Purple"/>
+                            <StringItem index="10" value="Fuchsia"/>
+                            <StringItem index="11" value="Olive"/>
+                            <StringItem index="12" value="Gray"/>
+                            <StringItem index="13" value="Silver"/>
+                            <StringItem index="14" value="Black"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -171,7 +170,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontColourLB4">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content2FontColour"/>
+                        <Property name="text" type="java.lang.String" value="language2Content02FontColour"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -182,23 +181,22 @@
                     <Component class="javax.swing.JComboBox" name="FontColourCB4">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="16">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="Maroon"/>
-                            <StringItem index="2" value="Red"/>
-                            <StringItem index="3" value="Yellow"/>
-                            <StringItem index="4" value="Green"/>
-                            <StringItem index="5" value="Lime"/>
-                            <StringItem index="6" value="Navy"/>
-                            <StringItem index="7" value="Blue"/>
-                            <StringItem index="8" value="Teal"/>
-                            <StringItem index="9" value="Aqua"/>
-                            <StringItem index="10" value="Purple"/>
-                            <StringItem index="11" value="Fuchsia"/>
-                            <StringItem index="12" value="Olive"/>
-                            <StringItem index="13" value="Gray"/>
-                            <StringItem index="14" value="Silver"/>
-                            <StringItem index="15" value="Black"/>
+                          <StringArray count="15">
+                            <StringItem index="0" value="Maroon"/>
+                            <StringItem index="1" value="Red"/>
+                            <StringItem index="2" value="Yellow"/>
+                            <StringItem index="3" value="Green"/>
+                            <StringItem index="4" value="Lime"/>
+                            <StringItem index="5" value="Navy"/>
+                            <StringItem index="6" value="Blue"/>
+                            <StringItem index="7" value="Teal"/>
+                            <StringItem index="8" value="Aqua"/>
+                            <StringItem index="9" value="Purple"/>
+                            <StringItem index="10" value="Fuchsia"/>
+                            <StringItem index="11" value="Olive"/>
+                            <StringItem index="12" value="Gray"/>
+                            <StringItem index="13" value="Silver"/>
+                            <StringItem index="14" value="Black"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -214,23 +212,22 @@
                     <Component class="javax.swing.JComboBox" name="FontColourCB6">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="16">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="Maroon"/>
-                            <StringItem index="2" value="Red"/>
-                            <StringItem index="3" value="Yellow"/>
-                            <StringItem index="4" value="Green"/>
-                            <StringItem index="5" value="Lime"/>
-                            <StringItem index="6" value="Navy"/>
-                            <StringItem index="7" value="Blue"/>
-                            <StringItem index="8" value="Teal"/>
-                            <StringItem index="9" value="Aqua"/>
-                            <StringItem index="10" value="Purple"/>
-                            <StringItem index="11" value="Fuchsia"/>
-                            <StringItem index="12" value="Olive"/>
-                            <StringItem index="13" value="Gray"/>
-                            <StringItem index="14" value="Silver"/>
-                            <StringItem index="15" value="Black"/>
+                          <StringArray count="15">
+                            <StringItem index="0" value="Maroon"/>
+                            <StringItem index="1" value="Red"/>
+                            <StringItem index="2" value="Yellow"/>
+                            <StringItem index="3" value="Green"/>
+                            <StringItem index="4" value="Lime"/>
+                            <StringItem index="5" value="Navy"/>
+                            <StringItem index="6" value="Blue"/>
+                            <StringItem index="7" value="Teal"/>
+                            <StringItem index="8" value="Aqua"/>
+                            <StringItem index="9" value="Purple"/>
+                            <StringItem index="10" value="Fuchsia"/>
+                            <StringItem index="11" value="Olive"/>
+                            <StringItem index="12" value="Gray"/>
+                            <StringItem index="13" value="Silver"/>
+                            <StringItem index="14" value="Black"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -245,7 +242,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontColourLB6">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content4FontColour"/>
+                        <Property name="text" type="java.lang.String" value="language2Content04FontColour"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -256,23 +253,22 @@
                     <Component class="javax.swing.JComboBox" name="FontColourCB5">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="16">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="Maroon"/>
-                            <StringItem index="2" value="Red"/>
-                            <StringItem index="3" value="Yellow"/>
-                            <StringItem index="4" value="Green"/>
-                            <StringItem index="5" value="Lime"/>
-                            <StringItem index="6" value="Navy"/>
-                            <StringItem index="7" value="Blue"/>
-                            <StringItem index="8" value="Teal"/>
-                            <StringItem index="9" value="Aqua"/>
-                            <StringItem index="10" value="Purple"/>
-                            <StringItem index="11" value="Fuchsia"/>
-                            <StringItem index="12" value="Olive"/>
-                            <StringItem index="13" value="Gray"/>
-                            <StringItem index="14" value="Silver"/>
-                            <StringItem index="15" value="Black"/>
+                          <StringArray count="15">
+                            <StringItem index="0" value="Maroon"/>
+                            <StringItem index="1" value="Red"/>
+                            <StringItem index="2" value="Yellow"/>
+                            <StringItem index="3" value="Green"/>
+                            <StringItem index="4" value="Lime"/>
+                            <StringItem index="5" value="Navy"/>
+                            <StringItem index="6" value="Blue"/>
+                            <StringItem index="7" value="Teal"/>
+                            <StringItem index="8" value="Aqua"/>
+                            <StringItem index="9" value="Purple"/>
+                            <StringItem index="10" value="Fuchsia"/>
+                            <StringItem index="11" value="Olive"/>
+                            <StringItem index="12" value="Gray"/>
+                            <StringItem index="13" value="Silver"/>
+                            <StringItem index="14" value="Black"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -287,7 +283,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontColourLB5">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content3FontColour"/>
+                        <Property name="text" type="java.lang.String" value="language2Content03FontColour"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -439,7 +435,8 @@
                   <SubComponents>
                     <Component class="javax.swing.JCheckBox" name="DisplaySelectableCheckBox1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content1DisplaySelectable"/>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="language1Content01DisplaySelectable"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DisplaySelectableCheckBox1ActionPerformed"/>
@@ -452,7 +449,8 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="DisplaySelectableCheckB1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content2DisplaySelectable"/>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="language1Content02DisplaySelectable"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DisplaySelectableCheckB1ActionPerformed"/>
@@ -465,7 +463,8 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="DisplaySelectableCheckB3">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content4DisplaySelectable"/>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="language1Content04DisplaySelectable"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DisplaySelectableCheckB3ActionPerformed"/>
@@ -478,7 +477,8 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="DisplaySelectableCheckB2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content3DisplaySelectable"/>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="language1Content03DisplaySelectable"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DisplaySelectableCheckB2ActionPerformed"/>
@@ -509,7 +509,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="FontStyleLabel2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content1FontStyle"/>
+                        <Property name="text" type="java.lang.String" value="language2Content01FontStyle"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -520,12 +520,11 @@
                     <Component class="javax.swing.JComboBox" name="FontStyleComboBox2">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="plain"/>
-                            <StringItem index="2" value="bold"/>
-                            <StringItem index="3" value="italic"/>
-                            <StringItem index="4" value="underlined"/>
+                          <StringArray count="4">
+                            <StringItem index="0" value="plain"/>
+                            <StringItem index="1" value="bold"/>
+                            <StringItem index="2" value="italic"/>
+                            <StringItem index="3" value="underlined"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -540,7 +539,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontStyleLB4">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content2FontStyle"/>
+                        <Property name="text" type="java.lang.String" value="language2Content02FontStyle"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -551,12 +550,11 @@
                     <Component class="javax.swing.JComboBox" name="FontStyleCB4">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="plain"/>
-                            <StringItem index="2" value="bold"/>
-                            <StringItem index="3" value="italic"/>
-                            <StringItem index="4" value="underlined"/>
+                          <StringArray count="4">
+                            <StringItem index="0" value="plain"/>
+                            <StringItem index="1" value="bold"/>
+                            <StringItem index="2" value="italic"/>
+                            <StringItem index="3" value="underlined"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -572,12 +570,11 @@
                     <Component class="javax.swing.JComboBox" name="FontStyleCB6">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="plain"/>
-                            <StringItem index="2" value="bold"/>
-                            <StringItem index="3" value="italic"/>
-                            <StringItem index="4" value="underlined"/>
+                          <StringArray count="4">
+                            <StringItem index="0" value="plain"/>
+                            <StringItem index="1" value="bold"/>
+                            <StringItem index="2" value="italic"/>
+                            <StringItem index="3" value="underlined"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -592,7 +589,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontStyleLB6">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content4FontStyle"/>
+                        <Property name="text" type="java.lang.String" value="language2Content04FontStyle"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -603,12 +600,11 @@
                     <Component class="javax.swing.JComboBox" name="FontStyleCB5">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="plain"/>
-                            <StringItem index="2" value="bold"/>
-                            <StringItem index="3" value="italic"/>
-                            <StringItem index="4" value="underlined"/>
+                          <StringArray count="4">
+                            <StringItem index="0" value="plain"/>
+                            <StringItem index="1" value="bold"/>
+                            <StringItem index="2" value="italic"/>
+                            <StringItem index="3" value="underlined"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -623,7 +619,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontStyleLB5">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content3FontStyle"/>
+                        <Property name="text" type="java.lang.String" value="language2Content03FontStyle"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -651,7 +647,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="DisplayTextLable3">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content1DisplayText"/>
+                        <Property name="text" type="java.lang.String" value="language3Content01DisplayText"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -661,7 +657,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="DisplayTextLB7">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content2DisplayText"/>
+                        <Property name="text" type="java.lang.String" value="language3Content02DisplayText"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -671,7 +667,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="DisplayTextLB9">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content4DisplayText"/>
+                        <Property name="text" type="java.lang.String" value="language3Content04DisplayText"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -681,7 +677,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="DisplayTextLB8">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content3DisplayText"/>
+                        <Property name="text" type="java.lang.String" value="language3Content03DisplayText"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -740,7 +736,8 @@
                   <SubComponents>
                     <Component class="javax.swing.JCheckBox" name="DisplaySelectableCheckBox3">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content1DisplaySelectable"/>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="language3Content01DisplaySelectable"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DisplaySelectableCheckBox3ActionPerformed"/>
@@ -753,7 +750,8 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="DisplaySelectableCheckB7">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content2DisplaySelectable"/>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="language3Content02DisplaySelectable"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DisplaySelectableCheckB7ActionPerformed"/>
@@ -766,7 +764,8 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="DisplaySelectableCheckB9">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content4DisplaySelectable"/>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="language3Content04DisplaySelectable"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DisplaySelectableCheckB9ActionPerformed"/>
@@ -779,7 +778,8 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="DisplaySelectableCheckB8">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content3DisplaySelectable"/>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="language3Content03DisplaySelectable"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DisplaySelectableCheckB8ActionPerformed"/>
@@ -810,7 +810,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="FontColourLabel3">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content1FontColour"/>
+                        <Property name="text" type="java.lang.String" value="language3Content01FontColour"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -820,7 +820,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontColourLB7">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content2FontColour"/>
+                        <Property name="text" type="java.lang.String" value="language3Content02FontColour"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -830,7 +830,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontColourLB9">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content4FontColour"/>
+                        <Property name="text" type="java.lang.String" value="language3Content04FontColour"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -840,7 +840,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontColourLB8">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content3FontColour"/>
+                        <Property name="text" type="java.lang.String" value="language3Content03FontColour"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -851,23 +851,22 @@
                     <Component class="javax.swing.JComboBox" name="FontColourComboBox3">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="16">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="Maroon"/>
-                            <StringItem index="2" value="Red"/>
-                            <StringItem index="3" value="Yellow"/>
-                            <StringItem index="4" value="Green"/>
-                            <StringItem index="5" value="Lime"/>
-                            <StringItem index="6" value="Navy"/>
-                            <StringItem index="7" value="Blue"/>
-                            <StringItem index="8" value="Teal"/>
-                            <StringItem index="9" value="Aqua"/>
-                            <StringItem index="10" value="Purple"/>
-                            <StringItem index="11" value="Fuchsia"/>
-                            <StringItem index="12" value="Olive"/>
-                            <StringItem index="13" value="Gray"/>
-                            <StringItem index="14" value="Silver"/>
-                            <StringItem index="15" value="Black"/>
+                          <StringArray count="15">
+                            <StringItem index="0" value="Maroon"/>
+                            <StringItem index="1" value="Red"/>
+                            <StringItem index="2" value="Yellow"/>
+                            <StringItem index="3" value="Green"/>
+                            <StringItem index="4" value="Lime"/>
+                            <StringItem index="5" value="Navy"/>
+                            <StringItem index="6" value="Blue"/>
+                            <StringItem index="7" value="Teal"/>
+                            <StringItem index="8" value="Aqua"/>
+                            <StringItem index="9" value="Purple"/>
+                            <StringItem index="10" value="Fuchsia"/>
+                            <StringItem index="11" value="Olive"/>
+                            <StringItem index="12" value="Gray"/>
+                            <StringItem index="13" value="Silver"/>
+                            <StringItem index="14" value="Black"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -883,23 +882,22 @@
                     <Component class="javax.swing.JComboBox" name="FontColourCB7">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="16">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="Maroon"/>
-                            <StringItem index="2" value="Red"/>
-                            <StringItem index="3" value="Yellow"/>
-                            <StringItem index="4" value="Green"/>
-                            <StringItem index="5" value="Lime"/>
-                            <StringItem index="6" value="Navy"/>
-                            <StringItem index="7" value="Blue"/>
-                            <StringItem index="8" value="Teal"/>
-                            <StringItem index="9" value="Aqua"/>
-                            <StringItem index="10" value="Purple"/>
-                            <StringItem index="11" value="Fuchsia"/>
-                            <StringItem index="12" value="Olive"/>
-                            <StringItem index="13" value="Gray"/>
-                            <StringItem index="14" value="Silver"/>
-                            <StringItem index="15" value="Black"/>
+                          <StringArray count="15">
+                            <StringItem index="0" value="Maroon"/>
+                            <StringItem index="1" value="Red"/>
+                            <StringItem index="2" value="Yellow"/>
+                            <StringItem index="3" value="Green"/>
+                            <StringItem index="4" value="Lime"/>
+                            <StringItem index="5" value="Navy"/>
+                            <StringItem index="6" value="Blue"/>
+                            <StringItem index="7" value="Teal"/>
+                            <StringItem index="8" value="Aqua"/>
+                            <StringItem index="9" value="Purple"/>
+                            <StringItem index="10" value="Fuchsia"/>
+                            <StringItem index="11" value="Olive"/>
+                            <StringItem index="12" value="Gray"/>
+                            <StringItem index="13" value="Silver"/>
+                            <StringItem index="14" value="Black"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -915,23 +913,22 @@
                     <Component class="javax.swing.JComboBox" name="FontColourCB8">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="16">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="Maroon"/>
-                            <StringItem index="2" value="Red"/>
-                            <StringItem index="3" value="Yellow"/>
-                            <StringItem index="4" value="Green"/>
-                            <StringItem index="5" value="Lime"/>
-                            <StringItem index="6" value="Navy"/>
-                            <StringItem index="7" value="Blue"/>
-                            <StringItem index="8" value="Teal"/>
-                            <StringItem index="9" value="Aqua"/>
-                            <StringItem index="10" value="Purple"/>
-                            <StringItem index="11" value="Fuchsia"/>
-                            <StringItem index="12" value="Olive"/>
-                            <StringItem index="13" value="Gray"/>
-                            <StringItem index="14" value="Silver"/>
-                            <StringItem index="15" value="Black"/>
+                          <StringArray count="15">
+                            <StringItem index="0" value="Maroon"/>
+                            <StringItem index="1" value="Red"/>
+                            <StringItem index="2" value="Yellow"/>
+                            <StringItem index="3" value="Green"/>
+                            <StringItem index="4" value="Lime"/>
+                            <StringItem index="5" value="Navy"/>
+                            <StringItem index="6" value="Blue"/>
+                            <StringItem index="7" value="Teal"/>
+                            <StringItem index="8" value="Aqua"/>
+                            <StringItem index="9" value="Purple"/>
+                            <StringItem index="10" value="Fuchsia"/>
+                            <StringItem index="11" value="Olive"/>
+                            <StringItem index="12" value="Gray"/>
+                            <StringItem index="13" value="Silver"/>
+                            <StringItem index="14" value="Black"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -947,23 +944,22 @@
                     <Component class="javax.swing.JComboBox" name="FontColourCB9">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="16">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="Maroon"/>
-                            <StringItem index="2" value="Red"/>
-                            <StringItem index="3" value="Yellow"/>
-                            <StringItem index="4" value="Green"/>
-                            <StringItem index="5" value="Lime"/>
-                            <StringItem index="6" value="Navy"/>
-                            <StringItem index="7" value="Blue"/>
-                            <StringItem index="8" value="Teal"/>
-                            <StringItem index="9" value="Aqua"/>
-                            <StringItem index="10" value="Purple"/>
-                            <StringItem index="11" value="Fuchsia"/>
-                            <StringItem index="12" value="Olive"/>
-                            <StringItem index="13" value="Gray"/>
-                            <StringItem index="14" value="Silver"/>
-                            <StringItem index="15" value="Black"/>
+                          <StringArray count="15">
+                            <StringItem index="0" value="Maroon"/>
+                            <StringItem index="1" value="Red"/>
+                            <StringItem index="2" value="Yellow"/>
+                            <StringItem index="3" value="Green"/>
+                            <StringItem index="4" value="Lime"/>
+                            <StringItem index="5" value="Navy"/>
+                            <StringItem index="6" value="Blue"/>
+                            <StringItem index="7" value="Teal"/>
+                            <StringItem index="8" value="Aqua"/>
+                            <StringItem index="9" value="Purple"/>
+                            <StringItem index="10" value="Fuchsia"/>
+                            <StringItem index="11" value="Olive"/>
+                            <StringItem index="12" value="Gray"/>
+                            <StringItem index="13" value="Silver"/>
+                            <StringItem index="14" value="Black"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1062,7 +1058,8 @@
                   <SubComponents>
                     <Component class="javax.swing.JCheckBox" name="DisplaySelectableCheckBox2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content1DisplaySelectable"/>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="language2Content01DisplaySelectable"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DisplaySelectableCheckBox2ActionPerformed"/>
@@ -1075,7 +1072,8 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="DisplaySelectableCheckB4">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content2DisplaySelectable"/>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="language2Content02DisplaySelectable"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DisplaySelectableCheckB4ActionPerformed"/>
@@ -1088,7 +1086,8 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="DisplaySelectableCheckB6">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content4DisplaySelectable"/>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="language2Content04DisplaySelectable"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DisplaySelectableCheckB6ActionPerformed"/>
@@ -1101,7 +1100,8 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="DisplaySelectableCheckB5">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content3DisplaySelectable"/>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="language2Content03DisplaySelectable"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DisplaySelectableCheckB5ActionPerformed"/>
@@ -1132,7 +1132,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="FontStyleLabel1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content1FontStyle"/>
+                        <Property name="text" type="java.lang.String" value="language1Content01FontStyle"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1143,12 +1143,11 @@
                     <Component class="javax.swing.JComboBox" name="FontStyleComboBox1">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="plain"/>
-                            <StringItem index="2" value="bold"/>
-                            <StringItem index="3" value="italic"/>
-                            <StringItem index="4" value="underlined"/>
+                          <StringArray count="4">
+                            <StringItem index="0" value="plain"/>
+                            <StringItem index="1" value="bold"/>
+                            <StringItem index="2" value="italic"/>
+                            <StringItem index="3" value="underlined"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1163,7 +1162,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontStyleLB1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content2FontStyle"/>
+                        <Property name="text" type="java.lang.String" value="language1Content02FontStyle"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1174,12 +1173,11 @@
                     <Component class="javax.swing.JComboBox" name="FontStyleCB1">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="plain"/>
-                            <StringItem index="2" value="bold"/>
-                            <StringItem index="3" value="italic"/>
-                            <StringItem index="4" value="underlined"/>
+                          <StringArray count="4">
+                            <StringItem index="0" value="plain"/>
+                            <StringItem index="1" value="bold"/>
+                            <StringItem index="2" value="italic"/>
+                            <StringItem index="3" value="underlined"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1194,7 +1192,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontStyleLB3">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content4FontStyle"/>
+                        <Property name="text" type="java.lang.String" value="language1Content04FontStyle"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1205,12 +1203,11 @@
                     <Component class="javax.swing.JComboBox" name="FontStyleCB3">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="plain"/>
-                            <StringItem index="2" value="bold"/>
-                            <StringItem index="3" value="italic"/>
-                            <StringItem index="4" value="underlined"/>
+                          <StringArray count="4">
+                            <StringItem index="0" value="plain"/>
+                            <StringItem index="1" value="bold"/>
+                            <StringItem index="2" value="italic"/>
+                            <StringItem index="3" value="underlined"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1226,12 +1223,11 @@
                     <Component class="javax.swing.JComboBox" name="FontStyleCB2">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="plain"/>
-                            <StringItem index="2" value="bold"/>
-                            <StringItem index="3" value="italic"/>
-                            <StringItem index="4" value="underlined"/>
+                          <StringArray count="4">
+                            <StringItem index="0" value="plain"/>
+                            <StringItem index="1" value="bold"/>
+                            <StringItem index="2" value="italic"/>
+                            <StringItem index="3" value="underlined"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1246,7 +1242,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontStyleLB2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content3FontStyle"/>
+                        <Property name="text" type="java.lang.String" value="language1Content03FontStyle"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1274,7 +1270,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="FontColourLabel">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content1FontColour"/>
+                        <Property name="text" type="java.lang.String" value="language1Content01FontColour"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1285,23 +1281,22 @@
                     <Component class="javax.swing.JComboBox" name="FontColourComboBox">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="16">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="Maroon"/>
-                            <StringItem index="2" value="Red"/>
-                            <StringItem index="3" value="Yellow"/>
-                            <StringItem index="4" value="Green"/>
-                            <StringItem index="5" value="Lime"/>
-                            <StringItem index="6" value="Navy"/>
-                            <StringItem index="7" value="Blue"/>
-                            <StringItem index="8" value="Teal"/>
-                            <StringItem index="9" value="Aqua"/>
-                            <StringItem index="10" value="Purple"/>
-                            <StringItem index="11" value="Fuchsia"/>
-                            <StringItem index="12" value="Olive"/>
-                            <StringItem index="13" value="Gray"/>
-                            <StringItem index="14" value="Silver"/>
-                            <StringItem index="15" value="Black"/>
+                          <StringArray count="15">
+                            <StringItem index="0" value="Maroon"/>
+                            <StringItem index="1" value="Red"/>
+                            <StringItem index="2" value="Yellow"/>
+                            <StringItem index="3" value="Green"/>
+                            <StringItem index="4" value="Lime"/>
+                            <StringItem index="5" value="Navy"/>
+                            <StringItem index="6" value="Blue"/>
+                            <StringItem index="7" value="Teal"/>
+                            <StringItem index="8" value="Aqua"/>
+                            <StringItem index="9" value="Purple"/>
+                            <StringItem index="10" value="Fuchsia"/>
+                            <StringItem index="11" value="Olive"/>
+                            <StringItem index="12" value="Gray"/>
+                            <StringItem index="13" value="Silver"/>
+                            <StringItem index="14" value="Black"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1316,7 +1311,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontColourLB1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content2FontColour"/>
+                        <Property name="text" type="java.lang.String" value="language1Content02FontColour"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1327,23 +1322,22 @@
                     <Component class="javax.swing.JComboBox" name="FontColourCB1">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="16">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="Maroon"/>
-                            <StringItem index="2" value="Red"/>
-                            <StringItem index="3" value="Yellow"/>
-                            <StringItem index="4" value="Green"/>
-                            <StringItem index="5" value="Lime"/>
-                            <StringItem index="6" value="Navy"/>
-                            <StringItem index="7" value="Blue"/>
-                            <StringItem index="8" value="Teal"/>
-                            <StringItem index="9" value="Aqua"/>
-                            <StringItem index="10" value="Purple"/>
-                            <StringItem index="11" value="Fuchsia"/>
-                            <StringItem index="12" value="Olive"/>
-                            <StringItem index="13" value="Gray"/>
-                            <StringItem index="14" value="Silver"/>
-                            <StringItem index="15" value="Black"/>
+                          <StringArray count="15">
+                            <StringItem index="0" value="Maroon"/>
+                            <StringItem index="1" value="Red"/>
+                            <StringItem index="2" value="Yellow"/>
+                            <StringItem index="3" value="Green"/>
+                            <StringItem index="4" value="Lime"/>
+                            <StringItem index="5" value="Navy"/>
+                            <StringItem index="6" value="Blue"/>
+                            <StringItem index="7" value="Teal"/>
+                            <StringItem index="8" value="Aqua"/>
+                            <StringItem index="9" value="Purple"/>
+                            <StringItem index="10" value="Fuchsia"/>
+                            <StringItem index="11" value="Olive"/>
+                            <StringItem index="12" value="Gray"/>
+                            <StringItem index="13" value="Silver"/>
+                            <StringItem index="14" value="Black"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1358,7 +1352,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontColourLB3">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content4FontColour"/>
+                        <Property name="text" type="java.lang.String" value="language1Content04FontColour"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1369,23 +1363,22 @@
                     <Component class="javax.swing.JComboBox" name="FontColourCB3">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="16">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="Maroon"/>
-                            <StringItem index="2" value="Red"/>
-                            <StringItem index="3" value="Yellow"/>
-                            <StringItem index="4" value="Green"/>
-                            <StringItem index="5" value="Lime"/>
-                            <StringItem index="6" value="Navy"/>
-                            <StringItem index="7" value="Blue"/>
-                            <StringItem index="8" value="Teal"/>
-                            <StringItem index="9" value="Aqua"/>
-                            <StringItem index="10" value="Purple"/>
-                            <StringItem index="11" value="Fuchsia"/>
-                            <StringItem index="12" value="Olive"/>
-                            <StringItem index="13" value="Gray"/>
-                            <StringItem index="14" value="Silver"/>
-                            <StringItem index="15" value="Black"/>
+                          <StringArray count="15">
+                            <StringItem index="0" value="Maroon"/>
+                            <StringItem index="1" value="Red"/>
+                            <StringItem index="2" value="Yellow"/>
+                            <StringItem index="3" value="Green"/>
+                            <StringItem index="4" value="Lime"/>
+                            <StringItem index="5" value="Navy"/>
+                            <StringItem index="6" value="Blue"/>
+                            <StringItem index="7" value="Teal"/>
+                            <StringItem index="8" value="Aqua"/>
+                            <StringItem index="9" value="Purple"/>
+                            <StringItem index="10" value="Fuchsia"/>
+                            <StringItem index="11" value="Olive"/>
+                            <StringItem index="12" value="Gray"/>
+                            <StringItem index="13" value="Silver"/>
+                            <StringItem index="14" value="Black"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1401,23 +1394,22 @@
                     <Component class="javax.swing.JComboBox" name="FontColourCB2">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="16">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="Maroon"/>
-                            <StringItem index="2" value="Red"/>
-                            <StringItem index="3" value="Yellow"/>
-                            <StringItem index="4" value="Green"/>
-                            <StringItem index="5" value="Lime"/>
-                            <StringItem index="6" value="Navy"/>
-                            <StringItem index="7" value="Blue"/>
-                            <StringItem index="8" value="Teal"/>
-                            <StringItem index="9" value="Aqua"/>
-                            <StringItem index="10" value="Purple"/>
-                            <StringItem index="11" value="Fuchsia"/>
-                            <StringItem index="12" value="Olive"/>
-                            <StringItem index="13" value="Gray"/>
-                            <StringItem index="14" value="Silver"/>
-                            <StringItem index="15" value="Black"/>
+                          <StringArray count="15">
+                            <StringItem index="0" value="Maroon"/>
+                            <StringItem index="1" value="Red"/>
+                            <StringItem index="2" value="Yellow"/>
+                            <StringItem index="3" value="Green"/>
+                            <StringItem index="4" value="Lime"/>
+                            <StringItem index="5" value="Navy"/>
+                            <StringItem index="6" value="Blue"/>
+                            <StringItem index="7" value="Teal"/>
+                            <StringItem index="8" value="Aqua"/>
+                            <StringItem index="9" value="Purple"/>
+                            <StringItem index="10" value="Fuchsia"/>
+                            <StringItem index="11" value="Olive"/>
+                            <StringItem index="12" value="Gray"/>
+                            <StringItem index="13" value="Silver"/>
+                            <StringItem index="14" value="Black"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1432,7 +1424,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontColourLB2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content3FontColour"/>
+                        <Property name="text" type="java.lang.String" value="language1Content03FontColour"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1460,7 +1452,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="DisplayTextLabel1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content1DisplayText"/>
+                        <Property name="text" type="java.lang.String" value="language1Content01DisplayText"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1470,7 +1462,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="DisplayTextLB1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content2DisplayText"/>
+                        <Property name="text" type="java.lang.String" value="language1Content02DisplayText"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1480,7 +1472,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="DisplayTextLB3">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content4DisplayText"/>
+                        <Property name="text" type="java.lang.String" value="language1Content04DisplayText"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1490,7 +1482,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="DisplayTextLB2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language1Content3DisplayText"/>
+                        <Property name="text" type="java.lang.String" value="language1Content03DisplayText"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1546,7 +1538,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="DisplayTextLable2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content1DisplayText"/>
+                        <Property name="text" type="java.lang.String" value="language2Content01DisplayText"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1556,7 +1548,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="DisplayTextLB4">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content2DisplayText"/>
+                        <Property name="text" type="java.lang.String" value="language2Content02DisplayText"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1566,7 +1558,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="DisplayTextLB6">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content4DisplayText"/>
+                        <Property name="text" type="java.lang.String" value="language2Content04DisplayText"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1576,7 +1568,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="DisplayTextLB5">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language2Content3DisplayText"/>
+                        <Property name="text" type="java.lang.String" value="language2Content03DisplayText"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1635,7 +1627,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="FontStyleLabel3">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content1FontStyle"/>
+                        <Property name="text" type="java.lang.String" value="language3Content01FontStyle"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1645,7 +1637,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontStyleLB7">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content2FontStyle"/>
+                        <Property name="text" type="java.lang.String" value="language3Content02FontStyle"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1655,7 +1647,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontStyleLB9">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content4FontStyle"/>
+                        <Property name="text" type="java.lang.String" value="language3Content04FontStyle"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1665,7 +1657,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="FontStyleLB8">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="language3Content3FontStyle"/>
+                        <Property name="text" type="java.lang.String" value="language3Content03FontStyle"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1676,12 +1668,11 @@
                     <Component class="javax.swing.JComboBox" name="FontStyleComboBox3">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="plain"/>
-                            <StringItem index="2" value="bold"/>
-                            <StringItem index="3" value="italic"/>
-                            <StringItem index="4" value="underlined"/>
+                          <StringArray count="4">
+                            <StringItem index="0" value="plain"/>
+                            <StringItem index="1" value="bold"/>
+                            <StringItem index="2" value="italic"/>
+                            <StringItem index="3" value="underlined"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1697,12 +1688,11 @@
                     <Component class="javax.swing.JComboBox" name="FontStyleCB7">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="plain"/>
-                            <StringItem index="2" value="bold"/>
-                            <StringItem index="3" value="italic"/>
-                            <StringItem index="4" value="underlined"/>
+                          <StringArray count="4">
+                            <StringItem index="0" value="plain"/>
+                            <StringItem index="1" value="bold"/>
+                            <StringItem index="2" value="italic"/>
+                            <StringItem index="3" value="underlined"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1718,12 +1708,11 @@
                     <Component class="javax.swing.JComboBox" name="FontStyleCB8">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="plain"/>
-                            <StringItem index="2" value="bold"/>
-                            <StringItem index="3" value="italic"/>
-                            <StringItem index="4" value="underlined"/>
+                          <StringArray count="4">
+                            <StringItem index="0" value="plain"/>
+                            <StringItem index="1" value="bold"/>
+                            <StringItem index="2" value="italic"/>
+                            <StringItem index="3" value="underlined"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1739,12 +1728,11 @@
                     <Component class="javax.swing.JComboBox" name="FontStyleCB9">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="5">
-                            <StringItem index="0" value="NONE"/>
-                            <StringItem index="1" value="plain"/>
-                            <StringItem index="2" value="bold"/>
-                            <StringItem index="3" value="italic"/>
-                            <StringItem index="4" value="underlined"/>
+                          <StringArray count="4">
+                            <StringItem index="0" value="plain"/>
+                            <StringItem index="1" value="bold"/>
+                            <StringItem index="2" value="italic"/>
+                            <StringItem index="3" value="underlined"/>
                           </StringArray>
                         </Property>
                       </Properties>
