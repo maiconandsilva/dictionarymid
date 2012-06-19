@@ -61,6 +61,8 @@ public class PropertiesEditor extends javax.swing.JFrame {
     public static final String metal = "javax.swing.plaf.metal.MetalLookAndFeel";
     public static final String motif = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
 
+    // The size that the PropertiesEditor window should
+    // have depending on the look and feel selected.
     // GTk
     public static final int GTk_height_2_Langs = 670;
     public static final int GTk_height_3_Langs = 685;
@@ -88,7 +90,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
     
     
    /*
-    * Variables declaration for
+    * Variable declarations for
     * the property file editor
     */
     // variables unique to all
@@ -156,80 +158,80 @@ public class PropertiesEditor extends javax.swing.JFrame {
     public static String language2NumberOfContentDeclarations = "";
     public static String language3NumberOfContentDeclarations = "";    
     
-    // Other Content Variables
+    // Other ContentNN properties Variables
     // Language 1
-    public static String language1Content1DisplayText = "";
-    public static String language1Content1FontColour = "";
-    public static String language1Content1FontStyle = "";
-    public static String language1Content1DisplaySelectable = "";
-    public static String language1Content2DisplayText = "";
-    public static String language1Content2FontColour = "";
-    public static String language1Content2FontStyle = "";
-    public static String language1Content2DisplaySelectable = "";
-    public static String language1Content3DisplayText = "";
-    public static String language1Content3FontColour = "";
-    public static String language1Content3FontStyle = "";
-    public static String language1Content3DisplaySelectable = "";
-    public static String language1Content4DisplayText = "";
-    public static String language1Content4FontColour = "";
-    public static String language1Content4FontStyle = "";
-    public static String language1Content4DisplaySelectable = "";
+    public static String language1Content01DisplayText = "";
+    public static String language1Content01FontColour = "";
+    public static String language1Content01FontStyle = "";
+    public static String language1Content01DisplaySelectable = "";
+    public static String language1Content02DisplayText = "";
+    public static String language1Content02FontColour = "";
+    public static String language1Content02FontStyle = "";
+    public static String language1Content02DisplaySelectable = "";
+    public static String language1Content03DisplayText = "";
+    public static String language1Content03FontColour = "";
+    public static String language1Content03FontStyle = "";
+    public static String language1Content03DisplaySelectable = "";
+    public static String language1Content04DisplayText = "";
+    public static String language1Content04FontColour = "";
+    public static String language1Content04FontStyle = "";
+    public static String language1Content04DisplaySelectable = "";
     
     /*
-    public static String language1Content5DisplayText = "";
-    public static String language1Content5FontColour = "";
-    public static String language1Content5FontStyle = "";
-    public static String language1Content5DisplaySelectable = "";
+    public static String language1Content05DisplayText = "";
+    public static String language1Content05FontColour = "";
+    public static String language1Content05FontStyle = "";
+    public static String language1Content05DisplaySelectable = "";
     */
     
     // Language 2
-    public static String language2Content1DisplayText = "";
-    public static String language2Content1FontColour = "";
-    public static String language2Content1FontStyle = "";
-    public static String language2Content1DisplaySelectable = "";
-    public static String language2Content2DisplayText = "";
-    public static String language2Content2FontColour = "";
-    public static String language2Content2FontStyle = "";
-    public static String language2Content2DisplaySelectable = "";
-    public static String language2Content3DisplayText = "";
-    public static String language2Content3FontColour = "";
-    public static String language2Content3FontStyle = "";
-    public static String language2Content3DisplaySelectable = "";
-    public static String language2Content4DisplayText = "";
-    public static String language2Content4FontColour = "";
-    public static String language2Content4FontStyle = "";
-    public static String language2Content4DisplaySelectable = "";
+    public static String language2Content01DisplayText = "";
+    public static String language2Content01FontColour = "";
+    public static String language2Content01FontStyle = "";
+    public static String language2Content01DisplaySelectable = "";
+    public static String language2Content02DisplayText = "";
+    public static String language2Content02FontColour = "";
+    public static String language2Content02FontStyle = "";
+    public static String language2Content02DisplaySelectable = "";
+    public static String language2Content03DisplayText = "";
+    public static String language2Content03FontColour = "";
+    public static String language2Content03FontStyle = "";
+    public static String language2Content03DisplaySelectable = "";
+    public static String language2Content04DisplayText = "";
+    public static String language2Content04FontColour = "";
+    public static String language2Content04FontStyle = "";
+    public static String language2Content04DisplaySelectable = "";
     
     /*
-    public static String language2Content5DisplayText = "";
-    public static String language2Content5FontColour = "";
-    public static String language2Content5FontStyle = "";
-    public static String language2Content5DisplaySelectable = "";
+    public static String language2Content05DisplayText = "";
+    public static String language2Content05FontColour = "";
+    public static String language2Content05FontStyle = "";
+    public static String language2Content05DisplaySelectable = "";
     */
     
     // Language 3
-    public static String language3Content1DisplayText = "";
-    public static String language3Content1FontColour = "";
-    public static String language3Content1FontStyle = "";
-    public static String language3Content1DisplaySelectable = "";
-    public static String language3Content2DisplayText = "";
-    public static String language3Content2FontColour = "";
-    public static String language3Content2FontStyle = "";
-    public static String language3Content2DisplaySelectable = "";
-    public static String language3Content3DisplayText = "";
-    public static String language3Content3FontColour = "";
-    public static String language3Content3FontStyle = "";
-    public static String language3Content3DisplaySelectable = "";
-    public static String language3Content4DisplayText = "";
-    public static String language3Content4FontColour = "";
-    public static String language3Content4FontStyle = "";
-    public static String language3Content4DisplaySelectable = "";
+    public static String language3Content01DisplayText = "";
+    public static String language3Content01FontColour = "";
+    public static String language3Content01FontStyle = "";
+    public static String language3Content01DisplaySelectable = "";
+    public static String language3Content02DisplayText = "";
+    public static String language3Content02FontColour = "";
+    public static String language3Content02FontStyle = "";
+    public static String language3Content02DisplaySelectable = "";
+    public static String language3Content03DisplayText = "";
+    public static String language3Content03FontColour = "";
+    public static String language3Content03FontStyle = "";
+    public static String language3Content03DisplaySelectable = "";
+    public static String language3Content04DisplayText = "";
+    public static String language3Content04FontColour = "";
+    public static String language3Content04FontStyle = "";
+    public static String language3Content04DisplaySelectable = "";
     
     /*
-    public static String language3Content5DisplayText = "";
-    public static String language3Content5FontColour = "";
-    public static String language3Content5FontStyle = "";
-    public static String language3Content5DisplaySelectable = "";
+    public static String language3Content05DisplayText = "";
+    public static String language3Content05FontColour = "";
+    public static String language3Content05FontStyle = "";
+    public static String language3Content05DisplaySelectable = "";
     */
     
 
@@ -1487,7 +1489,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
 
         jMenu1.setText(I18n.tr("file.dfmPropCreate")); // NOI18N
 
-        jMenuItem1.setText(I18n.tr("creatTheProps.dfmPropCreate")); // NOI18N
+        jMenuItem1.setText(I18n.tr("createThePropsFile.dfmPropCreate")); // NOI18N
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -2312,133 +2314,133 @@ public class PropertiesEditor extends javax.swing.JFrame {
         }
 
         // Langage-1 content variables
-        if (!"".equals(language1Content1DisplayText)){
-            ppWin.appendText("language1Content1DisplayText" + colon + language1Content1DisplayText + newline);
+        if (!"".equals(language1Content01DisplayText)){
+            ppWin.appendText("language1Content01DisplayText" + colon + language1Content01DisplayText + newline);
         }
 
-        if (!"".equals(language1Content1FontColour)){
-            ppWin.appendText("language1Content1FontColour" + colon + language1Content1FontColour + newline);
+        if (!"".equals(language1Content01FontColour)){
+            ppWin.appendText("language1Content01FontColour" + colon + language1Content01FontColour + newline);
         }
 
-        if (!"".equals(language1Content1FontStyle)){
-            ppWin.appendText("language1Content1FontStyle" + colon + language1Content1FontStyle + newline);
+        if (!"".equals(language1Content01FontStyle)){
+            ppWin.appendText("language1Content01FontStyle" + colon + language1Content01FontStyle + newline);
         }
 
-        if (!"".equals(language1Content1DisplaySelectable)){
-            ppWin.appendText("language1Content1DisplaySelectable" + colon + language1Content1DisplaySelectable + newline);
+        if (!"".equals(language1Content01DisplaySelectable)){
+            ppWin.appendText("language1Content01DisplaySelectable" + colon + language1Content01DisplaySelectable + newline);
         }
 
-        if (!"".equals(language1Content2DisplayText)){
-            ppWin.appendText("language1Content2DisplayText" + colon + language1Content2DisplayText + newline);
+        if (!"".equals(language1Content02DisplayText)){
+            ppWin.appendText("language1Content02DisplayText" + colon + language1Content02DisplayText + newline);
         }
 
-        if (!"".equals(language1Content2FontColour)){
-            ppWin.appendText("language1Content2FontColour" + colon + language1Content2FontColour + newline);
+        if (!"".equals(language1Content02FontColour)){
+            ppWin.appendText("language1Content02FontColour" + colon + language1Content02FontColour + newline);
         }
 
-        if (!"".equals(language1Content2FontStyle)){
-            ppWin.appendText("language1Content2FontStyle" + colon + language1Content2FontStyle + newline);
+        if (!"".equals(language1Content02FontStyle)){
+            ppWin.appendText("language1Content02FontStyle" + colon + language1Content02FontStyle + newline);
         }
 
-        if (!"".equals(language1Content2DisplaySelectable)){
-            ppWin.appendText("language1Content2DisplaySelectable" + colon + language1Content2DisplaySelectable + newline);
+        if (!"".equals(language1Content02DisplaySelectable)){
+            ppWin.appendText("language1Content02DisplaySelectable" + colon + language1Content02DisplaySelectable + newline);
         }
 
-        if (!"".equals(language1Content3DisplayText)){
-            ppWin.appendText("language1Content3DisplayText" + colon + language1Content3DisplayText + newline);
+        if (!"".equals(language1Content03DisplayText)){
+            ppWin.appendText("language1Content03DisplayText" + colon + language1Content03DisplayText + newline);
         }
 
-        if (!"".equals(language1Content3FontColour)){
-            ppWin.appendText("language1Content3FontColour" + colon + language1Content3FontColour + newline);
+        if (!"".equals(language1Content03FontColour)){
+            ppWin.appendText("language1Content03FontColour" + colon + language1Content03FontColour + newline);
         }
 
-        if (!"".equals(language1Content3FontStyle)){
-            ppWin.appendText("language1Content3FontStyle" + colon + language1Content3FontStyle + newline);
+        if (!"".equals(language1Content03FontStyle)){
+            ppWin.appendText("language1Content03FontStyle" + colon + language1Content03FontStyle + newline);
         }
 
-        if (!"".equals(language1Content3DisplaySelectable)){
-            ppWin.appendText("language1Content3DisplaySelectable" + colon + language1Content3DisplaySelectable + newline);
+        if (!"".equals(language1Content03DisplaySelectable)){
+            ppWin.appendText("language1Content03DisplaySelectable" + colon + language1Content03DisplaySelectable + newline);
         }
 
-        if (!"".equals(language1Content4DisplayText)){
-            ppWin.appendText("language1Content4DisplayText" + colon + language1Content4DisplayText + newline);
+        if (!"".equals(language1Content04DisplayText)){
+            ppWin.appendText("language1Content04DisplayText" + colon + language1Content04DisplayText + newline);
         }
 
-        if (!"".equals(language1Content4FontColour)){
-            ppWin.appendText("language1Content4FontColour" + colon + language1Content4FontColour + newline);
+        if (!"".equals(language1Content04FontColour)){
+            ppWin.appendText("language1Content04FontColour" + colon + language1Content04FontColour + newline);
         }
 
-        if (!"".equals(language1Content4FontStyle)){
-            ppWin.appendText("language1Content4FontStyle" + colon + language1Content4FontStyle + newline);
+        if (!"".equals(language1Content04FontStyle)){
+            ppWin.appendText("language1Content04FontStyle" + colon + language1Content04FontStyle + newline);
         }
 
-        if (!"".equals(language1Content4DisplaySelectable)){
-            ppWin.appendText("language1Content4DisplaySelectable" + colon + language1Content4DisplaySelectable + newline + newline);
+        if (!"".equals(language1Content04DisplaySelectable)){
+            ppWin.appendText("language1Content04DisplaySelectable" + colon + language1Content04DisplaySelectable + newline + newline);
         }
 
         // Langage-2 content variables
-        if (!"".equals(language2Content1DisplayText)){
-            ppWin.appendText("language2Content1DisplayText" + colon + language2Content1DisplayText + newline);
+        if (!"".equals(language2Content01DisplayText)){
+            ppWin.appendText("language2Content01DisplayText" + colon + language2Content01DisplayText + newline);
         }
 
-        if (!"".equals(language2Content1FontColour)){
-            ppWin.appendText("language2Content1FontColour" + colon + language2Content1FontColour + newline);
+        if (!"".equals(language2Content01FontColour)){
+            ppWin.appendText("language2Content01FontColour" + colon + language2Content01FontColour + newline);
         }
 
-        if (!"".equals(language2Content1FontStyle)){
-            ppWin.appendText("language2Content1FontStyle" + colon + language2Content1FontStyle + newline);
+        if (!"".equals(language2Content01FontStyle)){
+            ppWin.appendText("language2Content01FontStyle" + colon + language2Content01FontStyle + newline);
         }
 
-        if (!"".equals(language2Content1DisplaySelectable)){
-            ppWin.appendText("language2Content1DisplaySelectable" + colon + language2Content1DisplaySelectable + newline);
+        if (!"".equals(language2Content01DisplaySelectable)){
+            ppWin.appendText("language2Content01DisplaySelectable" + colon + language2Content01DisplaySelectable + newline);
         }
 
-        if (!"".equals(language2Content2DisplayText)){
-            ppWin.appendText("language2Content2DisplayText" + colon + language2Content2DisplayText + newline);
+        if (!"".equals(language2Content02DisplayText)){
+            ppWin.appendText("language2Content02DisplayText" + colon + language2Content02DisplayText + newline);
         }
 
-        if (!"".equals(language2Content2FontColour)){
-            ppWin.appendText("language2Content2FontColour" + colon + language2Content2FontColour + newline);
+        if (!"".equals(language2Content02FontColour)){
+            ppWin.appendText("language2Content02FontColour" + colon + language2Content02FontColour + newline);
         }
 
-        if (!"".equals(language2Content2FontStyle)){
-            ppWin.appendText("language2Content2FontStyle" + colon + language2Content2FontStyle + newline);
+        if (!"".equals(language2Content02FontStyle)){
+            ppWin.appendText("language2Content02FontStyle" + colon + language2Content02FontStyle + newline);
         }
 
-        if (!"".equals(language2Content2DisplaySelectable)){
-            ppWin.appendText("language2Content2DisplaySelectable" + colon + language2Content2DisplaySelectable + newline);
+        if (!"".equals(language2Content02DisplaySelectable)){
+            ppWin.appendText("language2Content02DisplaySelectable" + colon + language2Content02DisplaySelectable + newline);
         }
 
-        if (!"".equals(language2Content3DisplayText)){
-            ppWin.appendText("language2Content3DisplayText" + colon + language2Content3DisplayText + newline);
+        if (!"".equals(language2Content03DisplayText)){
+            ppWin.appendText("language2Content03DisplayText" + colon + language2Content03DisplayText + newline);
         }
 
-        if (!"".equals(language2Content3FontColour)){
-            ppWin.appendText("language2Content3FontColour" + colon + language2Content3FontColour + newline);
+        if (!"".equals(language2Content03FontColour)){
+            ppWin.appendText("language2Content03FontColour" + colon + language2Content03FontColour + newline);
         }
 
-        if (!"".equals(language2Content3FontStyle)){
-            ppWin.appendText("language2Content3FontStyle" + colon + language2Content3FontStyle + newline);
+        if (!"".equals(language2Content03FontStyle)){
+            ppWin.appendText("language2Content03FontStyle" + colon + language2Content03FontStyle + newline);
         }
 
-        if (!"".equals(language2Content3DisplaySelectable)){
-            ppWin.appendText("language2Content3DisplaySelectable" + colon + language2Content3DisplaySelectable + newline);
+        if (!"".equals(language2Content03DisplaySelectable)){
+            ppWin.appendText("language2Content03DisplaySelectable" + colon + language2Content03DisplaySelectable + newline);
         }
 
-        if (!"".equals(language2Content4DisplayText)){
-            ppWin.appendText("language2Content4DisplayText" + colon + language2Content4DisplayText + newline);
+        if (!"".equals(language2Content04DisplayText)){
+            ppWin.appendText("language2Content04DisplayText" + colon + language2Content04DisplayText + newline);
         }
 
-        if (!"".equals(language2Content4FontColour)){
-            ppWin.appendText("language2Content4FontColour" + colon + language2Content4FontColour + newline);
+        if (!"".equals(language2Content04FontColour)){
+            ppWin.appendText("language2Content04FontColour" + colon + language2Content04FontColour + newline);
         }
 
-        if (!"".equals(language2Content4FontStyle)){
-            ppWin.appendText("language2Content4FontStyle" + colon + language2Content4FontStyle + newline);
+        if (!"".equals(language2Content04FontStyle)){
+            ppWin.appendText("language2Content04FontStyle" + colon + language2Content04FontStyle + newline);
         }   
 
-        if (!"".equals(language2Content4DisplaySelectable)){
-            ppWin.appendText("language2Content4DisplaySelectable" + colon + language2Content4DisplaySelectable + newline + newline);
+        if (!"".equals(language2Content04DisplaySelectable)){
+            ppWin.appendText("language2Content04DisplaySelectable" + colon + language2Content04DisplaySelectable + newline + newline);
         }
 
         
@@ -2473,68 +2475,68 @@ public class PropertiesEditor extends javax.swing.JFrame {
             if (!"".equals(language3NumberOfContentDeclarations)){
                 ppWin.appendText("language3NumberOfContentDeclarations" + colon + language3NumberOfContentDeclarations + newline + newline);
             }
-            if (!"".equals(language3Content1DisplayText)){
-                ppWin.appendText("language3Content1DisplayText" + colon + language3Content1DisplayText + newline);
+            if (!"".equals(language3Content01DisplayText)){
+                ppWin.appendText("language3Content01DisplayText" + colon + language3Content01DisplayText + newline);
             }
 
-            if (!"".equals(language3Content1FontColour)){
-                ppWin.appendText("language3Content1FontColour" + colon + language3Content1FontColour + newline);
+            if (!"".equals(language3Content01FontColour)){
+                ppWin.appendText("language3Content01FontColour" + colon + language3Content01FontColour + newline);
             }
 
-            if (!"".equals(language3Content1FontStyle)){
-                ppWin.appendText("language3Content1FontStyle" + colon + language3Content1FontStyle + newline);
+            if (!"".equals(language3Content01FontStyle)){
+                ppWin.appendText("language3Content01FontStyle" + colon + language3Content01FontStyle + newline);
             }
 
-            if (!"".equals(language3Content1DisplaySelectable)){
-                ppWin.appendText("language3Content1DisplaySelectable" + colon + language3Content1DisplaySelectable + newline);
+            if (!"".equals(language3Content01DisplaySelectable)){
+                ppWin.appendText("language3Content01DisplaySelectable" + colon + language3Content01DisplaySelectable + newline);
             }
 
-            if (!"".equals(language3Content2DisplayText)){
-                ppWin.appendText("language3Content2DisplayText" + colon + language3Content2DisplayText + newline);
+            if (!"".equals(language3Content02DisplayText)){
+                ppWin.appendText("language3Content02DisplayText" + colon + language3Content02DisplayText + newline);
             }
 
-            if (!"".equals(language3Content2FontColour)){
-                ppWin.appendText("language3Content2FontColour" + colon + language3Content2FontColour + newline);
+            if (!"".equals(language3Content02FontColour)){
+                ppWin.appendText("language3Content02FontColour" + colon + language3Content02FontColour + newline);
             }
 
-            if (!"".equals(language3Content2FontStyle)){
-                ppWin.appendText("language3Content2FontStyle" + colon + language3Content2FontStyle + newline);
+            if (!"".equals(language3Content02FontStyle)){
+                ppWin.appendText("language3Content02FontStyle" + colon + language3Content02FontStyle + newline);
             }
 
-            if (!"".equals(language3Content2DisplaySelectable)){
-                ppWin.appendText("language3Content2DisplaySelectable" + colon + language3Content2DisplaySelectable + newline);
+            if (!"".equals(language3Content02DisplaySelectable)){
+                ppWin.appendText("language3Content02DisplaySelectable" + colon + language3Content02DisplaySelectable + newline);
             }
 
-            if (!"".equals(language3Content3DisplayText)){
-                ppWin.appendText("language3Content3DisplayText" + colon + language3Content3DisplayText + newline);
+            if (!"".equals(language3Content03DisplayText)){
+                ppWin.appendText("language3Content03DisplayText" + colon + language3Content03DisplayText + newline);
             }
 
-            if (!"".equals(language3Content3FontColour)){
-                ppWin.appendText("language3Content3FontColour" + colon + language3Content3FontColour + newline);
+            if (!"".equals(language3Content03FontColour)){
+                ppWin.appendText("language3Content03FontColour" + colon + language3Content03FontColour + newline);
             }
 
-            if (!"".equals(language3Content3FontStyle)){
-                ppWin.appendText("language3Content3FontStyle" + colon + language3Content3FontStyle + newline);
+            if (!"".equals(language3Content03FontStyle)){
+                ppWin.appendText("language3Content03FontStyle" + colon + language3Content03FontStyle + newline);
             }
 
-            if (!"".equals(language3Content3DisplaySelectable)){
-                ppWin.appendText("language3Content3DisplaySelectable" + colon + language3Content3DisplaySelectable + newline);
+            if (!"".equals(language3Content03DisplaySelectable)){
+                ppWin.appendText("language3Content03DisplaySelectable" + colon + language3Content03DisplaySelectable + newline);
             }
 
-            if (!"".equals(language3Content4DisplayText)){
-                ppWin.appendText("language3Content4DisplayText" + colon + language3Content4DisplayText + newline);
+            if (!"".equals(language3Content04DisplayText)){
+                ppWin.appendText("language3Content04DisplayText" + colon + language3Content04DisplayText + newline);
             }
 
-            if (!"".equals(language3Content4FontColour)){
-                ppWin.appendText("language3Content4FontColour" + colon + language3Content4FontColour + newline);
+            if (!"".equals(language3Content04FontColour)){
+                ppWin.appendText("language3Content04FontColour" + colon + language3Content04FontColour + newline);
             }
 
-            if (!"".equals(language3Content4FontStyle)){
-                ppWin.appendText("language3Content4FontStyle" + colon + language3Content4FontStyle + newline);
+            if (!"".equals(language3Content04FontStyle)){
+                ppWin.appendText("language3Content04FontStyle" + colon + language3Content04FontStyle + newline);
             }
 
-            if (!"".equals(language3Content4DisplaySelectable)){
-                ppWin.appendText("language3Content4DisplaySelectable" + colon + language3Content4DisplaySelectable + newline);
+            if (!"".equals(language3Content04DisplaySelectable)){
+                ppWin.appendText("language3Content04DisplaySelectable" + colon + language3Content04DisplaySelectable + newline);
             }            
         }
     }
@@ -2690,7 +2692,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
     }
 
     private void showContentPropsEditor(){
-        ContentNNPropertiesCreator CPEdit = ContentNNPropertiesCreator.getContentPropsEditor();
+        ContentPropertiesCreator CPEdit = ContentPropertiesCreator.getContentPropsEditor();
         CPEdit.setSize(1100, 500);
         CPEdit.setLocation(screenSize.width / 2 - CPEdit.getWidth() / 2,
                         screenSize.height / 2 - CPEdit.getHeight() / 2);

@@ -42,16 +42,16 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 
-public class ContentNNPropertiesCreator extends javax.swing.JDialog implements PropertyChangeListener {
+public class ContentPropertiesCreator extends javax.swing.JDialog implements PropertyChangeListener {
     
-    public static ContentNNPropertiesCreator getContentPropsEditor(){
-        return new ContentNNPropertiesCreator();
+    public static ContentPropertiesCreator getContentPropsEditor(){
+        return new ContentPropertiesCreator();
     }
 
     /**
-     * Creates new form ContentNNPropertiesCreator
+     * Creates new form ContentPropertiesCreator
      */
-    public ContentNNPropertiesCreator() {
+    public ContentPropertiesCreator() {
         initComponents();
     }
 
@@ -185,7 +185,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Content Properties Creator");
+        setTitle("ContentProperties-Creator");
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -195,7 +195,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         jPanel30.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel30.setLayout(new java.awt.GridBagLayout());
 
-        FontColourLabel2.setText("language2Content1FontColour");
+        FontColourLabel2.setText("language2Content01FontColour");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -203,7 +203,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel30.add(FontColourLabel2, gridBagConstraints);
 
-        FontColourComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
+        FontColourComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
         FontColourComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontColourComboBox2ActionPerformed(evt);
@@ -216,7 +216,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel30.add(FontColourComboBox2, gridBagConstraints);
 
-        FontColourLB4.setText("language2Content2FontColour");
+        FontColourLB4.setText("language2Content02FontColour");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -224,7 +224,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel30.add(FontColourLB4, gridBagConstraints);
 
-        FontColourCB4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
+        FontColourCB4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
         FontColourCB4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontColourCB4ActionPerformed(evt);
@@ -237,7 +237,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel30.add(FontColourCB4, gridBagConstraints);
 
-        FontColourCB6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
+        FontColourCB6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
         FontColourCB6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontColourCB6ActionPerformed(evt);
@@ -250,7 +250,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel30.add(FontColourCB6, gridBagConstraints);
 
-        FontColourLB6.setText("language2Content4FontColour");
+        FontColourLB6.setText("language2Content04FontColour");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -258,7 +258,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel30.add(FontColourLB6, gridBagConstraints);
 
-        FontColourCB5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
+        FontColourCB5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
         FontColourCB5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontColourCB5ActionPerformed(evt);
@@ -271,7 +271,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel30.add(FontColourCB5, gridBagConstraints);
 
-        FontColourLB5.setText("language2Content3FontColour");
+        FontColourLB5.setText("language2Content03FontColour");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -372,7 +372,8 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel16.setLayout(new java.awt.GridBagLayout());
 
-        DisplaySelectableCheckBox1.setText("language1Content1DisplaySelectable");
+        DisplaySelectableCheckBox1.setSelected(true);
+        DisplaySelectableCheckBox1.setText("language1Content01DisplaySelectable");
         DisplaySelectableCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplaySelectableCheckBox1ActionPerformed(evt);
@@ -385,7 +386,8 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel16.add(DisplaySelectableCheckBox1, gridBagConstraints);
 
-        DisplaySelectableCheckB1.setText("language1Content2DisplaySelectable");
+        DisplaySelectableCheckB1.setSelected(true);
+        DisplaySelectableCheckB1.setText("language1Content02DisplaySelectable");
         DisplaySelectableCheckB1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplaySelectableCheckB1ActionPerformed(evt);
@@ -398,7 +400,8 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel16.add(DisplaySelectableCheckB1, gridBagConstraints);
 
-        DisplaySelectableCheckB3.setText("language1Content4DisplaySelectable");
+        DisplaySelectableCheckB3.setSelected(true);
+        DisplaySelectableCheckB3.setText("language1Content04DisplaySelectable");
         DisplaySelectableCheckB3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplaySelectableCheckB3ActionPerformed(evt);
@@ -411,7 +414,8 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel16.add(DisplaySelectableCheckB3, gridBagConstraints);
 
-        DisplaySelectableCheckB2.setText("language1Content3DisplaySelectable");
+        DisplaySelectableCheckB2.setSelected(true);
+        DisplaySelectableCheckB2.setText("language1Content03DisplaySelectable");
         DisplaySelectableCheckB2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplaySelectableCheckB2ActionPerformed(evt);
@@ -434,7 +438,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         jPanel27.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel27.setLayout(new java.awt.GridBagLayout());
 
-        FontStyleLabel2.setText("language2Content1FontStyle");
+        FontStyleLabel2.setText("language2Content01FontStyle");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -442,7 +446,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel27.add(FontStyleLabel2, gridBagConstraints);
 
-        FontStyleComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "plain", "bold", "italic", "underlined" }));
+        FontStyleComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plain", "bold", "italic", "underlined" }));
         FontStyleComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontStyleComboBox2ActionPerformed(evt);
@@ -455,7 +459,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel27.add(FontStyleComboBox2, gridBagConstraints);
 
-        FontStyleLB4.setText("language2Content2FontStyle");
+        FontStyleLB4.setText("language2Content02FontStyle");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -463,7 +467,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel27.add(FontStyleLB4, gridBagConstraints);
 
-        FontStyleCB4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "plain", "bold", "italic", "underlined" }));
+        FontStyleCB4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plain", "bold", "italic", "underlined" }));
         FontStyleCB4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontStyleCB4ActionPerformed(evt);
@@ -476,7 +480,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel27.add(FontStyleCB4, gridBagConstraints);
 
-        FontStyleCB6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "plain", "bold", "italic", "underlined" }));
+        FontStyleCB6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plain", "bold", "italic", "underlined" }));
         FontStyleCB6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontStyleCB6ActionPerformed(evt);
@@ -489,7 +493,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel27.add(FontStyleCB6, gridBagConstraints);
 
-        FontStyleLB6.setText("language2Content4FontStyle");
+        FontStyleLB6.setText("language2Content04FontStyle");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -497,7 +501,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel27.add(FontStyleLB6, gridBagConstraints);
 
-        FontStyleCB5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "plain", "bold", "italic", "underlined" }));
+        FontStyleCB5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plain", "bold", "italic", "underlined" }));
         FontStyleCB5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontStyleCB5ActionPerformed(evt);
@@ -510,7 +514,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel27.add(FontStyleCB5, gridBagConstraints);
 
-        FontStyleLB5.setText("language2Content3FontStyle");
+        FontStyleLB5.setText("language2Content03FontStyle");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -528,7 +532,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         jPanel23.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel23.setLayout(new java.awt.GridBagLayout());
 
-        DisplayTextLable3.setText("language3Content1DisplayText");
+        DisplayTextLable3.setText("language3Content01DisplayText");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -536,7 +540,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel23.add(DisplayTextLable3, gridBagConstraints);
 
-        DisplayTextLB7.setText("language3Content2DisplayText");
+        DisplayTextLB7.setText("language3Content02DisplayText");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -544,7 +548,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel23.add(DisplayTextLB7, gridBagConstraints);
 
-        DisplayTextLB9.setText("language3Content4DisplayText");
+        DisplayTextLB9.setText("language3Content04DisplayText");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -552,7 +556,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel23.add(DisplayTextLB9, gridBagConstraints);
 
-        DisplayTextLB8.setText("language3Content3DisplayText");
+        DisplayTextLB8.setText("language3Content03DisplayText");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -608,7 +612,8 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel15.setLayout(new java.awt.GridBagLayout());
 
-        DisplaySelectableCheckBox3.setText("language3Content1DisplaySelectable");
+        DisplaySelectableCheckBox3.setSelected(true);
+        DisplaySelectableCheckBox3.setText("language3Content01DisplaySelectable");
         DisplaySelectableCheckBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplaySelectableCheckBox3ActionPerformed(evt);
@@ -621,7 +626,8 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel15.add(DisplaySelectableCheckBox3, gridBagConstraints);
 
-        DisplaySelectableCheckB7.setText("language3Content2DisplaySelectable");
+        DisplaySelectableCheckB7.setSelected(true);
+        DisplaySelectableCheckB7.setText("language3Content02DisplaySelectable");
         DisplaySelectableCheckB7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplaySelectableCheckB7ActionPerformed(evt);
@@ -634,7 +640,8 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel15.add(DisplaySelectableCheckB7, gridBagConstraints);
 
-        DisplaySelectableCheckB9.setText("language3Content4DisplaySelectable");
+        DisplaySelectableCheckB9.setSelected(true);
+        DisplaySelectableCheckB9.setText("language3Content04DisplaySelectable");
         DisplaySelectableCheckB9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplaySelectableCheckB9ActionPerformed(evt);
@@ -647,7 +654,8 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel15.add(DisplaySelectableCheckB9, gridBagConstraints);
 
-        DisplaySelectableCheckB8.setText("language3Content3DisplaySelectable");
+        DisplaySelectableCheckB8.setSelected(true);
+        DisplaySelectableCheckB8.setText("language3Content03DisplaySelectable");
         DisplaySelectableCheckB8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplaySelectableCheckB8ActionPerformed(evt);
@@ -670,7 +678,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         jPanel31.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel31.setLayout(new java.awt.GridBagLayout());
 
-        FontColourLabel3.setText("language3Content1FontColour");
+        FontColourLabel3.setText("language3Content01FontColour");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -678,7 +686,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel31.add(FontColourLabel3, gridBagConstraints);
 
-        FontColourLB7.setText("language3Content2FontColour");
+        FontColourLB7.setText("language3Content02FontColour");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -686,7 +694,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel31.add(FontColourLB7, gridBagConstraints);
 
-        FontColourLB9.setText("language3Content4FontColour");
+        FontColourLB9.setText("language3Content04FontColour");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -694,7 +702,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel31.add(FontColourLB9, gridBagConstraints);
 
-        FontColourLB8.setText("language3Content3FontColour");
+        FontColourLB8.setText("language3Content03FontColour");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -702,7 +710,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel31.add(FontColourLB8, gridBagConstraints);
 
-        FontColourComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
+        FontColourComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
         FontColourComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontColourComboBox3ActionPerformed(evt);
@@ -715,7 +723,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel31.add(FontColourComboBox3, gridBagConstraints);
 
-        FontColourCB7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
+        FontColourCB7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
         FontColourCB7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontColourCB7ActionPerformed(evt);
@@ -728,7 +736,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel31.add(FontColourCB7, gridBagConstraints);
 
-        FontColourCB8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
+        FontColourCB8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
         FontColourCB8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontColourCB8ActionPerformed(evt);
@@ -741,7 +749,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel31.add(FontColourCB8, gridBagConstraints);
 
-        FontColourCB9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
+        FontColourCB9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
         FontColourCB9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontColourCB9ActionPerformed(evt);
@@ -821,7 +829,8 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel14.setLayout(new java.awt.GridBagLayout());
 
-        DisplaySelectableCheckBox2.setText("language2Content1DisplaySelectable");
+        DisplaySelectableCheckBox2.setSelected(true);
+        DisplaySelectableCheckBox2.setText("language2Content01DisplaySelectable");
         DisplaySelectableCheckBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplaySelectableCheckBox2ActionPerformed(evt);
@@ -834,7 +843,8 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel14.add(DisplaySelectableCheckBox2, gridBagConstraints);
 
-        DisplaySelectableCheckB4.setText("language2Content2DisplaySelectable");
+        DisplaySelectableCheckB4.setSelected(true);
+        DisplaySelectableCheckB4.setText("language2Content02DisplaySelectable");
         DisplaySelectableCheckB4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplaySelectableCheckB4ActionPerformed(evt);
@@ -847,7 +857,8 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel14.add(DisplaySelectableCheckB4, gridBagConstraints);
 
-        DisplaySelectableCheckB6.setText("language2Content4DisplaySelectable");
+        DisplaySelectableCheckB6.setSelected(true);
+        DisplaySelectableCheckB6.setText("language2Content04DisplaySelectable");
         DisplaySelectableCheckB6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplaySelectableCheckB6ActionPerformed(evt);
@@ -860,7 +871,8 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel14.add(DisplaySelectableCheckB6, gridBagConstraints);
 
-        DisplaySelectableCheckB5.setText("language2Content3DisplaySelectable");
+        DisplaySelectableCheckB5.setSelected(true);
+        DisplaySelectableCheckB5.setText("language2Content03DisplaySelectable");
         DisplaySelectableCheckB5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DisplaySelectableCheckB5ActionPerformed(evt);
@@ -883,7 +895,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         jPanel26.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel26.setLayout(new java.awt.GridBagLayout());
 
-        FontStyleLabel1.setText("language1Content1FontStyle");
+        FontStyleLabel1.setText("language1Content01FontStyle");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -891,7 +903,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel26.add(FontStyleLabel1, gridBagConstraints);
 
-        FontStyleComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "plain", "bold", "italic", "underlined" }));
+        FontStyleComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plain", "bold", "italic", "underlined" }));
         FontStyleComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontStyleComboBox1ActionPerformed(evt);
@@ -904,7 +916,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel26.add(FontStyleComboBox1, gridBagConstraints);
 
-        FontStyleLB1.setText("language1Content2FontStyle");
+        FontStyleLB1.setText("language1Content02FontStyle");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -912,7 +924,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel26.add(FontStyleLB1, gridBagConstraints);
 
-        FontStyleCB1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "plain", "bold", "italic", "underlined" }));
+        FontStyleCB1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plain", "bold", "italic", "underlined" }));
         FontStyleCB1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontStyleCB1ActionPerformed(evt);
@@ -925,7 +937,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel26.add(FontStyleCB1, gridBagConstraints);
 
-        FontStyleLB3.setText("language1Content4FontStyle");
+        FontStyleLB3.setText("language1Content04FontStyle");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -933,7 +945,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel26.add(FontStyleLB3, gridBagConstraints);
 
-        FontStyleCB3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "plain", "bold", "italic", "underlined" }));
+        FontStyleCB3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plain", "bold", "italic", "underlined" }));
         FontStyleCB3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontStyleCB3ActionPerformed(evt);
@@ -946,7 +958,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel26.add(FontStyleCB3, gridBagConstraints);
 
-        FontStyleCB2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "plain", "bold", "italic", "underlined" }));
+        FontStyleCB2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plain", "bold", "italic", "underlined" }));
         FontStyleCB2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontStyleCB2ActionPerformed(evt);
@@ -959,7 +971,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel26.add(FontStyleCB2, gridBagConstraints);
 
-        FontStyleLB2.setText("language1Content3FontStyle");
+        FontStyleLB2.setText("language1Content03FontStyle");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -977,7 +989,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         jPanel29.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel29.setLayout(new java.awt.GridBagLayout());
 
-        FontColourLabel.setText("language1Content1FontColour");
+        FontColourLabel.setText("language1Content01FontColour");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -985,7 +997,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel29.add(FontColourLabel, gridBagConstraints);
 
-        FontColourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
+        FontColourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
         FontColourComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontColourComboBoxActionPerformed(evt);
@@ -998,7 +1010,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel29.add(FontColourComboBox, gridBagConstraints);
 
-        FontColourLB1.setText("language1Content2FontColour");
+        FontColourLB1.setText("language1Content02FontColour");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -1006,7 +1018,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel29.add(FontColourLB1, gridBagConstraints);
 
-        FontColourCB1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
+        FontColourCB1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
         FontColourCB1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontColourCB1ActionPerformed(evt);
@@ -1019,7 +1031,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel29.add(FontColourCB1, gridBagConstraints);
 
-        FontColourLB3.setText("language1Content4FontColour");
+        FontColourLB3.setText("language1Content04FontColour");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -1027,7 +1039,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel29.add(FontColourLB3, gridBagConstraints);
 
-        FontColourCB3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
+        FontColourCB3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
         FontColourCB3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontColourCB3ActionPerformed(evt);
@@ -1040,7 +1052,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel29.add(FontColourCB3, gridBagConstraints);
 
-        FontColourCB2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
+        FontColourCB2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maroon", "Red", "Yellow", "Green", "Lime", "Navy", "Blue", "Teal", "Aqua", "Purple", "Fuchsia", "Olive", "Gray", "Silver", "Black" }));
         FontColourCB2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontColourCB2ActionPerformed(evt);
@@ -1053,7 +1065,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel29.add(FontColourCB2, gridBagConstraints);
 
-        FontColourLB2.setText("language1Content3FontColour");
+        FontColourLB2.setText("language1Content03FontColour");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -1071,7 +1083,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         jPanel24.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel24.setLayout(new java.awt.GridBagLayout());
 
-        DisplayTextLabel1.setText("language1Content1DisplayText");
+        DisplayTextLabel1.setText("language1Content01DisplayText");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -1079,7 +1091,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel24.add(DisplayTextLabel1, gridBagConstraints);
 
-        DisplayTextLB1.setText("language1Content2DisplayText");
+        DisplayTextLB1.setText("language1Content02DisplayText");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -1087,7 +1099,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel24.add(DisplayTextLB1, gridBagConstraints);
 
-        DisplayTextLB3.setText("language1Content4DisplayText");
+        DisplayTextLB3.setText("language1Content04DisplayText");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -1095,7 +1107,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel24.add(DisplayTextLB3, gridBagConstraints);
 
-        DisplayTextLB2.setText("language1Content3DisplayText");
+        DisplayTextLB2.setText("language1Content03DisplayText");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -1145,7 +1157,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         jPanel25.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel25.setLayout(new java.awt.GridBagLayout());
 
-        DisplayTextLable2.setText("language2Content1DisplayText");
+        DisplayTextLable2.setText("language2Content01DisplayText");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -1153,7 +1165,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel25.add(DisplayTextLable2, gridBagConstraints);
 
-        DisplayTextLB4.setText("language2Content2DisplayText");
+        DisplayTextLB4.setText("language2Content02DisplayText");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -1161,7 +1173,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel25.add(DisplayTextLB4, gridBagConstraints);
 
-        DisplayTextLB6.setText("language2Content4DisplayText");
+        DisplayTextLB6.setText("language2Content04DisplayText");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -1169,7 +1181,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel25.add(DisplayTextLB6, gridBagConstraints);
 
-        DisplayTextLB5.setText("language2Content3DisplayText");
+        DisplayTextLB5.setText("language2Content03DisplayText");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -1225,7 +1237,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         jPanel28.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel28.setLayout(new java.awt.GridBagLayout());
 
-        FontStyleLabel3.setText("language3Content1FontStyle");
+        FontStyleLabel3.setText("language3Content01FontStyle");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -1233,7 +1245,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel28.add(FontStyleLabel3, gridBagConstraints);
 
-        FontStyleLB7.setText("language3Content2FontStyle");
+        FontStyleLB7.setText("language3Content02FontStyle");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -1241,7 +1253,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel28.add(FontStyleLB7, gridBagConstraints);
 
-        FontStyleLB9.setText("language3Content4FontStyle");
+        FontStyleLB9.setText("language3Content04FontStyle");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -1249,7 +1261,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel28.add(FontStyleLB9, gridBagConstraints);
 
-        FontStyleLB8.setText("language3Content3FontStyle");
+        FontStyleLB8.setText("language3Content03FontStyle");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -1257,7 +1269,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel28.add(FontStyleLB8, gridBagConstraints);
 
-        FontStyleComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "plain", "bold", "italic", "underlined" }));
+        FontStyleComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plain", "bold", "italic", "underlined" }));
         FontStyleComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontStyleComboBox3ActionPerformed(evt);
@@ -1270,7 +1282,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel28.add(FontStyleComboBox3, gridBagConstraints);
 
-        FontStyleCB7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "plain", "bold", "italic", "underlined" }));
+        FontStyleCB7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plain", "bold", "italic", "underlined" }));
         FontStyleCB7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontStyleCB7ActionPerformed(evt);
@@ -1283,7 +1295,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel28.add(FontStyleCB7, gridBagConstraints);
 
-        FontStyleCB8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "plain", "bold", "italic", "underlined" }));
+        FontStyleCB8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plain", "bold", "italic", "underlined" }));
         FontStyleCB8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontStyleCB8ActionPerformed(evt);
@@ -1296,7 +1308,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel28.add(FontStyleCB8, gridBagConstraints);
 
-        FontStyleCB9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "plain", "bold", "italic", "underlined" }));
+        FontStyleCB9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plain", "bold", "italic", "underlined" }));
         FontStyleCB9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FontStyleCB9ActionPerformed(evt);
@@ -1346,7 +1358,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
 
         jMenu2.setText("?");
 
-        jMenuItem3.setText(I18n.tr("about.content.properties.creator.contentPropsEditor")); // NOI18N
+        jMenuItem3.setText(I18n.tr("about.content.properties.creator")); // NOI18N
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -1579,7 +1591,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
 
             @Override
             public void run() {
-              //  new ContentNNPropertiesCreator().setVisible(true);
+              //  new ContentPropertiesCreator().setVisible(true);
             }
         });
     }
@@ -2011,59 +2023,59 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         int i = comboBox.getSelectedIndex();
         String colorCode;
         switch (i){
-            case 1:
+            case 0:
             colorCode = "128,0,0";
             break;
 
-            case 2:
+            case 1:
             colorCode = "255,0,0";
             break;
 
-            case 3:
+            case 2:
             colorCode = "255,255,0";
             break;
 
-            case 4:
+            case 3:
             colorCode = "0,128,0";
             break;
 
-            case 5:
+            case 4:
             colorCode = "0,255,0";
             break;
 
-            case 6:
+            case 5:
             colorCode = "0,0,128";
             break;
 
-            case 7:
+            case 6:
             colorCode = "0,0,255";
             break;
 
-            case 8:
+            case 7:
             colorCode = "0,128,128";
             break;
 
-            case 9:
+            case 8:
             colorCode = "0,255,255";
             break;
 
-            case 10:
+            case 9:
             colorCode = "128,0,128";
             break;
 
-            case 11:
+            case 10:
             colorCode = "255,0,255";
             break;
 
-            case 12:
+            case 11:
             colorCode = "128,128,0";
             break;
 
-            case 13:
+            case 12:
             colorCode = "128,128,128";
             break;
 
-            case 14:
+            case 13:
             colorCode = "192,192,192";
             break;
 
@@ -2087,70 +2099,70 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         //////////////// LANGUAGE-1 ///////////////
         ///////////////////////////////////////////
         
-        // language1Content1
+        // language1Content01
         if (!"".equals(DisplayTextTextField1.getText())){
-            PropertiesEditor.language1Content1DisplayText = DisplayTextTextField1.getText();
+            PropertiesEditor.language1Content01DisplayText = DisplayTextTextField1.getText();
         }
         if (!"NONE".equals(FontColourComboBox.getSelectedItem().toString())){
-            PropertiesEditor.language1Content1FontColour = getRGBCodes(FontColourComboBox);
+            PropertiesEditor.language1Content01FontColour = getRGBCodes(FontColourComboBox);
         }
         if (!"NONE".equals(FontStyleComboBox1.getSelectedItem().toString())){
-            PropertiesEditor.language1Content1FontStyle = FontStyleComboBox1.getSelectedItem().toString();
+            PropertiesEditor.language1Content01FontStyle = FontStyleComboBox1.getSelectedItem().toString();
         }
         
         if (DisplaySelectableCheckBox1.isSelected()){
-            PropertiesEditor.language1Content1DisplaySelectable = "true";
+            PropertiesEditor.language1Content01DisplaySelectable = "true";
         } else {
-            PropertiesEditor.language1Content1DisplaySelectable = "false";
+            PropertiesEditor.language1Content01DisplaySelectable = "false";
         }
-        // language1Content2
+        // language1Content02
         switch (NumOfContentDecsCB1.getSelectedItem().toString()) {
             case "2":
                 if (!"".equals(DisplayTextTF1.getText())){
-                    PropertiesEditor.language1Content2DisplayText = DisplayTextTF1.getText();
+                    PropertiesEditor.language1Content02DisplayText = DisplayTextTF1.getText();
                 }
                 if (!"NONE".equals(FontColourCB1.getSelectedItem().toString())){
-                    PropertiesEditor.language1Content2FontColour = getRGBCodes(FontColourCB1);
+                    PropertiesEditor.language1Content02FontColour = getRGBCodes(FontColourCB1);
                 }
                 if (!"NONE".equals(FontStyleCB1.getSelectedItem().toString())){
-                    PropertiesEditor.language1Content2FontStyle = FontStyleCB1.getSelectedItem().toString();
+                    PropertiesEditor.language1Content02FontStyle = FontStyleCB1.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB1.isSelected()){
-                    PropertiesEditor.language1Content2DisplaySelectable = "true";
+                    PropertiesEditor.language1Content02DisplaySelectable = "true";
                 } else {
-                    PropertiesEditor.language1Content2DisplaySelectable = "false";
+                    PropertiesEditor.language1Content02DisplaySelectable = "false";
                 }
                 break;
             case "3":
                 if (!"".equals(DisplayTextTF2.getText())){
-                    PropertiesEditor.language1Content3DisplayText = DisplayTextTF2.getText();
+                    PropertiesEditor.language1Content03DisplayText = DisplayTextTF2.getText();
                 }
                 if (!"NONE".equals(FontColourCB2.getSelectedItem().toString())){
-                    PropertiesEditor.language1Content3FontColour = getRGBCodes(FontColourCB2);
+                    PropertiesEditor.language1Content03FontColour = getRGBCodes(FontColourCB2);
                 }
                 if (!"NONE".equals(FontStyleCB2.getSelectedItem().toString())){
-                    PropertiesEditor.language1Content3FontStyle = FontStyleCB2.getSelectedItem().toString();
+                    PropertiesEditor.language1Content03FontStyle = FontStyleCB2.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB2.isSelected()){
-                    PropertiesEditor.language1Content3DisplaySelectable = "true";
+                    PropertiesEditor.language1Content03DisplaySelectable = "true";
                 } else {
-                    PropertiesEditor.language1Content3DisplaySelectable = "false";
+                    PropertiesEditor.language1Content03DisplaySelectable = "false";
                 }
                 break;
             case "4":
                 if (!"".equals(DisplayTextTF3.getText())){
-                    PropertiesEditor.language1Content4DisplayText = DisplayTextTF3.getText();
+                    PropertiesEditor.language1Content04DisplayText = DisplayTextTF3.getText();
                 }
                 if (!"NONE".equals(FontColourCB3.getSelectedItem().toString())){
-                    PropertiesEditor.language1Content4FontColour = getRGBCodes(FontColourCB3);
+                    PropertiesEditor.language1Content04FontColour = getRGBCodes(FontColourCB3);
                 }
                 if (!"NONE".equals(FontStyleCB3.getSelectedItem().toString())){
-                    PropertiesEditor.language1Content4FontStyle = FontStyleCB3.getSelectedItem().toString();
+                    PropertiesEditor.language1Content04FontStyle = FontStyleCB3.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB3.isSelected()){
-                    PropertiesEditor.language1Content4DisplaySelectable = "true";
+                    PropertiesEditor.language1Content04DisplaySelectable = "true";
                 } else {
-                    PropertiesEditor.language1Content4DisplaySelectable = "false";
+                    PropertiesEditor.language1Content04DisplaySelectable = "false";
                 }
                 break;
         }
@@ -2159,69 +2171,69 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         //////////////// LANGUAGE-2 ///////////////
         /////////////////////////////////////////// 
         if (!"".equals(DisplayTextTextField2.getText())){
-            PropertiesEditor.language2Content1DisplayText = DisplayTextTextField2.getText();
+            PropertiesEditor.language2Content01DisplayText = DisplayTextTextField2.getText();
         }
         
         if (!"NONE".equals(FontColourComboBox2.getSelectedItem().toString())){
-            PropertiesEditor.language2Content1FontColour = getRGBCodes(FontColourComboBox2);
+            PropertiesEditor.language2Content01FontColour = getRGBCodes(FontColourComboBox2);
         }
         
         if (!"NONE".equals(FontStyleComboBox2.getSelectedItem().toString())){
-            PropertiesEditor.language2Content1FontStyle = FontStyleComboBox2.getSelectedItem().toString();
+            PropertiesEditor.language2Content01FontStyle = FontStyleComboBox2.getSelectedItem().toString();
         }
         
         if (DisplaySelectableCheckBox2.isSelected()){
-            PropertiesEditor.language2Content1DisplaySelectable = "true";
+            PropertiesEditor.language2Content01DisplaySelectable = "true";
         } else {
-            PropertiesEditor.language2Content1DisplaySelectable = "false";
+            PropertiesEditor.language2Content01DisplaySelectable = "false";
         }
         switch (NumOfContentDecsCB2.getSelectedItem().toString()) {
             case "2":
                 if (!"".equals(DisplayTextTF4.getText())){
-                    PropertiesEditor.language2Content2DisplayText = DisplayTextTF4.getText();
+                    PropertiesEditor.language2Content02DisplayText = DisplayTextTF4.getText();
                 }
                 if (!"NONE".equals(FontColourCB4.getSelectedItem().toString())){
-                    PropertiesEditor.language2Content2FontColour = getRGBCodes(FontColourCB4);
+                    PropertiesEditor.language2Content02FontColour = getRGBCodes(FontColourCB4);
                 }
                 if (!"NONE".equals(FontStyleCB4.getSelectedItem().toString())){
-                    PropertiesEditor.language2Content2FontStyle = FontStyleCB4.getSelectedItem().toString();
+                    PropertiesEditor.language2Content02FontStyle = FontStyleCB4.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB4.isSelected()){
-                    PropertiesEditor.language2Content2DisplaySelectable = "true";
+                    PropertiesEditor.language2Content02DisplaySelectable = "true";
                 } else {
-                    PropertiesEditor.language2Content2DisplaySelectable = "false";
+                    PropertiesEditor.language2Content02DisplaySelectable = "false";
                 }
                 break;
             case "3":
                 if (!"".equals(DisplayTextTF5.getText())){
-                    PropertiesEditor.language2Content3DisplayText = DisplayTextTF5.getText();
+                    PropertiesEditor.language2Content03DisplayText = DisplayTextTF5.getText();
                 }
                 if (!"NONE".equals(FontColourCB5.getSelectedItem().toString())){
-                    PropertiesEditor.language2Content3FontColour = getRGBCodes(FontColourCB5);
+                    PropertiesEditor.language2Content03FontColour = getRGBCodes(FontColourCB5);
                 }
                 if (!"NONE".equals(FontStyleCB5.getSelectedItem().toString())){
-                    PropertiesEditor.language2Content3FontStyle = FontStyleCB5.getSelectedItem().toString();
+                    PropertiesEditor.language2Content03FontStyle = FontStyleCB5.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB5.isSelected()){
-                    PropertiesEditor.language2Content3DisplaySelectable = "true";
+                    PropertiesEditor.language2Content03DisplaySelectable = "true";
                 } else {
-                    PropertiesEditor.language2Content3DisplaySelectable = "false";
+                    PropertiesEditor.language2Content03DisplaySelectable = "false";
                 }
                 break;
             case "4":
                 if (!"".equals(DisplayTextTF6.getText())){
-                    PropertiesEditor.language2Content4DisplayText = DisplayTextTF6.getText();
+                    PropertiesEditor.language2Content04DisplayText = DisplayTextTF6.getText();
                 }
                 if (!"NONE".equals(FontColourCB6.getSelectedItem().toString())){
-                    PropertiesEditor.language2Content4FontColour = getRGBCodes(FontColourCB6);
+                    PropertiesEditor.language2Content04FontColour = getRGBCodes(FontColourCB6);
                 }
                 if (!"NONE".equals(FontStyleCB6.getSelectedItem().toString())){
-                    PropertiesEditor.language2Content4FontStyle = FontStyleCB6.getSelectedItem().toString();
+                    PropertiesEditor.language2Content04FontStyle = FontStyleCB6.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB6.isSelected()){
-                    PropertiesEditor.language2Content4DisplaySelectable = "true";
+                    PropertiesEditor.language2Content04DisplaySelectable = "true";
                 } else {
-                    PropertiesEditor.language2Content4DisplaySelectable = "false";
+                    PropertiesEditor.language2Content04DisplaySelectable = "false";
                 }
                 break;
         }
@@ -2230,69 +2242,69 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
         //////////////// LANGUAGE-3 ///////////////
         ///////////////////////////////////////////
         if (!"".equals(DisplayTextTextField3.getText())){
-            PropertiesEditor.language3Content1DisplayText = DisplayTextTextField3.getText();
+            PropertiesEditor.language3Content01DisplayText = DisplayTextTextField3.getText();
         }
         
         if (!"NONE".equals(FontColourComboBox3.getSelectedItem().toString())){
-            PropertiesEditor.language3Content1FontColour = getRGBCodes(FontColourComboBox3);
+            PropertiesEditor.language3Content01FontColour = getRGBCodes(FontColourComboBox3);
         }
 
         if (!"NONE".equals(FontStyleComboBox3.getSelectedItem().toString())){
-            PropertiesEditor.language3Content1FontStyle = FontStyleComboBox3.getSelectedItem().toString();
+            PropertiesEditor.language3Content01FontStyle = FontStyleComboBox3.getSelectedItem().toString();
         }
         
         if (DisplaySelectableCheckBox3.isSelected()){
-            PropertiesEditor.language3Content1DisplaySelectable = "true";
+            PropertiesEditor.language3Content01DisplaySelectable = "true";
         } else {
-            PropertiesEditor.language3Content1DisplaySelectable = "false";
+            PropertiesEditor.language3Content01DisplaySelectable = "false";
         }
         switch (NumOfContentDecsCB3.getSelectedItem().toString()) {
             case "2":
                 if (!"".equals(DisplayTextTF7.getText())){
-                    PropertiesEditor.language3Content2DisplayText = DisplayTextTF7.getText();
+                    PropertiesEditor.language3Content02DisplayText = DisplayTextTF7.getText();
                 }
                 if (!"NONE".equals(FontColourCB7.getSelectedItem().toString())){
-                    PropertiesEditor.language3Content2FontColour = getRGBCodes(FontColourCB7);
+                    PropertiesEditor.language3Content02FontColour = getRGBCodes(FontColourCB7);
                 }
                 if (!"NONE".equals(FontStyleCB7.getSelectedItem().toString())){
-                    PropertiesEditor.language3Content2FontStyle = FontStyleCB7.getSelectedItem().toString();
+                    PropertiesEditor.language3Content02FontStyle = FontStyleCB7.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB7.isSelected()){
-                    PropertiesEditor.language3Content2DisplaySelectable = "true";
+                    PropertiesEditor.language3Content02DisplaySelectable = "true";
                 } else {
-                    PropertiesEditor.language3Content2DisplaySelectable = "false";
+                    PropertiesEditor.language3Content02DisplaySelectable = "false";
                 }
                 break;
             case "3":
                 if (!"".equals(DisplayTextTF8.getText())){
-                    PropertiesEditor.language3Content3DisplayText = DisplayTextTF8.getText();
+                    PropertiesEditor.language3Content03DisplayText = DisplayTextTF8.getText();
                 }
                 if (!"NONE".equals(FontColourCB8.getSelectedItem().toString())){
-                    PropertiesEditor.language3Content3FontColour = getRGBCodes(FontColourCB8);
+                    PropertiesEditor.language3Content03FontColour = getRGBCodes(FontColourCB8);
                 }
                 if (!"NONE".equals(FontStyleCB8.getSelectedItem().toString())){
-                    PropertiesEditor.language3Content3FontStyle = FontStyleCB8.getSelectedItem().toString();
+                    PropertiesEditor.language3Content03FontStyle = FontStyleCB8.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB8.isSelected()){
-                    PropertiesEditor.language3Content3DisplaySelectable = "true";
+                    PropertiesEditor.language3Content03DisplaySelectable = "true";
                 } else {
-                    PropertiesEditor.language3Content3DisplaySelectable = "false";
+                    PropertiesEditor.language3Content03DisplaySelectable = "false";
                 }
                 break;
             case "4":
                 if (!"".equals(DisplayTextTF9.getText())){
-                    PropertiesEditor.language3Content4DisplayText = DisplayTextTF9.getText();
+                    PropertiesEditor.language3Content04DisplayText = DisplayTextTF9.getText();
                 }
                 if (!"NONE".equals(FontColourCB9.getSelectedItem().toString())){
-                    PropertiesEditor.language3Content4FontColour = getRGBCodes(FontColourCB9);
+                    PropertiesEditor.language3Content04FontColour = getRGBCodes(FontColourCB9);
                 }
                 if (!"NONE".equalsIgnoreCase(FontStyleCB9.getSelectedItem().toString())){
-                    PropertiesEditor.language3Content4FontStyle = FontStyleCB9.getSelectedItem().toString();
+                    PropertiesEditor.language3Content04FontStyle = FontStyleCB9.getSelectedItem().toString();
                 }
                 if (DisplaySelectableCheckB9.isSelected()){
-                    PropertiesEditor.language3Content4DisplaySelectable = "true";
+                    PropertiesEditor.language3Content04DisplaySelectable = "true";
                 } else {
-                    PropertiesEditor.language3Content4DisplaySelectable = "false";
+                    PropertiesEditor.language3Content04DisplaySelectable = "false";
                 }
                 break;
         }
@@ -2300,14 +2312,18 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
     
     
     ////////////////////////////////////////////////
-    //  Creating a fake progress bar which will
-    //  give the user the impression that the
-    //  values are set up in a few seconds...
-    //  In reality it takes less than a second
-    //  for the values to be set up. This progress
-    //  bar reassures the user and shows her that
-    //  the values are really being set up and she
-    //  can experience this visually.
+    //  Creating a fake progress bar which will   //
+    //  give the user the impression that the     //
+    //  values are set up in a few seconds...     //
+    //  In reality it takes less than a second    //
+    //  for the values to be saved. This progress //
+    //  bar reassures the user and shows her that //
+    //  the values are really being save and she  //
+    //  can experience this visually. Of course   //
+    //  the values are saved but it happens so    //
+    //  quickly that without this progress bar,   //
+    //  the user might have the impression that   //
+    //  nothing is being saved.                   //
     ////////////////////////////////////////////////
     
     // task variable that will be
@@ -2345,7 +2361,7 @@ public class ContentNNPropertiesCreator extends javax.swing.JDialog implements P
     }
 
     // sort of actionPerformed that will actually
-    // call the progress bar.
+    // call the fake progress bar.
     public void progBarActPerf() {
         setContentValsBT.setEnabled(false);
         quitButton.setEnabled(false);

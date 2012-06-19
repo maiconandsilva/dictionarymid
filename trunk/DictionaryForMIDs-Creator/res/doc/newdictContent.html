@@ -15,37 +15,53 @@
 <div id="content">
 
 		<h2>Content declarations</h2>
-		<p>Content properties are new with version 3.0.</p>
+		<p>Content properties are new. They came up with version 3.0 of the DictionaryForMIDs tools.</p>
 		
 		<h3>Properties</h3>
-    <p>With the content properties you can specify that there is a pronunciation 
-	part, an explanation part, etc. For each content you can specify font 
-	colour, font style and more. <br>
-    The content is specified for each languageX.</p>
+    	<p>With the content properties you can specify that there is a pronunciation 
+		part, an explanation part, etc. in your dictionary. For each content you can
+		specify font colour, font style and so forth.<br>
+    	The content is specified for each languageX.</p>
+    	
+    	<i>languageXNumberOfContentDeclarations</i><br>
+		<img src="images/contentDeclaration.png" alt="contentDeclaration.png" >		
 		<ul>
 		<li>languageXNumberOfContentDeclarations</li>
 		</ul>
 		<p>Defines how many content-declarations exist for this dictionary. For 
 		each content-declaration the contentNN-properties need to be defined as 
-		described below. Note: all contentNN-properties must have two digits: 
+		described below. Note that all the contentNN-properties must have two digits: 
 		content01..., content02..., content03 etc !</p>
 		<p>The property languageXNumberOfContentDeclarations is optional. When 
 		this property is not set, then DictionaryForMIDs does not scan for
-        <a href="#ContentTags">content tags</a> in the dictionary.</p>
+      <a href="#ContentTags">content tags</a> in the dictionary.</p>
+      <p>As an example, as shown on the screen shot, we chose the value 2 in the
+      ComboBox, that is, the number of content-declarations for our dictionary is 2
+      and the dictionary itself has 3 languages. This is the maximum number of languages
+      that the main <b>PropertiesEditor</b> supports.</p>
+      
+      <i>languageXContentNNDisplayText</i><br>
+      <img src="images/DisplayText.png" alt="DisplayText.png" >
 		<ul>
 		<li>languageXContentNNDisplayText</li>
 		</ul>
 		
 		<p>Text that is used on the user interface to identify the content. NN 
-		needs to be replace with the content number. For example:<br>
-		language1Content01DisplayText: contentDefinition<br>
-		language1Content02DisplayText: contentPronunciation<br>
-        ...<br>
-        language1Content05DisplayText: Pinyin</p>
+		needs to be replace with the content number.<br>
+		As shown on the screen shot:<br><br>
+		
+		language1Content01DisplayText: contentPronunciation<br>
+		language1Content02DisplayText: contentExample<br><br>
+		
+		language2Content01DisplayText: contentGrammaticalCategory<br>
+		language2Content02DisplayText: contentPhoneticTranscription<br><br>
+		
+		language3Content01DisplayText: contentNotes<br>
+		language3Content02DisplayText: contentExplanation<br></p>
         
 		<p>Predefined content is prefixed by &quot;content&quot;. The following content is 
 		predefined in DictionaryForMIDs:<br>
-        contentDefinition<br>
+      contentDefinition<br>
 		contentPronunciation<br>
 		contentGrammaticalCategory<br>
 		contentOrigin<br>
@@ -58,20 +74,21 @@
 		style etc. If you do not want to use Predefined content, then you may 
 		choose any other name for languageXContentNNDisplayText.</p>
 		
+		<i>languageXContentNNFontColour</i><br>
+		<img src="images/FontColor.png" alt="FontColor.png" >
 		<ul>
 		<li>languageXContentNNFontColour</li>
 		</ul>
 		
-		<p>Defines the font colour for the content. Font colour is specified as 
-		'RRR, GGG, BBB' where RRR is the value for red, GG for green and BBB for 
-		blue. RRR, GGG, BBB each can have a value between 0 and 255.</p>
-		<p>Example for yellow colour:<br>
-        language1Content01FontColour: 0,255,255</p>
-	<p>This property is optional.</p>
-        
-        <p>You are free to choose any color you wish using the RGB color codes. 
-		But, if you wish to use &quot;traditional colors&quot;, then here is a list of the 
-		15 most common colors.</p>
+		<p>This property defines the font colour for the content. Font colour is specified as 
+		'RRR, GGG, BBB' where RRR is the value for red, GGG for green and BBB for 
+		blue. Each one of the RRR, GGG, BBB component has to have a value between 0 and 255.</p>
+		<p>You are provided with ComboBoxes that have default values. Choose the color name
+		and ContentProperties-Creator will automatically generate the RGB colour code for you.
+		If you want to manually enter the values or modify the selected values in the Properties
+		Preview/Edit window just before saving definitely the values in the DictionaryForMIDs.properties
+		file, then you have to know the RGB colour codes. Below are the colour codes for the default
+		colours provided in the ComboBoxes:</p>
 		
 		<table border="0">
 			<tr>
@@ -166,31 +183,59 @@
 			</tr>
 		</table>
 		
+      <p>Note that you are free to choose any color you wish using the RGB color codes,
+      that is, you are not obliged to choose only between the default ones. However
+      note that these default ones are the common colors that are used most of the time.</p>
+		
+		<i>languageXContentNNFontStyle</i><br>
+		<img src="images/FontStyles.png" alt="FontStyles.png" >
 		<ul>
 		<li>languageXContentNNFontStyle</li>
 		</ul>
 		
-		<p>Defines the font style for the content. Allowed values are:<br>
-        bold<br>
-        italic<br>
-        underlined<br>
-        plain</p>
-		<p>Example for underlined text:<br>
-        language1Content01FontStyle: underlined<br>
-        <br>
-        This property is optional, the default value is plain.</p>
-        
+		<p>Defines the font style for the content. Allowed values are provided in the ComboBoxes as follows:<br>
+      bold<br>
+      italic<br>
+      underlined<br>
+      plain</p>
+		<p>Examples from the screen shot:<br>
+      language1Content01FontStyle: plain<br>
+      language1Content02FontStyle: italic<br><br>
+      
+      language2Content01FontStyle: bold<br>
+      language2Content02FontStyle: italic<br><br>
+      
+      language3Content01FontStyle: underlined<br>
+      language3Content02FontStyle: bold<br><br>
+      
+      This property is optional, the default value is plain.</p>
+      
+      <i>languageXContentNNDisplaySelectable</i><br>
+      <img src="images/DisplaySelectable.png" alt="DisplaySelectable.png" >
 		<ul>
 		<li>languageXContentNNDisplaySelectable</li>
-		</ul>
-		
-		<p>A boolean property with either the value true or the value false. Set 
-		to true when the user can turn on or off the display of this content. 
-		Set to false when this content is always displayed, i.e. the user cannot 
-		turn off the display of this content.<br>
-		This property is optional, the default value is true.<br>
-        This property will be supported in a later version.<br>
+		</ul>		
+		<p>This is a boolean property with either the value true or false. Here,
+		that means either the CheckBoxes are selected or unselected. According to
+		the state of the CheckBoxes, the ContentProperties-Creator automatically
+		assigns the values true or false. Set these properties to true by selecting
+		the CheckBoxes or to false by unselecting them. Set them to true when the user
+		can turn on or off the display of these contents. Set them to false when these
+		contents are always displayed, i.e. the user cannot toggle their display on/off.<br>
+		These properties are optional, the default value is true, so select the CheckBoxes.
+      They will be supported in a later version.<br>
 		&nbsp;</p>
+		
+		<p>Here are the values chosen, as shown on the screen shot:<br><br>
+		language1Content01DisplaySelectable: false<br>
+		language1Content02DisplaySelectable: true<br><br>
+		
+		language2Content01DisplaySelectable: false<br>
+		language2Content02DisplaySelectable: true<br><br>
+		
+		language3Content01DisplaySelectable: true<br>
+		language3Content02DisplaySelectable: true<br><br>		
+		</p>
 		
 		<h3><a name="ContentTags"></a>Content tags for the dictionaries</h3>
 		<p>In the dictionaries the content parts are marked with the following 
@@ -198,35 +243,33 @@
 		<p>Each content has a start delimiter at the beginning and an end 
 		delimiter at the end.</p>
 		<p>Start delimiter: <br>
-        [NN<br>
-        where NN is the content number. This needs to be a two-digit number !</p>
+      <b>[NN</b><br>
+      where NN is the content number. This needs to be a two-digit number !</p>
 		<p>End delimiter: <br>
-        ]<br>
-        <br>
-        To use a [ or ]-character in the text (without content syntax) a \ must 
-		be prepended:&nbsp; \[ and \]<br>
-        A newline-character is \n and a tab is \t</p>
-		<p>Contents can be nested.</p>
+      <b>]</b><br>
+      <br>
+      To use a <b>[</b> or <b>]</b> character in the text (without content syntax)
+      a <b>\</b> (backslash) must be prepended:&nbsp; <b>\[</b> and <b>\]</b><br>
+      A newline-character is <b>\n</b> and a tab-character is <b>\t</b></p>
 		<p>Here is an example for a language2 column:</p>
 		<dl>
           <dd>
-		<pre>dictionary [01dikshionari] [02noun] [03\nA book that contains translations for words.]</pre>
+		<pre>dictionary [<b>01</b>dikshionari] [<b>02</b>noun] [<b>03</b>\nA book that contains translations for words.]</pre>
+		<i>(Content numbers are boldfaced only for didactical purposes)</i>
           </dd>
-    </dl>
+      </dl>
     
-    <p>In that example the following properties are declared:<br>
-    language2Content01DisplayText: contentPronunciation<br>
-    language2Content02DisplayText: contentGrammaticalCategory<br>
-    language2Content03DisplayText: contentNotes<br>
-&nbsp;</p>
-    <p>Contents can also be nested. Example:</p>
-    
-    <dl>
-      <dd>
-    <pre>dictionary [01dikshionari] [03\nA book that contains translations for words. [02noun]\nAlso exists in electronic form]</pre>
-      </dd>
-    </dl>
-
+      <p>In that example the following properties are declared:<br><br>
+      language2Content01DisplayText: contentPronunciation<br>
+      language2Content02DisplayText: contentGrammaticalCategory<br>
+      language2Content03DisplayText: contentNotes<br>
+		&nbsp;</p>
+      <p>Contents can also be nested. Example:</p>    
+      <dl>
+          <dd>
+      <pre>dictionary [<b>01</b>dikshionari] [<b>03</b>\nA book that contains translations for words. [<b>02</b>noun]\nAlso exists in electronic form]</pre>
+          </dd>
+      </dl>
 
 </div>
 </body>

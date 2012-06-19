@@ -58,6 +58,7 @@ public class SumWinBFG extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         textarea.setColumns(20);
+        textarea.setEditable(false);
         textarea.setRows(5);
         jScrollPane1.setViewportView(textarea);
         fillBFGSummaryTextArea();
