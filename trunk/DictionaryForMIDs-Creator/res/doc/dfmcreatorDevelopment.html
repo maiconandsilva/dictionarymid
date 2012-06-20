@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+		<meta name="author" content="Karim" />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" >
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta name="keywords" content="dictionary, language, MIDP, J2ME, Java, Midlet, mobile, cell phone, PDA">
+		<link rel="stylesheet" href="style.css" type="text/css">
+<TITLE>DfM-Creator - What you need to graphically set your dictionaries up!</TITLE></HEAD>
+<BODY> 
+
+
+<!--
+<div id="w3c_valid">
+<p>
+    <a   STYLE="COLOR: #000000;"  href="http://validator.w3.org/check?uri=referer"><img border="0"
+        src="http://www.w3.org/Icons/valid-xhtml10"
+        alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
+  </p>
+</div>
+
+
+<div id="menu">
+  <iframe src="menu.html" width="95%" height="450" frameborder=0></iframe>
+</div>
+<div id="content">
+ -->
+
+
+
+<h2><a name="Design"></a>The DictionaryForMIDs-Creator Developper's Documentation</h2>
+<h3>Architecture</h3>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color:#111111" width="974" id="AutoNumber1" >
+<!-- iheight="313"> -->
+  <tr>
+    <td width="628" colspan="4" align="center" bgcolor="#ff9900" height="104">
+    <p style="line-height: 200%; margin-top: 18; margin-bottom: 18"><b>
+    <font size="4"><span style="background-color: #ff9900">DictionaryForMIDs-Creator (DfM-Creator)</span></font></b></td>
+    <td width="29" align="center" height="104">&nbsp;</td>
+    <td width="313" align="center" bgcolor="#ff9900" height="104">
+    <p style="margin: 6" align="left">Main Layer: 
+    Provides access to the other DictionaryForMIDs tools throught the DfM-Creator GUI.</td>
+  </tr>
+  <tr>
+    <td width="151" align="center" bgcolor="#f3f3f3" height="104">
+    <p style="line-height: 200%; margin: 18 6"><b><font size="4">DictdToDictionaryForMIDs</font></b></td>
+    <td width="158" align="center" bgcolor="#f3f3f3" height="104">
+    <p style="line-height: 200%; margin-top: 18; margin-bottom: 18"><b>
+    <font size="4">DictionaryGeneration</font></b></td>
+    <td width="151" align="center" height="104" bgcolor="#f3f3f3">
+    <p style="line-height: 200%; margin-top: 18; margin-bottom: 18"><b>
+    <font size="4">BitmapFontGenerator</font></b></td>
+    <td width="165" align="center" height="104" bgcolor="#f3f3f3">
+    <p style="line-height: 200%; margin-top: 18; margin-bottom: 18"><b>
+    <font size="4">JarCreator</font></b></td>
+    <td width="29" align="center" height="104">&nbsp;</td>
+    <td width="313" align="center" bgcolor="#f3f3f3" height="104">
+    <p style="margin: 6" align="left"><font size="2">This layer contains the user interface.</font></p>
+    </td>
+  </tr>  
+  <tr>
+    <td width="151" align="center" bgcolor="#00ae10" height="104">
+    <p style="line-height: 200%; margin: 18 6">
+    <p style="margin: 6" align="left"><font size="2">
+    DictdToDictionaryForMIDs converts an input dictionary file that
+    is in the Dict protocol format (Dictd) into a single Comma-Separated-Value
+    (CSV file) that is the input dictionary file for DictionaryGeneration.</font></p>
+    </td>
+    <td width="158" align="center" bgcolor="#00ae10" height="104">
+    <p style="line-height: 200%; margin-top: 18; margin-bottom: 18">
+    <p style="margin: 6" align="left"><font size="2">
+    DictionaryGeneration reads the input CSV file along with the file
+    DictionaryForMIDs.properties to generate dictionary files, index files
+    and searchlist files in the DictionaryForMIDs format.</font></p></td>
+    <td width="151" align="center" height="104" bgcolor="#00ae10">
+    <p style="line-height: 200%; margin-top: 18; margin-bottom: 18">
+    <p style="margin: 6" align="left"><font size="2">
+    BitmapFontGenerator is used to generate bitmap fonts for mobiles
+    devices that may not support some character encodings or other
+    language characters like the chinese characters for instance.</font></p></td>
+    <td width="165" align="center" height="104" bgcolor="#00ae10">
+    <p style="line-height: 200%; margin-top: 18; margin-bottom: 18">
+    <p style="margin: 6" align="left"><font size="2">
+    JarCreator assembles all the necessary files in order for you to have
+    a DictionaryForMIDs midlet. It then packs them in some empty
+    DictionaryForMIDs.jar/jad files.</font></p></td>
+    <td width="29" align="center" height="104">&nbsp;</td>
+    <td width="313" align="center" bgcolor="#00ae10" height="104">
+    <p style="margin: 6" align="left"><font size="2">This layer contains
+    functionalities for the DictionaryForMIDs tools.</font></p>
+    </td>
+  </tr>
+</table>
+
+
+
+
+<h2><a name="Source"></a>Source Code</h2>
+<p>You can download the current source code either from 
+SVN (Subversion), or, if you are not familiar with SVN, just download the source as a ZIP 
+file.</p>
+<h3>Downloading the Source Code from SVN</h3>
+
+<p dir="ltr">The sources for DictionaryForMIDs-Creator are maintained in
+<a href="http://dictionarymid.svn.sourceforge.net">SourceForge SVN repository</a>.
+Read the description how to <a href="SVNRepositoryAccess.html">access the 
+DictionaryForMIDs SVN repository</a>.<br>
+You can also use the&nbsp; &quot;Download GNU tarball&quot; link on the
+<a href="http://dictionarymid.svn.sourceforge.net/viewvc/dictionarymid/trunk/">
+sourceforge web frontend</a> to download the DictionaryForMIDs-Creator sources.<br>
+&nbsp;</p>
+<h3>Downloading the Source Code as ZIP file</h3>
+<p dir="ltr">A zip file containing a successfully built jar of DfM-Creator will
+be available on this page soon!
+&nbsp;</p>
+
+<h3>Building the tools and applications</h3>
+<p><b>Development Environments</b></p>
+
+
+</p>
+<p>
+<b>Dependencies between the tools and applications</b></p>
+<p>The following dependencies exist between the tools and applications:</p>
+<ul>
+  <li><font size="2">DictionaryGeneration, JarCreator, BitmapFontGenerator, 
+  LanguageUIGenerator, JavaME, JavaSE and Web App depend on DictionaryForMIDs
+  </font></li>
+  <li><font size="2">DictionaryGeneration, JarCreator, BitmapFontGenerator and 
+  LanguageUIGenerator depend on JavaSE </font>
+  </li>
+  <li><font size="2">JarCreator depends on JavaME</font></li>
+</ul>
+<p><b>Building the tools and applications with build.xml</b></p>
+<p>Due to the complexity of DictionaryForMIDs-Creator, the only supported build
+method is through the use of either the build.xml file that in under the directory
+trunk/Build or the one that is specific to DfM-Creator; that one in located in
+trunk/DictionaryForMIDs-Creator/DfM-Creator-Build. Its name is also build.xml.<br>
+You must have Apache-Ant and Antenna (preferably the latest versions). Antenna
+is already present in the above mentioned 2 build directories.</p>
+<p>Here is how to use the build.xml file:</p>
+<ul>
+  <li>
+This file build.xml should be located in directory Build
+  </li>
+  <li>
+You must have Sun&#39;s Java ME SDK installed (can be downloaded somewhere at
+<a href="http://java.sun.com/javame/index.jsp">
+http://java.sun.com/javame/index.jsp</a>) 
+  </li>
+  <li>
+You must set wtk.home to your WTK installation directory 
+  </li>
+  <li>
+This build.xml can generate DictionaryForMIDs (Java ME and Java SE), 
+DictionaryGeneration, JarCreator and BitmapFontGenerator</li>
+  <li>
+Using: run ant in directory Build
+  </li>
+  <li>
+It runs well on both platforms windows/linux 
+  </li>
+  <li>
+The jar-tool must be in the path. Otherwise there will be an error during the 
+preverifier run.</li>
+  <li>
+You also must have the antenna-bin-xxx.jar file in the Build directory (the file 
+antenna-bin-xxx.jar is part of the Build SVN directory)
+  </li>
+</ul>
+<p>Important note: the source files are UTF-8 encoded. If you are using the old 
+Sun WTK (for versions &lt;= 2.5.2), you must 
+set in the file ktools.properties (found somewhere under wtklib) the following 
+property:<br>
+javac.encoding=UTF-8<br>
+&nbsp;</p><br>
+
+<pre>Written by Karim Mahamane,
+Author of DfM-Creator.
+Parts copied from this <a href="development.html" >file</a>
+written by Gert Nuber,
+creator of DictionaryForMIDs.</pre>
+
+
+
+</div>
+</BODY></HTML>
