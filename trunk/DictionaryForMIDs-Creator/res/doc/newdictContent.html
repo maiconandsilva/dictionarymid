@@ -2,7 +2,7 @@
 <html>
 	
     <head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" >
 		<meta http-equiv="Content-Style-Type" content="text/css">
 		<meta name="keywords" content="dictionary, language, MIDP, J2ME, Java, Midlet, mobile, cell phone, PDA">
 		<link rel="stylesheet" href="style.css" type="text/css">
@@ -65,14 +65,14 @@
 		needs to be replace with the content number.<br>
 		As shown on the screen shot:<br><br>
 		
-		language1Content01DisplayText: contentPronunciation<br>
-		language1Content02DisplayText: contentExample<br><br>
+		language1Content01DisplayText:contentPronunciation<br>
+		language1Content02DisplayText:contentExample<br><br>
 		
-		language2Content01DisplayText: contentGrammaticalCategory<br>
-		language2Content02DisplayText: contentPhoneticTranscription<br><br>
+		language2Content01DisplayText:contentGrammaticalCategory<br>
+		language2Content02DisplayText:contentPhoneticTranscription<br><br>
 		
-		language3Content01DisplayText: contentNotes<br>
-		language3Content02DisplayText: contentExplanation<br></p>
+		language3Content01DisplayText:contentNotes<br>
+		language3Content02DisplayText:contentExplanation<br></p>
         
 		<p>Predefined content is prefixed by &quot;content&quot;. The following content is 
 		predefined in DictionaryForMIDs:<br>
@@ -99,7 +99,20 @@
 		'RRR, GGG, BBB' where RRR is the value for red, GGG for green and BBB for 
 		blue. Each one of the RRR, GGG, BBB component has to have a value between 0 and 255.</p>
 		<p>You are provided with ComboBoxes that have default values. Choose the color name
-		and ContentProperties-Creator will automatically generate the RGB colour code for you.
+		and ContentProperties-Creator will automatically generate the RGB colour code for you.</p>
+		<p>Here are the choices that are shown on the screen shot. Each color name represents
+		a RGB color code. In the final DictionaryForMIDs.properties file, color names are not written, each name is
+		replaced by its actual code as show below:<br><br>
+		
+		language1Content01FontColour:128,0,0<br>
+		language1Content02FontColour:255,0,0<br><br>
+
+		language2Content01FontColour:255,255,0<br>
+		language2Content02FontColour:0,128,0<br><br>
+
+		language3Content01FontColour:0,255,0<br>
+		language3Content02FontColour:0,128,0<br></p>				
+		
 		If you want to manually enter the values or modify the selected values in the Properties
 		Preview/Edit window just before saving definitely the values in the DictionaryForMIDs.properties
 		file, then you have to know the RGB colour codes. Below are the colour codes for the default
@@ -213,15 +226,15 @@
       italic<br>
       underlined<br>
       plain</p>
-		<p>Examples from the screen shot:<br>
-      language1Content01FontStyle: plain<br>
-      language1Content02FontStyle: italic<br><br>
+		<p>Examples from the screen shot:<br><br>
+      language1Content01FontStyle:plain<br>
+      language1Content02FontStyle:italic<br><br>
       
-      language2Content01FontStyle: bold<br>
-      language2Content02FontStyle: italic<br><br>
+      language2Content01FontStyle:bold<br>
+      language2Content02FontStyle:italic<br><br>
       
-      language3Content01FontStyle: underlined<br>
-      language3Content02FontStyle: bold<br><br>
+      language3Content01FontStyle:underlined<br>
+      language3Content02FontStyle:bold<br><br>
       
       This property is optional, the default value is plain.</p>
       
@@ -242,14 +255,14 @@
 		&nbsp;</p>
 		
 		<p>Here are the values chosen, as shown on the screen shot:<br><br>
-		language1Content01DisplaySelectable: false<br>
-		language1Content02DisplaySelectable: true<br><br>
+		language1Content01DisplaySelectable:false<br>
+		language1Content02DisplaySelectable:true<br><br>
 		
-		language2Content01DisplaySelectable: false<br>
-		language2Content02DisplaySelectable: true<br><br>
+		language2Content01DisplaySelectable:false<br>
+		language2Content02DisplaySelectable:true<br><br>
 		
-		language3Content01DisplaySelectable: true<br>
-		language3Content02DisplaySelectable: true<br><br>		
+		language3Content01DisplaySelectable:true<br>
+		language3Content02DisplaySelectable:true<br><br>		
 		</p>
 		
 		<h3><a name="ContentTags"></a>Content tags for the dictionaries</h3>
@@ -275,9 +288,9 @@
       </dl>
     
       <p>In that example the following properties are declared:<br><br>
-      language2Content01DisplayText: contentPronunciation<br>
-      language2Content02DisplayText: contentGrammaticalCategory<br>
-      language2Content03DisplayText: contentNotes<br>
+      language2Content01DisplayText:contentPronunciation<br>
+      language2Content02DisplayText:contentGrammaticalCategory<br>
+      language2Content03DisplayText:contentNotes<br>
 		&nbsp;</p>
       <p>Contents can also be nested. Example:</p>    
       <dl>
