@@ -30,7 +30,7 @@
 
 <h2><a name="Design"></a>The DictionaryForMIDs-Creator Developper's Documentation</h2>
 <h3>Architecture</h3>
-<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color:#111111" width="974" id="AutoNumber1" >
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color:#111111" width="500" id="AutoNumber1" >
 <!-- iheight="313"> -->
   <tr>
     <td width="628" colspan="4" align="center" bgcolor="#ff9900" height="104">
@@ -43,16 +43,16 @@
   </tr>
   <tr>
     <td width="151" align="center" bgcolor="#f3f3f3" height="104">
-    <p style="line-height: 200%; margin: 18 6"><b><font size="4">DictdToDictionaryForMIDs</font></b></td>
+    <p style="line-height: 200%; margin: 18 6"><b><font size="3">DictdToDictionaryForMIDs<br></font></b></td>
     <td width="158" align="center" bgcolor="#f3f3f3" height="104">
     <p style="line-height: 200%; margin-top: 18; margin-bottom: 18"><b>
-    <font size="4">DictionaryGeneration</font></b></td>
+    <font size="3">DictionaryGeneration</font></b></td>
     <td width="151" align="center" height="104" bgcolor="#f3f3f3">
     <p style="line-height: 200%; margin-top: 18; margin-bottom: 18"><b>
-    <font size="4">BitmapFontGenerator</font></b></td>
+    <font size="3">BitmapFontGenerator</font></b></td>
     <td width="165" align="center" height="104" bgcolor="#f3f3f3">
     <p style="line-height: 200%; margin-top: 18; margin-bottom: 18"><b>
-    <font size="4">JarCreator</font></b></td>
+    <font size="3">JarCreator</font></b></td>
     <td width="29" align="center" height="104">&nbsp;</td>
     <td width="313" align="center" bgcolor="#f3f3f3" height="104">
     <p style="margin: 6" align="left"><font size="2">This layer contains the user interface.</font></p>
@@ -83,7 +83,7 @@
     <p style="margin: 6" align="left"><font size="2">
     JarCreator assembles all the necessary files in order for you to have
     a DictionaryForMIDs midlet. It then packs them in some empty
-    DictionaryForMIDs.jar/jad files.</font></p></td>
+    DfM.jar/jad files.</font></p></td>
     <td width="29" align="center" height="104">&nbsp;</td>
     <td width="313" align="center" bgcolor="#00ae10" height="104">
     <p style="margin: 6" align="left"><font size="2">This layer contains
@@ -91,34 +91,220 @@
     </td>
   </tr>
 </table>
+<h2>Source code overview</h2>
+<h3>DictionaryForMIDs-Creator</h3>
+<h4>Overview of the packages</h4>
+<p>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color:#111111" >
+	<td align="center" bgcolor="#fff1cd"><font size="+2">Package</font></td>
+	<td align="center" bgcolor="#ffcdd6"><font size="+2">Description</font></td>
+	</tr>
+	<tr><td>de.kugihan.DfMCreator</td>
+	<td><p style="margin: 2" align="left">Contains the class files for DictionaryForMIDs-Creator</p></td>
+	</tr>
+	<tr><td>de.kugihan.I18n-L10n</td>
+	<td><p style="margin: 2" align="left">Contains the string/translation bundle files</p></td>
+	</tr>
+	<tr><td>de.kugihan.dictionaryformids.dictdtodictionaryformids</td>
+	<td><p style="margin: 2" align="left">Contains the class files for DictdToDictionaryForMIDs</p></td>
+	</tr>
+	<tr><td>de.kugihan.dictionaryformids.dictgen</td>
+	<td><p style="margin: 2" align="left">Contains the class files for DictionaryGeneration</p></td>
+	</tr>
+	<tr><td>de.kugihan.dictionaryformids.dictgen.dictionaryupdate</td>
+	<td><p style="margin: 2" align="left">Contains the DictionaryUpdate class files</p></td>
+	</tr>
+	<tr><td>de.kugihan.fonttoolkit</td>
+	<td><p style="margin: 2" align="left">Contains the BitmapFontGenerator class files</p></td>
+	</tr>
+	<tr><td>de.kugihan.jarCreator</td>
+	<td><p style="margin: 2" align="left">Contains the class files for JarCreator</p></td>
+	</tr>
+	<tr><td>edu.hws.eck.mdb</td>
+	<td><p style="margin: 2" align="left">Contains the single class <b>(I18n)</b> that handles<br>
+	the application language/translation</p></td>
+	</tr>
+	<tr><td>org.dict.kernel</td>
+	<td><p style="margin: 2" align="left">Contains the sources for <b>JDictd</b> that are used by<br>
+	    DictdToDictionaryForMIDs to convert a Dictd dictionary<br>
+	    file into a comma-separated-value (CSV) file</p></td>
+	</tr>
+	<tr><td>org.dict.server</td>
+	<td><p style="margin: 2" align="left">Contains the sources for <b>JDictd</b> that are used by<br>
+	    DictdToDictionaryForMIDs to convert a Dictd dictionary<br>
+	    file into a comma-separated-value (CSV) file</p></td>
+	</tr>
+	</tr>
+	<tr><td>org.dict.zip</td>
+	<td><p style="margin: 2" align="left">Contains the sources for <b>JDictd</b> that are used by<br>
+	    DictdToDictionaryForMIDs to convert a Dictd dictionary<br>
+	    file into a comma-separated-value (CSV) file</p></td>
+	</tr>
+	</tr>
+</table>
+</p>
+
+<h4>Overview of the classes</h4>
+<p>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color:#111111" >
+<tr>
+<td align="center" bgcolor="#fff1cd"><font size="+2">Java Class</font></td>
+<td align="center" bgcolor="#ffcdd6"><font size="+2">Function</font></td>
+</tr>
+<tr>
+<td>AboutBox</td>
+<td><p style="margin: 2" align="left">Popup window that shows some information about<br>
+DictionaryForMIDs-Creator, license information,<br>copyright notice...</p></td>
+</tr>
+<tr>
+<td>CheckCSVFileIntegrity</td>
+<td><p style="margin: 2" align="left">Provides a GUI to enable the user to check<br>
+the integrity of a CSV file (the output file of<br>DictdToDictionaryForMIDs).</p></td>
+</tr>
+<tr>
+<td>ContentPropertiesCreator</td>
+<td><p style="margin: 2" align="left">Helps in creating the languageXContentNN properties.<br>
+The creation is done graphically. This window is<br>launched from the <b>PropertiesEditor</b> window.</p></td>
+</tr>
+<tr>
+<td>DfMCreatorExceptions</td>
+<td><p style="margin: 2" align="left">Contains the personalized exceptions for DfM-Creator.</p></td>
+</tr>
+<tr>
+<td>DfMCreatorMain</td>
+<td><p style="margin: 2" align="left">This is the main class, the main window. Almost<br>
+everything is done in here. This calls all the other<br>
+windows, subroutines...</p></td>
+</tr>
+<tr>
+<td>DictdToDfMConvSteps</td>
+<td><p style="margin: 2" align="left">This is an interface not a class. Contains<br>
+the conversion steps for DictdToDictionaryForMIDs.<br>
+This does not do much of a job, will probably be<br>
+removed in a future version.</p></td>
+</tr>
+<tr>
+<td>HelpContents</td>
+<td><p style="margin: 2" align="left">A window that displays help files for DfM-Creator.</p></td>
+</tr>
+<tr>
+<td>InputDialog</td>
+<td><p style="margin: 2" align="left">A small text input dialog that is used by<br>
+PropertiesEditor to retrieve custom information.</p></td>
+</tr>
+<tr>
+<td>PreferencesBox</td>
+<td><p style="margin: 2" align="left">The preferences window for DfM-Creator.</p></td>
+</tr>
+<tr>
+<td>PropertiesEditor</td>
+<td><p style="margin: 2" align="left">The <b>PropertiesEditor</b> window. This makes it<br>
+easier to create a <b>DictionaryForMIDs.properties</b> file<br>
+that is used by <b>DictionaryGeneration</b> to generate the<br>
+dictionary files. The creation is also done graphically.</p></td>
+</tr>
+<tr>
+<td>PropertiesPreview</td>
+<td><p style="margin: 2" align="left">Previews the values entered/selected in the<br>
+<b>PropertiesEditor</b> window before saving them in the<br>
+final <b>DictionaryForMIDs.properties</b> file. Can also<br>
+edit the values manually before saving them.</p></td>
+</tr>
+<tr>
+<td>RegexpUtils</td>
+<td><p style="margin: 2" align="left">Regular expression utilities that are used to<br>
+check if the property <b>infoText</b> that is entered in the<br>
+<b>PropertiesEditor</b> contains an email address or a URL for<br>
+the dictionary. As of version 0.4 of DfM-Creator, this does<br>
+not always work. Will be fixed in a future version.</p></td>
+</tr>
+<tr>
+<td>SumWinBFG</td>
+<td><p style="margin: 2" align="left">BitmapFontGeneration Preferences Summary Window.<br>
+A window that displays the summary of the font generation<br>
+preferences (values entered/selected by the user).</p></td>
+</tr>
+<tr>
+<td>SumWinDictdToDfM</td>
+<td><p style="margin: 2" align="left">DictdToDictionaryForMIDs Preferences Summary Window.<br>
+A window that displays the summary of the dictionary conversion<br>
+preferences (values entered/selected by the user).</p></td>
+</tr>
+<tr>
+<td>SumWinDictGen</td>
+<td><p style="margin: 2" align="left">DictionaryGeneration Preferences Summary Window.<br>
+A window that displays the summary of the dictionary generation<br>
+preferences (values entered/selected by the user).</p></td>
+</tr>
+<tr>
+<td>SumWinJarCreator</td>
+<td><p style="margin: 2" align="left">JarCreator Preferences Summary Window.<br>
+A window that displays the summary of the jar creation<br>
+preferences (values entered/selected by the user).</p></td>
+</tr>
+</table>
+</p>
+<h3>Important subroutines</h3>
+
+<h4>DictdToDictionaryForMIDs Tab</h4>
 
 
 
 
-<h2><a name="Source"></a>Source Code</h2>
-<p>You can download the current source code either from 
-SVN (Subversion), or, if you are not familiar with SVN, just download the source as a ZIP 
-file.</p>
+<h4>DictionaryGeneration Tab</h4>
+
+
+
+
+<h4>BitmapFontGenerator Tab</h4>
+
+
+
+<h4>JarCreator Tab</h4>
+
+
+
+<h4>PropertiesEditor window</h4>
+
+
+
+<h4>ContentProperties-Creator window</h4>
+
+
+
+<h4>Preferences window</h4>
+
+
+
+<h4>Summary windows</h4>
+<ul>
+<li>DictdToDictionaryForMIDs preferences summary window: </li>
+<li>DictionaryGeneration preferences summary window: </li>
+<li>BitmapFontGeneration preferences summary window: </li>
+<li>JarCreator preferences summary window: </li>
+</ul>
+
+<h2><a name="Source"></a>Getting the source code</h2>
+<p>You can download the current source code either from the Subversion
+repository or from this very page as a zip file or a GNU tarball.</p>
 <h3>Downloading the Source Code from SVN</h3>
 
 <p dir="ltr">The sources for DictionaryForMIDs-Creator are maintained in
 <a href="http://dictionarymid.svn.sourceforge.net">SourceForge SVN repository</a>.
-Read the description how to <a href="SVNRepositoryAccess.html">access the 
+Read the description on how to <a href="SVNRepositoryAccess.html">access the 
 DictionaryForMIDs SVN repository</a>.<br>
 You can also use the&nbsp; &quot;Download GNU tarball&quot; link on the
 <a href="http://dictionarymid.svn.sourceforge.net/viewvc/dictionarymid/trunk/">
-sourceforge web frontend</a> to download the DictionaryForMIDs-Creator sources.<br>
+subversion web frontend </a> to download the DictionaryForMIDs-Creator sources.<br>
 &nbsp;</p>
 <h3>Downloading the Source Code as ZIP file</h3>
-<p dir="ltr">A zip file containing a successfully built jar of DfM-Creator will
-be available on this page soon!
+<p dir="ltr">A zip file containing a stable release of DfM-Creator will
+be available on this page soon! Please bear in mind that this zip file
+contains probably always sources that are outdated. If you want to get
+the lastest development sources always go to the Subversion repository.
 &nbsp;</p>
 
 <h3>Building the tools and applications</h3>
-<p><b>Development Environments</b></p>
-
-
-</p>
 <p>
 <b>Dependencies between the tools and applications</b></p>
 <p>The following dependencies exist between the tools and applications:</p>
@@ -138,34 +324,25 @@ trunk/Build or the one that is specific to DfM-Creator; that one in located in
 trunk/DictionaryForMIDs-Creator/DfM-Creator-Build. Its name is also build.xml.<br>
 You must have Apache-Ant and Antenna (preferably the latest versions). Antenna
 is already present in the above mentioned 2 build directories.</p>
-<p>Here is how to use the build.xml file:</p>
+<p>Before proceeding to the building, you must:</p>
 <ul>
   <li>
-This file build.xml should be located in directory Build
+Let the file build.xml in its build directory
   </li>
   <li>
-You must have Sun&#39;s Java ME SDK installed (can be downloaded somewhere at
+Have Oracle Java ME SDK 3.0 installed or Sun Java Wireless Toolkit 2.5.2<br>
+(can be downloaded somewhere at
 <a href="http://java.sun.com/javame/index.jsp">
 http://java.sun.com/javame/index.jsp</a>) 
   </li>
   <li>
-You must set wtk.home to your WTK installation directory 
+Set wtk.home to your WTK installation directory 
+  </li>
+Have Apache Ant installed on your system (in the PATH)
   </li>
   <li>
-This build.xml can generate DictionaryForMIDs (Java ME and Java SE), 
-DictionaryGeneration, JarCreator and BitmapFontGenerator</li>
-  <li>
-Using: run ant in directory Build
-  </li>
-  <li>
-It runs well on both platforms windows/linux 
-  </li>
-  <li>
-The jar-tool must be in the path. Otherwise there will be an error during the 
-preverifier run.</li>
-  <li>
-You also must have the antenna-bin-xxx.jar file in the Build directory (the file 
-antenna-bin-xxx.jar is part of the Build SVN directory)
+Have antenna-bin-xxx.jar in the build directory (build directory has a version
+of antenna but it is most of the time outdated.)
   </li>
 </ul>
 <p>Important note: the source files are UTF-8 encoded. If you are using the old 
@@ -177,7 +354,7 @@ javac.encoding=UTF-8<br>
 
 <pre>Written by Karim Mahamane,
 Author of DfM-Creator.
-Parts copied from this <a href="development.html" >file</a>
+Inspired by this <a href="development.html" >file</a>
 written by Gert Nuber,
 creator of DictionaryForMIDs.</pre>
 
