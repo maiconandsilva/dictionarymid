@@ -278,10 +278,20 @@ preferences (values entered/selected by the user).</p></td>
 
 <h4>Summary windows</h4>
 <ul>
-<li>DictdToDictionaryForMIDs preferences summary window: </li>
-<li>DictionaryGeneration preferences summary window: </li>
-<li>BitmapFontGeneration preferences summary window: </li>
-<li>JarCreator preferences summary window: </li>
+<li>DictdToDictionaryForMIDs preferences summary window:<pre>fillDictdConvSummaryTextPane()</pre>
+fillDictdConvSummaryTextPane() gets all the needed information<br>
+and formats them correctly so as to have a clear and neat<br>
+summary of the Bitmap Font Generation preferences entered<br>
+by the user.</li><br>
+
+<li>DictionaryGeneration preferences summary window:<pre>fillDictGenSummaryTextArea()</pre>
+Does the same thing as the above mentioned subroutine but for DictionaryGeneration.</li><br>
+
+<li>BitmapFontGeneration preferences summary window:<pre>fillBFGSummaryTextArea()</pre>
+Does the same thing as the above mentioned subroutines but for BitmapFontGeneration</li><br>
+
+<li>JarCreator preferences summary window:<pre>fillJarCreationSummaryTextArea()</pre>
+Does the same thing as the above mentioned subroutines but for JarCreator<br></li><br>
 </ul>
 
 <h2><a name="Source"></a>Getting the source code</h2>
@@ -357,8 +367,6 @@ Author of DfM-Creator.
 Inspired by this <a href="development.html" >file</a>
 written by Gert Nuber,
 creator of DictionaryForMIDs.</pre>
-
-
 
 </div>
 </BODY></HTML>
