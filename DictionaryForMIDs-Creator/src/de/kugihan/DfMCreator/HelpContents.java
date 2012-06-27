@@ -266,6 +266,12 @@ public class HelpContents extends JPanel
             (I18n.tr("genTheDictFiles"),
         path + "newdictDictionaryGeneration.html"));
         docCategory.add(book);
+        
+        // Editing DictionaryForMIDs.jar Manually
+        book = new DefaultMutableTreeNode(new BookInfo
+            (I18n.tr("dict.manual.edit"),
+        path + "newdictJARCreator.html"));
+        docCategory.add(book);
     }
     
     
