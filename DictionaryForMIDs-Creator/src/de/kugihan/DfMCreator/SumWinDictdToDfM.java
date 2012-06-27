@@ -227,9 +227,12 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         return new SumWinDictdToDfM();
     }
     
-    // This method will be used to delete the
-    // incomplete outputcsvfile if the conversion
-    // process is aborted.
+    /**
+     * deleteCSVFile() is used to delete the
+     * incomplete output csv file if the conversion 
+     * process is aborted by the user.
+     */
+    
     private boolean deleteCSVFile(){
         boolean status;
         File csvFile = new File (DictdToDfM.getOutputCSVFile());
@@ -354,8 +357,14 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         }
     }
 
-    /*
-     * This task will call the dictionary converter.
+    /**
+     * <pre>class Task extends SwingWorker<Void, Void></pre>
+     * SwinWorker class named <i>Task</i> that is used to actually
+     * launch the dictionary conversion process in a new thread.<br>
+     * In the DictionaryForMIDs-Creator, almost all SwingWorker classes
+     * are called <i>Task</i>, however, they do not belong to the same
+     * classes and therefore do not do the same things. We could have used
+     * just about any valid variable/class name instead of <i>Task</i>.
      */
     class Task extends SwingWorker<Void, Void> {
         @Override

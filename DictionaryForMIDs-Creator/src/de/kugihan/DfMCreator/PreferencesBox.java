@@ -170,13 +170,27 @@ public class PreferencesBox extends javax.swing.JFrame {
         return new PreferencesBox();
     }
     
-    // The order of the index in the list from which
-    // the user selects among the installed look and feels
-    // is the same as the index order of the array list
-    // _lookAndFeelClassNames_; consequently, we use info.getName
-    // to get the names of the look and feels (names are better than
-    // ugly class names). And then we use the actual class names that
-    // were stored in lookAndFeelClassNames to pass them to savePreferences()
+/**
+    In the List that displays the intalled look and feels, the values
+    are displayed as follows by this code snipet that was copied:<br><br>
+
+    // add the look and feel names to<br>
+    // the list that the user will see
+    <pre>listModel.addElement(info.getName());</pre>
+
+    // add the actual class names to the<br>
+    // array list that will be used to<br>
+    // actually set the selected L & F
+    <pre>lookAndFeelClassNames.add(info.getClassName());</pre>
+
+    In fact, the order of the index in the list from which the user selects
+    among the installed look and feels (info.getName()) is the same as the
+    index order of the arraylist <i>lookAndFeelClassNames</i>; consequently, we
+    use <i>info.getName</i> to get the names of the look and feels (names are better
+    than the ugly class names), and then we use the actual class names that
+    were stored in the arraylist <i>lookAndFeelClassNames</i> to pass them to the
+    subroutine <b>savePreferences()</b> in order for it to save them.
+*/
     private void setLookAndFeelPrefs(){        
         // the selected look and feel name
         int idx = list.getSelectedIndex();

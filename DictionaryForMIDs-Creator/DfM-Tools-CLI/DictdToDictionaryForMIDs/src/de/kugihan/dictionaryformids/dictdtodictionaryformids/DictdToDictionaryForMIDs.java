@@ -19,9 +19,55 @@ distribution of these sources and therefore one does not need to go fetch for
 these other sources. Thanks to the jDictd author, TextIO author ;-)
 */
 
-import java.io.FileOutputStream;
+package de.kugihan.dictionaryformids.dictdtodictionaryformids;
+
+import edu.hws.eck.mdb.*;
+
 import java.io.*;
+import java.io.FileOutputStream;
 import java.util.Scanner;
+
+import org.dict.kernel.Answer.*;
+import org.dict.kernel.BASE64Converter.*;
+import org.dict.kernel.Database.*;
+import org.dict.kernel.DatabaseConfiguration.*;
+import org.dict.kernel.DictEngine.*;
+import org.dict.kernel.EnglishMorphAnalyzer.*;
+import org.dict.kernel.FileKeyList.*;
+import org.dict.kernel.FlatDataAccessor.*;
+import org.dict.kernel.FrenchMorphAnalyzer.*;
+import org.dict.kernel.GermanMorphAnalyzer.*;
+import org.dict.kernel.HTMLPrinter.*;
+import org.dict.kernel.IAnswer.*;
+import org.dict.kernel.IAnswerPrinter.*;
+import org.dict.kernel.IComparator.*;
+import org.dict.kernel.IDataAccessor.*;
+import org.dict.kernel.IDatabase.*;
+import org.dict.kernel.IDictEngine.*;
+import org.dict.kernel.IKey.*;
+import org.dict.kernel.IList.*;
+import org.dict.kernel.IMorphAnalyzer.*;
+import org.dict.kernel.IRequest.*;
+import org.dict.kernel.IWordList.*;
+import org.dict.kernel.IWordPosition.*;
+import org.dict.kernel.Key.*;
+import org.dict.kernel.KeyComparator.*;
+import org.dict.kernel.KeyList.*;
+import org.dict.kernel.ListUtil.*;
+import org.dict.kernel.MemoryKeyList.*;
+import org.dict.kernel.PlainPrinter.*;
+import org.dict.kernel.SimpleList.*;
+import org.dict.kernel.SimpleRequest.*;
+import org.dict.kernel.WordList.*;
+import org.dict.kernel.WordPosition.*;
+
+import org.dict.server.DatabaseFactory.*;
+import org.dict.server.Logger.*;
+
+import org.dict.zip.DictZipDataAccessor.*;
+import org.dict.zip.DictZipHeader.*;
+import org.dict.zip.DictZipInputStream.*;
+import org.dict.zip.RandomAccessInputStream.*;
 
 public class DictdToDictionaryForMIDs {
 
@@ -36,21 +82,6 @@ public class DictdToDictionaryForMIDs {
 	static char separatorCharacter;
 	static String outputEncodingCharset;
 
-	
-/************************************************************************
-	Following lines are the former way of setting up the values directly in the
-	source code for DictdToDictionaryForMIDs.
-	
-	static Sting dbname = "gcide";
-	static String outputCSVfile = "C:/Generated_Dict/" + dbname + ".txt";
-	static boolean switchLanguages = false;
-	static boolean keepTabAndNewlineChars = true;
-	static boolean removeSquareBrackets = false;
-	static char separatorCharacter = '\t';
-	static String outputEncodingCharset = "UTF-8";
-*************************************************************************/
-	
-	
 	
 	/*
 	 * 
