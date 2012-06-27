@@ -233,7 +233,12 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
         }
     }
 
-    
+    /**
+     * <pre>class Task extends SwingWorker<Void, Void></pre>
+     * SwinWorker class named <i>Task</i> that does the same
+     * the is for DictionaryGeneration, what the above mentioned
+     * one is for DictdToDictionaryForMIDs.
+     */
     class Task extends SwingWorker<Void, Void> {
         
         @Override

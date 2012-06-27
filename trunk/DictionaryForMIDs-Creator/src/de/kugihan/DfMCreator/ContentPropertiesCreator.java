@@ -1719,8 +1719,8 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
     
     /**
      * updateNumOfContentDec() updates (shows or hides some components)
-     * the Content Properties Editor window according to the number of
-     * content declaration chosen for a particular language
+     * the ContentProperties-Creator's window according to the number of
+     * content declaration chosen for a particular language.
      */
     public void updateNumOfContentDec(){
         switch (NumOfContentDecsCB1.getSelectedItem().toString()) {
@@ -2017,7 +2017,7 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
      * getRGBCodes() converts the selected item's
      * name into a RGB color and returns it.
      * @param comboBox
-     * @return 
+     * @returns String colorCode
      */
     public static String getRGBCodes(JComboBox comboBox){
         int i = comboBox.getSelectedIndex();
@@ -2313,12 +2313,12 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
     
     ////////////////////////////////////////////////
     //  Creating a fake progress bar which will   //
-    //  give the user the impression that the     //
-    //  values are set up in a few seconds...     //
+    //  give to the user the impression that the  //
+    //  values are saved in a few seconds...      //
     //  In reality it takes less than a second    //
     //  for the values to be saved. This progress //
     //  bar reassures the user and shows her that //
-    //  the values are really being save and she  //
+    //  the values are really being saved and she //
     //  can experience this visually. Of course   //
     //  the values are saved but it happens so    //
     //  quickly that without this progress bar,   //

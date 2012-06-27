@@ -39,7 +39,7 @@
     <td width="29" align="center" height="104">&nbsp;</td>
     <td width="313" align="center" bgcolor="#ff9900" height="104">
     <p style="margin: 6" align="left">Main Layer: 
-    Provides access to the other DictionaryForMIDs tools throught the DfM-Creator GUI.</td>
+    Provides access to the other DictionaryForMIDs tools through the DfM-Creator GUI.</td>
   </tr>
   <tr>
     <td width="151" align="center" bgcolor="#f3f3f3" height="104">
@@ -153,7 +153,7 @@
 </tr>
 <tr>
 <td>AboutBox</td>
-<td><p style="margin: 2" align="left">Popup window that shows some information about<br>
+<td><p style="margin: 2" align="left">Pop-up window that shows some information about<br>
 DictionaryForMIDs-Creator, license information,<br>copyright notice...</p></td>
 </tr>
 <tr>
@@ -246,53 +246,298 @@ preferences (values entered/selected by the user).</p></td>
 </p>
 <h3>Important subroutines</h3>
 
-<h4>DictdToDictionaryForMIDs Tab</h4>
+<h4><u>DfMCreatorMain (the main window that holds the other tabs)</u></h4>
+<p><b>addFontTKToDfMCreatorTabbedPane()</b><br>
+The font generator tab holds the FontToolkit created by Sean Kernohan.
+When i started creating the DfM-Creator, i did not want to have to write
+a new GUI from scratch for the BitmapFontGenerator. So, i decided to modify
+the FontToolkit and integrate it in the DfM-Creator. The code in this subroutine
+does what is necessary to get the FontToolkit to work with the DfM-Creator.
+The other modifications were done directly in the FontToolkit sources.</p>
 
+<p><b>getFile()</b> shows a file chooser to let the user
+choose a file and return the it's path.<br>
+Parameter: <i>dirsOnly</i>; a boolean value that toggles on/off the possibility of
+chowing directories only or files and directories.</p>
 
+<p><b>trim()</b> removes trailing slashes or backslashes at the end of a string.
+It is used here mainly to trim trailing slashes/backslashes from the paths to the input and
+output files and directories provided by the user. Works for both Windows and Linux
+(i.e, for \ and /).</p>
 
-
-<h4>DictionaryGeneration Tab</h4>
-
-
-
-
-<h4>BitmapFontGenerator Tab</h4>
-
-
-
-<h4>JarCreator Tab</h4>
-
-
-
-<h4>PropertiesEditor window</h4>
-
-
-
-<h4>ContentProperties-Creator window</h4>
-
-
-
-<h4>Preferences window</h4>
-
-
-
-<h4>Summary windows</h4>
+<p><b>printAnyMsg()</b> prints a JOptionPane message dialog.<br>
+The parameters are the following:<br>
 <ul>
-<li>DictdToDictionaryForMIDs preferences summary window:<pre>fillDictdConvSummaryTextPane()</pre>
+<li><i>message;</i> the text of the message</li>
+<li><i>winText;</i> the title of the windows</li>
+<li><i>infType;</i> the type of the message</li>
+</ul>
+</p>
+
+<p><b>setTheLocale()</b> gets and sets the default locale. It can also
+test other locales during debug sessions for example.</p>
+
+<p><b>savePreferences()</b> saves the preferences (for now, only the look and feel
+preferences are concerned.)</p>
+
+<p><b>applyPreferences()</b> applies the saved preferences at program startup.
+
+<p><b>OwnTextFieldCheck()</b> and <b>OwnEncTextFieldCheck()</b> check if the
+"Choose Your Own" radio buttons in the DictdToDictionaryForMIDs tab
+are selected in order to enable/disable the little text areas that let
+the user provide her own choices instead of the ones given by default.
+These radio buttons exist for encoding and separator character choices.</p>
+
+<p><b>setDictdToDfMVals()</b> checks the validity of the values entered by the
+user and passes them to DictdToDictionaryForMIDs if they are valid.<br>
+Exceptions thrown by this subroutine:<br>
+<ul>
+<li>FileNotFoundException</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.DBNameTextFieldIsEmpty</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.DBPathTextFieldIsEmpty</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.OutCSVFileTextFieldIsEmpty</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.DBFolderNotAccessible</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.DBINIFileNotAccessible</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.OutCSVFileCantBeWritten</li></p>
+</ul>
+
+<p><b>setDictGenVals()</b> checks and sets the values up for DictionaryGeneration.<br>
+Exceptions thrown by this subroutine:<br>
+<ul>
+<li>FileNotFoundException</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.PropFileErrorException</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.SourceFileTFIsEmpty</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.DirectoryDestinationTFIsEmpty</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.PropertyPathTFIsEmpty</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.SourceFileNotAccessible</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.SourceFileNotAccessible</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.PropertyPathNotAccessible</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.DirectoryDestinationNotAccessible</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.CantCreateDestDir</li></p>
+</ul>
+
+<p><b>setJCVals()</b> checks and sets the values up for JarCreator.<br>
+Exceptions thrown by this subroutine:<br>
+<ul>
+<li>FileNotFoundException</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.BadDictDirNameException</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.DictionaryDirectoryNotAccessible</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.PropFileErrorException</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.EmptyDfMJarJadDirDoesNotExist</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.EmptyDfMFileNotFound</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.OutputDirectoryNotAccessible</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.InputCSVFilesTFIsEmpty</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.EmptyDfMDirTFIsEmpty</li>
+<li>de.kugihan.DfMCreator.DfMCreatorExceptions.OutputDirTFIsEmpty</li></p>
+</ul>
+
+<p><b>DictdConvDoAll</b><br>
+this subroutine does all the required operations in order for us to
+be able to convert a dictd dictionary file with DictdToDictionaryForMIDs.</p>
+
+<p><b>DictGenDoAll()</b><br>
+this subroutine is like the above mentioned one, but it is proper to
+DictionaryGeneration.</p>
+
+<p><b>JarCreatorDoAll()</b><br>
+this subroutine is like the above mentioned ones, but it is proper to
+DictionaryGeneration.</p>
+
+<h4><u>PropertiesEditor window</u></h4>
+<p><b>showInputDialog()</b><br>
+Shows an input dialog and returns its content.<br>
+Parameter: <i>winTitle</i>; the title of the window.
+Returns: the value entered by the user.</p>
+
+<p><b>filterSepChar()</b><br>
+Processes the selected item of one of the four separator character ComboBoxes
+and returns the actual separator character corresponding to the selected item.<br>
+Parameter: <i>combobox</i>
+Returns: <i>value</i>; the selected separator character</p>
+
+<p><b>showMoreInfo()</b><br> shows some extra information about the properties.</p>
+
+<b>editExistingPropFile()</b><br> launches a file open dialog in order to let
+the user choose a <b>DictionaryForMIDs.properties</b> file that she wishes to edit
+and then launches the <b>PropertiesPreview</b> window. The user can then edit the
+file manually and then save it.</p>
+
+<p><b>viewAndOrEdit()</b><br> launches the <b>PropertiesPreview</b> window with the values
+selected/entered by the user in the <b>PropertiesEditor</b>. Here also the user
+can edit the file manually before saving it. Note that the name of the file is
+automatically set by the <b>PropertiesPreview</b> and is <b>DictionaryForMIDs.properties</b>.</p>
+
+<p><b>showSamplePropFile()</b><br> shows a sample <b>DictionaryForMIDs.properties</b> file.</p>
+
+<p><b>validateValues()</b><br> validates the values entered by the user in the <b>PropertiesEditor</b>.
+Checks if the required values are all provided, if some TextFields are empty or not and so forth.</p>
+
+<p><b>setValuesInPropTextArea()</b><br> sets the values entered/selected by the user in
+the <b>PropertiesPreview</b> window.</p>
+
+<p><b>updateNumOfLang()</b><br> updates/shows/hides some values/TextFields/CheckBoxes etc.
+according to the number of languages selected in the <b>numOfLangCmbBox</b> ComboBox.</p>
+
+<p><b>getInputOptionDialog()</b><br> shows the InputDialog window.<br>
+Parameter: <i>label</i>
+Parameter: <i>winTitle</i>
+Returns: String <i>S</i></p>
+
+<p><b>showContentPropsCreator()</b><br> shows the ContentProperties-Creator window.</p>
+
+<p><b>checkInfoTextContents()</b><br> checks the content of the InfoText TextField
+to match it against the regular expression patterns present in the
+RegexpUtils class in order to make sure the user provided a URL or an
+email address for the maintainer(s) of the dictionary file that is about
+to be set up in the empty DictionaryForMIDs.jar/jad files.<br>
+Throws: <i>IllegalArgumentException</i> if the text does not
+contain an URL or an email address.</p>
+
+<h4><u>ContentProperties-Creator window</u></h4>
+<p><b>updateNumOfContentDec()</b><br>
+This subroutine updates (shows or hides some components) the ContentProperties-Creator's
+window according to the number of content declaration chosen for a particular language.
+</p>
+
+<p><b>getRGBCodes()</b><br>
+This converts the selected item's name of the color ComboBoxes into a RGB color code and returns it.<br>
+Parameter: <i>comboBox</i>, the ComboBox that is passed, from which the selected item's name will
+be converted into a RGB color code.<br>
+Returns: the String <i>colorCode</i>
+</p>
+
+<p><b>setTheContentNNProperties()</b><br>
+This saves the content settings that were chosen by the user into the content variables located as
+public static variables in the PropertiesEditor Class.
+</p>
+
+<p><b>class Task extends SwingWorker<Void, Void></b></pre>
+This SwingWorker Task class creates a fake progress bar which will give to the
+user the impression that the values are saved in a few seconds...
+In reality it takes less than a second for the values to be saved.
+This progress bar reassures the user and shows her that the values are really
+being saved and she can experience this visually. Of course the values are
+saved but it happens so quickly that without this progress bar, the user
+might have the impression that nothing is happening.
+</p>
+
+<h4><u>Preferences window</u></h4>
+<p>For the time being, the Preferences window offers the possibility to customize
+only the Look and Feel settings. It enables the user to select which look and feel
+should the DictionaryForMIDs-Creator have. The list that is displayed, varies from
+one operating system to another but whatever
+the operating system, if you installed JDK-7u2 or later, you should have the Nimbus,
+the Metal and the CDE/Motif look and feels installed. Note that to compile/build the
+DictionaryForMIDs-Creator you need JDK-7u2 or later.<br></br>
+
+<b>setLookAndFeelPrefs()</b><br>
+In the List that displays the intalled look and feels, the values
+are displayed as follows by this code snipet that was copied:<br><br>
+
+// add the look and feel names to<br>
+// the list that the user will see
+<pre>listModel.addElement(info.getName());</pre>
+
+// add the actual class names to the<br>
+// array list that will be used to<br>
+// actually set the selected L & F
+<pre>lookAndFeelClassNames.add(info.getClassName());</pre>
+
+In fact, the order of the index in the list from which the user selects
+among the installed look and feels (info.getName()) is the same as the
+index order of the arraylist <i>lookAndFeelClassNames</i>; consequently, we
+use <i>info.getName</i> to get the names of the look and feels (names are better
+than the ugly class names), and then we use the actual class names that
+were stored in the arraylist <i>lookAndFeelClassNames</i> to pass them to the
+subroutine <b>savePreferences()</b> in order for it to save them.
+</p>
+
+<h4><u>CheckCSVFileIntegrity</u></h4>
+<p><b>checkCSVFileIntegrity()</b><br>
+Main subroutine that checks the integrity of a CSV file entered by the user.
+it calls the subroutine below to do the actual checking.
+</p>
+
+<p><b>checkCsvFileFormat()</b><br>
+Copied from DictionaryGeneration in order to adapt it to DfM-Creator.
+Checks a CSV file's integrity.<br>
+Parameter: <i>csvFileName</i> the input csv-file's name.<br>
+Exceptions: <i>DictionaryException</i>, <i>IOException</i>
+</p>
+
+<h4><u>RegexpUtils</u></h4>
+</p><b>validateURL()</b> checks if a string contains a URL, URI, URN.<br>
+Parameter: <i>input</i> the input string<br>
+Returns: true or false<br>
+Throws: Exception</p>
+
+<p><b>validateEmail()</b> checks if a string contains an email address.<br>
+Parameter: <i>input</i> the input string<br>
+Returns: true or false<br>
+Throws: Exception </p>
+
+<h4><u>Summary windows</u></h4>
+<ol type="I">
+<li>
+<b><u>DictdToDictionaryForMIDs preferences summary window:</u></b>
+<p><b>fillDictdConvSummaryTextPane()</b><br>
 fillDictdConvSummaryTextPane() gets all the needed information<br>
 and formats them correctly so as to have a clear and neat<br>
 summary of the Bitmap Font Generation preferences entered<br>
-by the user.</li><br>
+by the user.</p>
+<p><b>deleteCSVFile()</b><br>
+deleteCSVFile() is used to delete the incomplete output csv file if the conversion
+process is aborted by the user.
+</p>
+<p><b>class Task extends SwingWorker<Void, Void></b><br>
+SwinWorker class named <i>Task</i> that is used to actually
+launch the dictionary conversion process in a new thread.<br>
+In the DictionaryForMIDs-Creator, almost all SwingWorker classes
+are called <i>Task</i>, however, they do not belong to the same
+classes and therefore do not do the same things. We could have used
+just about any valid variable/class name instead of <i>Task</i>.
+</p>
+</li>
 
-<li>DictionaryGeneration preferences summary window:<pre>fillDictGenSummaryTextArea()</pre>
-Does the same thing as the above mentioned subroutine but for DictionaryGeneration.</li><br>
+<li>
+<b><u>DictionaryGeneration preferences summary window:</u></b>
+<p><b>fillDictGenSummaryTextArea()</b><br>
+Does the same thing as the above mentioned summary subroutine but for DictionaryGeneration.</p>
 
-<li>BitmapFontGeneration preferences summary window:<pre>fillBFGSummaryTextArea()</pre>
-Does the same thing as the above mentioned subroutines but for BitmapFontGeneration</li><br>
+<p><b>class Task extends SwingWorker<Void, Void></b><br>
+SwingWorker class named <i>Task</i> that is to DictionaryGeneration
+what the above mentioned Task class is to DictdToDictionaryForMIDs.</p>
+</li>
 
-<li>JarCreator preferences summary window:<pre>fillJarCreationSummaryTextArea()</pre>
-Does the same thing as the above mentioned subroutines but for JarCreator<br></li><br>
-</ul>
+<li>
+<b><u>JarCreator preferences summary window:</u></b>
+<p><b>fillJarCreationSummaryTextArea()</b><br>
+Does the same thing as the above mentioned summary subroutines but for JarCreator</p>
+
+<p><b>class Task extends SwingWorker<Void, Void></b><br>
+SwingWorker class named <i>Task</i> that is to JarCreator
+what the above mentioned Task class is to DictionaryGeneration.</p>
+</li>
+
+<li>
+<b><u>BitmapFontGeneration preferences summary window:</u></b>
+<p><b>fillBFGSummaryTextArea()</b><br>
+Does the same thing as the above mentioned summary subroutines but for BitmapFontGeneration</p>
+
+<p>Though the BitmapFontGeneration also has a preferences summary window,
+it does not have a <b>SwingWorker</b> class that handles the font generation
+process. The FontToolkit class already has a thread class that does for the
+BitmapFontGenerator, what the SwingWorker classes do for DictdToDictionaryForMIDs,
+DictionaryGeneration and JarCreator.</p>
+</li>
+</ol>
+
+<h3><u>Subroutines that call the other windows</u></h3>
+<p><b>showPrefsWin()</b> shows the preferences window.</p>
+<p><b>showHelpWindow()</b> shows the help window.</p>
+<p><b>showAbout()</b> shows the about window.</p>
+<p><b>showPropWin()</b> shows the PropertiesEditor Window.</p>
+<p><b>showCSVFileCheckWin()</b> shows the csvfile check window.</p>
 
 <h2><a name="Source"></a>Getting the source code</h2>
 <p>You can download the current source code either from the Subversion
@@ -311,7 +556,7 @@ subversion web frontend </a> to download the DictionaryForMIDs-Creator sources.<
 <p dir="ltr">A zip file containing a stable release of DfM-Creator will
 be available on this page soon! Please bear in mind that this zip file
 contains probably always sources that are outdated. If you want to get
-the lastest development sources always go to the Subversion repository.
+the latest development sources always go to the Subversion repository.
 &nbsp;</p>
 
 <h3>Building the tools and applications</h3>
@@ -319,40 +564,38 @@ the lastest development sources always go to the Subversion repository.
 <b>Dependencies between the tools and applications</b></p>
 <p>The following dependencies exist between the tools and applications:</p>
 <ul>
-  <li><font size="2">DictionaryGeneration, JarCreator, BitmapFontGenerator, 
-  LanguageUIGenerator, JavaME, JavaSE and Web App depend on DictionaryForMIDs
-  </font></li>
-  <li><font size="2">DictionaryGeneration, JarCreator, BitmapFontGenerator and 
-  LanguageUIGenerator depend on JavaSE </font>
-  </li>
-  <li><font size="2">JarCreator depends on JavaME</font></li>
+	<li><font size="2">DictionaryForMIDs-Creator depends DictionaryForMIDs, JavaSE and JavaME</font></li>
+	Therefore, make sure the DictionaryForMIDs-Creator sources remain under <b>trunk/DictionaryForMIDs-Creator</b>.
+	During the build process, the sources for DictionaryForMIDs, JavaSE and JavaME are expected to be respectively in
+	<b>trunk/DictionaryForMIDs</b>, <b>trunk/JavaSE</b> and <b>trunk/JavaME</b>. Otherwise, the build will fail!
+	The best way to be sure that you got everything right is to keep the directory tree after checking the
+	DictionaryForMIDs repository out.
 </ul>
 <p><b>Building the tools and applications with build.xml</b></p>
 <p>Due to the complexity of DictionaryForMIDs-Creator, the only supported build
 method is through the use of either the build.xml file that in under the directory
-trunk/Build or the one that is specific to DfM-Creator; that one in located in
-trunk/DictionaryForMIDs-Creator/DfM-Creator-Build. Its name is also build.xml.<br>
-You must have Apache-Ant and Antenna (preferably the latest versions). Antenna
-is already present in the above mentioned 2 build directories.</p>
-<p>Before proceeding to the building, you must:</p>
+<b>trunk/Build</b> or the one that is specific to DfM-Creator; that one in located in
+<b>trunk/DictionaryForMIDs-Creator/DfM-Creator-Build</b>. Its name is also <b>build.xml</b>.<br>
+You must have Apache-Ant and Antenna (preferably the latest versions).<br>
+Antenna is already present in the above mentioned 2 build directories.</p>
+<p>Before proceeding to the build, you must:</p>
 <ul>
   <li>
-Let the file build.xml in its build directory
+	Let the file build.xml in its build directory
   </li>
   <li>
-Have Oracle Java ME SDK 3.0 installed or Sun Java Wireless Toolkit 2.5.2<br>
-(can be downloaded somewhere at
-<a href="http://java.sun.com/javame/index.jsp">
-http://java.sun.com/javame/index.jsp</a>) 
+	Have Oracle Java ME SDK 3.0 installed or Sun Java Wireless Toolkit 2.5.2<br>
+	(can be downloaded somewhere at	<a href="http://java.sun.com/javame/index.jsp">
+	http://java.sun.com/javame/index.jsp</a>) 
   </li>
   <li>
-Set wtk.home to your WTK installation directory 
+	Set wtk.home to your WTK installation directory 
   </li>
-Have Apache Ant installed on your system (in the PATH)
+	Have Apache Ant installed on your system (in the PATH)
   </li>
   <li>
-Have antenna-bin-xxx.jar in the build directory (build directory has a version
-of antenna but it is most of the time outdated.)
+	Have antenna-bin-xxx.jar in the build directory (build directory has a version
+	of antenna but it is most of the time outdated.)
   </li>
 </ul>
 <p>Important note: the source files are UTF-8 encoded. If you are using the old 

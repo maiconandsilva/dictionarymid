@@ -1259,7 +1259,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }//GEN-LAST:event_UTFRBActionPerformed
 
     private void proceedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedButtonActionPerformed
-        DictdConvProceedAll();
+        DictdConvDoAll();
     }//GEN-LAST:event_proceedButtonActionPerformed
 
     private void clearFieldsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFieldsButtonActionPerformed
@@ -1276,7 +1276,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void GenDictFilesBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenDictFilesBTActionPerformed
-        DictGenProceedAll();
+        DictGenDoAll();
     }//GEN-LAST:event_GenDictFilesBTActionPerformed
 
     private void SourceFileBrowseBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SourceFileBrowseBTActionPerformed
@@ -1326,7 +1326,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
    }//GEN-LAST:event_dictdconvMenuActionPerformed
 
     private void miProceedConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miProceedConvertActionPerformed
-        DictdConvProceedAll();
+        DictdConvDoAll();
     }//GEN-LAST:event_miProceedConvertActionPerformed
 
     private void miEditSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditSettingsActionPerformed
@@ -1338,7 +1338,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        JarCreatorProceedAll();
+        JarCreatorDoAll();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1355,7 +1355,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        DictGenProceedAll();
+        DictGenDoAll();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -1367,7 +1367,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        JarCreatorProceedAll();
+        JarCreatorDoAll();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1434,17 +1434,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         fontTK.clearFields();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
-    /**
-     * printCopyrightNotice() prints a copyright
-     * statement and the exits.
-     */
-    public static void printCopyrightNotice(){
-    System.out.println("\n\nDictionaryForMIDs-Creator V" + dfm_creator_version + ","
-                    + "(C) 2012 Karim Mahamane Karimou\n"
-                    + "DictionaryForMIDs-Creator comes with ABSOLUTELY NO WARRANTY.\n"
-                    + "This is free software, and you are welcome to redistribute it\n"
-                    + "under the terms and conditions of the GNU General Public License.\n\n");
-    }
     
     /**
      * @param args the command line arguments
@@ -1612,6 +1601,17 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * 
      */
     
+    /**
+     * printCopyrightNotice() prints a copyright
+     * statement and then exits.
+     */
+    public static void printCopyrightNotice(){
+    System.out.println("\n\nDictionaryForMIDs-Creator V" + dfm_creator_version + ","
+                    + "(C) 2012 Karim Mahamane Karimou\n"
+                    + "DictionaryForMIDs-Creator comes with ABSOLUTELY NO WARRANTY.\n"
+                    + "This is free software, and you are welcome to redistribute it\n"
+                    + "under the terms and conditions of the GNU General Public License.\n\n");
+    }
     
     /**
      * addFontTKToDfMCreatorTabbedPane()
@@ -1620,7 +1620,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * write a new GUI from scratch for the BitmapFontGenerator. So, i decided
      * to modify the FontToolkit and integrate it in the DfM-Creator.
      * The code below does what's necessary to get the FontToolkit to
-     * work with the DfM-Creator. 
+     * work with the DictionaryForMIDs-Creator. 
      */
     private void addFontTKToDfMCreatorTabbedPane() {
         // Creating a toolbar
@@ -1758,7 +1758,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     /**
      * OwnTextFieldCheck() checks if the "Choose Your Own"
      * radio button is selected in order to enable/disable
-     * the little text area that enables the user to provide
+     * the little text area that lets the user provide
      * her own choice instead of the ones given by default.
      */
     private void OwnTextFieldCheck(){
@@ -2038,7 +2038,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * things needed to be done in order to
      * convert a dict file with DictdToDfM.
      */
-    private void DictdConvProceedAll() {
+    private void DictdConvDoAll() {
         try {
             setDictdToDfMVals();
             DictdToDfM.printDictdConvSummary();            
@@ -2117,7 +2117,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }
     
     /**
-     * editExistingPropFile() Edits and existing
+     * editExistingPropFile() Edits an existing
      * DictionaryForMIDs.properties file.
      */
     public void editExistingPropFile(){
@@ -2226,7 +2226,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * DictionaryGeneration. it's like the
      * actionPerformed subroutine for dictgen.
      */
-    private void DictGenProceedAll() {
+    private void DictGenDoAll() {
         try {
             setDictGenVals();
             DictionaryGeneration.showDictGenSummary();
@@ -2379,7 +2379,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * JarCreator. it's like the actionPerformed
      * subroutine for JarCreator.
      */
-    private void JarCreatorProceedAll() {
+    private void JarCreatorDoAll() {
         try {
             setJCVals();
             JarCreator.showJarCreationSum();

@@ -1688,7 +1688,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
    }//GEN-LAST:event_minNumEntPerDictFileSLPropertyChange
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        showContentPropsEditor();
+        showContentPropsCreator();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -1970,11 +1970,20 @@ public class PropertiesEditor extends javax.swing.JFrame {
         dictGenOmitParCB.setSelected(false);
     }
     
+    /**
+     * showMoreInfo() shows some extra information about the properties.
+     */
     private void showMoreInfo(){
         JOptionPane.showMessageDialog(ppWin, moreInfo, I18n.tr("additionalInfo.dfmPropCreate"),
                                                        JOptionPane.INFORMATION_MESSAGE);
     }
     
+    /**
+     * editExistingPropFile() launches a file open dialog in order to let
+     * the user choose a DictionaryForMIDs.properties file that the user
+     * wishes to edit and then launches the PropertiesPreview window. The
+     * user can then edit the file manually and then save it.
+     */
     public void editExistingPropFile(){
         try {
             if (openPropFile()){
@@ -1993,6 +2002,9 @@ public class PropertiesEditor extends javax.swing.JFrame {
         
     }
     
+    /**
+     * showSamplePropFile() shows a sample DictionaryForMIDs.proerties file.
+     */
     public void showSamplePropFile(){
         JOptionPane.showMessageDialog(ppWin, samplePropertyFile, I18n.tr("samplePropsWinTitle.dfmPropCreate"),
                                                                 JOptionPane.PLAIN_MESSAGE);
@@ -2034,7 +2046,12 @@ public class PropertiesEditor extends javax.swing.JFrame {
         return fileChose;
     }
     
-
+    /**
+     * viewAndOrEdit() launches the PropertiesPreview window with the values
+     * selected/entered by the user in the PropertiesEditor. Here also the user
+     * can edit the file manually before saving it. Note that the name of the file is
+     * automatically set by the PropertiesPreview and is DictionaryForMIDs.properties.
+     */
     public void viewAndOrEdit(){        
         try {
             validateValues();
@@ -2049,6 +2066,10 @@ public class PropertiesEditor extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * validateValues() validates the values entered by the user in the PropertiesEditor.
+     * Checks if the required values are all provides, if some TextFields are empty or not and so forth.
+     */
     private void validateValues() {
 	if ("".equals(infoTextTA.getText()) || "".equals(dictAbbrevTF.getText()) ||
             "".equals(langDispTextTF1.getText()) || "".equals(langDispTextTF2.getText()) ||
@@ -2212,6 +2233,10 @@ public class PropertiesEditor extends javax.swing.JFrame {
         }       
     }
     
+    /**
+     * setValuesInPropTextArea() sets the values entered/selected by the user in
+     * the PropertiesPreview window.
+     */
     private void setValuesInPropTextArea(){
         // passing values to the textarea for preview before saving.
         // General values (general to all languages)
@@ -2542,7 +2567,10 @@ public class PropertiesEditor extends javax.swing.JFrame {
     }
     
 
-
+    /**
+     * updateNumOfLang() updates/shows/hides some values/TextFields/CheckBoxes etc.
+     * according to the number of languages selected in the <b>numOfLangCmbBox</b> ComboBox.
+     */
     public void updateNumOfLang() {        
         if (numOfLangCmbBox.getSelectedItem().equals("2")){          
             // textareas combo boxes...
@@ -2678,6 +2706,12 @@ public class PropertiesEditor extends javax.swing.JFrame {
     + "language1DictionaryUpdateClassName: de.kugihan.dictionaryformids.dictgen.\ndictionaryupdate.DictionaryUpdateFreedictDeuEngGer\n"
     + "language1NormationClassName: de.kugihan.dictionaryformids.translation.\nnormation.Normation.NormationEng\n";
 
+    /**
+     * getInputOptionDialog() shows the InputDialog window.
+     * @param label
+     * @param winTitle
+     * @return String <i>S</i>
+     */
     public static String getInputOptionDialog(String label, String winTitle) {
             Object[] possibilities = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
             String s = (String)JOptionPane.showInputDialog(
@@ -2691,7 +2725,10 @@ public class PropertiesEditor extends javax.swing.JFrame {
             return s;
     }
 
-    private void showContentPropsEditor(){
+    /**
+     * showContentPropsCreator() shows the ContentProperties-Creator window.
+     */
+    private void showContentPropsCreator(){
         ContentPropertiesCreator CPEdit = ContentPropertiesCreator.getContentPropsEditor();
         CPEdit.setSize(1100, 500);
         CPEdit.setLocation(screenSize.width / 2 - CPEdit.getWidth() / 2,
@@ -2701,6 +2738,14 @@ public class PropertiesEditor extends javax.swing.JFrame {
         CPEdit.setVisible(true);
     }
 
+    /**
+     * checkInfoTextContents() checks the content of the InfoText TextField
+     * to match it against the regular expression patterns present in the
+     * RegexpUtils class in order to make sure the user provided a URL or an
+     * email address for the maintainer(s) of the dictionary file that is about
+     * to be set up in the empty DictionaryForMIDs.jar/jad files.
+     * @throws IllegalArgumentException 
+     */
     private void checkInfoTextContents() throws IllegalArgumentException {
         String s = infoTextTA.getText();
         boolean v;

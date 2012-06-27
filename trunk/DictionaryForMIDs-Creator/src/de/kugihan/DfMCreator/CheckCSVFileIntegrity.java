@@ -326,8 +326,8 @@ public class CheckCSVFileIntegrity extends javax.swing.JFrame implements Propert
     }
     
     /**
-     * Copied from DictionaryGeneration in order to adapt it
-     * to the GUI DfM-Creator. Checks a CSV file's integrity.
+     * checkCsvFileFormat() Copied from DictionaryGeneration in order
+     * to adapt it to the GUI DfM-Creator. Checks a CSV file's integrity.
      * @param csvFileName the input csv-file's name.
      * @throws DictionaryException
      * @throws IOException 

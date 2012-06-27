@@ -40,10 +40,10 @@ you will need to setup your dictionary files a little differently.</p>
 
 <p>Instead of using a single input dictionary file, you will use 2 input files, 
 one for the ABC to XYZ translation, and one for the XYZ to DEF translation.&nbsp; 
-Then you will run the DictionaryGeneration tool 2 times.&nbsp; Here are the 
-details of the process.</p>
+Then you will run DictionaryGeneration within the DictionaryForMIDs-Creator
+2 times.&nbsp; Here are the details of the process.</p>
 
-<h3>Step 1: Run the DictionaryGeneration tool</h3>
+<h3>Step 1: Run DictionaryGeneration</h3>
 
 <ul>
 	<li>generate 2 input dictionary files (both files should have the languages 
@@ -73,7 +73,7 @@ details of the process.</p>
 </pre>
 
 <ul>
-	<li>run the DictionaryGeneration tool for 1st input dictionary file</li>
+	<li>run DictionaryGeneration for 1st input dictionary file</li>
 </ul>
 
 <ul>
@@ -83,11 +83,13 @@ details of the process.</p>
 </ul>
 
 <ul>
-	<li>make a new &quot;dictionary&quot; directory in the same place as the old directory</li>
+	<li>DictionaryForMIDs-Creator will automatically create a new &quot;dictionary&quot;
+	directory in the same place as the old directory if the output directory for the
+	2 dictionaries you provided is the same.</li>
 </ul>
 
 <ul>
-	<li>change these properties in your DictionaryForMIDs.properties file:</li>
+	<li>change these properties in your DictionaryForMIDs.properties file manually:</li>
 </ul>
 
 <pre>
@@ -98,7 +100,7 @@ details of the process.</p>
 </pre>
 
 <ul>
-	<li>run the DictionaryGeneration tool again for 2nd input dictionary file</li>
+	<li>run DictionaryGeneration again for 2nd input dictionary file</li>
 </ul>
 
 <ul>
@@ -121,7 +123,7 @@ except for the &quot;DictionaryForMIDs.properties&quot; file (For example: from
 <ul>
 	<li>look at the DictionaryForMIDs.properties files for both outputs.&nbsp; Find 
 	the bigger number from both files and enter it into your final 
-	DictionaryForMIDs.properties file:</li>
+	DictionaryForMIDs.properties file manually also:</li>
 </ul>
 
 <pre>
@@ -140,7 +142,7 @@ except for the &quot;DictionaryForMIDs.properties&quot; file (For example: from
 	language2IndexNumberOfSourceEntries
 </pre>
 
-<h3>Step 3: Run the JarCreator tool</h3>
+<h3>Step 3: Run JarCreator to pack the generated dictionary files in the empty DictionaryForMIDs.jar/jad</h3>
 
 </div>
 </body>
