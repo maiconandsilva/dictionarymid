@@ -116,7 +116,7 @@ public class HelpContents extends JPanel
     }
 
     private void initHelp() {
-        String s = path + "Help.html";
+        String s = path + "index.html";
         helpURL = getClass().getResource(s);
         if (helpURL == null) {
             System.err.println(I18n.tr("couldntFindHelFile") + " " + s);
@@ -170,7 +170,7 @@ public class HelpContents extends JPanel
         DefaultMutableTreeNode docCategory = null;
         DefaultMutableTreeNode book = null;
 
-        guiCategory = new DefaultMutableTreeNode("DfM-Creator - Quick Guide");
+        guiCategory = new DefaultMutableTreeNode("Quick Tour");
         top.add(guiCategory);
         
 	// GUI Documentation category
