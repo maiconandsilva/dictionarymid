@@ -301,7 +301,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         ButtonsPanel.add(clearFieldsButton);
-        clearFieldsButton.setBounds(60, 18, 207, 30);
+        clearFieldsButton.setBounds(60, 18, 207, 29);
 
         proceedButton.setText(I18n.tr("proceed.dfmCreatorMain")); // NOI18N
         proceedButton.addActionListener(new java.awt.event.ActionListener() {
@@ -310,7 +310,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         ButtonsPanel.add(proceedButton);
-        proceedButton.setBounds(60, 52, 207, 30);
+        proceedButton.setBounds(60, 52, 207, 29);
 
         EncodingPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         EncodingPanel.setLayout(null);
@@ -398,10 +398,10 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         ISO1Label.setText("ISO-8859-1");
         ISO1Label.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 ISO1LabelAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -465,11 +465,11 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         DBPanel.add(DBBrowseButton);
-        DBBrowseButton.setBounds(550, 40, 36, 30);
+        DBBrowseButton.setBounds(550, 40, 36, 29);
         DBPanel.add(DBNameTextField);
         DBNameTextField.setBounds(270, 5, 150, 28);
         DBPanel.add(DBPathTextField);
-        DBPathTextField.setBounds(270, 40, 275, 28);
+        DBPathTextField.setBounds(270, 40, 275, 27);
 
         DBBrowseLabel.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         DBPanel.add(DBBrowseLabel);
@@ -483,7 +483,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         DBPanel.add(OutCVSFilePathLabel);
         OutCVSFilePathLabel.setBounds(5, 75, 250, 20);
         DBPanel.add(OutCSVFileTextField);
-        OutCSVFileTextField.setBounds(270, 75, 275, 28);
+        OutCSVFileTextField.setBounds(270, 75, 275, 27);
 
         OutCSVFileBrowseLabel.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         DBPanel.add(OutCSVFileBrowseLabel);
@@ -496,7 +496,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         DBPanel.add(OutCSVFileBrowseButton);
-        OutCSVFileBrowseButton.setBounds(550, 75, 36, 30);
+        OutCSVFileBrowseButton.setBounds(550, 75, 36, 29);
 
         DBNameLabel.setText(I18n.tr("dbName.dfmCreatorMain")); // NOI18N
         DBPanel.add(DBNameLabel);
@@ -577,7 +577,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         SLLabel.setText(I18n.tr("switchLang.dfmCreatorMain")); // NOI18N
         SLPanel.add(SLLabel);
-        SLLabel.setBounds(30, 5, 325, 18);
+        SLLabel.setBounds(30, 5, 325, 17);
 
         KTLabel.setText(I18n.tr("keepTab.dfmCreatorMain")); // NOI18N
         KTLabel.setMaximumSize(new java.awt.Dimension(250, 50));
@@ -588,7 +588,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         RSBLabel.setText(I18n.tr("removeSquare.dfmCreatorMain")); // NOI18N
         SLPanel.add(RSBLabel);
-        RSBLabel.setBounds(30, 70, 325, 18);
+        RSBLabel.setBounds(30, 70, 325, 17);
 
         SLCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -651,9 +651,9 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             dictdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dictdPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(toolbar4, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(toolbar4, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DBPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addComponent(DBPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dictdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(SCPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
@@ -662,7 +662,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 .addGroup(dictdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ButtonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(SLPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         DictdConvPanel.add(dictdPanel, java.awt.BorderLayout.CENTER);
@@ -676,31 +676,31 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         jPanel1.add(SourceFileLabel);
         SourceFileLabel.setBounds(5, 5, 240, 36);
         jPanel1.add(SourceFileTF);
-        SourceFileTF.setBounds(250, 5, 300, 28);
+        SourceFileTF.setBounds(250, 5, 300, 27);
 
         DirectoryDestinationLabel.setText(I18n.tr("dictGenLabel3.dfmCreatorMain")); // NOI18N
         jPanel1.add(DirectoryDestinationLabel);
         DirectoryDestinationLabel.setBounds(5, 110, 240, 18);
         jPanel1.add(DirectoryDestinationTF);
-        DirectoryDestinationTF.setBounds(250, 110, 300, 28);
+        DirectoryDestinationTF.setBounds(250, 110, 300, 27);
 
         PropertyPathLabel.setText(I18n.tr("dictGenLabel2.dfmCreatorMain")); // NOI18N
         jPanel1.add(PropertyPathLabel);
         PropertyPathLabel.setBounds(5, 55, 240, 36);
         jPanel1.add(PropertyPathTF);
-        PropertyPathTF.setBounds(250, 55, 300, 28);
+        PropertyPathTF.setBounds(250, 55, 300, 27);
 
         SourceFileBrowseLB.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel1.add(SourceFileBrowseLB);
-        SourceFileBrowseLB.setBounds(600, 10, 130, 18);
+        SourceFileBrowseLB.setBounds(600, 10, 130, 17);
 
         DirectoryDestinationBrowseLB.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel1.add(DirectoryDestinationBrowseLB);
-        DirectoryDestinationBrowseLB.setBounds(600, 115, 130, 18);
+        DirectoryDestinationBrowseLB.setBounds(600, 115, 130, 17);
 
         PropertyPathBrowseLB.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel1.add(PropertyPathBrowseLB);
-        PropertyPathBrowseLB.setBounds(600, 65, 130, 18);
+        PropertyPathBrowseLB.setBounds(600, 65, 130, 17);
 
         SourceFileBrowseBT.setText("...");
         SourceFileBrowseBT.addActionListener(new java.awt.event.ActionListener() {
@@ -709,7 +709,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel1.add(SourceFileBrowseBT);
-        SourceFileBrowseBT.setBounds(560, 5, 36, 30);
+        SourceFileBrowseBT.setBounds(560, 5, 36, 29);
 
         DirectoryDestinationBrowseBT.setText("...");
         DirectoryDestinationBrowseBT.addActionListener(new java.awt.event.ActionListener() {
@@ -718,7 +718,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel1.add(DirectoryDestinationBrowseBT);
-        DirectoryDestinationBrowseBT.setBounds(560, 110, 36, 30);
+        DirectoryDestinationBrowseBT.setBounds(560, 110, 36, 29);
 
         PropertyPathBT.setText("...");
         PropertyPathBT.addActionListener(new java.awt.event.ActionListener() {
@@ -727,7 +727,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel1.add(PropertyPathBT);
-        PropertyPathBT.setBounds(560, 55, 36, 30);
+        PropertyPathBT.setBounds(560, 55, 36, 29);
 
         jPanel5.setLayout(new java.awt.GridBagLayout());
         jPanel1.add(jPanel5);
@@ -820,7 +820,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         DFMBuilderTabbedPane.addTab("DictionaryGeneration", DictGenPanel);
@@ -856,31 +856,31 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(InputCSVFilesTF);
-        InputCSVFilesTF.setBounds(5, 45, 345, 28);
+        InputCSVFilesTF.setBounds(5, 45, 345, 27);
 
         jLabel2.setText(I18n.tr("jarCreatorLabel2.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel2);
         jLabel2.setBounds(5, 85, 310, 36);
         jPanel2.add(EmptyDfMDirTF);
-        EmptyDfMDirTF.setBounds(5, 125, 345, 28);
+        EmptyDfMDirTF.setBounds(5, 125, 345, 27);
 
         jLabel3.setText(I18n.tr("jarCreatorLabel3.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel3);
         jLabel3.setBounds(5, 170, 310, 18);
         jPanel2.add(OutputDirTF);
-        OutputDirTF.setBounds(5, 190, 345, 28);
+        OutputDirTF.setBounds(5, 190, 345, 27);
 
         jLabel4.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(365, 170, 100, 18);
+        jLabel4.setBounds(365, 170, 100, 17);
 
         jLabel5.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(365, 105, 100, 18);
+        jLabel5.setBounds(365, 105, 100, 17);
 
         jLabel6.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(365, 25, 100, 18);
+        jLabel6.setBounds(365, 25, 100, 17);
 
         InputCSVFilesButton.setText("...");
         InputCSVFilesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -889,7 +889,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(InputCSVFilesButton);
-        InputCSVFilesButton.setBounds(365, 45, 47, 30);
+        InputCSVFilesButton.setBounds(365, 45, 47, 29);
 
         EmptyDfMDirButton.setText("...");
         EmptyDfMDirButton.addActionListener(new java.awt.event.ActionListener() {
@@ -898,7 +898,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(EmptyDfMDirButton);
-        EmptyDfMDirButton.setBounds(365, 125, 47, 30);
+        EmptyDfMDirButton.setBounds(365, 125, 47, 29);
 
         OutputDirButton.setText("...");
         OutputDirButton.addActionListener(new java.awt.event.ActionListener() {
@@ -907,7 +907,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(OutputDirButton);
-        OutputDirButton.setBounds(365, 190, 47, 30);
+        OutputDirButton.setBounds(365, 190, 47, 29);
 
         jButton4.setText(I18n.tr("packCSVFiles.dfmCreatorMain")); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -951,10 +951,10 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             JarCreatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JarCreatorPanelLayout.createSequentialGroup()
                 .addGap(67, 67, 67)
-                .addComponent(toolbar2, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(toolbar2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         DFMBuilderTabbedPane.addTab("JarCreator", JarCreatorPanel);
@@ -1041,10 +1041,20 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem9.setText(I18n.tr("editAnExistingProp.normal.dfmCreatorMain")); // NOI18N
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         dictGenMenu.add(jMenuItem9);
 
         jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem10.setText(I18n.tr("checkCSVFile.normal.dfmCreatorMain")); // NOI18N
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         dictGenMenu.add(jMenuItem10);
 
         dfmBuilderMenuBar.add(dictGenMenu);
@@ -1433,6 +1443,14 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         fontTK.clearFields();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        editExistingPropFile();
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        showCSVFileCheckWin();
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     
     /**

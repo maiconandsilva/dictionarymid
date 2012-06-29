@@ -21,7 +21,7 @@ these other sources. Thanks to the jDictd author, TextIO author ;-)
 
 package de.kugihan.dictionaryformids.dictdtodictionaryformids;
 
-import edu.hws.eck.mdb.*;
+import edu.hws.eck.mdb.TextIO.*;
 
 import java.io.*;
 import java.io.FileOutputStream;

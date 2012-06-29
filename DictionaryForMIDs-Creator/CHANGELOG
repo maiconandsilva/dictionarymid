@@ -1,0 +1,22 @@
+January 2012:
+DictionaryForMIDs-Creator development started.
+
+February 2012:
+Version 0.1:
+-The DictdToDictionaryForMIDs tab (GUI) was created.
+
+Version 0.2:
+-The DictionaryGeneration tab (GUI) was created.
+
+Version 0.3:
+-The JarCreator tab (GUI) was created.
+
+Version 0.4 prerelease:
+-The BitmapFontGenerator tab (GUI) was loaded from the FontToolkit class.
+
+From February to June, tremendous work started as the actual coding, testing
+finding bugs, fixing them...went on for almost 4months
+
+29 June 2012:
+Version 0.4 Beta came up:
+Sources uploaded in the Subversion repository of the DictionaryForMIDs project.
