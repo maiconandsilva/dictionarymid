@@ -21,8 +21,7 @@ javac.encoding=UTF-8
 	<property name="wtk.midp.version"  			value="2.0"/>
 	<property name="wtk.optionalpda.enabled"  	value="true"/>
 
-	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-1.1.0-sdk30.jar"/> <!-- This is a patched version of -->
-							  <!-- antenna: see http://eriksdiary.blogspot.com/2009/07/antenna-suport-for-java-me-sdk-30.html --> 
+	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-1.2.1-beta.jar"/> 
 	
     <property name="VersionNumber" 		value="3.5.8"/>	<!-- version of tools / applications -->
 	<property name="VersionStatus" 		value="final"/>	 <!--  e.g. "beta", "testversion 2"  -->
@@ -32,7 +31,6 @@ javac.encoding=UTF-8
 
   	<property name="Build" 				location="."/> 				<!-- current directory -->
   	<property name="Build.buildfile" 	location="${Build}/${Build.buildfilename}"/> <!-- location of this file -->
-  	<property name="Build.antennafilename" value="antenna-bin-1.1.0-sdk30.jar"/> 		<!-- name of the antenna file -->
 	
   	<property name="DfM.inputbasedir" 	location="../DictionaryForMIDs"/>
   	<property name="DfM.outputbasedir" 	location="${Build}/DictionaryForMIDs"/>
@@ -100,7 +98,7 @@ javac.encoding=UTF-8
 	
 	
   	<!-- 
-  		DfMCreator
+  		DfM-Creator
   	-->
     <target name="dfm_creator_pre-init">
         <copy todir="${dfmc.classdir}/de/kugihan/I18n-L10n">
@@ -146,13 +144,11 @@ javac.encoding=UTF-8
 			<zipfileset file="${dfmc.jarfile}"/>
 			<zipfileset file="${dfmc_packaging.copyrightfile}"/>
 			<zipfileset file="${dfmc.outputbasedir}/${dfmc_packaging.subdir}/${dfmc_packaging.readmefilename}"/>
-			<zipfileset dir="${Build}" prefix="source/DictionaryForMIDs-Creator/DfM-Creator-build" includes="${Build.buildfilename}"/>
-			<zipfileset dir="${Build}" prefix="source/DictionaryForMIDs-Creator/DfM-Creator-build" includes="${Build.antennafilename}"/>
 			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs/src"/>
 			<zipfileset dir="${JavaSE.srcdir}" prefix="source/JavaSE/src"/>
 			<zipfileset dir="${JavaME.srcdir}" prefix="source/JavaME/src"/>
-			<zipfileset dir="${dfmc.srcdir}" prefix="source/DictionaryForMIDs-Creator/src"/>
-			<zipfileset dir="${dfmc.srcdir}" prefix="source/DictionaryForMIDs-Creator/res"/>
+			<zipfileset dir="${dfmc.inputbasedir}" prefix="source/DictionaryForMIDs-Creator"/>
+
 		</zip>
 	</target>
 	
