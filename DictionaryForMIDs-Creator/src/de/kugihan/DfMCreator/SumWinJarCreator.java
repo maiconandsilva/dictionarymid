@@ -35,6 +35,7 @@ import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.jarCreator.JarCreator;
 import edu.hws.eck.mdb.I18n;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -46,8 +47,15 @@ import javax.swing.SwingWorker;
 
 public class SumWinJarCreator extends javax.swing.JDialog implements PropertyChangeListener {
     
+    private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
     public static SumWinJarCreator getCJPWin(){
-        return new SumWinJarCreator();
+        SumWinJarCreator cjpw = new SumWinJarCreator();
+        cjpw.setSize(420, 400);
+        cjpw.setLocation(screenSize.width / 2 - cjpw.getWidth() / 2,
+                        screenSize.height / 2 - cjpw.getHeight() / 2);
+        cjpw.setModal(true);
+        return cjpw;
     }
     
     private Task task;

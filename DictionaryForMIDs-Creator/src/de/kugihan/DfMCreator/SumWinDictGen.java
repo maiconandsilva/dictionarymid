@@ -34,6 +34,7 @@ package de.kugihan.DfMCreator;
 import de.kugihan.dictionaryformids.dictgen.DictionaryGeneration;
 import edu.hws.eck.mdb.I18n;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -46,9 +47,16 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
     
     private static Task task;
     public static boolean done;
+    
+    private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
        
     public static SumWinDictGen getDictGenSummary(){
-        return new SumWinDictGen();
+        SumWinDictGen dgensum = new SumWinDictGen();
+        dgensum.setSize(380, 450);
+        dgensum.setModal(true);
+        dgensum.setLocation(screenSize.width / 2 - dgensum.getWidth() / 2,
+                          screenSize.height / 2 - dgensum.getHeight() / 2);
+        return dgensum;
     }
 
     /**

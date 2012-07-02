@@ -32,6 +32,8 @@
 package de.kugihan.DfMCreator;
 
 import edu.hws.eck.mdb.I18n;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
@@ -165,9 +167,15 @@ public class PreferencesBox extends javax.swing.JFrame {
             }
         });
     }
-    
+
+    private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
     public static PreferencesBox getPrefsWin(){
-        return new PreferencesBox();
+        PreferencesBox prefs = new PreferencesBox();
+        //prefs.setSize(350, 400);
+        prefs.setLocation(screenSize.width / 2 - prefs.getWidth() / 2,
+                        screenSize.height / 2 - prefs.getHeight() / 2);
+        return prefs;
     }
     
 /**

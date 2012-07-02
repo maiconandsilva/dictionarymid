@@ -56,9 +56,6 @@ public class DictdToDfM {
         // method to retrieve the 00-header of dictd files.
         private static String header;
         
-        private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-
         /*
          * Getter methods for DictdToDfM class.
          */
@@ -142,10 +139,6 @@ public class DictdToDfM {
     // conversion.
     public static void printDictdConvSummary() {
         SumWinDictdToDfM summary = SumWinDictdToDfM.getInstance();
-        summary.setSize(425, 500);
-        summary.setModal(true);
-        summary.setLocation(screenSize.width / 2 - summary.getWidth() / 2,
-                          screenSize.height / 2 - summary.getHeight() / 2);
         summary.setVisible(true);
     }
         
