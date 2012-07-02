@@ -1,1 +1,0 @@
-build.xml included in this directory is used to build DfM-Creator with ant/antenna. Sometimes the build throught NetBeans fails. this one should always work if everything is set up correctly.
