@@ -185,7 +185,6 @@ DictionaryForMIDs-Creator, the default operation is
 		</antcall>
 	    <jar destfile="${DTDfM-CLI.jarfile}"  >
 	      	<fileset dir="${DTDfM-CLI.classdir}"      includes="de/kugihan/dictionaryformids/dictdtodictionaryformids/**"  />
-	      	<fileset dir="${DTDfM-CLI.classdir}"      includes="edu/hws/eck/mdb/**" />
 	      	<fileset dir="${DTDfM-CLI.classdir}"      includes="org/dict/**" />
 	      	<fileset dir="${DTDfM-CLI.outputbasedir}" includes="${dfmc_app.propertyfilename}"/>
 	      	<manifest>
