@@ -62,6 +62,8 @@ public class PropertiesPreview extends JDialog implements ActionListener {
     
     public JDialog PropFileView = new JDialog();
     
+    public JPanel panel = new JPanel();
+    
     public JTextPane propTextPane = new JTextPane();
     
     public JMenuBar menuBar = new JMenuBar();
@@ -95,12 +97,16 @@ public class PropertiesPreview extends JDialog implements ActionListener {
     }
         
     private void initComponents() {
-        PropFileView.setLayout(null);                
-        PropFileView.add(scrollpane);
-        PropFileView.add(saveButton);
-        PropFileView.add(editButton);
-        PropFileView.add(clearButton);
-        PropFileView.add(closeButton);
+        PropFileView.setLayout(null);
+        PropFileView.add(panel);
+        
+        panel.setBounds(0, 0, 500, 600);
+        panel.setLayout(null);
+        panel.add(scrollpane);
+        panel.add(saveButton);
+        panel.add(editButton);
+        panel.add(clearButton);
+        panel.add(closeButton);
         
         if (styledDoc instanceof AbstractDocument) {
             doc = (AbstractDocument)styledDoc;
@@ -135,7 +141,8 @@ public class PropertiesPreview extends JDialog implements ActionListener {
         propTextPane.setBackground(new java.awt.Color(225, 255, 190));
         PropFileView.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         
-        PropFileView.setSize(500, 600);
+        PropFileView.setPreferredSize(new Dimension(500, 650));
+        PropFileView.pack();
         PropFileView.setLocation(screenSize.width / 2 - PropFileView.getWidth() / 2,
                                screenSize.height / 2 - PropFileView.getHeight() / 2);
         PropFileView.setModal(true);

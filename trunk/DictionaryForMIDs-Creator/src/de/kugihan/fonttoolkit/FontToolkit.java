@@ -272,11 +272,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
     }
     
     public void showBFGsummary() {
-        SumWinBFG bfgSum = SumWinBFG.getBFGwindow(); 
-        bfgSum.setSize(400, 400);
-        bfgSum.setLocation(screenSize.width / 2 - bfgSum.getWidth() / 2,
-                           screenSize.height / 2 - bfgSum.getHeight() / 2);
-        
+        SumWinBFG bfgSum = SumWinBFG.getBFGwindow();        
         bfgSum.setVisible(true);
     }
     

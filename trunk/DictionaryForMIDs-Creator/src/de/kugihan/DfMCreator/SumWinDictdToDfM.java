@@ -34,6 +34,7 @@ package de.kugihan.DfMCreator;
 import de.kugihan.dictionaryformids.dictdtodictionaryformids.DictdToDfM;
 import edu.hws.eck.mdb.I18n;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
@@ -222,9 +223,15 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
+    private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public static SumWinDictdToDfM getInstance(){
-        return new SumWinDictdToDfM();
+        SumWinDictdToDfM summary = new SumWinDictdToDfM();
+        summary.setSize(425, 500);
+        summary.setModal(true);
+        summary.setLocation(screenSize.width / 2 - summary.getWidth() / 2,
+                          screenSize.height / 2 - summary.getHeight() / 2);
+        return summary;
     }
     
     /**

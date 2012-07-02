@@ -1709,9 +1709,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      */
     private void showPrefsWin(){
         PreferencesBox prefs = PreferencesBox.getPrefsWin();
-        prefs.setSize(350, 400);
-        prefs.setLocation(screenSize.width / 2 - prefs.getWidth() / 2,
-                        screenSize.height / 2 - prefs.getHeight() / 2);
         prefs.setVisible(true);
     }
     

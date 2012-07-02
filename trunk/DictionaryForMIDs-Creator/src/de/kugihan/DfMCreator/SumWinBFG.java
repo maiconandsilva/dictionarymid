@@ -32,6 +32,8 @@
 package de.kugihan.DfMCreator;
 
 import edu.hws.eck.mdb.I18n;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public class SumWinBFG extends javax.swing.JFrame {
 
@@ -106,9 +108,14 @@ public class SumWinBFG extends javax.swing.JFrame {
     private javax.swing.JTextArea textarea;
     // End of variables declaration//GEN-END:variables
 
-    
+    private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
     public static SumWinBFG getBFGwindow() {
-        return new SumWinBFG();
+        SumWinBFG bfgSum = new SumWinBFG();
+        bfgSum.setSize(400, 400);
+        bfgSum.setLocation(screenSize.width / 2 - bfgSum.getWidth() / 2,
+                           screenSize.height / 2 - bfgSum.getHeight() / 2);
+        return bfgSum;
     }
 
     /**

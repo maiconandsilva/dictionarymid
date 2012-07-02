@@ -67,10 +67,7 @@ public class DictionaryGeneration {
 	
 	// content parser object for syntax checking of content:
 	private static ContentParser contentParserObj;
-        
-        // Size of the Screen
-        private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        
+                
         // String message shown in case
         // java.lang.OutOfMemoryError occurs.
         private static final String OutOfMemErrMsg = I18n.tr("outOfMemoryMsg.dictGenSummary");
@@ -105,10 +102,6 @@ public class DictionaryGeneration {
     // before lauching the dictionary generation process.
     public static void showDictGenSummary(){
         SumWinDictGen dgensum = SumWinDictGen.getDictGenSummary();
-        dgensum.setSize(380, 450);
-        dgensum.setModal(true);
-        dgensum.setLocation(screenSize.width / 2 - dgensum.getWidth() / 2,
-                          screenSize.height / 2 - dgensum.getHeight() / 2);
         dgensum.setVisible(true);
     }
         

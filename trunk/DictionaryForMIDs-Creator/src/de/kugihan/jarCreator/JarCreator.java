@@ -51,8 +51,6 @@ public static final String EXTENSION_JAD = ".jad";
 public static final String FILE_EMPTY_JAR_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAR;
 public static final String FILE_EMPTY_JAD_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAD;
 
-private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
 private static String dictionarydirectory; 
 private static String emptydictionaryformids;
 private static String outputdirectory;
@@ -97,10 +95,6 @@ public static String getOutputDirectory(){
     // summarry before the actual jar creation.
     public static void showJarCreationSum(){
         SumWinJarCreator cjpw = SumWinJarCreator.getCJPWin();
-        cjpw.setSize(420, 360);
-        cjpw.setLocation(screenSize.width / 2 - cjpw.getWidth() / 2,
-                          screenSize.height / 2 - cjpw.getHeight() / 2);
-        cjpw.setModal(true);
         cjpw.setVisible(true);
     }
 
