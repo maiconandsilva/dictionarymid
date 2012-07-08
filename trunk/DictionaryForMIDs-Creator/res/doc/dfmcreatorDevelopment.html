@@ -5,10 +5,9 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" >
 		<meta http-equiv="Content-Style-Type" content="text/css">
 		<meta name="keywords" content="dictionary, language, MIDP, J2ME, Java, Midlet, mobile, cell phone, PDA">
-		<link rel="stylesheet" href="style.css" type="text/css">
+		<link rel="stylesheet" href="/style.css" type="text/css">
 <TITLE>DfM-Creator - What you need to graphically set your dictionaries up!</TITLE></HEAD>
 <BODY> 
-
 
 <!--
 <div id="w3c_valid">
@@ -21,11 +20,10 @@
 
 
 <div id="menu">
-  <iframe src="menu.html" width="95%" height="450" frameborder=0></iframe>
+  <iframe src="/menu.html" width="95%" height="450" frameborder=0></iframe>
 </div>
+<div id="content">
 -->
-
-
 
 <h2><a name="Design"></a>The DictionaryForMIDs-Creator Developper's Documentation</h2>
 <h3>Architecture</h3>
@@ -90,7 +88,7 @@
     </td>
   </tr>
 </table>
-<h2>Source code overview</h2>
+<h2 id="codeoverview">Source code overview</h2>
 <h3>DictionaryForMIDs-Creator</h3>
 <h4>Overview of the packages</h4>
 <p>
@@ -538,14 +536,14 @@ DictionaryGeneration and JarCreator.</p>
 <p><b>showPropWin()</b> shows the PropertiesEditor Window.</p>
 <p><b>showCSVFileCheckWin()</b> shows the csvfile check window.</p>
 
-<h2><a name="Source"></a>Getting the source code</h2>
+<h2 id="downloadsources">Getting the source code</h2>
 <p>You can download the current source code either from the Subversion
 repository or from this very page as a zip file or a GNU tarball.</p>
 <h3>Downloading the Source Code from SVN</h3>
 
 <p dir="ltr">The sources for DictionaryForMIDs-Creator are maintained in
 <a href="http://dictionarymid.svn.sourceforge.net">SourceForge SVN repository</a>.
-Read the description on how to <a href="SVNRepositoryAccess.html">access the 
+Read the description on how to <a href="/SVNRepositoryAccess.html">access the 
 DictionaryForMIDs SVN repository</a>.<br>
 You can also use the&nbsp; &quot;Download GNU tarball&quot; link on the
 <a href="http://dictionarymid.svn.sourceforge.net/viewvc/dictionarymid/trunk/">
@@ -558,7 +556,7 @@ contains probably always sources that are outdated. If you want to get
 the latest development sources always go to the Subversion repository.
 &nbsp;</p>
 
-<h3>Building the tools and applications</h3>
+<h3 id="buildprocess">Building the tools and applications</h3>
 <p>
 <b>Dependencies between the tools and applications</b></p>
 <p>The following dependencies exist between the tools and applications:</p>
@@ -611,7 +609,7 @@ javac.encoding=UTF-8<br>
 
 <pre>Written by Karim Mahamane,
 Author of DfM-Creator.
-Inspired by this <a href="development.html" >file</a>
+Inspired by this <a href="/development.html" >file</a>
 written by Gert Nuber,
 creator of DictionaryForMIDs.</pre>
 
