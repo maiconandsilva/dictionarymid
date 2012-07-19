@@ -61,44 +61,19 @@ javac.encoding=UTF-8
   	<property name="Build.buildfilename" value="build.xml"/>
 	
     <property name="DfM-Creator-Version" 		value="0.4"/>	<!-- DfM-Creator version -->
-	<property name="DfM-Creator-VersionStatus" 		value="Beta"/>	 <!--  e.g. "beta", "alpha"  -->
+	<property name="DfM-Creator-VersionStatus" 		value="Alpha"/>	 <!--  e.g. "beta", "alpha"  -->
     <condition property="DfM-Creator-AppVersion" 	value="${DfM-Creator-Version}_${DfM-Creator-VersionStatus}" else="${DfM-Creator-Version}">
     	<isset property="DfM-Creator-VersionStatus"/>
 	</condition>
 
 	<property name="dfmc.inputbasedir"  	location="../DictionaryForMIDs-Creator"/>
-	<property name="dfmc.outputbasedir"  location="${Build}/DictionaryForMIDs-Creator"/>
-	<property name="dfmc.srcdir"  		location="${dfmc.inputbasedir}/src"/>
-	<property name="dfmc.classdir"    	location="${dfmc.outputbasedir}/bin"/>
-	<property name="dfmc.jarfile"     	location="${dfmc.outputbasedir}/DfM-Creator.jar"/> 	
+	<property name="dfmc.outputbasedir"     location="${Build}/DictionaryForMIDs-Creator"/>
+	<property name="dfmc.srcdir"  		    location="${dfmc.inputbasedir}/src"/>
+	<property name="dfmc.classdir"    	    location="${dfmc.outputbasedir}/bin"/>
+	<property name="dfmc.jarfile"     	    location="${dfmc.outputbasedir}/DfM-Creator.jar"/> 	
 	
-	<property name="DTDfM-CLI.inputbasedir"  	location="../DictionaryForMIDs-Creator/DfM-Tools-CLI/DictdToDictionaryForMIDs"/>
-	<property name="DTDfM-CLI.outputbasedir"	location="${Build}/DictdToDictionaryForMIDs"/>
-	<property name="DTDfM-CLI.srcdir"  			location="${DTDfM-CLI.inputbasedir}/src"/>
-	<property name="DTDfM-CLI.classdir"    		location="${DTDfM-CLI.outputbasedir}/bin"/>
-	<property name="DTDfM-CLI.jarfile"     		location="${DTDfM-CLI.outputbasedir}/DictdToDictionaryForMIDs.jar"/>
-	
-	<property name="DG-CLI.inputbasedir"  		location="../DictionaryForMIDs-Creator/DfM-Tools-CLI/DictionaryGeneration"/>
-	<property name="DG-CLI.outputbasedir"  		location="${Build}/DictionaryGeneration"/>
-	<property name="DG-CLI.srcdir"  			location="${DG-CLI.inputbasedir}/src"/>
-	<property name="DG-CLI.classdir"    		location="${DG-CLI.outputbasedir}/bin"/>
-	<property name="DG-CLI.jarfile"     		location="${DG-CLI.outputbasedir}/DictionaryGeneration.jar"/>
-	
-	<property name="JC-CLI.inputbasedir"  	location="../DictionaryForMIDs-Creator/DfM-Tools-CLI/JarCreator"/>
-	<property name="JC-CLI.outputbasedir" 	location="${Build}/JarCreator"/>
-	<property name="JC-CLI.srcdir" 			location="${JC-CLI.inputbasedir}/src"/>
-	<property name="JC-CLI.classdir"    	location="${JC-CLI.outputbasedir}/bin"/>
-	<property name="JC-CLI.jarfile"     	location="${JC-CLI.outputbasedir}/JarCreator.jar"/>
-
-	<property name="BFG-CLI.inputbasedir"  	location="../DictionaryForMIDs-Creator/DfM-Tools-CLI/BitmapFontGenerator"/>
-	<property name="BFG-CLI.outputbasedir"  location="${Build}/BitmapFontGenerator"/>
-	<property name="BFG-CLI.srcdir"  		location="${BFG-CLI.inputbasedir}/src"/>
-	<property name="BFG-CLI.classdir"    	location="${BFG-CLI.outputbasedir}/bin"/>
-	<property name="BFG-CLI.jarfile"     	location="${BFG-CLI.outputbasedir}/fontgenerator.jar"/>
-	
-	
-  	<!-- 
-  		DfM-Creator
+	<!-- 
+        Compiling, building and packaging operations
   	-->
     <target name="dfm_creator_pre-init">
         <copy todir="${dfmc.classdir}/de/kugihan/I18n-L10n">
@@ -119,6 +94,7 @@ javac.encoding=UTF-8
 			<param name="destinationbasedir" 	value="${dfmc.outputbasedir}"/>
 		</antcall>
 	    <jar destfile="${dfmc.jarfile}"  >
+	      	<fileset dir="${dfmc.classdir}"      includes="cli/version/de/kugihan/**" />
 	      	<fileset dir="${dfmc.classdir}"      includes="de/kugihan/**" />
 	      	<fileset dir="${dfmc.classdir}"      includes="org/dict/**" />
 	      	<fileset dir="${dfmc.classdir}"      includes="edu/hws/eck/mdb/**" />
@@ -152,172 +128,8 @@ javac.encoding=UTF-8
 		</zip>
 	</target>
 	
- 	<!-- 
-  		DictdToDictionaryForMIDs
-  	-->
-	<target name="compile_dtdfm_cli">
-	    <mkdir dir="${DTDfM-CLI.classdir}"/>
-	    <javac srcdir="${DTDfM-CLI.srcdir}" encoding="UTF-8" destdir="${DTDfM-CLI.classdir}" debug="on"/>
-	</target>
-
-	<target name="build_dtdfm_cli" depends="compile_dtdfm_cli"> 
-		<antcall target="dfmc_create_application_property_file">
-			<param name="destinationbasedir" 	value="${DTDfM-CLI.outputbasedir}"/>
-		</antcall>
-	    <jar destfile="${DTDfM-CLI.jarfile}"  >
-	      	<fileset dir="${DTDfM-CLI.classdir}"      includes="de/kugihan/dictionaryformids/dictdtodictionaryformids/**"  />
-	      	<fileset dir="${DTDfM-CLI.classdir}"      includes="org/dict/**" />
-	      	<fileset dir="${DTDfM-CLI.outputbasedir}" includes="${dfmc_app.propertyfilename}"/>
-	      	<manifest>
-	        	<attribute name="Built-By" value="${user.name}"/>
-	        	<attribute name="(C)" value="2005 Gert Nuber, 2012 Karim Mahamane"/>
-	        	<attribute name="Main-Class" value="de.kugihan.dictionaryformids.dictdtodictionaryformids.DictdToDictionaryForMIDs"/>
-	      	</manifest>
-	    </jar>
-	</target>
-
-	<target name="package_dtdfm_cli" depends="build_dtdfm_cli">
-		<antcall target="cli_tools_replace_keywords_readme">
-			<param name="sourcebasedir" 		value="${DTDfM-CLI.inputbasedir}"/>
-			<param name="destinationbasedir" 	value="${DTDfM-CLI.outputbasedir}"/>
-		</antcall>
-		<property name="DTDfM-CLI.zipfile"	location="${DTDfM-CLI.outputbasedir}/DictionaryForMIDs_DictdToDictionaryForMIDs_${ApplicationVersion}.zip"/>
-		<zip destfile="${DTDfM-CLI.zipfile}">
-			<zipfileset file="${DTDfM-CLI.jarfile}"/>
-			<zipfileset file="${packaging.copyrightfile}"/>
-			<zipfileset file="${DTDfM-CLI.outputbasedir}/${dfmc_packaging.subdir}/${packaging.readmefilename}"/>
-			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
-			<zipfileset dir="${DTDfM-CLI.srcdir}" prefix="source/DictdToDictionaryForMIDs/src"/>
-		</zip>
-	</target>
-	
   	<!-- 
-  		DictionaryGeneration
-  	-->
-	<target name="compile_dg_cli" depends="compile_dfm_common,compile_dfm_java_se">
-	    <mkdir dir="${DG-CLI.classdir}"/>
-	    <javac srcdir="${DG-CLI.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${DG-CLI.classdir}" debug="on"/>
-	</target>
-	
-	<target name="build_dg_cli" depends="compile_dg_cli"> 
-		<antcall target="dfmc_create_application_property_file">
-			<param name="destinationbasedir" 	value="${DG-CLI.outputbasedir}"/>
-		</antcall>
-	    <jar destfile="${DG-CLI.jarfile}"  >
-	      	<fileset dir="${DfM.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${DG-CLI.classdir}"      includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${JavaSE.classdir}"  includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${DG-CLI.outputbasedir}" includes="${dfmc_app.propertyfilename}"  />
-	      	<manifest>
-	        	<attribute name="Built-By" value="${user.name}"/>
-	        	<attribute name="Created-By" value="Gert Nuber"/>
-	        	<attribute name="Main-Class" value="de.kugihan.dictionaryformids.dictgen.DictionaryGeneration"/>
-	      	</manifest>
-	    </jar>
-	</target>
-
-	<target name="package_dg_cli" depends="build_dg_cli">
-		<antcall target="cli_tools_replace_keywords_readme">
-			<param name="sourcebasedir" 		value="${DG-CLI.inputbasedir}"/>
-			<param name="destinationbasedir" 	value="${DG-CLI.outputbasedir}"/>
-		</antcall>
-		<property name="DG-CLI.zipfile"	location="${DG-CLI.outputbasedir}/DictionaryForMIDs_DictionaryGeneration_${ApplicationVersion}.zip"/>
-		<zip destfile="${DG-CLI.zipfile}">
-			<zipfileset file="${DG-CLI.jarfile}"/>
-			<zipfileset file="${packaging.copyrightfile}"/>
-			<zipfileset file="${DG-CLI.outputbasedir}/${dfmc_packaging.subdir}/${packaging.readmefilename}"/>
-			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
-			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs/src"/>
-			<zipfileset dir="${JavaSE.srcdir}" prefix="source/JavaSE/src"/>
-			<zipfileset dir="${DG-CLI.srcdir}" prefix="source/DictionaryGeneration/src"/>
-		</zip>
-	</target>
-	
-  	<!-- 
-  		JarCreator
-  	-->
-	<target name="compile_jc_cli" depends="compile_dfm_common,compile_dfm_java_se,compile_dfm_java_me">
-	    <mkdir dir="${JC-CLI.classdir}"/>
-	    <javac srcdir="${JC-CLI.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir};${JavaME.classdir}" encoding="UTF-8" destdir="${JC-CLI.classdir}" debug="on"/>
-	</target>
-
-	<target name="build_jc_cli" depends="compile_jc_cli"> 
-		<antcall target="dfmc_create_application_property_file">
-			<param name="destinationbasedir" 	value="${JC-CLI.outputbasedir}"/>
-		</antcall>
-	    <jar destfile="${JC-CLI.jarfile}"  >
-	      	<fileset dir="${DfM.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${JC-CLI.classdir}"      includes="de/kugihan/jarCreator/JarCreator.class"  />
-	      	<fileset dir="${JavaME.classdir}"  includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${JavaSE.classdir}"  includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${JC-CLI.outputbasedir}" includes="${dfmc_app.propertyfilename}"/>
-	      	<manifest>
-	        	<attribute name="Built-By" value="${user.name}"/>
-	        	<attribute name="Created-By" value="Mathis Karmann"/>
-	        	<attribute name="Main-Class" value="de.kugihan.jarCreator.JarCreator"/>
-	      	</manifest>
-	    </jar>
-	</target>
-
-	<target name="package_jc_cli" depends="build_jc_cli">
-		<antcall target="cli_tools_replace_keywords_readme">
-			<param name="sourcebasedir" 		value="${JC-CLI.inputbasedir}"/>
-			<param name="destinationbasedir" 	value="${JC-CLI.outputbasedir}"/>
-		</antcall>
-		<property name="JC-CLI.zipfile"	location="${JC-CLI.outputbasedir}/DictionaryForMIDs_JarCreator_${ApplicationVersion}.zip"/>
-		<zip destfile="${JC-CLI.zipfile}">
-			<zipfileset file="${JC-CLI.jarfile}"/>
-			<zipfileset file="${packaging.copyrightfile}"/>
-			<zipfileset file="${JC-CLI.outputbasedir}/${dfmc_packaging.subdir}/${packaging.readmefilename}"/>
-			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
-			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs/src"/>
-			<zipfileset dir="${JavaSE.srcdir}" prefix="source/JavaSE/src"/>
-			<zipfileset dir="${JC-CLI.srcdir}" prefix="source/JarCreator/src"/>
-		</zip>
-	</target>
-	
-  	<!-- 
-  		BitmapFontGenerator
-  	-->
-	<target name="compile_bfg_cli" depends="compile_dfm_common,compile_dfm_java_se">
-	    <mkdir dir="${BFG-CLI.classdir}"/>
-	    <javac srcdir="${BFG-CLI.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${BFG-CLI.classdir}" debug="on"/>
-	</target>
-	
-	<target name="build_bfg_cli" depends="compile_bfg_cli"> 
-		<antcall target="dfmc_create_application_property_file">
-			<param name="destinationbasedir" 	value="${BFG-CLI.outputbasedir}"/>
-		</antcall>
-	    <jar destfile="${BFG-CLI.jarfile}"  >
-	      	<fileset dir="${DfM.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${BFG-CLI.classdir}"      includes="de/kugihan/fonttoolkit/**"  />
-	      	<fileset dir="${JavaSE.classdir}"  includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${BFG-CLI.outputbasedir}" includes="${dfmc_app.propertyfilename}"/>
-	      	<manifest>
-	        	<attribute name="Built-By" value="${user.name}"/>
-	        	<attribute name="Created-By" value="Sean Kernohan"/>
-	        	<attribute name="Main-Class" value="de.kugihan.fonttoolkit.FontToolkit"/>
-	      	</manifest>
-	    </jar>
-	</target>
-
-	<target name="package_bfg_cli" depends="build_bfg_cli">
-		<antcall target="cli_tools_replace_keywords_readme">
-			<param name="sourcebasedir" 		value="${BFG-CLI.inputbasedir}"/>
-			<param name="destinationbasedir" 	value="${BFG-CLI.outputbasedir}"/>
-		</antcall>
-		<property name="BFG-CLI.zipfile"	location="${BFG-CLI.outputbasedir}/DictionaryForMIDs_BitmapFontGenerator_${ApplicationVersion}.zip"/>
-		<zip destfile="${BFG-CLI.zipfile}">
-			<zipfileset file="${BFG-CLI.jarfile}"/>
-			<zipfileset file="${packaging.copyrightfile}"/>
-			<zipfileset file="${BFG-CLI.outputbasedir}/${dfmc_packaging.subdir}/${packaging.readmefilename}"/>
-			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
-			<zipfileset dir="${BFG-CLI.srcdir}" prefix="source/BitmapFontGenerator/src"/>
-		</zip>
-	</target>	
-	
-  	<!-- 
-  		General operations...
+  		Other properties/operations...
   	-->  	
 		<property name="dfmc_packaging.subdir"  			value="${dfmc.inputbasedir}/res/README"/>
 		<property name="dfmc_packaging.readmefilename" 		value="README"/>
@@ -328,9 +140,9 @@ javac.encoding=UTF-8
 		<property name="dfmc.copyrightyear"  				value="2012"/>
   	
 	<target name="dfmc_replace_keywords_readme">
-	    <property name="destinationdir"  	location="${destinationbasedir}/${dfmc_packaging.subdir}"/>	 
-	    <property name="destinationfile" 	location="${destinationdir}/${dfmc_packaging.readmefilename}"/>
-	    <property name="sourcefile" 		location="${dfmc_packaging.subdir}/${dfmc_packaging.readmefilename}"/>
+	    <property name="destinationdir"  	                location="${destinationbasedir}/${dfmc_packaging.subdir}"/>	 
+	    <property name="destinationfile" 	                location="${destinationdir}/${dfmc_packaging.readmefilename}"/>
+	    <property name="sourcefile" 		                location="${dfmc_packaging.subdir}/${dfmc_packaging.readmefilename}"/>
 	    <mkdir dir="${destinationdir}"/>
 		<copy file="${sourcefile}" tofile="${destinationfile}"/>
 		<replace file="${destinationfile}">
@@ -349,21 +161,7 @@ javac.encoding=UTF-8
 		</propertyfile>
 	</target>
 	
-	<target name="cli_tools_replace_keywords_readme">
-	    <property name="destinationdir"  	location="${destinationbasedir}/${dfmc_packaging.subdir}"/>	 
-	    <property name="destinationfile" 	location="${destinationdir}/${dfmc_packaging.readmefilename}"/>
-	    <property name="sourcefile" 		location="${dfmc_packaging.subdir}/${dfmc_packaging.readmefilename}"/>
-	    <mkdir dir="${destinationdir}"/>
-		<copy file="${sourcefile}" tofile="${destinationfile}"/>
-		<replace file="${destinationfile}">
-			<replacefilter token="$PackageVersion$" 		value="${VersionNumber}"/>
-			<replacefilter token="$CopyrightYear$" 			value="${DfM.copyrightyear}"/>
-			<replacefilter token="$CopyrightGPLFilename$" 	value="${packaging.gplfilename}"/>
-			<replacefilter token="$CopyrightBy$" 			value="${DfM.team}"/>
-		</replace>
-	</target>  	
-
-  	<!-- 
+ 	<!-- 
 		###################### end DfM-Creator ######################
   	-->
 	
@@ -404,27 +202,11 @@ javac.encoding=UTF-8
 	    <delete dir="${dfmc.outputbasedir}"/>
 	</target>
 	
-	<target name="clean_jc_cli">
-	    <delete dir="${JC-CLI.outputbasedir}"/>
-	</target>
-	
-	<target name="clean_dg_cli">
-	    <delete dir="${DG-CLI.outputbasedir}"/>
-	</target>
-
-	<target name="clean_bfg_cli">
-	    <delete dir="${BFG-CLI.outputbasedir}"/>
-	</target>
-	
-	<target name="clean_dtdfm_cli">
-	    <delete dir="${DTDfM-CLI.outputbasedir}"/>
-	</target>
-
 	<target name="clean_lg">
 	    <delete dir="${LG.outputbasedir}"/>
 	</target>
 
-	<target name="clean_all" depends="clean_dfm,clean_java_se,clean_dfm_creator,clean_dtdfm_cli,clean_java_me,clean_jc_cli,clean_dg_cli,clean_bfg_cli,clean_lg">
+	<target name="clean_all" depends="clean_dfm,clean_java_se,clean_dfm_creator,clean_java_me,clean_lg">
 	</target>
 
   	<!-- 
@@ -679,11 +461,11 @@ javac.encoding=UTF-8
 		</propertyfile>
 	</target>
 		
-	<target name="build_all" depends="build_dg_cli,build_dtdfm_cli,build_jc_cli,build_bfg_cli,build_lg,build_dfm_java_se,build_dfm_java_me,build_dfm_creator"/>
+	<target name="build_all" depends="build_lg,build_dfm_java_se,build_dfm_java_me,build_dfm_creator"/>
 	
-	<target name="package_all" depends="package_dg_cli,package_jc_cli,package_bfg_cli,package_dtdfm_cli,package_lg,package_dfm_java_me_empty,package_dfm_java_se,package_dfm_creator"/>
+	<target name="package_all" depends="package_lg,package_dfm_java_me_empty,package_dfm_java_se,package_dfm_creator"/>
 
-    <target name="package_all_except_java_me" depends="package_dg_cli,package_jc_cli,package_bfg_cli,package_dtdfm_cli,package_lg,package_dfm_java_se,package_dfm_creator"/>
+    <target name="package_all_except_java_me" depends="package_lg,package_dfm_java_se,package_dfm_creator"/>
 
 </project>
 
