@@ -1,0 +1,43 @@
+Building the tools and applications with build.xml
+
+Due to the complexity of DictionaryForMIDs-Creator, the only supported build
+method is through the use of either the build.xml file that in under the
+directory trunk/Build or the one that is specific to DfM-Creator; that one
+in located in trunk/DictionaryForMIDs-Creator/DfM-Creator-Build.
+Its name is also build.xml.
+
+You must have Apache-Ant and Antenna (preferably the latest versions).
+Antenna is already present in the above mentioned 2 build directories.
+
+Before proceeding to the build, you must:
+
+    Let the file build.xml in its build directory
+    Have Oracle Java JDK-7u2 or later (can be downloaded somewhere at:
+    http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+    Have Oracle Java ME SDK 3.0 installed or Sun Java Wireless Toolkit 2.5.2
+    (can be downloaded somewhere at:
+    http://www.oracle.com/technetwork/java/javame/javamobile/download/sdk/index.html)
+    Set wtk.home to your WTK installation directory
+    Have Apache Ant installed on your system (in the PATH)
+    Have antenna-bin-xxx.jar in the build directory (build directory has a version
+    of antenna but it is most of the time outdated.)
+
+Important note: the source files are UTF-8 encoded. If you are using the old Sun WTK (for versions <= 2.5.2), you must set in the file ktools.properties (found somewhere under wtklib) the following property:
+javac.encoding=UTF-8
+
+== How to compile the sources ==
+
+Check out the whole source tree from SVN
+
+Edit Build/build.xml and change 
+<property name="wtk.home"  location="D:\WTK25"/>
+to the corrrect path
+
+$ cd Build
+$ ant
+
+now Build directory will contain the compiled result of all the sources.
+
+Full instructions can be found at http://dictionarymid.sourceforge.net/development.html#Source
+
+

@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+		<meta name="author" content="Karim" />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" >
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta name="keywords" content="dictionary, language, MIDP, J2ME, Java, Midlet, mobile, cell phone, PDA">
+		<link rel="stylesheet" href="/style.css" type="text/css">
+<TITLE>DfM-Creator - Download</TITLE>
+
+<style type="text/css">
+
+    h2.release-title {
+    	  font-family: monospace;
+        color: white;
+        background: black;
+        border: 3px solid white;
+        text-align: left;
+        padding: 0.1em;
+    }
+
+    div.pane { overflow: auto; }
+
+</style> 
+
+</HEAD>
+
+<BODY>
+
+<div id="w3c_valid">
+<p>
+    <a STYLE="COLOR: #000000;"  href="http://validator.w3.org/check?uri=referer"><img border="0"
+       src="http://www.w3.org/Icons/valid-xhtml10"
+       alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
+  </p>
+</div>
+
+<div id="menu">
+  <iframe src="/menu.html" width="95%" height="450" frameborder=0></iframe>
+</div>
+<div id="content">
+
+
+<h2>DfM-Creator Binaries Download</h2>
+
+<p>Download the latest stable binaries <a href="files/DfM-Creator.zip" >here</a></p>
+
+<font size="+2"><b>Changelog</b></font><br>
+
+<div style="display: block; height: 500px; width: 800px" class="pane" id="release-pane">
+        
+<h2 class="release-title">Release: 0.5 [19 July, 2012]</h2>
+
+<h3 class="category">New Features</h3>
+<ul>
+	<li>Merged the command line versions of DictdToDictionaryForMIDs, DictionaryGeneration,
+	BitmapFontGenerator and JarCreator into DfM-Creator.<br><br>
+	Its now possible to invoke the CLI versions of the above mentioned tools
+	from the command line by calling DfM-Creator in either of the following forms:<br>
+		<ul>
+			<li>java -jar DfM-Creator.jar -DictdToDictionaryForMIDs</li>
+			<li>java -jar DfM-Creator.jar -DictionaryGeneration</li>
+			<li>java -jar DfM-Creator.jar -FontGenerator</li>
+			<li>java -jar DfM-Creator.jar -JarCreator</li>
+		</ul>
+	</li>
+	<br>
+	
+	<!--
+	<li>Made DictdToDictionaryForMIDs tab generate .ini files from the database name
+		 and dict path entered by the user
+	</li>
+	<br>
+	<li>Made it possible to:
+		<ul>
+			<li>queue many dictd files to be converted</li>
+			<li>queue many csv files to be generated</li>
+			<li>queue many fonts to be generated</li>
+			<li>queue many jar files to be built</li>
+		</ul>	
+	</li>
+	<br>
+	<li>Made the PropertiesEditor able to load a properties file and make what's necessary
+	(fill the textAreas, check/uncheck the checkboxes, select items in comboboxes...) to edit the file
+	</li>
+	<br>
+	<li>Bundled custom font file and used it for the DfM-Creator.
+	Choosen font file is the Ubuntu font family. Looks pretty beautiful!
+	</li>
+	<br>
+	<li>Implemented Next/Previous buttons in the Help/Content window
+	</li>
+	<br>
+	<li>Implemented a "Choose language" tab in the preferences tabbed pane
+	</li>
+</ul>
+
+<h3 class="category">Bug Fixes</h3>
+<ul>
+	<li>Fixed the fact that DictdToDictionaryForMIDs introduces some nasty
+	characters while converting a dictionary from freedict.org
+	</li>
+	-->	
+	
+</ul>
+
+
+
+<h2 class="release-title">Release: 0.4 [29 June, 2012]</h2>
+<p>First official DfM-Creator release</p>
+
+<h3 class="category">Major Implemented Features:</h3>
+<ul>
+	<b>Now you can graphically:</b>
+	<li>Convert a Dictd file into the DictionaryForMIDs format</li>
+	<br>
+	<li>Generate dictionary files from the input file either provided by
+		 DictdToDictionaryForMIDs or manually created from Microsoft Excel or
+		 OpenOffice.org/LibreOffice's Calc
+	</li>
+	<br>
+	<li>Pack the generated dictionary files in some empty DictionaryForMIDs
+		 Jar/Jad files
+	</li>
+	<br>
+	<li>Create a DictionaryForMIDs.properties file with both the <b>PropertiesEditor</b>
+		 and the <b>ContentProperties-Creator</b> in an easy and pleasant way.
+	</li>
+	<br>
+	<li>Edit an existing DictionaryForMIDs.properties file in order to adapt it,
+	for instance, to another dictionary file.</li>
+	<br>
+	<li>Check the integrity of an existing CSV file (the input file for DictionaryGeneration)
+	</li>
+	<br>
+</ul>
+
+<h3 class="category">Known Bugs:</h3>
+<p>There is a known bug during the dictionary conversion (Bug-09062012).
+It happens during the conversion of some freedict.org bilingual dictionaries.
+The bug causes DictdToDictionaryForMIDs to write in the converted dictionary file
+a line like the following:
+</p>
+<p><i>&lt;pre&gt;	java.lang.NullPointerException at org.dict.kernel.Database.readAll(Database.java:395)
+at org.dict.kernel.Database.defineMatch(Database.java:52) at org.dict.kernel.DictEngine.defineMatch(DictEngine.java:72)
+at org.dict.kernel.DictEngine.lookup(DictEngine.java:149) (...) at java.lang.Thread.run(Thread.java:722)
+\n\nAvailable dictionaries: freedict-eng-fra&lt;/pre&gt;</i>
+</p>
+<p>
+This bug will be fixed in a future version of DictionaryForMIDs-Creator.
+For the time being, the only way to get rid of those nasties is to edit the converted file manually.
+So, if your input dictionary file is from freedict.org (is a freedict dictionary), open the converted
+file and remove the line starting from <i>&lt;pre&gt;</i> to <i>&lt;/pre&gt;</i> along with all the text
+between them. Be careful not to delete some text that actually belong to the dictionary.
+</p>
+
+
+<h2 class="release-title">Version: 0.4 Beta [April, 2012]</h2>
+<p>Made it possible to load the FontToolkit (the GUI that was created by Sean Kernohan for
+	FontGenerator) with some minor changes, into the BitmapFontGenerator tab of the DfM-Creator.</p>
+
+<h2 class="release-title">Version: 0.3 [March, 2012]</h2>
+<p>The JarCreator tab was created in the DfM-Creator.</p>
+
+<h2 class="release-title">Version: 0.2 [March, 2012]</h2>
+<p>The DictionaryGeneration tab was created in the DfM-Creator.</p>
+
+<h2 class="release-title">Version: 0.1 [January, 2012]</h2>
+<p>DfM-Creator development started.</p>
+<p>The DictdToDictionaryForMIDs tab was created in the DfM-Creator.</p>
+</div>
+
+<h2>DfM-Creator Sources Download</h2>
+
+<p>A zip file containing a stable release of DfM-Creator is available
+below. Please bear in mind that this zip file contains sometimes
+sources that are outdated. If you want to get the latest development
+sources, always go to the subversion repository. To check out the repository, code:<br>
+<code>svn co https://dictionarymid.svn.sourceforge.net/svnroot/dictionarymid dictionarymid</code>
+</p>
+
+<p>Download the latest stable sources <a href="files/DfM-Creator-src.zip" >here</a></p>
+<p>For a detailed information about the subversion repository of DictionaryForMIDs or how to build
+DictionaryForMIDs tools and applications, go <a href="dfmcreatorDevelopment.html#buildprocess">here</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</BODY>
+</HTML>
