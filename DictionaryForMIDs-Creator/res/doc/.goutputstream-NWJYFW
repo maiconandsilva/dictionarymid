@@ -1,0 +1,38 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta name="keywords" content="dictionary, language, MIDP, J2ME, Java, Midlet, mobile, cell phone, PDA">
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<title>DictionaryGeneration's (GUI) Documentation</title>
+	</head>
+
+<body>
+
+<h1>DictionaryGeneration GUI Documentation</h1>
+<p>After converting the dictionary file into a CSV file, you have to generate the dictionary files<br>
+into the format of DictionaryForMIDs. For that, you have to use DictionaryGeneration. Note that<br>
+before generating the files, you have to create a properties file (DictionaryForMIDs.properties).<br>
+To create such file you can use just about any text editor, but it is far more convenient to use the<br>
+application 'PropertiesEditor' included in DictionaryForMIDs-Creator. PropertiesEditor makes it<br>
+very easy and pleasant to create a properties file. Almost everything is there written for you,<br>
+you just have to choose among comboboxes, lists, checkboxes etc. and PropertiesEditor will write<br>
+the final DictionaryForMIDs.properties file for you.<br><br>
+
+<img src="images/CreateButton.png" alt="Create and Edit buttons" width="743" height="160"><br><br>
+Hit the <b>Create</b> button to launch the PropertiesEditor window.<br>
+Hit the <b>Edit...</b> button select a DictionaryForMIDs.properties<br>
+ the lauch the PropertiesEditor 
+
+
+</p>
+
+
+
+
+
+
+
+</body>
+</html>
