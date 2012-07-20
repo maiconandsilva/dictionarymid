@@ -31,8 +31,6 @@ package de.kugihan.dictionaryformids.dictdtodictionaryformids;
 import de.kugihan.DfMCreator.DfMCreatorMain;
 import de.kugihan.DfMCreator.SumWinDictdToDfM;
 import edu.hws.eck.mdb.I18n;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -41,8 +39,8 @@ import javax.swing.JOptionPane;
 
 public class DictdToDfM {
 
-	//public String versionNumber = "2.4.0";
-
+	public static String versionNumber = "2.5.0";
+        
 	private static String dbName;
 	private static String dbFolderName;
 	private static String outputCSVFile;
@@ -142,6 +140,40 @@ public class DictdToDfM {
         summary.setVisible(true);
     }
         
+	public static void main(String[] args) {
+		printCopyrightNotice();
+				
+	// Starting the interaction with the user.
+		printDBSetUpInfo();
+		dbName = TextIO.getlnWord();
+	
+		printDBFolderNamePrompt();
+		dbFolderName = TextIO.getlnWord();
+	
+		printOutputCSVfileNamePrompt();
+		outputCSVFile = TextIO.getlnWord();
+	
+		printSwitchLanguagesPrompt();
+		switchLanguages = TextIO.getlnBoolean();
+	
+		printKeepTabAndNewlineCharsPrompt();
+		keepTabAndNewLineChars = TextIO.getlnBoolean();
+	
+		printRemoveSquareBracketsPrompt();
+		removeSquareBrackets = TextIO.getlnBoolean();
+		
+		printOutputEncodingCharsetPrompt();
+		outputEncodingCharset = TextIO.getlnWord();
+	
+		printSeparatorCharacterPrompt();
+		separatorCharacter = TextIO.getAnyChar();
+                // End of the interaction.
+                
+                // Call the conversion subroutine
+                convert();
+        }
+		
+    
 	 
 	/*
 	 * 
@@ -152,7 +184,7 @@ public class DictdToDfM {
 	 
 	 public static void convert() {
 
-		try {
+            try {
                try (OutputStreamWriter outputWriter = new OutputStreamWriter(new FileOutputStream(outputCSVFile),
                     outputEncodingCharset)) {
                         org.dict.kernel.IDictEngine e =
@@ -226,7 +258,136 @@ public class DictdToDfM {
                         } 
 	}
         
-		
+	
+	static public void printCopyrightNotice() {
+            System.out.print(
+                "\n\nDictionaryForMIDs - DictdToDictionaryForMIDs Version " + versionNumber + "\n" +
+                "Copyright (C) 2005 Gert Nuber, 2012 Karim Mahamane Karimou\n\n" +
+
+                "DictdToDictionaryForMIDs is free software; you can redistribute it and/or modify\n" +
+                "it under the terms of the GNU General Public License as published by\n" +
+                "the Free Software Foundation; either version 2 of the License, or\n" +
+                "(at your option) any later version.\n\n" +
+
+                "DictdToDictionaryForMIDs is distributed in the hope that it will be useful,\n" +
+                "but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
+                "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
+                "GNU General Public License for more details.\n\n" +
+
+                "You should have received a copy of the GNU General Public License\n" +
+                "along with DictdToDictionaryForMIDs; if not, write to the Free Software Foundation,\n" +
+                "Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA\n" +
+                "For documentation and source code, see http://dictionarymid.sourceforge.net\n\n");
+	}
+
+	/*
+	 * Interactive messages subroutines
+         */
+	
+	
+	static public void printDBSetUpInfo() {
+		System.out.print(
+				"\nDB_NAME\n" +
+				"Enter the name of the database:\n" +
+				"The name of the database defines the DICT-database to be used. It must be\n" +
+				"defined for JDictd. See the documentation for JDictd to see how to set up\n" +
+				"a DICT-database for JDictd. The JDictd database configuration file must\n" +
+				"have the name <dbname-value>.ini. e.g. eng-por.ini. This ini-file\n" +
+				"needs to be copied in the folder where the dictionary files are.\n");
+	}
+	
+
+	static public void printDBFolderNamePrompt() {
+		System.out.print(
+				"\nDB_PATH_AND_FOLDER_NAME\n" +
+				"Enter the path and the name of the folder where the ini file\n" +
+				"is located:\n" +
+				"e.g: /home/user/Dicts/Gcide -- on a Linux/Unix machine.\n" +
+                "Or C:/Dicts/Gcide -- on a windows machine.\n" +
+				"PS: don't add the last '/' to the folder name\n" +
+				"this is added automatically by me ;-) what I mean is\n" +
+				"instead of C:/Dicts/Gcide/ write C:/Dicts/Gcide\n");
+	}
+				
+				
+
+	static public void printOutputCSVfileNamePrompt() {
+		System.out.print(
+				"\nOUTPUT_CSV_FILE_PATH_AND_NAME\n" +
+				"Enter the name and the path to the output CSV-file:\n" +
+				"This is where the converted dictionary will be written to.\n" +
+				"This file need not be present even if it were,\n" +
+				"it will be overwritten anyway ;-)\n" +
+				"e.g: C:/Generated_Dict/gcide.txt\n");
+	}
+				
+				
+
+	static public void printSwitchLanguagesPrompt() {
+		System.out.print(
+				"\nSWITCH_LANGUAGES\n" +
+				"Enter: true, false, t, f, yes, no, y, n, 0, or 1\n" +
+				"You can put upper or lowercase letters.\n" +
+				"This will toggle the SWITCH_LANGUAGES value On/Off.\n" +
+				"If SWITCH_LANGUAGES is set to true then\n" +
+				"the translation is put in the first column and\n" +
+				"the keyword in the second.\n" +
+				"If it is set to false, the keyword is put in the\n" +
+				"first column and the translation in the second\n");				
+	}
+
+
+	static public void printKeepTabAndNewlineCharsPrompt() {
+		System.out.print(
+				"\nKEEP_TAB_AND_NEW_LINE_CHARS\n" +
+				"When KEEP_TAB_AND_NEW_LINE_CHARS is set to true then\n" +
+				"the newline and tab characters in the translation text\n" +
+				"are replaced by '\\n' and '\\t'. DictionaryForMIDs will then\n" +
+				"insert newlines/tabs when displaying the result.\n" +
+				"If KEEP_TAB_AND_NEW_LINE_CHARS is set to false then the newline\n" +
+				"and tab characters are replaced by blanks;\n" +
+				"Enter: true, false, t, f, yes, no, y, n, 0, or 1\n" +
+				"You can put upper or lowercase letters.\n");
+	}
+	
+
+	static public void printRemoveSquareBracketsPrompt() {
+		System.out.print(
+				"\nREMOVE_SQUARE_BRACKETS\n" +
+				"If REMOVE_SQUARE_BRACKETS is set to true,\n" +
+				"then any text within square brackets is removed from the\n" +
+				"keyword/translation. However, bear in mind that this is a\n" +
+				"very special (dangerous) flag that normally is set to false.\n" +
+				"It is only set to true when really needed\n" +
+				"Enter: true, false, t, f, yes, no, y, n, 0, or 1\n" +
+				"You can put upper or lowercase letters.\n");
+	}
+	
+	
+	static public void printSeparatorCharacterPrompt() {
+		System.out.print(
+				"\nSEPARATOR_CHARACTER\n" +
+				"It defines the character between the first\n" +
+				"and the second column (normally a tab-character).\n" +
+				"The property dictionaryGenerationSeparatorCharacter\n" +
+				"for DictionaryGeneration has to have the same value\n" +
+				"as SEPARATOR_CHARACTER\n" +
+				"PS: if you want to put a tab character, type it literally,\n" +
+				"That is, HIT the TAB KEY on your keyboard ;-)\n");
+	}
+	
+	
+	static public void printOutputEncodingCharsetPrompt() {
+		System.out.print(
+				"\nOUTPUT_ENCODING_CHARSET\n" +
+				"It defines the character encoding for\n" +
+				"the generated file. UTF-8 works with all files. The property\n" +
+				"dictionaryGenerationInputCharEncoding for DictionaryGeneration\n" +
+				"has to have the same value as OUTPUT_ENCODING_CHARSET.\n" +
+				"PS: if UTF-8 is what you want to choose, type it as follows:\n" +
+				"UTF-8\n");
+	}
+         
 				
 	/*
 	 * 

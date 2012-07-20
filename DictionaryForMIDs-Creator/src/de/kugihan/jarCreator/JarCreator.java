@@ -28,6 +28,7 @@ GPL applies - see file COPYING for copyright statement.
 package de.kugihan.jarCreator;
 
 import de.kugihan.DfMCreator.DfMCreatorExceptions;
+import de.kugihan.DfMCreator.DfMCreatorExceptions.CantCreatOutputJarJadDirectory;
 import de.kugihan.DfMCreator.DfMCreatorMain;
 import de.kugihan.DfMCreator.SumWinJarCreator;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
@@ -38,10 +39,10 @@ import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.ResourceHandler;
 import de.kugihan.dictionaryformids.hmi_java_me.lcdui_extension.ResourceHandler.IconSize;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
 import edu.hws.eck.mdb.I18n;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.io.*;
 import java.util.jar.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 
 public class JarCreator {
@@ -97,10 +98,54 @@ public static String getOutputDirectory(){
         SumWinJarCreator cjpw = SumWinJarCreator.getCJPWin();
         cjpw.setVisible(true);
     }
+    
+    public static void main(String[] args) throws FileNotFoundException, IOException, DictionaryException {
+	printCopyrightNotice();
+	if (args.length!=3){
+           System.out.println(
+               "\nError in command line arguments\n\n" +
+               "Usage:\n" +
+               "java -jar DfM-Creator.jar -JarCreator dictionary_directory empty_jar output_directory\n\n"+
+               "dictionary_directory: directory containing the dictionary files and the file DictionaryForMIDs.properties\n"+
+               "empty_dictionaryformids: directory of the empty DictionaryForMIDs.jar/.jad files\n"+
+               "output_directory: directory where the generated JAR/JAD files are written to\n\n");
+           System.exit(1);
+        }
+	
+        dictionarydirectory = getPathName(args[0]); 
+	emptydictionaryformids = getPathName(args[1]);
+	outputdirectory = getPathName(args[2]);
+        try {
+            // Call the jar creation subroutine
+            createJar();
+        } catch (CantCreatOutputJarJadDirectory ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+	static public void printCopyrightNotice() throws DictionaryException {
+		System.out.print(
+                    "\n\nDictionaryForMIDs - JarCreator, Copyright (C) 2005-2009 Mathis Karmann et al\n\n" +
+
+                    "JarCreator is free software; you can redistribute it and/or modify\n" +
+                    "it under the terms of the GNU General Public License as published by\n" +
+                    "the Free Software Foundation; either version 2 of the License, or\n" +
+                    "(at your option) any later version.\n\n" +
+
+                    "JarCreator is distributed in the hope that it will be useful,\n" +
+                    "but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
+                    "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
+                    "GNU General Public License for more details.\n\n" +
+
+                    "You should have received a copy of the GNU General Public License\n" +
+                    "along with JarCreator; if not, write to the Free Software Foundation,\n" +
+                    "Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA\n" +
+                    "For documentation and source code, see http://dictionarymid.sourceforge.net\n");
+	}
 
 	public static void createJar() throws FileNotFoundException,
-                                              DfMCreatorExceptions.CantCreatOutputJarJadDirectory,
-                                              IOException, DictionaryException {
+                                               DfMCreatorExceptions.CantCreatOutputJarJadDirectory,
+                                               IOException, DictionaryException {
 
             	UtilWin utilObj = new UtilWin();
 		Util.setUtil(utilObj);

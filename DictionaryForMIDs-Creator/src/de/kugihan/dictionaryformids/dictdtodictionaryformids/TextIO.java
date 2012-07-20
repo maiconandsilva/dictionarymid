@@ -1,10 +1,9 @@
-package cli.version.de.kugihan.dictionaryformids.dictdtodictionaryformids;
+package de.kugihan.dictionaryformids.dictdtodictionaryformids;
 
 import java.io.*;
 import java.util.IllegalFormatException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
