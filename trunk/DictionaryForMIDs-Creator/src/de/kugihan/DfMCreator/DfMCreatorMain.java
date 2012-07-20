@@ -70,6 +70,8 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import javax.swing.*;
 
@@ -1468,7 +1470,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 System.out.println("\n\nYou invoked the commad line version of DictdToDictionaryForMIDs");
                 
                 // Call the DictdToDictionaryForMIDs main class
-                cli.version.de.kugihan.dictionaryformids.dictdtodictionaryformids.DictdToDictionaryForMIDs.main(args);
+                de.kugihan.dictionaryformids.dictdtodictionaryformids.DictdToDfM.main(args);
                 
             } else if (args[0].equals("-DictionaryGeneration")){
                 
@@ -1477,7 +1479,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 
                 // Call the DictionaryGeneration main class
                 try {                    
-                    cli.version.de.kugihan.dictionaryformids.dictgen.DictionaryGeneration.main(args);
+                    de.kugihan.dictionaryformids.dictgen.DictionaryGeneration.main(args);
                 } catch (DictionaryException ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -1489,7 +1491,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 
                 // Call the FontGenerator main class
                 try {                    
-                    cli.version.de.kugihan.fonttoolkit.FontToolkit.main(args);
+                    de.kugihan.fonttoolkit.FontToolkit.main(args);
                 } catch (DictionaryException ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -1499,38 +1501,37 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 // Tell the user she invoked JarCreator
                 System.out.println("\n\nYou invoked the commad line version of JarCreator");
                 
-                // Call the JarCreator main class
-                try {                    
-                    cli.version.de.kugihan.jarCreator.JarCreator.main(args);
+                try {
+                    de.kugihan.jarCreator.JarCreator.main(args);
                 } catch (FileNotFoundException ex) {
                     System.out.println(ex.getMessage());
                 } catch (IOException | DictionaryException ex) {
                     System.out.println(ex.getMessage());
-                }
+                }                  
                 
             } else 
                 // Print a general information/error message in case the user
                 // entered a bad argument.
                 System.out.println(I18n.tr("cli.invoke.msg.dfmcreatormain"));
             
-        // If we reach here, it means the user passed no argument
-        // to DfM-Creator through command line, so, launch the
-        // DfM-Creator window.
-        } else {
-            // set locale
-            setTheLocale();        
+            // If we reach here, it means the user passed no argument
+            // to DfM-Creator through command line, so, launch the
+            // DfM-Creator window.
+            } else {
+                // set locale
+                setTheLocale();        
 
-            // Apply preferences. Among other
-            // preferences, look and feel settings
-            applyPreferences();
+                // Apply preferences. Among other
+                // preferences, look and feel settings
+                applyPreferences();
 
-            // print a copyright notice
-            printCopyrightNotice();
-            
-            // Creates the DictionaryForMIDs-Creator
-            // form and displays it
-            CreateAndDisplayTheForm();
-        }
+                // print a copyright notice
+                printCopyrightNotice();
+
+                // Creates the DictionaryForMIDs-Creator
+                // form and displays it
+                CreateAndDisplayTheForm();
+            }
 
     }
     

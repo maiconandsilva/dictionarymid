@@ -560,6 +560,11 @@ sources, always go to the subversion repository. To check out the repository, co
 
 <code>svn co https://dictionarymid.svn.sourceforge.net/svnroot/dictionarymid dictionarymid</code>
 <p>Download the latest stable sources <a href="files/DfM-Creator-src.zip" >here</a></p>
+Note that these are only the DfM-Creator sources. For development purposes you will need some
+other tools/applications that are dependencies to DfM-Creator. To get all the dependencies,
+download at least the trunk directory from the subversion repository. To download only the trunk
+repository, code:<br>
+<code>svn co https://dictionarymid.svn.sourceforge.net/svnroot/dictionarymid/trunk dictionarymid_trunk</code>
 </p>
 
 <h3 id="buildprocess">Building the tools and applications</h3>
@@ -583,27 +588,38 @@ Antenna is already present in the above mentioned build directory.</p>
 <p>Before proceeding to the build, you must:</p>
 <ul>
   <li>
-	Let the file build.xml in its build directory
+	Have the file build.xml in the trunk/Build directory
   </li>
+  <br>
   <li>
 	Have Oracle Java JDK-7u2 or later (can be downloaded somewhere at:<br>
 	<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">
 	http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>) 
   </li>
+  <br>
   <li>
 	Have Oracle Java ME SDK 3.0 installed or Sun Java Wireless Toolkit 2.5.2<br>
 	(can be downloaded somewhere at:<br>
 	<a href="http://www.oracle.com/technetwork/java/javame/javamobile/download/sdk/index.html">
 	http://www.oracle.com/technetwork/java/javame/javamobile/download/sdk/index.html</a>) 
   </li>
+  <br>
   <li>
 	Set wtk.home to your WTK installation directory 
   </li>
-	Have Apache Ant installed on your system (in the PATH)
-  </li>
+  <br>
   <li>
-	Have antenna-bin-xxx.jar in the build directory (build directory has a version
-	of antenna but it is most of the time outdated.)
+	Have Apache Ant installed on your system (in the PATH)
+	(can be downloaded somewhere at:<br>
+	<a href="http://ant.apache.org/bindownload.cgi">
+	http://ant.apache.org/bindownload.cgi</a>)
+  </li>
+  <br>
+  <li>
+	Have antenna-bin-xxx.jar in the build directory (build directory has a version of antenna<br>
+	but it is most of the time outdated. The latest version can be	downloaded somewhere at:<br>
+	<a href="http://antenna.sourceforge.net/">
+	http://antenna.sourceforge.net/</a>) 
   </li>
 </ul>
 <p>Important note: the source files are UTF-8 encoded. If you are using the old 

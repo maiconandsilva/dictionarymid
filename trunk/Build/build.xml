@@ -94,7 +94,6 @@ javac.encoding=UTF-8
 			<param name="destinationbasedir" 	value="${dfmc.outputbasedir}"/>
 		</antcall>
 	    <jar destfile="${dfmc.jarfile}"  >
-	      	<fileset dir="${dfmc.classdir}"      includes="cli/version/de/kugihan/**" />
 	      	<fileset dir="${dfmc.classdir}"      includes="de/kugihan/**" />
 	      	<fileset dir="${dfmc.classdir}"      includes="org/dict/**" />
 	      	<fileset dir="${dfmc.classdir}"      includes="edu/hws/eck/mdb/**" />

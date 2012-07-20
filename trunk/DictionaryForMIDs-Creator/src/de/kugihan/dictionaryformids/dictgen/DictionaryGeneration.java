@@ -44,8 +44,6 @@ import de.kugihan.dictionaryformids.translation.SearchIndicator;
 import de.kugihan.dictionaryformids.translation.TextOfLanguage;
 import de.kugihan.dictionaryformids.translation.normation.Normation;
 import edu.hws.eck.mdb.I18n;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -105,6 +103,64 @@ public class DictionaryGeneration {
         dgensum.setVisible(true);
     }
         
+    public static void main(String[] args) throws DictionaryException {
+	printCopyrightNotice();
+        
+        if (args.length != 3) {
+            printArgumentError("Incorrect number of arguments");
+            printUsage();
+        } else {
+                sourceFile = args[0];
+                directoryDestination = args[1];
+                propertyPath = args[2];
+                
+                if (! directoryDestination.endsWith(DictionaryDataFile.pathNameDataFiles)) {
+                    printArgumentError("Argument 2 (outputdirectory) must end with " + DictionaryDataFile.pathNameDataFiles);  
+                    printUsage();
+                }
+                
+                // Call the dictionary generation subroutine
+                generate();
+        }
+    }
+    
+	static public void printCopyrightNotice() throws DictionaryException {
+            System.out.print(
+                "\n\nDictionaryForMIDs - DictionaryGeneration\n" +
+                "Copyright (C) 2005, 2006, 2007  Gert Nuber (dict@kugihan.de) et al\n\n" +
+
+                "DictionaryGeneration is free software; you can redistribute it and/or modify\n" +
+                "it under the terms of the GNU General Public License as published by\n" +
+                "the Free Software Foundation; either version 2 of the License, or\n" +
+                "(at your option) any later version.\n\n" +
+
+                "DictionaryGeneration is distributed in the hope that it will be useful,\n" +
+                "but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
+                "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
+                "GNU General Public License for more details.\n\n" +
+
+                "You should have received a copy of the GNU General Public License\n" +
+                "along with DictionaryGeneration; if not, write to the Free Software Foundation,\n" +
+                "Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA\n" +
+                "For documentation and source code, see http://dictionarymid.sourceforge.net\n");
+				
+	}
+	
+	static public void printUsage() {
+	System.out.print(
+		"\nUsage:\n" +
+		"java -jar DfM-Creator.jar -DictionaryGeneration input_dictionary_file output_directory property_directory\n\n" +
+		"input_dictionary_file: file from which the directory is read (this is normally a CSV file)\n" +
+		"output_directory: path to the directory where the generated dictionary files are written to.\n" +
+		"This must end with \"" + DictionaryDataFile.pathNameDataFiles + "\" !)\n" + 
+		"property_directory: directory where the file DictionaryForMIDs.properties is located\n\n");
+        }
+	
+	static public void printArgumentError(String errorMessage) {
+		System.out.print("\nError in command line argument:\n" + errorMessage + "\n");
+	}
+    
+
         
         public static void generate() throws DictionaryException {
 			UtilWin utilObj = new UtilWin();
