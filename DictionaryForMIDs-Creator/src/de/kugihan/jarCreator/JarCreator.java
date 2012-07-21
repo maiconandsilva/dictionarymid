@@ -1,13 +1,13 @@
 /*
 ****************************************************************************
-* This version of this file is part of DictionaryForMIDs Creator
+* This version of this file is part of DictionaryForMIDs-Creator
 * (C) 2012 Karim Mahamane Karimou
 *
 * This version is a modified version. It was modified to make it compatible
-* with DictionaryForMIDs Creator. It was modified by me. See below for
+* with DictionaryForMIDs-Creator. It was modified by me. See below for
 * information about the original copyright holder.
 *
-* DictionaryForMIDs Creator (DfMCreator) is a GUI wrapper around various
+* DictionaryForMIDs-Creator (DfM-Creator) is a GUI wrapper around various
 * DictionaryForMIDs tools, among others we have DictdToDictionaryForMIDs,
 * DictionaryGeneration, JarCreator and BitmapFontGenerator.
 *  
@@ -41,56 +41,54 @@ import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
 import edu.hws.eck.mdb.I18n;
 import java.io.*;
 import java.util.jar.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 
 public class JarCreator {
     
-public static final String EXTENSION_JAR = ".jar";
-public static final String EXTENSION_JAD = ".jad";
-public static final String FILE_EMPTY_JAR_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAR;
-public static final String FILE_EMPTY_JAD_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAD;
+    public static final String EXTENSION_JAR = ".jar";
+    public static final String EXTENSION_JAD = ".jad";
+    public static final String FILE_EMPTY_JAR_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAR;
+    public static final String FILE_EMPTY_JAD_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAD;
 
-private static String dictionarydirectory; 
-private static String emptydictionaryformids;
-private static String outputdirectory;
+    private static String dictionarydirectory; 
+    private static String emptydictionaryformids;
+    private static String outputdirectory;
 
-private static File JARFILE;
-public static File getJarFile(){
-    return JARFILE;
-}
+    private static File JARFILE;
+    public static File getJarFile(){
+        return JARFILE;
+    }
 
-private static File JADFILE;
-public static File getJadFile(){
-    return JADFILE;
-}
+    private static File JADFILE;
+    public static File getJadFile(){
+        return JADFILE;
+    }
 
 
-// Setter and Getter Methods.
-public static void setDictionaryDirectory(String newDictionaryDirectory){
-    dictionarydirectory = newDictionaryDirectory;
-}
+    // Setter and Getter Methods.
+    public static void setDictionaryDirectory(String newDictionaryDirectory){
+        dictionarydirectory = newDictionaryDirectory;
+    }
 
-public static void setEmptyDictionaryForMID(String newEmptyDictionaryForMIDs){
-    emptydictionaryformids = newEmptyDictionaryForMIDs;
-}
+    public static void setEmptyDictionaryForMID(String newEmptyDictionaryForMIDs){
+        emptydictionaryformids = newEmptyDictionaryForMIDs;
+    }
 
-public static void setOutputDirectory(String newOutputDirectory){
-    outputdirectory = newOutputDirectory;
-}
+    public static void setOutputDirectory(String newOutputDirectory){
+        outputdirectory = newOutputDirectory;
+    }
 
-public static String getDictionaryDirectory(){
-    return dictionarydirectory;
-}
+    public static String getDictionaryDirectory(){
+        return dictionarydirectory;
+    }
 
-public static String getEmptyDictionaryForMID(){
-    return emptydictionaryformids;
-}
+    public static String getEmptyDictionaryForMID(){
+        return emptydictionaryformids;
+    }
 
-public static String getOutputDirectory(){
-    return outputdirectory;
-}
+    public static String getOutputDirectory(){
+        return outputdirectory;
+    }
 
     // window showing jar creation preferencies
     // summarry before the actual jar creation.

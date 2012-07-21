@@ -1,13 +1,13 @@
 /*
 ****************************************************************************
-* This version of this file is part of DictionaryForMIDs Creator
+* This version of this file is part of DictionaryForMIDs-Creator
 * (C) 2012 Karim Mahamane Karimou
 *
 * This version is a modified version. It was modified to make it compatible
-* with DictionaryForMIDs Creator. It was modified by me. See below for
+* with DictionaryForMIDs-Creator. It was modified by me. See below for
 * information about the original copyright holder.
 *
-* DictionaryForMIDs Creator (DfMCreator) is a GUI wrapper around various
+* DictionaryForMIDs-Creator (DfM-Creator) is a GUI wrapper around various
 * DictionaryForMIDs tools, among others we have DictdToDictionaryForMIDs,
 * DictionaryGeneration, JarCreator and BitmapFontGenerator.
 *  
@@ -48,7 +48,7 @@ import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 
-public class DictionaryGeneration {
+    public class DictionaryGeneration {
 
 	private static String FILE_SEPARATOR = System.getProperty("file.separator");
 	
@@ -163,55 +163,55 @@ public class DictionaryGeneration {
 
         
         public static void generate() throws DictionaryException {
-			UtilWin utilObj = new UtilWin();
-			Util.setUtil(utilObj);
-			boolean fileAccessError = false;
+        	UtilWin utilObj = new UtilWin();
+		Util.setUtil(utilObj);
+		boolean fileAccessError = false;
 
-			try {
-				if (!directoryDestination.endsWith(FILE_SEPARATOR))
-				{
-					directoryDestination = directoryDestination + FILE_SEPARATOR;
-				}
-				if (!propertyPath.endsWith(FILE_SEPARATOR))
-				{
-					propertyPath = propertyPath + FILE_SEPARATOR;
-				}
-				/* test if files can be accessed */
-				if (! (new File(sourceFile)).canRead()) {
-					System.err.println(I18n.tr("inputDictError", new Object[] {sourceFile}));
-					fileAccessError = true;
-				}
-				if (! (new File(directoryDestination)).exists()) {
-					System.err.println(I18n.tr("outputDictError", new Object[] {directoryDestination}));
-					fileAccessError = true;
-				}
-				/* read properties */
-				if (! utilObj.readProperties(propertyPath, true)) {
-					System.err.println(I18n.tr("propFError", new Object[] {utilObj.buildPropertyFileName(propertyPath)}));  
-					fileAccessError = true;
-				}
-				if (! fileAccessError) {
-					/* generate the files */
-					generateDictionaryFiles();
-					/* copy the property file */
-					copyPropertyFile(utilObj.buildPropertyFileName(propertyPath), directoryDestination);
-					System.out.println(I18n.tr("complete\n"));
-				}
-			} catch (UnsupportedEncodingException e){
-                            SumWinDictGen.done = true;
-                            DfMCreatorMain.printAnyMsg(I18n.tr("encErrMsg", new Object[] {e.getLocalizedMessage()}),
-                                                       I18n.tr("encErrWinTitle"), JOptionPane.ERROR_MESSAGE);
-                            // print the exception in command line.
-                            System.out.println(e + "\n");
-                        } catch (java.lang.OutOfMemoryError e){
-                            DfMCreatorMain.printAnyMsg(OutOfMemErrMsg, I18n.tr("outOfMemory.dictGenSummary")
-                                                                                 ,JOptionPane.ERROR_MESSAGE);
-                        } catch (Throwable t){
-                            DfMCreatorMain.printAnyMsg(I18n.tr("criticalErrMsg", new Object[]
-                                        {t, t.getLocalizedMessage()}), I18n.tr("error"), JOptionPane.ERROR_MESSAGE);
-                            System.out.println(t + "\n");
-                        }
-		}
+		try {
+			if (!directoryDestination.endsWith(FILE_SEPARATOR))
+			{
+				directoryDestination = directoryDestination + FILE_SEPARATOR;
+			}
+			if (!propertyPath.endsWith(FILE_SEPARATOR))
+			{
+				propertyPath = propertyPath + FILE_SEPARATOR;
+			}
+			/* test if files can be accessed */
+			if (! (new File(sourceFile)).canRead()) {
+				System.err.println(I18n.tr("inputDictError", new Object[] {sourceFile}));
+				fileAccessError = true;
+			}
+			if (! (new File(directoryDestination)).exists()) {
+				System.err.println(I18n.tr("outputDictError", new Object[] {directoryDestination}));
+				fileAccessError = true;
+			}
+			/* read properties */
+			if (! utilObj.readProperties(propertyPath, true)) {
+				System.err.println(I18n.tr("propFError", new Object[] {utilObj.buildPropertyFileName(propertyPath)}));  
+				fileAccessError = true;
+			}
+			if (! fileAccessError) {
+				/* generate the files */
+				generateDictionaryFiles();
+				/* copy the property file */
+				copyPropertyFile(utilObj.buildPropertyFileName(propertyPath), directoryDestination);
+				System.out.println(I18n.tr("complete\n"));
+			}
+		} catch (UnsupportedEncodingException e){
+                        SumWinDictGen.done = true;
+                        DfMCreatorMain.printAnyMsg(I18n.tr("encErrMsg", new Object[] {e.getLocalizedMessage()}),
+                                                   I18n.tr("encErrWinTitle"), JOptionPane.ERROR_MESSAGE);
+                        // print the exception in command line.
+                        System.out.println(e + "\n");
+                    } catch (java.lang.OutOfMemoryError e){
+                        DfMCreatorMain.printAnyMsg(OutOfMemErrMsg, I18n.tr("outOfMemory.dictGenSummary")
+                                                                             ,JOptionPane.ERROR_MESSAGE);
+                    } catch (Throwable t){
+                        DfMCreatorMain.printAnyMsg(I18n.tr("criticalErrMsg", new Object[]
+                                    {t, t.getLocalizedMessage()}), I18n.tr("error"), JOptionPane.ERROR_MESSAGE);
+                        System.out.println(t + "\n");
+                    }
+	}
 
         
 	public static void generateDictionaryFiles() throws IOException, UnsupportedEncodingException, Throwable, DictionaryException {

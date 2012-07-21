@@ -1,13 +1,13 @@
 /*
 ****************************************************************************
-* This version of this file is part of DictionaryForMIDs Creator
+* This version of this file is part of DictionaryForMIDs-Creator
 * (C) 2012 Karim Mahamane Karimou
 *
 * This version is a modified version. It was modified to make it compatible
-* with DictionaryForMIDs Creator. It was modified by me. See below for
+* with DictionaryForMIDs-Creator. It was modified by me. See below for
 * information about the original copyright holder.
 *
-* DictionaryForMIDs Creator (DfMCreator) is a GUI wrapper around various
+* DictionaryForMIDs-Creator (DfM-Creator) is a GUI wrapper around various
 * DictionaryForMIDs tools, among others we have DictdToDictionaryForMIDs,
 * DictionaryGeneration, JarCreator and BitmapFontGenerator.
 *  
@@ -37,7 +37,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import javax.swing.JOptionPane;
 
-public class DictdToDfM {
+    public class DictdToDfM {
 
 	public static String versionNumber = "2.5.0";
         
@@ -141,45 +141,41 @@ public class DictdToDfM {
     }
         
 	public static void main(String[] args) {
-		printCopyrightNotice();
+            
+            printCopyrightNotice();
 				
-	// Starting the interaction with the user.
-		printDBSetUpInfo();
-		dbName = TextIO.getlnWord();
-	
-		printDBFolderNamePrompt();
-		dbFolderName = TextIO.getlnWord();
-	
-		printOutputCSVfileNamePrompt();
-		outputCSVFile = TextIO.getlnWord();
-	
-		printSwitchLanguagesPrompt();
-		switchLanguages = TextIO.getlnBoolean();
-	
-		printKeepTabAndNewlineCharsPrompt();
-		keepTabAndNewLineChars = TextIO.getlnBoolean();
-	
-		printRemoveSquareBracketsPrompt();
-		removeSquareBrackets = TextIO.getlnBoolean();
-		
-		printOutputEncodingCharsetPrompt();
-		outputEncodingCharset = TextIO.getlnWord();
-	
-		printSeparatorCharacterPrompt();
-		separatorCharacter = TextIO.getAnyChar();
-                // End of the interaction.
-                
-                // Call the conversion subroutine
-                convert();
-        }
-		
-    
+            // Starting the interaction with the user.
+            printDBSetUpInfo();
+            dbName = TextIO.getlnWord();
+
+            printDBFolderNamePrompt();
+            dbFolderName = TextIO.getlnWord();
+
+            printOutputCSVfileNamePrompt();
+            outputCSVFile = TextIO.getlnWord();
+
+            printSwitchLanguagesPrompt();
+            switchLanguages = TextIO.getlnBoolean();
+
+            printKeepTabAndNewlineCharsPrompt();
+            keepTabAndNewLineChars = TextIO.getlnBoolean();
+
+            printRemoveSquareBracketsPrompt();
+            removeSquareBrackets = TextIO.getlnBoolean();
+
+            printOutputEncodingCharsetPrompt();
+            outputEncodingCharset = TextIO.getlnWord();
+
+            printSeparatorCharacterPrompt();
+            separatorCharacter = TextIO.getAnyChar();
+
+            // Call the conversion subroutine
+            convert();
+        }   
 	 
 	/*
-	 * 
 	 * The convertion subroutine: reads all the entries from the DICT-database
 	 * and writes them line by line to the output file.
-	 * 
 	 */
 	 
 	 public static void convert() {
