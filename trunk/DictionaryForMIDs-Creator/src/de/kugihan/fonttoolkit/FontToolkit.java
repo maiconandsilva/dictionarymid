@@ -1,13 +1,13 @@
 /*
 ****************************************************************************
-* This version of this file is part of DictionaryForMIDs Creator
+* This version of this file is part of DictionaryForMIDs-Creator
 * (C) 2012 Karim Mahamane Karimou
 *
 * This version is a modified version. It was modified to make it compatible
-* with DictionaryForMIDs Creator. It was modified by me. See below for
+* with DictionaryForMIDs-Creator. It was modified by me. See below for
 * information about the original copyright holder.
 *
-* DictionaryForMIDs Creator (DfMCreator) is a GUI wrapper around various
+* DictionaryForMIDs-Creator (DfM-Creator) is a GUI wrapper around various
 * DictionaryForMIDs tools, among others we have DictdToDictionaryForMIDs,
 * DictionaryGeneration, JarCreator and BitmapFontGenerator.
 *  
