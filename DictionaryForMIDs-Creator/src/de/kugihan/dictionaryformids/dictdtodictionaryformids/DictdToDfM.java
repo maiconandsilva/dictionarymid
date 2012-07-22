@@ -140,9 +140,7 @@ import javax.swing.JOptionPane;
         summary.setVisible(true);
     }
         
-	public static void main(String[] args) {
-            
-            printCopyrightNotice();
+	public static void main(String[] args) {            
 				
             // Starting the interaction with the user.
             printDBSetUpInfo();
