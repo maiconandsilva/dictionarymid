@@ -104,27 +104,17 @@ import javax.swing.JOptionPane;
     }
         
     public static void main(String[] args) throws DictionaryException {
-	printCopyrightNotice();
         
-        if (args.length != 3) {
-            printArgumentError("Incorrect number of arguments");
-            printUsage();
-        } else {
-                sourceFile = args[0];
-                directoryDestination = args[1];
-                propertyPath = args[2];
-                
-                if (! directoryDestination.endsWith(DictionaryDataFile.pathNameDataFiles)) {
-                    printArgumentError("Argument 2 (outputdirectory) must end with " + DictionaryDataFile.pathNameDataFiles);  
-                    printUsage();
-                }
-                
-                // Call the dictionary generation subroutine
-                generate();
-        }
+            sourceFile = getPathName(sourceFile);
+            directoryDestination = getPathName(directoryDestination);
+            propertyPath = getPathName(propertyPath);
+                               
+            // Call the dictionary generation subroutine
+            generate();
+        
     }
     
-	static public void printCopyrightNotice() throws DictionaryException {
+	static public void printCopyrightNotice() {
             System.out.print(
                 "\n\nDictionaryForMIDs - DictionaryGeneration\n" +
                 "Copyright (C) 2005, 2006, 2007  Gert Nuber (dict@kugihan.de) et al\n\n" +
@@ -142,18 +132,34 @@ import javax.swing.JOptionPane;
                 "You should have received a copy of the GNU General Public License\n" +
                 "along with DictionaryGeneration; if not, write to the Free Software Foundation,\n" +
                 "Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA\n" +
-                "For documentation and source code, see http://dictionarymid.sourceforge.net\n");
+                "For documentation and source code, see http://dictionarymid.sourceforge.net\n\n");
 				
+	}
+        
+	// adds a directory separator character to pathName
+        // if the pathName does have one at the end.
+        // Duplicated for convenience from JarCreator.class
+	static public String getPathName(String pathName) {
+		String completePathName = pathName;
+		if (! completePathName.endsWith(File.separator)) {
+			completePathName = completePathName + File.separator; 
+		}
+		return completePathName;
 	}
 	
 	static public void printUsage() {
 	System.out.print(
-		"\nUsage:\n" +
-		"java -jar DfM-Creator.jar -DictionaryGeneration input_dictionary_file output_directory property_directory\n\n" +
-		"input_dictionary_file: file from which the directory is read (this is normally a CSV file)\n" +
-		"output_directory: path to the directory where the generated dictionary files are written to.\n" +
-		"This must end with \"" + DictionaryDataFile.pathNameDataFiles + "\" !)\n" + 
-		"property_directory: directory where the file DictionaryForMIDs.properties is located\n\n");
+            "\nUsage:\n" +
+            "java -jar DfM-Creator.jar -DictionaryGeneration input_dictionary_file output_directory property_directory\n\n" +
+            "input_dictionary_file: file from which the directory is read (this is normally a CSV file)\n" +
+            "output_directory: path to the directory where the generated dictionary files are written to.\n" +
+            "property_directory: directory where the file DictionaryForMIDs.properties is located\n\n");
+        System.exit(1);
+        
+        /* Debug: uncomment to activate */
+            //System.out.println(sourceFile);
+            //System.out.println(directoryDestination);
+            //System.out.println(propertyPath);
         }
 	
 	static public void printArgumentError(String errorMessage) {

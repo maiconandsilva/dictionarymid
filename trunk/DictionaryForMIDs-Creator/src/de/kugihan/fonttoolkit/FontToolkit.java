@@ -49,6 +49,14 @@ import javax.swing.*;
 
 public class FontToolkit extends JFrame implements ActionListener, Callback {
     
+    // Flag that will tell us wether the FontToolkit
+    // is being called from DfM-Creator or from the
+    // command line (the user might have called the
+    // older standalone version of the FontToolkit)
+    // set to true if it is called from DfM-Creator
+    // and to false otherwise.
+    public static boolean flag = false;
+    
     private static final long serialVersionUID = 1L;
 
     private boolean debugMode = false;
@@ -126,11 +134,11 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
         }
                 
 	public static void main (String[] args) throws DictionaryException {
-            printCopyrightNotice();
-            new FontToolkit().run();                
+            DfMCreatorMain.setTheNimbusLookAndFeel();
+            new FontToolkit().run();            
 	}
         
-        private static void printCopyrightNotice() {
+        public static void printCopyrightNotice() {
         System.out.print(
             "\n\nDictionaryForMIDs - FontGenerator Copyright (C) 2005 J2ME Polish\n" +
             "FontToolkit (GUI for FontGenerator) Copyright (C) Sean Kernohan\n\n" +
@@ -170,11 +178,11 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 	public void run() throws DictionaryException {
             UtilWin utilObj = new UtilWin();
             Util.setUtil(utilObj);
-            this.setTitle(I18n.tr("bitmapFonGenerator")+ Util.getUtil().getApplicationVersionString());
+            this.setTitle(I18n.tr("bitmapFonGenerator"));
             this.setJMenuBar(getJMenuBar());
             this.setDefaultCloseOperation(FontToolkit.EXIT_ON_CLOSE);
 
-            this.setSize(460, 300);
+            this.setSize(460, 350);
             this.setLocation(screenSize.width / 2 - this.getWidth() / 2,
                              screenSize.height / 2 - this.getHeight() / 2);
 
@@ -268,12 +276,21 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
                         dictionaryField.setText(s);
                     }
             } else if (arg0.getSource() == startButton) {
-                
-                // Validate the values entered and
-                // showing the bitmap font generation
-                // preferences summary which will enable
-                // us to actualy generate the font files.
-                validateAndShowSum();
+                // check if flag is set to true, meaning that the fontToolkit
+                // is being called from the command line. In such case we don't
+                // call the bitmap font generation preferences summary window
+                // since that window is related to DfM-Creator but here it has
+                // not even been loaded, so, we'll directly generate the font
+                // files without calling the preferences summary window.
+                if (flag) {
+                    proceed();                    
+                } else {
+                    // if we reach here flag remains set to false. In such case we can call the
+                    // bitmap font generation preferences summary window since DfM-Creator is loaded.
+                    // We Validate the values entered and then we show the bitmap font generation
+                    // preferences summary window.Here, It enables us to actualy generate the font files.
+                    validateAndShowSum();
+                }
              
             } else if (arg0.getSource() == clearButton){
                     clearFields();
@@ -394,7 +411,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
                 String outBmfString = outBmfPath.toString();
                 
 		JOptionPane.showMessageDialog(null, I18n.tr("successMsg", new Object[] {outBmfString}),
-                                                                                   I18n.tr("DONE"), JOptionPane.INFORMATION_MESSAGE);
+                                                     I18n.tr("DONE"), JOptionPane.INFORMATION_MESSAGE);
 	}
 
     @Override
@@ -441,11 +458,8 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 	}
 
 	public void showAbout() throws DictionaryException {
-		JOptionPane
-				.showMessageDialog(
-						null,
-						I18n.tr("appAboutMsg", new Object[] {Util.getUtil().getApplicationVersionString()}),
-						I18n.tr("about"), JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null,
+                        I18n.tr("appAboutMsg"), I18n.tr("about"), JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void showInvalidFieldsError(Exception e) {

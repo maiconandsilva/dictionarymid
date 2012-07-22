@@ -255,7 +255,7 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
             try {
                 DictionaryGeneration.generate();
             } catch (Exception e){
-                // Ignored.
+                System.out.println(e.getMessage());
             }
             return null;
         }

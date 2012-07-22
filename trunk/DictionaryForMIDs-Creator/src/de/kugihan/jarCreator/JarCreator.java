@@ -98,21 +98,11 @@ public class JarCreator {
     }
     
     public static void main(String[] args) throws FileNotFoundException, IOException, DictionaryException {
-	printCopyrightNotice();
-	if (args.length!=3){
-           System.out.println(
-               "\nError in command line arguments\n\n" +
-               "Usage:\n" +
-               "java -jar DfM-Creator.jar -JarCreator dictionary_directory empty_jar output_directory\n\n"+
-               "dictionary_directory: directory containing the dictionary files and the file DictionaryForMIDs.properties\n"+
-               "empty_dictionaryformids: directory of the empty DictionaryForMIDs.jar/.jad files\n"+
-               "output_directory: directory where the generated JAR/JAD files are written to\n\n");
-           System.exit(1);
-        }
-	
-        dictionarydirectory = getPathName(args[0]); 
-	emptydictionaryformids = getPathName(args[1]);
-	outputdirectory = getPathName(args[2]);
+
+        dictionarydirectory = getPathName(dictionarydirectory);
+        emptydictionaryformids = getPathName(emptydictionaryformids);
+        outputdirectory = getPathName(outputdirectory);
+        
         try {
             // Call the jar creation subroutine
             createJar();
@@ -120,26 +110,43 @@ public class JarCreator {
             System.out.println(ex.getMessage());
         }
     }
+
     
-	static public void printCopyrightNotice() throws DictionaryException {
-		System.out.print(
-                    "\n\nDictionaryForMIDs - JarCreator, Copyright (C) 2005-2009 Mathis Karmann et al\n\n" +
+    static public void printCopyrightNotice() {
+        System.out.print(
+            "\n\nDictionaryForMIDs - JarCreator, Copyright (C) 2005-2009 Mathis Karmann et al\n\n" +
 
-                    "JarCreator is free software; you can redistribute it and/or modify\n" +
-                    "it under the terms of the GNU General Public License as published by\n" +
-                    "the Free Software Foundation; either version 2 of the License, or\n" +
-                    "(at your option) any later version.\n\n" +
+            "JarCreator is free software; you can redistribute it and/or modify\n" +
+            "it under the terms of the GNU General Public License as published by\n" +
+            "the Free Software Foundation; either version 2 of the License, or\n" +
+            "(at your option) any later version.\n\n" +
 
-                    "JarCreator is distributed in the hope that it will be useful,\n" +
-                    "but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
-                    "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
-                    "GNU General Public License for more details.\n\n" +
+            "JarCreator is distributed in the hope that it will be useful,\n" +
+            "but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
+            "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
+            "GNU General Public License for more details.\n\n" +
 
-                    "You should have received a copy of the GNU General Public License\n" +
-                    "along with JarCreator; if not, write to the Free Software Foundation,\n" +
-                    "Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA\n" +
-                    "For documentation and source code, see http://dictionarymid.sourceforge.net\n");
+            "You should have received a copy of the GNU General Public License\n" +
+            "along with JarCreator; if not, write to the Free Software Foundation,\n" +
+            "Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA\n" +
+            "For documentation and source code, see http://dictionarymid.sourceforge.net\n");
 	}
+    
+	static public void printUsage() {
+            System.out.println(
+                "\nError in command line arguments\n\n" +
+                "Usage:\n" +
+                "java -jar DfM-Creator.jar -JarCreator dictionary_directory empty_jar_directory output_directory\n\n"+
+                "dictionary_directory: directory containing the dictionary and the DictionaryForMIDs.properties files\n"+
+                "empty_jar_directory: directory of the empty DictionaryForMIDs.jar/.jad files\n"+
+                "output_directory: directory where the generated JAR/JAD files are written to\n\n");
+            System.exit(1);
+            
+            /* Debug: uncomment to activate */
+                //System.out.println(dictionarydirectory);
+                //System.out.println(emptydictionaryformids);
+                //System.out.println(outputdirectory);
+        }
 
 	public static void createJar() throws FileNotFoundException,
                                                DfMCreatorExceptions.CantCreatOutputJarJadDirectory,
