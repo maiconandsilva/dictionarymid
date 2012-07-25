@@ -81,8 +81,7 @@ public class AboutBox extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("de/kugihan/I18n-L10n/Bundle"); // NOI18N
-        okButton.setText(bundle.getString("ok.aboutBox")); // NOI18N
+        okButton.setText(I18n.tr("ok.aboutBox")); // NOI18N
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);

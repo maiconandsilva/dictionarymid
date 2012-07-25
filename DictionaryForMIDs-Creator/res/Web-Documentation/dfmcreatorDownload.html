@@ -38,8 +38,6 @@
 <div id="menu">
   <iframe src="/menu.html" width="95%" height="450" frameborder=0></iframe>
 </div>
-<div id="content">
-
 
 <h2>DfM-Creator Binaries Download</h2>
 
@@ -49,7 +47,7 @@
 
 <div style="display: block; height: 500px; width: 800px" class="pane" id="release-pane">
         
-<h2 class="release-title">Release: 0.5 [19 July, 2012]</h2>
+<h2 class="release-title">Release: 0.5 [25 July, 2012]</h2>
 
 <h3 class="category">New Features</h3>
 <ul>
@@ -59,9 +57,9 @@
 	from the command line by calling DfM-Creator in either of the following forms:<br>
 		<ul>
 			<li>java -jar DfM-Creator.jar -DictdToDictionaryForMIDs</li>
-			<li>java -jar DfM-Creator.jar -DictionaryGeneration</li>
+			<li>java -jar DfM-Creator.jar -DictionaryGeneration INPUT_DICTIONARY_FILE | OUTPUT_DIRECTORY | PROPERTY_DIRECTORY</li>
+			<li>java -jar DfM-Creator.jar -JarCreator DICTIONARY_DIRECTORY | EMPTY_JAR_DIRECTORY | OUTPUT_DIRECTORY</li>
 			<li>java -jar DfM-Creator.jar -FontGenerator</li>
-			<li>java -jar DfM-Creator.jar -JarCreator</li>
 		</ul>
 	</li>
 	<br>
@@ -104,8 +102,6 @@
 	
 </ul>
 
-
-
 <h2 class="release-title">Release: 0.4 [29 June, 2012]</h2>
 <p>First official DfM-Creator release</p>
 
@@ -115,7 +111,7 @@
 	<li>Convert a Dictd file into the DictionaryForMIDs format</li>
 	<br>
 	<li>Generate dictionary files from the input file either provided by
-		 DictdToDictionaryForMIDs or manually created from Microsoft Excel or
+		 DictdToDictionaryForMIDs or manually created from Microsoft's Excel or
 		 OpenOffice.org/LibreOffice's Calc
 	</li>
 	<br>
@@ -136,7 +132,7 @@
 </ul>
 
 <h3 class="category">Known Bugs:</h3>
-<p>There is a known bug during the dictionary conversion (Bug-09062012).
+<p>There is a known bug related to the dictionary conversion (Bug-09062012).
 It happens during the conversion of some freedict.org bilingual dictionaries.
 The bug causes DictdToDictionaryForMIDs to write in the converted dictionary file
 a line like the following:
@@ -147,7 +143,8 @@ at org.dict.kernel.DictEngine.lookup(DictEngine.java:149) (...) at java.lang.Thr
 \n\nAvailable dictionaries: freedict-eng-fra&lt;/pre&gt;</i>
 </p>
 <p>
-This bug will be fixed in a future version of DictionaryForMIDs-Creator.
+Hopefully the causes of this bug will be discovered and then the bug will be fixed.
+Hopefully this will be done in a future version of DictionaryForMIDs-Creator.
 For the time being, the only way to get rid of those nasties is to edit the converted file manually.
 So, if your input dictionary file is from freedict.org (is a freedict dictionary), open the converted
 file and remove the line starting from <i>&lt;pre&gt;</i> to <i>&lt;/pre&gt;</i> along with all the text
@@ -179,12 +176,14 @@ sources, always go to the subversion repository. To check out the repository, co
 <code>svn co https://dictionarymid.svn.sourceforge.net/svnroot/dictionarymid dictionarymid</code>
 </p>
 
-<p>Download the latest stable sources <a href="files/DfM-Creator-src.zip" >here</a></p>
+<p id="sourcesDownload">Download the latest stable sources <a href="files/DfM-Creator-src.zip" >here</a></p>
 Note that these are only the DfM-Creator sources. For development purposes you will need some
 other tools/applications that are dependencies to DfM-Creator. To get all the dependencies,
 download at least the trunk directory from the subversion repository. To download only the trunk
-repository, code:<br>
+directory, code:<br>
+
 <code>svn co https://dictionarymid.svn.sourceforge.net/svnroot/dictionarymid/trunk dictionarymid_trunk</code>
+
 <p>For a detailed information about the subversion repository of DictionaryForMIDs or how to build
 DictionaryForMIDs tools and applications, go <a href="dfmcreatorDevelopment.html#buildprocess">here</a></p>
 <p>&nbsp;</p>
