@@ -14,455 +14,455 @@ javac.encoding=UTF-8
 
 <project name="allwork" default="build_all">
 
-	<!-- <property name="wtk.home"  location="D:\WTK25"/> -->
-	<property name="wtk.home"  location="/media/MultimediaPlus/WTK-2.5.2"/>
+    <!-- <property name="wtk.home"                  location="D:\WTK25"/> -->
+    <property name="wtk.home"                       location="/media/MultimediaPlus/WTK-2.5.2"/>
 
-	<property name="wtk.cldc.version"  			value="1.1"/>
-	<property name="wtk.midp.version"  			value="2.0"/>
-	<property name="wtk.optionalpda.enabled"  	value="true"/>
+    <property name="wtk.cldc.version"               value="1.1"/>
+    <property name="wtk.midp.version"               value="2.0"/>
+    <property name="wtk.optionalpda.enabled"        value="true"/>
 
-	<taskdef resource="antenna.properties" 		classpath="./antenna-bin-1.2.1-beta.jar"/> 
-	
-    <property name="VersionNumber" 		value="3.5.8"/>	<!-- version of tools / applications -->
-	<property name="VersionStatus" 		value="final"/>	 <!--  e.g. "beta", "testversion 2"  -->
-    <condition property="ApplicationVersion" 	value="${VersionNumber}_${VersionStatus}" else="${VersionNumber}">
-    	<isset property="VersionStatus"/>
-	</condition>
+    <taskdef resource="antenna.properties"          classpath="./antenna-bin-1.2.1-beta.jar"/> 
+    
+    <property name="VersionNumber"                  value="3.5.8"/>    <!-- version of tools / applications -->
+    <property name="VersionStatus"                  value="final"/>     <!--  e.g. "beta", "testversion 2"  -->
+        <condition property="ApplicationVersion"    value="${VersionNumber}_${VersionStatus}" else="${VersionNumber}">
+        <isset property="VersionStatus"/>
+    </condition>
 
-  	<property name="Build" 				location="."/> 				<!-- current directory -->
-  	<property name="Build.buildfile" 	location="${Build}/${Build.buildfilename}"/> <!-- location of this file -->
-	
-  	<property name="DfM.inputbasedir" 	location="../DictionaryForMIDs"/>
-  	<property name="DfM.outputbasedir" 	location="${Build}/DictionaryForMIDs"/>
-	<property name="DfM.srcdir"     	location="${DfM.inputbasedir}/src"/>            		
-	<property name="DfM.classdir"   	location="${DfM.outputbasedir}/classes"/>        		
+    <property name="Build"                          location="."/>                 <!-- current directory -->
+    <property name="Build.buildfile"                location="${Build}/${Build.buildfilename}"/> <!-- location of this file -->
+    
+    <property name="DfM.inputbasedir"               location="../DictionaryForMIDs"/>
+    <property name="DfM.outputbasedir"              location="${Build}/DictionaryForMIDs"/>
+    <property name="DfM.srcdir"                     location="${DfM.inputbasedir}/src"/>                    
+    <property name="DfM.classdir"                   location="${DfM.outputbasedir}/classes"/>                
 
-	<property name="JavaME.inputbasedir"  location="../JavaME"/>
-	<property name="JavaME.outputbasedir" location="${Build}/JavaME"/>
-	<property name="JavaME.srcdir" 		location="${JavaME.inputbasedir}/src"/>
-	<property name="JavaME.classdir" 	location="${JavaME.outputbasedir}/classes"/>
-	<property name="JavaME.resdir"     	location="${JavaME.inputbasedir}/res"/>            		
-	<property name="JavaME.bindir"   	location="${JavaME.outputbasedir}/bin"/>				
-	<property name="JavaME.jarfile"    	location="${JavaME.outputbasedir}/DictionaryForMIDs.jar"/> <!-- Put the file in the home directory of Build/Java ME -->
-	<property name="JavaME.jadfile"    	location="${JavaME.outputbasedir}/DictionaryForMIDs.jad"/> <!-- Put the file in the home directory of Build/Java ME -->
-	<property name="JavaME.manifest"   	location="${JavaME.bindir}/MANIFEST.MF"/>				  
+    <property name="JavaME.inputbasedir"            location="../JavaME"/>
+    <property name="JavaME.outputbasedir"           location="${Build}/JavaME"/>
+    <property name="JavaME.srcdir"                  location="${JavaME.inputbasedir}/src"/>
+    <property name="JavaME.classdir"                location="${JavaME.outputbasedir}/classes"/>
+    <property name="JavaME.resdir"                  location="${JavaME.inputbasedir}/res"/>                    
+    <property name="JavaME.bindir"                  location="${JavaME.outputbasedir}/bin"/>                
+    <property name="JavaME.jarfile"                 location="${JavaME.outputbasedir}/DictionaryForMIDs.jar"/> <!-- Put the file in the home directory of Build/Java ME -->
+    <property name="JavaME.jadfile"                 location="${JavaME.outputbasedir}/DictionaryForMIDs.jad"/> <!-- Put the file in the home directory of Build/Java ME -->
+    <property name="JavaME.manifest"                location="${JavaME.bindir}/MANIFEST.MF"/>                  
 
-	<property name="JavaSE.inputbasedir"  location="../JavaSE"/>
-	<property name="JavaSE.outputbasedir" location="${Build}/JavaSE"/>
-	<property name="JavaSE.srcdir" 		location="${JavaSE.inputbasedir}/src"/>
-	<property name="JavaSE.classdir" 	location="${JavaSE.outputbasedir}/bin"/>
-	<property name="JavaSE.jarfile" 	location="${JavaSE.outputbasedir}/DictionaryForMIDsPC.jar"/>
-	
+    <property name="JavaSE.inputbasedir"            location="../JavaSE"/>
+    <property name="JavaSE.outputbasedir"           location="${Build}/JavaSE"/>
+    <property name="JavaSE.srcdir"                  location="${JavaSE.inputbasedir}/src"/>
+    <property name="JavaSE.classdir"                location="${JavaSE.outputbasedir}/bin"/>
+    <property name="JavaSE.jarfile"                 location="${JavaSE.outputbasedir}/DictionaryForMIDsPC.jar"/>
+    
 
-  	<!-- 
-		###################### DfM-Creator ######################
-  	-->
-  	
-  	<property name="Build.buildfilename" value="build.xml"/>
-	
-    <property name="DfM-Creator-Version" 		value="0.4"/>	<!-- DfM-Creator version -->
-	<property name="DfM-Creator-VersionStatus" 		value="Alpha"/>	 <!--  e.g. "beta", "alpha"  -->
-    <condition property="DfM-Creator-AppVersion" 	value="${DfM-Creator-Version}_${DfM-Creator-VersionStatus}" else="${DfM-Creator-Version}">
-    	<isset property="DfM-Creator-VersionStatus"/>
-	</condition>
+      <!-- 
+        ###################### DfM-Creator ######################
+      -->
+      
+    <property name="Build.buildfilename"            value="build.xml"/>    
+    <property name="DfM-Creator-Version"            value="0.5"/>    <!-- DfM-Creator version -->
+    <property name="DfM-Creator-VersionStatus"      value="Alpha"/>     <!--  e.g. "beta", "alpha"  -->
+    <condition property="DfM-Creator-AppVersion"    value="${DfM-Creator-Version}_${DfM-Creator-VersionStatus}" else="${DfM-Creator-Version}">
+        <isset property="DfM-Creator-VersionStatus"/>
+    </condition>
 
-	<property name="dfmc.inputbasedir"  	location="../DictionaryForMIDs-Creator"/>
-	<property name="dfmc.outputbasedir"     location="${Build}/DictionaryForMIDs-Creator"/>
-	<property name="dfmc.srcdir"  		    location="${dfmc.inputbasedir}/src"/>
-	<property name="dfmc.classdir"    	    location="${dfmc.outputbasedir}/bin"/>
-	<property name="dfmc.jarfile"     	    location="${dfmc.outputbasedir}/DfM-Creator.jar"/> 	
-	
-	<!-- 
+    <property name="dfmc.inputbasedir"              location="../DictionaryForMIDs-Creator"/>
+    <property name="dfmc.outputbasedir"             location="${Build}/DictionaryForMIDs-Creator"/>
+    <property name="dfmc.srcdir"                    location="${dfmc.inputbasedir}/src"/>
+    <property name="dfmc.classdir"                  location="${dfmc.outputbasedir}/bin"/>
+    <property name="dfmc.jarfile"                   location="${dfmc.outputbasedir}/DfM-Creator.jar"/>     
+    
+    <!-- 
         Compiling, building and packaging operations
-  	-->
+      -->
     <target name="dfm_creator_pre-init">
-        <copy todir="${dfmc.classdir}/de/kugihan/I18n-L10n">
-            <fileset dir="${dfmc.srcdir}/de/kugihan/I18n-L10n"/>
+        <copy todir="${dfmc.classdir}/de/kugihan/I18nL10n">
+            <fileset dir="${dfmc.srcdir}/de/kugihan/I18nL10n"/>
         </copy>
         <copy todir="${dfmc.classdir}/de/kugihan/DfMCreator/doc">
             <fileset dir="${dfmc.inputbasedir}/res/doc"/>
         </copy>
     </target>
     
-	<target name="compile_dfm_creator" depends="dfm_creator_pre-init,compile_dfm_common,compile_dfm_java_se,compile_dfm_java_me">
-	    <mkdir dir="${dfmc.classdir}"/>
-	    <javac srcdir="${dfmc.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir};${JavaME.classdir}" encoding="UTF-8" destdir="${dfmc.classdir}" debug="on"/>
-	</target>
+    <target name="compile_dfm_creator" depends="dfm_creator_pre-init,compile_dfm_common,compile_dfm_java_se,compile_dfm_java_me">
+        <mkdir dir="${dfmc.classdir}"/>
+        <javac srcdir="${dfmc.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir};${JavaME.classdir}" encoding="UTF-8" destdir="${dfmc.classdir}" debug="on"/>
+    </target>
 
-	<target name="build_dfm_creator" depends="compile_dfm_creator"> 
-		<antcall target="dfmc_create_application_property_file">
-			<param name="destinationbasedir" 	value="${dfmc.outputbasedir}"/>
-		</antcall>
-	    <jar destfile="${dfmc.jarfile}"  >
-	      	<fileset dir="${dfmc.classdir}"      includes="de/kugihan/**" />
-	      	<fileset dir="${dfmc.classdir}"      includes="org/dict/**" />
-	      	<fileset dir="${dfmc.classdir}"      includes="edu/hws/eck/mdb/**" />
-	      	<fileset dir="${DfM.classdir}"     	 includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${JavaME.classdir}"    includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${JavaSE.classdir}"    includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${dfmc.outputbasedir}" includes="${dfmc_app.propertyfilename}"/>
-	      	<manifest>
-	        	<attribute name="Built-By" value="${user.name}"/>
-	        	<attribute name="Created-By" value="Karim Mahamane Karimou"/>
-	        	<attribute name="Main-Class" value="de.kugihan.DfMCreator.DfMCreatorMain"/>
-	      	</manifest>
-	    </jar>
-	</target>
+    <target name="build_dfm_creator" depends="compile_dfm_creator"> 
+        <antcall target="dfmc_create_application_property_file">
+            <param name="destinationbasedir"        value="${dfmc.outputbasedir}"/>
+        </antcall>
+        <jar destfile="${dfmc.jarfile}"  >
+              <fileset dir="${dfmc.classdir}"       includes="de/kugihan/**" />
+              <fileset dir="${dfmc.classdir}"       includes="org/dict/**" />
+              <fileset dir="${dfmc.classdir}"       includes="edu/hws/eck/mdb/**" />
+              <fileset dir="${DfM.classdir}"        includes="de/kugihan/dictionaryformids/**"  />
+              <fileset dir="${JavaME.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
+              <fileset dir="${JavaSE.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
+              <fileset dir="${dfmc.outputbasedir}"  includes="${dfmc_app.propertyfilename}"/>
+              <manifest>
+                <attribute name="Built-By"          value="${user.name}"/>
+                <attribute name="Created-By"        value="Karim Mahamane Karimou"/>
+                <attribute name="Main-Class"        value="de.kugihan.DfMCreator.DfMCreatorMain"/>
+              </manifest>
+        </jar>
+    </target>
 
-	<target name="package_dfm_creator" depends="build_dfm_creator">
-		<antcall target="dfmc_replace_keywords_readme">
-			<param name="sourcebasedir" 		value="${dfmc.inputbasedir}"/>
-			<param name="destinationbasedir" 	value="${dfmc.outputbasedir}"/>
-		</antcall>
-		<property name="dfmc.zipfile"	location="${dfmc.outputbasedir}/DictionaryForMIDs-Creator_${DfM-Creator-AppVersion}.zip"/>
-		<zip destfile="${dfmc.zipfile}">
-			<zipfileset file="${dfmc.jarfile}"/>
-			<zipfileset file="${dfmc_packaging.copyrightfile}"/>
-			<zipfileset file="${dfmc.outputbasedir}/${dfmc_packaging.subdir}/${dfmc_packaging.readmefilename}"/>
-			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs/src"/>
-			<zipfileset dir="${JavaSE.srcdir}" prefix="source/JavaSE/src"/>
-			<zipfileset dir="${JavaME.srcdir}" prefix="source/JavaME/src"/>
-			<zipfileset dir="${dfmc.inputbasedir}" prefix="source/DictionaryForMIDs-Creator"/>
+    <target name="package_dfm_creator"              depends="build_dfm_creator">
+        <antcall target="dfmc_replace_keywords_readme">
+            <param name="sourcebasedir"             value="${dfmc.inputbasedir}"/>
+            <param name="destinationbasedir"        value="${dfmc.outputbasedir}"/>
+        </antcall>
+        <property name="dfmc.zipfile"               location="${dfmc.outputbasedir}/DictionaryForMIDs-Creator_${DfM-Creator-AppVersion}.zip"/>
+        <zip destfile="${dfmc.zipfile}">
+            <zipfileset file="${dfmc.jarfile}"/>
+            <zipfileset file="${dfmc_packaging.copyrightfile}"/>
+            <zipfileset file="${dfmc.outputbasedir}/${dfmc_packaging.subdir}/${dfmc_packaging.readmefilename}"/>
+            <zipfileset dir="${DfM.srcdir}"         prefix="source/DictionaryForMIDs/src"/>
+            <zipfileset dir="${JavaSE.srcdir}"      prefix="source/JavaSE/src"/>
+            <zipfileset dir="${JavaME.srcdir}"      prefix="source/JavaME/src"/>
+            <zipfileset dir="${dfmc.inputbasedir}"  prefix="source/DictionaryForMIDs-Creator"/>
 
-		</zip>
-	</target>
-	
-  	<!-- 
-  		Other properties/operations...
-  	-->  	
-		<property name="dfmc_packaging.subdir"  			value="${dfmc.inputbasedir}/res/README"/>
-		<property name="dfmc_packaging.readmefilename" 		value="README"/>
-		<property name="dfmc_packaging.gplfilename" 		value="COPYING"/>
-		<property name="dfmc_packaging.copyrightfile" 		value="${dfmc_packaging.subdir}/${dfmc_packaging.gplfilename}"/>
-		<property name="dfmc_app.propertyfilename" 			value="Application.properties"/> 
-		<property name="dfmc.team"  						value="Karim Mahamane Karimou"/>	
-		<property name="dfmc.copyrightyear"  				value="2012"/>
-  	
-	<target name="dfmc_replace_keywords_readme">
-	    <property name="destinationdir"  	                location="${destinationbasedir}/${dfmc_packaging.subdir}"/>	 
-	    <property name="destinationfile" 	                location="${destinationdir}/${dfmc_packaging.readmefilename}"/>
-	    <property name="sourcefile" 		                location="${dfmc_packaging.subdir}/${dfmc_packaging.readmefilename}"/>
-	    <mkdir dir="${destinationdir}"/>
-		<copy file="${sourcefile}" tofile="${destinationfile}"/>
-		<replace file="${destinationfile}">
-			<replacefilter token="$PackageVersion$" 		value="${DfM-Creator-Version}"/>
-			<replacefilter token="$CopyrightYear$" 			value="${dfmc.copyrightyear}"/>
-			<replacefilter token="$CopyrightGPLFilename$" 	value="${packaging.gplfilename}"/>
-			<replacefilter token="$CopyrightBy$" 			value="${dfmc.team}"/>
-		</replace>
-	</target>
-		
-	<target name="dfmc_create_application_property_file">
-	    <property name="destinationfile" 	location="${destinationbasedir}/${dfmc_app.propertyfilename}"/>
-		<propertyfile file="${destinationfile}" comment="The file is automatically created from build.xml">
-		    <entry key="DfM-Creator-Version" value="${DfM-Creator-Version}"/>
-		    <entry key="DfM-Creator-VersionStatus" value="${DfM-Creator-VersionStatus}"/>
-		</propertyfile>
-	</target>
-	
- 	<!-- 
-		###################### end DfM-Creator ######################
-  	-->
-	
+        </zip>
+    </target>
+    
+    <!-- 
+          Other properties/operations...
+    -->      
+    <property name="dfmc_packaging.subdir"          value="${dfmc.inputbasedir}/res/README"/>
+    <property name="dfmc_packaging.readmefilename"  value="README"/>
+    <property name="dfmc_packaging.gplfilename"     value="COPYING"/>
+    <property name="dfmc_packaging.copyrightfile"   value="${dfmc_packaging.subdir}/${dfmc_packaging.gplfilename}"/>
+    <property name="dfmc_app.propertyfilename"      value="Application.properties"/> 
+    <property name="dfmc.team"                      value="Karim Mahamane Karimou"/>    
+    <property name="dfmc.copyrightyear"             value="2012"/>
+      
+    <target name="dfmc_replace_keywords_readme">
+        <property name="destinationdir"             location="${destinationbasedir}/${dfmc_packaging.subdir}"/>     
+        <property name="destinationfile"            location="${destinationdir}/${dfmc_packaging.readmefilename}"/>
+        <property name="sourcefile"                 location="${dfmc_packaging.subdir}/${dfmc_packaging.readmefilename}"/>
+        <mkdir dir="${destinationdir}"/>
+        <copy file="${sourcefile}" tofile="${destinationfile}"/>
+        <replace file="${destinationfile}">
+          <replacefilter token="$PackageVersion$"   value="${DfM-Creator-Version}"/>
+          <replacefilter token="$CopyrightYear$"    value="${dfmc.copyrightyear}"/>
+          <replacefilter token="$CopyrightGPLFilename$" value="${packaging.gplfilename}"/>
+          <replacefilter token="$CopyrightBy$"      value="${dfmc.team}"/>
+        </replace>
+    </target>
+        
+    <target name="dfmc_create_application_property_file">
+        <property name="destinationfile"            location="${destinationbasedir}/${dfmc_app.propertyfilename}"/>
+        <propertyfile file="${destinationfile}"     comment="The file is automatically created from build.xml">
+            <entry key="DfM-Creator-Version"        value="${DfM-Creator-Version}"/>
+            <entry key="DfM-Creator-VersionStatus"  value="${DfM-Creator-VersionStatus}"/>
+        </propertyfile>
+    </target>
+    
+     <!-- 
+        ###################### end DfM-Creator ######################
+      -->
+    
 
 
-	<property name="LG.inputbasedir"  	location="../LanguageUIGeneration"/>
-	<property name="LG.outputbasedir"   location="${Build}/LanguageUIGeneration"/>
-	<property name="LG.srcdir"  		location="${LG.inputbasedir}/src"/>
-	<property name="LG.classdir"    	location="${LG.outputbasedir}/bin"/>
-	<property name="LG.jarfile"     	location="${LG.outputbasedir}/LanguageUIGeneration.jar"/>
+    <property name="LG.inputbasedir"                location="../LanguageUIGeneration"/>
+    <property name="LG.outputbasedir"               location="${Build}/LanguageUIGeneration"/>
+    <property name="LG.srcdir"                      location="${LG.inputbasedir}/src"/>
+    <property name="LG.classdir"                    location="${LG.outputbasedir}/bin"/>
+    <property name="LG.jarfile"                     location="${LG.outputbasedir}/LanguageUIGeneration.jar"/>
 
-	<property name="packaging.subdir"  			value="files_for_packaging"/>
-	<property name="packaging.readmefilename" 	value="README"/>
-	<property name="packaging.gplfilename" 		value="COPYING"/>
-	<property name="packaging.copyrightfile" 	value="${Build}/${packaging.subdir}/${packaging.gplfilename}"/>
+    <property name="packaging.subdir"               value="files_for_packaging"/>
+    <property name="packaging.readmefilename"       value="README"/>
+    <property name="packaging.gplfilename"          value="COPYING"/>
+    <property name="packaging.copyrightfile"        value="${Build}/${packaging.subdir}/${packaging.gplfilename}"/>
 
-	<property name="app.propertyfilename" 		value="Application.properties"/> 
+    <property name="app.propertyfilename"           value="Application.properties"/> 
 
-	<property name="DfM.team"  			value="Gert Nuber and Contributors"/> <!-- Must not be longer than 32 characters --> 
-	                                                                          <!-- otherwise an Application Error will occur --> 
-	                                                                          <!-- on some Motorola devices -->
-	<property name="DfM.copyrightyear"  value="2005, 2006, 2007, 2008, 2009, 2010"/>
+    <property name="DfM.team"                       value="Gert Nuber and Contributors"/> <!-- Must not be longer than 32 characters --> 
+                                                                              <!-- otherwise an Application Error will occur --> 
+                                                                              <!-- on some Motorola devices -->
+    <property name="DfM.copyrightyear"              value="2005, 2006, 2007, 2008, 2009, 2010"/>
 
-	
-	<target name="clean_dfm">
-	    <delete dir="${DfM.outputbasedir}"/>
-	</target>
+    
+    <target name="clean_dfm">
+        <delete dir="${DfM.outputbasedir}"/>
+    </target>
 
-	<target name="clean_java_se">
-	    <delete dir="${JavaSE.outputbasedir}"/>
-	</target>
-	
-	<target name="clean_java_me">
-	    <delete dir="${JavaME.outputbasedir}"/>
-	</target>
-	
-	<target name="clean_dfm_creator">
-	    <delete dir="${dfmc.outputbasedir}"/>
-	</target>
-	
-	<target name="clean_lg">
-	    <delete dir="${LG.outputbasedir}"/>
-	</target>
+    <target name="clean_java_se">
+        <delete dir="${JavaSE.outputbasedir}"/>
+    </target>
+    
+    <target name="clean_java_me">
+        <delete dir="${JavaME.outputbasedir}"/>
+    </target>
+    
+    <target name="clean_dfm_creator">
+        <delete dir="${dfmc.outputbasedir}"/>
+    </target>
+    
+    <target name="clean_lg">
+        <delete dir="${LG.outputbasedir}"/>
+    </target>
 
-	<target name="clean_all" depends="clean_dfm,clean_java_se,clean_dfm_creator,clean_java_me,clean_lg">
-	</target>
+    <target name="clean_all" depends="clean_dfm,clean_java_se,clean_dfm_creator,clean_java_me,clean_lg">
+    </target>
 
-  	<!-- 
-  		DictionaryForMIDs common parts 
-  	-->
-	<target name="compile_dfm_common">
-	    <mkdir dir="${DfM.classdir}"/>	 
-	    <wtkbuild srcdir="${DfM.srcdir}" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${DfM.classdir}" debug="on"/>
-	</target>
+      <!-- 
+          DictionaryForMIDs common parts 
+      -->
+    <target name="compile_dfm_common">
+        <mkdir dir="${DfM.classdir}"/>     
+        <wtkbuild srcdir="${DfM.srcdir}" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${DfM.classdir}" debug="on"/>
+    </target>
 
-	<!-- 
-  		DictionaryForMIDs Java ME 
-  	-->
-	<target name="compile_dfm_java_me" depends="compile_dfm_common">
-	    <mkdir dir="${JavaME.classdir}"/>	 
-	    <mkdir dir="${JavaME.bindir}"/>	 
-	    <wtkbuild srcdir="${JavaME.srcdir}" classpath="${DfM.classdir}" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${JavaME.classdir}" debug="on"/>
-	</target>
+    <!-- 
+          DictionaryForMIDs Java ME 
+    -->
+    
+    <target name="compile_dfm_java_me" depends="compile_dfm_common">
+        <mkdir dir="${JavaME.classdir}"/>     
+        <mkdir dir="${JavaME.bindir}"/>     
+        <wtkbuild srcdir="${JavaME.srcdir}" classpath="${DfM.classdir}" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${JavaME.classdir}" debug="on"/>
+    </target>
 
-	<target name="create_dfm_java_me_jadfile_and_manifest"> 
-		<property name="JavaME.MIDlet-Name" value="DictionaryForMIDs"/> 
-	    <property name="JavaME.MIDlet-Version" value="${VersionNumber}"/>
-	    <property name="JavaME.MicroEdition-Profile" value="MIDP-2.0"/>
-	    <property name="JavaME.MicroEdition-Configuration" value="CLDC-1.1"/>
-	    <property name="JavaME.Built-By" value="${user.name}"/>
-	    <property name="JavaME.MIDlet-1" value="DictionaryForMIDs, /icons/Application/DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs"/>
-	    <wtkjad jadfile="${JavaME.jadfile}">
-		    <attribute name="MIDlet-Name" value="${JavaME.MIDlet-Name}"/>
-		    <attribute name="MIDlet-Version" value="${JavaME.MIDlet-Version}"/>
-		    <attribute name="MicroEdition-Profile" value="${JavaME.MicroEdition-Profile}"/>
-		    <attribute name="MicroEdition-Configuration" value="${JavaME.MicroEdition-Configuration}"/>
-		    <attribute name="Built-By" value="${user.name}"/>
-		    <attribute name="MIDlet-Vendor" value="${DfM.team}"/>
-		    <attribute name="MIDlet-1" value="${JavaME.MIDlet-1}"/>
-		    <attribute name="MIDlet-Jar-URL" value="DictionaryForMIDs.jar"/>
-		    <attribute name="MIDlet-Permissions" value="javax.microedition.io.Connector.file.read"/>
-		    <attribute name="logLevel" value="0"/>
-	  	</wtkjad>
-      	<manifest file="${JavaME.manifest}">
-	      	<attribute name="MIDlet-Name" value="${JavaME.MIDlet-Name}"/>
-	      	<attribute name="MIDlet-Version" value="${JavaME.MIDlet-Version}"/>
-	      	<attribute name="MicroEdition-Profile" value="${JavaME.MicroEdition-Profile}"/>
-	      	<attribute name="MicroEdition-Configuration" value="${JavaME.MicroEdition-Configuration}"/>
-	      	<attribute name="Built-By" value="${user.name}"/>
-	      	<attribute name="MIDlet-Vendor" value="${DfM.team}"/>
-	      	<attribute name="MIDlet-1" value="${JavaME.MIDlet-1}"/>
-      	</manifest>
-	</target>
+    <target name="create_dfm_java_me_jadfile_and_manifest"> 
+        <property name="JavaME.MIDlet-Name"         value="DictionaryForMIDs"/> 
+        <property name="JavaME.MIDlet-Version"      value="${VersionNumber}"/>
+        <property name="JavaME.MicroEdition-Profile" value="MIDP-2.0"/>
+        <property name="JavaME.MicroEdition-Configuration" value="CLDC-1.1"/>
+        <property name="JavaME.Built-By"            value="${user.name}"/>
+        <property name="JavaME.MIDlet-1"            value="DictionaryForMIDs, /icons/Application/DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs"/>
+        <wtkjad jadfile="${JavaME.jadfile}">
+            <attribute name="MIDlet-Name"           value="${JavaME.MIDlet-Name}"/>
+            <attribute name="MIDlet-Version"        value="${JavaME.MIDlet-Version}"/>
+            <attribute name="MicroEdition-Profile"  value="${JavaME.MicroEdition-Profile}"/>
+            <attribute name="MicroEdition-Configuration" value="${JavaME.MicroEdition-Configuration}"/>
+            <attribute name="Built-By"              value="${user.name}"/>
+            <attribute name="MIDlet-Vendor"         value="${DfM.team}"/>
+            <attribute name="MIDlet-1"              value="${JavaME.MIDlet-1}"/>
+            <attribute name="MIDlet-Jar-URL"        value="DictionaryForMIDs.jar"/>
+            <attribute name="MIDlet-Permissions"    value="javax.microedition.io.Connector.file.read"/>
+            <attribute name="logLevel"              value="0"/>
+          </wtkjad>
+          <manifest file="${JavaME.manifest}">
+              <attribute name="MIDlet-Name"         value="${JavaME.MIDlet-Name}"/>
+              <attribute name="MIDlet-Version"      value="${JavaME.MIDlet-Version}"/>
+              <attribute name="MicroEdition-Profile" value="${JavaME.MicroEdition-Profile}"/>
+              <attribute name="MicroEdition-Configuration" value="${JavaME.MicroEdition-Configuration}"/>
+              <attribute name="Built-By"            value="${user.name}"/>
+              <attribute name="MIDlet-Vendor"       value="${DfM.team}"/>
+              <attribute name="MIDlet-1"            value="${JavaME.MIDlet-1}"/>
+          </manifest>
+    </target>
 
-	<target name="build_dfm_java_me" depends="compile_dfm_java_me,create_dfm_java_me_jadfile_and_manifest"> 
-		<antcall target="create_application_property_file">
-			<param name="destinationbasedir" 	value="${JavaME.outputbasedir}"/>
-		</antcall>
-		<!-- note: the following wtkpackage task will fail on preverification if the jar tool is not in the path -->
-	    <wtkpackage jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}" manifest="${JavaME.manifest}" preverify="true">
-			<fileset dir="${DfM.classdir}"     	includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${JavaME.classdir}"/>
-	      	<fileset dir="${JavaME.resdir}"/>
-	      	<fileset dir="${JavaME.outputbasedir}" includes="${app.propertyfilename}"/>
-	    </wtkpackage>
-	</target>
+    <target name="build_dfm_java_me" depends="compile_dfm_java_me,create_dfm_java_me_jadfile_and_manifest"> 
+        <antcall target="create_application_property_file">
+            <param name="destinationbasedir"        value="${JavaME.outputbasedir}"/>
+        </antcall>
+        <!-- note: the following wtkpackage task will fail on preverification if the jar tool is not in the path -->
+        <wtkpackage jarfile="${JavaME.jarfile}"     jadfile="${JavaME.jadfile}" manifest="${JavaME.manifest}" preverify="true">
+            <fileset dir="${DfM.classdir}"          includes="de/kugihan/dictionaryformids/**"  />
+              <fileset dir="${JavaME.classdir}"/>
+              <fileset dir="${JavaME.resdir}"/>
+              <fileset dir="${JavaME.outputbasedir}" includes="${app.propertyfilename}"/>
+        </wtkpackage>
+    </target>
 
-	<target name="package_dfm_java_me_empty" depends="obfuscate_dfm_java_me"> 
-		<property name="packaging.java_me_executeable.subdir" value="files_for_packaging/executeable_distribution"/>
-		<antcall target="replace_keywords_readme">
-			<param name="sourcebasedir" 		value="${JavaME.inputbasedir}"/>
-			<param name="destinationbasedir" 	value="${JavaME.outputbasedir}"/>
-			<param name="packaging.subdir" 		value="${packaging.java_me_executeable.subdir}"/>
-		</antcall>
-		<property name="JavaME.zipfile_empty"	location="${JavaME.outputbasedir}/DictionaryForMIDs_${ApplicationVersion}_empty.zip"/>
-		<zip destfile="${JavaME.zipfile_empty}">
-			<zipfileset file="${JavaME.jarfile}"/>
-			<zipfileset file="${JavaME.jadfile}"/>
-			<zipfileset file="${packaging.copyrightfile}"/>
-			<zipfileset file="${JavaME.outputbasedir}/${packaging.java_me_executeable.subdir}/${packaging.readmefilename}"/>
-		</zip>
-	</target>
+    <target name="package_dfm_java_me_empty" depends="obfuscate_dfm_java_me"> 
+        <property name="packaging.java_me_executeable.subdir" value="files_for_packaging/executeable_distribution"/>
+        <antcall target="replace_keywords_readme">
+            <param name="sourcebasedir"             value="${JavaME.inputbasedir}"/>
+            <param name="destinationbasedir"        value="${JavaME.outputbasedir}"/>
+            <param name="packaging.subdir"          value="${packaging.java_me_executeable.subdir}"/>
+        </antcall>
+        <property name="JavaME.zipfile_empty"       location="${JavaME.outputbasedir}/DictionaryForMIDs_${ApplicationVersion}_empty.zip"/>
+        <zip destfile="${JavaME.zipfile_empty}">
+            <zipfileset file="${JavaME.jarfile}"/>
+            <zipfileset file="${JavaME.jadfile}"/>
+            <zipfileset file="${packaging.copyrightfile}"/>
+            <zipfileset file="${JavaME.outputbasedir}/${packaging.java_me_executeable.subdir}/${packaging.readmefilename}"/>
+        </zip>
+    </target>
 
-	<target name="package_dfm_java_me_sources" depends="build_dfm_java_me">  <!-- dependency on build_dfm_java_me is included 
-	                                                                              to ensure that the source compiles -->
-		<property name="packaging.java_me_source.subdir" value="files_for_packaging/source_distribution"/>
-		<antcall target="replace_keywords_readme">
-			<param name="sourcebasedir" 		value="${JavaME.inputbasedir}"/>
-			<param name="destinationbasedir" 	value="${JavaME.outputbasedir}"/>
-			<param name="packaging.subdir" 		value="${packaging.java_me_source.subdir}"/>
-		</antcall>
-		<property name="JavaME.zipfile_source"	location="${JavaME.outputbasedir}/DictionaryForMIDs_${ApplicationVersion}_source.zip"/>
-		<zip destfile="${JavaME.zipfile_source}">
-			<zipfileset dir="${JavaME.srcdir}" prefix="source/DictionaryForMIDs/src"/>
-			<zipfileset dir="${DfM.srcdir}" prefix="source/DictionaryForMIDs/src"/>
-			<zipfileset dir="${JavaME.resdir}" prefix="source/DictionaryForMIDs/res"/>
-			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
-			<zipfileset file="${packaging.copyrightfile}"/>
-			<zipfileset file="${JavaME.outputbasedir}/${packaging.java_me_source.subdir}/${packaging.readmefilename}"/>
-		</zip>
-	</target>
+    <target name="package_dfm_java_me_sources" depends="build_dfm_java_me">  <!-- dependency on build_dfm_java_me is included 
+                                                                                  to ensure that the source compiles -->
+        <property name="packaging.java_me_source.subdir" value="files_for_packaging/source_distribution"/>
+        <antcall target="replace_keywords_readme">
+            <param name="sourcebasedir"             value="${JavaME.inputbasedir}"/>
+            <param name="destinationbasedir"        value="${JavaME.outputbasedir}"/>
+            <param name="packaging.subdir"          value="${packaging.java_me_source.subdir}"/>
+        </antcall>
+        <property name="JavaME.zipfile_source"    location="${JavaME.outputbasedir}/DictionaryForMIDs_${ApplicationVersion}_source.zip"/>
+        <zip destfile="${JavaME.zipfile_source}">
+            <zipfileset dir="${JavaME.srcdir}"      prefix="source/DictionaryForMIDs/src"/>
+            <zipfileset dir="${DfM.srcdir}"         prefix="source/DictionaryForMIDs/src"/>
+            <zipfileset dir="${JavaME.resdir}"      prefix="source/DictionaryForMIDs/res"/>
+            <zipfileset dir="${Build}"              prefix="source/Build" includes="${Build.buildfilename}"/>
+            <zipfileset file="${packaging.copyrightfile}"/>
+            <zipfileset file="${JavaME.outputbasedir}/${packaging.java_me_source.subdir}/${packaging.readmefilename}"/>
+        </zip>
+    </target>
 
-	<target name="do_obfuscate_dfm_java_me"> 
-	    <wtkobfuscate jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}">
-	    	<!-- do not obfuscate the main class that is referred in the manifest --> 
-			<preserve class="de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs"/>
-	    	<!-- do not obfuscate normation classes that may be referred in the file DictionaryForMIDs.properties --> 
-			<preserve class="de.kugihan.dictionaryformids.translation.normation.Normation"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationLat"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationGer"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationFil"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationEng"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationEng2"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationJpn"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationLat"/>
-			<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationNor"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationUkr"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationUkrC"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationRus"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationRus2"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationRusC"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationVie"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationEpo"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationBul"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationCyr1"/>
-	    	<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationCyr2"/>
-	    	<!-- do not obfuscate the zip classes; this will allow JarCreator to strip off the zip classes -->
-	    	<!-- note: the keeppackagenames parameter is supported by proGuard only; not yet tested
-	    	<argument value="-keeppackagenames de.kugihan.dictionaryformids.dataaccess.zip/*"/>   -->
-	    </wtkobfuscate>
-		<!-- need to preverify again -->
-		<wtkpreverify jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}"/>
-	</target>
-  	
-	<target name="obfuscate_dfm_java_me" depends="build_dfm_java_me"> 
-		<antcall target="do_obfuscate_dfm_java_me"/>
-	</target>
-	
-	<target name="create_minimal_size_dfm_java_me" depends="compile_dfm_java_me,create_dfm_java_me_jadfile_and_manifest"> 
-		<antcall target="create_application_property_file">
-			<param name="destinationbasedir" 	value="${DfM.outputbasedir}"/>
-		</antcall>
-	    <wtkpackage jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}" manifest="${JavaME.manifest}">
-	      	<fileset dir="${JavaME.classdir}"/>
-	      	<fileset dir="${JavaME.outputbasedir}" includes="${app.propertyfilename}"/>
-	      	<fileset dir="${JavaME.resdir}">
-	      		<!-- do not include any icons -->
-	      		<exclude name="icons/**"/>
-	      		<!-- further improvement: do not include zip classes -->
-	      	</fileset>
-	    </wtkpackage>
-		<antcall target="do_obfuscate_dfm_java_me"/>
-	</target>
-  	
-  	<!-- 
-  		DictionaryForMIDs Java SE
-  	-->
-	<target name="compile_dfm_java_se" depends="compile_dfm_common">
-	    <mkdir dir="${JavaSE.classdir}"/>	 
-	    <javac srcdir="${JavaSE.srcdir}"  classpath="${DfM.classdir}" encoding="UTF-8" destdir="${JavaSE.classdir}" debug="on" />
-	</target>
+    <target name="do_obfuscate_dfm_java_me"> 
+        <wtkobfuscate jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}">
+            <!-- do not obfuscate the main class that is referred in the manifest --> 
+            <preserve class="de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs"/>
+            <!-- do not obfuscate normation classes that may be referred in the file DictionaryForMIDs.properties --> 
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.Normation"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationLat"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationGer"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationFil"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationEng"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationEng2"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationJpn"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationLat"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationNor"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationUkr"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationUkrC"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationRus"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationRus2"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationRusC"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationVie"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationEpo"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationBul"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationCyr1"/>
+            <preserve class="de.kugihan.dictionaryformids.translation.normation.NormationCyr2"/>
+            <!-- do not obfuscate the zip classes; this will allow JarCreator to strip off the zip classes -->
+            <!-- note: the keeppackagenames parameter is supported by proGuard only; not yet tested
+            <argument value="-keeppackagenames de.kugihan.dictionaryformids.dataaccess.zip/*"/>   -->
+        </wtkobfuscate>
+        <!-- need to preverify again -->
+        <wtkpreverify jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}"/>
+    </target>
+      
+    <target name="obfuscate_dfm_java_me" depends="build_dfm_java_me"> 
+        <antcall target="do_obfuscate_dfm_java_me"/>
+    </target>
+    
+    <target name="create_minimal_size_dfm_java_me" depends="compile_dfm_java_me,create_dfm_java_me_jadfile_and_manifest"> 
+        <antcall target="create_application_property_file">
+            <param name="destinationbasedir"     value="${DfM.outputbasedir}"/>
+        </antcall>
+        <wtkpackage jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}" manifest="${JavaME.manifest}">
+              <fileset dir="${JavaME.classdir}"/>
+              <fileset dir="${JavaME.outputbasedir}" includes="${app.propertyfilename}"/>
+              <fileset dir="${JavaME.resdir}">
+                  <!-- do not include any icons -->
+                  <exclude name="icons/**"/>
+                  <!-- further improvement: do not include zip classes -->
+              </fileset>
+        </wtkpackage>
+        <antcall target="do_obfuscate_dfm_java_me"/>
+    </target>
+      
+      <!-- 
+          DictionaryForMIDs Java SE
+      -->
+    <target name="compile_dfm_java_se" depends="compile_dfm_common">
+        <mkdir dir="${JavaSE.classdir}"/>     
+        <javac srcdir="${JavaSE.srcdir}"  classpath="${DfM.classdir}" encoding="UTF-8" destdir="${JavaSE.classdir}" debug="on" />
+    </target>
 
-	<target name="build_dfm_java_se" depends="compile_dfm_java_se"> 
-		<antcall target="create_application_property_file">
-			<param name="destinationbasedir" 	value="${JavaSE.outputbasedir}"/>
-		</antcall>
-	    <jar destfile="${JavaSE.jarfile}"  >
-			<fileset dir="${DfM.classdir}"     	includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${JavaSE.classdir}"  	includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${JavaSE.outputbasedir}" includes="${app.propertyfilename}"/>
-	      	<manifest>
-	        	<attribute name="Built-By" 		value="${user.name}"/>
-	        	<attribute name="Created-By" 	value="Stefan Martens"/>
-	        	<attribute name="Main-Class" 	value="de.kugihan.dictionaryformids.hmi_java_se.DictionaryForSE"/>
-	      	</manifest>
-	    </jar>
-	</target>
-  	
-	<target name="package_dfm_java_se" depends="build_dfm_java_se">
-		<antcall target="replace_keywords_readme">
-			<param name="sourcebasedir" 		value="${JavaSE.inputbasedir}"/>
-			<param name="destinationbasedir" 	value="${JavaSE.outputbasedir}"/>
-		</antcall>
-		<property name="JavaSE.zipfile"	location="${JavaSE.outputbasedir}/DictionaryForMIDs_JavaSE_${ApplicationVersion}.zip"/>
-		<zip destfile="${JavaSE.zipfile}">
-			<zipfileset file="${JavaSE.jarfile}"/>
-			<zipfileset file="${packaging.copyrightfile}"/>
-			<zipfileset file="${JavaSE.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
-			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
-			<zipfileset dir="${JavaSE.srcdir}" prefix="source/JavaSE/src"/>
-		</zip>
-	</target>
-	
+    <target name="build_dfm_java_se" depends="compile_dfm_java_se"> 
+        <antcall target="create_application_property_file">
+            <param name="destinationbasedir"        value="${JavaSE.outputbasedir}"/>
+        </antcall>
+        <jar destfile="${JavaSE.jarfile}"  >
+            <fileset dir="${DfM.classdir}"          includes="de/kugihan/dictionaryformids/**"  />
+              <fileset dir="${JavaSE.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
+              <fileset dir="${JavaSE.outputbasedir}" includes="${app.propertyfilename}"/>
+              <manifest>
+                <attribute name="Built-By"          value="${user.name}"/>
+                <attribute name="Created-By"        value="Stefan Martens"/>
+                <attribute name="Main-Class"        value="de.kugihan.dictionaryformids.hmi_java_se.DictionaryForSE"/>
+              </manifest>
+        </jar>
+    </target>
+      
+    <target name="package_dfm_java_se" depends="build_dfm_java_se">
+        <antcall target="replace_keywords_readme">
+            <param name="sourcebasedir"             value="${JavaSE.inputbasedir}"/>
+            <param name="destinationbasedir"        value="${JavaSE.outputbasedir}"/>
+        </antcall>
+        <property name="JavaSE.zipfile"    location="${JavaSE.outputbasedir}/DictionaryForMIDs_JavaSE_${ApplicationVersion}.zip"/>
+        <zip destfile="${JavaSE.zipfile}">
+            <zipfileset file="${JavaSE.jarfile}"/>
+            <zipfileset file="${packaging.copyrightfile}"/>
+            <zipfileset file="${JavaSE.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
+            <zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
+            <zipfileset dir="${JavaSE.srcdir}" prefix="source/JavaSE/src"/>
+        </zip>
+    </target>
+    
 
-  	<!-- 
-  		LanguageUIGeneration
-  	-->
-	<target name="compile_lg" depends="compile_dfm_common,compile_dfm_java_se">
-	    <mkdir dir="${LG.classdir}"/>
-	    <javac srcdir="${LG.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${LG.classdir}" debug="on"/>
-	</target>
-	
-	<target name="build_lg" depends="compile_lg"> 
-		<antcall target="create_application_property_file">
-			<param name="destinationbasedir" 	value="${LG.outputbasedir}"/>
-		</antcall>
-	    <jar destfile="${LG.jarfile}"  >
-	      	<fileset dir="${DfM.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${LG.classdir}"      includes="de/kugihan/dictionaryformids/languagegen/**"  />
-	      	<fileset dir="${JavaSE.classdir}"  includes="de/kugihan/dictionaryformids/**"  />
-	      	<fileset dir="${LG.outputbasedir}" includes="${app.propertyfilename}"/>
-	      	<manifest>
-	        	<attribute name="Built-By" value="${user.name}"/>
-	        	<attribute name="Created-By" value="Gert Nuber"/>
-	        	<attribute name="Main-Class" value="de.kugihan.dictionaryformids.languagegen.LanguageUIGeneration"/>
-	      	</manifest>
-	    </jar>
-	</target>
+      <!-- 
+          LanguageUIGeneration
+      -->
+    <target name="compile_lg" depends="compile_dfm_common,compile_dfm_java_se">
+        <mkdir dir="${LG.classdir}"/>
+        <javac srcdir="${LG.srcdir}" classpath="${DfM.classdir};${JavaSE.classdir}" encoding="UTF-8" destdir="${LG.classdir}" debug="on"/>
+    </target>
+    
+    <target name="build_lg" depends="compile_lg"> 
+        <antcall target="create_application_property_file">
+            <param name="destinationbasedir"     value="${LG.outputbasedir}"/>
+        </antcall>
+        <jar destfile="${LG.jarfile}"  >
+              <fileset dir="${DfM.classdir}"        includes="de/kugihan/dictionaryformids/**"  />
+              <fileset dir="${LG.classdir}"         includes="de/kugihan/dictionaryformids/languagegen/**"  />
+              <fileset dir="${JavaSE.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
+              <fileset dir="${LG.outputbasedir}"    includes="${app.propertyfilename}"/>
+              <manifest>
+                <attribute name="Built-By"          value="${user.name}"/>
+                <attribute name="Created-By"        value="Gert Nuber"/>
+                <attribute name="Main-Class"        value="de.kugihan.dictionaryformids.languagegen.LanguageUIGeneration"/>
+              </manifest>
+        </jar>
+    </target>
 
-	<target name="package_lg" depends="build_lg">
-		<antcall target="replace_keywords_readme">
-			<param name="sourcebasedir" 		value="${LG.inputbasedir}"/>
-			<param name="destinationbasedir" 	value="${LG.outputbasedir}"/>
-		</antcall>
-		<property name="LG.zipfile"	location="${LG.outputbasedir}/DictionaryForMIDs_LanguageUIGeneration_${ApplicationVersion}.zip"/>
-		<zip destfile="${LG.zipfile}">
-			<zipfileset file="${LG.jarfile}"/>
-			<zipfileset file="${packaging.copyrightfile}"/>
-			<zipfileset file="${LG.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
-			<zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
-			<zipfileset dir="${LG.srcdir}" prefix="source/LanguageUIGeneration/src"/>
-		</zip>
-	</target>
+    <target name="package_lg" depends="build_lg">
+        <antcall target="replace_keywords_readme">
+            <param name="sourcebasedir"             value="${LG.inputbasedir}"/>
+            <param name="destinationbasedir"        value="${LG.outputbasedir}"/>
+        </antcall>
+        <property name="LG.zipfile"    location="${LG.outputbasedir}/DictionaryForMIDs_LanguageUIGeneration_${ApplicationVersion}.zip"/>
+        <zip destfile="${LG.zipfile}">
+            <zipfileset file="${LG.jarfile}"/>
+            <zipfileset file="${packaging.copyrightfile}"/>
+            <zipfileset file="${LG.outputbasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
+            <zipfileset dir="${Build}" prefix="source/Build" includes="${Build.buildfilename}"/>
+            <zipfileset dir="${LG.srcdir}" prefix="source/LanguageUIGeneration/src"/>
+        </zip>
+    </target>
 
-	<!-- 
-		general procedures that are called with antcall 
-	-->
-	<target name="replace_keywords_readme">
-	    <property name="destinationdir"  	location="${destinationbasedir}/${packaging.subdir}"/>	 
-	    <property name="destinationfile" 	location="${destinationdir}/${packaging.readmefilename}"/>
-	    <property name="sourcefile" 		location="${sourcebasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
-	    <mkdir dir="${destinationdir}"/>
-		<copy file="${sourcefile}" tofile="${destinationfile}"/>
-		<replace file="${destinationfile}">
-			<replacefilter token="$PackageVersion$" 		value="${VersionNumber}"/>
-			<replacefilter token="$CopyrightYear$" 			value="${DfM.copyrightyear}"/>
-			<replacefilter token="$CopyrightGPLFilename$" 	value="${packaging.gplfilename}"/>
-			<replacefilter token="$CopyrightBy$" 			value="${DfM.team}"/>
-		</replace>
-	</target>
-		
-	<target name="create_application_property_file">
-	    <property name="destinationfile" 	location="${destinationbasedir}/${app.propertyfilename}"/>
-		<propertyfile file="${destinationfile}" comment="The file is automatically created from build.xml">
-		    <entry key="VersionNumber" value="${VersionNumber}"/>
-		    <entry key="VersionStatus" value="${VersionStatus}"/>
-		</propertyfile>
-	</target>
-		
-	<target name="build_all" depends="build_lg,build_dfm_java_se,build_dfm_java_me,build_dfm_creator"/>
-	
-	<target name="package_all" depends="package_lg,package_dfm_java_me_empty,package_dfm_java_se,package_dfm_creator"/>
+    <!-- 
+        general procedures that are called with antcall 
+    -->
+    <target name="replace_keywords_readme">
+        <property name="destinationdir"             location="${destinationbasedir}/${packaging.subdir}"/>     
+        <property name="destinationfile"            location="${destinationdir}/${packaging.readmefilename}"/>
+        <property name="sourcefile"                 location="${sourcebasedir}/${packaging.subdir}/${packaging.readmefilename}"/>
+        <mkdir dir="${destinationdir}"/>
+        <copy file="${sourcefile}" tofile="${destinationfile}"/>
+        <replace file="${destinationfile}">
+            <replacefilter token="$PackageVersion$" value="${VersionNumber}"/>
+            <replacefilter token="$CopyrightYear$"  value="${DfM.copyrightyear}"/>
+            <replacefilter token="$CopyrightGPLFilename$" value="${packaging.gplfilename}"/>
+            <replacefilter token="$CopyrightBy$"    value="${DfM.team}"/>
+        </replace>
+    </target>
+        
+    <target name="create_application_property_file">
+        <property name="destinationfile"            location="${destinationbasedir}/${app.propertyfilename}"/>
+        <propertyfile file="${destinationfile}"     comment="The file is automatically created from build.xml">
+            <entry key="VersionNumber"              value="${VersionNumber}"/>
+            <entry key="VersionStatus"              value="${VersionStatus}"/>
+        </propertyfile>
+    </target>
+        
+    <target name="build_all" depends="build_lg,build_dfm_java_se,build_dfm_java_me,build_dfm_creator"/>
+    
+    <target name="package_all" depends="package_lg,package_dfm_java_me_empty,package_dfm_java_se,package_dfm_creator"/>
 
     <target name="package_all_except_java_me" depends="package_lg,package_dfm_java_se,package_dfm_creator"/>
 

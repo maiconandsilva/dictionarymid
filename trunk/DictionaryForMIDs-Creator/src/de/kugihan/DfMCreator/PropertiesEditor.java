@@ -1463,8 +1463,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         jPanel14.setLayout(new java.awt.GridBagLayout());
 
         jButton1.setText(I18n.tr("contentNNPropsEditorButton.dfmPropCreate")); // NOI18N
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("de/kugihan/I18n-L10n/Bundle"); // NOI18N
-        jButton1.setToolTipText(bundle.getString("content.nn.props.creator.win.launcher.button.tooltiptext")); // NOI18N
+        jButton1.setToolTipText(I18n.tr("content.nn.props.creator.win.launcher.button.tooltiptext")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

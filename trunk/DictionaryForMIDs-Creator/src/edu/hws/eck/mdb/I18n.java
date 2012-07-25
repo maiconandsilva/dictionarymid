@@ -1,8 +1,8 @@
 package edu.hws.eck.mdb;
 
+import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.text.MessageFormat;
 
 /**
  * This class provides some support for Internationalization, making it possible
@@ -18,7 +18,7 @@ public class I18n {
     * where xx is the code for the locale.  To use this file in another program,
     * only the propertyFileName has to be changed.
     */
-   private final static String propertyFileName = "de/kugihan/I18n-L10n/Bundle";
+   private final static String propertyFileName = "de/kugihan/I18nL10n/Bundle";
    
    /**
     * If locale is null, the default locale is used.  A non-null value can be

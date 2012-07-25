@@ -2027,10 +2027,10 @@
                 <Component class="javax.swing.JButton" name="jButton1">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="contentNNPropsEditorButton.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="contentNNPropsEditorButton.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="content.nn.props.creator.win.launcher.button.tooltiptext" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="content.nn.props.creator.win.launcher.button.tooltiptext" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Events>
