@@ -20,7 +20,7 @@
 *   the implied warranty of MERCHANTABILITY or
 *   FITNESS FOR A PARTICULAR PURPOSE.  See the
 *   GNU General Public License for more details.
-*   	
+*   
 *   You should have received a copy of the GNU General Public
 *   License along with DictionaryForMIDs-Creator;
 *   if not, write to the Free Software Foundation, Inc.,
@@ -70,9 +70,6 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 import javax.swing.*;
 

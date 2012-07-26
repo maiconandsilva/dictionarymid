@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" >
 		<meta http-equiv="Content-Style-Type" content="text/css">
 		<meta name="keywords" content="dictionary, language, MIDP, J2ME, Java, Midlet, mobile, cell phone, PDA">
-		<link rel="stylesheet" href="/style.css" type="text/css">
+		<link rel="stylesheet" href="style.css" type="text/css">
 		<title>DictionaryForMIDs - a free multi-language dictionary for cell phones and PDAs</title>
 	</head>
 
@@ -22,8 +22,8 @@
 <div id="menu">
   <iframe src="/menu.html" width="95%" height="450" frameborder=0></iframe>
 </div>
-<div id="content">
 
+<div id="content">
 <div class="NAVHEADER">
 <table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
 	<tbody>
@@ -43,7 +43,7 @@
 		<h3>Properties</h3>
     	<p>With the content properties you can specify that there is a pronunciation 
 		part, an explanation part, etc. in your dictionary. For each content you can
-		specify font colour, font style and so forth.<br>
+		specify font color, font style and so forth.<br>
     	The content is specified for each languageX.</p>
     	
     	<i>languageXNumberOfContentDeclarations</i><br>
@@ -70,7 +70,7 @@
 		</ul>
 		
 		<p>Text that is used on the user interface to identify the content. NN 
-		needs to be replace with the content number.<br>
+		needs to be replaced with the content number.<br>
 		As shown on the screen-shot:<br><br>
 		
 		language1Content01DisplayText:contentPronunciation<br>
@@ -82,8 +82,8 @@
 		language3Content01DisplayText:contentNotes<br>
 		language3Content02DisplayText:contentExplanation<br></p>
         
-		<p>Predefined content is prefixed by &quot;content&quot;. The following content is 
-		predefined in DictionaryForMIDs:<br>
+		<p>Predefined content is prefixed by &quot;content&quot;.
+		The following content names are	predefined in DictionaryForMIDs:<br>
       contentDefinition<br>
 		contentPronunciation<br>
 		contentGrammaticalCategory<br>
@@ -92,8 +92,12 @@
 		contentNotes</p>
 		
 		<p>* <font color="#FF0000">Note</font>: &quot;contentDefinition&quot; and 
-		&quot;contentNotes&quot; will become available in version 3.0.3</p>
-		<p>For predefined content there are default values for font colour, font 
+		&quot;contentNotes&quot; will become available in version 3.0.3 (at the time
+		of updating this documentation file to tailor it to the new DictionaryForMIDs
+		tool called <b>DictionaryForMIDs-Creator</b> or <b>DfM-Creator</b> for short,
+		the version	of DictionaryForMIDs is 3.5.8, so, normally this feature is
+		implemented	unless otherwise noted.)</p>
+		<p>For predefined content there are default values for font color, font 
 		style etc. If you do not want to use Predefined content, then you may 
 		choose any other name for languageXContentNNDisplayText.</p>
 		
@@ -103,14 +107,14 @@
 		<li>languageXContentNNFontColour</li>
 		</ul>
 		
-		<p>This property defines the font colour for the content. Font colour is specified as 
+		<p>This property defines the font color for the content. Font color is specified as 
 		'RRR, GGG, BBB' where RRR is the value for red, GGG for green and BBB for 
 		blue. Each one of the RRR, GGG, BBB component has to have a value between 0 and 255.</p>
 		<p>You are provided with ComboBoxes that have default values. Choose the color name
-		and ContentProperties-Creator will automatically generate the RGB colour code for you.</p>
+		and ContentProperties-Creator will automatically generate the RGB color code for you.</p>
 		<p>Here are the choices that are shown on the screen-shot. Each color name represents
-		a RGB color code. In the final DictionaryForMIDs.properties file, color names are not written, each name is
-		replaced by its actual code as show below:<br><br>
+		a RGB color code. In the final DictionaryForMIDs.properties file, color names are not written,
+		each name is replaced with its actual code as show below:<br><br>
 		
 		language1Content01FontColour:128,0,0<br>
 		language1Content02FontColour:255,0,0<br><br>
@@ -123,8 +127,8 @@
 		
 		If you want to manually enter the values or modify the selected values in the Properties
 		Preview/Edit window just before saving definitely the values in the DictionaryForMIDs.properties
-		file, then you have to know the RGB colour codes. Below are the colour codes for the default
-		colours provided in the ComboBoxes:</p>
+		file, then you will have to know the RGB color codes. Below are the color codes for the default
+		colors provided in the ComboBoxes:</p>
 		
 		<table border="0">
 			<tr>
@@ -259,7 +263,7 @@
 		can turn on or off the display of these contents. Set them to false when these
 		contents are always displayed, i.e. the user cannot toggle their display on/off.<br>
 		These properties are optional, the default value is true, so select the CheckBoxes.
-      They will be supported in a later version.<br>
+      These properties will be supported in a later version.<br>
 		&nbsp;</p>
 		
 		<p>Here are the values chosen, as shown on the screen-shot:<br><br>
