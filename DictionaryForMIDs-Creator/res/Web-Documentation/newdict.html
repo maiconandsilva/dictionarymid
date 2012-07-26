@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="Content-Style-Type" content="text/css">
 		<meta name="keywords" content="dictionary, language, MIDP, J2ME, Java, Midlet, mobile, cell phone, PDA">
-		<link rel="stylesheet" href="/style.css" type="text/css">
+		<link rel="stylesheet" href="style.css" type="text/css">
 		<title>DictionaryForMIDs - a free multi-language dictionary for cell phones and PDAs</title>
 	</head>
 
@@ -21,8 +21,8 @@
 <div id="menu">
   <iframe src="/menu.html" width="95%" height="450" frameborder=0></iframe>
 </div>
-<div id="content">
 
+<div id="content">
 <div class="NAVHEADER">
 <table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
 	<tbody>
@@ -72,11 +72,11 @@
 	<h2><a name="#SetupDictionaryFile"></a>1. Setup the dictionary file</h2>
 	
 	<p>The easiest way to store a dictionary is by using a spreadsheet program 
-	such as Microsoft Excel or OpenOffice.org Impress.&nbsp; Create two columns:
+	such as Microsoft Excel or OpenOffice.org/LibreOffice Impress.&nbsp; Create two columns:
 	the headword for the first language, and the definition in the second language.
 	&nbsp; Microsoft 	Access can also be used to store the dictionary, but it is
 	more difficult to edit and sort the data.&nbsp; The latest Microsoft Excel
-	and OpenOffice.org Impress are probably always the best as each cell can 
+	and OpenOffice.org/LibreOffice Impress are probably always the best as each cell can 
 	store an unlimited amount of data.&nbsp; Microsoft Excel 2003 for instance can
 	only store 255 letters in each cell.</p>
 	
@@ -102,8 +102,8 @@
 	<tt>2. To interpret; to explain; as, to read a riddle.</tt><br>
 	<tt>3. To tell; to declare; to recite.</tt>	
 	
-	<h3><a name="IndexFileSizeReduction"></a>Excluding text from generated index 
-	files (optional)</h3>
+	<h3><a name="IndexFileSizeReduction"></a>Excluding text from the
+	generated index files (optional)</h3>
 	<p dir="ltr">Dictionaries with many example sentences and grammar tags can 
 	create very big indexes. For example, if the inputdictionaryfile was 2 MB, 
 	then the generated files could be 10 MB or more.<br>
@@ -153,16 +153,17 @@
 	
 	<h2><a name="SetupEnvironment"></a>2. Setup the work environment</h2>
 	
-	<p>Download DictionaryforMIDs:</p>
-	<p><a href="http://prdownloads.sourceforge.net/dictionarymid/DfM-Creator_Latest_Build.zip?download">
-	DictionaryforMIDs-Creator - latest build (but propably not latest sources)</a></p>
+	<p>Download DictionaryForMIDs-Creator:</p>
+	<p><a href="dfmcreatorDownload.html#downloadBinaries">Here</a> you will find DictionaryForMIDs-Creator
+	(DfM-Creator) bundled with the latest stable release of DictionaryForMIDs.jar/jad
+	free of any dictionary files, suitable for creating new dictionaries.</p>
 		
-	<p>Extract the files to C:\Dict\ or /home/user/.&nbsp;
-	You may change the directory, but you will need to change the following 
-	instructions to meet your chosen directory.&nbsp; Therefore it is recommended to leave the 
-	directory as C:\Dict\ or /home/user/ for new users.</p>
+	<p>Extract the files to C:\ or /home/user/.&nbsp;
+	You may change the directory, but you will need to change the following
+	instructions to meet your chosen directory.&nbsp; Therefore it is recommended
+	to leave the directory as C:\ or /home/user/ specially for novices.</p>
 	<p>The work environment contains the DictionaryForMIDs-Creator which
-	is a GUI collection of the following tools:</p>
+	is a GUI wrapper of the following tools:</p>
 	
 	<table border="1">
 		<tr>
@@ -183,7 +184,7 @@
 		</tr>
 		<tr>
 			<td width="245">DictionaryForMIDs.jar<br>DictionaryForMIDs.jad</td>			
-			<td width="245">As a bonus, there are the DictionaryForMIDs.jar/jad files.
+			<td width="245">As an extra, there are also the DictionaryForMIDs.jar/jad files.
 			These are the empty java midlet files in which the generated dictionary
 			files will be put. These are not	part of the DictionaryForMIDs-Creator
 			application, they are java midlets that are in a separate directory.</td>	
@@ -191,23 +192,20 @@
 	</table>
 	
 	<p>Next, download Java (J2SE Runtime) and install it.&nbsp; 
-	DictionaryforMIDs depends on Java to create the dictionary files.&nbsp; You 
-	can download Java from
-	<a href="http://java.com/en/download/index.jsp">
-	here</a> (this file is &gt; 15 MB).</p>
+	DictionaryforMIDs depends on Java to run.&nbsp; You can get some information on how
+	and where to download Java (JRE or JDK) <a href="dfmcreatorDevelopment.html#jdkdownload"> here</a>.</p>
 	
 	<p>&nbsp;</p>
 		
-	<h2><a name="SetupProperties"></a>3. Configuring the properties of the file 
-	<b>DictionaryForMIDs.properties</b></h2>
+	<h2><a name="SetupProperties"></a>3. Creating a configuration file (<b>DictionaryForMIDs.properties</b>)</h2>
 	
-	<p>For the documentation on how to create a <b>DictionaryForMIDs.properties</b> file see
-	<a href="newdictProperties.html">here</a></p>
+	<p>For a detailed description on how to create a <b>DictionaryForMIDs.properties</b> file
+	go <a href="newdictProperties.html">here</a></p>
 	
 	<h2><a name="Build"></a>4. Build the dictionary</h2>
 	
-	<p>For the documentation on how to build the dictionary files, see
-	<a href="gui-DictionaryGeneration.html">here</a></p>
+	<p>For a detailed description on how to build the dictionary files,
+	go <a href="gui-DictionaryGeneration.html">here</a></p>
 	
 	<h3><a name="BitmapFont"></a>Creating bitmap fonts (optional)</h3>
 	
@@ -218,8 +216,8 @@
 	to the dictionary.&nbsp; This will enable the user to view any language 
 	contained in the dictionary.&nbsp;</p>
 	
-	<p>For the documentation on how to generate bitmat fonts for you dictionary, see
-	<a href="gui-BitmapFontGenerator.html">here</a></p>
+	<p>For documentation on how to generate bitmap fonts for your dictionary,
+	go <a href="gui-BitmapFontGenerator.html">here</a></p>
 	
 	<h2><a name="Publish"></a>5. Publishing your dictionary and submitting it to 
 	the &#39;dictionary archive&#39; (optional)</h2>
@@ -228,13 +226,11 @@
 	For this, please send an email to Peter Kmet (send cc to Gert Nuber), see 
 	<a href="/contact.html">contact</a>. 
 	Also, please post a message about your dictionary in the
-	<a href="forum/">DictionaryForMIDs 
-	forum</a>. Once your dictionary is published, please also send the 
-	inputdictionaryfile and the other files that are needed to the 
-	<a href="/dictionaryArchive.html">
+	<a href="forum/">DictionaryForMIDs forum</a>. Once your dictionary
+	is published, please send also the inputdictionaryfile and the other
+	files. They are needed for the <a href="/dictionaryArchive.html">
 	&#39;dictionary archive&#39;</a>. For more information see 
-	<a href="/dictionaryArchive.html">
-	here</a>.</p>
+	<a href="/dictionaryArchive.html">	here</a>.</p>
 	
 	<h3>Packaging into a ZIP file</h3>
 	<p>For packaging the files, put the 4 files (1) DictionaryForMIDs_xxx.jar 

@@ -5,28 +5,24 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" >
 		<meta http-equiv="Content-Style-Type" content="text/css">
 		<meta name="keywords" content="dictionary, language, MIDP, J2ME, Java, Midlet, mobile, cell phone, PDA">
-		<link rel="stylesheet" href="/style.css" type="text/css">
+		<link rel="stylesheet" href="style.css" type="text/css">
 <TITLE>DfM-Creator - What you need to graphically set your dictionaries up!</TITLE></HEAD>
 <BODY> 
 
-
-
+<!--
 <div id="w3c_valid">
 <p>
-    <a   STYLE="COLOR: #000000;"  href="http://validator.w3.org/check?uri=referer"><img border="0"
+    <a STYLE="COLOR: #000000;"  href="http://validator.w3.org/check?uri=referer"><img border="0"
         src="http://www.w3.org/Icons/valid-xhtml10"
-        alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
-  </p>
+        alt="Valid XHTML 1.0 Transitional" height="31" width="88" />
+    </a>
+</p>
 </div>
-
-
 <div id="menu">
   <iframe src="/menu.html" width="95%" height="450" frameborder=0></iframe>
 </div>
 <div id="content">
-
-
-
+-->
 
 <h2><a name="Design"></a>The DictionaryForMIDs-Creator Developper's Documentation</h2>
 <h3>Architecture</h3>
@@ -541,7 +537,7 @@ DictionaryGeneration and JarCreator.</p>
 
 <h2 id="downloadsources">Getting the source code</h2>
 <p>You can download the current source code either from the Subversion
-repository or from this very page as a zip file or a GNU tarball.</p>
+repository or from this web site as a zip file.</p>
 <h3>Downloading the Source Code from SVN</h3>
 
 <p dir="ltr">The sources for DictionaryForMIDs-Creator are maintained in
@@ -553,11 +549,20 @@ You can also use the&nbsp; &quot;Download GNU tarball&quot; link on the
 subversion web frontend </a> to download the DictionaryForMIDs-Creator sources.<br>
 &nbsp;</p>
 <h3>Downloading the Source Code as ZIP file</h3>
-<p dir="ltr">A zip file containing a stable release of DfM-Creator will
-be available on this page soon! Please bear in mind that this zip file
-contains probably always sources that are outdated. If you want to get
-the latest development sources always go to the Subversion repository.
-&nbsp;</p>
+<p dir="ltr">A zip file containing a stable release of DfM-Creator is available
+on this web site. Please bear in mind that this zip file contains sometimes
+sources that are outdated. If you want to get the latest development sources,
+always go to the subversion repository. To check out the repository, code:<br>
+
+<code>svn co https://dictionarymid.svn.sourceforge.net/svnroot/dictionarymid dictionarymid</code>
+
+<p>Download the latest stable sources <a href="dfmcreatorDownload.html#sourcesDownload" >on this page</a></p>
+Note that these are only the DfM-Creator sources. For development purposes you will need some
+other tools/applications that are dependencies to DfM-Creator. To get all the dependencies,
+download at least the trunk directory from the subversion repository. To download only the trunk
+repository, code:<br>
+<code>svn co https://dictionarymid.svn.sourceforge.net/svnroot/dictionarymid/trunk dictionarymid_trunk</code>
+</p>
 
 <h3 id="buildprocess">Building the tools and applications</h3>
 <p>
@@ -580,27 +585,38 @@ Antenna is already present in the above mentioned build directory.</p>
 <p>Before proceeding to the build, you must:</p>
 <ul>
   <li>
-	Let the file build.xml in its build directory
+	Have the file build.xml in the trunk/Build directory
   </li>
-  <li>
+  <br>
+  <li><a name="jdkdownload" ></a>
 	Have Oracle Java JDK-7u2 or later (can be downloaded somewhere at:<br>
 	<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">
 	http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>) 
   </li>
+  <br>
   <li>
 	Have Oracle Java ME SDK 3.0 installed or Sun Java Wireless Toolkit 2.5.2<br>
 	(can be downloaded somewhere at:<br>
 	<a href="http://www.oracle.com/technetwork/java/javame/javamobile/download/sdk/index.html">
 	http://www.oracle.com/technetwork/java/javame/javamobile/download/sdk/index.html</a>) 
   </li>
+  <br>
   <li>
 	Set wtk.home to your WTK installation directory 
   </li>
-	Have Apache Ant installed on your system (in the PATH)
-  </li>
+  <br>
   <li>
-	Have antenna-bin-xxx.jar in the build directory (build directory has a version
-	of antenna but it is most of the time outdated.)
+	Have Apache Ant installed on your system (in the PATH)
+	(can be downloaded somewhere at:<br>
+	<a href="http://ant.apache.org/bindownload.cgi">
+	http://ant.apache.org/bindownload.cgi</a>)
+  </li>
+  <br>
+  <li>
+	Have antenna-bin-xxx.jar in the build directory (build directory has a version of antenna<br>
+	but it is most of the time outdated. The latest version can be	downloaded somewhere at:<br>
+	<a href="http://antenna.sourceforge.net/">
+	http://antenna.sourceforge.net/</a>) 
   </li>
 </ul>
 <p>Important note: the source files are UTF-8 encoded. If you are using the old 
@@ -616,5 +632,7 @@ Inspired by this <a href="/development.html" >file</a>
 written by Gert Nuber,
 creator of DictionaryForMIDs.</pre>
 
-</div>
-</BODY></HTML>
+
+<!-- </div> -->
+</BODY>
+</HTML>

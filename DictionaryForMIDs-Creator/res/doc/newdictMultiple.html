@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="Content-Style-Type" content="text/css">
 		<meta name="keywords" content="dictionary, language, MIDP, J2ME, Java, Midlet, mobile, cell phone, PDA">
-		<link rel="stylesheet" href="/style.css" type="text/css">
+		<link rel="stylesheet" href="style.css" type="text/css">
 		<title>DictionaryForMIDs - a free multi-language dictionary for cell phones and PDAs</title>
 	</head>
 	
@@ -13,17 +13,17 @@
 <!--
 <div id="w3c_valid">
 <p>
-	<a STYLE="COLOR: #000000;"  href="http://validator.w3.org/check?uri=referer"><img border="0"
-      src="http://www.w3.org/Icons/valid-xhtml10"
-      alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
+    <a STYLE="COLOR: #000000;"  href="http://validator.w3.org/check?uri=referer"><img border="0"
+        src="http://www.w3.org/Icons/valid-xhtml10"
+        alt="Valid XHTML 1.0 Transitional" height="31" width="88" />
+    </a>
 </p>
 </div>
-
 <div id="menu">
   <iframe src="/menu.html" width="95%" height="450" frameborder=0></iframe>
 </div>
--->
 <div id="content">
+-->
 
 <div class="NAVHEADER">
 <table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -67,7 +67,8 @@ Then you will run DictionaryGeneration within the DictionaryForMIDs-Creator
 	<li>enter these properties into your DictionaryForMIDs.properties file:</li>
 </ul>
 
-<pre>	language1HasSeparateDictionaryFile: true
+<pre>
+	language1HasSeparateDictionaryFile: true
 	language2HasSeparateDictionaryFile: true
 </pre>
 
@@ -75,7 +76,8 @@ Then you will run DictionaryGeneration within the DictionaryForMIDs-Creator
 	<li>also enter this into your DictionaryForMIDs.properties file:</li>
 </ul>
 
-<pre>	language1IsSearchable: true
+<pre>
+	language1IsSearchable: true
 	language2IsSearchable: false
 	language1GenerateIndex: true
 	language2GenerateIndex: false
@@ -101,18 +103,19 @@ Then you will run DictionaryGeneration within the DictionaryForMIDs-Creator
 	<li>change these properties in your DictionaryForMIDs.properties file manually:</li>
 </ul>
 
-<pre>	language1IsSearchable: false
+<pre>
+	language1IsSearchable: false
 	language2IsSearchable: true
 	language1GenerateIndex: false
 	language2GenerateIndex: true
 </pre>
 
 <ul>
-	<li>run DictionaryGeneration again for 2nd input dictionary file</li>
+	<li>run DictionaryGeneration again for the second input dictionary file</li>
 </ul>
 
 <ul>
-<li>copy the contents of the 1st output folder into the 2nd output folder, 
+<li>copy the contents of the 1st output folder into the second output folder, 
 except for the &quot;DictionaryForMIDs.properties&quot; file (For example: from 
 &#39;dictionaryEngGer&#39; to &#39;dictionary&#39;)</li>
 </ul>
@@ -123,17 +126,19 @@ except for the &quot;DictionaryForMIDs.properties&quot; file (For example: from
 	<li>change both these settings to true:</li>
 </ul>
 
-<pre>	language1IsSearchable: true
+<pre>
+	language1IsSearchable: true
 	language2IsSearchable: true
 </pre>
 
 <ul>
-	<li>look at the DictionaryForMIDs.properties files for both outputs.&nbsp; Find 
-	the bigger number from both files and enter it into your final 
-	DictionaryForMIDs.properties file manually also:</li>
+	<li>look at the DictionaryForMIDs.properties files for both outputs.
+	&nbsp; Find the bigger number of the two files and enter it into
+	your final DictionaryForMIDs.properties file manually also:</li>
 </ul>
 
-<pre>	indexFileMaxSize
+<pre>
+	indexFileMaxSize
 	dictionaryFileMaxSize
 	searchListFileMaxSize
 </pre>
@@ -143,12 +148,12 @@ except for the &quot;DictionaryForMIDs.properties&quot; file (For example: from
 	properties (each of the export files will only have one line):</li>
 </ul>
 
-<pre>	language1IndexNumberOfSourceEntries
+<pre>
+	language1IndexNumberOfSourceEntries
 	language2IndexNumberOfSourceEntries
 </pre>
 
-<h3>Step 3: Run JarCreator to pack the generated dictionary files in the empty DictionaryForMIDs.jar/jad</h3>
-
+<h3>Step 3: Run JarCreator to package the generated dictionary files in the empty DictionaryForMIDs.jar/jad</h3>
 </div>
 
 <div class="NAVFOOTER"><hr width="100%" align="LEFT">
@@ -166,7 +171,8 @@ except for the &quot;DictionaryForMIDs.properties&quot; file (For example: from
 		</tr>
 	</tbody>
 </table>
-</div>
 
-</body>
-</html>
+
+<!-- </div> -->
+</BODY>
+</HTML>

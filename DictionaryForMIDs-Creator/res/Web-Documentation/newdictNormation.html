@@ -4,8 +4,18 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="Content-Style-Type" content="text/css">
 		<meta name="keywords" content="dictionary, language, MIDP, J2ME, Java, Midlet, mobile, cell phone, PDA">
-		<link rel="stylesheet" href="/style.css" type="text/css">
+		<link rel="stylesheet" href="style.css" type="text/css">
 		<title>DictionaryForMIDs - a free multi-language dictionary for cell phones and PDAs</title>
+		
+    <style type="text/css">
+      <!--
+      pre {color: #000000; background-color: #ffffff; font-family: Monospaced}
+      .ST0 {font-family: Monospaced; font-weight: bold}
+      .ST1 {font-family: Monospaced; font-style: italic}
+      .comment {color: #969696}
+      .keyword-directive {color: #0000e6}
+     -->
+   </style>	
 	</head>
 
 <body>
@@ -48,50 +58,51 @@
 		<p>For normation a Java class needs to be implemented. The name 
         of this Java class is provided in the property languageXNormationClassName.</p>
 		<p>The class name needs to include the package identification (no package 
-		identification if default package is used).</p>
+		 identification if default package is used).</p>
 		<p>Per convention the Normation classes have as name NormationXXX where XXX is 
-		the value from the property languageXFilePostfix.</p>
+		 the value from the property languageXFilePostfix.</p>
 		<p>The normation class needs to inherit from the class 
         de.kugihan.dictionaryformids.normation.Normation and provide a language 
         specific implementation for the methods of the Normation class. Here is 
         an extract from the Normation class:</p>
-		<pre>package de.kugihan.dictionaryformids.translation.normation;
 
-	public class Normation {
-		public StringBuffer normateWord(StringBuffer nonNormatedWord) {
-			// default is to do nothing
-			return nonNormatedWord;
-		}
-
-		public Vector searchWord(String text) {
-			// default is to do return only the provided text
-			Vector words = new Vector();
-			words.addElement(new SearchedWord(text));
-			return words;
-		}
-
-		public Vector suggestionWord(String text) {
-			// default is to do return no suggestion
-			Vector suggestions = new Vector();
-			return suggestions;
-		}
-	}
-</pre>
+    <pre>
+     <span class="keyword-directive">package</span> de.kugihan.dictionaryformids.translation.normation;
+     
+     <span class="keyword-directive">public</span> <span class="keyword-directive">class</span> <span class="ST0">Normation</span> {
+             <span class="keyword-directive">public</span> StringBuffer <span class="ST0">normateWord</span>(StringBuffer nonNormatedWord) {
+                 <span class="comment">// default is to do nothing</span>
+                 <span class="keyword-directive">return</span> nonNormatedWord;
+             }
+     
+             <span class="keyword-directive">public</span> <span class="ST1">Vector</span> <span class="ST0">searchWord</span>(String text) {
+                 <span class="comment">// default is to do return only the provided text</span>
+                 <span class="ST1">Vector</span> words = <span class="keyword-directive">new</span> <span class="ST1">Vector</span>();
+                 words.<span class="ST1">addElement</span>(<span class="keyword-directive">new</span> <span class="ST1">SearchedWord</span>(text));
+                 <span class="keyword-directive">return</span> words;
+             }
+     
+             <span class="keyword-directive">public</span> <span class="ST1">Vector</span> <span class="ST0">suggestionWord</span>(String text) {
+                 <span class="comment">// default is to do return no suggestion</span>
+                 <span class="ST1">Vector</span> suggestions = <span class="keyword-directive">new</span> <span class="ST1">Vector</span>();
+                 <span class="keyword-directive">return</span> suggestions;
+             }
+     }
+    </pre>
 		<p>Writing Normation-classes is an easy task for the Java part. If you know some 
-		rules for a language but you do not know how to implement in Java or you do not 
-		have an Java development environment, 
-		<a href="/contact.html">send us</a> the rules and 
-        we will implement them.</p>
+		   rules for a language but you do not know how to implement them in Java or you do not 
+		   have an Java development environment, <a href="/contact.html">send us</a> the rules and 
+         we will implement them and create the java Normation class for you.</p>
         
 		<p>In any case, if you did implement a Normation class, please 
         <a href="/contact.html">send it to us</a>, 
-        so that we can make it available for other people who set up a dictionary.</p>
+        so that we can make it available for other users who might be interested.</p>
         
 		<h3>Implementation of method normatedWord</h3>
 		
 		<p>Overwrite the method normateWord for support of phonetic search. Or 
         for search of words that have different spellings. This method takes a 
-        nonNormatedWord and returns a normed representation of that word.</p>
+        nonNormatedWord and returns a normated representation of that word.</p>
         
 		<p>Example: NormationGer parses the nonNormatedWord for the German 
         'Umlauts' (ä, ö, ü) and returns the word with the Umlaut-paraphrasing 
@@ -109,15 +120,15 @@
         searchWord returns a Vector of SearchedWord.</p>
         
         <p>Example: NormationJpn generates a Hiragana and Katakana 
-        representation from a romaji input word. When the user enters a word in 
-		romaji, the search done for both Hiragana and Katakana.</p>
+           representation from a romaji input word. When the user enters a word in 
+		     romaji, the search done for both Hiragana and Katakana.</p>
 		
 		<h3>Implementation of method suggestionWord</h3>
 		
 		<p>With suggestionWord you can generate additional words that are 
-        suggested to the user when no match is found. The user then can pick a 
-        suggestion and re-run the translation. suggestionWord returns a Vector 
-        of SuggestedWord.</p>
+         suggested to the user when no match is found. The user then can pick a 
+         suggestion and re-run the translation. suggestionWord returns a Vector 
+         of SuggestedWord.</p>
 </div>
 
 <div class="NAVFOOTER"><hr width="100%" align="LEFT">

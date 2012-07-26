@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="Content-Style-Type" content="text/css">
 		<meta name="keywords" content="dictionary, language, MIDP, J2ME, Java, Midlet, mobile, cell phone, PDA">
-		<link rel="stylesheet" href="/style.css" type="text/css">
+		<link rel="stylesheet" href="style.css" type="text/css">
 		<title>DictionaryForMIDs - a free multi-language dictionary for cell phones and PDAs</title>
 	</head>
 
@@ -13,17 +13,17 @@
 <!--
 <div id="w3c_valid">
 <p>
-	<a STYLE="COLOR: #000000;"  href="http://validator.w3.org/check?uri=referer"><img border="0"
-      src="http://www.w3.org/Icons/valid-xhtml10"
-      alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
+    <a STYLE="COLOR: #000000;"  href="http://validator.w3.org/check?uri=referer"><img border="0"
+        src="http://www.w3.org/Icons/valid-xhtml10"
+        alt="Valid XHTML 1.0 Transitional" height="31" width="88" />
+    </a>
 </p>
 </div>
-
 <div id="menu">
   <iframe src="/menu.html" width="95%" height="450" frameborder=0></iframe>
 </div>
--->
 <div id="content">
+-->
 
 <div class="NAVHEADER">
 <table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -45,29 +45,45 @@
 		For a complete documentation on how to create DictionaryForMIDs.jar/jad midlet for your
 		generated dictionary files with JarCreator, go <a href="gui-JarCreator.html">here</a></p>
 		
+		<p>Note that you can still access to the older command line version of JarCreator
+		throught DictionaryForMIDs-Creator by coding the following on the command line (Linux Terminal
+		or Windows Command Prompt):<br>
+		<code>java -jar DfM-Creator.jar -JarCreator DICTIONARY_DIRECTORY | EMPTY_JAR_DIRECTORY | OUTPUT_DIRECTORY</code></p>	
 		
-		<h3><a name="ManualUpdate"></a>Updating DictionaryForMIDs.jar manually (if you are not using 
-		JarCreator)</h3>
+		<h3><a name="ManualUpdate"></a>Updating DictionaryForMIDs.jar manually (without	JarCreator)</h3>
 		
 		<p>(if you are using JarCreator, continue with
 		<a href="#SampleDictionaryForMIDsjar">Sample DictionaryForMIDs.jar</a>)<br>
-		Normally you should be using JarCreator, because JarCreator is 
-        automatically taking care for a lot of things. Still, alternatively to using JarCreator, you can also update the file 
-		DictionaryForMIDs manually: You use a ZIP-utility to do so, such as the 
-		free info-zip (<a href="http://www.info-zip.org/WiZ.html" target="_blank">Windows 
-		version</a> or <a href="http://www.info-zip.org/Zip.html" target="_blank">
-		command line version</a>) or WinZip.</p>
+		Normally you should be using JarCreator, because JarCreator will 
+        automatically take care of a lot of things. Still, alternatively to using JarCreator,
+        you can also manually package the dictionary files in the empty DictionaryForMIDs.jar.
+        For that, you use a ZIP-utility such as:<br>
+        <ul>
+      	<li><a href="http://www.7-zip.org" target="_blank">7-zip (Windows)</a> or
+      	its Linux port <a href="http://www.p7zip.sourceforge.net" target="_blank">P7ZIP</a>.
+      	7-Zip is open source software.<br>
+      	Most of the source code is under the GNU LGPL license.<br>
+      	The unRAR code is under a mixed license: GNU LGPL + unRAR restrictions.</li>
+      	<br>
+      	<li><a href="http://freearc.org/Download.aspx" target="_blank">FreeArc</a>). FreeArc
+      	is an FreeArc is a modern general-purpose archiver.<br>
+      	Its main advantage is that it is 2 to 5 times faster than the best of the available<br>
+      	other compression programs. It is available for both Windows and Linux.<br>
+      	It is a free, open-source software.</li>
+        </ul>
+        </p>
 		<p>In the file DictionaryForMIDs.jar add the directory &quot;dictionary&quot; 
 		including all the generated files. Important: in the JAR-file the 
-		generated files _must_ be in the directory dictionary, otherwise you 
-		will receive an error message when you translate from DictionaryForMIDs. 
+		generated files _must_ be in the directory <code>dictionary</code>, otherwise you 
+		will receive an error message when you will proceed to some translation. 
 		Depending on the ZIP-utility that you are using, adding the files in the 
 		directory dictionary can be little bit tricky.</p>
 
-		<p>If you are including a bitmap font with the dictionary, font.bmf must be moved out of the 'dictionary'
-		directory, and into a new directory called 'fonts'. Bitmap font support will not be available in DictionaryForMIDs
-		unless the font file is in the correct directory. The 'fonts' folder should be at the same level as the 'dictionary'
-		directory in the directory tree.</p>
+		<p>If you are including a bitmap font with the dictionary, the file <code>font.bmf</code>
+		must be moved out of the directory <code>dictionary</code>. It must be into a new
+		directory called <code>fonts</code> . Bitmap font support will not be available in
+		DictionaryForMIDs	unless the font file is in the correct directory. The <code>fonts</code>
+		folder should be at the same level as the <code>dictionary</code> directory in the midlet file tree.</p>
 
 		<p>After adding the dictionary files, you need to adjust the property 
 		MIDlet-Jar-Size in the file DictionaryForMIDs.jad. Put precisely the 
@@ -78,7 +94,7 @@
 		
 		<h3><a name="SampleDictionaryForMIDsjar"></a>Sample DictionaryForMIDs.jar</h3>
 		
-		<p>Here is an example for DictionaryForMIDs set up with a dictionary. 
+		<p>Here is an example on setting a dictionary up in DictionaryForMIDsp. 
 		You can see there that the generated files are in the directory 
 		&quot;dictionary&quot;:
 		<br>
@@ -101,7 +117,8 @@
 		</tr>
 	</tbody>
 </table>
-</div>		
-		
-</body>
-</html>
+
+
+<!-- </div> -->
+</BODY>
+</HTML>
