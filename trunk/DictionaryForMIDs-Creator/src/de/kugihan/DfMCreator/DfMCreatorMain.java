@@ -1841,7 +1841,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         Locale locale = Locale.getDefault();
         
         // debug
-        System.out.println(locale.toString());
+        System.out.println("Locale: " + locale.toString());
         I18n.setLocale(locale);
     }
     
