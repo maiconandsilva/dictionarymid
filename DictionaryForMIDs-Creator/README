@@ -1,0 +1,13 @@
+These are the sources for DictionaryForMIDs-Creator.
+
+DictionaryForMIDs-Creator (or DfM-Creator) is copyright (C) 2012 Karim Mahamane Karimou.
+This is a GUI wrapper around the following DfM tools:
+
+-DictdToDictionaryForMIDs by Gert Nuber
+-DictionaryGeneration by Gert Nuber
+-JarCreator by Mathis Karmann
+-BitmapFontGenerator by J2ME Polish and Sean Kernohan
+
+All the above mentionned tools were modifed to make them fit with the DictionaryForMIDs-Creator. The modifications are major. Please bear in mind that only the modified versions work with DictionaryForMIDs-Creator.
+
+PS: The bitmap font tab in the DfM-Creator is a modification of the FontToolkit (GUI) by Sean Kernohan. (Why reinvent the wheel?)  DictionaryForMIDs-Creator and all the above mentioned tools are under the GNU General Public Lisence. See the file COPYING for more details.

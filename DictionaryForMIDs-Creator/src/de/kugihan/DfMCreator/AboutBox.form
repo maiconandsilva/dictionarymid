@@ -70,7 +70,7 @@
                     <Property name="contentType" type="java.lang.String" value="text/html"/>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="infoText.aboutBox" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="infoText.aboutBox" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -119,7 +119,7 @@
                     <Property name="contentType" type="java.lang.String" value="text/html"/>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="creditsText.aboutBox" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="creditsText.aboutBox" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
