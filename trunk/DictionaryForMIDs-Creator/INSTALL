@@ -25,9 +25,11 @@ Before proceeding to the build, you must:
 Important note: the source files are UTF-8 encoded. If you are using the old Sun WTK (for versions <= 2.5.2), you must set in the file ktools.properties (found somewhere under wtklib) the following property:
 javac.encoding=UTF-8
 
-== How to compile the sources ==
+-Install subversion on your computer
+-Check out the whole source tree from the DictionaryForMIDs subversion repository
 
-Check out the whole source tree from SVN
+code:
+    svn co https://dictionarymid.svn.sourceforge.net/svnroot/dictionarymid dictionarymid
 
 Edit Build/build.xml and change 
 <property name="wtk.home"  location="D:\WTK25"/>
@@ -36,7 +38,7 @@ to the corrrect path
 $ cd Build
 $ ant
 
-now Build directory will contain the compiled result of all the sources.
+now, Build directory will contain the compiled binaries of all the sources.
 
 Full instructions can be found at http://dictionarymid.sourceforge.net/development.html#Source
 
