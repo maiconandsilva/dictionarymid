@@ -140,35 +140,47 @@ import javax.swing.JOptionPane;
         summary.setVisible(true);
     }
         
-	public static void main(String[] args) {            
-                                
-            // Starting the interaction with the user.
-            printDBSetUpInfo();
-            dbName = TextIO.getlnWord();
+	public static void main(String[] args) {
+            
+            try {                                
+                // Starting the interaction with the user.
+                printDBSetUpInfo();
+                dbName = TextIO.getlnWord();
 
-            printDBFolderNamePrompt();
-            dbFolderName = TextIO.getlnWord();
+                printDBFolderNamePrompt();
+                dbFolderName = TextIO.getlnWord();
 
-            printOutputCSVfileNamePrompt();
-            outputCSVFile = TextIO.getlnWord();
+                printOutputCSVfileNamePrompt();
+                outputCSVFile = TextIO.getlnWord();
 
-            printSwitchLanguagesPrompt();
-            switchLanguages = TextIO.getlnBoolean();
+                printSwitchLanguagesPrompt();
+                switchLanguages = TextIO.getlnBoolean();
 
-            printKeepTabAndNewlineCharsPrompt();
-            keepTabAndNewLineChars = TextIO.getlnBoolean();
+                printKeepTabAndNewlineCharsPrompt();
+                keepTabAndNewLineChars = TextIO.getlnBoolean();
 
-            printRemoveSquareBracketsPrompt();
-            removeSquareBrackets = TextIO.getlnBoolean();
+                printRemoveSquareBracketsPrompt();
+                removeSquareBrackets = TextIO.getlnBoolean();
 
-            printOutputEncodingCharsetPrompt();
-            outputEncodingCharset = TextIO.getlnWord();
+                printOutputEncodingCharsetPrompt();
+                outputEncodingCharset = TextIO.getlnWord();
 
-            printSeparatorCharacterPrompt();
-            separatorCharacter = TextIO.getChar();
+                printSeparatorCharacterPrompt();
+                stripCharFromInput();
 
-            // Call the conversion subroutine
-            convert();
+                // Call the conversion subroutine
+                convert();
+                
+            } catch (ArrayIndexOutOfBoundsException e) {
+                //
+                System.out.println(e.getMessage());
+            } catch (StringIndexOutOfBoundsException e) {
+                //
+                System.out.println(e.getMessage());
+            } catch (Throwable t) {
+                //
+                System.out.println(t.getMessage());
+            }
         }   
 	 
 	/*
@@ -348,8 +360,12 @@ import javax.swing.JOptionPane;
                     + "It defines the character between the first and the second column (normally a tab-character).\n"
                     + "The property \"dictionaryGenerationSeparatorCharacter\" for DictionaryGeneration has to have the\n"
                     + "same value as SEPARATOR_CHARACTER. NOTE: if you want to enter one of the following characters\n"
-                    + "follow these instructions:"
-                    + "\n");
+                    + "follow these instructions:\n"
+                    + "For a TAB character enter TAB\n"
+                    + "For a CARRIAGE-RETURN character enter CR\n"
+                    + "For a FORMFEED character enter FF\n"
+                    + "For any other printed character enter it as it is. Note that if you enter a string (many characters)\n"
+                    + "only the first one will be taken, the other ones will be discarded.\n");
 	}
 	
 	
@@ -511,4 +527,32 @@ import javax.swing.JOptionPane;
 			output = "";
 		return output;
 	}
+
+    private static void stripCharFromInput() {
+        
+        String tempSepChar = TextIO.getlnWord();
+        
+        switch (tempSepChar) {
+                case "TAB":
+                    separatorCharacter = '\t';
+                break;
+                    
+                case "CR":
+                    separatorCharacter = '\r';
+                break;
+                    
+                case "FF":
+                    separatorCharacter = '\f';
+                break;
+                    
+                default:
+                    // separator character becomes the first
+                    // character in the tempSepChar string.
+                    separatorCharacter = tempSepChar.charAt(0);
+                    
+                    // display the separator character
+                    System.out.println("Separator character stripped from your input: " + separatorCharacter);
+       }
+        
+    }
 }
