@@ -141,7 +141,7 @@ import javax.swing.JOptionPane;
     }
         
 	public static void main(String[] args) {            
-				
+                                
             // Starting the interaction with the user.
             printDBSetUpInfo();
             dbName = TextIO.getlnWord();
@@ -165,7 +165,7 @@ import javax.swing.JOptionPane;
             outputEncodingCharset = TextIO.getlnWord();
 
             printSeparatorCharacterPrompt();
-            separatorCharacter = TextIO.getAnyChar();
+            separatorCharacter = TextIO.getChar();
 
             // Call the conversion subroutine
             convert();
@@ -280,109 +280,89 @@ import javax.swing.JOptionPane;
 	
 	
 	static public void printDBSetUpInfo() {
-		System.out.print(
-				"\nDB_NAME\n" +
-				"Enter the name of the database:\n" +
-				"The name of the database defines the DICT-database to be used. It must be\n" +
-				"defined for JDictd. See the documentation for JDictd to see how to set up\n" +
-				"a DICT-database for JDictd. The JDictd database configuration file must\n" +
-				"have the name <dbname-value>.ini. e.g. eng-por.ini. This ini-file\n" +
-				"needs to be copied in the folder where the dictionary files are.\n");
+            System.out.print("\n__________________________________________________________________________________\n"
+                    + "DATABASE_NAME\n"
+                    + "Enter the name of the database:\n"
+                    + "The name of the database defines the DICT-database to be used. It must be defined for JDictd.\n"
+                    + " See the documentation for JDictd to see how to set up a DICT-database for JDictd. The JDictd\n"
+                    + "database configuration file must have the name <dbname-value>.ini. e.g. eng-por.ini.\n"
+                    + "This ini-file needs to be copied in the folder where the dictionary files are.\n");
 	}
 	
 
 	static public void printDBFolderNamePrompt() {
-		System.out.print(
-				"\nDB_PATH_AND_FOLDER_NAME\n" +
-				"Enter the path and the name of the folder where the ini file\n" +
-				"is located:\n" +
-				"e.g: /home/user/Dicts/Gcide -- on a Linux/Unix machine.\n" +
-                "Or C:/Dicts/Gcide -- on a windows machine.\n" +
-				"PS: don't add the last '/' to the folder name\n" +
-				"this is added automatically by me ;-) what I mean is\n" +
-				"instead of C:/Dicts/Gcide/ write C:/Dicts/Gcide\n");
+            System.out.print("\n__________________________________________________________________________________\n"
+                    + "DATABASE_FOLDER_PATH\n"
+                    + "Enter the path and the name of the folder where the ini file is located:\n"
+                    + "e.g: /home/user/Dicts/Gcide on a Linux/Unix machine or C:/Dicts/Gcide\n"
+                    + "on a Windows machine. NOTE: Don't add the last '/' to the folder name this\n"
+                    + "is added automatically by me! Instead of C:/Dicts/Gcide/ write C:/Dicts/Gcide\n");
 	}
-				
-				
+
+
 
 	static public void printOutputCSVfileNamePrompt() {
-		System.out.print(
-				"\nOUTPUT_CSV_FILE_PATH_AND_NAME\n" +
-				"Enter the name and the path to the output CSV-file:\n" +
-				"This is where the converted dictionary will be written to.\n" +
-				"This file need not be present even if it were,\n" +
-				"it will be overwritten anyway ;-)\n" +
-				"e.g: C:/Generated_Dict/gcide.txt\n");
+            System.out.print("\n__________________________________________________________________________________\n"
+                    + "OUTPUT_CSV_FILE_PATH\n"
+                    + "Enter the path to the output CSV-file. This is where the converted dictionary will be\n"
+                    + "written to. This file need not be present even if it were, it will be overwritten anyway.\n"
+                    + "Example /Generated_Dict/gcide.txt (Linux); C:/Generated_Dict/gcide.txt (Windows)\n");
 	}
-				
-				
+
+
 
 	static public void printSwitchLanguagesPrompt() {
-		System.out.print(
-				"\nSWITCH_LANGUAGES\n" +
-				"Enter: true, false, t, f, yes, no, y, n, 0, or 1\n" +
-				"You can put upper or lowercase letters.\n" +
-				"This will toggle the SWITCH_LANGUAGES value On/Off.\n" +
-				"If SWITCH_LANGUAGES is set to true then\n" +
-				"the translation is put in the first column and\n" +
-				"the keyword in the second.\n" +
-				"If it is set to false, the keyword is put in the\n" +
-				"first column and the translation in the second\n");				
+            System.out.print("\n__________________________________________________________________________________\n"
+                    + "SWITCH_LANGUAGES\n"                    
+                    + "This will toggle the SWITCH_LANGUAGES value On/Off. If SWITCH_LANGUAGES is set to true then\n"
+                    + "the translation is put in the first column and the keyword in the second. If it is set to\n"
+                    + "false, the keyword is put in the first column and the translation in the second\n"
+                    + "Enter: true, false, t, f, yes, no, y, n, 0, or 1. You can put upper or lowercase letters.\n");
 	}
 
 
 	static public void printKeepTabAndNewlineCharsPrompt() {
-		System.out.print(
-				"\nKEEP_TAB_AND_NEW_LINE_CHARS\n" +
-				"When KEEP_TAB_AND_NEW_LINE_CHARS is set to true then\n" +
-				"the newline and tab characters in the translation text\n" +
-				"are replaced by '\\n' and '\\t'. DictionaryForMIDs will then\n" +
-				"insert newlines/tabs when displaying the result.\n" +
-				"If KEEP_TAB_AND_NEW_LINE_CHARS is set to false then the newline\n" +
-				"and tab characters are replaced by blanks;\n" +
-				"Enter: true, false, t, f, yes, no, y, n, 0, or 1\n" +
-				"You can put upper or lowercase letters.\n");
+            System.out.print("\n__________________________________________________________________________________\n"
+                    + "KEEP_TAB_AND_NEW_LINE_CHARACTERS\n"
+                    + "When KEEP_TAB_AND_NEW_LINE_CHARACTERS is set to true then the newline and tab characters\n"
+                    + "in the translation text are replaced by '\\n' and '\\t'. DictionaryForMIDs will then insert\n"
+                    + "newlines/tabs when displaying the result. If KEEP_TAB_AND_NEW_LINE_CHARACTERS is set to false\n"
+                    + "then the newline and tab characters are replaced by blanks.\n"
+                    + "Enter: true, false, t, f, yes, no, y, n, 0, or 1. You can put upper or lowercase letters.\n");
 	}
 	
 
 	static public void printRemoveSquareBracketsPrompt() {
-		System.out.print(
-				"\nREMOVE_SQUARE_BRACKETS\n" +
-				"If REMOVE_SQUARE_BRACKETS is set to true,\n" +
-				"then any text within square brackets is removed from the\n" +
-				"keyword/translation. However, bear in mind that this is a\n" +
-				"very special (dangerous) flag that normally is set to false.\n" +
-				"It is only set to true when really needed\n" +
-				"Enter: true, false, t, f, yes, no, y, n, 0, or 1\n" +
-				"You can put upper or lowercase letters.\n");
+            System.out.print("\n__________________________________________________________________________________\n"
+                    + "REMOVE_SQUARE_BRACKETS\n"
+                    + "If REMOVE_SQUARE_BRACKETS is set to true, then any text within square brackets is removed\n"
+                    + "from the keyword/translation. However, bear in mind that this is a very special (dangerous)\n"
+                    + "flag that normally is set to false. It is only set to true when really needed.\n"
+                    + "Enter: true, false, t, f, yes, no, y, n, 0, or 1. You can put upper or lowercase letters.\n");
 	}
 	
 	
 	static public void printSeparatorCharacterPrompt() {
-		System.out.print(
-				"\nSEPARATOR_CHARACTER\n" +
-				"It defines the character between the first\n" +
-				"and the second column (normally a tab-character).\n" +
-				"The property dictionaryGenerationSeparatorCharacter\n" +
-				"for DictionaryGeneration has to have the same value\n" +
-				"as SEPARATOR_CHARACTER\n" +
-				"PS: if you want to put a tab character, type it literally,\n" +
-				"That is, HIT the TAB KEY on your keyboard ;-)\n");
+            System.out.print("\n__________________________________________________________________________________\n"
+                    + "SEPARATOR_CHARACTER\n"
+                    + "It defines the character between the first and the second column (normally a tab-character).\n"
+                    + "The property \"dictionaryGenerationSeparatorCharacter\" for DictionaryGeneration has to have the\n"
+                    + "same value as SEPARATOR_CHARACTER. NOTE: if you want to enter one of the following characters\n"
+                    + "follow these instructions:"
+                    + "\n");
 	}
 	
 	
 	static public void printOutputEncodingCharsetPrompt() {
-		System.out.print(
-				"\nOUTPUT_ENCODING_CHARSET\n" +
-				"It defines the character encoding for\n" +
-				"the generated file. UTF-8 works with all files. The property\n" +
-				"dictionaryGenerationInputCharEncoding for DictionaryGeneration\n" +
-				"has to have the same value as OUTPUT_ENCODING_CHARSET.\n" +
-				"PS: if UTF-8 is what you want to choose, type it as follows:\n" +
-				"UTF-8\n");
+            System.out.print("\n__________________________________________________________________________________\n"
+                    + "OUTPUT_ENCODING_CHARACTER_SET\n"
+                    + "It defines the character encoding for the generated file. UTF-8 works with all files.\n"
+                    + "The property dictionaryGenerationInputCharEncoding for DictionaryGeneration has to have\n"
+                    + "the same value as OUTPUT_ENCODING_CHARSET. To enter for example UTF-8, type it like this:\n"
+                    + "UTF-8\n");
 	}
          
-				
+
 	/*
 	 * 
 	 * A few utility methods:
@@ -404,48 +384,48 @@ import javax.swing.JOptionPane;
 		String output = new String();
 		for (int pos = 0; pos < input.length(); ++pos) {
 			if (input.charAt(pos) != oldCharacter) {
-				output = output + input.charAt(pos); 
+                                output = output + input.charAt(pos); 
 			}
 			else {
-				output = output + newCharacter;
+                                output = output + newCharacter;
 			}
 		}
 		return output;
 	}
 	
 	public static String adaptToCharset(String input)
-				throws IOException {
+                                throws IOException {
 		String output;
 		if ("ISO_8859-1".equals(outputEncodingCharset)) {
 			// Replace characters that do not exist in ISO-8859-1 with blanks.
 			String inputCleaned = new String();
 			for (int posInput = 0; posInput < input.length(); ++posInput) {
-				char characterFromInput = input.charAt(posInput);
-				int charType = Character.getType(characterFromInput);
-				if ((charType == Character.COMBINING_SPACING_MARK) ||
-					(charType == Character.DASH_PUNCTUATION ) ||
-					(charType == Character.FORMAT ) ||
-					(charType == Character.SPACE_SEPARATOR ) ||
-					(charType == Character.UNASSIGNED )) {
-					// replace that character by a blank
-					inputCleaned = inputCleaned + ' '; 
-				}
-				else {
-					inputCleaned = inputCleaned + characterFromInput; 
-				}
+                                char characterFromInput = input.charAt(posInput);
+                                int charType = Character.getType(characterFromInput);
+                                if ((charType == Character.COMBINING_SPACING_MARK) ||
+                                	(charType == Character.DASH_PUNCTUATION ) ||
+                                	(charType == Character.FORMAT ) ||
+                                	(charType == Character.SPACE_SEPARATOR ) ||
+                                	(charType == Character.UNASSIGNED )) {
+                                	// replace that character by a blank
+                                	inputCleaned = inputCleaned + ' '; 
+                                }
+                                else {
+                                	inputCleaned = inputCleaned + characterFromInput; 
+                                }
 			}
 			output = new String();
 			// get rid of characters that are converted into ?
 			for (int posInput = 0; posInput < inputCleaned.length(); ++posInput) {
-				String characterFromInput = inputCleaned.substring(posInput, posInput + 1);
-				byte [] bytesForString = characterFromInput.getBytes(outputEncodingCharset); 
-				if ((bytesForString.length == 1) && (bytesForString[0] == (int) '?')) {
-					// replace that character by a blank
-					output = output + ' '; 
-				}
-				else {
-					output = output + characterFromInput; 
-				}
+                                String characterFromInput = inputCleaned.substring(posInput, posInput + 1);
+                                byte [] bytesForString = characterFromInput.getBytes(outputEncodingCharset); 
+                                if ((bytesForString.length == 1) && (bytesForString[0] == (int) '?')) {
+                                	// replace that character by a blank
+                                	output = output + ' '; 
+                                }
+                                else {
+                                	output = output + characterFromInput; 
+                                }
 			}
 		}
 		else {
@@ -465,19 +445,19 @@ import javax.swing.JOptionPane;
 		else {
 			output = new String();
 			for (int pos = 0; pos < input.length(); ++pos) {
-				char currentCharacter = input.charAt(pos);
-				if (currentCharacter == '\n') {
-					output = output + "\\n";
-				}
-				else if (currentCharacter == '\t') {
-					output = output + "\\t";
-				}
-				else if (currentCharacter == '\\') {
-					output = output + "\\\\";
-				}
-				else {
-					output = output + currentCharacter;
-				}
+                                char currentCharacter = input.charAt(pos);
+                                if (currentCharacter == '\n') {
+                                	output = output + "\\n";
+                                }
+                                else if (currentCharacter == '\t') {
+                                	output = output + "\\t";
+                                }
+                                else if (currentCharacter == '\\') {
+                                	output = output + "\\\\";
+                                }
+                                else {
+                                	output = output + currentCharacter;
+                                }
 			}
 		}
 		return output;
@@ -491,23 +471,23 @@ import javax.swing.JOptionPane;
 			char character = expression.charAt(charPos);
 			if ( (character == '\t') || (character == ' ')) {
 			    if (resultExpression.length() == 0) {
-					// ignore whitspaces at the beginning of the expression
-				}
-				else if (charPos == expression.length() -1) {
-					// ignore whitspaces at the end of the expression
-				}
-				else if (lastCharWasWhitespace)  {
-					// ignore multiple whitespaces in sequence
-				}
+                                	// ignore whitspaces at the beginning of the expression
+                                }
+                                else if (charPos == expression.length() -1) {
+                                	// ignore whitspaces at the end of the expression
+                                }
+                                else if (lastCharWasWhitespace)  {
+                                	// ignore multiple whitespaces in sequence
+                                }
 
-				else {
-					resultExpression = resultExpression + character;
-				}
-				lastCharWasWhitespace = true;
+                                else {
+                                	resultExpression = resultExpression + character;
+                                }
+                                lastCharWasWhitespace = true;
 			}
 			else {
-				resultExpression = resultExpression + character;
-				lastCharWasWhitespace = false;
+                                resultExpression = resultExpression + character;
+                                lastCharWasWhitespace = false;
 			}
 		}
 		return resultExpression;

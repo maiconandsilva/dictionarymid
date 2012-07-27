@@ -6,13 +6,13 @@ GPL applies - see file COPYING for copyright statement.
 */
 
 package de.kugihan.dictionaryformids.dictgen.dictionaryupdate;
-import java.util.Vector;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryUpdateIF;
 import de.kugihan.dictionaryformids.dictgen.DictionaryGeneration;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
+import java.util.Vector;
 
 public class DictionaryUpdate 
 	implements DictionaryUpdateIF {
@@ -27,7 +27,7 @@ public class DictionaryUpdate
 		String returnString;
 		if (DictionaryDataFile.dictionaryGenerationOmitParFromIndex) {
 			boolean replacementDone;
-			StringBuffer expressionUpdated = new StringBuffer(dictionaryExpression);
+			StringBuilder expressionUpdated = new StringBuilder(dictionaryExpression);
 			do {
 				replacementDone = false;
 				// remove all delimiterStart and delimiterEnd
@@ -63,7 +63,7 @@ public class DictionaryUpdate
 			int posBehindLastDelimiter = 0;
 			int posDelimiterStart;
 			int posDelimiterEnd;
-			StringBuffer expressionUpdated = new StringBuffer(expression);
+			StringBuilder expressionUpdated = new StringBuilder(expression);
 			do {
 				if ((posBehindLastDelimiter >= expressionUpdated.length()) && (nestingLevel > 0)) {
 						throw new DictionaryException("Number of " + delimiterStart + " does not match " +  delimiterEnd + " at end of expression");
