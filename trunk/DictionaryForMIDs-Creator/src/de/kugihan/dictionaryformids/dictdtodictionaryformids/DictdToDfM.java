@@ -41,6 +41,12 @@ import javax.swing.JOptionPane;
 
 	public static String versionNumber = "2.5.0";
         
+        // Flag that will tell us wether the DictdToDfM
+        // is being called from DfM-Creator or from the
+        // command line. Set it to true if called from
+        // DfM-Creator and to false otherwise.
+        public static boolean flag = false;
+        
 	private static String dbName;
 	private static String dbFolderName;
 	private static String outputCSVFile;
@@ -142,45 +148,33 @@ import javax.swing.JOptionPane;
         
 	public static void main(String[] args) {
             
-            try {                                
-                // Starting the interaction with the user.
-                printDBSetUpInfo();
-                dbName = TextIO.getlnWord();
+            // Starting the interaction with the user.
+            printDBSetUpInfo();
+            dbName = TextIO.getlnWord();
 
-                printDBFolderNamePrompt();
-                dbFolderName = TextIO.getlnWord();
+            printDBFolderNamePrompt();
+            dbFolderName = TextIO.getlnWord();
 
-                printOutputCSVfileNamePrompt();
-                outputCSVFile = TextIO.getlnWord();
+            printOutputCSVfileNamePrompt();
+            outputCSVFile = TextIO.getlnWord();
 
-                printSwitchLanguagesPrompt();
-                switchLanguages = TextIO.getlnBoolean();
+            printSwitchLanguagesPrompt();
+            switchLanguages = TextIO.getlnBoolean();
 
-                printKeepTabAndNewlineCharsPrompt();
-                keepTabAndNewLineChars = TextIO.getlnBoolean();
+            printKeepTabAndNewlineCharsPrompt();
+            keepTabAndNewLineChars = TextIO.getlnBoolean();
 
-                printRemoveSquareBracketsPrompt();
-                removeSquareBrackets = TextIO.getlnBoolean();
+            printRemoveSquareBracketsPrompt();
+            removeSquareBrackets = TextIO.getlnBoolean();
 
-                printOutputEncodingCharsetPrompt();
-                outputEncodingCharset = TextIO.getlnWord();
+            printOutputEncodingCharsetPrompt();
+            outputEncodingCharset = TextIO.getlnWord();
 
-                printSeparatorCharacterPrompt();
-                stripCharFromInput();
+            printSeparatorCharacterPrompt();
+            stripCharFromInput();
 
-                // Call the conversion subroutine
-                convert();
-                
-            } catch (ArrayIndexOutOfBoundsException e) {
-                //
-                System.out.println(e.getMessage());
-            } catch (StringIndexOutOfBoundsException e) {
-                //
-                System.out.println(e.getMessage());
-            } catch (Throwable t) {
-                //
-                System.out.println(t.getMessage());
-            }
+            // Call the conversion subroutine
+            convert();
         }   
 	 
 	/*
@@ -252,16 +246,42 @@ import javax.swing.JOptionPane;
                     }
 			System.out.println(I18n.tr("done"));
 		} catch (UnsupportedEncodingException e){
-                            SumWinDictdToDfM.done = true;
-                            DfMCreatorMain.printAnyMsg(I18n.tr("encErrMsg", new Object[] {e.getLocalizedMessage()}),
-                                                       I18n.tr("encErrWinTitle"), JOptionPane.ERROR_MESSAGE);
-                            // print the exception in command line.
-                            System.out.println(e + "\n");
-                        } catch (Throwable t){
-                            DfMCreatorMain.printAnyMsg(I18n.tr("criticalErrMsg", new Object[]
-                                        {t, t.getLocalizedMessage()}), I18n.tr("error"), JOptionPane.ERROR_MESSAGE);
-                            System.out.println(t + "\n");
-                        } 
+                    // If DictdToDictionaryForMIDs is being called from DfM-Creator make
+                    // it possible to display graphical error messages if exceptions occur.
+                    if (!flag) {
+                        SumWinDictdToDfM.done = true;
+                        DfMCreatorMain.printAnyMsg(I18n.tr("encErrMsg", new Object[] {e.getLocalizedMessage()}),
+                                                   I18n.tr("encErrWinTitle"), JOptionPane.ERROR_MESSAGE);
+                        // We'll print the exception in command line anyway.
+                        System.out.println("\n" + e.getMessage() + "\n");
+                        
+                    // If DictdToDictionaryForMIDs is being called from CLI prevent the app
+                    // from displaying graphical error messages when exceptions occur.                        
+                    } else {
+                        System.out.println("\nThe selected Character Encoding is not supported.");                        
+                        System.out.println("Here is the value that you entered: " + e.getMessage());
+                        System.out.println("Please choose another one; UTF-8 works fine.");
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("\nAn unexpected error occurred! Probably one or more of the required");
+                        System.out.println("arguments was/were not provided. Technical ause of the error: " + e);
+                } catch (StringIndexOutOfBoundsException e) {
+                        System.out.println("\nAn internal error occurred! Please make sure that the dictionary and");
+                        System.out.println("arguments you provided are valid. Technical cause of the error: " + e);
+                } catch (Throwable t){
+                    if (!flag) {
+                        DfMCreatorMain.printAnyMsg(I18n.tr("criticalErrMsg", new Object[]
+                                {t, t.getLocalizedMessage()}), I18n.tr("error"), JOptionPane.ERROR_MESSAGE);
+                        // Print exception in command line anyway
+                        System.out.println("\n" + t.getMessage() + "\n");
+                    } else {
+                        System.out.println("\nA critical error occured; Operation aborted!");
+                        System.out.println("If you are familiar with technical details.");
+                        System.out.println("check the message below:");
+                        System.out.println("Error: " + t.getMessage());
+                        System.out.println("Description/Cause: " + t.getCause());
+                    }
+                } 
 	}
         
 	
@@ -361,9 +381,9 @@ import javax.swing.JOptionPane;
                     + "The property \"dictionaryGenerationSeparatorCharacter\" for DictionaryGeneration has to have the\n"
                     + "same value as SEPARATOR_CHARACTER. NOTE: if you want to enter one of the following characters\n"
                     + "follow these instructions:\n"
-                    + "For a TAB character enter TAB\n"
-                    + "For a CARRIAGE-RETURN character enter CR\n"
-                    + "For a FORMFEED character enter FF\n"
+                    + "For a TAB character enter TAB or tab\n"
+                    + "For a CARRIAGE-RETURN character enter CR or cr\n"
+                    + "For a FORMFEED character enter FF or ff\n"
                     + "For any other printed character enter it as it is. Note that if you enter a string (many characters)\n"
                     + "only the first one will be taken, the other ones will be discarded.\n");
 	}
@@ -374,8 +394,7 @@ import javax.swing.JOptionPane;
                     + "OUTPUT_ENCODING_CHARACTER_SET\n"
                     + "It defines the character encoding for the generated file. UTF-8 works with all files.\n"
                     + "The property dictionaryGenerationInputCharEncoding for DictionaryGeneration has to have\n"
-                    + "the same value as OUTPUT_ENCODING_CHARSET. To enter for example UTF-8, type it like this:\n"
-                    + "UTF-8\n");
+                    + "the same value as OUTPUT_ENCODING_CHARSET. You can enter for example UTF-8, it works fine.\n");
 	}
          
 
@@ -528,6 +547,8 @@ import javax.swing.JOptionPane;
 		return output;
 	}
 
+    // Analyzes the the string input for separatorCharacter
+    // and returns a valid separatorCharacter.
     private static void stripCharFromInput() {
         
         String tempSepChar = TextIO.getlnWord();
@@ -536,12 +557,27 @@ import javax.swing.JOptionPane;
                 case "TAB":
                     separatorCharacter = '\t';
                 break;
+                
+                // lowercase tab
+                case "tab":
+                    separatorCharacter = '\t';
+                break;
                     
                 case "CR":
                     separatorCharacter = '\r';
                 break;
+                   
+                // lowercase cr
+                case "cr":
+                    separatorCharacter = '\r';
+                break;
                     
                 case "FF":
+                    separatorCharacter = '\f';
+                break;
+                
+                // lowercase ff
+                case "ff":
                     separatorCharacter = '\f';
                 break;
                     
@@ -551,7 +587,7 @@ import javax.swing.JOptionPane;
                     separatorCharacter = tempSepChar.charAt(0);
                     
                     // display the separator character
-                    System.out.println("Separator character stripped from your input: " + separatorCharacter);
+                    System.out.println("\nSeparator character stripped from your input: " + separatorCharacter);
        }
         
     }
