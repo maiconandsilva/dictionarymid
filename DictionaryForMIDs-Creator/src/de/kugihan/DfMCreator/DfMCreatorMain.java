@@ -1473,6 +1473,10 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                     // Printing the DictdToDictionaryForMIDs copyright notice
                     de.kugihan.dictionaryformids.dictdtodictionaryformids.DictdToDfM.printCopyrightNotice();
                     
+                    // Set flag to true to tell the app that the
+                    // DictdToDictionaryForMIDs is being called from the command line
+                    de.kugihan.dictionaryformids.dictdtodictionaryformids.DictdToDfM.flag = true;
+                    
                     // Call the DictdToDictionaryForMIDs main class
                     de.kugihan.dictionaryformids.dictdtodictionaryformids.DictdToDfM.main(args);
                     break;
