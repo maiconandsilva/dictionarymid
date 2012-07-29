@@ -1,36 +1,3 @@
-TABLE {
-	BORDER-RIGHT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; BORDER-BOTTOM: #ccc 1px solid; BORDER-COLLAPSE: collapse
-}
-TD {
-	BORDER-RIGHT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; BORDER-BOTTOM: #ccc 1px solid; BORDER-COLLAPSE: collapse
-}
-TABLE {
-	BORDER-RIGHT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; BORDER-BOTTOM: #ccc 1px solid
-}
-THEAD TH {
-	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 5px; BORDER-LEFT: #ccc 1px solid; COLOR: #666; PADDING-TOP: 5px
-}
-TBODY TH {
-	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 5px; BORDER-LEFT: #ccc 1px solid; COLOR: #666; PADDING-TOP: 5px
-}
-TBODY TH {
-	BORDER-TOP: #ccc 1px solid; FONT-WEIGHT: normal; BACKGROUND: #fafafb; TEXT-ALIGN: left
-}
-TBODY TR TD {
-	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 5px; COLOR: #666; PADDING-TOP: 5px
-}
-TBODY TR:hover {
-	
-}
-TBODY TR:hover TD {
-	COLOR: #454545
-}
-TFOOT TD {
-	PADDING-RIGHT: 4px; BORDER-TOP: #ccc 1px solid; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; BORDER-LEFT: medium none; COLOR: #666; PADDING-TOP: 4px
-}
-TFOOT TH {
-	PADDING-RIGHT: 4px; BORDER-TOP: #ccc 1px solid; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; BORDER-LEFT: medium none; COLOR: #666; PADDING-TOP: 4px
-}
 BODY {
 
 	FONT-WEIGHT: normal; FONT-SIZE: 12px; MARGIN: 2em; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff ; 
