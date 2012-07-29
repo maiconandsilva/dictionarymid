@@ -60,7 +60,7 @@ javac.encoding=UTF-8
       
     <property name="Build.buildfilename"            value="build.xml"/>    
     <property name="DfM-Creator-Version"            value="0.5"/>    <!-- DfM-Creator version -->
-    <property name="DfM-Creator-VersionStatus"      value="Alpha"/>     <!--  e.g. "beta", "alpha"  -->
+    <property name="DfM-Creator-VersionStatus"      value="Final"/>     <!--  e.g. "beta", "alpha"  -->
     <condition property="DfM-Creator-AppVersion"    value="${DfM-Creator-Version}_${DfM-Creator-VersionStatus}" else="${DfM-Creator-Version}">
         <isset property="DfM-Creator-VersionStatus"/>
     </condition>
