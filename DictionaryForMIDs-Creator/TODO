@@ -1,5 +1,7 @@
 -Make DictdToDictionaryForMIDs tab generate .ini files from the database name and dict path entered by the user
 
+-Verify the version of the installed JRE and print an error message if the installed JRE is below 1.7.
+
 -Make it possible to:
 +queue many dictd files to be converted
 +queue many csv files to be generated
