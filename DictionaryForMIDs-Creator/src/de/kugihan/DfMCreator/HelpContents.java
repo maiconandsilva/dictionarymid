@@ -1,5 +1,7 @@
 /* ////////////////////////////////////////////////////////////////
-* 
+*   
+*   In the Name of Allah
+*   
 *   DICTIONARYFORMIDS-CREATOR
 *   
 *   This file is part of DictionaryForMIDs-Creator
