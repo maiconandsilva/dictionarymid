@@ -7,14 +7,14 @@
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="file.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+              <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="file.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="createThePropsFile.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="createThePropsFile.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -24,7 +24,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="editExisting.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="editExisting.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -34,8 +34,9 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="resetSettings.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="resetSettings.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
@@ -44,7 +45,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="samplePros.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="samplePros.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -54,7 +55,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="extraInfos.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="extraInfos.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -64,8 +65,9 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="quit.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="quit.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem7ActionPerformed"/>
@@ -76,14 +78,14 @@
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="about.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+              <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="about.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="aboutPropsEditor.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="aboutPropsEditor.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -280,7 +282,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel20">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -292,7 +294,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel21">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -304,7 +306,7 @@
                 <Component class="javax.swing.JLabel" name="langDictUpdateLB3">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -464,7 +466,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel30">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                          <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                         </Property>
                       </Properties>
                       <Constraints>
@@ -490,7 +492,7 @@
                     <Component class="javax.swing.JLabel" name="langExpSplitStringLB3">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                          <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                         </Property>
                       </Properties>
                       <Constraints>
@@ -509,8 +511,9 @@
                     <Component class="javax.swing.JLabel" name="jLabel29">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                          <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                         </Property>
+                        <Property name="toolTipText" type="java.lang.String" value=""/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -554,7 +557,7 @@
                 <Component class="javax.swing.JCheckBox" name="langIsSearchCB1">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -566,7 +569,7 @@
                 <Component class="javax.swing.JCheckBox" name="langIsSearchCB2">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -578,7 +581,7 @@
                 <Component class="javax.swing.JCheckBox" name="langIsSearchCB3">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -637,7 +640,7 @@
                 <Component class="javax.swing.JLabel" name="langNormLB3">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -649,7 +652,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel24">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -674,7 +677,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel25">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -842,7 +845,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel9">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                          <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                         </Property>
                       </Properties>
                       <Constraints>
@@ -854,7 +857,7 @@
                     <Component class="javax.swing.JLabel" name="langFilePostfixLB3">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                          <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                         </Property>
                       </Properties>
                       <Constraints>
@@ -866,7 +869,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel10">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                          <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                         </Property>
                       </Properties>
                       <Constraints>
@@ -1021,7 +1024,7 @@
                 <Component class="javax.swing.JCheckBox" name="langHasSepDictCB3">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -1033,7 +1036,7 @@
                 <Component class="javax.swing.JCheckBox" name="langHasSepDictCB1">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -1045,7 +1048,7 @@
                 <Component class="javax.swing.JCheckBox" name="langHasSepDictCB2">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -1090,7 +1093,7 @@
                 <Component class="javax.swing.JButton" name="additionalInfo">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="extraInfo.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="extraInfo.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="extraButton.toolTipText.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
@@ -1108,7 +1111,7 @@
                 <Component class="javax.swing.JButton" name="samplePropFile">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="samplePros.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="samplePros.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="sampleButton.toolTipText.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
@@ -1126,7 +1129,7 @@
                 <Component class="javax.swing.JButton" name="createPropFile">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="createThePropsFile.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="createThePropsFile.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="createButton.toolTipText.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
@@ -1144,7 +1147,7 @@
                 <Component class="javax.swing.JButton" name="resetSetting">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="resetSettings.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="resetSettings.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="resetButton.toolTipText.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
@@ -1162,7 +1165,7 @@
                 <Component class="javax.swing.JButton" name="editExistingBT">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="editExisting.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="editExisting.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="editButton.toolTipText.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
@@ -1198,7 +1201,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel16">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="sepChar.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="sepChar.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="sepChars.toolTipText.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
@@ -1453,7 +1456,7 @@
                 <Component class="javax.swing.JLabel" name="lab3">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="value" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="value" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
@@ -1488,7 +1491,7 @@
                 <Component class="javax.swing.JCheckBox" name="langGenIndCB1">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -1513,7 +1516,7 @@
                 <Component class="javax.swing.JCheckBox" name="langGenIndCB2">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -1525,7 +1528,7 @@
                 <Component class="javax.swing.JCheckBox" name="langGenIndCB3">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -1613,7 +1616,7 @@
                 <Component class="javax.swing.JLabel" name="lab4">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="value" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="value" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
@@ -1630,7 +1633,7 @@
                 <Component class="javax.swing.JLabel" name="lab5">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="value" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="value" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
@@ -1694,7 +1697,7 @@
                     <Component class="javax.swing.JLabel" name="langDispTextLB3">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                          <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                         </Property>
                       </Properties>
                       <Constraints>
@@ -1720,7 +1723,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel5">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                          <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                         </Property>
                       </Properties>
                       <Constraints>
@@ -1732,7 +1735,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel6">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                          <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                         </Property>
                       </Properties>
                       <Constraints>
@@ -1823,7 +1826,7 @@
                 <Component class="javax.swing.JLabel" name="lab1">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="value" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="value" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
@@ -1840,7 +1843,7 @@
                 <Component class="javax.swing.JLabel" name="lab2">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="value" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="value" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
@@ -1875,7 +1878,7 @@
                 <Component class="javax.swing.JLabel" name="langIndNumSrcEntLB3">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-3" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -1887,7 +1890,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel44">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-2" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -1899,7 +1902,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel45">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="language-1" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -1996,7 +1999,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel42">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="de/kugihan/I18n-L10n/Bundle.properties" key="compusoryPropsInfo.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="de/kugihan/I18nL10n/Bundle.properties" key="compusoryPropsInfo.dfmPropCreate" replaceFormat="I18n.tr(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>

@@ -1,33 +1,33 @@
 /* ////////////////////////////////////////////////////////////////
-*   
+*
 *   In the Name of Allah
-*   
+*
 *   DICTIONARYFORMIDS-CREATOR
-*   
+*
 *   This file is part of DictionaryForMIDs-Creator
 *   Copyright (C) 2012 Karim Mahamane Karimou
 *   DictionaryForMIDs-Creator is a GUI wrapper around various
 *   DictionaryForMIDs tools, among others we have
 *   DictdToDictionaryForMIDs, DictionaryGeneration,
 *   JarCreator and BitmapFontGenerator.
-*   
+*
 *   DictionaryForMIDs-Creator is free software;
 *   you can redistribute it and/or modify it under the terms
 *   of the GNU General Public License as published by the
 *   Free Software Foundation; either version 2 of the License, or
 *   (at your option) any later version.
-*   
+*
 *   DictionaryForMIDs-Creator is distributed in the hope that
 *   it will be useful, but WITHOUT ANY WARRANTY; without even
 *   the implied warranty of MERCHANTABILITY or
 *   FITNESS FOR A PARTICULAR PURPOSE.  See the
 *   GNU General Public License for more details.
-*   	
+*
 *   You should have received a copy of the GNU General Public
 *   License along with DictionaryForMIDs-Creator;
 *   if not, write to the Free Software Foundation, Inc.,
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-*   
+*
 * //////////////////////////////////////////////////////////////// */
 
 
@@ -48,18 +48,18 @@ import javax.swing.SwingWorker;
 
 
 public class SumWinJarCreator extends javax.swing.JDialog implements PropertyChangeListener {
-    
+
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public static SumWinJarCreator getCJPWin(){
         SumWinJarCreator cjpw = new SumWinJarCreator();
-        cjpw.setSize(420, 400);
+        cjpw.setSize(580, 455);
         cjpw.setLocation(screenSize.width / 2 - cjpw.getWidth() / 2,
                         screenSize.height / 2 - cjpw.getHeight() / 2);
         cjpw.setModal(true);
         return cjpw;
     }
-    
+
     private Task task;
     public static boolean done;
 
@@ -80,42 +80,26 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        outTA = new javax.swing.JTextArea();
-        jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         StartBT = new javax.swing.JButton();
         CancelBT = new javax.swing.JButton();
         ProgBar = new javax.swing.JProgressBar();
+        JarCreatorEnqueueBT = new javax.swing.JButton();
+        JarCreatorClearQueueBT = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        JarCreatorSummaryTA = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JarCreatorQueueTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new java.awt.GridBagLayout());
-
-        jPanel1.setLayout(new java.awt.BorderLayout());
-
-        outTA.setBackground(new java.awt.Color(254, 242, 246));
-        outTA.setColumns(20);
-        outTA.setEditable(false);
-        outTA.setRows(5);
-        jScrollPane2.setViewportView(outTA);
-        fillJarCreationSummaryTextArea();
-
-        jPanel1.add(jScrollPane2, java.awt.BorderLayout.CENTER);
-
-        jPanel4.setLayout(new java.awt.GridLayout(1, 0));
-        jPanel1.add(jPanel4, java.awt.BorderLayout.PAGE_END);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 150;
-        gridBagConstraints.ipady = 300;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        getContentPane().add(jPanel1, gridBagConstraints);
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -126,43 +110,148 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel2.add(StartBT, gridBagConstraints);
 
         CancelBT.setText(I18n.tr("cancel.jarCreationSummary")); // NOI18N
+        CancelBT.setEnabled(false);
         CancelBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelBTActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel2.add(CancelBT, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipady = 5;
         jPanel2.add(ProgBar, gridBagConstraints);
+
+        JarCreatorEnqueueBT.setText(I18n.tr("enqueue.another.dict.JarCreator")); // NOI18N
+        JarCreatorEnqueueBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JarCreatorEnqueueBTActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        jPanel2.add(JarCreatorEnqueueBT, gridBagConstraints);
+
+        JarCreatorClearQueueBT.setText(I18n.tr("clear.queue.contents.JarCreator")); // NOI18N
+        JarCreatorClearQueueBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JarCreatorClearQueueBTActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        jPanel2.add(JarCreatorClearQueueBT, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 200;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(jPanel2, gridBagConstraints);
+
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        JarCreatorSummaryTA.setBackground(new java.awt.Color(254, 242, 246));
+        JarCreatorSummaryTA.setColumns(20);
+        JarCreatorSummaryTA.setEditable(false);
+        JarCreatorSummaryTA.setRows(5);
+        jScrollPane2.setViewportView(JarCreatorSummaryTA);
+        fillJarCreationSummaryTextArea();
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 180;
+        gridBagConstraints.ipady = 300;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel1.add(jScrollPane2, gridBagConstraints);
+
+        JarCreatorQueueTextArea.setBackground(new java.awt.Color(254, 242, 246));
+        JarCreatorQueueTextArea.setColumns(20);
+        JarCreatorQueueTextArea.setEditable(false);
+        JarCreatorQueueTextArea.setLineWrap(true);
+        JarCreatorQueueTextArea.setRows(5);
+        JarCreatorQueueTextArea.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(JarCreatorQueueTextArea);
+        fillJarCreatorQueueTA();
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.ipady = 300;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 5);
+        jPanel1.add(jScrollPane1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 2.0;
+        gridBagConstraints.weighty = 1.0;
+        getContentPane().add(jPanel1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void StartBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartBTActionPerformed
-        progActionPerf();
+        executeJarCreationTask();
     }//GEN-LAST:event_StartBTActionPerformed
 
     private void CancelBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelBTActionPerformed
         confirmCancelConvert();
     }//GEN-LAST:event_CancelBTActionPerformed
+
+    private void JarCreatorEnqueueBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JarCreatorEnqueueBTActionPerformed
+        this.dispose();
+        DfMCreatorMain.dfmCreator.clearJarCreatorTFs();
+    }//GEN-LAST:event_JarCreatorEnqueueBTActionPerformed
+
+    private void JarCreatorClearQueueBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JarCreatorClearQueueBTActionPerformed
+        clearJarCreatorQueueContents();
+    }//GEN-LAST:event_JarCreatorClearQueueBTActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        cancelJarCreationOnQuit();
+        DfMCreatorMain.dfmCreator.clearJarCreatorTFs();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -172,9 +261,9 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
         /*
          * Set the default look and feel
          */
-        
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        try {                   
+        try {
              javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException |
         		 IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
@@ -196,26 +285,74 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelBT;
+    private javax.swing.JButton JarCreatorClearQueueBT;
+    private javax.swing.JButton JarCreatorEnqueueBT;
+    private javax.swing.JTextArea JarCreatorQueueTextArea;
+    private javax.swing.JTextArea JarCreatorSummaryTA;
     private javax.swing.JProgressBar ProgBar;
     private javax.swing.JButton StartBT;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea outTA;
     // End of variables declaration//GEN-END:variables
 
     private static final String newline = "\n";
 
+    private void cancelJarCreationOnQuit() {
+        if (!task.isDone()){
+            task.cancel(true);
+            deleteIncompleteDictFile();
+        }
+    }
+
     class Task extends SwingWorker<Void, Void> {
         @Override
         public Void doInBackground() {
+            DfMCreatorMain.JarCreatorValsToEnqueue q;
             try {
-                JarCreator.createJar();
+                    // This is for the queue itself
+                    while (!DfMCreatorMain.dfmCreator.jarCreatorQueue.isEmpty()){
+                        q = DfMCreatorMain.dfmCreator.jarCreatorQueue.remove();
+
+                        // Passing the values of the current item
+                        // to JarCreator in order for it to process it
+                        JarCreator.setDictionaryDirectory(q.dictDir);
+                        JarCreator.setEmptyDictionaryForMID(q.emptyDfM);
+                        JarCreator.setOutputDirectory(q.outputDir);
+
+                        // Showing the jar creation preferences
+                        // for the current item being processed.
+                        JarCreatorSummaryTA.setText("");
+
+                        JarCreatorSummaryTA.append(I18n.tr("items.info.jarCreator") + "\n\n");
+                        JarCreatorSummaryTA.append(I18n.tr("remaining.items.jarCreator"));
+                        JarCreatorSummaryTA.append(String.valueOf(DfMCreatorMain.dfmCreator.jarCreatorQueue.size()) + "\n\n");
+                        JarCreatorSummaryTA.append(q.dictDir + "\n\n");
+
+                        JarCreatorSummaryTA.append(I18n.tr("emptyDfMDir.jarCreationSummary") + "\n\n");
+                        JarCreatorSummaryTA.append(q.emptyDfM + "\n\n");
+
+                        JarCreatorSummaryTA.append(I18n.tr("outputDir.jarCreationSummary") + "\n\n");
+                        JarCreatorSummaryTA.append(q.outputDir + "\n\n");
+
+                        // Perform the Jar Creation for
+                        // the current item.
+                        JarCreator.createJar();
+
+                        // JarCreatorSummaryTA
+                        int i = 0;
+                        JarCreatorSummaryTA.setText("");
+                        JarCreatorQueueTextArea.append(I18n.tr("items.queue.JarCreator") + "\n\n");
+                        DfMCreatorMain.dfmCreator.jarCreatorArray.remove(i);
+                        JarCreatorSummaryTA.append(DfMCreatorMain.dfmCreator.jarCreatorArray.get(i).toString() + "\n\n");
+
+                    }
+
             } catch (IOException | DictionaryException e) {
                 done = true;
                 DfMCreatorMain.printAnyMsg(e.getMessage() ,"Error", JOptionPane.ERROR_MESSAGE);
-                System.out.println(e.getMessage());             
+                System.out.println(e.getMessage());
             } catch (DfMCreatorExceptions.CantCreatOutputJarJadDirectory e){
                 done = true;
                 DfMCreatorMain.printAnyMsg(e.getMessage() ,"Directory Creation Error", JOptionPane.ERROR_MESSAGE);
@@ -223,18 +360,20 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
             }
             return null;
             }
-        
+
         @Override
         public void done() {
             //Tell progress listener to stop updating progress bar.
             done = true;
             StartBT.setEnabled(true);
             CancelBT.setEnabled(false);
+            JarCreatorEnqueueBT.setEnabled(true);
+            JarCreatorClearQueueBT.setEnabled(false);
             Toolkit.getDefaultToolkit().beep();
             setCursor(null); //turn off the wait cursor
             ProgBar.setIndeterminate(false);
             ProgBar.setValue(ProgBar.getMinimum());
-            outTA.append(I18n.tr("done.jarCreationSummary"));
+            JarCreatorSummaryTA.append(I18n.tr("done.jarCreationSummary"));
         }
     }
 
@@ -245,22 +384,26 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
             if (progress == 0) {
                 ProgBar.setStringPainted(false);
                 ProgBar.setIndeterminate(true);
-                outTA.append(I18n.tr("pleaseWait.jarCreationSummary"));
+                JarCreatorSummaryTA.append(I18n.tr("pleaseWait.jarCreationSummary"));
                 StartBT.setEnabled(false);
                 CancelBT.setEnabled(true);
             }
             else {
-                ProgBar.setIndeterminate(false); 
+                ProgBar.setIndeterminate(false);
                 ProgBar.setString(null);
-                ProgBar.setValue(progress);        
-                outTA.append(String.format(newline + newline +
+                ProgBar.setValue(progress);
+                JarCreatorSummaryTA.append(String.format(newline + newline +
                 I18n.tr("completed.jarCreationSummary"), task.getProgress()));
-            }            
+            }
         }
     }
-    
-    public void progActionPerf(){
+
+    public void executeJarCreationTask(){
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        StartBT.setEnabled(false);
+        CancelBT.setEnabled(true);
+        JarCreatorEnqueueBT.setEnabled(false);
+        //JarCreatorClearQueueBT.setEnabled(false);
         done = false;
         task = new Task();
         task.addPropertyChangeListener(this);
@@ -274,7 +417,8 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
         if (n == JOptionPane.YES_OPTION){
             if (!task.isDone()){
                 task.cancel(true);
-                deleteIncompleteDictFile();                
+                deleteIncompleteDictFile();
+                DfMCreatorMain.dfmCreator.jarCreatorQueue.clear();
             }
         }
     }
@@ -286,7 +430,7 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
         if (incompleteJar.exists()) {
             incompleteJar.delete();
         }
-        
+
         File incompleteJad = JarCreator.getJadFile();
         if (incompleteJad.exists()) {
             incompleteJad.delete();
@@ -300,21 +444,36 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
      * by the user.
      */
     private void fillJarCreationSummaryTextArea() {
-        
-        outTA.setText("");
 
-        outTA.append(I18n.tr("headLine.jarCreationSummary") + "\n");
+        JarCreatorSummaryTA.setText("");
+        JarCreatorSummaryTA.append(I18n.tr("headLine.jarCreationSummary") + "\n");
 
-        outTA.append(I18n.tr("dictDir.jarCreationSummary"));
-        outTA.append("\n" + JarCreator.getDictionaryDirectory() + "\n\n");
+        JarCreatorSummaryTA.append(I18n.tr("dictDir.jarCreationSummary"));
+        JarCreatorSummaryTA.append("\n" + JarCreator.getDictionaryDirectory() + "\n\n");
 
-        outTA.append(I18n.tr("emptyDfMDir.jarCreationSummary"));
-        outTA.append("\n" + JarCreator.getEmptyDictionaryForMID() + "\n\n");
+        JarCreatorSummaryTA.append(I18n.tr("emptyDfMDir.jarCreationSummary"));
+        JarCreatorSummaryTA.append("\n" + JarCreator.getEmptyDictionaryForMID() + "\n\n");
 
-        outTA.append(I18n.tr("outputDir.jarCreationSummary"));
-        outTA.append("\n" + JarCreator.getOutputDirectory() + "\n\n");
+        JarCreatorSummaryTA.append(I18n.tr("outputDir.jarCreationSummary"));
+        JarCreatorSummaryTA.append("\n" + JarCreator.getOutputDirectory() + "\n\n");
 
-        outTA.append(I18n.tr("hitStart.jarCreationSummary"));
-        outTA.append("\n");
+        JarCreatorSummaryTA.append(I18n.tr("hitStart.jarCreationSummary"));
+        JarCreatorSummaryTA.append("\n");
     }
+
+    private void clearJarCreatorQueueContents() {
+        DfMCreatorMain.dfmCreator.dictConvQueue.clear();
+        JarCreatorQueueTextArea.setText("");
+        JarCreatorSummaryTA.setText("");
+        DfMCreatorMain.dfmCreator.clearJarCreatorTFs();
+    }
+
+    private void fillJarCreatorQueueTA() {
+        JarCreatorQueueTextArea.setText("");
+        JarCreatorQueueTextArea.append(I18n.tr("items.queue.JarCreator") + "\n\n");
+        for (int i=0; i<DfMCreatorMain.dfmCreator.jarCreatorArray.size(); i++){
+            JarCreatorQueueTextArea.append(DfMCreatorMain.dfmCreator.jarCreatorArray.get(i).toString() + "\n");
+        }
+    }
+
 }

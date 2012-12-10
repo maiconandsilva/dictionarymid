@@ -71,7 +71,10 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Locale;
+import java.util.Queue;
 import java.util.prefs.Preferences;
 import javax.swing.*;
 
@@ -120,6 +123,40 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     // A public DfMCreatorMain instance
     public static DfMCreatorMain dfmCreator;
 
+    // These are the queue variables that will be used to enqueue
+    // conversion/generation/creation settings before the actual processings.
+    // For DictdToDfM
+    public Queue<DTDFMValsToEnqueue> dictConvQueue;
+    // For DictionaryGeneration
+    public Queue<DictGenValsToEnqueue> dictgenQueue;
+    // For JarCreator
+    public Queue<JarCreatorValsToEnqueue> jarCreatorQueue;
+
+    // These are for checking if the queues have not already been created
+    // in order to prevent overwritring them if they already exist.
+    // For DictdToDfM
+    private static boolean dtdfmQueueCreationFlag = false;
+    // For DictionaryGeneration
+    private static boolean dictgenQueueCreationFlag = false;
+    // For JarCreator
+    private static boolean jarCreatorQueueCreationtorFlag = false;
+
+    // These are the ArrayList variables that will be used to hold
+    // the names of the items being processed in order to use them
+    // in TextAreas as visual representations for the queues being
+    // processed so as to be references for the user.
+
+    // For DictdToDfM
+    public ArrayList<String> dictConvArray;
+    // For DictionaryGeneration
+    public ArrayList<String> dictGenArray;
+    // For JarCreator
+    public ArrayList<String> jarCreatorArray;
+
+
+
+
+
     /**
      * Creates new form
      */
@@ -138,7 +175,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         EncGroupBut = new javax.swing.ButtonGroup();
         SCGroupBut = new javax.swing.ButtonGroup();
         DFMBuilderTabbedPane = new javax.swing.JTabbedPane();
@@ -305,7 +341,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         ButtonsPanel.add(clearFieldsButton);
-        clearFieldsButton.setBounds(60, 18, 207, 29);
+        clearFieldsButton.setBounds(60, 18, 207, 30);
 
         proceedButton.setText(I18n.tr("proceed.dfmCreatorMain")); // NOI18N
         proceedButton.addActionListener(new java.awt.event.ActionListener() {
@@ -314,7 +350,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         ButtonsPanel.add(proceedButton);
-        proceedButton.setBounds(60, 52, 207, 29);
+        proceedButton.setBounds(60, 52, 207, 30);
 
         EncodingPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         EncodingPanel.setLayout(null);
@@ -449,7 +485,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         OwnEncLabel.setBounds(30, 155, 155, 20);
 
         OwnEncTextField.setEnabled(false);
-
         EncodingPanel.add(OwnEncTextField);
         OwnEncTextField.setBounds(190, 155, 30, 25);
 
@@ -560,7 +595,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         OwnLabel.setBounds(35, 125, 155, 20);
 
         OwnSCTextField.setEnabled(false);
-
         SCPanel.add(OwnSCTextField);
         OwnSCTextField.setBounds(195, 125, 30, 25);
 
@@ -569,7 +603,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         SLLabel.setText(I18n.tr("switchLang.dfmCreatorMain")); // NOI18N
         SLPanel.add(SLLabel);
-        SLLabel.setBounds(30, 5, 325, 17);
+        SLLabel.setBounds(30, 5, 325, 25);
 
         KTLabel.setText(I18n.tr("keepTab.dfmCreatorMain")); // NOI18N
         KTLabel.setMaximumSize(new java.awt.Dimension(250, 50));
@@ -580,14 +614,11 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         RSBLabel.setText(I18n.tr("removeSquare.dfmCreatorMain")); // NOI18N
         SLPanel.add(RSBLabel);
-        RSBLabel.setBounds(30, 70, 325, 17);
-
+        RSBLabel.setBounds(30, 70, 325, 30);
         SLPanel.add(SLCheckBox);
         SLCheckBox.setBounds(5, 5, 20, 20);
-
         SLPanel.add(KTCheckBox);
         KTCheckBox.setBounds(5, 35, 20, 20);
-
         SLPanel.add(RSBCheckBox);
         RSBCheckBox.setBounds(5, 70, 20, 20);
 
@@ -625,7 +656,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(toolbar4, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DBPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                .addComponent(DBPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dictdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(SCPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
@@ -634,7 +665,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 .addGroup(dictdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ButtonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(SLPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addGap(0, 2, Short.MAX_VALUE))
         );
 
         DictdConvPanel.add(dictdPanel, java.awt.BorderLayout.CENTER);
@@ -646,33 +677,33 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         SourceFileLabel.setText(I18n.tr("dictGenLabel1.dfmCreatorMain")); // NOI18N
         jPanel1.add(SourceFileLabel);
-        SourceFileLabel.setBounds(5, 5, 240, 36);
+        SourceFileLabel.setBounds(5, 5, 240, 35);
         jPanel1.add(SourceFileTF);
         SourceFileTF.setBounds(250, 5, 300, 27);
 
         DirectoryDestinationLabel.setText(I18n.tr("dictGenLabel3.dfmCreatorMain")); // NOI18N
         jPanel1.add(DirectoryDestinationLabel);
-        DirectoryDestinationLabel.setBounds(5, 110, 240, 18);
+        DirectoryDestinationLabel.setBounds(5, 110, 240, 35);
         jPanel1.add(DirectoryDestinationTF);
         DirectoryDestinationTF.setBounds(250, 110, 300, 27);
 
         PropertyPathLabel.setText(I18n.tr("dictGenLabel2.dfmCreatorMain")); // NOI18N
         jPanel1.add(PropertyPathLabel);
-        PropertyPathLabel.setBounds(5, 55, 240, 36);
+        PropertyPathLabel.setBounds(5, 55, 240, 35);
         jPanel1.add(PropertyPathTF);
         PropertyPathTF.setBounds(250, 55, 300, 27);
 
         SourceFileBrowseLB.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel1.add(SourceFileBrowseLB);
-        SourceFileBrowseLB.setBounds(600, 10, 130, 17);
+        SourceFileBrowseLB.setBounds(600, 10, 130, 20);
 
         DirectoryDestinationBrowseLB.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel1.add(DirectoryDestinationBrowseLB);
-        DirectoryDestinationBrowseLB.setBounds(600, 115, 130, 17);
+        DirectoryDestinationBrowseLB.setBounds(600, 115, 130, 20);
 
         PropertyPathBrowseLB.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel1.add(PropertyPathBrowseLB);
-        PropertyPathBrowseLB.setBounds(600, 65, 130, 17);
+        PropertyPathBrowseLB.setBounds(600, 65, 130, 20);
 
         SourceFileBrowseBT.setText("...");
         SourceFileBrowseBT.addActionListener(new java.awt.event.ActionListener() {
@@ -787,11 +818,11 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             DictGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DictGenPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(toolbar1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addComponent(toolbar1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -800,7 +831,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         bfgPanel.setLayout(new java.awt.GridBagLayout());
 
         infotarea.setText("Don't touch this panel it will hold the FontToolkit at runtime...");
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -816,34 +846,33 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         jLabel1.setText(I18n.tr("jarCreatorLabel1.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(5, 5, 310, 36);
-
+        jLabel1.setBounds(5, 5, 310, 35);
         jPanel2.add(InputCSVFilesTF);
         InputCSVFilesTF.setBounds(5, 45, 345, 27);
 
         jLabel2.setText(I18n.tr("jarCreatorLabel2.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(5, 85, 310, 36);
+        jLabel2.setBounds(5, 85, 310, 35);
         jPanel2.add(EmptyDfMDirTF);
         EmptyDfMDirTF.setBounds(5, 125, 345, 27);
 
         jLabel3.setText(I18n.tr("jarCreatorLabel3.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(5, 170, 310, 18);
+        jLabel3.setBounds(5, 165, 310, 25);
         jPanel2.add(OutputDirTF);
         OutputDirTF.setBounds(5, 190, 345, 27);
 
         jLabel4.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(365, 170, 100, 17);
+        jLabel4.setBounds(365, 170, 100, 20);
 
         jLabel5.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(365, 105, 100, 17);
+        jLabel5.setBounds(365, 105, 100, 20);
 
         jLabel6.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(365, 25, 100, 17);
+        jLabel6.setBounds(365, 25, 100, 20);
 
         InputCSVFilesButton.setText("...");
         InputCSVFilesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -852,7 +881,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(InputCSVFilesButton);
-        InputCSVFilesButton.setBounds(365, 45, 47, 29);
+        InputCSVFilesButton.setBounds(365, 45, 47, 25);
 
         EmptyDfMDirButton.setText("...");
         EmptyDfMDirButton.addActionListener(new java.awt.event.ActionListener() {
@@ -861,7 +890,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(EmptyDfMDirButton);
-        EmptyDfMDirButton.setBounds(365, 125, 47, 29);
+        EmptyDfMDirButton.setBounds(365, 125, 47, 25);
 
         OutputDirButton.setText("...");
         OutputDirButton.addActionListener(new java.awt.event.ActionListener() {
@@ -870,7 +899,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(OutputDirButton);
-        OutputDirButton.setBounds(365, 190, 47, 29);
+        OutputDirButton.setBounds(365, 190, 47, 25);
 
         jButton4.setText(I18n.tr("packCSVFiles.dfmCreatorMain")); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -925,6 +954,11 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         getContentPane().add(DFMBuilderTabbedPane, java.awt.BorderLayout.CENTER);
 
         dictdconvMenu.setText(I18n.tr("dictdConverter.dfmCreatorMain")); // NOI18N
+        dictdconvMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                dictdconvMenuMousePressed(evt);
+            }
+        });
 
         miEditSettings.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         miEditSettings.setText(I18n.tr("clear.fields.dfmCreatorMain")); // NOI18N
@@ -947,6 +981,11 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         dfmBuilderMenuBar.add(dictdconvMenu);
 
         dictGenMenu.setText(I18n.tr("dictGen.dfmCreatorMain")); // NOI18N
+        dictGenMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                dictGenMenuMousePressed(evt);
+            }
+        });
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText(I18n.tr("createThePropsFile.dfmPropCreate")); // NOI18N
@@ -1101,7 +1140,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }//GEN-LAST:event_helpMenuActionPerformed
 
     private void OwnSCRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OwnSCRBActionPerformed
-        OwnSCTextField.setEnabled(true);
+        ownSCTextFieldSetEnabled();
     }//GEN-LAST:event_OwnSCRBActionPerformed
 
     private void FFRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FFRBActionPerformed
@@ -1117,18 +1156,11 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }//GEN-LAST:event_TabRBActionPerformed
 
     private void OutCSVFileBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OutCSVFileBrowseButtonActionPerformed
-        String s = getFile(true);
-        if (!"".equals(s)){
-            OutCSVFileTextField.setText(s);
-        }
+        outCSVFileBrowseGetFile();
     }//GEN-LAST:event_OutCSVFileBrowseButtonActionPerformed
 
     private void DBBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DBBrowseButtonActionPerformed
-        String s = getFile(true);
-        if (!"".equals(s)){
-            DBPathTextField.setText(s);
-            OutCSVFileTextField.setText(DBPathTextField.getText());
-        }
+        dbBrowseButtonGetFile();
     }//GEN-LAST:event_DBBrowseButtonActionPerformed
 
     private void UTFLERBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UTFLERBActionPerformed
@@ -1156,7 +1188,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }//GEN-LAST:event_ISO1RBActionPerformed
 
     private void OWNRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OWNRBActionPerformed
-        OwnEncTextField.setEnabled(true);
+        ownEncTextFieldSetEnabled();
     }//GEN-LAST:event_OWNRBActionPerformed
 
     private void UTFBERBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UTFBERBActionPerformed
@@ -1189,45 +1221,27 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }//GEN-LAST:event_GenDictFilesBTActionPerformed
 
     private void SourceFileBrowseBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SourceFileBrowseBTActionPerformed
-        String s = getFile(false);
-        if (!"".equals(s)){
-            SourceFileTF.setText(s);
-        }
+        sourceFileBrowseBTGetFile();
     }//GEN-LAST:event_SourceFileBrowseBTActionPerformed
 
     private void DirectoryDestinationBrowseBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DirectoryDestinationBrowseBTActionPerformed
-        String s = getFile(true);
-        if (!"".equals(s)){
-            DirectoryDestinationTF.setText(s);
-        }
+        directoryDestinationBrowseBTGetFile();
     }//GEN-LAST:event_DirectoryDestinationBrowseBTActionPerformed
 
     private void PropertyPathBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PropertyPathBTActionPerformed
-        String s = getFile(true);
-        if (!"".equals(s)){
-            PropertyPathTF.setText(s);
-        }
+        propertyPathBTGetFile();
     }//GEN-LAST:event_PropertyPathBTActionPerformed
 
     private void InputCSVFilesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputCSVFilesButtonActionPerformed
-        String s = getFile(true);
-        if (!"".equals(s)){
-            InputCSVFilesTF.setText(s);
-        }
+        inputCSVFilesButtonGetFile();
     }//GEN-LAST:event_InputCSVFilesButtonActionPerformed
 
     private void EmptyDfMDirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmptyDfMDirButtonActionPerformed
-        String s = getFile(true);
-        if (!"".equals(s)){
-            EmptyDfMDirTF.setText(s);
-        }
+        emptyDfMDirButtonGetFile();
     }//GEN-LAST:event_EmptyDfMDirButtonActionPerformed
 
     private void OutputDirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OutputDirButtonActionPerformed
-        String s = getFile(true);
-        if (!"".equals(s)){
-            OutputDirTF.setText(s);
-        }
+        outputDirButtonGetFile();
     }//GEN-LAST:event_OutputDirButtonActionPerformed
 
     private void miProceedConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miProceedConvertActionPerformed
@@ -1505,7 +1519,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     private javax.swing.JTextField DirectoryDestinationTF;
     private javax.swing.JButton EmptyDfMDirButton;
     private javax.swing.JTextField EmptyDfMDirTF;
-    public javax.swing.ButtonGroup EncGroupBut;
+    private javax.swing.ButtonGroup EncGroupBut;
     private javax.swing.JLabel EncodingLabel;
     private javax.swing.JPanel EncodingPanel;
     private javax.swing.JRadioButton FFRB;
@@ -1603,7 +1617,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenu jarCreatorMenu;
     private javax.swing.JMenuItem miContents;
     private javax.swing.JMenuItem miEditSettings;
@@ -1615,255 +1628,11 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 
-    /*
-     *
-     * miscellaneous subroutiness
-     *
-     */
-
-    /**
-     * CreateAndDisplayTheForm() creates and displays
-     * The DfM-Creator form.
-     */
-    private static void CreateAndDisplayTheForm() {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                dfmCreator = new DfMCreatorMain();
-                dfmCreator.setLocation(screenSize.width / 2 - dfmCreator.getWidth() / 2,
-                                     screenSize.height / 2 - dfmCreator.getHeight() / 2);
-                dfmCreator.setVisible(true);
-            }
-        });
-    }
-
-    /**
-     * printCopyrightNotice() prints a copyright
-     * statement and then exits.
-     */
-    public static void printCopyrightNotice(){
-    System.out.println("\n\nDictionaryForMIDs-Creator V" + dfm_creator_version + ","
-                    + "(C) 2012 Karim Mahamane Karimou\n"
-                    + "DictionaryForMIDs-Creator comes with ABSOLUTELY NO WARRANTY.\n"
-                    + "This is free software, and you are welcome to redistribute it\n"
-                    + "under the terms and conditions of the GNU General Public License.\n\n");
-    }
-
-    /**
-     * addFontTKToDfMCreatorTabbedPane()
-     * The font generator tab holds the FontToolkit created by Sean Kernohan.
-     * When i started creating the DfM-Creator, i did not want to have to
-     * write a new GUI from scratch for the BitmapFontGenerator. So, i decided
-     * to modify the FontToolkit and integrate it in the DfM-Creator.
-     * The code below does what's necessary to get the FontToolkit to
-     * work with the DictionaryForMIDs-Creator.
-     */
-    private void addFontTKToDfMCreatorTabbedPane() {
-        // Creating a toolbar
-        javax.swing.JToolBar bfgToolbar = new javax.swing.JToolBar();
-        bfgToolbar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        bfgToolbar.setFloatable(false);
-        bfgToolbar.setRollover(true);
-        bfgToolbar.setPreferredSize(new java.awt.Dimension(400, 15));
-        bfgToolbar.setRequestFocusEnabled(false);
-
-        // Creating a label for the toolbar
-        javax.swing.JLabel toolbarLabel = new javax.swing.JLabel();
-        toolbarLabel.setText("<html><font color=gray>BitmapFontGenerator</font>");
-        bfgToolbar.add(toolbarLabel);
-
-        // Hiding the little info textarea that is visible
-        // during design and souldn't during runtime.
-        infotarea.setVisible(false);
-
-        // Creating a new layout to override
-        // the one of the little info textarea.
-        bfgPanel.setLayout(new java.awt.GridBagLayout());
-
-        // Getting the FontToolkit panel
-        JPanel fontTKPanel = fontTK.getJPanel();
-
-        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        bfgPanel.add(bfgToolbar, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        bfgPanel.add(fontTKPanel, gridBagConstraints);
-
-        fontTKPanel.setPreferredSize(new java.awt.Dimension(460, 300));
-        fontTKPanel.setVisible(true);
-    }
-
-    /**
-     * setTheLocale() gets and sets the default
-     * locale. It can also test other locales
-     * during debug sessions for example.
-     */
-    private static void setTheLocale() {
-        //Locale locale = new Locale.Builder().setLanguage("en").setRegion("US").build();
-        //Locale locale = new Locale.Builder().setLanguage("fr").setRegion("FR").build();
-        Locale locale = Locale.getDefault();
-
-        // debug
-        System.out.println("Locale: " + locale.toString());
-        I18n.setLocale(locale);
-    }
-
-    /**
-     * showPrefsWin() gets the preferences window.
-     */
-    private void showPrefsWin(){
-        PreferencesBox prefs = PreferencesBox.getPrefsWin();
-        prefs.setVisible(true);
-    }
-
-    /**
-     * showHelpWindow() gets the help window
-     */
-    private void showHelpWindow() {
-        JFrame hw = HelpContents.createAndShowGUI();
-        hw.setLocation(screenSize.width / 2 - hw.getWidth() / 2,
-                        screenSize.height / 2 - hw.getHeight() / 2);
-        hw.setVisible(true);
-    }
-
-   /**
-    * savePreferences() saves the preferences
-    * settings.
-    * @param look the selected look and feel
+   /*
+    *
+    * DictdToDictionaryForMIDs subroutines
+    *
     */
-   public static void savePreferences(String look) {
-      try {
-         node.put("DfMCreator.window.LookAndFeel", look);
-         printAnyMsg(I18n.tr("lookAndFeelMsg.dfmCreatorMain"),
-                     I18n.tr("prefsSaved.dfmCreatorMain"), JOptionPane.INFORMATION_MESSAGE);
-      }
-      catch (Throwable t) {
-          System.out.println(t + "\n" + t.getCause());
-      }
-   }
-
-    /**
-     * applyPreferences() applies the saved
-     * preferences at program startup.
-     */
-    public static void applyPreferences() {
-      try {
-         if (! root.nodeExists(pathName)){
-
-             //TODO: Becomes a placeholder now for writing new code :-)
-
-         } else {
-	     if (LookAndFeel != null) {
-	        try {
-                    javax.swing.UIManager.setLookAndFeel(LookAndFeel);
-	        }
-	        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException t) {
-                    System.out.println(t.getLocalizedMessage() + "\n" + t.getCause());
-	        }
-	     }
-	  }
-      }
-      catch (Throwable t) {
-          System.out.println(t + "\n" + t.getCause());
-      }
-   }
-
-    /**
-     * OwnTextFieldCheck() checks if the "Choose Your Own"
-     * radio button is selected in order to enable/disable
-     * the little text area that lets the user provide
-     * her own choice instead of the ones given by default.
-     */
-    private void OwnTextFieldCheck(){
-        if (OwnSCTextField.isEnabled()) {
-            OwnSCTextField.setEnabled(false);
-        }
-    }
-
-    /**
-     * OwnEncTextFieldCheck() checks if the "Choose Your Own"
-     * radio button is selected in order to enable/disable
-     * the little text area that enables the user to provide
-     * her own choice instead of the ones given by default.
-     */
-    private void OwnEncTextFieldCheck(){
-        if (OwnEncTextField.isEnabled()){
-            OwnEncTextField.setEnabled(false);
-        }
-    }
-
-    /**
-     * trim() removes trailing slashes or
-     * backslashes at the end of a string
-     * @param s the string to be trimmed.
-     * @return
-     */
-    private String trim(String s){
-        switch (s.substring(s.length() - 1, s.length())) {
-            case "/":
-                s = s.substring(0, s.length() - 1);
-                break;
-            case "\\":
-                s = s.substring(0, s.length() - 1);
-                break;
-        }
-        return s;
-    }
-
-    /**
-     * prints a JOptionPane message dialog.
-     * @param message the text of the message
-     * @param winText the title of the windows
-     * @param infType the type of the message
-     */
-    public static void printAnyMsg(String message, String winText, int infType){
-        JOptionPane.showMessageDialog(null, message, winText, infType);
-    }
-
-    /**
-     * getFile() shows a file chooser to let the user
-     * choose a file and returns the file's path
-     * @param dirsOnly whether or not let the user
-     * be able to choose files or directories.
-     * @return the absolute path of the file.
-     */
-    private String getFile(boolean dirsOnly) {
-        Path returnedPath;
-        String returnedPathString;
-
-	JFileChooser chooser = new JFileChooser();
-	if (dirsOnly) {
-		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-	} else {
-            chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        }
-	int valueReturned = chooser.showOpenDialog(this);
-	if (valueReturned == JFileChooser.APPROVE_OPTION){
-
-            returnedPath = Paths.get(chooser.getSelectedFile().getAbsolutePath());
-            returnedPath = returnedPath.normalize();
-            returnedPathString = returnedPath.toString();
-
-             return returnedPathString;
-        }
-        else {
-            return "";
-        }
-    }
 
     /**
      * setDictdToDfMVals() checks the validity of the values entered by
@@ -2031,8 +1800,38 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             removeSquareBracketsVar = false;
         }
 
-        // Setting the values for dictdconv.
-        // Setting Sting values.
+        // Creating a new item to be put in the queue.
+        DTDFMValsToEnqueue dtdfmRecord = new DTDFMValsToEnqueue();
+
+        // This checks if the dictConvQueue hasn't already been created
+        // otherwise creates it but if it already exists, avoids
+        // overwriting it so that other conversion settings may
+        // be enqueued.
+        if (!dtdfmQueueCreationFlag){
+            dictConvQueue = new LinkedList<DTDFMValsToEnqueue>();
+            // Initializing our ArrayList
+            dictConvArray = new ArrayList<>();
+            dtdfmQueueCreationFlag = true;
+        }
+
+        // Passing values to the variables of this item
+        dtdfmRecord.db = dbNameVar;
+        dtdfmRecord.dbFolder = dbFolderNameVar;
+        dtdfmRecord.outputCSV = outputCSVFileVar;
+        dtdfmRecord.outputEncoding = outputEncodingCharsetVar;
+        dtdfmRecord.separatorChar = separatorCharacterVar;
+        dtdfmRecord.removeSquareBracks = removeSquareBracketsVar;
+        dtdfmRecord.keepTabAndNewLines = keepTabsAndNewLinesVar;
+        dtdfmRecord.switchLangs = switchLanguagesVar;
+
+        // Actually adding the element to the queue
+        dictConvQueue.add(dtdfmRecord);
+
+        // Adding the dbName variable to the ArrayList
+        // This will be used to display a representation of the queue.
+        dictConvArray.add(dtdfmRecord.db);
+
+        // As a test, try passing values to DictdToDfM
         DictdToDfM.setDBName(dbNameVar);
         DictdToDfM.setDBFolderName(dbFolderNameVar);
         DictdToDfM.setOutputCSVFile(outputCSVFileVar);
@@ -2046,18 +1845,17 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         DictdToDfM.setSwitchLanguages(switchLanguagesVar);
         DictdToDfM.setRemoveSquareBrackets(removeSquareBracketsVar);
 
-        // For the actual call of DictdToDfM to do
-        // the actual convertion, refer to the DictdConvSummary.java class.
     }
 
-    /**
-     * resets the setting for the
-     * DictdToDictionaryForMIDs tab.
-     */
-    private void clearFields() {
-        DBNameTextField.setText("");
-        DBPathTextField.setText("");
-        OutCSVFileTextField.setText("");
+    public class DTDFMValsToEnqueue {
+	String db;
+	String dbFolder;
+	String outputCSV;
+	String outputEncoding;
+	char separatorChar;
+	boolean switchLangs;
+	boolean keepTabAndNewLines;
+	boolean removeSquareBracks;
     }
 
     /**
@@ -2095,18 +1893,15 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         }
     }
 
-
-    /**
-     * showAbout() gets the about window
-     */
-    private void showAbout() {
-        AboutBox aboutbox = AboutBox.getAboutBox();
-        aboutbox.setSize(525, 485);
-        aboutbox.setModal(true);
-        aboutbox.setLocation(screenSize.width / 2 - aboutbox.getWidth() / 2,
-                          screenSize.height / 2 - aboutbox.getHeight() / 2);
-        aboutbox.setVisible(true);
-    }
+        /**
+        * resets the setting for the
+        * DictdToDictionaryForMIDs tab.
+        */
+        private void clearFields() {
+            DBNameTextField.setText("");
+            DBPathTextField.setText("");
+            OutCSVFileTextField.setText("");
+        }
 
 
    /*
@@ -2115,43 +1910,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     *
     */
 
-    /**
-     * checkScreenResolution() checks the resolution
-     * of the screen just before calling PropertiesEditor
-     */
-    public void checkScreenResolution(){
-        if (screenSize.getHeight() < PropertiesEditor.Default_height_2_Langs ||
-            screenSize.getWidth() < PropertiesEditor.Default_width) {
-            JOptionPane.showMessageDialog(null, I18n.tr("screenResolution.dfmCreatorMain"),
-                                   I18n.tr("screenResolutionTitle.dfmCreatorMain"), JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
-
-
-    /**
-     * showPropWin() gets the PropertiesEditor Window.
-     */
-    public void showPropWin(){
-        PropertiesEditor propWin = PropertiesEditor.getPropWin();
-        // this subroutine will set the selected index
-        // of the combo box to "2" languages and hide all
-        // textfields, labels, buttons related to language-3
-        // it also resizes the properties window accordingly
-        propWin.updateNumOfLang();
-        propWin.setLocation(screenSize.width / 2 - propWin.getWidth() / 2,
-                          screenSize.height / 2 - propWin.getHeight() / 2);
-        propWin.setVisible(true);
-    }
-
-    /**
-     * editExistingPropFile() Edits an existing
-     * DictionaryForMIDs.properties file.
-     */
-    public void editExistingPropFile(){
-        PropertiesEditor propWin = PropertiesEditor.getPropWin();
-        propWin.setVisible(false);
-        propWin.editExistingPropFile();
-    }
 
     /**
      * setDictGenVals() checks and sets the values up
@@ -2231,21 +1989,45 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 throw new CantCreateDestDir(I18n.tr("destDirCreationError.dfmCreatorMain"));
             }
         }
-        // Passing the values to dictgen
+
+        // Creating a new item to be put in the queue.
+        DictGenValsToEnqueue dictgenRecord = new DictGenValsToEnqueue();
+
+
+        // This checks if the dictgenQueue hasn't already been created
+        // otherwise creates it but if it already exists, prevents
+        // overwriting it so that other dictionary generation items
+        // may be enqueued.
+        if (!dictgenQueueCreationFlag){
+            dictgenQueue = new LinkedList<DictGenValsToEnqueue>();
+            // Initializing our DictGen ArrayList
+            dictGenArray = new ArrayList<>();
+            dictgenQueueCreationFlag = true;
+        }
+
+        // Passing values to the variables of this item
+        dictgenRecord.srcFile = sourceFile;
+        dictgenRecord.destDir = directoryDestination + PATH_SEPARATOR + "dictionary";
+        dictgenRecord.propPath = propertyPath;
+
+        // Actually adding the element to the queue
+        dictgenQueue.add(dictgenRecord);
+
+        // Adding the sourceFile path to the ArrayList
+        // This will be used to display a representation of the queue.
+        dictGenArray.add(dictgenRecord.srcFile);
+
+         // As a test, try passing values to DictGen
         DictionaryGeneration.setSourceFile(sourceFile);
         DictionaryGeneration.setDirectoryDestination(directoryDestination + PATH_SEPARATOR + "dictionary");
         DictionaryGeneration.setPropertyPath(propertyPath);
 
     }
 
-    /**
-     * resets the setting for the
-     * DictionaryGeneration tab.
-     */
-    private void clearDGFields() {
-        SourceFileTF.setText("");
-        DirectoryDestinationTF.setText("");
-        PropertyPathTF.setText("");
+    public class DictGenValsToEnqueue {
+	String srcFile;
+	String destDir;
+	String propPath;
     }
 
     /**
@@ -2289,14 +2071,15 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         }
     }
 
+
     /**
-     * showCSVFileCheckWin() gets the csvfile check window.
+     * resets the setting for the
+     * DictionaryGeneration tab.
      */
-    private void showCSVFileCheckWin(){
-    	CheckCSVFileIntegrity csvWin = CheckCSVFileIntegrity.getCSVCheckWin();
-        csvWin.setLocation(screenSize.width / 2 - csvWin.getWidth() / 2,
-                        screenSize.height / 2 - csvWin.getHeight() / 2);
-        csvWin.setVisible(true);
+    private void clearDGFields() {
+        SourceFileTF.setText("");
+        DirectoryDestinationTF.setText("");
+        PropertyPathTF.setText("");
     }
 
 
@@ -2384,21 +2167,43 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             throw new EmptyDfMFileNotFound(I18n.tr("emptyJarNotFound.dfmCreatorMain"));
         }
 
-        // Setting values for JarCreator
+        // Creating a new item to be put in the queue.
+        JarCreatorValsToEnqueue jarCreatorRecord = new JarCreatorValsToEnqueue();
+
+        // This checks if the jarCreatorQueue hasn't already been created
+        // otherwise creates it but if it already exists, prevents
+        // overwriting it so that other dictionary generation items
+        // may be enqueued.
+        if (!jarCreatorQueueCreationtorFlag){
+            jarCreatorQueue = new LinkedList<JarCreatorValsToEnqueue>();
+            // Initializing our JarCreator ArrayList
+            jarCreatorArray = new ArrayList<>();
+            jarCreatorQueueCreationtorFlag = true;
+        }
+
+        // Passing values to the variables of this item
+        jarCreatorRecord.dictDir = dictionarydirectory + PATH_SEPARATOR;
+        jarCreatorRecord.emptyDfM = emptydictionaryformids;
+        jarCreatorRecord.outputDir = outputdirectory;
+
+        // Actually adding the element to the queue
+        jarCreatorQueue.add(jarCreatorRecord);
+
+        // Adding the dictionaryDirectory path to the ArrayList
+        // This will be used to display a representation of the queue.
+        jarCreatorArray.add(jarCreatorRecord.dictDir);
+
+        // As a test, try passing values to JarCreator
         JarCreator.setDictionaryDirectory(dictionarydirectory + PATH_SEPARATOR);
         JarCreator.setEmptyDictionaryForMID(emptydictionaryformids);
         JarCreator.setOutputDirectory(outputdirectory);
 
     }
 
-    /**
-     * resets the setting for the
-     * JarCreator tab.
-     */
-    private void clearJCFields() {
-        InputCSVFilesTF.setText("");
-        EmptyDfMDirTF.setText("");
-        OutputDirTF.setText("");
+    public class JarCreatorValsToEnqueue {
+	String dictDir;
+	String emptyDfM;
+	String outputDir;
     }
 
     /**
@@ -2445,6 +2250,328 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * resets the setting for the
+     * JarCreator tab.
+     */
+    private void clearJCFields() {
+        InputCSVFilesTF.setText("");
+        EmptyDfMDirTF.setText("");
+        OutputDirTF.setText("");
+    }
+
+
+    /*
+     *
+     * miscellaneous subroutiness
+     *
+     */
+
+    /**
+     * CreateAndDisplayTheForm() creates and displays
+     * The DfM-Creator form.
+     */
+    private static void CreateAndDisplayTheForm() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                dfmCreator = new DfMCreatorMain();
+                dfmCreator.setLocation(screenSize.width / 2 - dfmCreator.getWidth() / 2,
+                                     screenSize.height / 2 - dfmCreator.getHeight() / 2);
+                dfmCreator.setVisible(true);
+            }
+        });
+    }
+
+    /**
+     * printCopyrightNotice() prints a copyright
+     * statement and then exits.
+     */
+    public static void printCopyrightNotice(){
+    System.out.println("\n\nDictionaryForMIDs-Creator V" + dfm_creator_version + ","
+                    + "(C) 2012 Karim Mahamane Karimou\n"
+                    + "DictionaryForMIDs-Creator comes with ABSOLUTELY NO WARRANTY.\n"
+                    + "This is free software, and you are welcome to redistribute it\n"
+                    + "under the terms and conditions of the GNU General Public License.\n\n");
+    }
+
+    /**
+     * addFontTKToDfMCreatorTabbedPane()
+     * The font generator tab holds the FontToolkit created by Sean Kernohan.
+     * When i started creating the DfM-Creator, i did not want to have to
+     * write a new GUI from scratch for the BitmapFontGenerator. So, i decided
+     * to modify the FontToolkit and integrate it in the DfM-Creator.
+     * The code below does what's necessary to get the FontToolkit to
+     * work with the DictionaryForMIDs-Creator.
+     */
+    private void addFontTKToDfMCreatorTabbedPane() {
+        // Creating a toolbar
+        javax.swing.JToolBar bfgToolbar = new javax.swing.JToolBar();
+        bfgToolbar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        bfgToolbar.setFloatable(false);
+        bfgToolbar.setRollover(true);
+        bfgToolbar.setPreferredSize(new java.awt.Dimension(400, 15));
+        bfgToolbar.setRequestFocusEnabled(false);
+
+        // Creating a label for the toolbar
+        javax.swing.JLabel toolbarLabel = new javax.swing.JLabel();
+        toolbarLabel.setText("<html><font color=gray>BitmapFontGenerator</font>");
+        bfgToolbar.add(toolbarLabel);
+
+        // Hiding the little info textarea that is visible
+        // during design and souldn't during runtime.
+        infotarea.setVisible(false);
+
+        // Creating a new layout to override
+        // the one of the little info textarea.
+        bfgPanel.setLayout(new java.awt.GridBagLayout());
+
+        // Getting the FontToolkit panel
+        JPanel fontTKPanel = fontTK.getJPanel();
+
+        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        bfgPanel.add(bfgToolbar, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        bfgPanel.add(fontTKPanel, gridBagConstraints);
+
+        fontTKPanel.setPreferredSize(new java.awt.Dimension(460, 300));
+        fontTKPanel.setVisible(true);
+    }
+
+    /**
+     * setTheLocale() gets and sets the default
+     * locale. It can also test other locales
+     * during debug sessions for example.
+     */
+    private static void setTheLocale() {
+        //Locale locale = new Locale.Builder().setLanguage("en").setRegion("US").build();
+        //Locale locale = new Locale.Builder().setLanguage("fr").setRegion("FR").build();
+        Locale locale = Locale.getDefault();
+
+        // debug
+        System.out.println("Locale: " + locale.toString());
+        I18n.setLocale(locale);
+    }
+
+    /**
+     * showAbout() gets the about window
+     */
+    private void showAbout() {
+        AboutBox aboutbox = AboutBox.getAboutBox();
+        aboutbox.setSize(525, 485);
+        aboutbox.setModal(true);
+        aboutbox.setLocation(screenSize.width / 2 - aboutbox.getWidth() / 2,
+                          screenSize.height / 2 - aboutbox.getHeight() / 2);
+        aboutbox.setVisible(true);
+    }
+
+    /**
+     * showPrefsWin() gets the preferences window.
+     */
+    private void showPrefsWin(){
+        PreferencesBox prefs = PreferencesBox.getPrefsWin();
+        prefs.setVisible(true);
+    }
+
+    /**
+     * showHelpWindow() gets the help window
+     */
+    private void showHelpWindow() {
+        JFrame hw = HelpContents.createAndShowGUI();
+        hw.setLocation(screenSize.width / 2 - hw.getWidth() / 2,
+                        screenSize.height / 2 - hw.getHeight() / 2);
+        hw.setVisible(true);
+    }
+
+   /**
+    * savePreferences() saves the preferences
+    * settings.
+    * @param look the selected look and feel
+    */
+   public static void savePreferences(String look) {
+      try {
+         node.put("DfMCreator.window.LookAndFeel", look);
+         printAnyMsg(I18n.tr("lookAndFeelMsg.dfmCreatorMain"),
+                     I18n.tr("prefsSaved.dfmCreatorMain"), JOptionPane.INFORMATION_MESSAGE);
+      }
+      catch (Throwable t) {
+          System.out.println(t + "\n" + t.getCause());
+      }
+   }
+
+    /**
+     * applyPreferences() applies the saved
+     * preferences at program startup.
+     */
+    public static void applyPreferences() {
+      try {
+         if (! root.nodeExists(pathName)){
+
+             //TODO: Becomes a placeholder now for writing new code :-)
+
+         } else {
+	     if (LookAndFeel != null) {
+	        try {
+                    javax.swing.UIManager.setLookAndFeel(LookAndFeel);
+	        }
+	        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException t) {
+                    System.out.println(t.getLocalizedMessage() + "\n" + t.getCause());
+	        }
+	     }
+	  }
+      }
+      catch (Throwable t) {
+          System.out.println(t + "\n" + t.getCause());
+      }
+   }
+
+    /**
+     * OwnTextFieldCheck() checks if the "Choose Your Own"
+     * radio button is selected in order to enable/disable
+     * the little text area that lets the user provide
+     * her own choice instead of the ones given by default.
+     */
+    private void OwnTextFieldCheck(){
+        if (OwnSCTextField.isEnabled()) {
+            OwnSCTextField.setEnabled(false);
+        }
+    }
+
+    /**
+     * OwnEncTextFieldCheck() checks if the "Choose Your Own"
+     * radio button is selected in order to enable/disable
+     * the little text area that enables the user to provide
+     * her own choice instead of the ones given by default.
+     */
+    private void OwnEncTextFieldCheck(){
+        if (OwnEncTextField.isEnabled()){
+            OwnEncTextField.setEnabled(false);
+        }
+    }
+
+    /**
+     * trim() removes trailing slashes or
+     * backslashes at the end of a string
+     * @param s the string to be trimmed.
+     * @return
+     */
+    private String trim(String s){
+        switch (s.substring(s.length() - 1, s.length())) {
+            case "/":
+                s = s.substring(0, s.length() - 1);
+                break;
+            case "\\":
+                s = s.substring(0, s.length() - 1);
+                break;
+        }
+        return s;
+    }
+
+    /**
+     * prints a JOptionPane message dialog.
+     * @param message the text of the message
+     * @param winText the title of the windows
+     * @param infType the type of the message
+     */
+    public static void printAnyMsg(String message, String winText, int infType){
+        JOptionPane.showMessageDialog(null, message, winText, infType);
+    }
+
+    /**
+     * getFile() shows a file chooser to let the user
+     * choose a file and returns the file's path
+     * @param dirsOnly whether or not let the user
+     * be able to choose files or directories.
+     * @return the absolute path of the file.
+     */
+    private String getFile(boolean dirsOnly) {
+        Path returnedPath;
+        String returnedPathString;
+
+	JFileChooser chooser = new JFileChooser();
+	if (dirsOnly) {
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+	} else {
+            chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        }
+	int valueReturned = chooser.showOpenDialog(this);
+	if (valueReturned == JFileChooser.APPROVE_OPTION){
+
+            returnedPath = Paths.get(chooser.getSelectedFile().getAbsolutePath());
+            returnedPath = returnedPath.normalize();
+            returnedPathString = returnedPath.toString();
+
+             return returnedPathString;
+        }
+        else {
+            return "";
+        }
+    }
+
+    /**
+     * checkScreenResolution() checks the resolution
+     * of the screen just before calling PropertiesEditor
+     */
+    public void checkScreenResolution(){
+        if (screenSize.getHeight() < PropertiesEditor.Default_height_2_Langs ||
+            screenSize.getWidth() < PropertiesEditor.Default_width) {
+            JOptionPane.showMessageDialog(null, I18n.tr("screenResolution.dfmCreatorMain"),
+                                   I18n.tr("screenResolutionTitle.dfmCreatorMain"), JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+
+    /**
+     * showPropWin() gets the PropertiesEditor Window.
+     */
+    public void showPropWin(){
+        PropertiesEditor propWin = PropertiesEditor.getPropWin();
+        // this subroutine will set the selected index
+        // of the combo box to "2" languages and hide all
+        // textfields, labels, buttons related to language-3
+        // it also resizes the properties window accordingly
+        propWin.updateNumOfLang();
+        propWin.setLocation(screenSize.width / 2 - propWin.getWidth() / 2,
+                          screenSize.height / 2 - propWin.getHeight() / 2);
+        propWin.setVisible(true);
+    }
+
+    /**
+     * editExistingPropFile() Edits an existing
+     * DictionaryForMIDs.properties file.
+     */
+    public void editExistingPropFile(){
+        PropertiesEditor propWin = PropertiesEditor.getPropWin();
+        propWin.setVisible(false);
+        propWin.editExistingPropFile();
+    }
+
+    /**
+     * showCSVFileCheckWin() gets the csvfile check window.
+     */
+    private void showCSVFileCheckWin(){
+    	CheckCSVFileIntegrity csvWin = CheckCSVFileIntegrity.getCSVCheckWin();
+        csvWin.setLocation(screenSize.width / 2 - csvWin.getWidth() / 2,
+                        screenSize.height / 2 - csvWin.getHeight() / 2);
+        csvWin.setVisible(true);
+    }
+
+
     public static void setTheNimbusLookAndFeel() {
         /*
          * Copied from a NetBeans generated code from
@@ -2465,6 +2592,95 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    private void ownSCTextFieldSetEnabled() {
+        OwnSCTextField.setEnabled(true);
+    }
+
+    private void outCSVFileBrowseGetFile() {
+        String s = getFile(true);
+        if (!"".equals(s)){
+            OutCSVFileTextField.setText(s);
+        }
+    }
+
+    private void dbBrowseButtonGetFile() {
+        String s = getFile(true);
+        if (!"".equals(s)){
+            DBPathTextField.setText(s);
+            OutCSVFileTextField.setText(DBPathTextField.getText());
+        }
+    }
+
+    private void ownEncTextFieldSetEnabled() {
+        OwnEncTextField.setEnabled(true);
+    }
+
+    private void sourceFileBrowseBTGetFile() {
+        String s = getFile(false);
+        if (!"".equals(s)){
+            SourceFileTF.setText(s);
+        }
+    }
+
+    private void directoryDestinationBrowseBTGetFile() {
+        String s = getFile(true);
+        if (!"".equals(s)){
+            DirectoryDestinationTF.setText(s);
+        }
+    }
+
+    private void propertyPathBTGetFile() {
+        String s = getFile(true);
+        if (!"".equals(s)){
+            PropertyPathTF.setText(s);
+        }
+    }
+
+    private void inputCSVFilesButtonGetFile() {
+        String s = getFile(true);
+        if (!"".equals(s)){
+            InputCSVFilesTF.setText(s);
+        }
+    }
+
+    private void emptyDfMDirButtonGetFile() {
+        String s = getFile(true);
+        if (!"".equals(s)){
+            EmptyDfMDirTF.setText(s);
+        }
+    }
+
+    private void outputDirButtonGetFile() {
+        String s = getFile(true);
+        if (!"".equals(s)){
+            OutputDirTF.setText(s);
+        }
+    }
+
+    // Clears the contents of the TextFields of the
+    // DictdToDfM panel from DfMCreatorMain window
+    public void clearDictdToDfMTFs() {
+        DBNameTextField.setText("");
+        DBPathTextField.setText("");
+        OutCSVFileTextField.setText("");
+    }
+
+    // Clears the contents of the TextFields of the
+    // DictGen panel from DfMCreatorMain window
+    public void clearDictGenTFs() {
+        SourceFileTF.setText("");
+        PropertyPathTF.setText("");
+        DirectoryDestinationTF.setText("");
+    }
+
+    // Clears the contents of the TextFields of the
+    // JarCreator panel from DfMCreatorMain window
+    public void clearJarCreatorTFs() {
+        InputCSVFilesTF.setText("");
+        EmptyDfMDirTF.setText("");
+        OutputDirTF.setText("");
     }
 
 }

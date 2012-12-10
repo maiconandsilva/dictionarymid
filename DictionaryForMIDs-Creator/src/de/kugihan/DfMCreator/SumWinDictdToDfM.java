@@ -1,33 +1,33 @@
 /* ////////////////////////////////////////////////////////////////
-*   
+*
 *   In the Name of Allah
-*   
+*
 *   DICTIONARYFORMIDS-CREATOR
-*   
+*
 *   This file is part of DictionaryForMIDs-Creator
 *   Copyright (C) 2012 Karim Mahamane Karimou
 *   DictionaryForMIDs-Creator is a GUI wrapper around various
 *   DictionaryForMIDs tools, among others we have
 *   DictdToDictionaryForMIDs, DictionaryGeneration,
 *   JarCreator and BitmapFontGenerator.
-*   
+*
 *   DictionaryForMIDs-Creator is free software;
 *   you can redistribute it and/or modify it under the terms
 *   of the GNU General Public License as published by the
 *   Free Software Foundation; either version 2 of the License, or
 *   (at your option) any later version.
-*   
+*
 *   DictionaryForMIDs-Creator is distributed in the hope that
 *   it will be useful, but WITHOUT ANY WARRANTY; without even
 *   the implied warranty of MERCHANTABILITY or
 *   FITNESS FOR A PARTICULAR PURPOSE.  See the
 *   GNU General Public License for more details.
-*   	
+*
 *   You should have received a copy of the GNU General Public
 *   License along with DictionaryForMIDs-Creator;
 *   if not, write to the Free Software Foundation, Inc.,
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-*   
+*
 * //////////////////////////////////////////////////////////////// */
 
 
@@ -59,10 +59,10 @@ import javax.swing.text.StyledDocument;
 
 public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListener, DictdToDfMConvSteps,
                                                                      WindowListener, PropertyChangeListener {
-    
+
     private Task task;
     public static boolean done;
-  
+
     /**
      * Creates new form SumWinDictdToDfM
      */
@@ -84,11 +84,18 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         jPanel1 = new javax.swing.JPanel();
         SumCancelButton = new javax.swing.JButton();
         SumProceedButton = new javax.swing.JButton();
+        enqueueButton = new javax.swing.JButton();
+        clearQueueBT = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         SummaryTextPane = new javax.swing.JTextPane();
         conversionProgBar = new javax.swing.JProgressBar(0, 100);
+        jScrollPane2 = new javax.swing.JScrollPane();
+        QueueTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 650));
+        setMinimumSize(new java.awt.Dimension(500, 400));
+        setPreferredSize(new java.awt.Dimension(600, 500));
         setResizable(false);
         addWindowListener(this);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -101,10 +108,10 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         SumCancelButton.setEnabled(false);
         SumCancelButton.addActionListener(this);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 42;
-        gridBagConstraints.ipady = 4;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 4, 0, 0);
         jPanel1.add(SumCancelButton, gridBagConstraints);
@@ -114,10 +121,30 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 43;
-        gridBagConstraints.ipady = 3;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(SumProceedButton, gridBagConstraints);
+
+        enqueueButton.setText(I18n.tr("enque.another.dict.to.convert")); // NOI18N
+        enqueueButton.addActionListener(this);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 0, 0);
+        jPanel1.add(enqueueButton, gridBagConstraints);
+
+        clearQueueBT.setText(I18n.tr("clear.queue.DictdToDfM")); // NOI18N
+        clearQueueBT.addActionListener(this);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 0, 0);
+        jPanel1.add(clearQueueBT, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -128,6 +155,7 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(SumPanel, gridBagConstraints);
 
@@ -141,7 +169,6 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 250;
         gridBagConstraints.ipady = 300;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -152,9 +179,27 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(conversionProgBar, gridBagConstraints);
+
+        QueueTextArea.setColumns(20);
+        QueueTextArea.setEditable(false);
+        QueueTextArea.setLineWrap(true);
+        QueueTextArea.setRows(5);
+        QueueTextArea.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(QueueTextArea);
+        fillDictdToDfMQueueTA();
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 200;
+        gridBagConstraints.ipady = 300;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(jScrollPane2, gridBagConstraints);
 
         getAccessibleContext().setAccessibleDescription("");
     }
@@ -168,15 +213,18 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         else if (evt.getSource() == SumProceedButton) {
             SumWinDictdToDfM.this.SumProceedButtonActionPerformed(evt);
         }
+        else if (evt.getSource() == enqueueButton) {
+            SumWinDictdToDfM.this.enqueueButtonActionPerformed(evt);
+        }
+        else if (evt.getSource() == clearQueueBT) {
+            SumWinDictdToDfM.this.clearQueueBTActionPerformed(evt);
+        }
     }
 
     public void windowActivated(java.awt.event.WindowEvent evt) {
     }
 
     public void windowClosed(java.awt.event.WindowEvent evt) {
-        if (evt.getSource() == SumWinDictdToDfM.this) {
-            SumWinDictdToDfM.this.formWindowClosed(evt);
-        }
     }
 
     public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -207,41 +255,51 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         start();
     }//GEN-LAST:event_SumProceedButtonActionPerformed
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-
-    }//GEN-LAST:event_formWindowClosed
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        DfMCreatorMain.dfmCreator.clearDictdToDfMTFs();
         stopOnQuit();
     }//GEN-LAST:event_formWindowClosing
 
+    private void enqueueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enqueueButtonActionPerformed
+        this.dispose();
+        DfMCreatorMain.dfmCreator.clearDictdToDfMTFs();
+    }//GEN-LAST:event_enqueueButtonActionPerformed
+
+    private void clearQueueBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearQueueBTActionPerformed
+        clearDictConvQueueContents();
+    }//GEN-LAST:event_clearQueueBTActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea QueueTextArea;
     private javax.swing.JButton SumCancelButton;
     private javax.swing.JPanel SumPanel;
     private javax.swing.JButton SumProceedButton;
     private javax.swing.JTextPane SummaryTextPane;
+    private javax.swing.JButton clearQueueBT;
     private javax.swing.JProgressBar conversionProgBar;
+    private javax.swing.JButton enqueueButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public static SumWinDictdToDfM getInstance(){
         SumWinDictdToDfM summary = new SumWinDictdToDfM();
-        summary.setSize(425, 500);
+        summary.setSize(600, 500);
         summary.setModal(true);
         summary.setLocation(screenSize.width / 2 - summary.getWidth() / 2,
                           screenSize.height / 2 - summary.getHeight() / 2);
         return summary;
     }
-    
+
     /**
      * deleteCSVFile() is used to delete the
-     * incomplete output csv file if the conversion 
+     * incomplete output csv file if the conversion
      * process is aborted by the user.
      */
-    
+
     private boolean deleteCSVFile(){
         boolean status;
         File csvFile = new File (DictdToDfM.getOutputCSVFile());
@@ -259,28 +317,28 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
      * Subroutines that are used to retrieve the
      * conversion preferences summary.
      */
-    
+
     private final static String newline = "\n";
-    
+
     private String sumDB(){
         return DictdToDfM.getDBName();
     }
-    
+
     private String sumDBFolder(){
         return DictdToDfM.getDBFolderName();
     }
-    
+
     private String sumCSV(){
         return DictdToDfM.getOutputCSVFile();
     }
-    
+
     private String sumEncoding(){
         return DictdToDfM.getOutputEncodingCharset();
     }
-    
+
     private String sumSeparator(){
         String s = Character.toString(DictdToDfM.getSeparatorCharacter());
-        
+
         if (DictdToDfM.getSeparatorCharacter() == '\t'){
             return I18n.tr("tab.dictdConvSummary");
         }
@@ -296,7 +354,7 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
                 return s;
              }
     }
-    
+
     private String sumSwitch(){
         if (DictdToDfM.getSwitchLanguages()){
             return I18n.tr("true.dictdConvSummary");
@@ -305,7 +363,7 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
             return I18n.tr("false.dictdConvSummary");
         }
     }
-    
+
     private String sumKeep(){
         if (DictdToDfM.getKeepTabAndNewLineChars()){
             return I18n.tr("true.dictdConvSummary");
@@ -314,7 +372,7 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
             return I18n.tr("false.dictdConvSummary");
         }
     }
-    
+
     private String sumRemove(){
         if (DictdToDfM.getRemoveSquareBrackets()){
             return I18n.tr("true.dictdConvSummary");
@@ -326,7 +384,7 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
 
     @Override
     public void start() {
-        progressActPerf();
+        executeConversionTask();
     }
 
     @Override
@@ -336,9 +394,9 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
 
     @Override
     public void stopOnQuit() {
-        ConvCancelledOnQuit();
+        convCancelledOnQuit();
     }
-    
+
     public void append(String s) {
         try {
             StyledDocument doc = SummaryTextPane.getStyledDocument();
@@ -353,18 +411,19 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
             int progress = task.getProgress();
                 if (progress == 0) {
                     conversionProgBar.setStringPainted(false);
-                    conversionProgBar.setIndeterminate(true);                    
+                    conversionProgBar.setIndeterminate(true);
                     append(I18n.tr("pleaseWait.dictdConvSummary"));
                 }
                 else {
-                    conversionProgBar.setIndeterminate(false); 
+                    conversionProgBar.setIndeterminate(false);
                     conversionProgBar.setString(null);
-                    conversionProgBar.setValue(progress);        
+                    conversionProgBar.setValue(progress);
                     append(String.format(newline + newline +
                     I18n.tr("completed.dictdConvSummary"), task.getProgress()));
-                }            
+                }
         }
     }
+
 
     /**
      * <pre>class Task extends SwingWorker<Void, Void></pre>
@@ -378,8 +437,60 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
     class Task extends SwingWorker<Void, Void> {
         @Override
         public Void doInBackground() {
+            DfMCreatorMain.DTDFMValsToEnqueue q;
             try {
-                DictdToDfM.convert();
+                    // This is for the queue itself
+                    while (!DfMCreatorMain.dfmCreator.dictConvQueue.isEmpty()){
+                        q = DfMCreatorMain.dfmCreator.dictConvQueue.remove();
+                        // Passing the values of the current item
+                        // to DictdToDfM in order for it to convert
+                        // this item.
+                        DictdToDfM.setDBName(q.db);
+                        DictdToDfM.setDBFolderName(q.dbFolder);
+                        DictdToDfM.setOutputCSVFile(q.outputCSV);
+                        DictdToDfM.setOutputEncodingCharset(q.outputEncoding);
+                        DictdToDfM.setSeparatorCharacter(q.separatorChar);
+                        DictdToDfM.setSwitchLanguages(q.switchLangs);
+                        DictdToDfM.setKeepTabAndNewLineChars(q.keepTabAndNewLines);
+                        DictdToDfM.setRemoveSquareBrackets(q.removeSquareBracks);
+
+                        // Showing the conversion preferences
+                        // for the current item being processed.
+                        SummaryTextPane.setText("");
+                        append(I18n.tr("item.being.processed.DictdToDfM") + "\n");
+                        append(I18n.tr("remaining.items.DictdToDfM"));
+                        append(String.valueOf(DfMCreatorMain.dfmCreator.dictConvQueue.size()) + "\n\n");
+                        append(I18n.tr("dbName.dictdConvSummary") + " ");
+                        append(" " + q.db + newline + newline);
+                        append(I18n.tr("dbDir.dictdConvSummary"));
+                        append(" " + q.dbFolder + newline + newline);
+                        append(I18n.tr("outputCSVfilePath.dictdConvSummary"));
+                        append(" " + q.outputCSV + newline + newline);
+                        append(I18n.tr("encoding.dictdConvSummary"));
+                        append(" " + q.outputEncoding + newline + newline);
+
+                        append(I18n.tr("separatorCharacter.dictdConvSummary"));
+                        append(" " + q.separatorChar + newline + newline);
+
+                        append(I18n.tr("switchLanguages.dictdConvSummary"));
+                        append(" " + q.switchLangs + newline);
+                        append(I18n.tr("keepTabs.dictdConvSummary"));
+                        append(" " + q.keepTabAndNewLines + newline);
+                        append(I18n.tr("removeSquares.dictdConvSummary"));
+                        append(" " + q.removeSquareBracks + newline);
+
+                        // Perform the conversion
+                        DictdToDfM.convert();
+
+                        // QueueTextArea
+                        int i = 0;
+                        QueueTextArea.setText("");
+                        QueueTextArea.append(I18n.tr("queue.text.area.DictdToDfM") + "\n\n");
+                        DfMCreatorMain.dfmCreator.dictConvArray.remove(i);
+                        QueueTextArea.append(DfMCreatorMain.dfmCreator.dictConvArray.get(i).toString() + "\n");
+
+                    }
+
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException ex) {
                 done = true;
                 DfMCreatorMain.printAnyMsg(I18n.tr("criticalError.dictdConvSummary"),
@@ -387,19 +498,21 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
             }
             return null;
             }
-        
+
         @Override
         public void done() {
             //Tell progress listener to stop updating progress bar.
             done = true;
             Toolkit.getDefaultToolkit().beep();
-            SumProceedButton.setEnabled(true);
+            SumProceedButton.setEnabled(false);
             SumCancelButton.setEnabled(false);
+            //clearQueueBT.setEnabled(false);
             setCursor(null); //turn off the wait cursor
             conversionProgBar.setIndeterminate(false);
             conversionProgBar.setValue(conversionProgBar.getMinimum());
             append(I18n.tr("done.dictdConvSummary"));
-            
+            QueueTextArea.append("\n\n" + I18n.tr("conversion.done.DictdToDfM") + "\n");
+
             String csvfile = DictdToDfM.getOutputCSVFile();
             String destcsvfile = csvfile + I18n.tr("converted.dictdConvSummary");
             Path csvpath = Paths.get(csvfile);
@@ -411,13 +524,14 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
             }
         }
     }
-    
+
     /*
      * This method will set some values up and call the conversion task.
      */
-    public void progressActPerf(){
+    public void executeConversionTask(){
         SumProceedButton.setEnabled(false);
         SumCancelButton.setEnabled(true);
+        clearQueueBT.setEnabled(false);
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         done = false;
         task = new Task();
@@ -425,30 +539,31 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         task.execute();
         conversionProgBar.setValue(task.getProgress());
       }
-    
-    
+
+
     public void confirmCancelConvert() {
         int n = JOptionPane.showConfirmDialog(this, I18n.tr("sureToCancel.dictdConvSummary"),
                                       I18n.tr("cancelConversion.dictdConvSummary"), JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION){
             if (!task.isDone()){
                 task.cancel(true);
-                deleteCSVFile();                
+                deleteCSVFile();
+                DfMCreatorMain.dfmCreator.dictConvQueue.clear();
             }
         }
     }
-    
-    public void ConvCancelledOnQuit() {
+
+    public void convCancelledOnQuit() {
         boolean n = deleteCSVFile();
         if (n == true){
             if (!task.isDone()){
                 task.cancel(true);
             }
-        }        
+        }
         this.dispose();
     }
-    
-    
+
+
     /**
      * fillDictdConvSummaryTextPane() gets all the needed information
      * and formats them correctly so as to have a clear and neat
@@ -456,7 +571,7 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
      * by the user.
      */
     private void fillDictdConvSummaryTextPane() {
-        
+
         SummaryTextPane.setText("");
         append(I18n.tr("headline.dictdConvSummary"));
         append(" " + newline + newline);
@@ -485,4 +600,22 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         append(I18n.tr("clickToProceed.dictdConvSummary"));
         append(newline);
     }
+
+    private void fillDictdToDfMQueueTA() {
+        QueueTextArea.setText("");
+        QueueTextArea.append(I18n.tr("queue.text.area.DictdToDfM") + "\n\n");
+        for (int i=0; i<DfMCreatorMain.dfmCreator.dictConvArray.size(); i++){
+            QueueTextArea.append(DfMCreatorMain.dfmCreator.dictConvArray.get(i).toString() + "\n");
+        }
+    }
+
+    private void clearDictConvQueueContents() {
+        DfMCreatorMain.dfmCreator.dictConvQueue.clear();
+        QueueTextArea.setText("");
+        SummaryTextPane.setText("");
+        DfMCreatorMain.dfmCreator.clearDictdToDfMTFs();
+        DfMCreatorMain.dfmCreator.dictConvArray.clear();
+    }
+
+
 }
