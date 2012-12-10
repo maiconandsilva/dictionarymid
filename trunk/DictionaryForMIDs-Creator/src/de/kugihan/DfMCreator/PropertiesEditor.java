@@ -566,6 +566,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         jPanel21.add(langExpSplitStringTF3, gridBagConstraints);
 
         jLabel29.setText(I18n.tr("language-1")); // NOI18N
+        jLabel29.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -1507,6 +1508,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText(I18n.tr("resetSettings.dfmPropCreate")); // NOI18N
+        jMenuItem3.setToolTipText("");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -1531,6 +1533,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         jMenu1.add(jMenuItem5);
 
         jMenuItem7.setText(I18n.tr("quit.dfmPropCreate")); // NOI18N
+        jMenuItem7.setToolTipText("");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);

@@ -1337,6 +1337,7 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText(I18n.tr("FILE.contentPropsEditor")); // NOI18N
+        jMenu1.setToolTipText("");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText(I18n.tr("save.values.contentPropsEditor")); // NOI18N

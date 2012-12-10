@@ -1,33 +1,33 @@
 /* ////////////////////////////////////////////////////////////////
-*   
+*
 *   In the Name of Allah
-*   
+*
 *   DICTIONARYFORMIDS-CREATOR
-*   
+*
 *   This file is part of DictionaryForMIDs-Creator
 *   Copyright (C) 2012 Karim Mahamane Karimou
 *   DictionaryForMIDs-Creator is a GUI wrapper around various
 *   DictionaryForMIDs tools, among others we have
 *   DictdToDictionaryForMIDs, DictionaryGeneration,
 *   JarCreator and BitmapFontGenerator.
-*   
+*
 *   DictionaryForMIDs-Creator is free software;
 *   you can redistribute it and/or modify it under the terms
 *   of the GNU General Public License as published by the
 *   Free Software Foundation; either version 2 of the License, or
 *   (at your option) any later version.
-*   
+*
 *   DictionaryForMIDs-Creator is distributed in the hope that
 *   it will be useful, but WITHOUT ANY WARRANTY; without even
 *   the implied warranty of MERCHANTABILITY or
 *   FITNESS FOR A PARTICULAR PURPOSE.  See the
 *   GNU General Public License for more details.
-*   	
+*
 *   You should have received a copy of the GNU General Public
 *   License along with DictionaryForMIDs-Creator;
 *   if not, write to the Free Software Foundation, Inc.,
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-*   
+*
 * //////////////////////////////////////////////////////////////// */
 
 
@@ -46,15 +46,15 @@ import javax.swing.SwingWorker;
 
 
 public class SumWinDictGen extends javax.swing.JDialog implements PropertyChangeListener {
-    
+
     private static Task task;
     public static boolean done;
-    
+
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-       
+
     public static SumWinDictGen getDictGenSummary(){
         SumWinDictGen dgensum = new SumWinDictGen();
-        dgensum.setSize(380, 450);
+        dgensum.setSize(555, 480);
         dgensum.setModal(true);
         dgensum.setLocation(screenSize.width / 2 - dgensum.getWidth() / 2,
                           screenSize.height / 2 - dgensum.getHeight() / 2);
@@ -82,9 +82,13 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
         jPanel2 = new javax.swing.JPanel();
         CancelDictGenBT = new javax.swing.JButton();
         DictGenBT = new javax.swing.JButton();
+        dictGenEnqueueButton = new javax.swing.JButton();
+        dictGenClearQueueButton = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
         jScrollPane2 = new javax.swing.JScrollPane();
         DictGenTA = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        dictGenQueueTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -106,8 +110,11 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel2.add(CancelDictGenBT, gridBagConstraints);
@@ -122,14 +129,47 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel2.add(DictGenBT, gridBagConstraints);
 
+        dictGenEnqueueButton.setText(I18n.tr("enqueue.another.csvFile.DictGen")); // NOI18N
+        dictGenEnqueueButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dictGenEnqueueButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        jPanel2.add(dictGenEnqueueButton, gridBagConstraints);
+
+        dictGenClearQueueButton.setText(I18n.tr("clear.queue.elements.DictGen")); // NOI18N
+        dictGenClearQueueButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dictGenClearQueueButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        jPanel2.add(dictGenClearQueueButton, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
@@ -154,15 +194,31 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 125;
         gridBagConstraints.ipady = 300;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel1.add(jScrollPane2, gridBagConstraints);
+
+        dictGenQueueTextArea.setBackground(new java.awt.Color(252, 254, 222));
+        dictGenQueueTextArea.setColumns(20);
+        dictGenQueueTextArea.setEditable(false);
+        dictGenQueueTextArea.setLineWrap(true);
+        dictGenQueueTextArea.setRows(5);
+        dictGenQueueTextArea.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(dictGenQueueTextArea);
+        fillDictGenQueueTA();
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 125;
+        gridBagConstraints.ipady = 300;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        jPanel1.add(jScrollPane1, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -170,10 +226,11 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
     }// </editor-fold>//GEN-END:initComponents
 
     private void DictGenBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DictGenBTActionPerformed
-        generatorActPerf();
+        executeDictGenTask();
     }//GEN-LAST:event_DictGenBTActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        DfMCreatorMain.dfmCreator.clearDictGenTFs();
         // cancelling the dictionary generation
         // process if the user closes the window.
         GenCancelledOnQuit();
@@ -183,6 +240,15 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
         confirmCancelGen();
     }//GEN-LAST:event_CancelDictGenBTActionPerformed
 
+    private void dictGenEnqueueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dictGenEnqueueButtonActionPerformed
+        this.dispose();
+        DfMCreatorMain.dfmCreator.clearDictGenTFs();
+    }//GEN-LAST:event_dictGenEnqueueButtonActionPerformed
+
+    private void dictGenClearQueueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dictGenClearQueueButtonActionPerformed
+        clearDictGenQueueContents();
+    }//GEN-LAST:event_dictGenClearQueueButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -191,9 +257,9 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
         /*
          * Set the default look and feel
          */
-        
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        try {                   
+        try {
              javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException |
         		 IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
@@ -217,31 +283,36 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
     private javax.swing.JButton CancelDictGenBT;
     private javax.swing.JButton DictGenBT;
     private javax.swing.JTextArea DictGenTA;
+    private javax.swing.JButton dictGenClearQueueButton;
+    private javax.swing.JButton dictGenEnqueueButton;
+    private javax.swing.JTextArea dictGenQueueTextArea;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JProgressBar progressBar;
     // End of variables declaration//GEN-END:variables
 
-    
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (!done) {
             int progress = task.getProgress();
             if (progress == 0) {
                 progressBar.setStringPainted(false);
-                progressBar.setIndeterminate(true);                    
+                progressBar.setIndeterminate(true);
                 DictGenTA.append(I18n.tr("wait.dictGenSummary"));
             }
             else {
-                progressBar.setIndeterminate(false); 
+                progressBar.setIndeterminate(false);
                 progressBar.setString(null);
-                progressBar.setValue(progress);        
+                progressBar.setValue(progress);
                 DictGenTA.append(String.format("\n\n" +
                 I18n.tr("completed.dictGenSummary"), task.getProgress()));
-            }            
+            }
         }
     }
+
 
     /**
      * <pre>class Task extends SwingWorker<Void, Void></pre>
@@ -250,12 +321,50 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
      * one is for DictdToDictionaryForMIDs.
      */
     class Task extends SwingWorker<Void, Void> {
-        
+
         @Override
-        protected Void doInBackground() throws Exception {            
-            // launching the dict generation.
+        protected Void doInBackground() throws Exception {
+            DfMCreatorMain.DictGenValsToEnqueue q;
             try {
-                DictionaryGeneration.generate();
+                    // This is for the queue itself
+                    while (!DfMCreatorMain.dfmCreator.dictgenQueue.isEmpty()){
+                        q = DfMCreatorMain.dfmCreator.dictgenQueue.remove();
+
+                        // Passing the values of the current item
+                        // to DictGen in order for it to convert it
+                        DictionaryGeneration.setSourceFile(q.srcFile);
+                        DictionaryGeneration.setPropertyPath(q.propPath);
+                        DictionaryGeneration.setDirectoryDestination(q.destDir);
+
+                        // Showing the generation preferences
+                        // for the current item being processed.
+                        DictGenTA.setText("");
+                        DictGenTA.append(I18n.tr("item.being.processed.info.DictGen") + "\n\n");
+                        DictGenTA.append(I18n.tr("remaining.items.DictGen") + "\n");
+                        DictGenTA.append(String.valueOf(DfMCreatorMain.dfmCreator.dictgenQueue.size()) + "\n\n");
+
+                        DictGenTA.append(I18n.tr("inputFile.dictGenSummary") + "\n");
+                        DictGenTA.append(q.srcFile + "\n\n");
+
+                        DictGenTA.append(I18n.tr("outputDir.dictGenSummary") + "\n");
+                        DictGenTA.append(q.destDir + "\n\n");
+
+                        DictGenTA.append(I18n.tr("dfmPropsFile.dictGenSummary") + "\n");
+                        DictGenTA.append(q.propPath + "\n\n");
+
+                        // Perform the dictionary generation
+                        // of the current item
+                        DictionaryGeneration.generate();
+
+                        // dictGenQueueTextArea
+                        int i = 0;
+                        dictGenQueueTextArea.setText("");
+                        dictGenQueueTextArea.append(I18n.tr("queue.items.DictGen") + "\n\n");
+                        DfMCreatorMain.dfmCreator.dictGenArray.remove(i);
+                        dictGenQueueTextArea.append(DfMCreatorMain.dfmCreator.dictGenArray.get(i).toString() + "\n\n");
+
+                    }
+
             } catch (Exception e){
                 System.out.println(e.getMessage());
             }
@@ -269,6 +378,8 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
             Toolkit.getDefaultToolkit().beep();
             DictGenBT.setEnabled(true);
             CancelDictGenBT.setEnabled(false);
+            dictGenEnqueueButton.setEnabled(true);
+            dictGenClearQueueButton.setEnabled(false);
             setCursor(null); //turn off the wait cursor
             progressBar.setIndeterminate(false);
             progressBar.setValue(progressBar.getMinimum());
@@ -276,14 +387,16 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
         }
 
     }
-    
+
     /*
      * This method will set some values up
      * and call the generation task.
      */
-    public void generatorActPerf(){
+    public void executeDictGenTask(){
         DictGenBT.setEnabled(false);
         CancelDictGenBT.setEnabled(true);
+        dictGenEnqueueButton.setEnabled(false);
+        //dictGenClearQueueButton.setEnabled(false);
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         done = false;
         task = new Task();
@@ -291,29 +404,30 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
         task.execute();
         progressBar.setValue(task.getProgress());
       }
-    
-    
+
+
     public void confirmCancelGen() {
         int n = JOptionPane.showConfirmDialog(null, I18n.tr("sureToCancel.dictGenSummary"),
                                                     I18n.tr("cancelConversion.dictGenSummary"), JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION){
             if (!task.isDone()){
                 task.cancel(true);
-                deleteIncompleteDictFiles();                
+                deleteIncompleteDictFiles();
+                DfMCreatorMain.dfmCreator.dictgenQueue.clear();
             }
         }
     }
-    
+
     public void GenCancelledOnQuit() {
         boolean n = deleteIncompleteDictFiles();
         if (n == true){
             if (!task.isDone()){
                 task.cancel(true);
             }
-        }        
+        }
         this.dispose();
     }
-    
+
     // This method will be used to delete the
     // incomplete outputcsvfile if the conversion
     // process is aborted.
@@ -329,7 +443,7 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
         }
         return status;
     }
-    
+
     /**
      * fillDictGenSummaryTextArea() gets all the needed information
      * and formats them correctly so as to have a clear and neat
@@ -337,21 +451,34 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
      * by the user.
      */
     private void fillDictGenSummaryTextArea() {
-        
+        DictGenTA.setText("");
         DictGenTA.append(I18n.tr("headline.dictGenSummary") + "\n\n");
 
         DictGenTA.append(I18n.tr("inputFile.dictGenSummary") + "\n");
-
         DictGenTA.append(DictionaryGeneration.getSourceFile() + "\n\n");
 
         DictGenTA.append(I18n.tr("outputDir.dictGenSummary") + "\n");
-
         DictGenTA.append(DictionaryGeneration.getDirectoryDestination() + "\n\n");
 
         DictGenTA.append(I18n.tr("dfmPropsFile.dictGenSummary") + "\n");
-
         DictGenTA.append(DictionaryGeneration.getPropertyPath() + "\n\n");
 
         DictGenTA.append(I18n.tr("hitEnterToProceed.dictGenSummary") + "\n");
     }
+
+    private void clearDictGenQueueContents() {
+        DfMCreatorMain.dfmCreator.dictgenQueue.clear();
+        dictGenQueueTextArea.setText("");
+        DictGenTA.setText("");
+        DfMCreatorMain.dfmCreator.clearDictGenTFs();
+    }
+
+    private void fillDictGenQueueTA() {
+        dictGenQueueTextArea.setText("");
+        dictGenQueueTextArea.append(I18n.tr("queue.items.DictGen") + "\n\n");
+        for (int i=0; i<DfMCreatorMain.dfmCreator.dictGenArray.size(); i++){
+            dictGenQueueTextArea.append(DfMCreatorMain.dfmCreator.dictGenArray.get(i).toString() + "\n");
+        }
+    }
+
 }
