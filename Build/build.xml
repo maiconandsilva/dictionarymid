@@ -1,7 +1,7 @@
 <!-- 
 This file build.xml should be located in directory Build
 You must have Sun's Java ME SDK installed (can be downloaded from http://java.sun.com)
-You must set wtk.home to your Sun Java ME SDK installation directory
+You must set the environment variable WTK_HOME to your Sun Java ME SDK installation directory
 This build.xml can generate DictionaryForMIDs (Java ME and Java SE), DictionaryGeneration, JarCreator, BitmapFontGenerator and LanguageUIGeneration
 Using: run ant in directory Build
 It runs well on both platforms windows/linux
@@ -14,8 +14,11 @@ javac.encoding=UTF-8
 
 <project name="allwork" default="build_all">
 
-    <!-- <property name="wtk.home"                  location="D:\WTK25"/> -->
-    <property name="wtk.home"                       location="/media/Stuff/WTK-2.5.2"/>
+	<!-- Location of the WTK toolkit is defined in the environment variable WTK_HOME -->
+	<property environment="env"/> 
+	<condition property="wtk.home" value="${env.WTK_HOME}" else="/media/Stuff/WTK-2.5.2"> <!-- if WTK_HOME is not set use default value -->
+		<isset property="env.WTK_HOME" />
+	</condition>
 
     <property name="wtk.cldc.version"               value="1.1"/>
     <property name="wtk.midp.version"               value="2.0"/>
