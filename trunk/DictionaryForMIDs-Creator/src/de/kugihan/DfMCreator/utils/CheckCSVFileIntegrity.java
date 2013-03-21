@@ -5,7 +5,7 @@
 *   DICTIONARYFORMIDS-CREATOR
 *   
 *   This file is part of DictionaryForMIDs-Creator
-*   Copyright (C) 2012 Karim Mahamane Karimou
+*   Copyright (C) 2012, 2013 Karim Mahamane Karimou
 *   DictionaryForMIDs-Creator is a GUI wrapper around various
 *   DictionaryForMIDs tools, among others we have
 *   DictdToDictionaryForMIDs, DictionaryGeneration,
@@ -31,8 +31,9 @@
 * //////////////////////////////////////////////////////////////// */
 
 
-package de.kugihan.DfMCreator;
+package de.kugihan.DfMCreator.utils;
 
+import de.kugihan.DfMCreator.DfMCreatorMain;
 import de.kugihan.dictionaryformids.dictgen.DictionaryGeneration;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import edu.hws.eck.mdb.I18n;

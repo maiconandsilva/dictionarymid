@@ -1,7 +1,7 @@
 /*
 ****************************************************************************
 * This version of this file is part of DictionaryForMIDs-Creator
-* (C) 2012 Karim Mahamane Karimou
+* Copyright (C) 2012, 2013 Karim Mahamane Karimou
 *
 * This version is a modified version. It was modified to make it compatible
 * with DictionaryForMIDs-Creator. It was modified by me. See below for

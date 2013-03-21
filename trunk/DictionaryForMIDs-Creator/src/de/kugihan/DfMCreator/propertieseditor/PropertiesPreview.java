@@ -4,8 +4,8 @@
 *   
 *   DICTIONARYFORMIDS-CREATOR
 *   
-*   This file is part of DictionaryForMIDs-Creator
-*   Copyright (C) 2012 Karim Mahamane Karimou
+*   This propFileDir is part of DictionaryForMIDs-Creator
+*   Copyright (C) 2012, 2013 Karim Mahamane Karimou
 *   DictionaryForMIDs-Creator is a GUI wrapper around various
 *   DictionaryForMIDs tools, among others we have
 *   DictdToDictionaryForMIDs, DictionaryGeneration,
@@ -31,8 +31,9 @@
 * //////////////////////////////////////////////////////////////// */
 
 
-package de.kugihan.DfMCreator;
+package de.kugihan.DfMCreator.propertieseditor;
 
+import de.kugihan.DfMCreator.DfMCreatorMain;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import edu.hws.eck.mdb.I18n;
 import java.awt.Dimension;
@@ -66,15 +67,15 @@ public class PropertiesPreview extends JDialog implements ActionListener {
     
     public JPanel panel = new JPanel();
     
-    public JTextPane propTextPane = new JTextPane();
+    public JTextPane propsText = new JTextPane();
     
     public JMenuBar menuBar = new JMenuBar();
     
-    public StyledDocument styledDoc = propTextPane.getStyledDocument();
+    public StyledDocument styledDoc = propsText.getStyledDocument();
     
     public AbstractDocument doc;
     
-    public JScrollPane scrollpane = new JScrollPane(propTextPane);
+    public JScrollPane scrollpane = new JScrollPane(propsText);
     
     public JButton saveButton = new JButton(I18n.tr("save"));
     
@@ -86,7 +87,7 @@ public class PropertiesPreview extends JDialog implements ActionListener {
 
     public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-    // property file name
+    // property propFileDir name
     public static final String PROPERTY_FILE_NAME = DictionaryDataFile.propertyFileName;
     
     public JFileChooser fc = new JFileChooser();
@@ -119,7 +120,7 @@ public class PropertiesPreview extends JDialog implements ActionListener {
         }
         
         //Set up the menu bar.
-        actions=createActionTable(propTextPane);
+        actions=createActionTable(propsText);
         JMenu editMenu = createEditMenu();
         menuBar.add(editMenu);
         PropFileView.setJMenuBar(menuBar);
@@ -139,8 +140,8 @@ public class PropertiesPreview extends JDialog implements ActionListener {
         
         doc.addUndoableEditListener(new MyUndoableEditListener());
         
-        propTextPane.setEditable(false);
-        propTextPane.setBackground(new java.awt.Color(225, 255, 190));
+        propsText.setEditable(false);
+        propsText.setBackground(new java.awt.Color(225, 255, 190));
         PropFileView.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         
         PropFileView.setPreferredSize(new Dimension(500, 650));
@@ -153,7 +154,7 @@ public class PropertiesPreview extends JDialog implements ActionListener {
     
     public static PropertiesPreview getPropPreviewWin() {
     	return new PropertiesPreview();
-    }
+    }    
     
     public void appendText(String s) {
         try {
@@ -182,31 +183,33 @@ public class PropertiesPreview extends JDialog implements ActionListener {
         }
     }
     
-    private void savePropFile() throws UnsupportedOperationException,
+    public boolean savePropFile() throws UnsupportedOperationException,
                                        IOException, NullPointerException {
+        boolean fileSaved = false;
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnVal = fc.showSaveDialog(PropFileView);
         int rval = -1;
         if (returnVal == JFileChooser.APPROVE_OPTION){
-            File file = fc.getSelectedFile();
-            file.mkdirs(); // if the user entered a path that doesn't exist yet, we create it.
-            if (!file.canWrite()){
+            File propFileDir = fc.getSelectedFile();
+            propFileDir.mkdirs(); // if the user entered a path that doesn't exist yet, we create it.
+            if (!propFileDir.canWrite()){
                 throw new UnsupportedOperationException();
             }
-            String s = file.toString();
-            s = s + FileSystems.getDefault().getSeparator() + PROPERTY_FILE_NAME;
-            File file2 = new File(s);
-            if (file2.exists()){
+            String propFileString = propFileDir.toString();
+            propFileString = propFileString + FileSystems.getDefault().getSeparator() + PROPERTY_FILE_NAME;
+            File propFileItself = new File(propFileString);
+            if (propFileItself.exists()){
                 rval = JOptionPane.showConfirmDialog(PropFileView, I18n.tr("fileExistsString"),
                                                               I18n.tr("fileExistsTitle"), JOptionPane.YES_NO_OPTION);
             }
-            if (rval == JOptionPane.YES_OPTION || !file2.exists()){
+            if (rval == JOptionPane.YES_OPTION || !propFileItself.exists()){
                 try {
-                    try (BufferedWriter out = new BufferedWriter(new FileWriter((file2)))) {
-                        String text = propTextPane.getText();
-                        // writing content to file
+                    try (BufferedWriter out = new BufferedWriter(new FileWriter((propFileItself)))) {
+                        String text = propsText.getText();
+                        // writing content to propFileDir
                         out.write(text);
                         out.flush();
+                        fileSaved = true;
                     }
                 } catch (IOException e){
                     DfMCreatorMain.printAnyMsg(IOEMsg, I18n.tr("runtimeErrorTitle"), JOptionPane.ERROR_MESSAGE);
@@ -214,27 +217,29 @@ public class PropertiesPreview extends JDialog implements ActionListener {
                     DfMCreatorMain.printAnyMsg(NPEMsg, I18n.tr("error"), JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                // do nothing, for now...
+                // propFileDir not saved
+                fileSaved = false;
             }
         }
+        return fileSaved;
     }
 
     private void editPropFile() {
         
         if (editButton.isSelected()){
-            propTextPane.setEditable(true);
-            propTextPane.setBackground(new java.awt.Color(255, 255, 255));
+            propsText.setEditable(true);
+            propsText.setBackground(new java.awt.Color(255, 255, 255));
             editButton.setText(I18n.tr("doNotEdit"));
             undoAction.setEnabled(true);
             redoAction.setEnabled(true);
-            propTextPane.setCaretPosition(styledDoc.getLength() - 1);
+            propsText.setCaretPosition(styledDoc.getLength() - 1);
         } else {
-            propTextPane.setEditable(false);
-            propTextPane.setBackground(new java.awt.Color(225, 255, 190));
+            propsText.setEditable(false);
+            propsText.setBackground(new java.awt.Color(225, 255, 190));
             editButton.setText(I18n.tr("edit"));
             undoAction.setEnabled(false);
             redoAction.setEnabled(false);
-            propTextPane.setCaretPosition(0);
+            propsText.setCaretPosition(0);
         }
     }
 
@@ -242,7 +247,7 @@ public class PropertiesPreview extends JDialog implements ActionListener {
         int returnVal = JOptionPane.showConfirmDialog(null, I18n.tr("sureToClear"),
                                                     I18n.tr("confirmDeletion"), JOptionPane.YES_NO_OPTION);
         if (returnVal == JOptionPane.YES_OPTION){
-            propTextPane.setText("");
+            propsText.setText("");
         }
     }
 
@@ -255,10 +260,10 @@ public class PropertiesPreview extends JDialog implements ActionListener {
         }
     }
     
-    private final String internalErrorMsg = I18n.tr("internalError.operationAborted");
-    private final String IOEMsg = I18n.tr("internalError.operationAborted");                           
-    private final String NPEMsg = I18n.tr("textAreaEmptyError");    
-    private final String canWriteFileMsg = I18n.tr("propFileCantBeWritten");
+    public static final String internalErrorMsg = I18n.tr("internalError.operationAborted");
+    public static final String IOEMsg = I18n.tr("internalError.operationAborted");                           
+    public static final String NPEMsg = I18n.tr("textAreaEmptyError");    
+    public static final String canWriteFileMsg = I18n.tr("propFileCantBeWritten");
                                          
     /*
      *

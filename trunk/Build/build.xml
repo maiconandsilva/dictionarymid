@@ -15,7 +15,7 @@ javac.encoding=UTF-8
 <project name="allwork" default="build_all">
 
     <!-- <property name="wtk.home"                  location="D:\WTK25"/> -->
-    <property name="wtk.home"                       location="/media/MultimediaPlus/WTK-2.5.2"/>
+    <property name="wtk.home"                       location="/media/Stuff/WTK-2.5.2"/>
 
     <property name="wtk.cldc.version"               value="1.1"/>
     <property name="wtk.midp.version"               value="2.0"/>
@@ -59,8 +59,8 @@ javac.encoding=UTF-8
       -->
       
     <property name="Build.buildfilename"            value="build.xml"/>    
-    <property name="DfM-Creator-Version"            value="0.5"/>    <!-- DfM-Creator version -->
-    <property name="DfM-Creator-VersionStatus"      value="Final"/>     <!--  e.g. "beta", "alpha"  -->
+    <property name="DfM-Creator-Version"            value="0.6"/>    <!-- DfM-Creator version -->
+    <property name="DfM-Creator-VersionStatus"      value="Beta"/>     <!--  e.g. "beta", "alpha"  -->
     <condition property="DfM-Creator-AppVersion"    value="${DfM-Creator-Version}_${DfM-Creator-VersionStatus}" else="${DfM-Creator-Version}">
         <isset property="DfM-Creator-VersionStatus"/>
     </condition>
@@ -69,17 +69,23 @@ javac.encoding=UTF-8
     <property name="dfmc.outputbasedir"             location="${Build}/DictionaryForMIDs-Creator"/>
     <property name="dfmc.srcdir"                    location="${dfmc.inputbasedir}/src"/>
     <property name="dfmc.classdir"                  location="${dfmc.outputbasedir}/bin"/>
-    <property name="dfmc.jarfile"                   location="${dfmc.outputbasedir}/DfM-Creator.jar"/>     
+    <property name="dfmc.jarfile"                   location="${dfmc.outputbasedir}/DfM-Creator-${DfM-Creator-Version}-${DfM-Creator-VersionStatus}.jar"/>
+	  
     
     <!-- 
         Compiling, building and packaging operations
-      -->
-    <target name="dfm_creator_pre-init">
-        <copy todir="${dfmc.classdir}/de/kugihan/I18nL10n">
+    -->
+    <target name="dfm_creator_pre-init" depends="build_dfm_java_me">
+        <copy todir="${dfmc.classdir}/de/kugihan/I18nL10n">		<!-- Copying the .properties files that contain the Strings -->
             <fileset dir="${dfmc.srcdir}/de/kugihan/I18nL10n"/>
         </copy>
-        <copy todir="${dfmc.classdir}/de/kugihan/DfMCreator/doc">
-            <fileset dir="${dfmc.inputbasedir}/res/doc"/>
+        <copy todir="${dfmc.classdir}/de/kugihan/DfMCreator/doc">	<!-- Copying the help files -->
+            <fileset dir="${dfmc.inputbasedir}/res/doc/"/>
+        </copy>
+		<mkdir dir="${dfmc.classdir}/de/kugihan/DfMCreator/Empty_DfM_JavaME"/> <!-- Creating the dir for the empty DfM -->
+		<copy todir="${dfmc.classdir}/de/kugihan/DfMCreator/Empty_DfM_JavaME">	<!-- Copying the Jar/Jad files to that location -->
+            <fileset file="${JavaME.jarfile}"/>
+			<fileset file="${JavaME.jadfile}"/>
         </copy>
     </target>
     
@@ -93,17 +99,17 @@ javac.encoding=UTF-8
             <param name="destinationbasedir"        value="${dfmc.outputbasedir}"/>
         </antcall>
         <jar destfile="${dfmc.jarfile}"  >
-              <fileset dir="${dfmc.classdir}"       includes="de/kugihan/**" />
-              <fileset dir="${dfmc.classdir}"       includes="org/dict/**" />
-              <fileset dir="${dfmc.classdir}"       includes="edu/hws/eck/mdb/**" />
-              <fileset dir="${DfM.classdir}"        includes="de/kugihan/dictionaryformids/**"  />
-              <fileset dir="${JavaME.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
-              <fileset dir="${JavaSE.classdir}"     includes="de/kugihan/dictionaryformids/**"  />
-              <fileset dir="${dfmc.outputbasedir}"  includes="${dfmc_app.propertyfilename}"/>
+              <fileset dir="${dfmc.classdir}"           includes="de/kugihan/**" />
+              <fileset dir="${dfmc.classdir}"           includes="org/dict/**" />
+              <fileset dir="${dfmc.classdir}"           includes="edu/hws/eck/mdb/**" />
+              <fileset dir="${DfM.classdir}"            includes="de/kugihan/dictionaryformids/**"  />
+              <fileset dir="${JavaME.classdir}"         includes="de/kugihan/dictionaryformids/**"  />
+              <fileset dir="${JavaSE.classdir}"         includes="de/kugihan/dictionaryformids/**"  />
+              <fileset dir="${dfmc.outputbasedir}"      includes="${dfmc_app.propertyfilename}"/>
               <manifest>
-                <attribute name="Built-By"          value="${user.name}"/>
-                <attribute name="Created-By"        value="Karim Mahamane Karimou"/>
-                <attribute name="Main-Class"        value="de.kugihan.DfMCreator.DfMCreatorMain"/>
+                <attribute name="Built-By"              value="${user.name}"/>
+                <attribute name="Created-By"            value="Karim Mahamane Karimou"/>
+                <attribute name="Main-Class"            value="de.kugihan.DfMCreator.DfMCreatorMain"/>
               </manifest>
         </jar>
     </target>
@@ -220,7 +226,7 @@ javac.encoding=UTF-8
     -->
     
     <target name="compile_dfm_java_me" depends="compile_dfm_common">
-        <mkdir dir="${JavaME.classdir}"/>     
+        <mkdir dir="${JavaME.classdir}"/> 
         <mkdir dir="${JavaME.bindir}"/>     
         <wtkbuild srcdir="${JavaME.srcdir}" classpath="${DfM.classdir}" preverify="false" target="1.1" source="1.2"  encoding="UTF-8" destdir="${JavaME.classdir}" debug="on"/>
     </target>

@@ -1,43 +1,58 @@
 /* ////////////////////////////////////////////////////////////////
-*   
+*
 *   In the Name of Allah
-*   
+*
 *   DICTIONARYFORMIDS-CREATOR
-*   
+*
 *   This file is part of DictionaryForMIDs-Creator
-*   Copyright (C) 2012 Karim Mahamane Karimou
+*   Copyright (C) 2012, 2013 Karim Mahamane Karimou
 *   DictionaryForMIDs-Creator is a GUI wrapper around various
 *   DictionaryForMIDs tools, among others we have
 *   DictdToDictionaryForMIDs, DictionaryGeneration,
-*   JarCreator and BitmapFontGenerator.
-*   
+*   BitmapFontGenerator and BitmapFontGenerator.
+*
 *   DictionaryForMIDs-Creator is free software;
 *   you can redistribute it and/or modify it under the terms
 *   of the GNU General Public License as published by the
 *   Free Software Foundation; either version 2 of the License, or
 *   (at your option) any later version.
-*   
+*
 *   DictionaryForMIDs-Creator is distributed in the hope that
 *   it will be useful, but WITHOUT ANY WARRANTY; without even
 *   the implied warranty of MERCHANTABILITY or
 *   FITNESS FOR A PARTICULAR PURPOSE.  See the
 *   GNU General Public License for more details.
-*   	
+*
 *   You should have received a copy of the GNU General Public
 *   License along with DictionaryForMIDs-Creator;
 *   if not, write to the Free Software Foundation, Inc.,
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-*   
+*
 * //////////////////////////////////////////////////////////////// */
 
 
 package de.kugihan.DfMCreator;
 
+import de.kugihan.DfMCreator.DfMCreatorException.dictionaryDirNotAccessible;
+import de.kugihan.DfMCreator.DfMCreatorException.fontNotAccessible;
+import de.kugihan.fonttoolkit.Core;
 import edu.hws.eck.mdb.I18n;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
-public class SumWinBFG extends javax.swing.JFrame {
+public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeListener {
+
+    private Task task;
+    public static boolean done;
+
+    // This one is to make sure that the task
+    // has been already created and launched.
+    private static boolean taskFlag = false;
 
     /**
      * Creates new form SumWinBFG
@@ -54,44 +69,205 @@ public class SumWinBFG extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        textarea = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        bfgenCancelBT = new javax.swing.JButton();
+        bfgenAddAnotherSizeBT = new javax.swing.JButton();
+        bfgenClearQueueBT = new javax.swing.JButton();
+        genBitmapFontsBT = new javax.swing.JButton();
+        BFGAddDictBT = new javax.swing.JButton();
+        bfgenSumTAScrollPane = new javax.swing.JScrollPane();
+        bfgenSumTextArea = new javax.swing.JTextArea();
+        bfgenQueueTAScrollPane = new javax.swing.JScrollPane();
+        bfgenQueueTextArea = new javax.swing.JTextArea();
+        bfgenProgressBar = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        textarea.setColumns(20);
-        textarea.setEditable(false);
-        textarea.setRows(5);
-        jScrollPane1.setViewportView(textarea);
-        fillBFGSummaryTextArea();
-
-        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
-
-        jButton1.setText(I18n.tr("generate.bdgSummary")); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        setMinimumSize(new java.awt.Dimension(795, 595));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
-        getContentPane().add(jButton1, java.awt.BorderLayout.PAGE_START);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        bfgenCancelBT.setText(I18n.tr("cancel.font.gen.BFG")); // NOI18N
+        bfgenCancelBT.setEnabled(false);
+        bfgenCancelBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bfgenCancelBTActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
+        jPanel1.add(bfgenCancelBT, gridBagConstraints);
+
+        bfgenAddAnotherSizeBT.setText(I18n.tr("enqueue.another.font.size.BFG")); // NOI18N
+        bfgenAddAnotherSizeBT.setToolTipText(I18n.tr("add.next.font.size.tooltiptext")); // NOI18N
+        bfgenAddAnotherSizeBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bfgenAddAnotherSizeBTActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
+        jPanel1.add(bfgenAddAnotherSizeBT, gridBagConstraints);
+
+        bfgenClearQueueBT.setText(I18n.tr("clear.queue.contents.BFG")); // NOI18N
+        bfgenClearQueueBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bfgenClearQueueBTActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
+        jPanel1.add(bfgenClearQueueBT, gridBagConstraints);
+
+        genBitmapFontsBT.setText(I18n.tr("generate.bdgSummary")); // NOI18N
+        genBitmapFontsBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genBitmapFontsBTActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
+        jPanel1.add(genBitmapFontsBT, gridBagConstraints);
+
+        BFGAddDictBT.setText(I18n.tr("enqueue.another.dict.BFG")); // NOI18N
+        BFGAddDictBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BFGAddDictBTActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
+        jPanel1.add(BFGAddDictBT, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
+        getContentPane().add(jPanel1, gridBagConstraints);
+
+        bfgenSumTextArea.setBackground(new java.awt.Color(254, 254, 254));
+        bfgenSumTextArea.setColumns(20);
+        bfgenSumTextArea.setEditable(false);
+        bfgenSumTextArea.setLineWrap(true);
+        bfgenSumTextArea.setRows(5);
+        bfgenSumTextArea.setWrapStyleWord(true);
+        bfgenSumTextArea.setMinimumSize(new java.awt.Dimension(50, 100));
+        bfgenSumTextArea.setPreferredSize(new java.awt.Dimension(100, 300));
+        bfgenSumTAScrollPane.setViewportView(bfgenSumTextArea);
+        fillBFGSummaryTextArea();
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 250;
+        gridBagConstraints.ipady = 300;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
+        getContentPane().add(bfgenSumTAScrollPane, gridBagConstraints);
+
+        bfgenQueueTextArea.setBackground(new java.awt.Color(232, 232, 232));
+        bfgenQueueTextArea.setColumns(20);
+        bfgenQueueTextArea.setEditable(false);
+        bfgenQueueTextArea.setLineWrap(true);
+        bfgenQueueTextArea.setRows(5);
+        bfgenQueueTextArea.setWrapStyleWord(true);
+        bfgenQueueTextArea.setMinimumSize(new java.awt.Dimension(20, 50));
+        bfgenQueueTextArea.setPreferredSize(new java.awt.Dimension(50, 200));
+        bfgenQueueTAScrollPane.setViewportView(bfgenQueueTextArea);
+        fillBFGQueueTextArea();
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.ipady = 300;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
+        getContentPane().add(bfgenQueueTAScrollPane, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
+        getContentPane().add(bfgenProgressBar, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Hiding the summary window
+    private void genBitmapFontsBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genBitmapFontsBTActionPerformed
+        executeFontGenerationTask();
+    }//GEN-LAST:event_genBitmapFontsBTActionPerformed
+
+    private void bfgenCancelBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bfgenCancelBTActionPerformed
+        confirmCancelFontGen();
+    }//GEN-LAST:event_bfgenCancelBTActionPerformed
+
+    private void bfgenClearQueueBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bfgenClearQueueBTActionPerformed
+        clearBFGQueueContents();
+    }//GEN-LAST:event_bfgenClearQueueBTActionPerformed
+
+    private void bfgenAddAnotherSizeBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bfgenAddAnotherSizeBTActionPerformed
+        addAnotherFontSize();
+    }//GEN-LAST:event_bfgenAddAnotherSizeBTActionPerformed
+
+    private void BFGAddDictBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFGAddDictBTActionPerformed
         this.dispose();
-        DfMCreatorMain.dfmCreator.fontTK.proceed();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        DfMCreatorMain.dfmCreator.fontTK.clearDictionaryField();
+    }//GEN-LAST:event_BFGAddDictBTActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // cancel the font generation process
+        // if the user closes the window
+        cancelFontGenerationOnQuit();
+        // clearing the text fields
+        DfMCreatorMain.dfmCreator.fontTK.clearDictionaryField();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        
+
+
 
         /*
          * Create and display the form
@@ -105,19 +281,195 @@ public class SumWinBFG extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea textarea;
+    private javax.swing.JButton BFGAddDictBT;
+    private javax.swing.JButton bfgenAddAnotherSizeBT;
+    private javax.swing.JButton bfgenCancelBT;
+    private javax.swing.JButton bfgenClearQueueBT;
+    private javax.swing.JProgressBar bfgenProgressBar;
+    private javax.swing.JScrollPane bfgenQueueTAScrollPane;
+    private javax.swing.JTextArea bfgenQueueTextArea;
+    private javax.swing.JScrollPane bfgenSumTAScrollPane;
+    private javax.swing.JTextArea bfgenSumTextArea;
+    private javax.swing.JButton genBitmapFontsBT;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
+    // Imported from de.kugihan.fonttoolkit.Core
+    // This will be used to launch the font_size generation
+    // from here, rather than from the FontToolkit class.
+    private Core c;
+
     public static SumWinBFG getBFGwindow() {
         SumWinBFG bfgSum = new SumWinBFG();
-        bfgSum.setSize(400, 400);
+        //bfgSum.setSize(800, 600);
         bfgSum.setLocation(screenSize.width / 2 - bfgSum.getWidth() / 2,
                            screenSize.height / 2 - bfgSum.getHeight() / 2);
         return bfgSum;
+    }
+
+
+    class Task extends SwingWorker<Void, Void> {
+        @Override
+        public Void doInBackground() {
+            c = new Core();
+            try {
+                    DfMCreatorMain.BitmapFontGeneratorToEnqueue q;
+                    while (!DfMCreatorMain.dfmCreator.fontGenerationQueue.isEmpty()){
+                        q = DfMCreatorMain.dfmCreator.fontGenerationQueue.remove();
+
+                        // Passing the values of the current item
+                        //c = new Core(q.in_file, q.dict_dir, q.font_directory, q.cback, q.font_size, q.clip_top, q.clip_bottom);
+                        c.setInputFile(q.in_file);
+                        c.setDictionaryDirectory(q.dict_dir);
+                        c.setFontDirectory(q.font_directory);
+                        c.setCallback(q.cback);
+                        c.setSize(q.font_size);
+                        c.setClipTop(q.clip_top);
+                        c.setClipBottom(q.clip_bottom);
+
+                        // Showing the font_size generation preferences
+                        // for the current item being processed.
+                        bfgenSumTextArea.setText("");
+                        bfgenSumTextArea.append(I18n.tr("current.item.processed.BFG") + "\n");
+                        bfgenSumTextArea.append(I18n.tr("remaining.items.BFG"));
+                        bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.
+                                fontGenerationQueue.size()) + "\n\n");
+                        bfgenSumTextArea.append(DfMCreatorMain.dfmCreator.fontTK.getInputFontFile().toString());
+                        bfgenSumTextArea.append("\n\n");
+
+                        bfgenSumTextArea.append(I18n.tr("fontSize.BFGSummary") + " " );
+                        bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontTK.getFontSize()));
+                        bfgenSumTextArea.append("\n\n");
+
+                        bfgenSumTextArea.append(I18n.tr("clipTop.BFGSummary") + " ");
+                        bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontTK.getClipTop()));
+                        bfgenSumTextArea.append("\n\n");
+
+                        bfgenSumTextArea.append(I18n.tr("clipBottom.BFGSummary") + " ");
+                        bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontTK.getClipBottom()));
+                        bfgenSumTextArea.append("\n\n");
+
+                        // Perform the font generation for the current item
+                        c.generateFonts();
+
+                        // Update the contents of the TextArea that displays the items
+                        // to be processed as some are being removed from the queue
+                        int i = 0;
+                        DfMCreatorMain.dfmCreator.fontGenerationArray.remove(i);
+                        bfgenQueueTextArea.setText("");
+                        bfgenQueueTextArea.append(I18n.tr("items.in.queue.BFG") + "\n\n");
+                        for (int j=0; j<DfMCreatorMain.dfmCreator.fontGenerationArray.size(); j++){
+                            bfgenQueueTextArea.append(DfMCreatorMain.dfmCreator.fontGenerationArray.get(j).toString() + "\n");
+                        }
+                    }
+
+            } catch (Throwable t) {
+                done = true;
+                DfMCreatorMain.printAnyMsg(I18n.tr("unknownRuntimeError.dfmCreatorMain",
+                    new Object[] {t, t.getLocalizedMessage()}),
+                    I18n.tr("unknownRuntimeErrorTitle"), JOptionPane.ERROR_MESSAGE);
+                System.out.println(t + "\n");
+            }
+            return null;
+            }
+
+        @Override
+        public void done() {
+            //Tell progress listener to stop updating progress bar.
+            done = true;
+            genBitmapFontsBT.setEnabled(false);
+            bfgenCancelBT.setEnabled(false);
+            bfgenAddAnotherSizeBT.setEnabled(false);
+            BFGAddDictBT.setEnabled(true);
+            bfgenClearQueueBT.setEnabled(true);
+            Toolkit.getDefaultToolkit().beep();
+            setCursor(null); //turn off the wait cursor
+            bfgenProgressBar.setIndeterminate(false);
+            bfgenProgressBar.setValue(bfgenProgressBar.getMinimum());
+            bfgenSumTextArea.append(I18n.tr("done.jarCreationSummary"));
+        }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (!done) {
+            int progress = task.getProgress();
+            if (progress == 0) {
+                bfgenProgressBar.setStringPainted(false);
+                bfgenProgressBar.setIndeterminate(true);
+                bfgenSumTextArea.append(I18n.tr("pleaseWait.jarCreationSummary"));
+                genBitmapFontsBT.setEnabled(true);
+                BFGAddDictBT.setEnabled(false);
+                bfgenAddAnotherSizeBT.setEnabled(false);
+                bfgenCancelBT.setEnabled(true);
+            }
+            else {
+                bfgenProgressBar.setIndeterminate(false);
+                bfgenProgressBar.setString(null);
+                bfgenProgressBar.setValue(progress);
+                bfgenSumTextArea.append(String.format("\n" + "\n" +
+                I18n.tr("completed.jarCreationSummary"), task.getProgress()));
+            }
+        }
+    }
+
+    public void executeFontGenerationTask(){
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        genBitmapFontsBT.setEnabled(false);
+        bfgenCancelBT.setEnabled(true);
+        bfgenAddAnotherSizeBT.setEnabled(false);
+        //bfgenClearQueueBT.setEnabled(false);
+        done = false;
+        task = new Task();
+        task.addPropertyChangeListener(this);
+        task.execute();
+        bfgenProgressBar.setValue(task.getProgress());
+        // Tell that the task has been lauched.
+        taskFlag = true;
+      }
+
+    public void confirmCancelFontGen() {
+        int n = JOptionPane.showConfirmDialog(null, I18n.tr("cancel.font.gen.msg.BFG"),
+                                                    I18n.tr("cancel.font.creation.title.BFG"), JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION){
+            if (!task.isDone()){
+                task.cancel(true);
+                DfMCreatorMain.dfmCreator.fontGenerationQueue.clear();
+                DfMCreatorMain.dfmCreator.fontGenerationArray.clear();
+            }
+        }
+    }
+
+    public void clearBFGQueueContents() {
+        DfMCreatorMain.dfmCreator.fontGenerationQueue.clear();
+        DfMCreatorMain.dfmCreator.fontGenerationArray.clear();
+        bfgenSumTextArea.setText("");
+        bfgenQueueTextArea.setText("");
+        DfMCreatorMain.dfmCreator.fontTK.clearDictionaryField();
+    }
+
+    private void addAnotherFontSize() {
+        try {
+            DfMCreatorMain.dfmCreator.fontTK.setValuesForQueue();
+        } catch (fontNotAccessible | dictionaryDirNotAccessible ex) {
+            System.out.println(ex.getMessage());
+        }
+        DfMCreatorMain.dfmCreator.createQueueForBFG();
+        DfMCreatorMain.dfmCreator.fontTK.incrementFontSizeAndRevalidateValues();
+        fillBFGQueueTextArea();
+        fillBFGSummaryTextArea();
+    }
+
+    private void cancelFontGenerationOnQuit() {
+        if (taskFlag){
+            if (!task.isDone()){
+                task.cancel(true);
+            }
+        }
+        DfMCreatorMain.dfmCreator.fontGenerationQueue.clear();
+        DfMCreatorMain.dfmCreator.fontGenerationArray.clear();
     }
 
     /**
@@ -127,27 +479,37 @@ public class SumWinBFG extends javax.swing.JFrame {
      * by the user.
      */
     private void fillBFGSummaryTextArea() {
-        
-        textarea.append(I18n.tr("headline.BFGSummary") + "\n\n");
-        
-        textarea.append(I18n.tr("chosenFont.BFGSummary") + "\n\n");
-        textarea.append(DfMCreatorMain.dfmCreator.fontTK.getFontFieldText());
-        textarea.append("\n\n");
-        
-        textarea.append(I18n.tr("fontSize.BFGSummary") + " " );
-        textarea.append(DfMCreatorMain.dfmCreator.fontTK.getFontSize());
-        textarea.append("\n\n");
-        
-        textarea.append(I18n.tr("clipTop.BFGSummary") + " ");
-        textarea.append(DfMCreatorMain.dfmCreator.fontTK.getClipTob());
-        textarea.append("\n\n");
-        
-        textarea.append(I18n.tr("clipBottom.BFGSummary") + " ");
-        textarea.append(DfMCreatorMain.dfmCreator.fontTK.getClipBottom());
-        textarea.append("\n\n");
-        
-        textarea.append(I18n.tr("end.BFGSummary"));
-        textarea.append("\n");
+        bfgenSumTextArea.setText("");
+        bfgenSumTextArea.append(I18n.tr("headline.BFGSummary") + "\n\n");
+
+        bfgenSumTextArea.append(I18n.tr("chosenFont.BFGSummary") + "\n\n");
+        bfgenSumTextArea.append(DfMCreatorMain.dfmCreator.fontTK.getInputFontFile().toString());
+        bfgenSumTextArea.append("\n\n");
+
+        bfgenSumTextArea.append(I18n.tr("fontSize.BFGSummary") + " " );
+        bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontTK.getFontSize()));
+        bfgenSumTextArea.append("\n\n");
+
+        bfgenSumTextArea.append(I18n.tr("clipTop.BFGSummary") + " ");
+        bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontTK.getClipTop()));
+        bfgenSumTextArea.append("\n\n");
+
+        bfgenSumTextArea.append(I18n.tr("clipBottom.BFGSummary") + " ");
+        bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontTK.getClipBottom()));
+        bfgenSumTextArea.append("\n\n");
+
+        bfgenSumTextArea.append(I18n.tr("end.BFGSummary"));
+        bfgenSumTextArea.append("\n");
     }
+
+    private void fillBFGQueueTextArea() {
+        bfgenQueueTextArea.setText("");
+        bfgenQueueTextArea.append(I18n.tr("items.in.queue.BFG") + "\n\n");
+        for (int i=0; i<DfMCreatorMain.dfmCreator.fontGenerationArray.size(); i++){
+            bfgenQueueTextArea.append(DfMCreatorMain.dfmCreator.fontGenerationArray.get(i).toString() + "\n");
+        }
+    }
+
+
 
 }
