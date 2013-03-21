@@ -10,7 +10,7 @@ projWebAppDictionaries=$projWebAppBase/dictionaries
 
 dictionaryFRSDir=$projFRSBase/$dictionarySubDir
 
-newestVersionDir=`ls "$dictionaryFRSDir" | sort | tail -n1`
+newestVersionDir=`ls "$dictionaryFRSDir" | grep [0123456789] | sort | tail -n1`
 
 dictionaryFRSSourceDir=$dictionaryFRSDir/$newestVersionDir
 

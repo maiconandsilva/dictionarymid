@@ -1,19 +1,46 @@
--Make DictdToDictionaryForMIDs tab generate .ini files from the database name and dict path entered by the user
+====- Fixes for the Current Release -====
+⦁Make it possible to download older DfM-Creator versions...
+⦁Update French language file
+⦁Update the Documentation files (according to the changes in the DfM-Creator GUI).
+⦁Create a Windows InoSetup installer that is bundled with JRE.
+⦁Create a linux portable version with MakeSelf bundled with JRE.
+⦁Create a universal installer version with izPack without JRE.
+⦁Create a spash-screen.
+⦁Create an icon.
 
--Verify the version of the installed JRE and print an error message if the installed JRE is below 1.7.
 
--Make it possible to:
-+queue many dictd files to be converted
-+queue many csv files to be generated
-+queue many fonts to be generated
-+queue many jar files to be built
 
--Make the PropertiesEditor be able to load a properties file and make what's necessary (fill the textAreas, check/uncheck the checkboxes, select items in comboboxes...) to edit the file
 
--Bundle custom font file and used it for the DfM-Creator. Why not the Ubuntu font family? It's pretty good!
+_____COMMON TASKS FOR EACH NEW DFM-CREATOR VERSION_____
+-Update the version number in:
+    -DfMCreatorMain.java
+    -trunk/Build/build.xml
+    
+-Update the documentation files (screenshots); document new features; remove obsolete ones...
+-Update the locale files (currently only the french language is concerned)
+-In case we're entering a new year, add that year to the copyright years (e.g: (C) 2012, 2013 Karim Mahamane Karimou)
+-Update dfmcreatorDownload.html
+-Update CHANGELOG
+-Use the GUI testing framework to make exhaustive test on the new DfM-Creator release
+-Test wether the CLI version of the DfM-Creator tools still work
+_______________________________________________________
 
--Implement Next/Previous buttons in the Help/Content window
 
--Implement Choose language tab in the preferences tabbed pane
 
--FIXES: the nasties introduced by DictdToDictionaryForMIDs while converting a dictionary from freedict.org
+============- TODOs for the Upcoming Release -=============
+-Use a GUI testing framework for DfM-Creator tests
+
+
+
+
+============- Long Term Fixes -============
+⦁Bundle custom font file and use it for the DfM-Creator. Why not the Ubuntu font family? It's pretty good!
+⦁Translate Documentation files in french.
+⦁FIX the nasties introduced by DictdToDictionaryForMIDs while converting a dictionary from freedict.org
+
+
+
+
+===TODOs Implemented Successfully===
+
+

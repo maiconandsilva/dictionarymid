@@ -1,7 +1,7 @@
 /*
 ****************************************************************************
 * This version of this file is part of DictionaryForMIDs-Creator
-* (C) 2012 Karim Mahamane Karimou
+* Copyright (C) 2012, 2013 Karim Mahamane Karimou
 *
 * This version is a modified version. It was modified to make it compatible
 * with DictionaryForMIDs-Creator. It was modified by me. See below for
@@ -10,9 +10,9 @@
 * DictionaryForMIDs-Creator (DfM-Creator) is a GUI wrapper around various
 * DictionaryForMIDs tools, among others we have DictdToDictionaryForMIDs,
 * DictionaryGeneration, JarCreator and BitmapFontGenerator.
-*  
+*
 * GPL applies, see file COPYING for more license information.
-* 
+*
 ****************************************************************************
 */
 
@@ -20,17 +20,17 @@
 
 /**
  * DictionaryForMIDs
- * 
+ *
  * FontToolkit.java - Created by Sean Kernohan (webmaster@seankernohan.com)
  */
 package de.kugihan.fonttoolkit;
 
-import de.kugihan.DfMCreator.DfMCreatorExceptions;
-import de.kugihan.DfMCreator.DfMCreatorExceptions.CSVDictionaryFilesNotFound;
-import de.kugihan.DfMCreator.DfMCreatorExceptions.dictionaryDirNotAccessible;
-import de.kugihan.DfMCreator.DfMCreatorExceptions.dictionaryFieldIsEmpty;
-import de.kugihan.DfMCreator.DfMCreatorExceptions.fontFieldIsEmpty;
-import de.kugihan.DfMCreator.DfMCreatorExceptions.fontNotAccessible;
+import de.kugihan.DfMCreator.DfMCreatorException;
+import de.kugihan.DfMCreator.DfMCreatorException.CSVDictionaryFilesNotFound;
+import de.kugihan.DfMCreator.DfMCreatorException.dictionaryDirNotAccessible;
+import de.kugihan.DfMCreator.DfMCreatorException.dictionaryFieldIsEmpty;
+import de.kugihan.DfMCreator.DfMCreatorException.fontFieldIsEmpty;
+import de.kugihan.DfMCreator.DfMCreatorException.fontNotAccessible;
 import de.kugihan.DfMCreator.DfMCreatorMain;
 import de.kugihan.DfMCreator.SumWinBFG;
 import de.kugihan.dictionaryformids.general.DictionaryException;
@@ -49,6 +49,11 @@ import javax.swing.*;
 
 public class FontToolkit extends JFrame implements ActionListener, Callback {
     
+    Callback call_back;
+    public Callback getCallback(){
+        return call_back;
+    }
+    
     // Flag that will tell us wether the FontToolkit
     // is being called from DfM-Creator or from the
     // command line (the user might have called the
@@ -56,7 +61,57 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
     // set to true if it is called from DfM-Creator
     // and to false otherwise.
     public static boolean flag = false;
+
+    // These variables will be used in the
+    // setValuesForQueue subroutine
+    private File inFile;
+    private File dirFile;
+    private int fontSize;
+    private int clipTop;
+    private int clipBottom;
+    private String fontDirectory;
+
+    // Getter and setter methods for
+    // the above variables.
+    public File getInputFontFile(){
+        return inFile;
+    }
+    public File getDirFile(){
+        return dirFile;
+    }
+    public int getFontSize(){
+        return fontSize;
+    }
+    public int getClipTop(){
+        return clipTop;
+    }
+    public int getClipBottom(){
+        return clipBottom;
+    }
+    public String getFontDirectory(){
+        return fontDirectory;
+    }
+
+    public void setInputFontFile(File newInFile){
+        inFile = newInFile;
+    }
+    public void setDirFile(File newDirFile){
+        dirFile = newDirFile;
+    }
+    public void setFontSize(int newFontSize){
+        fontSize = newFontSize;
+    }
+    public void setClipTop(int newClipTop){
+        clipTop = newClipTop;
+    }
+    public void setClipBottom(int newClipBottom){
+        clipBottom = newClipBottom;
+    }
+    public void setFontDirectory(String newFontDirectory){
+        fontDirectory = newFontDirectory;
+    }
     
+
     private static final long serialVersionUID = 1L;
 
     private boolean debugMode = false;
@@ -87,7 +142,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
     private JComboBox pixelsBottomBox = new JComboBox(pixelsBottom);
 
     private JButton startButton = new JButton(I18n.tr("start"));
-    
+
     private JButton clearButton = new JButton(I18n.tr("clear.fields.dfmCreatorMain"));
 
     private JLabel fontLabel = new JLabel(I18n.tr("fontPath"));
@@ -107,37 +162,12 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     private Core c;
-        
-        // Getter methods
-    
-        public String getFontFieldText() {
-            return fontField.getText();
-        }
-        
-        public String getDictionaryFieldText() {
-            return dictionaryField.getText();
-        }
-        
-        public String getFontSize() {
-            String fontSize = String.valueOf(fontList.getSelectedItem().toString());
-            return fontSize;
-        }
-        
-        public String getClipTob() {
-            String clipTop = String.valueOf(pixelsTopBox.getSelectedItem().toString());
-            return clipTop;
-        }
-        
-        public String getClipBottom() {
-            String clipBottom = String.valueOf(pixelsBottomBox.getSelectedItem().toString());
-            return clipBottom;
-        }
-                
+
 	public static void main (String[] args) throws DictionaryException {
             DfMCreatorMain.setTheNimbusLookAndFeel();
-            new FontToolkit().run();            
+            new FontToolkit().run();
 	}
-        
+
         public static void printCopyrightNotice() {
         System.out.print(
             "\n\nDictionaryForMIDs - FontGenerator Copyright (C) 2005 J2ME Polish\n" +
@@ -158,7 +188,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
             "Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA\n" +
             "For documentation and source code, see http://dictionarymid.sourceforge.net\n\n");
         }
-        
+
         // We will use this subroutine to test the existence of ".csv" files in the
         // selected dictionary directory and throw and exception if they dont exist.
 	private void findCSVFiles(File dictionaryDirectory) throws CSVDictionaryFilesNotFound {
@@ -167,7 +197,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
             for (int i = 0; i < 2; i++) {
                 if (files[i].getName().substring(files[i].getName().length() - 4,
                                                   files[i].getName().length()).equals(".csv")) {
-                    foundFiles = true;                    
+                    foundFiles = true;
                 }
             }
             if (!foundFiles) {
@@ -198,21 +228,21 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
             JMenuBar menuBar = new JMenuBar();
             JMenu fileMenu = new JMenu(I18n.tr("fime.menuItem"));
             JMenu helpMenu = new JMenu(I18n.tr("help.menuItem"));
-            
+
             quitItem = new JMenuItem(I18n.tr("quit.menuItem"));
             aboutItem = new JMenuItem(I18n.tr("about.menuItem"));
-            
+
             menuBar.add(fileMenu);
             fileMenu.add(quitItem);
             menuBar.add(helpMenu);
             helpMenu.add(aboutItem);
-        
+
             quitItem.addActionListener(this);
             aboutItem.addActionListener(this);
-            
-            return menuBar;               
+
+            return menuBar;
 	}
-        
+
         public JPanel getJPanel(){
 
             fontList.setSelectedIndex(2);
@@ -261,7 +291,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 
             return panel;
         }
-        
+
 
         @Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -283,15 +313,21 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
                 // not even been loaded, so, we'll directly generate the font
                 // files without calling the preferences summary window.
                 if (flag) {
-                    proceed();                    
+                    proceed();
                 } else {
+                try {
                     // if we reach here flag remains set to false. In such case we can call the
                     // bitmap font generation preferences summary window since DfM-Creator is loaded.
                     // We Validate the values entered and then we show the bitmap font generation
-                    // preferences summary window.Here, It enables us to actualy generate the font files.
-                    validateAndShowSum();
+                    // preferences summary window. Here, It enables us to actualy generate the font files.
+                    setValuesForQueue();
+                } catch (fontNotAccessible | dictionaryDirNotAccessible ex) {
+                    System.out.println(ex.getMessage());
                 }
-             
+                    DfMCreatorMain.dfmCreator.createQueueForBFG();
+                    validateAndShowSummaryWin();
+                }
+
             } else if (arg0.getSource() == clearButton){
                     clearFields();
             } else if (arg0.getSource() == quitItem) {
@@ -304,56 +340,64 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
                 }
             }
 	}
-        
+
     public void clearFields() {
         fontField.setText("");
         dictionaryField.setText("");
     }
     
+    public void clearDictionaryField(){
+        dictionaryField.setText("");
+    }
+
     public void showBFGsummary() {
-        SumWinBFG bfgSum = SumWinBFG.getBFGwindow();        
+        SumWinBFG bfgSum = SumWinBFG.getBFGwindow();
         bfgSum.setVisible(true);
     }
-    
-        public void validateAndShowSum() {
+
+        public void validateAndShowSummaryWin() {
             try {
                 validateFields();
                 findCSVFiles(new File(dictionaryField.getText()));
                 showBFGsummary();
             } catch (CSVDictionaryFilesNotFound ex) {
-                    DfMCreatorMain.printAnyMsg(DfMCreatorExceptions.CSVDictionaryFilesNotFoundMsg,
+                    DfMCreatorMain.printAnyMsg(DfMCreatorException.CSVDictionaryFilesNotFoundMsg,
                                                I18n.tr("badDictDir"), JOptionPane.ERROR_MESSAGE);
             } catch (fontFieldIsEmpty e){
-                    DfMCreatorMain.printAnyMsg(DfMCreatorExceptions.fontFieldIsEmptyMsg, I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
+                    DfMCreatorMain.printAnyMsg(DfMCreatorException.fontFieldIsEmptyMsg,
+                            I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
             } catch (dictionaryFieldIsEmpty e){
-                    DfMCreatorMain.printAnyMsg(DfMCreatorExceptions.dictionaryFielsIsEmptyMsg, I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
+                    DfMCreatorMain.printAnyMsg(DfMCreatorException.dictionaryFielsIsEmptyMsg,
+                            I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
             }  catch (NumberFormatException e) {
                     showSizeError(e);
             } catch (Exception e) {
                     showFatalError(e);
             }
         }
-        
+
         public void proceed() {
             try {
                 beginProcess();
             } catch (fontNotAccessible e){
-                    DfMCreatorMain.printAnyMsg(DfMCreatorExceptions.fontNotAccessibleMsg, I18n.tr("fontError"), JOptionPane.ERROR_MESSAGE);
+                    DfMCreatorMain.printAnyMsg(DfMCreatorException.fontNotAccessibleMsg,
+                            I18n.tr("fontError"), JOptionPane.ERROR_MESSAGE);
             } catch (dictionaryDirNotAccessible e){
-                     DfMCreatorMain.printAnyMsg(DfMCreatorExceptions.dictionaryDirNotAccessibleMsg, I18n.tr("notDictFiles"), JOptionPane.ERROR_MESSAGE);                            
+                     DfMCreatorMain.printAnyMsg(DfMCreatorException.dictionaryDirNotAccessibleMsg,
+                             I18n.tr("notDictFiles"), JOptionPane.ERROR_MESSAGE);
             }
         }
 
 	public void validateFields() throws fontFieldIsEmpty, dictionaryFieldIsEmpty {
-            
+
                 if ("".equals(fontField.getText())){
                     throw new fontFieldIsEmpty(I18n.tr("emptyFontField"));
                 }
-                
+
                 if ("".equals(dictionaryField.getText())){
                     throw new dictionaryFieldIsEmpty(I18n.tr("emptyDictField"));
                 }
-            
+
 		String font = fontField.getText();
 		if (font.substring(font.length() - 1, font.length()).equals("/")
 				|| font.substring(font.length() - 1, font.length())
@@ -370,24 +414,68 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 		dictionaryField.setText(dictionary);
 	}
 
-	public void beginProcess() throws fontNotAccessible, dictionaryDirNotAccessible {
-            
-		File inFile = new File(fontField.getText());
+
+        // This is the subroutine that will be called to generate the bitmap fonts
+        // when the FontGenerator is called from the GUI of DfM-Creator.
+	public void setValuesForQueue() throws fontNotAccessible, dictionaryDirNotAccessible {
+
+		inFile = new File(fontField.getText());
 		if (!inFile.canRead())
 			throw new fontNotAccessible(I18n.tr("notFontAccessible"));
 
-		File dirFile = new File(dictionaryField.getText());
+		dirFile = new File(dictionaryField.getText());
 		if (!dirFile.isDirectory() || !dirFile.canRead())
 			throw new dictionaryDirNotAccessible(I18n.tr("notDictDir"));
 
+		fontSize = Integer.parseInt(fontList.getSelectedItem().toString());
+		clipTop = Integer.parseInt(pixelsTopBox.getSelectedItem().toString());
+		clipBottom = Integer.parseInt(pixelsBottomBox.getSelectedItem().toString());
+		fontDirectory = dictionaryField.getText();
+        }
+
+
+        // This is the subroutine that will be called to generate the bitmap fonts
+        // when the FontGenerator is called in it's stand alone version from the CLI.
+	public void beginProcess() throws fontNotAccessible, dictionaryDirNotAccessible {
+
+		File inputFile = new File(fontField.getText());
+		if (!inputFile.canRead())
+			throw new fontNotAccessible(I18n.tr("notFontAccessible"));
+
+		File fileDirectory = new File(dictionaryField.getText());
+		if (!fileDirectory.isDirectory() || !fileDirectory.canRead())
+			throw new dictionaryDirNotAccessible(I18n.tr("notDictDir"));
+
 		int f = Integer.parseInt(fontList.getSelectedItem().toString());
-		int clipTop = Integer.parseInt(pixelsTopBox.getSelectedItem().toString());
-		int clipBottom = Integer.parseInt(pixelsBottomBox.getSelectedItem().toString());
-		String fontDirectory = dictionaryField.getText();
-		c = new Core(inFile, dirFile, fontDirectory, this, f, clipTop, clipBottom);
+		int clip_Top = Integer.parseInt(pixelsTopBox.getSelectedItem().toString());
+		int clip_Bottom = Integer.parseInt(pixelsBottomBox.getSelectedItem().toString());
+		String font_Directory = dictionaryField.getText();
+
+                c = new Core(inputFile, fileDirectory, font_Directory, this, f, clip_Top, clip_Bottom);
                 c.start();
 	}
-
+        
+        public void incrementFontSizeAndRevalidateValues(){
+            try {
+                validateFields();
+            } catch (fontFieldIsEmpty | dictionaryFieldIsEmpty ex) {
+                System.out.println(ex.getMessage());
+            }
+            try {
+                findCSVFiles(new File(dictionaryField.getText()));
+            } catch (CSVDictionaryFilesNotFound ex) {
+                System.out.println(ex.getMessage());
+            }
+            int i = fontList.getSelectedIndex();
+            if (i<14){
+                i++;
+                fontList.setSelectedIndex(i);
+            } else {
+                // We restart
+                fontList.setSelectedIndex(0);
+            }
+        }
+        
 	public String getFile(boolean dirsOnly) {
 		JFileChooser chooser = new JFileChooser();
 		if (dirsOnly) {
@@ -405,11 +493,11 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 	public void finish() {
 		popup.setVisible(false);
 		this.setVisible(true);
-                Path outBmfPath = Paths.get(dictionaryField.getText(), I18n.tr("fonts"));
+                Path outBmfPath = Paths.get(dictionaryField.getText(), "fonts");
                 outBmfPath = outBmfPath.normalize();
                 outBmfPath = outBmfPath.toAbsolutePath();
                 String outBmfString = outBmfPath.toString();
-                
+
 		JOptionPane.showMessageDialog(null, I18n.tr("successMsg", new Object[] {outBmfString}),
                                                      I18n.tr("DONE"), JOptionPane.INFORMATION_MESSAGE);
 	}
@@ -425,7 +513,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 		popup.setSize(500, 100);
 		popup.setLocation(screenSize.width / 2 - popup.getWidth() / 2,
 				screenSize.height / 2 - popup.getHeight() / 2);
-                
+
 		popup.setVisible(true);
 		popup.setResizable(false);
 	}
@@ -483,7 +571,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
                                  {t, t.getLocalizedMessage()}), I18n.tr("error"),
                                                       JOptionPane.ERROR_MESSAGE);
                 System.out.println(t + "\n");
-                
+
 		if (debugMode)
 			t.printStackTrace();
 	}
@@ -511,7 +599,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 		return accept;
 	}
 
-    @Override
+        @Override
 	public String getDescription() {
 		return I18n.tr("fontFilesFilter");
 	}
@@ -525,4 +613,5 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 
 		return suffix;
 	}
+        
 }

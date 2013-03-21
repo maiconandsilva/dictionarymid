@@ -74,7 +74,7 @@ public class FontGenerator {
 		// ADD CHARSPACING FIELD
 		BufferedImage image = createImage(this.text);
 				
-                Path outputFt = Paths.get(fontDir , I18n.tr("fonts") , String.valueOf(sizePoints));
+                Path outputFt = Paths.get(fontDir , "fonts" , String.valueOf(sizePoints));
                 outputFt = outputFt.toAbsolutePath();
                 outputFt = outputFt.normalize();                
                 Files.createDirectories(outputFt);

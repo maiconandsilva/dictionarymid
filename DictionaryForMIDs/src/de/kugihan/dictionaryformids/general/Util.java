@@ -7,11 +7,10 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.general;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
+import java.io.IOException;
+import java.io.InputStream;
 
 public abstract class Util {
 

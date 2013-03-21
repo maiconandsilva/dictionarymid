@@ -5,7 +5,7 @@
 *   DICTIONARYFORMIDS-CREATOR
 *
 *   This file is part of DictionaryForMIDs-Creator
-*   Copyright (C) 2012 Karim Mahamane Karimou
+*   Copyright (C) 2012, 2013 Karim Mahamane Karimou
 *   DictionaryForMIDs-Creator is a GUI wrapper around various
 *   DictionaryForMIDs tools, among others we have
 *   DictdToDictionaryForMIDs, DictionaryGeneration,
@@ -33,7 +33,6 @@
 
 package de.kugihan.DfMCreator;
 
-import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.jarCreator.JarCreator;
 import edu.hws.eck.mdb.I18n;
 import java.awt.Cursor;
@@ -42,7 +41,6 @@ import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
@@ -50,14 +48,18 @@ import javax.swing.SwingWorker;
 public class SumWinJarCreator extends javax.swing.JDialog implements PropertyChangeListener {
 
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    
+    // This one is to make sure that the task
+    // has been already created and launched.
+    private static boolean taskFlag = false;
 
-    public static SumWinJarCreator getCJPWin(){
-        SumWinJarCreator cjpw = new SumWinJarCreator();
-        cjpw.setSize(580, 455);
-        cjpw.setLocation(screenSize.width / 2 - cjpw.getWidth() / 2,
-                        screenSize.height / 2 - cjpw.getHeight() / 2);
-        cjpw.setModal(true);
-        return cjpw;
+    public static SumWinJarCreator getJarCreatorSumWin(){
+        SumWinJarCreator jcsw = new SumWinJarCreator();
+        //cjpw.setSize(800, 600);
+        jcsw.setLocation(screenSize.width / 2 - jcsw.getWidth() / 2,
+                        screenSize.height / 2 - jcsw.getHeight() / 2);
+        jcsw.setModal(true);
+        return jcsw;
     }
 
     private Task task;
@@ -93,6 +95,9 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
         JarCreatorQueueTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(795, 595));
+        setModal(true);
+        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -124,7 +129,7 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 5;
         gridBagConstraints.ipady = 5;
@@ -133,9 +138,9 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipadx = 300;
         gridBagConstraints.ipady = 5;
         jPanel2.add(ProgBar, gridBagConstraints);
 
@@ -160,7 +165,7 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 5;
         gridBagConstraints.ipady = 5;
@@ -170,7 +175,7 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 200;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -179,10 +184,12 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        JarCreatorSummaryTA.setBackground(new java.awt.Color(254, 242, 246));
+        JarCreatorSummaryTA.setBackground(new java.awt.Color(254, 254, 254));
         JarCreatorSummaryTA.setColumns(20);
         JarCreatorSummaryTA.setEditable(false);
+        JarCreatorSummaryTA.setLineWrap(true);
         JarCreatorSummaryTA.setRows(5);
+        JarCreatorSummaryTA.setWrapStyleWord(true);
         jScrollPane2.setViewportView(JarCreatorSummaryTA);
         fillJarCreationSummaryTextArea();
 
@@ -190,7 +197,7 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 180;
+        gridBagConstraints.ipadx = 200;
         gridBagConstraints.ipady = 300;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.weightx = 1.0;
@@ -198,7 +205,7 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(jScrollPane2, gridBagConstraints);
 
-        JarCreatorQueueTextArea.setBackground(new java.awt.Color(254, 242, 246));
+        JarCreatorQueueTextArea.setBackground(new java.awt.Color(232, 232, 232));
         JarCreatorQueueTextArea.setColumns(20);
         JarCreatorQueueTextArea.setEditable(false);
         JarCreatorQueueTextArea.setLineWrap(true);
@@ -222,7 +229,6 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 2.0;
         gridBagConstraints.weighty = 1.0;
@@ -241,7 +247,7 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
 
     private void JarCreatorEnqueueBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JarCreatorEnqueueBTActionPerformed
         this.dispose();
-        DfMCreatorMain.dfmCreator.clearJarCreatorTFs();
+        DfMCreatorMain.dfmCreator.clearJarCreatorTFsExceptEmptyDfM();
     }//GEN-LAST:event_JarCreatorEnqueueBTActionPerformed
 
     private void JarCreatorClearQueueBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JarCreatorClearQueueBTActionPerformed
@@ -250,7 +256,7 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         cancelJarCreationOnQuit();
-        DfMCreatorMain.dfmCreator.clearJarCreatorTFs();
+        DfMCreatorMain.dfmCreator.clearJarCreatorTFsExceptEmptyDfM();
     }//GEN-LAST:event_formWindowClosing
 
     /**
@@ -299,11 +305,16 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
 
     private static final String newline = "\n";
 
+
     private void cancelJarCreationOnQuit() {
-        if (!task.isDone()){
-            task.cancel(true);
-            deleteIncompleteDictFile();
+        if (taskFlag){
+            if (!task.isDone()){
+                task.cancel(true);
+                deleteIncompleteDictFile();
+            }
         }
+        DfMCreatorMain.dfmCreator.jarCreatorQueue.clear();
+        DfMCreatorMain.dfmCreator.jarCreatorArray.clear();
     }
 
     class Task extends SwingWorker<Void, Void> {
@@ -317,6 +328,7 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
 
                         // Passing the values of the current item
                         // to JarCreator in order for it to process it
+                        JarCreator jc = new JarCreator();
                         JarCreator.setDictionaryDirectory(q.dictDir);
                         JarCreator.setEmptyDictionaryForMID(q.emptyDfM);
                         JarCreator.setOutputDirectory(q.outputDir);
@@ -328,38 +340,45 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
                         JarCreatorSummaryTA.append(I18n.tr("items.info.jarCreator") + "\n\n");
                         JarCreatorSummaryTA.append(I18n.tr("remaining.items.jarCreator"));
                         JarCreatorSummaryTA.append(String.valueOf(DfMCreatorMain.dfmCreator.jarCreatorQueue.size()) + "\n\n");
+                        JarCreatorSummaryTA.append(I18n.tr("dictDir.jarCreationSummary") + "\n");
                         JarCreatorSummaryTA.append(q.dictDir + "\n\n");
 
-                        JarCreatorSummaryTA.append(I18n.tr("emptyDfMDir.jarCreationSummary") + "\n\n");
+                        JarCreatorSummaryTA.append(I18n.tr("emptyDfMDir.jarCreationSummary") + "\n");
                         JarCreatorSummaryTA.append(q.emptyDfM + "\n\n");
 
-                        JarCreatorSummaryTA.append(I18n.tr("outputDir.jarCreationSummary") + "\n\n");
-                        JarCreatorSummaryTA.append(q.outputDir + "\n\n");
+                        JarCreatorSummaryTA.append(I18n.tr("outputDir.jarCreationSummary") + "\n");
+                        JarCreatorSummaryTA.append(q.outputDir + "\n");
 
                         // Perform the Jar Creation for
                         // the current item.
-                        JarCreator.createJar();
+                        jc.createJar();
 
+                        // Update the contents of the TextArea that displays the items
+                        // to be processed as some are being removed from the queue
                         // JarCreatorSummaryTA
                         int i = 0;
-                        JarCreatorSummaryTA.setText("");
-                        JarCreatorQueueTextArea.append(I18n.tr("items.queue.JarCreator") + "\n\n");
                         DfMCreatorMain.dfmCreator.jarCreatorArray.remove(i);
-                        JarCreatorSummaryTA.append(DfMCreatorMain.dfmCreator.jarCreatorArray.get(i).toString() + "\n\n");
+                        JarCreatorQueueTextArea.setText("");
+                        JarCreatorQueueTextArea.append(I18n.tr("items.queue.JarCreator") + "\n\n");
+                        for (int j=0; j<DfMCreatorMain.dfmCreator.jarCreatorArray.size(); j++){
+                            JarCreatorQueueTextArea.append(DfMCreatorMain.dfmCreator.jarCreatorArray.get(j).toString() + "\n");
+                        }
 
                     }
 
-            } catch (IOException | DictionaryException e) {
-                done = true;
-                DfMCreatorMain.printAnyMsg(e.getMessage() ,"Error", JOptionPane.ERROR_MESSAGE);
-                System.out.println(e.getMessage());
-            } catch (DfMCreatorExceptions.CantCreatOutputJarJadDirectory e){
+            } catch (DfMCreatorException.CantCreatOutputJarJadDirectory e){
                 done = true;
                 DfMCreatorMain.printAnyMsg(e.getMessage() ,"Directory Creation Error", JOptionPane.ERROR_MESSAGE);
                 System.out.println(e.getMessage());
+            } catch (Throwable t) {
+                done = true;
+                DfMCreatorMain.printAnyMsg(I18n.tr("unknownRuntimeError.dfmCreatorMain",
+                    new Object[] {t, t.getLocalizedMessage()}),
+                    I18n.tr("unknownRuntimeErrorTitle"), JOptionPane.ERROR_MESSAGE);
+                System.out.println(t + "\n\n");
             }
             return null;
-            }
+        }
 
         @Override
         public void done() {
@@ -409,6 +428,8 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
         task.addPropertyChangeListener(this);
         task.execute();
         ProgBar.setValue(task.getProgress());
+        // Tell that the task has been lauched.
+        taskFlag = true;
       }
 
     public void confirmCancelConvert() {
@@ -419,6 +440,7 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
                 task.cancel(true);
                 deleteIncompleteDictFile();
                 DfMCreatorMain.dfmCreator.jarCreatorQueue.clear();
+                DfMCreatorMain.dfmCreator.jarCreatorArray.clear();
             }
         }
     }
@@ -426,14 +448,18 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
     // deletes the incomplete jar and jad files
     // if the user aborts the operation
     public void deleteIncompleteDictFile(){
-        File incompleteJar = JarCreator.getJarFile();
-        if (incompleteJar.exists()) {
-            incompleteJar.delete();
+        if (JarCreator.jarFlag){
+            File incompleteJar = JarCreator.getJarFile();
+            if (incompleteJar.exists()) {
+                incompleteJar.delete();
+            }
         }
 
-        File incompleteJad = JarCreator.getJadFile();
-        if (incompleteJad.exists()) {
-            incompleteJad.delete();
+        if (JarCreator.jadFlag){
+            File incompleteJad = JarCreator.getJadFile();
+            if (incompleteJad.exists()) {
+                incompleteJad.delete();
+            }
         }
     }
 
@@ -462,10 +488,11 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
     }
 
     private void clearJarCreatorQueueContents() {
-        DfMCreatorMain.dfmCreator.dictConvQueue.clear();
+        DfMCreatorMain.dfmCreator.jarCreatorQueue.clear();
+        DfMCreatorMain.dfmCreator.jarCreatorArray.clear();
         JarCreatorQueueTextArea.setText("");
         JarCreatorSummaryTA.setText("");
-        DfMCreatorMain.dfmCreator.clearJarCreatorTFs();
+        DfMCreatorMain.dfmCreator.clearJarCreatorTFsExceptEmptyDfM();
     }
 
     private void fillJarCreatorQueueTA() {
