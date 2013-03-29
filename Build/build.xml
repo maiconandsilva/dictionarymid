@@ -16,7 +16,7 @@ javac.encoding=UTF-8
 
 	<!-- Location of the WTK toolkit is defined in the environment variable WTK_HOME -->
 	<property environment="env"/> 
-	<condition property="wtk.home" value="${env.WTK_HOME}" else="/media/Stuff/WTK-2.5.2"> <!-- if WTK_HOME is not set use default value -->
+	<condition property="wtk.home" value="${env.WTK_HOME}" else="/media/kim/Stuff/WTK-2.5.2"> <!-- if WTK_HOME is not set use default value -->
 		<isset property="env.WTK_HOME" />
 	</condition>
 
