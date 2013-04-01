@@ -273,6 +273,20 @@ public class HelpContents extends JPanel
             (I18n.tr("dict.manual.edit"),
         path + "newdictJARCreator.html"));
         docCategory.add(book);
+        
+        
+	/*
+	 * Extras Documentation category
+	 */
+		
+        docCategory = new DefaultMutableTreeNode(I18n.tr("extrasDocumentation"));
+        top.add(docCategory);
+		
+        // Important change notes
+        book = new DefaultMutableTreeNode(new BookInfo
+            (I18n.tr("iso639-2-languages.names"),
+        path + "ISO_639-2.html"));
+        docCategory.add(book);
     }
     
     

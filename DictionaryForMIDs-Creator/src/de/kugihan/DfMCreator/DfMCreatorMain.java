@@ -130,7 +130,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
     // A public DfMCreatorMain instance
     public static DfMCreatorMain dfmCreator;
-    
+
     // A public PropertiesEditor instance
     public static PropertiesEditor propWin;
 
