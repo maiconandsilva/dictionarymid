@@ -115,9 +115,13 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     // get the size of the screen.
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-    // System specific path separator: / in linux \ in windows...
+    // System specific path separator for file systems: / in linux \ in windows...
     public static String PATH_SEPARATOR = FileSystems.getDefault().getSeparator();
 
+    // path separator for JAR files (accessed via Class.getResourceAsStream();
+	public static String JAR_PATH_SEPARATOR = "/";
+	
+    // Variables used by applyPreferences() and savePreferences()
     // Variables used by applyPreferences() and savePreferences()
     public static final String pathName = "/de/kugihan/DfMCreator";
     public static final Preferences root = Preferences.userRoot();
@@ -2369,9 +2373,9 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             jarCreatorRecord.emptyDfM = emptydictionaryformids;
         } else {
             //throw new IllegalArgumentException();
-            String dfmPath = PATH_SEPARATOR + "de" + PATH_SEPARATOR + "kugihan"
-                           + PATH_SEPARATOR + "DfMCreator" + PATH_SEPARATOR
-                           + "Empty_DfM_JavaME" + PATH_SEPARATOR;
+            String dfmPath = JAR_PATH_SEPARATOR + "de" + JAR_PATH_SEPARATOR + "kugihan"
+                           + JAR_PATH_SEPARATOR + "DfMCreator" + JAR_PATH_SEPARATOR
+                           + "Empty_DfM_JavaME" + JAR_PATH_SEPARATOR;
             jarCreatorRecord.emptyDfM = dfmPath;
         }
 
