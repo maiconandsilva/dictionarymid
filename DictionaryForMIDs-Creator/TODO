@@ -9,16 +9,10 @@
 ⦁Create an icon.
 
 _______This was taken from an email sent to me by Gert Nuber________
-⦁The properties editor has the button "create the properties file"; that may better read now "save properties file"; Possibly with two buttons: "save properties file" (i.e. overwrite existing) and "save properties file under" (new location)"
-⦁The button "Edit existing props file" in the property editor seems to me superflous, because the DictionaryGeneration pane alreads has "Edit an Existing Properties File"
-⦁Minor: the list of file postfixes: would it be an option to include the complete list at http://en.wikipedia.org/wiki/List_of_ISO_639-2_codes ?
-⦁In the DictionaryGeneration pane there is "Properties File's directory"; well, that path is requested again for "edit an existing properties file"
-⦁About the naming: 
-        ⦁"Path to the Input CSV file": this includes the filename (not only the path); maybe "Input CSV file" would be better ?
-        ⦁"Properties file's directory": hmmm, maybe it would be better to pick the file DictionaryForMIDs.properties (instead of the directory that contains that file ?)
-⦁Can it be that after a run of DictionaryGeneration that the fields in the DictionaryGeneration pane are cleared ?
+⦁In the DictionaryGeneration pane there is "Properties File's directory"; that path is requested again for "edit an existing properties file"
 ⦁JarCreator: "DictionaryForMIDs.properties and CSV files directory"; well, that is the same as DictionaryGeneration "Destination Directory"
-⦁JarCreator: did throw a NullPointerException on my test. Hmmm, I will check on that.
+ ⦁"Properties file's directory": maybe it would be better to pick the file DictionaryForMIDs.properties (instead of the directory that contains that file ?)
+⦁Can it be that after a run of DictionaryGeneration that the fields in the DictionaryGeneration pane are cleared ?
 
 
 
@@ -34,7 +28,8 @@ _____COMMON TASKS FOR EACH NEW DFM-CREATOR VERSION_____
 -Update dfmcreatorDownload.html
 -Update CHANGELOG
 -Use the GUI testing framework to make exhaustive test on the new DfM-Creator release
--Test wether the CLI version of the DfM-Creator tools still work
+-Test wether the CLI version of the DfM-Creator tools still works
+-Test the DfM-Creator on Linux, Windows and other OSes if possible
 _______________________________________________________
 
 
@@ -54,5 +49,11 @@ _______________________________________________________
 
 
 ===TODOs Implemented Successfully===
-
-
+⦁The PropertiesEditor's button "Create the Properties File" has been renamed to "Save the Properties File" (overwrites it if it has already been saved)
+⦁ A new button "Save Properties File As..." has been added
+⦁"Create the Properties File" does not trigger regexp checking so as to make sure the user entered an email address or any other contact information, in the dictionary infoText. That functionality is broken so it's disabled, for now...
+⦁The button "Edit existing props file" Has been removed because the DictionaryGeneration panel already has "Edit an Existing Properties File"
+⦁The list of languageX postfixes now includes the complete list (founde at http://en.wikipedia.org/wiki/List_of_ISO_639-2_codes)
+⦁"Path to the Input CSV file" renamed to "Input CSV file"
+BUG FIXES:
+    -Gert fixed a bug that prevented the DfM-Creator's JarCreator to load the internal DictionaryForMIDs.jar/jad files while generating jar/jad files.
