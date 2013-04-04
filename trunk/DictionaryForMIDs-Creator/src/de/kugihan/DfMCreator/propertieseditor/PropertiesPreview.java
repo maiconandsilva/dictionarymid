@@ -92,6 +92,10 @@ public class PropertiesPreview extends JDialog implements ActionListener {
     
     public JFileChooser fc = new JFileChooser();
     
+    private File propFileItself;
+    
+    public static boolean hasPropsFileAlreadyBeenSaved = false;
+    
     /**
      * Creates new form PropertiesPreview
      */
@@ -168,7 +172,7 @@ public class PropertiesPreview extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {        
         if (e.getSource() == saveButton) {
             try {
-                savePropFile();
+                savePropFile(false);
             } catch (UnsupportedOperationException ex){
                 DfMCreatorMain.printAnyMsg(canWriteFileMsg, I18n.tr("dirNotAccessible"), JOptionPane.ERROR_MESSAGE);
             } catch (IOException ex){
@@ -183,7 +187,29 @@ public class PropertiesPreview extends JDialog implements ActionListener {
         }
     }
     
-    public boolean savePropFile() throws UnsupportedOperationException,
+    public boolean savePropFileWithoutPrompt()throws UnsupportedOperationException,
+                                       IOException, NullPointerException {
+        boolean fileSaved = false;
+        try {
+            try (BufferedWriter out = new BufferedWriter(new FileWriter((propFileItself)))) {
+                String text = propsText.getText();
+                // writing content to propFileDir
+                out.write(text);
+                out.flush();
+                fileSaved = true;
+                DfMCreatorMain.printAnyMsg(I18n.tr("props.file.saved.MSG.PropsPrev", new Object[] {propFileItself}),
+                        I18n.tr("props.file.saved.PrepsPrev"),
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (IOException e){
+            DfMCreatorMain.printAnyMsg(IOEMsg, I18n.tr("runtimeErrorTitle"), JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException e){
+           DfMCreatorMain.printAnyMsg(NPEMsg, I18n.tr("error"), JOptionPane.ERROR_MESSAGE);
+        }
+        return fileSaved;
+    }
+    
+    public boolean savePropFile(boolean saveUnder) throws UnsupportedOperationException,
                                        IOException, NullPointerException {
         boolean fileSaved = false;
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -197,7 +223,7 @@ public class PropertiesPreview extends JDialog implements ActionListener {
             }
             String propFileString = propFileDir.toString();
             propFileString = propFileString + FileSystems.getDefault().getSeparator() + PROPERTY_FILE_NAME;
-            File propFileItself = new File(propFileString);
+            propFileItself = new File(propFileString);
             if (propFileItself.exists()){
                 rval = JOptionPane.showConfirmDialog(PropFileView, I18n.tr("fileExistsString"),
                                                               I18n.tr("fileExistsTitle"), JOptionPane.YES_NO_OPTION);
@@ -210,6 +236,12 @@ public class PropertiesPreview extends JDialog implements ActionListener {
                         out.write(text);
                         out.flush();
                         fileSaved = true;
+                    }
+                    if (!saveUnder){
+                        // Tell the PropertiesEditor that the Properties file has been saved
+                        // so that next time we can directly save the properties file without
+                        // showing a prompt to the user.
+                        hasPropsFileAlreadyBeenSaved = true;
                     }
                 } catch (IOException e){
                     DfMCreatorMain.printAnyMsg(IOEMsg, I18n.tr("runtimeErrorTitle"), JOptionPane.ERROR_MESSAGE);

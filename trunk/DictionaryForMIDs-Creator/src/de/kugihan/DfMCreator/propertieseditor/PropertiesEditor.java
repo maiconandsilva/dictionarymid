@@ -250,7 +250,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
 
     private ArrayList<String> loadedProperties;
     private ArrayList<String> nonLoadedProperties;
-    
+
     public static Properties dfMProps;
 
 
@@ -865,7 +865,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel19.add(samplePropFile, gridBagConstraints);
 
-        createPropFile.setText(I18n.tr("createThePropsFile.dfmPropCreate")); // NOI18N
+        createPropFile.setText(I18n.tr("save.Props.File.dfmPropCreate")); // NOI18N
         createPropFile.setToolTipText(I18n.tr("createButton.toolTipText.dfmPropCreate")); // NOI18N
         createPropFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -891,7 +891,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel19.add(resetSetting, gridBagConstraints);
 
-        editExistingBT.setText(I18n.tr("editExisting.dfmPropCreate")); // NOI18N
+        editExistingBT.setText(I18n.tr("save.props.file.under.dfmPropCreate")); // NOI18N
         editExistingBT.setToolTipText(I18n.tr("editButton.toolTipText.dfmPropCreate")); // NOI18N
         editExistingBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1069,7 +1069,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         jPanel1.add(jLabel37, gridBagConstraints);
 
         lab3.setText(I18n.tr("slider.value")); // NOI18N
-        lab3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        lab3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -1178,7 +1178,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         jPanel15.add(jLabel38, gridBagConstraints);
 
         lab4.setText(I18n.tr("slider.value")); // NOI18N
-        lab4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        lab4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -1187,7 +1187,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         jPanel15.add(lab4, gridBagConstraints);
 
         lab5.setText(I18n.tr("slider.value")); // NOI18N
-        lab5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        lab5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -1300,7 +1300,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         jPanel16.add(jLabel34, gridBagConstraints);
 
         lab1.setText(I18n.tr("slider.value")); // NOI18N
-        lab1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        lab1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -1432,7 +1432,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         jPanel22.add(minNumEntPerIndFileSL, gridBagConstraints);
 
         lab2.setText(I18n.tr("slider.value")); // NOI18N
-        lab2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        lab2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -1546,7 +1546,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
 
         jMenu1.setText(I18n.tr("file.dfmPropCreate")); // NOI18N
 
-        jMenuItem1.setText(I18n.tr("createThePropsFile.dfmPropCreate")); // NOI18N
+        jMenuItem1.setText(I18n.tr("save.Props.File.dfmPropCreate")); // NOI18N
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -1554,7 +1554,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText(I18n.tr("editExisting.dfmPropCreate")); // NOI18N
+        jMenuItem2.setText(I18n.tr("save.props.file.under.dfmPropCreate")); // NOI18N
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -1620,7 +1620,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        editExistingPropsFile();
+        savePropsFileUnder();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -1673,7 +1673,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_resetSettingActionPerformed
 
     private void editExistingBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editExistingBTActionPerformed
-        editExistingPropsFile();
+        savePropsFileUnder();
     }//GEN-LAST:event_editExistingBTActionPerformed
 
     private void numOfLangCmbBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_numOfLangCmbBoxItemStateChanged
@@ -2318,7 +2318,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             openPropsFileForGUIEditFlag = false;
             throw new UnsupportedOperationException();
         } else if (!propsFile.getName().equals(PropertiesPreview.PROPERTY_FILE_NAME)){
-            openPropsFileForGUIEditFlag = false;    
+            openPropsFileForGUIEditFlag = false;
             throw new IllegalArgumentException();
         } else {
             openPropsFileForGUIEditFlag = true;
@@ -2905,7 +2905,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         }
         return fileChosen;
     }
-    
+
     /**
      * viewAndOrEditAndSave() launches the PropertiesPreview window with the values
      * selected/entered by the user in the PropertiesEditor. Here also the user
@@ -2919,10 +2919,22 @@ public class PropertiesEditor extends javax.swing.JFrame {
             proPrevWin.propsText.setCaretPosition(0);
             proPrevWin.editButton.setSelected(false);
             proPrevWin.editButton.setText(I18n.tr("edit.dfmPropCreate"));
-            proPrevWin.PropFileView.setVisible(true);
+            if (!PropertiesPreview.hasPropsFileAlreadyBeenSaved){                
+                proPrevWin.PropFileView.setVisible(true);
+        } else {
+            try {
+                proPrevWin.PropFileView.setVisible(false);
+                proPrevWin.savePropFileWithoutPrompt();
+            } catch (UnsupportedOperationException ex){
+                DfMCreatorMain.printAnyMsg(PropertiesPreview.canWriteFileMsg, I18n.tr("dirNotAccessible"), JOptionPane.ERROR_MESSAGE);
+            } catch (IOException ex){
+                DfMCreatorMain.printAnyMsg(PropertiesPreview.internalErrorMsg, I18n.tr("error"), JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
         } catch (IllegalArgumentException e){
-            DfMCreatorMain.printAnyMsg(RequiredArgsAbsentErrorMsg, I18n.tr("error.dfmPropCreate"), JOptionPane.ERROR_MESSAGE);
-            System.out.println(e + "\n");
+                DfMCreatorMain.printAnyMsg(RequiredArgsAbsentErrorMsg, I18n.tr("error.dfmPropCreate"), JOptionPane.ERROR_MESSAGE);
+                System.out.println(e + "\n");
         }
     }
 
@@ -2944,12 +2956,14 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 	}
 
+        /* Broken. Disabled till fixed!
         try {
             checkInfoTextContents();
         } catch (IllegalArgumentException e){
             DfMCreatorMain.printAnyMsg(e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
+        */
+        
 	infoText = infoTextTA.getText();
 	dictionaryAbbreviation = dictAbbrevTF.getText();
 	numberOfAvailableLanguages = numOfLangCmbBox.getSelectedItem().toString();
@@ -3426,7 +3440,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
         }
     }
-    
+
     /**
      * updateNumOfLang() updates/shows/hides some values/TextFields/CheckBoxes etc.
      * according to the number of languages selected in the <b>numOfLangCmbBox</b> ComboBox.
@@ -3593,7 +3607,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         cpc.setSize(1020, 600);
         cpc.setLocation(screenSize.width / 2 - cpc.getWidth() / 2,
                         screenSize.height / 2 - cpc.getHeight() / 2);
-        
+
         cpc.updateNumOfContentDec();
         if (openPropsFileForGUIEditFlag){
             cpc.loadAndEditExistingContentNNProperties();
@@ -3625,6 +3639,23 @@ public class PropertiesEditor extends javax.swing.JFrame {
 
         if (!v && !w){
             throw new IllegalArgumentException(I18n.tr("badInfoText.dfmPropCreate"));
+        }
+
+    }
+
+    private void savePropsFileUnder() {
+        try {
+            validateValues();
+            setValuesInThePropsPreviewWindow();
+            proPrevWin.PropFileView.setVisible(false);
+            proPrevWin.savePropFile(true);
+        } catch (IllegalArgumentException e){
+            DfMCreatorMain.printAnyMsg(RequiredArgsAbsentErrorMsg, I18n.tr("error.dfmPropCreate"), JOptionPane.ERROR_MESSAGE);
+            System.out.println(e + "\n");
+        } catch (UnsupportedOperationException ex){
+            DfMCreatorMain.printAnyMsg(PropertiesPreview.canWriteFileMsg, I18n.tr("dirNotAccessible"), JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex){
+            DfMCreatorMain.printAnyMsg(PropertiesPreview.internalErrorMsg, I18n.tr("error"), JOptionPane.ERROR_MESSAGE);
         }
 
     }
