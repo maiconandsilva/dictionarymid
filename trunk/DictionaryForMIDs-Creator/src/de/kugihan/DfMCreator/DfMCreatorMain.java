@@ -308,21 +308,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         toolbar2 = new javax.swing.JToolBar();
         jLabel10 = new javax.swing.JLabel();
         dfmBuilderMenuBar = new javax.swing.JMenuBar();
-        dictdconvMenu = new javax.swing.JMenu();
-        miEditSettings = new javax.swing.JMenuItem();
-        miProceedConvert = new javax.swing.JMenuItem();
-        dictGenMenu = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        fontGenMenu = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jarCreatorMenu = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
@@ -657,7 +644,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         SLPanel.add(RSBCheckBox);
         RSBCheckBox.setBounds(5, 70, 20, 20);
 
-        toolbar4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        toolbar4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         toolbar4.setFloatable(false);
         toolbar4.setRollover(true);
         toolbar4.setPreferredSize(new java.awt.Dimension(49, 15));
@@ -802,9 +789,9 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         jPanel3.setLayout(null);
 
         jLabel7.setText(I18n.tr("propsInfoLabel.dfmCreatorMain")); // NOI18N
-        jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel3.add(jLabel7);
-        jLabel7.setBounds(10, 20, 550, 140);
+        jLabel7.setBounds(60, 20, 500, 140);
 
         createPropsFile.setText(I18n.tr("create.dfmCreatorMain")); // NOI18N
         createPropsFile.setPreferredSize(new java.awt.Dimension(70, 40));
@@ -828,7 +815,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         jPanel3.add(editPropsFile);
         editPropsFile.setBounds(570, 85, 160, 60);
 
-        toolbar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        toolbar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         toolbar1.setFloatable(false);
         toolbar1.setRollover(true);
         toolbar1.setPreferredSize(new java.awt.Dimension(49, 15));
@@ -972,7 +959,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         jPanel2.add(jSeparator1);
         jSeparator1.setBounds(0, 145, 520, 100);
 
-        toolbar2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        toolbar2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         toolbar2.setFloatable(false);
         toolbar2.setRollover(true);
         toolbar2.setPreferredSize(new java.awt.Dimension(49, 15));
@@ -1006,142 +993,18 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         getContentPane().add(DFMBuilderTabbedPane, java.awt.BorderLayout.CENTER);
 
-        dictdconvMenu.setText(I18n.tr("dictdConverter.dfmCreatorMain")); // NOI18N
-        dictdconvMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                dictdconvMenuMousePressed(evt);
-            }
-        });
+        jMenu2.setText(I18n.tr("file.dfmcreatormain")); // NOI18N
 
-        miEditSettings.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        miEditSettings.setText(I18n.tr("clear.fields.dfmCreatorMain")); // NOI18N
-        miEditSettings.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miEditSettingsActionPerformed(evt);
-            }
-        });
-        dictdconvMenu.add(miEditSettings);
-
-        miProceedConvert.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        miProceedConvert.setText(I18n.tr("proceed.dfmCreatorMain")); // NOI18N
-        miProceedConvert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miProceedConvertActionPerformed(evt);
-            }
-        });
-        dictdconvMenu.add(miProceedConvert);
-
-        dfmBuilderMenuBar.add(dictdconvMenu);
-
-        dictGenMenu.setText(I18n.tr("dictGen.dfmCreatorMain")); // NOI18N
-        dictGenMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                dictGenMenuMousePressed(evt);
-            }
-        });
-
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText(I18n.tr("createThePropsFile.dfmPropCreate")); // NOI18N
-        jMenuItem1.setToolTipText("");
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText(I18n.tr("quit.dfmcreatormain")); // NOI18N
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        dictGenMenu.add(jMenuItem1);
+        jMenu2.add(jMenuItem1);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem2.setText(I18n.tr("genDictFiles.dfmCreatorMain")); // NOI18N
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        dictGenMenu.add(jMenuItem2);
-
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem3.setText(I18n.tr("clear.fields.dfmCreatorMain")); // NOI18N
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        dictGenMenu.add(jMenuItem3);
-
-        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem9.setText(I18n.tr("editAnExistingProp.normal.dfmCreatorMain")); // NOI18N
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
-        dictGenMenu.add(jMenuItem9);
-
-        jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem10.setText(I18n.tr("checkCSVFile.normal.dfmCreatorMain")); // NOI18N
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
-            }
-        });
-        dictGenMenu.add(jMenuItem10);
-
-        dfmBuilderMenuBar.add(dictGenMenu);
-
-        fontGenMenu.setText(I18n.tr("bmf.dfmCreatorMain")); // NOI18N
-        fontGenMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                fontGenMenuMousePressed(evt);
-            }
-        });
-
-        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItem8.setText(I18n.tr("start.dfmCreatorMain")); // NOI18N
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
-        fontGenMenu.add(jMenuItem8);
-
-        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK));
-        jMenuItem11.setText(I18n.tr("clear.fields.dfmCreatorMain")); // NOI18N
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
-            }
-        });
-        fontGenMenu.add(jMenuItem11);
-
-        dfmBuilderMenuBar.add(fontGenMenu);
-
-        jarCreatorMenu.setText(I18n.tr("jarCreator.dfmCreatorMain")); // NOI18N
-        jarCreatorMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jarCreatorMenuMousePressed(evt);
-            }
-        });
-
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem5.setText(I18n.tr("packCSVFiles.dfmCreatorMain")); // NOI18N
-        jMenuItem5.setActionCommand(I18n.tr("pack.jarCreator.menu.item")); // NOI18N
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jarCreatorMenu.add(jMenuItem5);
-
-        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem7.setText(I18n.tr("clear.fields.dfmCreatorMain")); // NOI18N
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jarCreatorMenu.add(jMenuItem7);
-
-        dfmBuilderMenuBar.add(jarCreatorMenu);
+        dfmBuilderMenuBar.add(jMenu2);
 
         jMenu1.setText(I18n.tr("prefs.dfmCreatorMain")); // NOI18N
 
@@ -1297,14 +1160,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         outputDirButtonGetFile();
     }//GEN-LAST:event_OutputDirButtonActionPerformed
 
-    private void miProceedConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miProceedConvertActionPerformed
-        DictdConvDoAll();
-    }//GEN-LAST:event_miProceedConvertActionPerformed
-
-    private void miEditSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditSettingsActionPerformed
-        clearFields();
-    }//GEN-LAST:event_miEditSettingsActionPerformed
-
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         showAbout();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
@@ -1321,27 +1176,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         clearDictGenFields();
     }//GEN-LAST:event_clearFieldsBTActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    //        checkScreenResolution();
-        showPropWin();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        DictGenDoAll();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        clearDictGenFields();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        clearJarCreatorFields();
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        JarCreatorDoAll();
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
     private void editPropsFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPropsFileActionPerformed
         try {
             editExistingPropsFile();
@@ -1349,18 +1183,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             System.out.println(t.getLocalizedMessage());
         }
     }//GEN-LAST:event_editPropsFileActionPerformed
-
-    private void dictdconvMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dictdconvMenuMousePressed
-        DFMBuilderTabbedPane.setSelectedComponent(DictdConvPanel);
-    }//GEN-LAST:event_dictdconvMenuMousePressed
-
-    private void dictGenMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dictGenMenuMousePressed
-        DFMBuilderTabbedPane.setSelectedComponent(DictGenPanel);
-    }//GEN-LAST:event_dictGenMenuMousePressed
-
-    private void jarCreatorMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jarCreatorMenuMousePressed
-        DFMBuilderTabbedPane.setSelectedComponent(JarCreatorPanel);
-    }//GEN-LAST:event_jarCreatorMenuMousePressed
 
     private void checkCSVFileIntegrityBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkCSVFileIntegrityBTActionPerformed
         showCSVFileCheckWin();
@@ -1374,29 +1196,13 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         showHelpWindow();
     }//GEN-LAST:event_miContentsActionPerformed
 
-    private void fontGenMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fontGenMenuMousePressed
-        DFMBuilderTabbedPane.setSelectedComponent(bfgPanel);
-    }//GEN-LAST:event_fontGenMenuMousePressed
-
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        fontTK.validateAndShowSummaryWin();
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        fontTK.clearFields();
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        //editExistingPropFile();
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        showCSVFileCheckWin();
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
-
     private void chooseCustomJarJadCBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chooseCustomJarJadCBoxStateChanged
         monitorEmptyDfMCheckBoxState();
     }//GEN-LAST:event_chooseCustomJarJadCBoxStateChanged
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
     /**
@@ -1646,11 +1452,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     private javax.swing.JButton clearFieldsButton;
     private javax.swing.JButton createPropsFile;
     private javax.swing.JMenuBar dfmBuilderMenuBar;
-    private javax.swing.JMenu dictGenMenu;
     private javax.swing.JPanel dictdPanel;
-    private javax.swing.JMenu dictdconvMenu;
     private javax.swing.JButton editPropsFile;
-    private javax.swing.JMenu fontGenMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JTextField infotarea;
     private javax.swing.JLabel iniInfoLabelText;
@@ -1665,27 +1468,17 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JMenu jarCreatorMenu;
     private javax.swing.JMenuItem miContents;
-    private javax.swing.JMenuItem miEditSettings;
-    private javax.swing.JMenuItem miProceedConvert;
     private javax.swing.JButton proceedButton;
     private javax.swing.JToolBar toolbar1;
     private javax.swing.JToolBar toolbar2;
@@ -2494,7 +2287,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     private void addFontTKToDfMCreatorTabbedPane() {
         // Creating a toolbar
         javax.swing.JToolBar bfgToolbar = new javax.swing.JToolBar();
-        bfgToolbar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        bfgToolbar.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         bfgToolbar.setFloatable(false);
         bfgToolbar.setRollover(true);
         bfgToolbar.setPreferredSize(new java.awt.Dimension(400, 15));
