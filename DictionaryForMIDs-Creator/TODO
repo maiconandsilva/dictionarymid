@@ -1,5 +1,4 @@
 ====- Fixes for the Current Release -====
-⦁Make it possible to download older DfM-Creator versions...
 ⦁Update French language file
 ⦁Update the Documentation files (according to the changes in the DfM-Creator GUI).
 ⦁Create a Windows InoSetup installer that is bundled with JRE.
@@ -10,7 +9,7 @@
 
 _______This was taken from an email sent to me by Gert Nuber________
 ⦁In the DictionaryGeneration pane there is "Properties File's directory"; that path is requested again for "edit an existing properties file"
-⦁JarCreator: "DictionaryForMIDs.properties and CSV files directory"; well, that is the same as DictionaryGeneration "Destination Directory"
+⦁JarCreator: "DictionaryForMIDs.properties and CSV files directory"; that is the same as DictionaryGeneration "Destination Directory"
  ⦁"Properties file's directory": maybe it would be better to pick the file DictionaryForMIDs.properties (instead of the directory that contains that file ?)
 ⦁Can it be that after a run of DictionaryGeneration that the fields in the DictionaryGeneration pane are cleared ?
 
@@ -56,4 +55,4 @@ _______________________________________________________
 ⦁The list of languageX postfixes now includes the complete list (founde at http://en.wikipedia.org/wiki/List_of_ISO_639-2_codes)
 ⦁"Path to the Input CSV file" renamed to "Input CSV file"
 BUG FIXES:
-    -Gert fixed a bug that prevented the DfM-Creator's JarCreator to load the internal DictionaryForMIDs.jar/jad files while generating jar/jad files.
+    -Gert fixed a bug that prevented the DfM-Creator's JarCreator to load the internal DictionaryForMIDs.jar/jad files on Microsoft Windows while generating jar/jad files.
