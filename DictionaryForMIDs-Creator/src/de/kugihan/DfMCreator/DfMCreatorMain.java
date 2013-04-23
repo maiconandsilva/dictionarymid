@@ -59,6 +59,7 @@ import de.kugihan.DfMCreator.DfMCreatorException.SourceFileNotAccessible;
 import de.kugihan.DfMCreator.DfMCreatorException.SourceFileTFIsEmpty;
 import de.kugihan.DfMCreator.preferencesbox.PreferencesBox;
 import de.kugihan.DfMCreator.propertieseditor.PropertiesEditor;
+import de.kugihan.DfMCreator.propertieseditor.PropertiesPreview;
 import de.kugihan.DfMCreator.utils.CheckCSVFileIntegrity;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dictdtodictionaryformids.DictdToDfM;
@@ -340,7 +341,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         setTitle("DictionaryForMIDs-Creator " + dfm_creator_version);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setMinimumSize(new java.awt.Dimension(720, 450));
-        setName("mainFrame");
+        setName("mainFrame"); // NOI18N
         setResizable(false);
 
         DictdConvPanel.setLayout(new java.awt.BorderLayout());
@@ -805,7 +806,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         editPropsFile.setText(I18n.tr("editAnExisting.dfmCreatorMain")); // NOI18N
         editPropsFile.setMinimumSize(new java.awt.Dimension(100, 60));
-        editPropsFile.setName("");
+        editPropsFile.setName(""); // NOI18N
         editPropsFile.setPreferredSize(new java.awt.Dimension(150, 60));
         editPropsFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -867,38 +868,39 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         jPanel2.setLayout(null);
 
         jLabel1.setText(I18n.tr("jarCreatorLabel1.dfmCreatorMain")); // NOI18N
+        jLabel1.setToolTipText(I18n.tr("input.dir.jarcreator.tooltiptext")); // NOI18N
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(5, 5, 310, 35);
+        jLabel1.setBounds(5, 5, 310, 20);
         jPanel2.add(InputCSVFilesTF);
-        InputCSVFilesTF.setBounds(5, 50, 345, 27);
+        InputCSVFilesTF.setBounds(5, 35, 345, 27);
 
         EmptyDfMLabel.setText(I18n.tr("jarCreatorLabel2.dfmCreatorMain")); // NOI18N
         EmptyDfMLabel.setEnabled(false);
         jPanel2.add(EmptyDfMLabel);
-        EmptyDfMLabel.setBounds(5, 150, 310, 35);
+        EmptyDfMLabel.setBounds(5, 135, 310, 35);
 
         EmptyDfMDirTF.setEnabled(false);
         jPanel2.add(EmptyDfMDirTF);
-        EmptyDfMDirTF.setBounds(5, 190, 345, 27);
+        EmptyDfMDirTF.setBounds(5, 175, 345, 27);
 
         jLabel3.setText(I18n.tr("jarCreatorLabel3.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(5, 270, 310, 25);
+        jLabel3.setBounds(5, 255, 310, 25);
         jPanel2.add(OutputDirTF);
-        OutputDirTF.setBounds(5, 300, 345, 27);
+        OutputDirTF.setBounds(5, 285, 345, 27);
 
         jLabel4.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(415, 300, 100, 20);
+        jLabel4.setBounds(415, 285, 100, 20);
 
         EmptyDfMBrowseLabel.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         EmptyDfMBrowseLabel.setEnabled(false);
         jPanel2.add(EmptyDfMBrowseLabel);
-        EmptyDfMBrowseLabel.setBounds(415, 190, 100, 20);
+        EmptyDfMBrowseLabel.setBounds(415, 175, 100, 20);
 
         jLabel6.setText(I18n.tr("browse.dfmCreatorMain")); // NOI18N
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(415, 50, 100, 20);
+        jLabel6.setBounds(415, 35, 100, 20);
 
         InputCSVFilesButton.setText("...");
         InputCSVFilesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -907,7 +909,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(InputCSVFilesButton);
-        InputCSVFilesButton.setBounds(365, 50, 47, 25);
+        InputCSVFilesButton.setBounds(365, 35, 47, 25);
 
         EmptyDfMDirBrowseButton.setText("...");
         EmptyDfMDirBrowseButton.setEnabled(false);
@@ -917,7 +919,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(EmptyDfMDirBrowseButton);
-        EmptyDfMDirBrowseButton.setBounds(365, 190, 47, 25);
+        EmptyDfMDirBrowseButton.setBounds(365, 175, 47, 25);
 
         OutputDirButton.setText("...");
         OutputDirButton.addActionListener(new java.awt.event.ActionListener() {
@@ -926,7 +928,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(OutputDirButton);
-        OutputDirButton.setBounds(365, 300, 47, 25);
+        OutputDirButton.setBounds(365, 285, 47, 25);
 
         jButton4.setText(I18n.tr("packCSVFiles.dfmCreatorMain")); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -935,7 +937,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton4);
-        jButton4.setBounds(50, 350, 220, 30);
+        jButton4.setBounds(50, 335, 220, 30);
 
         jButton1.setText(I18n.tr("clear.fields.dfmCreatorMain")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -944,7 +946,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton1);
-        jButton1.setBounds(275, 350, 150, 30);
+        jButton1.setBounds(275, 335, 150, 30);
 
         chooseCustomJarJadCBox.setText(I18n.tr("custom.empty.dfm.jar.jad.JarCreator")); // NOI18N
         chooseCustomJarJadCBox.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -953,11 +955,11 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             }
         });
         jPanel2.add(chooseCustomJarJadCBox);
-        chooseCustomJarJadCBox.setBounds(5, 110, 500, 25);
+        chooseCustomJarJadCBox.setBounds(5, 95, 500, 25);
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.add(jSeparator1);
-        jSeparator1.setBounds(0, 145, 520, 100);
+        jSeparator1.setBounds(0, 130, 520, 100);
 
         toolbar2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         toolbar2.setFloatable(false);
@@ -985,7 +987,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(toolbar2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65))
         );
 
@@ -1145,7 +1147,15 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }//GEN-LAST:event_DirectoryDestinationBrowseBTActionPerformed
 
     private void PropertyPathBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PropertyPathBTActionPerformed
-        propertyPathBTGetFile();
+        try {
+            propertyPathBTGetFile();
+        } catch (IllegalArgumentException ex){
+            System.out.println(ex.getMessage());
+            DfMCreatorMain.printAnyMsg(PropertiesEditor.NotThePropFileErrorMsg,
+                    I18n.tr("error.dfmPropCreate"),
+                    JOptionPane.ERROR_MESSAGE);
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_PropertyPathBTActionPerformed
 
     private void InputCSVFilesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputCSVFilesButtonActionPerformed
@@ -1919,29 +1929,29 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         Path propertyPathPath = Paths.get(propertyPathString);
         propertyPathPath = propertyPathPath.normalize();
-        propertyPath = propertyPathPath.toString();
+        // If we don't do this in order to eliminate the filename
+        // and pass to DictionaryGeneration only the parent directory
+        // the generation fails. This seems to be the best workaround.
+        propertyPathPath = propertyPathPath.getParent();
+        propertyPath = propertyPathPath.toString();        
+        
 
-        File srcFile = new File(sourceFileString);
+        File srcFile = new File(sourceFile);
         if (!srcFile.exists() || !srcFile.canRead()){
             throw new SourceFileNotAccessible("");
         }
 
-        File destDir = new File(directoryDestinationString);
+        File destDir = new File(directoryDestination);
         if (!destDir.exists() || !destDir.canRead() || !destDir.isDirectory() || !destDir.canWrite()){
             throw new DirectoryDestinationNotAccessible(I18n.tr("destDirAccessError.dfmCreatorMain"));
         }
 
-        File propPath = new File(propertyPathString);
-        if (!propPath.exists() || !propPath.canRead() || !propPath.isDirectory()){
-            throw new PropertyPathNotAccessible(I18n.tr("dictPropsFilePath.dfmCreatorMain"));
-        }
-
-        File propFile = new File(propertyPathString + PATH_SEPARATOR + DictionaryDataFile.propertyFileName);
+        File propFile = new File(propertyPath);
         if (!propFile.exists() || !propFile.canRead()){
             throw new PropFileErrorException(I18n.tr("dictPropFileAccessError.dfmCreatorMain"));
         }
 
-        File destCSVsDir = new File(directoryDestinationString + PATH_SEPARATOR + "dictionary");
+        File destCSVsDir = new File(directoryDestination + PATH_SEPARATOR + "dictionary");
         if (!destCSVsDir.exists()){
             if (!destCSVsDir.mkdirs()){
                 throw new CantCreateDestDir(I18n.tr("destDirCreationError.dfmCreatorMain"));
@@ -2403,9 +2413,9 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * statement and then exits.
      */
     public static void printCopyrightNotice(){
-    System.out.println("\n\nDictionaryForMIDs-Creator V" + dfm_creator_version + ","
-                    + "(C) 2012 Karim Mahamane Karimou\n"
-                    + "DictionaryForMIDs-Creator comes with ABSOLUTELY NO WARRANTY.\n"
+    System.out.println("\n\nDfM-Creator V" + dfm_creator_version + ","
+                    + "(C) 2012, 2013 Karim Mahamane Karimou\n"
+                    + "DfM-Creator comes with ABSOLUTELY NO WARRANTY.\n"
                     + "This is free software, and you are welcome to redistribute it\n"
                     + "under the terms and conditions of the GNU General Public License.\n\n");
     }
@@ -2770,10 +2780,13 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }
 
     private void propertyPathBTGetFile() {
-        String s = getFile(true);
+        String s = getFile(false);        
         if (!"".equals(s)){
+            File propsFile = new File(s);
+            if (!propsFile.getName().equals(PropertiesPreview.PROPERTY_FILE_NAME)){
+            throw new IllegalArgumentException();
+        }
             PropertyPathTF.setText(s);
-            DirectoryDestinationTF.setText(PropertyPathTF.getText());
         }
     }
 
