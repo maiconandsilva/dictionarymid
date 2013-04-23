@@ -1,24 +1,56 @@
-====- Fixes for the Current Release -====
-⦁Update French language file
+====- Todos for the Current Release -====
 ⦁Update the Documentation files (according to the changes in the DfM-Creator GUI).
-⦁Create a Windows InoSetup installer that is bundled with JRE.
+⦁Create a Windows nsis installer that is bundled with JRE.
 ⦁Create a linux portable version with MakeSelf bundled with JRE.
 ⦁Create a universal installer version with izPack without JRE.
 ⦁Create a spash-screen.
 ⦁Create an icon.
-
-_______This was taken from an email sent to me by Gert Nuber________
-⦁In the DictionaryGeneration pane there is "Properties File's directory"; that path is requested again for "edit an existing properties file"
-⦁JarCreator: "DictionaryForMIDs.properties and CSV files directory"; that is the same as DictionaryGeneration "Destination Directory"
- ⦁"Properties file's directory": maybe it would be better to pick the file DictionaryForMIDs.properties (instead of the directory that contains that file ?)
-⦁Can it be that after a run of DictionaryGeneration that the fields in the DictionaryGeneration pane are cleared ?
+⦁Can it be that after a run of DictionaryGeneration the fields in the DictionaryGeneration pane are cleared?
 
 
 
 
-_____COMMON TASKS FOR EACH NEW DFM-CREATOR VERSION_____
+============- TODOs for the Upcoming Release -=============
+=====
+⦁In the DictdToDfM pane, "Output CSV file directory" is also the "input CSV file" in the DictionaryGeneration pane.
+⦁In the DictionaryGeneration pane "Properties File" is requested again for "edit an existing properties file".
+⦁In the JarCreator pane "DictionaryForMIDs.properties and CSV files directory" is the same as "Destination Directory" in the DictionaryGeneration pane.
+⦁In the BitmapFontGenerator pane "Path to Dictionary" is the same as "Destination Director" in the DictionaryGeneration pane.
+	POSSIBLE SOLUTION: create "Full Dictionary Creation" and if the user
+	selects that option, he will have to set these values up only once.
+	The app will behave subtly and will use the output values for one
+	command as the input values for others.
+====== 
+⦁Use a GUI testing framework for DfM-Creator tests
+⦁Enable batch convert through text file containing paths/settings for JarCreator (this will be for batch updating the DictionaryForMIDs that are on the webserver, to the latest version)
+⦁Bundle custom font file and use it for the DfM-Creator. Why not the Ubuntu font family? It's pretty good!
+⦁Translate Documentation files in french.
+⦁FIX the nasties introduced by DictdToDictionaryForMIDs while converting a dictionary from freedict.org
+
+
+
+===TODOs Implemented Successfully===
+⦁The PropertiesEditor's button "Create the Properties File" has been renamed to "Save the Properties File" (overwrites it if it has already been saved)
+⦁ A new button "Save Properties File As..." has been added
+⦁"Create the Properties File" does not trigger regexp checking so as to make sure the user entered an email address or any other contact information, in the dictionary infoText. That functionality is broken so it's disabled, for now...
+⦁The button "Edit existing props file" Has been removed because the DictionaryGeneration panel already has "Edit an Existing Properties File"
+⦁The list of languageX postfixes now includes the complete list (found at http://en.wikipedia.org/wiki/List_of_ISO_639-2_codes)
+⦁The button "Path to the Input CSV file" has been renamed to "Input CSV file"
+⦁The button "Properties File's Directory" has been ranamed to "Properties File"; in fact, it's no longer necessary to select the directory "only" and let DfM-Creator try to find the properties file, now you go ahead and select it yourself! But if you choose a file that has a name that is different from the "conventional" properties file name (i.e, DictionaryForMIDs.properties) you get and error message.
+⦁Updated French language locale file
+BUG FIXES:
+    -Gert fixed a bug that prevented the DfM-Creator's JarCreator to load the internal DictionaryForMIDs.jar/jad files on Microsoft Windows while generating jar/jad files.
+
+
+
+
+_______________________________________________________
+|    COMMON TASKS FOR EACH NEW DFM-CREATOR VERSION    |
+|_____________________________________________________|
 -Update the version number in:
     -DfMCreatorMain.java
+    	( public static final String dfm_creator_version = "0.6-Beta"; )
+    	                                                   ^^^^^^^^^^^
     -trunk/Build/build.xml
     
 -Update the documentation files (screenshots); document new features; remove obsolete ones...
@@ -30,29 +62,3 @@ _____COMMON TASKS FOR EACH NEW DFM-CREATOR VERSION_____
 -Test wether the CLI version of the DfM-Creator tools still works
 -Test the DfM-Creator on Linux, Windows and other OSes if possible
 _______________________________________________________
-
-
-
-============- TODOs for the Upcoming Release -=============
--Use a GUI testing framework for DfM-Creator tests
-
-
-
-
-============- Long Term Fixes -============
-⦁Bundle custom font file and use it for the DfM-Creator. Why not the Ubuntu font family? It's pretty good!
-⦁Translate Documentation files in french.
-⦁FIX the nasties introduced by DictdToDictionaryForMIDs while converting a dictionary from freedict.org
-
-
-
-
-===TODOs Implemented Successfully===
-⦁The PropertiesEditor's button "Create the Properties File" has been renamed to "Save the Properties File" (overwrites it if it has already been saved)
-⦁ A new button "Save Properties File As..." has been added
-⦁"Create the Properties File" does not trigger regexp checking so as to make sure the user entered an email address or any other contact information, in the dictionary infoText. That functionality is broken so it's disabled, for now...
-⦁The button "Edit existing props file" Has been removed because the DictionaryGeneration panel already has "Edit an Existing Properties File"
-⦁The list of languageX postfixes now includes the complete list (founde at http://en.wikipedia.org/wiki/List_of_ISO_639-2_codes)
-⦁"Path to the Input CSV file" renamed to "Input CSV file"
-BUG FIXES:
-    -Gert fixed a bug that prevented the DfM-Creator's JarCreator to load the internal DictionaryForMIDs.jar/jad files on Microsoft Windows while generating jar/jad files.
