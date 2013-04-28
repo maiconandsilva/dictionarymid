@@ -55,7 +55,7 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
 
     public static SumWinJarCreator getJarCreatorSumWin(){
         SumWinJarCreator jcsw = new SumWinJarCreator();
-        //cjpw.setSize(800, 600);
+        jcsw.setSize(800, 600);
         jcsw.setLocation(screenSize.width / 2 - jcsw.getWidth() / 2,
                         screenSize.height / 2 - jcsw.getHeight() / 2);
         jcsw.setModal(true);
@@ -184,9 +184,9 @@ public class SumWinJarCreator extends javax.swing.JDialog implements PropertyCha
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
+        JarCreatorSummaryTA.setEditable(false);
         JarCreatorSummaryTA.setBackground(new java.awt.Color(254, 254, 254));
         JarCreatorSummaryTA.setColumns(20);
-        JarCreatorSummaryTA.setEditable(false);
         JarCreatorSummaryTA.setLineWrap(true);
         JarCreatorSummaryTA.setRows(5);
         JarCreatorSummaryTA.setWrapStyleWord(true);

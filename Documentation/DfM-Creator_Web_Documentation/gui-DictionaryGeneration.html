@@ -12,6 +12,7 @@
 
 <body>
 
+
 <div id="w3c_valid">
 <p>
     <a STYLE="COLOR: #000000;"  href="http://validator.w3.org/check?uri=referer"><img border="0"
@@ -24,6 +25,7 @@
   <iframe src="/menu.html" width="95%" height="450" frameborder=0></iframe>
 </div>
 <div id="content">
+
 
 <div class="NAVHEADER">
 <table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -51,40 +53,63 @@ the final DictionaryForMIDs.properties file for you.
 </p>
 
 <p>
-<img src="images/CreateButton.png" alt="Create and Edit buttons" width="743" height="160"><br><br>
-Hit the <b>Create</b> button to launch the PropertiesEditor window.<br>
+<img src="images/CreateButton.png" alt="Create and Edit buttons"><br><br>
+Hit the <b>Create a Props File</b> button to launch the PropertiesEditor window.<br>
 Hit the <b>Edit an Existing...</b> button to select a DictionaryForMIDs.properties file
 and launch the PropertiesEditor to edit it and adapt it to another dictionary file.
 </p><br>
 
 <h2>Creating a DictionaryForMIDs.properties file from scratch</h2>
 <p><i>The <b>PropertiesEditor</b> window.</i> Click <a href="imagePreview.html">here</a> to view the image in its full size.<br>
-<img src="images/propsEditor.png" alt="PropertiesEditorWindow" width="600" height="375"><br><br>
+<img src="images/propsEditor.png" alt="PropertiesEditorWindow" width="800" height="600"><br><br>
 Go <a href="newdictProperties.html">here</a> for the complete documentation on how to create
 a DictionaryForMIDs.properties file with DfM-Creator's <b>PropertiesEditor</b>.
 </p><br>
 
 <h2>Editing an Existing DictionaryFroMIDs.properties file</h2>
 <p>If you already have a properties file that only has to be modified so as to be used
-with another dictionary file, you should hit the <b>Edit an Existing Properties File</b>
-button. A window will pop up and enable you to choose the file. The file should
-have the name <b>DictionaryForMIDs.properties</b> otherwise you cannot edit it.<br><br>
+with another dictionary file, you should edit it. Hit <b>Edit an Existing Properties File</b>
+button. The following window will pop up let you choose an editing mode. Note that the file name
+should be <b>DictionaryForMIDs.properties</b> otherwise you cannot edit it.<br><br>
 
-<i>The Properties Preview/Edit window</i><br>
+<h2>Choosing a Mode</h2>
+<img src="images/chooseEditingMode.png" alt="Editing Mode"><br><br>
+Hit:
+<ul>
+<li><b>Dismiss</b>: to abort editing a <i>DictionaryForMIDs.properties</i> file.</li>
+<li><b>In the PropertiesEditor</b> to edit a <i>DictionaryForMIDs.properties</i> file in the <b>PropertiesEditor</b>
+and this will take you to the window shown in the picture above.</li>
+<li><b>In the PropertiesPreview</b>: to edit <i>DictionaryForMIDs.properties</i> file in the text editor of <b>DfM-Creator</b>
+below is an example of a properties file being edited in the text area of <b>DfM-Creator</b> named <b>PropertiesPreview</b></li>
+</ul>
+
+<i>The PropertiesPreview window</i> (Nimbus look and feel)<br>
 
 
-<img src="images/prosPreview.png" alt="Properties Preview/Edit window" width="502" height="680"><br><br>
+<img src="images/propsPreview.png" alt="Properties Preview/Edit window"><br><br>
 After finishing to manually edit your properties file, save it with the <b>Save</b> button.
 </p><br>
 
 <h2>Filling the fields in</h2>
-<p>After creating a properties file you have to specify its location, the location of the destination
+<p>After creating a properties file you have to specify its path, the location of the destination
 directory and the full path to the input CSV file (either converted by DictdToDictionaryForMIDs
-or created directly from Microsoft Office's Excel or OpenOffice.org's Impress). After that,
-hit the <b>Generate Dictionary Files</b> button. This will take you to the dictionary generation
-preferences summary window and will enable you to actually generate the dictionary files.<br><br>
+or created directly from Microsoft Office's Excel or LibreOffice's Impress). After that,
+hit the <b>Enqueue/Generate Dictionary Files</b> button. This will take you to the dictionary generation
+preferences summary window and will enable you to actually generate the dictionary files there.<br>
 
-<img src="images/Generation.png" alt="Example of DictionaryGeneration Settings" width="740" height="230">
+<p>You can also:<br>
+<ul>
+<li><b>Clear Fields</b>: clear all the information entered.</li>
+<li><b>Check an Existing CSV File's Integrity</b>: select the CSV file and check it's integrity.
+This will enable you to see if there are any errors in the file or not. If there are some errors,
+they will be indicated to you along with the line containing the errors so that you open the file
+in a text editor and edit it manually. These errors are almost always related to the pairs: WORD
+and DEFINITION separated by a tab character or any other character specified as the <b>separatorCharacter</b></li>
+</ul>
+
+</p>
+
+<img src="images/Generation.png" alt="Example of DictionaryGeneration Settings">
 </p><br>
 
 <h2>Launching the dictionary generation preferences summary window</h2>
@@ -92,7 +117,7 @@ preferences summary window and will enable you to actually generate the dictiona
 to go on to the actual dictionary generation process. Note that this process might
 take up to hours to complete; depending on the size of the input dictionary file.<br><br>
 
-<img src="images/DictGenSum.png" alt="Dictionary Generation Preferences Summary Window" width="382" height="479">
+<img src="images/DictGenSum.png" alt="Dictionary Generation Preferences Summary Window">
 </p><br><br>
 
 <h2>Generating the dictionary files</h2>
@@ -101,6 +126,14 @@ If everything goes well, DictionaryForMIDs-Creator will generate
 your dictionary files in a directory named dictionary that is
 created under the output directory you provided.
 <br>
+<p>You can also:<br>
+<ul>
+<li><b>Enqueue Another CSV File</b>: add another csv file and it's settings in the dictionary generation
+queue.</li>
+<li><b>Clear Queue</b>: clear all the information entered.</li>
+<li><b>Cancel</b>: cancel the dictionary generation process (once it has been launched).</li>
+</ul>
+</p>
 
 <div class="NAVFOOTER"><hr width="100%" align="LEFT">
 <table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -119,7 +152,6 @@ created under the output directory you provided.
 </table>
 </div>
 
-
-</div>
+</div> 
 </BODY>
 </HTML>

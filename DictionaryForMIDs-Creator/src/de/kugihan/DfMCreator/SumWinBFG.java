@@ -303,7 +303,7 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
 
     public static SumWinBFG getBFGwindow() {
         SumWinBFG bfgSum = new SumWinBFG();
-        //bfgSum.setSize(800, 600);
+        bfgSum.setSize(800, 600);
         bfgSum.setLocation(screenSize.width / 2 - bfgSum.getWidth() / 2,
                            screenSize.height / 2 - bfgSum.getHeight() / 2);
         return bfgSum;

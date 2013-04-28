@@ -63,36 +63,38 @@ they are located in /usr/share/fonts/truetype/ubuntu-font-family. I think they l
 
 <li>Provide the path to the folder named <b>dictionary</b> where your dictionary files are located in.</li>
 
-<li>Choose a font size from the list. You can choose between 8 to 36. Note that the same dictionary<br>
-can have many font sizes. For that, you have to select a new size after each font generation and<br>
-relaunch a new font generation process by hitting the <b>Generate Bitmap Fonts</b> button again.</li><br>
+<li>Choose a font size from the list. You can choose between 8 to 36</li><br>
 
 <li>Choose a value in the list provided, between 0 and 4 for the option <b>Clip Top</b>.</li>
 
 <li>Choose a value in the list provided, between 0 and 4 for the option <b>Clip Bottom</b>.</li>
+
+<li>Hit <b>Enqueue/Generate Fonts</b> to go to the summary window and enqueue another dictionary
+along with its settings, or generate bitmap font files for the dictionary just enqueued.</li>
 </ul>
 </p>
 
 <i>Screenshot of the BitmapFontGenerator.</i><br><br>
-<img src="images/BitmapFontGeneration.png" alt="BitmapFontGenerator Example" width="492" height="346"><br><br>
+<img src="images/BitmapFontGeneration.png" alt="BitmapFontGenerator Example"><br><br>
 
 <h2>Launching the bitmap font generation preferences summary window</h2>
-The preferences summary window lets you review<br>
-the options you selected before actually going<br>
-to the font generation process. You can cancel<br>
-the font generation by closing the window before<br>
-launching the process.<br><br>
+The preferences summary window lets you preview the options you selected before actually going to the font
+generation process. You can cancel the font generation by closing the window before launching the process.<br>
+You can also <br>
 
-<img src="images/fontsSummary.png" alt="" width="402" height="430"><br><br>
+<img src="images/fontsSummary.png" alt="FontGeneration Summary"><br><br>
 
 <h2>Generating the bitmap fonts</h2>
 Hitting the <b>Generate Bitmap Fonts</b> button launches the process.<br><br>
-<i>The font generation process.</i><br>
-<img src="images/FontGenerationProcess.png" alt="Font Generation Process in Progress" width="502" height="129"><br><br>
-
-<i>End of the font generation process.</i><br>
-<img src="images/done.png" alt="Font Generation Process Done" width="410" height="217">
-<br>
+<p>You can also do the following here:<br>
+<ul>
+<li><b>Add the Next Font Size</b>: meaning, add another font size so as to have FontGenerator generate font files
+for all the sizes in the queue, at the same time, for the same dictionary. But this does not prevent you from
+enqueing other ditionaries and add other sizes for them. They will all be generated at the same time!</li>
+<li><b>Enque Another Dict</b>: that is to say, add another dictionary in order to generate fonts for it</li>
+<li><b>Clear Queue Contents</b>: clear everything in the queue.</li>
+<li><b>Cancel</b>: cancel the font generation process (after it has been launched).</li>
+</ul></p>
 
 <div class="NAVFOOTER"><hr width="100%" align="LEFT">
 <table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">

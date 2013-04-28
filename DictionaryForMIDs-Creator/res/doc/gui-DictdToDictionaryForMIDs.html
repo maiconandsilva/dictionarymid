@@ -47,26 +47,15 @@ into the DictionaryForMIDs format. We should follow these steps:<br>
 or <b>freedict-eng-fra.dict</b> (if it's not compressed) and <b>freedict-eng-fra.index</b><br>
 in a directory named <b>freedict-eng-fra</b>.</li><br>
 
-<li>Create a text file with the name <b>freedict-eng-fra.ini</b> and write the following in it:<br><br>
+<li>The database '.ini' file (e.g: <b>freedict-eng-fra.ini</b>)<br>
 
-# The freedict-eng-fra Database<br>
-freedict-eng-fra.data=freedict-eng-fra.dict.dz<br>
-freedict-eng-fra.index=freedict-eng-fra.index<br><br>
-<i>Note that if the file is not compressed you should replace the line<br>
-freedict-eng-fra.data=freedict-eng-fra.dict.dz<br>
-with the line:<br>
-freedict-eng-fra.data=freedict-eng-fra.dict</i><br><br>
-
-Make sure the file you created is in the directory containing the dictionary files.<br>
-You just created a configuration file that will be used by DictdToDictionaryForMIDs<br>
-to convert you input file. The first line (starting with a pound sign) is optional,<br>
-it is a comment and therefore is useful only for us (humans, not for the computer).<br>
-The second and the third lines are all what we need to get started.</li><br>
+As of version 0.6-Beta (i.e, DfM-Creator-0.6-Beta.jar) DfM-Creator automatically creates for you,
+the database '.ini' file.<br><br>
 
 <li>Fill the database name, path and the output directory fields in.<br>
 Peep the screen-shot below to have an idea on how to do that. You might manually provide the<br>
 paths by typing them in, you might also click the browse button to get the directory paths.<br>
-<img src="images/DBFields.png" alt="Filled database fields example" width="701" height="112">
+<img src="images/DBFields.png" alt="Filled database fields example">
 </li><br><br>
 
 <li>Choose the character encoding for the output converted CSV dictionary file.<br>
@@ -102,13 +91,20 @@ that will enable you to go to the actual conversion process.<br>
 
 <p>
 <h2>Launching the dictionary conversion preferences summary window</h2>
-<img src="images/ConversionSummary.png" alt="Conversion Preferences Window" width="427" height="529"><br><br>
+<img src="images/ConversionSummary.png" alt="Conversion Preferences Window"><br><br>
 
 <h2>Converting the dictionary file</h2>
 Hit the <b>Proceed</b> button to convert the dictionary file.
 If everything goes well you should find the file under the output
 directory you provided, with the name of the database + '-converted.txt'
 (i.e freedict-eng-fra-converted.txt)<br><br>
+<p>You can also do the following:
+<ul>
+<li><b>Enqueue Another Dict File</b>: add another dictionary file and adjust
+its settings in order to enqueue it and convert it also (bulk convert).</li>
+<li><b>Clear the Queue Contents</b>: clear all the items in the queue.</li>
+<li><b>Cancel</b>: that is to say, cancel the dictionary conversion process.</li>
+</ul></p>
 
 <b><u>Known Bugs:</u></b><br>
 <p>There is a known bug related to the dictionary conversion (Bug-09062012).
