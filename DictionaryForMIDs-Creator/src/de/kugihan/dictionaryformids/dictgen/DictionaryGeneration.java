@@ -433,11 +433,18 @@ import javax.swing.JOptionPane;
                                                                          DictionaryDataFile.dictionaryGenerationInputCharEncoding);
                 String csvFileLine;
                 int lineCounter = 0;
-                String splitCharacter = String.valueOf(DictionaryDataFile.dictionaryGenerationSeparatorCharacter);
+                char splitCharacter = DictionaryDataFile.dictionaryGenerationSeparatorCharacter;
                 while ((csvFileLine = readLineFromReader(csvFile)) != null) {
                         ++lineCounter;
                         // check if number of separator characters is correct
-                        int numberOfSeparatorCharacters = csvFileLine.split(splitCharacter).length - 1;
+                        int numberOfSeparatorCharacters = 0;
+						for (int i=0; i < csvFileLine.length(); i++)
+						{
+							if (csvFileLine.charAt(i) == splitCharacter)
+							{
+								 numberOfSeparatorCharacters++;
+							}
+						}
                         if (numberOfSeparatorCharacters != (DictionaryDataFile.numberOfAvailableLanguages -1)) {
                                 DfMCreatorMain.printAnyMsg(I18n.tr("sepCharError", new Object[] {lineCounter,
                                 numberOfSeparatorCharacters, (DictionaryDataFile.numberOfAvailableLanguages - 1)}),
