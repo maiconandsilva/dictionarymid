@@ -11,6 +11,7 @@
 
 <body>
 
+
 <div id="w3c_valid">
 <p>
     <a STYLE="COLOR: #000000;"  href="http://validator.w3.org/check?uri=referer"><img border="0"
@@ -23,6 +24,7 @@
   <iframe src="/menu.html" width="95%" height="450" frameborder=0></iframe>
 </div>
 <div id="content">
+
 
 <div class="NAVHEADER">
 <table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -44,12 +46,16 @@ You can find the JarCreator tab just after the BitmapFontGenerator tab. JarCreat
 correctly in order for it to take you to the jar creation preferences summary window. That window will enable you to go
 on to the actual jar creation process. You have to provide:<br>
 <ul>
-<li>The path to the directory named <i>dictionary</i> that contains the dictionary files created by DictionaryGeneration</li>
-<li>The path to the empty DictionaryForMIDs.jar and DictionaryForMIDs.jad (must be free of any dictionary files)</li>
+<li>The path to the directory named <i>dictionary</i> that contains the dictionary files created by DictionaryGeneration</li><br>
+<li>The path to the empty DictionaryForMIDs.jar and DictionaryForMIDs.jad (must be free of any dictionary files).<br>
+Provide this paths only if you selected the check box <b>"Choose Your Own Empty DictionaryForMIDs <font color="red">Jar</font>-
+<font color="red">Jad</font> Files"</b>.<br>
+Indeed, <b>DfM-Creator</b> comes bundled with the latest stable empty <b>DictionaryForMIDs.jar/jad</b> files.<br>
+And they can be used to create your jar/jad files without your having to provide external ones.</li><br>
 <li>The path to the output directory (where the created jar/jad files will be saved to)</li>
 </ul>
 Peep the screen-shot below.<br><br>
-<img src="images/JarCreation.png" alt="Jar Creation Settings Example" width="494" height="320">
+<img src="images/JarCreation.png" alt="Jar Creation Settings Example">
 </p><br>
 
 <h2>Launching the jar creation preferences summary window</h2>
@@ -58,13 +64,21 @@ Hitting the <b>Start</b> button launches the jar creation process. The jar/jad f
 that are created are put in a directory that has the same name as the dictionary
 name and are located just under the output directory that you specified.<br><br>
 
-<img src="images/JarCreatorSum.png" alt="The Jar Creation Preferences Summary Window" width="422" height="389"><br><br>
+<img src="images/JarCreatorSum.png" alt="The Jar Creation Preferences Summary Window"><br><br>
 
 <h2>Creating the jar/jad files</h2>
 Hitting the <b>Start</b> button launches the jar creation process.
 If everything goes well, you should find the files DictionaryForMIDs_XXX_XXX.jar
 and DictionaryForMIDs_XXX_XXX.jad in the directory DictionaryForMIDs_XXX_XXX.
 This directory is created under the output directory you provided.
+</p>
+
+<p>You can also:<br>
+<ul>
+<li><b>Enqueue Other Dict Files</b>: add another dictionary along with its settings.</li>
+<li><b>Clear Queue Contents</b>: remove all the information entered.</li>
+<li><b>Cancel</b>: cancel the jar creation process (once it has been launched).</li>
+</ul>
 </p>
 
 <div class="NAVFOOTER"><hr width="100%" align="LEFT">
@@ -84,7 +98,6 @@ This directory is created under the output directory you provided.
 </table>
 </div>
 
-
-</div>
+</div> 
 </BODY>
 </HTML>

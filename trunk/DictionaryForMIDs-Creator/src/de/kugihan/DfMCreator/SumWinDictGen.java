@@ -54,7 +54,7 @@ public class SumWinDictGen extends javax.swing.JDialog implements PropertyChange
 
     public static SumWinDictGen getDictGenSummary(){
         SumWinDictGen dgensum = new SumWinDictGen();
-        //dgensum.setSize(800, 600);
+        dgensum.setSize(800, 600);
         dgensum.setModal(true);
         dgensum.setLocation(screenSize.width / 2 - dgensum.getWidth() / 2,
                           screenSize.height / 2 - dgensum.getHeight() / 2);

@@ -50,8 +50,6 @@ import java.nio.file.Paths;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.StyledDocument;
 
 
 
@@ -84,15 +82,15 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         SumProceedButton = new javax.swing.JButton();
         enqueueButton = new javax.swing.JButton();
         clearQueueBT = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        SummaryTextPane = new javax.swing.JTextPane();
         conversionProgBar = new javax.swing.JProgressBar(0, 100);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        DictConvSummaryTextArea = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         dictdToDfMQueueTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(800, 650));
-        setMinimumSize(new java.awt.Dimension(795, 595));
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(790, 590));
         setPreferredSize(new java.awt.Dimension(800, 600));
         addWindowListener(this);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -157,20 +155,6 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         getContentPane().add(SumPanel, gridBagConstraints);
 
-        SummaryTextPane.setBackground(new java.awt.Color(254, 254, 254));
-        SummaryTextPane.setEditable(false);
-        jScrollPane1.setViewportView(SummaryTextPane);
-        fillDictdConvSummaryTextPane();
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        getContentPane().add(jScrollPane1, gridBagConstraints);
-
         conversionProgBar.setValue(0);
         conversionProgBar.setStringPainted(true);
         conversionProgBar.setToolTipText("");
@@ -183,9 +167,25 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         getContentPane().add(conversionProgBar, gridBagConstraints);
 
+        DictConvSummaryTextArea.setEditable(false);
+        DictConvSummaryTextArea.setColumns(20);
+        DictConvSummaryTextArea.setLineWrap(true);
+        DictConvSummaryTextArea.setRows(5);
+        DictConvSummaryTextArea.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(DictConvSummaryTextArea);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 200;
+        gridBagConstraints.ipady = 400;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        getContentPane().add(jScrollPane1, gridBagConstraints);
+
+        dictdToDfMQueueTextArea.setEditable(false);
         dictdToDfMQueueTextArea.setBackground(new java.awt.Color(232, 232, 232));
         dictdToDfMQueueTextArea.setColumns(20);
-        dictdToDfMQueueTextArea.setEditable(false);
         dictdToDfMQueueTextArea.setLineWrap(true);
         dictdToDfMQueueTextArea.setRows(5);
         dictdToDfMQueueTextArea.setWrapStyleWord(true);
@@ -268,10 +268,10 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
     }//GEN-LAST:event_clearQueueBTActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea DictConvSummaryTextArea;
     private javax.swing.JButton SumCancelButton;
     private javax.swing.JPanel SumPanel;
     private javax.swing.JButton SumProceedButton;
-    private javax.swing.JTextPane SummaryTextPane;
     private javax.swing.JButton clearQueueBT;
     private javax.swing.JProgressBar conversionProgBar;
     private javax.swing.JTextArea dictdToDfMQueueTextArea;
@@ -285,7 +285,7 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
 
     public static SumWinDictdToDfM getInstance(){
         SumWinDictdToDfM summary = new SumWinDictdToDfM();
-        //summary.setSize(800, 600);
+        summary.setSize(800, 600);
         summary.setModal(true);
         summary.setLocation(screenSize.width / 2 - summary.getWidth() / 2,
                           screenSize.height / 2 - summary.getHeight() / 2);
@@ -395,13 +395,15 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         convCancelledOnQuit();
     }
 
-    public void append(String s) {
+    /*
+    public void DictConvSummaryTextArea.append(String s) {
         try {
-            StyledDocument doc = SummaryTextPane.getStyledDocument();
+            StyledDocument doc = DictConvSummaryTextArea.getStyledDocument();
             doc.insertString(doc.getLength(), s, null);
         } catch(BadLocationException exc) {
         }
     }
+    */
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -410,13 +412,13 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
                 if (progress == 0) {
                     conversionProgBar.setStringPainted(false);
                     conversionProgBar.setIndeterminate(true);
-                    append(I18n.tr("pleaseWait.dictdConvSummary"));
+                    DictConvSummaryTextArea.append(I18n.tr("pleaseWait.dictdConvSummary"));
                 }
                 else {
                     conversionProgBar.setIndeterminate(false);
                     conversionProgBar.setString(null);
                     conversionProgBar.setValue(progress);
-                    append(String.format(newline + newline +
+                    DictConvSummaryTextArea.append(String.format(newline + newline +
                     I18n.tr("completed.dictdConvSummary"), task.getProgress()));
                 }
         }
@@ -454,28 +456,28 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
 
                         // Showing the conversion preferences
                         // for the current item being processed.
-                        SummaryTextPane.setText("");
-                        append(I18n.tr("item.being.processed.DictdToDfM") + "\n");
-                        append(I18n.tr("remaining.items.DictdToDfM"));
-                        append(String.valueOf(DfMCreatorMain.dfmCreator.dictConvQueue.size()) + "\n\n");
-                        append(I18n.tr("dbName.dictdConvSummary") + " ");
-                        append(" " + q.db + newline + newline);
-                        append(I18n.tr("dbDir.dictdConvSummary"));
-                        append(" " + q.dbFolder + newline + newline);
-                        append(I18n.tr("outputCSVfilePath.dictdConvSummary"));
-                        append(" " + q.outputCSV + newline + newline);
-                        append(I18n.tr("encoding.dictdConvSummary"));
-                        append(" " + q.outputEncoding + newline + newline);
+                        DictConvSummaryTextArea.setText("");
+                        DictConvSummaryTextArea.append(I18n.tr("item.being.processed.DictdToDfM") + "\n");
+                        DictConvSummaryTextArea.append(I18n.tr("remaining.items.DictdToDfM"));
+                        DictConvSummaryTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.dictConvQueue.size()) + "\n\n");
+                        DictConvSummaryTextArea.append(I18n.tr("dbName.dictdConvSummary") + " ");
+                        DictConvSummaryTextArea.append(" " + q.db + newline + newline);
+                        DictConvSummaryTextArea.append(I18n.tr("dbDir.dictdConvSummary"));
+                        DictConvSummaryTextArea.append(" " + q.dbFolder + newline + newline);
+                        DictConvSummaryTextArea.append(I18n.tr("outputCSVfilePath.dictdConvSummary"));
+                        DictConvSummaryTextArea.append(" " + q.outputCSV + newline + newline);
+                        DictConvSummaryTextArea.append(I18n.tr("encoding.dictdConvSummary"));
+                        DictConvSummaryTextArea.append(" " + q.outputEncoding + newline + newline);
 
-                        append(I18n.tr("separatorCharacter.dictdConvSummary"));
-                        append(" " + q.separatorChar + newline + newline);
+                        DictConvSummaryTextArea.append(I18n.tr("separatorCharacter.dictdConvSummary"));
+                        DictConvSummaryTextArea.append(" " + q.separatorChar + newline + newline);
 
-                        append(I18n.tr("switchLanguages.dictdConvSummary"));
-                        append(" " + q.switchLangs + newline);
-                        append(I18n.tr("keepTabs.dictdConvSummary"));
-                        append(" " + q.keepTabAndNewLines + newline);
-                        append(I18n.tr("removeSquares.dictdConvSummary"));
-                        append(" " + q.removeSquareBracks + newline);
+                        DictConvSummaryTextArea.append(I18n.tr("switchLanguages.dictdConvSummary"));
+                        DictConvSummaryTextArea.append(" " + q.switchLangs + newline);
+                        DictConvSummaryTextArea.append(I18n.tr("keepTabs.dictdConvSummary"));
+                        DictConvSummaryTextArea.append(" " + q.keepTabAndNewLines + newline);
+                        DictConvSummaryTextArea.append(I18n.tr("removeSquares.dictdConvSummary"));
+                        DictConvSummaryTextArea.append(" " + q.removeSquareBracks + newline);
 
                         // Perform the conversion
                         DictdToDfM.convert();
@@ -532,7 +534,7 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
             setCursor(null); //turn off the wait cursor
             conversionProgBar.setIndeterminate(false);
             conversionProgBar.setValue(conversionProgBar.getMinimum());
-            append(I18n.tr("done.dictdConvSummary"));
+            DictConvSummaryTextArea.append(I18n.tr("done.dictdConvSummary"));
             dictdToDfMQueueTextArea.append("\n\n" + I18n.tr("conversion.done.DictdToDfM") + "\n");
         }
     }
@@ -581,40 +583,40 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
 
 
     /**
-     * fillDictdConvSummaryTextPane() gets all the needed information
+     * fillDictdConvDictConvSummaryTextArea() gets all the needed information
      * and formats them correctly so as to have a clear and neat
      * summary of the DictdToDictionaryForMIDs preferences entered
      * by the user.
      */
-    private void fillDictdConvSummaryTextPane() {
+    private void fillDictdConvDictConvSummaryTextArea() {
 
-        SummaryTextPane.setText("");
-        append(I18n.tr("headline.dictdConvSummary"));
-        append(" " + newline + newline);
+        DictConvSummaryTextArea.setText("");
+        DictConvSummaryTextArea.append(I18n.tr("headline.dictdConvSummary"));
+        DictConvSummaryTextArea.append(" " + newline + newline);
 
-        append(I18n.tr("dbName.dictdConvSummary") + " ");
-        append(" " + DBName() + newline + newline);
-        append(I18n.tr("dbDir.dictdConvSummary"));
-        append(" " + DBFolder() + newline + newline);
-        append(I18n.tr("outputCSVfilePath.dictdConvSummary"));
-        append(" " + CSVFile() + newline + newline);
-        append(I18n.tr("encoding.dictdConvSummary"));
-        append(" " + outputEncoding() + newline + newline);
+        DictConvSummaryTextArea.append(I18n.tr("dbName.dictdConvSummary") + " ");
+        DictConvSummaryTextArea.append(" " + DBName() + newline + newline);
+        DictConvSummaryTextArea.append(I18n.tr("dbDir.dictdConvSummary"));
+        DictConvSummaryTextArea.append(" " + DBFolder() + newline + newline);
+        DictConvSummaryTextArea.append(I18n.tr("outputCSVfilePath.dictdConvSummary"));
+        DictConvSummaryTextArea.append(" " + CSVFile() + newline + newline);
+        DictConvSummaryTextArea.append(I18n.tr("encoding.dictdConvSummary"));
+        DictConvSummaryTextArea.append(" " + outputEncoding() + newline + newline);
 
-        append(I18n.tr("separatorCharacter.dictdConvSummary"));
-        append(" " + transcribeSeparatorCharacter() + newline + newline);
+        DictConvSummaryTextArea.append(I18n.tr("separatorCharacter.dictdConvSummary"));
+        DictConvSummaryTextArea.append(" " + transcribeSeparatorCharacter() + newline + newline);
 
-        append(I18n.tr("switchLanguages.dictdConvSummary"));
-        append(" " + switchLanguages() + newline);
-        append(I18n.tr("keepTabs.dictdConvSummary"));
-        append(" " + keepTabsAndNewlineChars() + newline);
-        append(I18n.tr("removeSquares.dictdConvSummary"));
-        append(" " + removeSquareBracketContents() + newline + newline);
+        DictConvSummaryTextArea.append(I18n.tr("switchLanguages.dictdConvSummary"));
+        DictConvSummaryTextArea.append(" " + switchLanguages() + newline);
+        DictConvSummaryTextArea.append(I18n.tr("keepTabs.dictdConvSummary"));
+        DictConvSummaryTextArea.append(" " + keepTabsAndNewlineChars() + newline);
+        DictConvSummaryTextArea.append(I18n.tr("removeSquares.dictdConvSummary"));
+        DictConvSummaryTextArea.append(" " + removeSquareBracketContents() + newline + newline);
 
-        append(I18n.tr("end.dictdConvSummary"));
-        append(newline);
-        append(I18n.tr("clickToProceed.dictdConvSummary"));
-        append(newline);
+        DictConvSummaryTextArea.append(I18n.tr("end.dictdConvSummary"));
+        DictConvSummaryTextArea.append(newline);
+        DictConvSummaryTextArea.append(I18n.tr("clickToProceed.dictdConvSummary"));
+        DictConvSummaryTextArea.append(newline);
     }
 
     private void fillDictdToDfMQueueTA() {
@@ -629,7 +631,7 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         DfMCreatorMain.dfmCreator.dictConvQueue.clear();
         DfMCreatorMain.dfmCreator.dictConvArray.clear();
         dictdToDfMQueueTextArea.setText("");
-        SummaryTextPane.setText("");
+        DictConvSummaryTextArea.setText("");
         DfMCreatorMain.dfmCreator.clearDictdToDfMTFs();
         DfMCreatorMain.dfmCreator.dictConvArray.clear();
     }

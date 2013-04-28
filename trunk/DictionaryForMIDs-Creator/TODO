@@ -1,12 +1,9 @@
 ====- Todos for the Current Release -====
 ⦁Update the Documentation files (according to the changes in the DfM-Creator GUI).
-⦁Create a Windows nsis installer that is bundled with JRE.
 ⦁Create a linux portable version with MakeSelf bundled with JRE.
 ⦁Create a universal installer version with izPack without JRE.
-⦁Create a spash-screen.
-⦁Create an icon.
-⦁Can it be that after a run of DictionaryGeneration the fields in the DictionaryGeneration pane are cleared?
-
+⦁Create a Windows nsis installer that is bundled with JRE.
+⦁After a run of DictionaryGeneration; clear the fields.
 
 
 
@@ -24,6 +21,8 @@
 ⦁Use a GUI testing framework for DfM-Creator tests
 ⦁Enable batch convert through text file containing paths/settings for JarCreator (this will be for batch updating the DictionaryForMIDs that are on the webserver, to the latest version)
 ⦁Bundle custom font file and use it for the DfM-Creator. Why not the Ubuntu font family? It's pretty good!
+⦁Create a spash-screen.
+⦁Create an icon.
 ⦁Translate Documentation files in french.
 ⦁FIX the nasties introduced by DictdToDictionaryForMIDs while converting a dictionary from freedict.org
 
@@ -37,7 +36,8 @@
 ⦁The list of languageX postfixes now includes the complete list (found at http://en.wikipedia.org/wiki/List_of_ISO_639-2_codes)
 ⦁The button "Path to the Input CSV file" has been renamed to "Input CSV file"
 ⦁The button "Properties File's Directory" has been ranamed to "Properties File"; in fact, it's no longer necessary to select the directory "only" and let DfM-Creator try to find the properties file, now you go ahead and select it yourself! But if you choose a file that has a name that is different from the "conventional" properties file name (i.e, DictionaryForMIDs.properties) you get and error message.
-⦁Updated French language locale file
+⦁Updated the French language locale file
+Updated Documentation files to the latest DfM-Creator version and features (i.e, DfM-Creator-0.6-final.jar)
 BUG FIXES:
     -Gert fixed a bug that prevented the DfM-Creator's JarCreator to load the internal DictionaryForMIDs.jar/jad files on Microsoft Windows while generating jar/jad files.
 
