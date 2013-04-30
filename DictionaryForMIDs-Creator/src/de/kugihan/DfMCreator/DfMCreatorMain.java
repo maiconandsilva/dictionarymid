@@ -120,8 +120,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     public static String PATH_SEPARATOR = FileSystems.getDefault().getSeparator();
 
     // path separator for JAR files (accessed via Class.getResourceAsStream();
-	public static String JAR_PATH_SEPARATOR = "/";
-	
+    public static String JAR_PATH_SEPARATOR = "/";
+
     // Variables used by applyPreferences() and savePreferences()
     // Variables used by applyPreferences() and savePreferences()
     public static final String pathName = "/de/kugihan/DfMCreator";
@@ -1279,7 +1279,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
                         // Passing the values to dictgen
                         // we will start with args[1] because args[0] is already used.
-                        // Here it is the one that holds the argument -DictionaryGeneration
+                        // Here it is the one that holds the argument --DictionaryGeneration
                         DictionaryGeneration.setSourceFile(args[1]);
                         DictionaryGeneration.setDirectoryDestination(args[2] + PATH_SEPARATOR + "dictionary");
                         DictionaryGeneration.setPropertyPath(args[3]);
@@ -1317,27 +1317,66 @@ public class DfMCreatorMain extends javax.swing.JFrame {
            /************************************
             * JarCreator              *
             ************************************/
-                case "--JarCreator":
-                case "-jc":
+                case "--JarCreator-Internal":
+                case "-jci":
                     // Tell the user she invoked JarCreator
-                    System.out.println("\n\nYou invoked the commad line version of JarCreator");
+                    System.out.println("\n\nYou invoked the commad line version of JarCreator\n"
+                            + "wich uses internal DictionaryForMIDs.jar/jad files.");
+
+                    // Printing the JarCreator copyright notice
+                    de.kugihan.jarCreator.JarCreator.printCopyrightNotice();
+
+                    // Check the number of command line arguments
+                    if (args.length!=3){
+                        de.kugihan.jarCreator.JarCreator.printUsageInternalDfM();
+                    }
+
+                    externalEmptyDfMFlag = false;
+                    try {
+                        // Setting up the values for JarCreator
+                        // we will start with args[1] because args[0] is already used.
+                        // Here, it is the one that holds the argument --JarCreator-Internal
+                        JarCreator.setDictionaryDirectory(args[1] + PATH_SEPARATOR);
+                        JarCreator.setOutputDirectory(args[2]);
+                        
+                        String internalDfmPath = JAR_PATH_SEPARATOR + "de" + JAR_PATH_SEPARATOR + "kugihan"
+                                                    + JAR_PATH_SEPARATOR + "DfMCreator" + JAR_PATH_SEPARATOR
+                                                    + "Empty_DfM_JavaME" + JAR_PATH_SEPARATOR;
+                        
+                        JarCreator.setEmptyDictionaryForMID(internalDfmPath);
+
+                        // Calling the actual main class
+                        de.kugihan.jarCreator.JarCreator.main(args);
+                    } catch (FileNotFoundException ex) {
+                        System.out.println(ex.getMessage());
+                    } catch (IOException | DictionaryException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+                    
+                // Use the EXTERNAL DFM.jar/jad files
+                case "--JarCreator-External":
+                case "-jcx":
+                    // Tell the user she invoked JarCreator
+                    System.out.println("\n\nYou invoked the commad line version of JarCreator\n"
+                            + "wich uses external DictionaryForMIDs.jar/jad files.");
 
                     // Printing the JarCreator copyright notice
                     de.kugihan.jarCreator.JarCreator.printCopyrightNotice();
 
                     // Check the number of command line arguments
                     if (args.length!=4){
-                        de.kugihan.jarCreator.JarCreator.printUsage();
+                        de.kugihan.jarCreator.JarCreator.printUsageExternalDfM();
                     }
 
                     externalEmptyDfMFlag = true;
                     try {
                         // Setting up the values for JarCreator
                         // we will start with args[1] because args[0] is already used.
-                        // Here, it is the one that holds the argument -JarCreator
+                        // Here, it is the one that holds the argument --JarCreator-Internal
                         JarCreator.setDictionaryDirectory(args[1] + PATH_SEPARATOR);
-                        JarCreator.setEmptyDictionaryForMID(args[2]);
-                        JarCreator.setOutputDirectory(args[3]);
+                        JarCreator.setOutputDirectory(args[2]);
+                        JarCreator.setEmptyDictionaryForMID(args[3]);
 
                         // Calling the actual main class
                         de.kugihan.jarCreator.JarCreator.main(args);
@@ -1933,8 +1972,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         // and pass to DictionaryGeneration only the parent directory
         // the generation fails. This seems to be the best workaround.
         propertyPathPath = propertyPathPath.getParent();
-        propertyPath = propertyPathPath.toString();        
-        
+        propertyPath = propertyPathPath.toString();
+
 
         File srcFile = new File(sourceFile);
         if (!srcFile.exists() || !srcFile.canRead()){
@@ -2175,11 +2214,11 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         if (chooseCustomJarJadCBox.isSelected()){
             jarCreatorRecord.emptyDfM = emptydictionaryformids;
         } else {
-            //throw new IllegalArgumentException();
-            String dfmPath = JAR_PATH_SEPARATOR + "de" + JAR_PATH_SEPARATOR + "kugihan"
+            //throw new IllegalArgumentException(); // For debug purposes...
+            String internalDfmPath = JAR_PATH_SEPARATOR + "de" + JAR_PATH_SEPARATOR + "kugihan"
                            + JAR_PATH_SEPARATOR + "DfMCreator" + JAR_PATH_SEPARATOR
                            + "Empty_DfM_JavaME" + JAR_PATH_SEPARATOR;
-            jarCreatorRecord.emptyDfM = dfmPath;
+            jarCreatorRecord.emptyDfM = internalDfmPath;
         }
 
         // Actually adding the element to the queue
@@ -2780,7 +2819,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }
 
     private void propertyPathBTGetFile() {
-        String s = getFile(false);        
+        String s = getFile(false);
         if (!"".equals(s)){
             File propsFile = new File(s);
             if (!propsFile.getName().equals(PropertiesPreview.PROPERTY_FILE_NAME)){

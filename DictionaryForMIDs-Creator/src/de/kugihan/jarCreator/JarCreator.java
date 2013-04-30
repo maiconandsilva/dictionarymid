@@ -104,10 +104,18 @@ public class JarCreator {
 
     public static void main(String[] args) throws FileNotFoundException, IOException, DictionaryException {
 
-        dictionarydirectory = getPathName(dictionarydirectory);
-        emptydictionaryformids = getPathName(emptydictionaryformids);
-        outputdirectory = getPathName(outputdirectory);
-
+        if (DfMCreatorMain.externalEmptyDfMFlag){
+            // use external DictionaryForMIDs.jar/jad files
+            dictionarydirectory = getPathName(dictionarydirectory);
+            emptydictionaryformids = getPathName(emptydictionaryformids);
+            outputdirectory = getPathName(outputdirectory);
+        } else {
+            // use internal ones
+            dictionarydirectory = getPathName(dictionarydirectory);
+            outputdirectory = getPathName(outputdirectory);
+            outputdirectory = outputdirectory;
+        }
+        
         try {
             // Call the jar creation subroutine
             JarCreator jc = new JarCreator();
@@ -138,19 +146,40 @@ public class JarCreator {
             "For documentation and source code, see http://dictionarymid.sourceforge.net\n");
      }
 
-     static public void printUsage() {
+     static public void printUsageExternalDfM() {
             System.out.println(
                 "\nError in command line arguments\n\n" +
                 "Usage:\n" +
-                "java -jar DfM-Creator.jar -JarCreator dictionary_directory empty_jar_directory output_directory\n\n"+
+                "java -jar DfM-Creator.jar --JarCreator-External dictionary_directory output_directory empty_jar_directory\n\n"+
+                "Or\n\n"+
+                "java -jar DfM-Creator.jar -jcx dictionary_directory output_directory empty_jar_directory\n\n"+
                 "dictionary_directory: directory containing the dictionary and the DictionaryForMIDs.properties files\n"+
-                "empty_jar_directory: directory of the empty DictionaryForMIDs.jar/.jad files\n"+
-                "output_directory: directory where the generated JAR/JAD files are written to\n\n");
+                "output_directory: directory where the generated JAR/JAD files are written to\n"+
+                "empty_jar_directory: directory of the empty DictionaryForMIDs.jar/.jad files\n\n");
+            System.exit(1);
+
+            /* Debug: uncomment to activate
+                System.out.println(dictionarydirectory);                
+                System.out.println(outputdirectory);
+                System.out.println(emptydictionaryformids); */
+        }
+     
+     static public void printUsageInternalDfM() {
+            System.out.println(
+                "\nError in command line arguments\n\n" +
+                "Usage:\n" +
+                "java -jar DfM-Creator.jar --JarCreator-Internal dictionary_directory output_directory\n\n"+
+                "Or\n\n"+
+                "java -jar DfM-Creator.jar -jci dictionary_directory output_directory\n\n"+
+                "dictionary_directory: directory containing the dictionary and the DictionaryForMIDs.properties files\n"+
+                "output_directory: directory where the generated JAR/JAD files are written to\n"+
+                "Note that using the switch --JarCreator-Internal or -jci\n"+
+                "you will be using the internal DictionaryForMIDs.jar/jad files\n"+
+                "(bundled in the DfM-Creator)\n\n");
             System.exit(1);
 
             /* Debug: uncomment to activate
                 System.out.println(dictionarydirectory);
-                System.out.println(emptydictionaryformids);
                 System.out.println(outputdirectory); */
         }
 
@@ -191,7 +220,7 @@ public class JarCreator {
           JarInputStream emptyJar;
           BufferedReader jadInputFile;
 
-          if (DfMCreatorMain.dfmCreator.externalEmptyDfMFlag){
+          if (DfMCreatorMain.externalEmptyDfMFlag){
               emptyJar = new JarInputStream(new FileInputStream(new File(fileNameEmptyJar)));
           } else {
               emptyJar = new JarInputStream(fileNameEmptyJar.getClass().getResourceAsStream(fileNameEmptyJar));
@@ -201,7 +230,7 @@ public class JarCreator {
           long jarSize=writeJAR(midletName, midletNameShort, dictDir, emptyJar, jarOutputFile);
           System.out.println(I18n.tr("writtenJar", new Object[] {fileNameOutputJar}));
 
-          if (DfMCreatorMain.dfmCreator.externalEmptyDfMFlag){
+          if (DfMCreatorMain.externalEmptyDfMFlag){
               jadInputFile = new BufferedReader(new InputStreamReader(new FileInputStream(fileNameEmptyJad)));
           } else {
               jadInputFile = new BufferedReader(new InputStreamReader(fileNameEmptyJad.getClass().getResourceAsStream(fileNameEmptyJad)));
