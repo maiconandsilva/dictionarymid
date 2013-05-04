@@ -193,8 +193,8 @@ public class JarCreator {
           String applicationUniqueIdentifier = buildApplicationUniqueIdentifier(dictionarydirectory);
           String midletName = "DfM" + applicationUniqueIdentifier;
           String midletNameShort = "DfM" + applicationUniqueIdentifier;
-          // restrict midletName to a maximum of 32 characters, because Motorola phones cannot handle more
-          int maxMidletNameLength = 64;
+          // Here it produces for instance the name DfM_GCIDE_EngDef
+          int maxMidletNameLength = 64; // restrict midletName to a maximum of 64 characters. Some phones might not handle more
           if (midletName.length() > maxMidletNameLength)
                midletName = midletName.substring(0, maxMidletNameLength);
           String fileNameOutputJar = outputdirectory + midletName + DfMCreatorMain.PATH_SEPARATOR + midletName + EXTENSION_JAR;
@@ -387,8 +387,8 @@ public class JarCreator {
                                                     DictionaryDataFile.supportedLanguages[indexLanguage].languageFilePostfix;
           }
           if (DictionaryDataFile.dictionaryAbbreviation != null) {
-               applicationUniqueIdentifier = applicationUniqueIdentifier + "_" +
-                                                    DictionaryDataFile.dictionaryAbbreviation;
+               applicationUniqueIdentifier = "_" + DictionaryDataFile.dictionaryAbbreviation + applicationUniqueIdentifier;
+               // produces for instance the name GCIDE_EngDef
           }
           else {
                System.err.println(I18n.tr("dictAbbrevError"));
