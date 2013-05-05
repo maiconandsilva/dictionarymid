@@ -298,6 +298,11 @@ import javax.swing.JOptionPane;
                                                 Vector keyWordVector = DictionaryUpdateObj.createKeyWordVector(sourceExpression,
                                                                                                                        DictionaryDataFile.supportedLanguages[indexLanguage].expressionSplitString);
                                                 DictionaryUpdateObj.updateKeyWordVector(keyWordVector);
+												if (keyWordVector.size() > DictionaryDataFile.dictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit) {
+													printMaxIndexKeyEntriesWarning(numberOfEntriesDictionaryTotal + 1,
+													                               indexLanguage + 1, 
+													                               sourceExpression);
+												}
                                                 for (int indexKeyWord = 0;
                                                      indexKeyWord < keyWordVector.size();
                                                      ++indexKeyWord) {
@@ -538,6 +543,23 @@ import javax.swing.JOptionPane;
                 outFileStream.close();
         }
 
+		// printMaxIndexKeyEntriesWarning prints a warning message about excess generation of index entries
+		// todo; 1. requires translation; 2. should Util.log be used ?
+		protected static void printMaxIndexKeyEntriesWarning(long lineInInputDictionaryFile,
+		                                               int numberOfLanguage,
+													   String expression) {
+				System.out.println("Note: more than " + 
+								   DictionaryDataFile.dictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit + 
+								   " index entries for language number " + numberOfLanguage +
+								   " in line " + lineInInputDictionaryFile + ".\n" +
+								   "Expression is: \"" + expression + "\"");
+				System.out.println("Please check if there are words that should not be put in the index !");
+				System.out.println("Read the DfM-Creator documentation on 'Excluding text from the generated index files'");
+				System.out.println("If you verified that index generation is correct, then set the " +
+				                   "property\ndictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit\nto a value higher than " +
+								   DictionaryDataFile.dictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit + ".\n");
+		}
+
         /**
          * Very weak encrytion/decryption mechanism.
          * See http://dictionarymid.german-fighters.com/forum/index.php?topic=215.0
@@ -549,7 +571,7 @@ import javax.swing.JOptionPane;
                         res.append(ch);
                 }
                 return res.toString();
-        }
+        }		
 
         // intentional misspelling "Espernato" for Esperanto
         private static final char[] weakEncrypt_password = "EspernatoEstasBona".toCharArray();

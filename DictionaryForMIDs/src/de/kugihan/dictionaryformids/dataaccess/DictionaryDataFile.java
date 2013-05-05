@@ -62,6 +62,7 @@ public class DictionaryDataFile  {
         public static long   dictionaryGenerationMinNumberOfEntriesPerDictionaryFile;
         public static long   dictionaryGenerationMinNumberOfEntriesPerIndexFile;
         public static boolean dictionaryGenerationOmitParFromIndex;
+		public static int	 dictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit;
 
         public static String fileEncodingFormat;
 
@@ -237,6 +238,7 @@ public class DictionaryDataFile  {
                         dictionaryGenerationMinNumberOfEntriesPerDictionaryFile = utilObj.getDictionaryPropertyIntDefault("dictionaryGenerationMinNumberOfEntriesPerDictionaryFile", 200);
                         dictionaryGenerationMinNumberOfEntriesPerIndexFile = utilObj.getDictionaryPropertyIntDefault("dictionaryGenerationMinNumberOfEntriesPerIndexFile", 500);
                         dictionaryGenerationOmitParFromIndex = utilObj.getDictionaryPropertyBooleanDefault("dictionaryGenerationOmitParFromIndex", true);
+                        dictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit = utilObj.getDictionaryPropertyIntDefault("dictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit", 10);
                 }
 
                 fileEncodingFormat = utilObj.getDictionaryPropertyString("fileEncodingFormat", true);
