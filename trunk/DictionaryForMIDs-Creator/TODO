@@ -9,6 +9,11 @@
 
 ============- TODOs for the Upcoming Release -=============
 =====
+CONSIDER THE FOLLOWING MAIL
+On 06/16/2013 12:06 PM, Muhammad Yoza Acika wrote:
+I want to report a bug regarding DictionaryForMIDs-Creator 0.6-Beta. When we create a Properties File in tab "Dictionary Generation" at "languageXHasSeparateDictionaryFile" box, the default value as written in the help file is set to "false". So, when I had already saved the properties file I created, which I set that box to "false" for both language 1 and language 2. And then I loaded it again using "Edit an Existing Properies File" in the properties editor, it will set to "true" instead. Then, the effect is you can't make it two-way language translation instead just one-way. P.S: when I edit it (properties file) in the Notepad, the generated jar will work in two-way language as I expected.
+
+
 ⦁In the DictdToDfM pane, "Output CSV file directory" is also the "input CSV file" in the DictionaryGeneration pane.
 ⦁In the DictionaryGeneration pane "Properties File" is requested again for "edit an existing properties file".
 ⦁In the JarCreator pane "DictionaryForMIDs.properties and CSV files directory" is the same as "Destination Directory" in the DictionaryGeneration pane.
