@@ -16,7 +16,7 @@ javac.encoding=UTF-8
 
 	<!-- Location of the WTK toolkit is defined in the environment variable WTK_HOME -->
 	<property environment="env"/> 
-	<condition property="wtk.home" value="${env.WTK_HOME}" else="/media/MultimediaPlus/WTK-2.5.2"> <!-- if WTK_HOME is not set use default value -->
+	<condition property="wtk.home" value="${env.WTK_HOME}" else="/media/X-SOFTS/WTK2.5.2"> <!-- if WTK_HOME is not set use default value -->
 		<isset property="env.WTK_HOME" />
 	</condition>
 
@@ -269,7 +269,7 @@ javac.encoding=UTF-8
             <param name="destinationbasedir"        value="${JavaME.outputbasedir}"/>
         </antcall>
         <!-- note: the following wtkpackage task will fail on preverification if the jar tool is not in the path -->
-        <wtkpackage jarfile="${JavaME.jarfile}"     jadfile="${JavaME.jadfile}" manifest="${JavaME.manifest}" preverify="true">
+        <wtkpackage jarfile="${JavaME.jarfile}"     jadfile="${JavaME.jadfile}" manifest="${JavaME.manifest}" preverify="false">
             <fileset dir="${DfM.classdir}"          includes="de/kugihan/dictionaryformids/**"  />
               <fileset dir="${JavaME.classdir}"/>
               <fileset dir="${JavaME.resdir}"/>
