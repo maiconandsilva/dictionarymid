@@ -44,6 +44,8 @@ class CsvFileCache {
 				// reset to the old file position
 				cachedFile.reset();
 			}
+			// TODO: wrap skip() in a loop to call it until it skipped the
+			// specified number of bytes or an error occurred (see below)
 			long skippedBytes = cachedFile.skip(numberOfBytesToBeSkipped);
 			if (skippedBytes != numberOfBytesToBeSkipped) {
 				throw new DictionaryException("CSV file: skipped only " + skippedBytes + " bytes");
@@ -63,7 +65,15 @@ class CsvFileCache {
 			Util.getUtil().logTime("open file", startTime);
 			startTime = System.currentTimeMillis();
 			if (csvStream != null) {
-				long skippedBytes = csvStream.skip(startPosition);
+				long skippedBytes = 0;
+				while (skippedBytes != startPosition) {
+					long skipResult = csvStream.skip(startPosition - skippedBytes);
+					if (skipResult > 0L) {
+						skippedBytes += skipResult;
+					} else {
+						break;
+					}
+				}
 				Util.getUtil().logTime("position file", startTime);
 				if (skippedBytes != startPosition) {
 					throw new DictionaryException("CSV file: skipped only " + skippedBytes + " bytes");
