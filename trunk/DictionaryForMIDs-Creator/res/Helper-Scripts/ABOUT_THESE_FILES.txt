@@ -1,0 +1,9 @@
+ABOUT THESE FILES:
+
+build.sh: script used to compile DfM-Creator for any Linux flavor
+build.win.sh: script used to compile Dfm-Creator for Windows
+dfm-creator-iss.iss: script used by inno-setup creator (creates an installer for Windows)
+dfm-creator.jsmooth: script used by jsmooth to create a Windows .exe wrapper for DfM-Creator
+dfm-creator-makeself.sh: script used by makeself to create a Linux .run installer for DfM-Creator
+dfm-creator-install.sh: script executed by makeself during the installation process of DfM-Creator for Linux
+makeself-2.1.5.run: makeself itself (Unix .run/.sh installer creator)
