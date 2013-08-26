@@ -1,0 +1,36 @@
+<launch4jConfig>
+  <dontWrapJar>true</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>dist\DfM-Creator-0.6-Beta.jar</jar>
+  <outfile>/media/Khorasan/DfM-Creator/DfM-Creator-0.6-beta-Windows-portable/DfM-Creator-0.6-Beta.exe</outfile>
+  <errTitle>No suitable JRE found !</errTitle>
+  <cmdLine></cmdLine>
+  <chdir></chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <manifest></manifest>
+  <icon>/media/Khorasan/DfM-Creator/Images/dfm-creator.ico</icon>
+  <classPath>
+    <mainClass>de.kugihan.DfMCreator.DfMCreatorMain</mainClass>
+    <cp>dist\DfM-Creator-0.6.Beta.jar</cp>
+  </classPath>
+  <jre>
+    <path>jre</path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <minVersion>1.7.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <initialHeapSize>32</initialHeapSize>
+    <initialHeapPercent>10</initialHeapPercent>
+    <maxHeapSize>512</maxHeapSize>
+    <maxHeapPercent>40</maxHeapPercent>
+  </jre>
+  <splash>
+    <file>/media/Khorasan/DfM-Creator/Images/dfm-creator.bmp</file>
+    <waitForWindow>true</waitForWindow>
+    <timeout>3</timeout>
+    <timeoutErr>false</timeoutErr>
+  </splash>
+</launch4jConfig>
