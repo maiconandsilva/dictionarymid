@@ -1,7 +1,5 @@
 ====- Todos for the Current Release -====
 ⦁Update the Documentation files (according to the changes in the DfM-Creator GUI).
-⦁Create a linux portable version with MakeSelf bundled with JRE.
-⦁Create a Windows nsis installer that is bundled with JRE.
 ⦁After a run of DictionaryGeneration; clear the fields.
 
 

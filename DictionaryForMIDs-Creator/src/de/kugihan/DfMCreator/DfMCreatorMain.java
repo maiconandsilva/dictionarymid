@@ -76,6 +76,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -2442,6 +2443,12 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 dfmCreator = new DfMCreatorMain();
                 dfmCreator.setLocation(screenSize.width / 2 - dfmCreator.getWidth() / 2,
                                      screenSize.height / 2 - dfmCreator.getHeight() / 2);
+                String s = "images" + "/" + "dfm-creator.png";
+                URL imgURL = getClass().getResource(s);
+                if (imgURL == null) {
+                    System.err.println("Could not load icon image file for DfM-Creator");
+                }
+                dfmCreator.setIconImage(Toolkit.getDefaultToolkit().getImage(imgURL));
                 dfmCreator.setVisible(true);
             }
         });
