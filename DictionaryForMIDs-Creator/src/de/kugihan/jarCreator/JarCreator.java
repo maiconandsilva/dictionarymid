@@ -45,6 +45,7 @@ import java.util.zip.ZipEntry;
 
 public class JarCreator {
 
+    public static final String DFM_JAVA_ME_APP_VERSION = "3.5.8";
     public static final String EXTENSION_JAR = ".jar";
     public static final String EXTENSION_JAD = ".jad";
     public static final String FILE_EMPTY_JAR_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAR;
@@ -387,7 +388,7 @@ public class JarCreator {
                                                     DictionaryDataFile.supportedLanguages[indexLanguage].languageFilePostfix;
           }
           if (DictionaryDataFile.dictionaryAbbreviation != null) {
-               applicationUniqueIdentifier = "_" + DictionaryDataFile.dictionaryAbbreviation + applicationUniqueIdentifier;
+               applicationUniqueIdentifier = "_" + DictionaryDataFile.dictionaryAbbreviation + applicationUniqueIdentifier + "_" + DFM_JAVA_ME_APP_VERSION;
                // produces for instance the name GCIDE_EngDef
           }
           else {

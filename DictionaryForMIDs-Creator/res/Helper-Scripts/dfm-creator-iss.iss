@@ -2,16 +2,16 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "DfM-Creator"
-#define MyAppVersion "0.6-Beta"
+#define MyAppVersion "0.6-beta"
 #define MyAppPublisher "DictionaryForMIDs"
-#define MyAppURL "dictionarymids.sourceforge.net"
+#define MyAppURL "dictionarymid.sourceforge.net"
 #define MyAppExeName "DfM-Creator-0.6-Beta.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{821DE300-44EA-4CF6-817E-ED6FAD2404CF}
+AppId={{BB9ACFF2-BF33-4EB6-9AAA-233D01234A74}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -21,10 +21,12 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-LicenseFile=E:\DfM-Creator\DfM-Creator-0.6-Windows-portable\COPYING-GPL-V2.txt
-InfoAfterFile=E:\DfM-Creator\DfM-Creator-0.6-Windows-portable\CHANGELOG.txt
-OutputDir=E:\DfM-Creator
-OutputBaseFilename=dfm-creator-0.6-beta-install_with-jre
+AllowNoIcons=yes
+LicenseFile=E:\DfM-Creator\DfM-Creator-0.6-beta-Windows-portable\COPYING-GPL-V2.txt
+InfoAfterFile=E:\DfM-Creator\DfM-Creator-0.6-beta-Windows-portable\CHANGELOG.txt
+OutputDir=E:\DfM-Creator\INSTALLERS
+OutputBaseFilename=dfm-creator-0.6-beta-installer
+SetupIconFile=E:\DfM-Creator\Icons\dfm-creator.ico
 Compression=lzma
 SolidCompression=yes
 
@@ -37,8 +39,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "E:\DfM-Creator\DfM-Creator-0.6-Windows-portable\DfM-Creator-0.6-Beta.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\DfM-Creator\DfM-Creator-0.6-Windows-portable\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\DfM-Creator\DfM-Creator-0.6-beta-Windows-portable\DfM-Creator-0.6-Beta.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\DfM-Creator\DfM-Creator-0.6-beta-Windows-portable\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
