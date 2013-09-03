@@ -1,36 +1,37 @@
 ====- Todos for the Current Release -====
+⦁Replace the colors by a Java native color picker in the Content-NN FontColour properties
+⦁CONSIDER THE FOLLOWING MAIL
+On 06/16/2013 12:06 PM, Muhammad Yoza Acika wrote:
+I want to report a bug regarding DictionaryForMIDs-Creator 0.6-Beta. When we create a Properties File in tab "Dictionary Generation" at "languageXHasSeparateDictionaryFile" box, the default value as written in the help file is set to "false". So, when I had already saved the properties file I created, which I set that box to "false" for both language 1 and language 2. And then I loaded it again using "Edit an Existing Properies File" in the properties editor, it will set to "true" instead. Then, the effect is you can't make it two-way language translation instead just one-way. P.S: when I edit it (properties file) in the Notepad, the generated jar will work in two-way language as I expected.
 ⦁Update the Documentation files (according to the changes in the DfM-Creator GUI).
 ⦁After a run of DictionaryGeneration; clear the fields.
 
 
-
 ============- TODOs for the Upcoming Release -=============
-=====
-CONSIDER THE FOLLOWING MAIL
-On 06/16/2013 12:06 PM, Muhammad Yoza Acika wrote:
-I want to report a bug regarding DictionaryForMIDs-Creator 0.6-Beta. When we create a Properties File in tab "Dictionary Generation" at "languageXHasSeparateDictionaryFile" box, the default value as written in the help file is set to "false". So, when I had already saved the properties file I created, which I set that box to "false" for both language 1 and language 2. And then I loaded it again using "Edit an Existing Properies File" in the properties editor, it will set to "true" instead. Then, the effect is you can't make it two-way language translation instead just one-way. P.S: when I edit it (properties file) in the Notepad, the generated jar will work in two-way language as I expected.
-
-
 ⦁In the DictdToDfM pane, "Output CSV file directory" is also the "input CSV file" in the DictionaryGeneration pane.
 ⦁In the DictionaryGeneration pane "Properties File" is requested again for "edit an existing properties file".
 ⦁In the JarCreator pane "DictionaryForMIDs.properties and CSV files directory" is the same as "Destination Directory" in the DictionaryGeneration pane.
 ⦁In the BitmapFontGenerator pane "Path to Dictionary" is the same as "Destination Director" in the DictionaryGeneration pane.
-	POSSIBLE SOLUTION: create "Full Dictionary Creation" and if the user
+	POSSIBLE SOLUTION: create an option named "Full Dictionary Creation" and if the user
 	selects that option, he will have to set these values up only once.
 	The app will behave subtly and will use the output values for one
-	command as the input values for others.
+	command as the input values for others and so forth.
 ====== 
-⦁Use a GUI testing framework for DfM-Creator tests
 ⦁Enable batch convert through text file containing paths/settings for JarCreator (this will be for batch updating the DictionaryForMIDs that are on the webserver, to the latest version)
 ⦁Bundle custom font file and use it for the DfM-Creator. Why not the Ubuntu font family? It's pretty good!
 ⦁Create a spash-screen.
-⦁Create an icon.
 ⦁Translate Documentation files in french.
+⦁Use a GUI testing framework for DfM-Creator tests
 ⦁FIX the nasties introduced by DictdToDictionaryForMIDs while converting a dictionary from freedict.org
 
 
 
 ===TODOs Implemented Successfully===
+JarCreator naming convention changed from for example:
+-DictionaryForMIDs_3.5.8_EngDef_GCIDE.zip
+to
+-DfM_GCIDE_EngDef_3.5.8.zip (the DfM-Creator automatically creates the directories but it is up to the user to create the zip files from the directories.
+⦁Now, DfM-Creator has a simple and nice icon :-)
 ⦁The PropertiesEditor's button "Create the Properties File" has been renamed to "Save the Properties File" (overwrites it if it has already been saved)
 ⦁ A new button "Save Properties File As..." has been added
 ⦁"Create the Properties File" does not trigger regexp checking so as to make sure the user entered an email address or any other contact information, in the dictionary infoText. That functionality is broken so it's disabled, for now...
