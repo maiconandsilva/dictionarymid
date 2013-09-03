@@ -239,7 +239,13 @@ public class JarCreator {
           File jadOutputFile = new File(fileNameOutputJad);
           writeJAD(jarSize, midletNameShort, midletName, jadInputFile, jadOutputFile);
           System.out.println(I18n.tr("writtenJad", new Object[] {fileNameOutputJar}));
-          System.out.println(I18n.tr("finalMsg"));
+          
+          String output_path = outputdirectory + midletName;
+          File foutput_name = new File(output_path);
+          String dir_Name = foutput_name.getName();
+          
+          System.out.println(I18n.tr("finalMsg", new Object[] {dir_Name}));
+          System.out.println(I18n.tr("you.can.now.create.zip", new Object[] {dir_Name + ".zip"}));
      }
 
      static void writeJAD(long jarSize, String midletNameShort,String midletName, BufferedReader jad_in, File jadOutputFile) throws IOException {
