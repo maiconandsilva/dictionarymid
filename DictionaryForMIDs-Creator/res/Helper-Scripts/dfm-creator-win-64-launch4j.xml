@@ -1,0 +1,26 @@
+<launch4jConfig>
+  <dontWrapJar>true</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>dist\DfM-Creator-0.6-Beta.jar</jar>
+  <outfile>F:\DfM-Creator\DfM-Creator-0.6-beta-Win-64-portable\DfM-Creator-0.6-beta4-amd64.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir></chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://javadl.sun.com/webapps/download/AutoDL?BundleId=80812</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <manifest></manifest>
+  <icon>F:\DfM-Creator\Icons\dfm-creator.ico</icon>
+  <jre>
+    <path>jre</path>
+    <bundledJre64Bit>true</bundledJre64Bit>
+    <minVersion>1.7.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <initialHeapSize>64</initialHeapSize>
+    <initialHeapPercent>10</initialHeapPercent>
+    <maxHeapSize>512</maxHeapSize>
+    <maxHeapPercent>25</maxHeapPercent>
+  </jre>
+</launch4jConfig>

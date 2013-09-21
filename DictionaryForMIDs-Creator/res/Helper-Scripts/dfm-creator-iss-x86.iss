@@ -5,7 +5,7 @@
 #define MyAppVersion "0.6-beta"
 #define MyAppPublisher "DictionaryForMIDs"
 #define MyAppURL "dictionarymid.sourceforge.net"
-#define MyAppExeName "DfM-Creator-0.6-Beta.exe"
+#define MyAppExeName "DfM-Creator-0.6-beta4-i386.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -22,11 +22,11 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=E:\DfM-Creator\DfM-Creator-0.6-beta-Windows-portable\COPYING-GPL-V2.txt
-InfoAfterFile=E:\DfM-Creator\DfM-Creator-0.6-beta-Windows-portable\CHANGELOG.txt
-OutputDir=E:\DfM-Creator\INSTALLERS
-OutputBaseFilename=dfm-creator-0.6-beta-installer
-SetupIconFile=E:\DfM-Creator\Icons\dfm-creator.ico
+LicenseFile=F:\DfM-Creator\DfM-Creator-0.6-beta-Win-32-portable\COPYING-GPL-V2.txt
+InfoAfterFile=F:\DfM-Creator\DfM-Creator-0.6-beta-Win-32-portable\CHANGELOG.txt
+OutputDir=F:\DfM-Creator\INSTALLERS
+OutputBaseFilename=dfm-creator-0.6-beta-x86-installer
+SetupIconFile=F:\DfM-Creator\Icons\dfm-creator.ico
 Compression=lzma
 SolidCompression=yes
 
@@ -39,8 +39,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "E:\DfM-Creator\DfM-Creator-0.6-beta-Windows-portable\DfM-Creator-0.6-Beta.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\DfM-Creator\DfM-Creator-0.6-beta-Windows-portable\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "F:\DfM-Creator\DfM-Creator-0.6-beta-Win-32-portable\DfM-Creator-0.6-beta4-i386.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\DfM-Creator\DfM-Creator-0.6-beta-Win-32-portable\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
