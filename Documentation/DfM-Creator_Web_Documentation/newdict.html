@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta name="keywords" content="dictionary, language, MIDP, J2ME, Java, Midlet, mobile, cell phone, PDA">
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<title>DictionaryForMIDs - a free multi-language dictionary for cell phones and PDAs</title>
+	</head>
+
+<body>
+
+<div id="w3c_valid">
+<p>
+    <a STYLE="COLOR: #000000;"  href="http://validator.w3.org/check?uri=referer"><img border="0"
+        src="http://www.w3.org/Icons/valid-xhtml10"
+        alt="Valid XHTML 1.0 Transitional" height="31" width="88" />
+    </a>
+</p>
+</div>
+<div id="menu">
+  <iframe src="/menu.html" width="95%" height="450" frameborder=0></iframe>
+</div>
+<div id="content">
+
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody>
+		<tr>
+			<td valign="bottom" width="10%" align="left"><a href="newdictChangeNotes.html" accesskey="P">Prev</a></td>	
+			<td valign="bottom" width="80%" align="center"></td>	
+			<td valign="bottom" width="10%" align="right"><a href="newdictProperties.html" accesskey="N">Next</a></td>
+		</tr>
+	</tbody>
+</table>
+<hr width="100%" align="LEFT">
+</div>
+
+	<a name="Setup"></a>
+	<h2><a name="sourceen"></a>Setting up a new dictionary for DictionaryForMIDs</h2>
+	
+	<blockquote>
+	<p dir="ltr"><i><br>
+	For change notes from past releases see
+	<a href="newdictChangeNotes.html">here</a>.</i></p>
+	</blockquote>
+
+	<p>Setting up a dictionary is just configuration, there is no need to have 
+	programming knowledge or a development environment. And if you have any 
+	problem while setting up a dictionary for DictionaryForMIDs, just 
+	<a href="/contact.html">contact us</a> and we will assist you.</p>
+	<p>Setting up a dictionary for DictionaryForMIDs involves the following 
+	steps:</p>
+	
+	<ol>
+		<li><a href="#SetupDictionaryFile">Setup dictionary file</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="#LineBreak">Add line breaks (optional)</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="#IndexFileSizeReduction">Exclude text from index (optional)</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="#ContentDeclaration">Define content declarations (optional)</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="#TwoSource">Using two source dictionaries (optional)</a><br>
+		</li>
+		<li><a href="#SetupEnvironment">Setup work environment</a></li>
+		<li><a href="#SetupProperties">Configure DictionaryForMIDs.properties</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="#UpdateClass">Using a DictionaryUpdate class (optional)</a><br>
+		</li>
+		<li><a href="#Build">Build dictionary</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="#BitmapFont">Add bitmap fonts (optional)</a>
+		</li>
+		<li><a href="#Publish">Publish dictionary (optional)</a></li>
+	</ol>
+	
+	<h2><a name="#SetupDictionaryFile"></a>1. Setup the dictionary file</h2>
+	
+	<p>The easiest way to store a dictionary is by using a spreadsheet program 
+	such as Microsoft Excel or OpenOffice.org/LibreOffice Impress.&nbsp; Create two columns:
+	the headword for the first language, and the definition in the second language.
+	&nbsp; Microsoft 	Access can also be used to store the dictionary, but it is
+	more difficult to edit and sort the data.&nbsp; The latest Microsoft Excel
+	and OpenOffice.org/LibreOffice Impress are probably always the best as each cell can 
+	store an unlimited amount of data.&nbsp; Microsoft Excel 2003 for instance can
+	only store 255 letters in each cell.</p>
+	
+	<h3><a name="LineBreak"></a>Adding line breaks (optional)</h3>
+	
+	<p>Some definitions can be very long. The definition would be easier to read if 
+	there were line breaks.&nbsp; Here is an example:</p>
+	
+	<tt>Read [tab] 1. To read, advice, counsel. 2. To interpret; to explain; as, 
+	to read a riddle. 3. To tell; to declare; to recite</tt><br>
+	
+	<p>Note: [tab] is for the tab-separator character (would be &#39;\t&#39; in 
+	DictionaryForMIDs.properties)</p>
+	<p>The definition would display as a long string of words. To add a line 
+	break, add a &quot;\n&quot; to the definition.&nbsp; For example:</p>
+	
+	<tt>Read [Tab] 1. To read, advice, counsel\n2. To interpret; to explain; as, 
+	to read a riddle.\n3. To tell; to declare; to recite</tt>
+	<p>Now the definition will be displayed like this:</p>
+	
+	<tt>Read</tt><br>
+	<tt>1. To read, advice, counsel.</tt><br>
+	<tt>2. To interpret; to explain; as, to read a riddle.</tt><br>
+	<tt>3. To tell; to declare; to recite.</tt>	
+	
+	<h3><a name="IndexFileSizeReduction"></a>Excluding text from the
+	generated index files (optional)</h3>
+	<p dir="ltr">Dictionaries with many example sentences and grammar tags can 
+	create very big indexes. For example, if the inputdictionaryfile was 2 MB, 
+	then the generated files could be 10 MB or more.<br>
+	<br>
+	To illustrate the problem, here is an example with a line from the 
+	inputdictionaryfile:<br>
+	<br>
+	<tt>sleep&nbsp; The state of reduced consciousness of a human or animal 
+	[tab] Schlaf&nbsp; Zustand der Ruhe eines Tieres oder Menschen<br>
+	</tt><br>
+	Note: [tab] is for the tab-separator character (would be &#39;\t&#39; in 
+	DictionaryForMIDs.properties)<br>
+	<br>
+	Here, without additional information, DictionaryGeneration would index all 
+	expressions that are included in the explanatory texts (e.g. &quot;The state of 
+	reduced consciousness of a human or animal&quot;). This is undesirable.<br>
+	<br>
+	The solution is to put the text that does not need to be included in the 
+	index between {{ and }}.<br>
+	<br>
+	In the example:<br>
+	<tt>sleep&nbsp; {{The state of reduced consciousness of a human or 
+	animal}}[tab]Schlaf&nbsp; {{Zustand der Ruhe eines Tieres oder Menschen}}</tt><br>
+	<br>
+	Then the size of the generated files would collapse. For an dictionary with 
+	an inputdictionaryfile of 2 MB as in the above example, the compressed 
+	result will likely be below 2 MB.</p>
+	
+	<h3><a name="ContentDeclaration"></a>Define content declarations (optional)</h3>
+	
+	<p>Content declarations allow users to add different styles to different 
+	parts of a definition.&nbsp; For example, all grammar tags could be 
+	displayed in blue color and all sample sentences could be displayed in 
+	italics.&nbsp; For more information see <a href="newdictContent.html">here</a>.</p>
+	
+	<h3><a name="TwoSource"></a>Using two source dictionaries (optional)</h3>
+	
+	<p>Typically only one source dictionary is used to create a built 
+	dictionary.&nbsp; A input dictionary file has a headword followed by 
+	definition in the second language.&nbsp; DictionaryforMIDs creates a 
+	bi-directional dictionary by building an index from language1 -&gt; language2 
+	as well as language2 -&gt; language1.</p>
+	<p>However, you may have two separate input dictionary files.&nbsp; One 
+	input file is from language1 -&gt; language2.&nbsp; The second input file is 
+	from language2 -&gt; language1.&nbsp; For information for setting up these 
+	kinds of dictionaries, please see <a href="newdictMultiple.html">here</a>.</p>
+	
+	<h2><a name="SetupEnvironment"></a>2. Setup the work environment</h2>
+	
+	<p>Download DictionaryForMIDs-Creator:</p>
+	<p><a href="dfmcreatorDownload.html#downloadBinaries">Here</a> you will find DictionaryForMIDs-Creator
+	(DfM-Creator) bundled with the latest stable release of DictionaryForMIDs.jar/jad
+	free of any dictionary files, suitable for creating new dictionaries.</p>
+		
+	<p>Extract the files to C:\ or /home/user/.&nbsp;
+	You may change the directory, but you will need to change the following
+	instructions to meet your chosen directory.&nbsp; Therefore it is recommended
+	to leave the directory as C:\ or /home/user/ specially for novices.</p>
+	<p>The work environment contains the DictionaryForMIDs-Creator which
+	is a GUI wrapper of the following tools:</p>
+	
+	<table border="1">
+		<tr>
+			<td width="245">DictdToDictionaryForMIDs</td>
+			<td>Converts a Dictd dictionary file into a CSV file</td>		
+		</tr>
+		<tr>
+			<td>DictionaryGeneration.</td>
+			<td>Builds the index and dictionary files for you.</td>
+		</tr>
+		<tr>
+			<td>JarCreator</td>
+			<td>Packages your index and dictonary files into one file (DictionaryForMIDs.jar).</td>
+		</tr>
+		<tr>
+			<td>BitmapFontGenerator</td>
+			<td>Creates bitmap fonts for users who do not have the necessary fonts on their phones.</td>
+		</tr>
+		<tr>
+			<td width="245">DictionaryForMIDs.jar<br>DictionaryForMIDs.jad</td>			
+			<td width="245">As an extra, there are also the DictionaryForMIDs.jar/jad files.
+			These are the empty java midlet files in which the generated dictionary
+			files will be put. These are not	part of the DictionaryForMIDs-Creator
+			application, they are java midlets that are in a separate directory.</td>	
+		</tr>
+	</table>
+	
+	<p>Next, download Java (J2SE Runtime) and install it.&nbsp; 
+	DictionaryforMIDs depends on Java to run.&nbsp; You can get some information on how
+	and where to download Java (JRE or JDK) <a href="dfmcreatorDevelopment.html#jdkdownload"> here</a>.</p>
+	
+	<p>&nbsp;</p>
+		
+	<h2><a name="SetupProperties"></a>3. Creating a configuration file (<b>DictionaryForMIDs.properties</b>)</h2>
+	
+	<p>For a detailed description on how to create a <b>DictionaryForMIDs.properties</b> file
+	go <a href="newdictProperties.html">here</a></p>
+	
+	<h2><a name="Build"></a>4. Build the dictionary</h2>
+	
+	<p>For a detailed description on how to build the dictionary files,
+	go <a href="gui-DictionaryGeneration.html">here</a></p>
+	
+	<h3><a name="BitmapFont"></a>Creating bitmap fonts (optional)</h3>
+	
+	<p>The users of your dictionary may not have the necessary fonts to use the 
+	dictionary.&nbsp; For example, if you created an English -&gt; Russian 
+	dictionary, then your users may not have the Russian fonts on their phone to 
+	view the Russian words.&nbsp; Therefore it may be useful to add bitmap fonts 
+	to the dictionary.&nbsp; This will enable the user to view any language 
+	contained in the dictionary.&nbsp;</p>
+	
+	<p>For documentation on how to generate bitmap fonts for your dictionary,
+	go <a href="gui-BitmapFontGenerator.html">here</a></p>
+	
+	<h2><a name="Publish"></a>5. Publishing your dictionary and submitting it to 
+	the &#39;dictionary archive&#39; (optional)</h2>
+	<p>If your dictionary is open source, then you can publish it on the
+	<a href="/dict.html">download page</a>. 
+	For this, please send an email to Peter Kmet (send cc to Gert Nuber), see 
+	<a href="/contact.html">contact</a>. 
+	Also, please post a message about your dictionary in the
+	<a href="forum/">DictionaryForMIDs forum</a>. Once your dictionary
+	is published, please send also the inputdictionaryfile and the other
+	files. They are needed for the <a href="/dictionaryArchive.html">
+	&#39;dictionary archive&#39;</a>. For more information see 
+	<a href="/dictionaryArchive.html">	here</a>.</p>
+	
+	<h3>Packaging into a ZIP file</h3>
+	<p>For packaging the files, put the 4 files (1) DictionaryForMIDs_xxx.jar 
+	(2) DictionaryForMIDs_xxx.jad (3) README.txt and (4) COPYING.txt into a ZIP 
+	file. You should use this file naming convention: </p>
+	<p>DictionaryForMIDs_VVVVV_XXXYYY_ZZZ.zip<br>
+	VVVVV: version of DictionaryForMIDs, for example &quot;3.5.0&quot;<br>
+	XXX: language1FilePostfix, for example &quot;Eng&quot;<br>
+	YYY: language2FilePostfix, for example &quot;Por&quot;<br>
+	ZZZ: info on the origin of the dictionary (can be longer than 3 characters), 
+	for example &quot;IDP&quot; or &quot;freedict&quot;; sould be the same as defined in the 
+	property dictionaryAbbreviation.</p>
+	<p>&nbsp;</p>
+
+	
+	<p>If you have any problem while setting a new dictionary up, just
+	<a href="/contact.html">contact us</a> and we will try to help you !</p>
+
+
+<div class="NAVFOOTER"><hr width="100%" align="LEFT">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody>
+		<tr>
+			<td valign="top" width="33%" align="left"><a href="newdictChangeNotes.html" accesskey="P">Prev</a></td>
+			<td valign="top" width="34%" align="center"><a href="index.html" accesskey="H">DfM-Creator Home</a></td>
+			<td valign="top" width="33%" align="right"><a href="newdictProperties.html" accesskey="N">Next</a></td>
+		</tr>
+		<tr>
+			<td valign="top" width="33%" align="left">Important Change Notes</td>
+			<td valign="top" width="34%" align="center">&nbsp;</td>
+			<td valign="top" width="33%" align="right">Configuring DictionaryForMIDs.properties</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+
+</div>
+</BODY>
+</HTML>
