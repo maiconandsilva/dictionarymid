@@ -185,7 +185,7 @@
                               <Component id="DBPanel" max="32767" attributes="0"/>
                               <Component id="toolbar4" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="49" max="32767" attributes="0"/>
+                          <EmptySpace pref="45" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -195,7 +195,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="toolbar4" pref="40" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="DBPanel" pref="147" max="32767" attributes="0"/>
+                          <Component id="DBPanel" pref="146" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="SCPanel" pref="200" max="-2" attributes="0"/>
@@ -918,7 +918,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jPanel3" max="32767" attributes="0"/>
-                          <Component id="toolbar1" pref="768" max="32767" attributes="0"/>
+                          <Component id="toolbar1" pref="764" max="32767" attributes="0"/>
                           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -933,7 +933,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel3" pref="181" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel1" pref="237" max="32767" attributes="0"/>
+                      <Component id="jPanel1" pref="236" max="32767" attributes="0"/>
                       <EmptySpace pref="60" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -1279,7 +1279,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="138" max="32767" attributes="0"/>
+                      <EmptySpace pref="134" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jPanel2" pref="520" max="32767" attributes="0"/>
                           <Component id="toolbar2" max="32767" attributes="0"/>

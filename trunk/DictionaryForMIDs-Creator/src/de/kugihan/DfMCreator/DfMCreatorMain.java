@@ -1,36 +1,34 @@
 /* ////////////////////////////////////////////////////////////////
-*
-*   In the Name of Allah
-*
-*   DICTIONARYFORMIDS-CREATOR
-*
-*   This file is part of DictionaryForMIDs-Creator
-*   Copyright (C) 2012, 2013 Karim Mahamane Karimou
-*   DictionaryForMIDs-Creator is a GUI wrapper around various
-*   DictionaryForMIDs tools, among others we have
-*   DictdToDictionaryForMIDs, DictionaryGeneration,
-*   JarCreator and BitmapFontGenerator.
-*
-*   DictionaryForMIDs-Creator is free software;
-*   you can redistribute it and/or modify it under the terms
-*   of the GNU General Public License as published by the
-*   Free Software Foundation; either version 2 of the License, or
-*   (at your option) any later version.
-*
-*   DictionaryForMIDs-Creator is distributed in the hope that
-*   it will be useful, but WITHOUT ANY WARRANTY; without even
-*   the implied warranty of MERCHANTABILITY or
-*   FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public
-*   License along with DictionaryForMIDs-Creator;
-*   if not, write to the Free Software Foundation, Inc.,
-*   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-*
-* //////////////////////////////////////////////////////////////// */
-
-
+ *
+ *   In the Name of Allah
+ *
+ *   DICTIONARYFORMIDS-CREATOR
+ *
+ *   This file is part of DictionaryForMIDs-Creator
+ *   Copyright (C) 2012, 2013 Karim Mahamane Karimou
+ *   DictionaryForMIDs-Creator is a GUI wrapper around various
+ *   DictionaryForMIDs tools, among others we have
+ *   DictdToDictionaryForMIDs, DictionaryGeneration,
+ *   JarCreator and BitmapFontGenerator.
+ *
+ *   DictionaryForMIDs-Creator is free software;
+ *   you can redistribute it and/or modify it under the terms
+ *   of the GNU General Public License as published by the
+ *   Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   DictionaryForMIDs-Creator is distributed in the hope that
+ *   it will be useful, but WITHOUT ANY WARRANTY; without even
+ *   the implied warranty of MERCHANTABILITY or
+ *   FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public
+ *   License along with DictionaryForMIDs-Creator;
+ *   if not, write to the Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+ *
+ * //////////////////////////////////////////////////////////////// */
 package de.kugihan.DfMCreator;
 
 import de.kugihan.DfMCreator.DfMCreatorException.BadDictDirNameException;
@@ -68,10 +66,7 @@ import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.fonttoolkit.Callback;
 import de.kugihan.fonttoolkit.FontToolkit;
 import de.kugihan.jarCreator.JarCreator;
-import edu.hws.eck.mdb.I18n;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -86,43 +81,38 @@ import java.util.Locale;
 import java.util.Queue;
 import java.util.prefs.Preferences;
 import javax.swing.*;
-
+import edu.hws.eck.mdb.I18n;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 public class DfMCreatorMain extends javax.swing.JFrame {
     // version number.
-    public static final String dfm_creator_version = "0.6-Beta";
 
+    public static final String dfm_creator_version = "0.6-Beta";
     // variables used with DictdToDfM
     private static String dbNameVar;
     private static String dbFolderNameVar;
     private static String outputCSVFileVar;
     private static String outputEncodingCharsetVar;
-
     private static char separatorCharacterVar;
-
     private static boolean keepTabsAndNewLinesVar;
     private static boolean switchLanguagesVar;
     private static boolean removeSquareBracketsVar;
-
     // Variables used with DictionaryGeneration
     private static String sourceFile;
     private static String directoryDestination;
     private static String propertyPath;
-
     // Variables used with JarCreator
     private static String dictionarydirectory;
     private static String emptydictionaryformids;
     private static String outputdirectory;
-
     // get the size of the screen.
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
     // System specific path separator for file systems: / in linux \ in windows...
     public static String PATH_SEPARATOR = FileSystems.getDefault().getSeparator();
-
     // path separator for JAR files (accessed via Class.getResourceAsStream();
     public static String JAR_PATH_SEPARATOR = "/";
-
     // Variables used by applyPreferences() and savePreferences()
     // Variables used by applyPreferences() and savePreferences()
     public static final String pathName = "/de/kugihan/DfMCreator";
@@ -130,16 +120,12 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     public static final Preferences node = root.node(pathName);
     public static final String LookAndFeel = node.get("DfMCreator.window.LookAndFeel", null);
     public static final String selectedLang = node.get("DfMCreator.language.Settings", null);
-
     // Creating an instance of the FontToolkit
     public FontToolkit fontTK = new FontToolkit();
-
     // A public DfMCreatorMain instance
     public static DfMCreatorMain dfmCreator;
-
     // A public PropertiesEditor instance
     public static PropertiesEditor propWin;
-
     // These are the queue variables that will be used to enqueue
     // conversion/generation/creation settings before the actual processings.
     // For DictdToDfM
@@ -150,7 +136,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     public Queue<JarCreatorValsToEnqueue> jarCreatorQueue;
     // For BitmapFontGenerator
     public Queue<BitmapFontGeneratorToEnqueue> fontGenerationQueue;
-
     // These are for checking if the queues have not already been created
     // in order to prevent overwritring them if they already exist.
     // For DictdToDfM
@@ -161,12 +146,10 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     private static boolean jarCreatorQueueCreationtorFlag = false;
     // For BitmapFontGenerator
     private static boolean fontGenerationQueueCreationFlag = false;
-
     // These are the ArrayList variables that will be used to hold
     // the names of the items being processed in order to use them
     // in TextAreas as visual representations for the queues being
     // processed so as to be references for the user.
-
     // For DictdToDfM
     public ArrayList<String> dictConvArray;
     // For DictionaryGeneration
@@ -175,13 +158,16 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     public ArrayList<String> jarCreatorArray;
     // For BitmapFontGenerator
     public ArrayList<String> fontGenerationArray;
-
     // Tells us wether the user wants to use and external
     // empty DictionaryForMIDs or the internal bundled one.
     public static boolean externalEmptyDfMFlag = false;
-
-
-
+    // Variables for the new CLI FontGenerator
+    private static File inputFontFile_CLI = null;
+    private static File inputDictDir_FILE_CLI = null;
+    private static String inputDictDir_STRING_CLI = "";
+    private static int font_Size_CLI = 1;
+    private static int clip_Top_CLI = 1;
+    private static int clip_Bottom_CLI = 1;
 
     /**
      * Creates new form
@@ -189,7 +175,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     public DfMCreatorMain() {
         initComponents();
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1131,7 +1116,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }//GEN-LAST:event_clearFieldsButtonActionPerformed
 
     private void createPropsFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPropsFileActionPerformed
-    //        checkScreenResolution();
+        //        checkScreenResolution();
         showPropWin();
     }//GEN-LAST:event_createPropsFileActionPerformed
 
@@ -1150,7 +1135,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     private void PropertyPathBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PropertyPathBTActionPerformed
         try {
             propertyPathBTGetFile();
-        } catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
             DfMCreatorMain.printAnyMsg(PropertiesEditor.NotThePropFileErrorMsg,
                     I18n.tr("error.dfmPropCreate"),
@@ -1190,7 +1175,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     private void editPropsFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPropsFileActionPerformed
         try {
             editExistingPropsFile();
-        } catch (Throwable t){
+        } catch (Throwable t) {
             System.out.println(t.getLocalizedMessage());
         }
     }//GEN-LAST:event_editPropsFileActionPerformed
@@ -1215,7 +1200,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-
     /**
      * @param args the command line arguments
      */
@@ -1228,12 +1212,12 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         if (args.length != 0) {
             switch (args[0]) {
 
-           /************************************
-            * DictdToDictionaryForMIDs         *
-            ************************************/
+//                          DictdToDictionaryForMIDs
+//#################################################################################
+
                 case "--DictdToDictionaryForMIDs":
                 case "-dc":
-                    // Tell the user she invoked DictdToDictionaryForMIDs
+                    // Tell the user he invoked DictdToDictionaryForMIDs
                     System.out.println("\n\nYou invoked the commad line version of DictdToDictionaryForMIDs");
 
                     // Printing the DictdToDictionaryForMIDs copyright notice
@@ -1247,19 +1231,19 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                     de.kugihan.dictionaryformids.dictdtodictionaryformids.DictdToDfM.main(args);
                     break;
 
-           /************************************
-            * DictionaryGeneration             *
-            ************************************/
+//                          DictionaryGeneration
+//#################################################################################
+
                 case "--DictionaryGeneration":
                 case "-dg":
-                    // Tell the user she invoked DictionaryGeneration
+                    // Tell the user he invoked DictionaryGeneration
                     System.out.println("\n\nYou invoked the commad line version of DictionaryGeneration");
 
                     // Printing the DictionaryGeneration copyright notice
                     de.kugihan.dictionaryformids.dictgen.DictionaryGeneration.printCopyrightNotice();
 
                     // Check the number of command line arguments
-                    if (args.length!=4){
+                    if (args.length != 4) {
                         de.kugihan.dictionaryformids.dictgen.DictionaryGeneration.printUsage();
                     }
 
@@ -1268,8 +1252,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                         // Creating the directory "dictionary" that will hold the csv
                         // dictionary files that are generated by DictionaryGeneration
                         File destCSVsDir = new File(args[2] + PATH_SEPARATOR + "dictionary");
-                        if (!destCSVsDir.exists()){
-                            if (!destCSVsDir.mkdirs()){
+                        if (!destCSVsDir.exists()) {
+                            if (!destCSVsDir.mkdirs()) {
                                 try {
                                     throw new DfMCreatorException.CantCreateDestDir(I18n.tr("destDirCreationError.dfmCreatorMain"));
                                 } catch (CantCreateDestDir ex) {
@@ -1292,12 +1276,13 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                     }
                     break;
 
-           /************************************
-            * BitmapFontGenerator              *
-            ************************************/
+
+//                          BitmapFontGenerator __GUI__
+//#################################################################################
+
                 case "--FontGenerator":
                 case "-fg":
-                    // Tell the user she invoked FontGenerator
+                    // Tell the user he invoked FontGenerator
                     System.out.println("\n\nYou invoked the older standalone GUI version of FontGenerator");
 
                     // Printing the FontGenerator copyright notice
@@ -1315,12 +1300,63 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                     }
                     break;
 
-           /************************************
-            * JarCreator              *
-            ************************************/
+//                          BitmapFontGenerator __CLI__
+//#################################################################################
+
+                case "--FontGenerator-CLI":
+                case "-fgc":
+                    // Tell the user he invoked FontGenerator
+                    System.out.println("\n\nYou invoked the new CLI version of FontGenerator");
+
+                    // Printing the FontGenerator copyright notice
+                    de.kugihan.fonttoolkit.FontToolkit.printCopyrightNotice();
+
+                    // Check the number of command line arguments
+                    if (args.length != 6) {
+                        de.kugihan.fonttoolkit.FontToolkit.printUsage();
+                    }
+
+                    try {
+                        inputFontFile_CLI = new File(args[1]);
+                        inputDictDir_FILE_CLI = new File(args[2]);
+                        inputDictDir_STRING_CLI = args[2];
+                        font_Size_CLI = Integer.parseInt(args[3]);
+                        clip_Top_CLI = Integer.parseInt(args[4]);
+                        clip_Bottom_CLI = Integer.parseInt(args[5]);
+                        
+                        // DEBUG:
+                        System.out.println(String.valueOf(inputFontFile_CLI));
+                        System.out.println(String.valueOf(inputDictDir_FILE_CLI));
+                        System.out.println(inputDictDir_STRING_CLI);
+                        System.out.println(String.valueOf(font_Size_CLI));
+                        System.out.println(String.valueOf(clip_Top_CLI));
+                        System.out.println(String.valueOf(clip_Bottom_CLI));
+
+                        // Set flag to true to tell the app that the fontToolkit is
+                        // being called from the command line.
+                        //de.kugihan.fonttoolkit.FontToolkit.flag_cli = true;
+
+                        try {
+                            // Call the actual font generation process
+                            new FontToolkit().executeFontGenerationTaskCLI(inputFontFile_CLI,
+                                    inputDictDir_FILE_CLI, inputDictDir_STRING_CLI, font_Size_CLI, clip_Top_CLI, clip_Bottom_CLI);
+                        } catch (DfMCreatorException.fontNotAccessible ex) {
+                            System.out.println("The font file selected is not accessible");
+                        } catch (DfMCreatorException.dictionaryDirNotAccessible ex) {
+                            System.out.println("The input dictionary directory is not accessible");
+                        }
+                    } catch (Throwable t) {
+                        System.out.println(t);
+                    }
+                    break;
+
+
+//                          JarCreator
+//#################################################################################
+
                 case "--JarCreator-Internal":
                 case "-jci":
-                    // Tell the user she invoked JarCreator
+                    // Tell the user he invoked JarCreator
                     System.out.println("\n\nYou invoked the commad line version of JarCreator\n"
                             + "wich uses internal DictionaryForMIDs.jar/jad files.");
 
@@ -1328,7 +1364,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                     de.kugihan.jarCreator.JarCreator.printCopyrightNotice();
 
                     // Check the number of command line arguments
-                    if (args.length!=3){
+                    if (args.length != 3) {
                         de.kugihan.jarCreator.JarCreator.printUsageInternalDfM();
                     }
 
@@ -1339,11 +1375,11 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                         // Here, it is the one that holds the argument --JarCreator-Internal
                         JarCreator.setDictionaryDirectory(args[1] + PATH_SEPARATOR);
                         JarCreator.setOutputDirectory(args[2]);
-                        
+
                         String internalDfmPath = JAR_PATH_SEPARATOR + "de" + JAR_PATH_SEPARATOR + "kugihan"
-                                                    + JAR_PATH_SEPARATOR + "DfMCreator" + JAR_PATH_SEPARATOR
-                                                    + "Empty_DfM_JavaME" + JAR_PATH_SEPARATOR;
-                        
+                                + JAR_PATH_SEPARATOR + "DfMCreator" + JAR_PATH_SEPARATOR
+                                + "Empty_DfM_JavaME" + JAR_PATH_SEPARATOR;
+
                         JarCreator.setEmptyDictionaryForMID(internalDfmPath);
 
                         // Calling the actual main class
@@ -1354,11 +1390,11 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                         System.out.println(ex.getMessage());
                     }
                     break;
-                    
+
                 // Use the EXTERNAL DFM.jar/jad files
                 case "--JarCreator-External":
                 case "-jcx":
-                    // Tell the user she invoked JarCreator
+                    // Tell the user he invoked JarCreator
                     System.out.println("\n\nYou invoked the commad line version of JarCreator\n"
                             + "wich uses external DictionaryForMIDs.jar/jad files.");
 
@@ -1366,7 +1402,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                     de.kugihan.jarCreator.JarCreator.printCopyrightNotice();
 
                     // Check the number of command line arguments
-                    if (args.length!=4){
+                    if (args.length != 4) {
                         de.kugihan.jarCreator.JarCreator.printUsageExternalDfM();
                     }
 
@@ -1397,9 +1433,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                     // to DfM-Creator through command line, so, launch the
                     // DfM-Creator window.
                     break;
-                }
-        }
-        else {
+            }
+        } else {
             // Apply preferences. Among other
             // preferences, look and feel settings
             applyPreferences();
@@ -1413,9 +1448,6 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         }
 
     }
-
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ButtonsPanel;
     private javax.swing.JRadioButton CRRB;
@@ -1536,42 +1568,43 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 
-   /*
-    *
-    * DictdToDictionaryForMIDs subroutines
-    *
-    */
-
+    /*
+     *
+     * DictdToDictionaryForMIDs subroutines
+     *
+     */
     /**
-     * setDictdToDfMVals() checks the validity of the values entered by
-     * the user and sets them up for DictdToDfM if they are valid.
+     * setDictdToDfMVals() checks the validity of the values entered by the user
+     * and sets them up for DictdToDfM if they are valid.
+     *
      * @throws FileNotFoundException
      * @throws de.kugihan.DfMCreator.DfMCreatorException.DBNameTextFieldIsEmpty
      * @throws de.kugihan.DfMCreator.DfMCreatorException.DBPathTextFieldIsEmpty
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.OutCSVFileTextFieldIsEmpty
+     * @throws
+     * de.kugihan.DfMCreator.DfMCreatorException.OutCSVFileTextFieldIsEmpty
      * @throws de.kugihan.DfMCreator.DfMCreatorException.DBFolderNotAccessible
      * @throws de.kugihan.DfMCreator.DfMCreatorException.DBINIFileNotAccessible
      * @throws de.kugihan.DfMCreator.DfMCreatorException.OutCSVFileCantBeWritten
      */
     private void setDictdToDfMVals() throws FileNotFoundException, DBNameTextFieldIsEmpty,
-                                            DBPathTextFieldIsEmpty, OutCSVFileTextFieldIsEmpty,
-                                            DBFolderNotAccessible, DBINIFileNotAccessible,
-                                            OutCSVFileCantBeWritten, NoDictFileFound,
-                                            NoIndexFileFound {
+            DBPathTextFieldIsEmpty, OutCSVFileTextFieldIsEmpty,
+            DBFolderNotAccessible, DBINIFileNotAccessible,
+            OutCSVFileCantBeWritten, NoDictFileFound,
+            NoIndexFileFound {
 
-        if ("".equals(DBNameTextField.getText())){
+        if ("".equals(DBNameTextField.getText())) {
             throw new DBNameTextFieldIsEmpty(I18n.tr("dbFieldEmpty1.dfmCreatorMain")
-                                           + I18n.tr("dbFieldEmpty2.dfmCreatorMain"));
+                    + I18n.tr("dbFieldEmpty2.dfmCreatorMain"));
         }
 
-        if ("".equals(DBPathTextField.getText())){
+        if ("".equals(DBPathTextField.getText())) {
             throw new DBPathTextFieldIsEmpty(I18n.tr("dbLocation.dfmCreatorMain")
-                                           + I18n.tr("dbLocation2.dfmCreatorMain"));
+                    + I18n.tr("dbLocation2.dfmCreatorMain"));
         }
 
-        if ("".equals(OutCSVFileTextField.getText())){
+        if ("".equals(OutCSVFileTextField.getText())) {
             throw new OutCSVFileTextFieldIsEmpty(I18n.tr("outputFileEmpty.dfmCreatorMain")
-                                               + I18n.tr("outputFileEmpty2.dfmCreatorMain"));
+                    + I18n.tr("outputFileEmpty2.dfmCreatorMain"));
         }
 
         String dbNameVarString = DBNameTextField.getText();
@@ -1582,12 +1615,12 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         outputCSVFileVarString = trim(outputCSVFileVarString);
 
         File dirFile1 = new File(dbFolderNameVarString);
-        if (!dirFile1.isDirectory() || !dirFile1.canRead()){
-                throw new DBFolderNotAccessible(I18n.tr("dbNotAccessible.dfmCreatorMain"));
+        if (!dirFile1.isDirectory() || !dirFile1.canRead()) {
+            throw new DBFolderNotAccessible(I18n.tr("dbNotAccessible.dfmCreatorMain"));
         }
 
-        File iniFile = new File(dbFolderNameVarString +PATH_SEPARATOR+ dbNameVarString + ".ini");
-        if (!iniFile.canRead()){
+        File iniFile = new File(dbFolderNameVarString + PATH_SEPARATOR + dbNameVarString + ".ini");
+        if (!iniFile.canRead()) {
 
             // Default values: Database Name + .dict.dz | Database Name + .index
             String compressedDict = dbNameVarString + ".dict.dz";
@@ -1600,22 +1633,20 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             String dictIndexExtension = ".index";
 
             // Checking if the dict and index files exist.
-            File compressedDictFile = new File(dbFolderNameVarString +PATH_SEPARATOR+ compressedDict);
-            File uncompressedDictFile = new File (dbFolderNameVarString +PATH_SEPARATOR+ uncompressedDict);
-            File dictIndexFile = new File (dbFolderNameVarString +PATH_SEPARATOR+ dictIndex);
+            File compressedDictFile = new File(dbFolderNameVarString + PATH_SEPARATOR + compressedDict);
+            File uncompressedDictFile = new File(dbFolderNameVarString + PATH_SEPARATOR + uncompressedDict);
+            File dictIndexFile = new File(dbFolderNameVarString + PATH_SEPARATOR + dictIndex);
 
             String dictNameToBeWrittenToINI = "";
-            if (!compressedDictFile.exists() && (!uncompressedDictFile.exists())){
+            if (!compressedDictFile.exists() && (!uncompressedDictFile.exists())) {
                 throw new NoDictFileFound(I18n.tr("no.dict.file.found"));
-            } else
-                if (compressedDictFile.exists()){
-                    dictNameToBeWrittenToINI = dbNameVarString + compressedDictExtension;
-                } else
-                    if (uncompressedDictFile.exists()){
-                        dictNameToBeWrittenToINI = dbNameVarString + UncompressedDictExtension;
-                    }
+            } else if (compressedDictFile.exists()) {
+                dictNameToBeWrittenToINI = dbNameVarString + compressedDictExtension;
+            } else if (uncompressedDictFile.exists()) {
+                dictNameToBeWrittenToINI = dbNameVarString + UncompressedDictExtension;
+            }
 
-            if (!dictIndexFile.exists()){
+            if (!dictIndexFile.exists()) {
                 throw new NoIndexFileFound(I18n.tr("no.index.file.found"));
             }
 
@@ -1639,14 +1670,14 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
                 printAnyMsg(I18n.tr("cant.create.iniFile"), I18n.tr("cant.create.iniFile.winTitle"),
-                                                            JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.ERROR_MESSAGE);
                 throw new DBINIFileNotAccessible(I18n.tr("dbINI.dfmCreatorMain"));
             }
         }
 
         File dirFile = new File(outputCSVFileVarString);
-        if (!dirFile.isDirectory() || !dirFile.canRead()){
-                throw new OutCSVFileCantBeWritten(I18n.tr("outputFileAccessError.dfmCreatorMain"));
+        if (!dirFile.isDirectory() || !dirFile.canRead()) {
+            throw new OutCSVFileCantBeWritten(I18n.tr("outputFileAccessError.dfmCreatorMain"));
         }
 
         dbNameVar = dbNameVarString;
@@ -1663,99 +1694,72 @@ public class DfMCreatorMain extends javax.swing.JFrame {
          * Checking the radio buttons and setting the value of
          * outputEncodingCharsetVar accordingly.
          */
-        if (UTFRB.isSelected()){
+        if (UTFRB.isSelected()) {
             outputEncodingCharsetVar = "UTF-8";
-        }
-        else
-            if (UTFLERB.isSelected()){
-                outputEncodingCharsetVar = "UTF-16LE";
-            }
-        else
-            if (UTFBERB.isSelected()){
-                outputEncodingCharsetVar = "UTF-16BE";
-            }
-        else
-            if (UTF16RB.isSelected()){
-                outputEncodingCharsetVar = "UTF-16";
-            }
-        else
-            if (ISO1RB.isSelected()){
-                outputEncodingCharsetVar = "ISO-8859-1";
-            }
-        else
-            if (ISO2RB.isSelected()){
-                outputEncodingCharsetVar = "ISO-8859-2";
-            }
-        else
-            if (IBMRB.isSelected()){
-                outputEncodingCharsetVar = "IBM-2020-50";
-            }
-        else
-            if (ISO50RB.isSelected()){
-                outputEncodingCharsetVar = "UTF-2020-50";
-            }
-        else
-            if (OWNRB.isSelected()){
-                if (OwnEncTextField.isEnabled()){
-                    if (!"".equals(OwnEncTextField.getText())){
-                        outputEncodingCharsetVar = OwnEncTextField.getText();
-                    }
-                    else {
-                        throw new FileNotFoundException();
-                    }
+        } else if (UTFLERB.isSelected()) {
+            outputEncodingCharsetVar = "UTF-16LE";
+        } else if (UTFBERB.isSelected()) {
+            outputEncodingCharsetVar = "UTF-16BE";
+        } else if (UTF16RB.isSelected()) {
+            outputEncodingCharsetVar = "UTF-16";
+        } else if (ISO1RB.isSelected()) {
+            outputEncodingCharsetVar = "ISO-8859-1";
+        } else if (ISO2RB.isSelected()) {
+            outputEncodingCharsetVar = "ISO-8859-2";
+        } else if (IBMRB.isSelected()) {
+            outputEncodingCharsetVar = "IBM-2020-50";
+        } else if (ISO50RB.isSelected()) {
+            outputEncodingCharsetVar = "UTF-2020-50";
+        } else if (OWNRB.isSelected()) {
+            if (OwnEncTextField.isEnabled()) {
+                if (!"".equals(OwnEncTextField.getText())) {
+                    outputEncodingCharsetVar = OwnEncTextField.getText();
+                } else {
+                    throw new FileNotFoundException();
                 }
             }
+        }
 
         /*
          * Checking the other radio buttons and setting the
          * value of separatorCharacterVar accordingly.
          */
-        if (TabRB.isSelected()){
+        if (TabRB.isSelected()) {
             separatorCharacterVar = '\t';
-        }
-        else
-            if (CRRB.isSelected()){
-                separatorCharacterVar = '\r';
-            }
-        else
-            if (FFRB.isSelected()){
-                separatorCharacterVar = '\f';
-            }
-        else
-            if (OwnSCRB.isSelected()){
-                if (OwnSCTextField.isEnabled()){
-                    if (!"".equals(OwnSCTextField.getText())){
-                        separatorCharacterVar = OwnSCTextField.getText().charAt(0);
-                    }
-                    else {
-                        throw new FileNotFoundException();
-                    }
+        } else if (CRRB.isSelected()) {
+            separatorCharacterVar = '\r';
+        } else if (FFRB.isSelected()) {
+            separatorCharacterVar = '\f';
+        } else if (OwnSCRB.isSelected()) {
+            if (OwnSCTextField.isEnabled()) {
+                if (!"".equals(OwnSCTextField.getText())) {
+                    separatorCharacterVar = OwnSCTextField.getText().charAt(0);
+                } else {
+                    throw new FileNotFoundException();
                 }
             }
+        }
 
         /*
          * Checking the checkboxes and setting the values of
          * keepTabsAndNewLinesVar, switchLanguagesVar
          * and removeSquareBracketsVar.
          */
-        if (SLCheckBox.isSelected()){
+        if (SLCheckBox.isSelected()) {
             switchLanguagesVar = true;
-        }
-        else {
+        } else {
             switchLanguagesVar = false;
         }
 
-        if (KTCheckBox.isSelected()){
+        if (KTCheckBox.isSelected()) {
             keepTabsAndNewLinesVar = true;
-        }
-        else {
+        } else {
             keepTabsAndNewLinesVar = false;
         }
 
-        if (RSBCheckBox.isSelected()){
+        if (RSBCheckBox.isSelected()) {
             removeSquareBracketsVar = true;
-        }
-        else {
+        } else {
             removeSquareBracketsVar = false;
         }
 
@@ -1766,7 +1770,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         // otherwise creates it but if it already exists, avoids
         // overwriting it so that other conversion settings may
         // be enqueued.
-        if (!dtdfmQueueCreationFlag){
+        if (!dtdfmQueueCreationFlag) {
             dictConvQueue = new LinkedList<>();
             // Initializing our ArrayList
             dictConvArray = new ArrayList<>();
@@ -1812,7 +1816,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     // enabling the buttons, textfields...Otherwise
     // we deactive them since he won't need them.
     private void monitorEmptyDfMCheckBoxState() {
-        if (chooseCustomJarJadCBox.isSelected()){
+        if (chooseCustomJarJadCBox.isSelected()) {
             EmptyDfMBrowseLabel.setEnabled(true);
             EmptyDfMDirBrowseButton.setEnabled(true);
             EmptyDfMDirTF.setEnabled(true);
@@ -1825,8 +1829,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         }
     }
 
-
     public class DTDFMValsToEnqueue {
+
         String db;
         String dbFolder;
         String outputCSV;
@@ -1838,8 +1842,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }
 
     /**
-     * this method gathers all the required
-     * things needed to be done in order to
+     * this method gathers all the required things needed to be done in order to
      * convert a dict file with DictdToDfM.
      */
     private void DictdConvDoAll() {
@@ -1848,52 +1851,49 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             DictdToDfM.printDictdConvSummary();
         } catch (FileNotFoundException ex) {
             DfMCreatorException.printErrorMsg();
-        } catch (DBNameTextFieldIsEmpty e){
+        } catch (DBNameTextFieldIsEmpty e) {
             printAnyMsg(DfMCreatorException.DBNameTextFieldIsEmptyMsg,
                     I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (DBPathTextFieldIsEmpty e){
+        } catch (DBPathTextFieldIsEmpty e) {
             printAnyMsg(DfMCreatorException.DBPathTextFieldIsEmptyMsg,
                     I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (OutCSVFileTextFieldIsEmpty e){
+        } catch (OutCSVFileTextFieldIsEmpty e) {
             printAnyMsg(DfMCreatorException.OutCSVFileTextFieldIsEmptyMsg,
                     I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (DBFolderNotAccessible e){
+        } catch (DBFolderNotAccessible e) {
             printAnyMsg(DfMCreatorException.DBFolderNotAccessibleMsg,
                     I18n.tr("dirNotAccessible.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (DBINIFileNotAccessible e){
+        } catch (DBINIFileNotAccessible e) {
             printAnyMsg(DfMCreatorException.DBINIFileNotAccessibleMsg,
                     I18n.tr("fileNotAccessible.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (OutCSVFileCantBeWritten e){
+        } catch (OutCSVFileCantBeWritten e) {
             printAnyMsg(DfMCreatorException.OutCSVFileCantBeWrittenMsg,
                     I18n.tr("dirNotAccessible.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (NoDictFileFound e){
+        } catch (NoDictFileFound e) {
             printAnyMsg(DfMCreatorException.NoDictFileFoundMsg,
                     I18n.tr("no.index.file.found.WinTitle"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (NoIndexFileFound e){
+        } catch (NoIndexFileFound e) {
             printAnyMsg(DfMCreatorException.NoIndexFileFoundMsg,
                     I18n.tr("no.index.file.found.WinTitle"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        }
-
-        catch (Throwable t){
-                printAnyMsg(I18n.tr("unknownException.dfmCreatorMain",
-                        new Object[] {t, t.getLocalizedMessage()}),
-                        I18n.tr("unknownExceptionTitle"), JOptionPane.ERROR_MESSAGE);
+        } catch (Throwable t) {
+            printAnyMsg(I18n.tr("unknownException.dfmCreatorMain",
+                    new Object[]{t, t.getLocalizedMessage()}),
+                    I18n.tr("unknownExceptionTitle"), JOptionPane.ERROR_MESSAGE);
             System.out.println(t + "\n");
         }
     }
 
     /**
-    * resets the setting for the
-    * DictdToDictionaryForMIDs tab.
-    */
+     * resets the setting for the DictdToDictionaryForMIDs tab.
+     */
     private void clearFields() {
         DBNameTextField.setText("");
         DBPathTextField.setText("");
@@ -1912,42 +1912,43 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }
 
 
-   /*
-    *
-    * DictionaryGneration subroutines
-    *
-    */
-
-
+    /*
+     *
+     * DictionaryGneration subroutines
+     *
+     */
     /**
-     * setDictGenVals() checks and sets the values up
-     * for DictionaryGeneration
+     * setDictGenVals() checks and sets the values up for DictionaryGeneration
+     *
      * @throws FileNotFoundException
      * @throws de.kugihan.DfMCreator.DfMCreatorException.PropFileErrorException
      * @throws de.kugihan.DfMCreator.DfMCreatorException.SourceFileTFIsEmpty
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.DirectoryDestinationTFIsEmpty
+     * @throws
+     * de.kugihan.DfMCreator.DfMCreatorException.DirectoryDestinationTFIsEmpty
      * @throws de.kugihan.DfMCreator.DfMCreatorException.PropertyPathTFIsEmpty
      * @throws de.kugihan.DfMCreator.DfMCreatorException.SourceFileNotAccessible
      * @throws de.kugihan.DfMCreator.DfMCreatorException.SourceFileNotAccessible
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.PropertyPathNotAccessible
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.DirectoryDestinationNotAccessible
+     * @throws
+     * de.kugihan.DfMCreator.DfMCreatorException.PropertyPathNotAccessible
+     * @throws
+     * de.kugihan.DfMCreator.DfMCreatorException.DirectoryDestinationNotAccessible
      * @throws de.kugihan.DfMCreator.DfMCreatorException.CantCreateDestDir
      */
     public void setDictGenVals() throws FileNotFoundException, PropFileErrorException,
-                                     SourceFileTFIsEmpty, DirectoryDestinationTFIsEmpty,
-                                     PropertyPathTFIsEmpty, SourceFileNotAccessible,
-                                     SourceFileNotAccessible, PropertyPathNotAccessible,
-                                     DirectoryDestinationNotAccessible, CantCreateDestDir {
+            SourceFileTFIsEmpty, DirectoryDestinationTFIsEmpty,
+            PropertyPathTFIsEmpty, SourceFileNotAccessible,
+            SourceFileNotAccessible, PropertyPathNotAccessible,
+            DirectoryDestinationNotAccessible, CantCreateDestDir {
 
-        if ("".equals(SourceFileTF.getText())){
+        if ("".equals(SourceFileTF.getText())) {
             throw new SourceFileTFIsEmpty(I18n.tr("srcFileField.dfmCreatorMain"));
         }
 
-        if ("".equals(DirectoryDestinationTF.getText())){
+        if ("".equals(DirectoryDestinationTF.getText())) {
             throw new DirectoryDestinationTFIsEmpty(I18n.tr("destDirField.dfmCreatorMain"));
         }
 
-        if ("".equals(PropertyPathTF.getText())){
+        if ("".equals(PropertyPathTF.getText())) {
             throw new PropertyPathTFIsEmpty(I18n.tr("propFilePath.dfmCreatorMain"));
         }
 
@@ -1977,23 +1978,23 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
 
         File srcFile = new File(sourceFile);
-        if (!srcFile.exists() || !srcFile.canRead()){
+        if (!srcFile.exists() || !srcFile.canRead()) {
             throw new SourceFileNotAccessible("");
         }
 
         File destDir = new File(directoryDestination);
-        if (!destDir.exists() || !destDir.canRead() || !destDir.isDirectory() || !destDir.canWrite()){
+        if (!destDir.exists() || !destDir.canRead() || !destDir.isDirectory() || !destDir.canWrite()) {
             throw new DirectoryDestinationNotAccessible(I18n.tr("destDirAccessError.dfmCreatorMain"));
         }
 
         File propFile = new File(propertyPath);
-        if (!propFile.exists() || !propFile.canRead()){
+        if (!propFile.exists() || !propFile.canRead()) {
             throw new PropFileErrorException(I18n.tr("dictPropFileAccessError.dfmCreatorMain"));
         }
 
         File destCSVsDir = new File(directoryDestination + PATH_SEPARATOR + "dictionary");
-        if (!destCSVsDir.exists()){
-            if (!destCSVsDir.mkdirs()){
+        if (!destCSVsDir.exists()) {
+            if (!destCSVsDir.mkdirs()) {
                 throw new CantCreateDestDir(I18n.tr("destDirCreationError.dfmCreatorMain"));
             }
         }
@@ -2006,7 +2007,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         // otherwise creates it but if it already exists, prevents
         // overwriting it so that other dictionary generation items
         // may be enqueued.
-        if (!dictgenQueueCreationFlag){
+        if (!dictgenQueueCreationFlag) {
             dictgenQueue = new LinkedList<>();
             // Initializing our DictGen ArrayList
             dictGenArray = new ArrayList<>();
@@ -2025,7 +2026,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         // This will be used to display a representation of the queue.
         dictGenArray.add(dictgenRecord.srcFile);
 
-         // As a test, try passing values to DictGen
+        // As a test, try passing values to DictGen
         DictionaryGeneration.setSourceFile(sourceFile);
         DictionaryGeneration.setDirectoryDestination(directoryDestination + PATH_SEPARATOR + "dictionary");
         DictionaryGeneration.setPropertyPath(propertyPath);
@@ -2033,15 +2034,15 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }
 
     public class DictGenValsToEnqueue {
+
         String srcFile;
         String destDir;
         String propPath;
     }
 
     /**
-     * this method will execute everything for
-     * DictionaryGeneration. it's like the
-     * actionPerformed subroutine for DictGen.
+     * this method will execute everything for DictionaryGeneration. it's like
+     * the actionPerformed subroutine for DictGen.
      */
     private void DictGenDoAll() {
         try {
@@ -2053,46 +2054,44 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             printAnyMsg(DfMCreatorException.PropFileErrorExceptionMsg,
                     I18n.tr("propsFileError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (SourceFileTFIsEmpty e){
+        } catch (SourceFileTFIsEmpty e) {
             printAnyMsg(DfMCreatorException.SourceFileTFIsEmptyMsg,
                     I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (DirectoryDestinationTFIsEmpty e){
+        } catch (DirectoryDestinationTFIsEmpty e) {
             printAnyMsg(DfMCreatorException.DirectoryDestinationTFIsEmptyMsg,
                     I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (PropertyPathTFIsEmpty e){
+        } catch (PropertyPathTFIsEmpty e) {
             printAnyMsg(DfMCreatorException.PropertyPathTFIsEmptyMsg,
                     I18n.tr("emptyFieldError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (SourceFileNotAccessible e){
+        } catch (SourceFileNotAccessible e) {
             printAnyMsg(DfMCreatorException.SourceFileNotAccessibleMsg,
                     I18n.tr("fileNotAccessible.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (PropertyPathNotAccessible e){
+        } catch (PropertyPathNotAccessible e) {
             printAnyMsg(DfMCreatorException.PropertyPathNotAccessibleMsg,
                     I18n.tr("DictDirAccessError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (DirectoryDestinationNotAccessible e){
+        } catch (DirectoryDestinationNotAccessible e) {
             printAnyMsg(DfMCreatorException.DirectoryDestinationNotAccessibleMsg,
                     I18n.tr("dictDirAccessError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (CantCreateDestDir e){
+        } catch (CantCreateDestDir e) {
             printAnyMsg(DfMCreatorException.CantCreateDestDirMsg,
                     I18n.tr("dictCreationError.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (Throwable t){
-                printAnyMsg(I18n.tr("unknownError.dfmCreatorMain",
-                        new Object[] {t, t.getLocalizedMessage()}),
-                        I18n.tr("unknownErrorTitle"), JOptionPane.ERROR_MESSAGE);
+        } catch (Throwable t) {
+            printAnyMsg(I18n.tr("unknownError.dfmCreatorMain",
+                    new Object[]{t, t.getLocalizedMessage()}),
+                    I18n.tr("unknownErrorTitle"), JOptionPane.ERROR_MESSAGE);
             System.out.println(t + "\n");
         }
     }
 
-
     /**
-     * resets the setting for the
-     * DictionaryGeneration tab.
+     * resets the setting for the DictionaryGeneration tab.
      */
     private void clearDictGenFields() {
         SourceFileTF.setText("");
@@ -2117,31 +2116,34 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * JarCreator subroutines
      *
      */
-
     /**
      * setJCVals() checks and sets the values up for JarCreator.
+     *
      * @throws FileNotFoundException
      * @throws de.kugihan.DfMCreator.DfMCreatorException.BadDictDirNameException
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.DictionaryDirectoryNotAccessible
+     * @throws
+     * de.kugihan.DfMCreator.DfMCreatorException.DictionaryDirectoryNotAccessible
      * @throws de.kugihan.DfMCreator.DfMCreatorException.PropFileErrorException
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.EmptyDfMJarJadDirDoesNotExist
+     * @throws
+     * de.kugihan.DfMCreator.DfMCreatorException.EmptyDfMJarJadDirDoesNotExist
      * @throws de.kugihan.DfMCreator.DfMCreatorException.EmptyDfMFileNotFound
-     * @throws de.kugihan.DfMCreator.DfMCreatorException.OutputDirectoryNotAccessible
+     * @throws
+     * de.kugihan.DfMCreator.DfMCreatorException.OutputDirectoryNotAccessible
      * @throws de.kugihan.DfMCreator.DfMCreatorException.InputCSVFilesTFIsEmpty
      * @throws de.kugihan.DfMCreator.DfMCreatorException.EmptyDfMDirTFIsEmpty
      * @throws de.kugihan.DfMCreator.DfMCreatorException.OutputDirTFIsEmpty
      */
     public void setJarCreatorVals() throws FileNotFoundException, BadDictDirNameException,
-                                   DictionaryDirectoryNotAccessible, PropFileErrorException,
-                                   EmptyDfMJarJadDirDoesNotExist, EmptyDfMFileNotFound,
-                                   OutputDirectoryNotAccessible, InputCSVFilesTFIsEmpty,
-                                   EmptyDfMDirTFIsEmpty, OutputDirTFIsEmpty, IllegalArgumentException {
+            DictionaryDirectoryNotAccessible, PropFileErrorException,
+            EmptyDfMJarJadDirDoesNotExist, EmptyDfMFileNotFound,
+            OutputDirectoryNotAccessible, InputCSVFilesTFIsEmpty,
+            EmptyDfMDirTFIsEmpty, OutputDirTFIsEmpty, IllegalArgumentException {
 
-        if ("".equals(InputCSVFilesTF.getText())){
+        if ("".equals(InputCSVFilesTF.getText())) {
             throw new InputCSVFilesTFIsEmpty(I18n.tr("inputFileFieldEmpty.dfmCreatorMain"));
         }
 
-        if ("".equals(OutputDirTF.getText())){
+        if ("".equals(OutputDirTF.getText())) {
             throw new OutputDirTFIsEmpty(I18n.tr("outputDirField.dfmCreatorMain"));
         }
         dictionarydirectory = InputCSVFilesTF.getText();
@@ -2158,24 +2160,24 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         outputdirectory = outputdirectory + PATH_SEPARATOR;
 
         File dictdir = new File(dictionarydirectory);
-        if (!dictdir.exists() || !dictdir.canRead() || !dictdir.isDirectory()){
+        if (!dictdir.exists() || !dictdir.canRead() || !dictdir.isDirectory()) {
             throw new DictionaryDirectoryNotAccessible(I18n.tr("dictDirAccessError.dfmCreatorMain"));
         }
         File outdir = new File(outputdirectory);
-        if (!outdir.exists() || !outdir.canRead() || !outdir.isDirectory()){
+        if (!outdir.exists() || !outdir.canRead() || !outdir.isDirectory()) {
             throw new OutputDirectoryNotAccessible(I18n.tr("outputDirAccessError.dfmCreatorMain"));
         }
-        if (!dictionarydirectory.endsWith(DictionaryDataFile.pathNameDataFiles)){
+        if (!dictionarydirectory.endsWith(DictionaryDataFile.pathNameDataFiles)) {
             throw new BadDictDirNameException(I18n.tr("dirNameError.dfmCreatorMain"));
         }
         File propfile = new File(dictionarydirectory + PATH_SEPARATOR + DictionaryDataFile.propertyFileName);
-        if (!propfile.exists() || !propfile.canRead()){
+        if (!propfile.exists() || !propfile.canRead()) {
             throw new PropFileErrorException(I18n.tr("dictPropsFileAccessError.dfmCreatorMain"));
         }
         // Activate the processing for the empty DfM jar-jad
         // files when the check box is selected.
-        if (chooseCustomJarJadCBox.isSelected()){
-            if ("".equals(EmptyDfMDirTF.getText())){
+        if (chooseCustomJarJadCBox.isSelected()) {
+            if ("".equals(EmptyDfMDirTF.getText())) {
                 throw new EmptyDfMDirTFIsEmpty(I18n.tr("emptyDfM.dfmCreatorMain"));
             }
 
@@ -2184,12 +2186,12 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             emptydictionaryformids = emptydictionaryformids + PATH_SEPARATOR;
 
             File emptydfmdir = new File(emptydictionaryformids);
-            if (!emptydfmdir.exists() || !emptydfmdir.canRead() || !emptydfmdir.isDirectory()){
+            if (!emptydfmdir.exists() || !emptydfmdir.canRead() || !emptydfmdir.isDirectory()) {
                 throw new EmptyDfMJarJadDirDoesNotExist(I18n.tr("emptyJarJad.dfmCreatorMain"));
             }
 
             File emptydfm = new File(emptydictionaryformids + PATH_SEPARATOR + JarCreator.FILE_EMPTY_JAR_NAME);
-            if (!emptydfm.exists() || !emptydfm.canRead()){
+            if (!emptydfm.exists() || !emptydfm.canRead()) {
                 throw new EmptyDfMFileNotFound(I18n.tr("emptyJarNotFound.dfmCreatorMain"));
             }
             externalEmptyDfMFlag = true;
@@ -2201,7 +2203,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         // otherwise creates it but if it already exists, prevents
         // overwriting it so that other dictionary generation items
         // may be enqueued.
-        if (!jarCreatorQueueCreationtorFlag){
+        if (!jarCreatorQueueCreationtorFlag) {
             jarCreatorQueue = new LinkedList<>();
             // Initializing our JarCreator ArrayList
             jarCreatorArray = new ArrayList<>();
@@ -2212,13 +2214,13 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         jarCreatorRecord.dictDir = dictionarydirectory + PATH_SEPARATOR;
         jarCreatorRecord.outputDir = outputdirectory;
 
-        if (chooseCustomJarJadCBox.isSelected()){
+        if (chooseCustomJarJadCBox.isSelected()) {
             jarCreatorRecord.emptyDfM = emptydictionaryformids;
         } else {
             //throw new IllegalArgumentException(); // For debug purposes...
             String internalDfmPath = JAR_PATH_SEPARATOR + "de" + JAR_PATH_SEPARATOR + "kugihan"
-                           + JAR_PATH_SEPARATOR + "DfMCreator" + JAR_PATH_SEPARATOR
-                           + "Empty_DfM_JavaME" + JAR_PATH_SEPARATOR;
+                    + JAR_PATH_SEPARATOR + "DfMCreator" + JAR_PATH_SEPARATOR
+                    + "Empty_DfM_JavaME" + JAR_PATH_SEPARATOR;
             jarCreatorRecord.emptyDfM = internalDfmPath;
         }
 
@@ -2236,76 +2238,75 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }
 
     public class JarCreatorValsToEnqueue {
+
         String dictDir;
         String emptyDfM;
         String outputDir;
     }
 
     /**
-     * this method will execute everything for
-     * JarCreator. it's like the actionPerformed
-     * subroutine for JarCreator.
+     * this method will execute everything for JarCreator. it's like the
+     * actionPerformed subroutine for JarCreator.
      */
     private void JarCreatorDoAll() {
         try {
             setJarCreatorVals();
             JarCreator.showJarCreationSum();
-        } catch (FileNotFoundException ex){
+        } catch (FileNotFoundException ex) {
             DfMCreatorException.printErrorMsg();
-        } catch (BadDictDirNameException e){
+        } catch (BadDictDirNameException e) {
             printAnyMsg(DfMCreatorException.BadDictDirNameExceptionMsg,
                     I18n.tr("badDirNameTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (PropFileErrorException e){
+        } catch (PropFileErrorException e) {
             printAnyMsg(DfMCreatorException.PropFileErrorExceptionMsg,
                     I18n.tr("propsFileErrorTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (EmptyDfMFileNotFound e){
+        } catch (EmptyDfMFileNotFound e) {
             printAnyMsg(DfMCreatorException.EmptyDfMFileNotFoundMsg,
                     I18n.tr("emptyDfMTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (InputCSVFilesTFIsEmpty e){
+        } catch (InputCSVFilesTFIsEmpty e) {
             printAnyMsg(DfMCreatorException.InputCSVFilesTFIsEmptyMsg,
                     I18n.tr("filedEmptyErrorTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (EmptyDfMDirTFIsEmpty e){
+        } catch (EmptyDfMDirTFIsEmpty e) {
             printAnyMsg(DfMCreatorException.EmptyDfMDirTFIsEmptyMsg,
                     I18n.tr("fieldEmptyErrorTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (OutputDirTFIsEmpty e){
+        } catch (OutputDirTFIsEmpty e) {
             printAnyMsg(DfMCreatorException.OutputDirTFIsEmptyMsg,
                     I18n.tr("fieldEmptyErrorTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (OutputDirectoryNotAccessible e){
+        } catch (OutputDirectoryNotAccessible e) {
             printAnyMsg(DfMCreatorException.OutputDirectoryNotAccessibleMsg,
                     I18n.tr("dictAccessTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (EmptyDfMJarJadDirDoesNotExist e){
+        } catch (EmptyDfMJarJadDirDoesNotExist e) {
             printAnyMsg(DfMCreatorException.EmptyDfMJarJadDirDoesNotExistMsg,
                     I18n.tr("emptyJarJadTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (DictionaryDirectoryNotAccessible e){
+        } catch (DictionaryDirectoryNotAccessible e) {
             printAnyMsg(DfMCreatorException.DictionaryDirectoryNotAccessibleMsg,
                     I18n.tr("dictAccessTitle.dfmCreatorMain"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getLocalizedMessage());
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             // Before i find a way to fix this.
             printAnyMsg("This functionality is broken for now.\n"
-                      + "Please go and select the checkbox so as\n"
-                      + "to provide an external empty DictionaryForMIDs.\n"
-                      + "This problem shall be fixed in a newer version.",
-                        "Broken Bundled DfM", JOptionPane.ERROR_MESSAGE);
-        } catch (Throwable t){
+                    + "Please go and select the checkbox so as\n"
+                    + "to provide an external empty DictionaryForMIDs.\n"
+                    + "This problem shall be fixed in a newer version.",
+                    "Broken Bundled DfM", JOptionPane.ERROR_MESSAGE);
+        } catch (Throwable t) {
             printAnyMsg(I18n.tr("unknownRuntimeError.dfmCreatorMain",
-                    new Object[] {t, t.getLocalizedMessage()}),
+                    new Object[]{t, t.getLocalizedMessage()}),
                     I18n.tr("unknownRuntimeErrorTitle"), JOptionPane.ERROR_MESSAGE);
             System.out.println(t + "\n");
         }
     }
 
     /**
-     * resets the setting for the
-     * JarCreator tab.
+     * resets the setting for the JarCreator tab.
      */
     private void clearJarCreatorFields() {
         InputCSVFilesTF.setText("");
@@ -2324,15 +2325,13 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     /**
      * BitmapFontGenerator subroutines
      */
-
     /**
-     * addFontTKToDfMCreatorTabbedPane()
-     * The font_size generator tab holds the FontToolkit created by Sean Kernohan.
-     * When i started creating the DfM-Creator, i did not want to have to
-     * write a new GUI from scratch for the BitmapFontGenerator. So, i decided
-     * to modify the FontToolkit and integrate it in the DfM-Creator.
-     * The code below does what's necessary to get the FontToolkit to
-     * work with the DictionaryForMIDs-Creator.
+     * addFontTKToDfMCreatorTabbedPane() The font_size generator tab holds the
+     * FontToolkit created by Sean Kernohan. When i started creating the
+     * DfM-Creator, i did not want to have to write a new GUI from scratch for
+     * the BitmapFontGenerator. So, i decided to modify the FontToolkit and
+     * integrate it in the DfM-Creator. The code below does what's necessary to
+     * get the FontToolkit to work with the DictionaryForMIDs-Creator.
      */
     private void addFontTKToDfMCreatorTabbedPane() {
         // Creating a toolbar
@@ -2383,7 +2382,9 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         fontTKPanel.setVisible(true);
     }
 
-    public void createQueueForBFG(){
+    public void createQueueForBFG(File inputFontFile,
+            File inputDictDirectory_FILE, String inputDictDirectory_STRING,
+            int fontSize, int clip_Top, int clip_Bottom) {
         // Creating a new item to be put in the queue.
         BitmapFontGeneratorToEnqueue bfgenRecord = new BitmapFontGeneratorToEnqueue();
 
@@ -2391,7 +2392,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         // otherwise creates it but if it already exists, avoids
         // overwriting it so that other conversion settings may
         // be enqueued.
-        if (!fontGenerationQueueCreationFlag){
+        if (!fontGenerationQueueCreationFlag) {
             fontGenerationQueue = new LinkedList<>();
             // Initializing our ArrayList
             fontGenerationArray = new ArrayList<>();
@@ -2399,13 +2400,13 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         }
 
         // Passing values to the variables of this item
-        bfgenRecord.in_file = fontTK.getInputFontFile();
-        bfgenRecord.dict_dir = fontTK.getDirFile();
-        bfgenRecord.font_directory = fontTK.getFontDirectory();
+        bfgenRecord.input_font_file = inputFontFile;
+        bfgenRecord.input_dict_dir_FILE = inputDictDirectory_FILE;
+        bfgenRecord.input_dict_dir_STRING = inputDictDirectory_STRING;
         bfgenRecord.cback = fontTK.getCallback();
-        bfgenRecord.font_size = fontTK.getFontSize();
-        bfgenRecord.clip_top = fontTK.getClipTop();
-        bfgenRecord.clip_bottom = fontTK.getClipBottom();
+        bfgenRecord.font_size = fontSize;
+        bfgenRecord.clip_top = clip_Top;
+        bfgenRecord.clip_bottom = clip_Bottom;
 
         // Actually adding the element to the queue
         fontGenerationQueue.add(bfgenRecord);
@@ -2416,13 +2417,14 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }
 
     public class BitmapFontGeneratorToEnqueue {
-        File in_file;
-        File dict_dir;
-        String font_directory;
-        Callback cback;
-        int font_size;
-        int clip_top;
-        int clip_bottom;
+
+        public File input_font_file;
+        public File input_dict_dir_FILE;
+        public String input_dict_dir_STRING;
+        public Callback cback;
+        public int font_size;
+        public int clip_top;
+        public int clip_bottom;
     }
 
 
@@ -2431,10 +2433,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
      * miscellaneous subroutiness
      *
      */
-
     /**
-     * CreateAndDisplayTheForm() creates and displays
-     * The DfM-Creator form.
+     * CreateAndDisplayTheForm() creates and displays The DfM-Creator form.
      */
     private static void CreateAndDisplayTheForm() {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -2442,7 +2442,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             public void run() {
                 dfmCreator = new DfMCreatorMain();
                 dfmCreator.setLocation(screenSize.width / 2 - dfmCreator.getWidth() / 2,
-                                     screenSize.height / 2 - dfmCreator.getHeight() / 2);
+                        screenSize.height / 2 - dfmCreator.getHeight() / 2);
                 String s = "images" + "/" + "dfm-creator.png";
                 URL imgURL = getClass().getResource(s);
                 if (imgURL == null) {
@@ -2455,33 +2455,28 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     }
 
     /**
-     * printCopyrightNotice() prints a copyright
-     * statement and then exits.
+     * printCopyrightNotice() prints a copyright statement and then exits.
      */
-    public static void printCopyrightNotice(){
-    System.out.println("\n\nDfM-Creator V" + dfm_creator_version + ","
-                    + "(C) 2012, 2013 Karim Mahamane Karimou\n"
-                    + "DfM-Creator comes with ABSOLUTELY NO WARRANTY.\n"
-                    + "This is free software, and you are welcome to redistribute it\n"
-                    + "under the terms and conditions of the GNU General Public License.\n\n");
+    public static void printCopyrightNotice() {
+        System.out.println("\n\nDfM-Creator V" + dfm_creator_version + ","
+                + "(C) 2012, 2013 Karim Mahamane Karimou\n"
+                + "DfM-Creator comes with ABSOLUTELY NO WARRANTY.\n"
+                + "This is free software, and you are welcome to redistribute it\n"
+                + "under the terms and conditions of the GNU General Public License.\n\n");
     }
 
-
     /**
-     * setTheLocale() gets and sets the default
-     * locale. It can also test other locales
-     * during debug sessions for example.
-
-    private static void setTheLocale() {
-        //Locale locale = new Locale.Builder().setLanguage("en").setRegion("US").build();
-        //Locale locale = new Locale.Builder().setLanguage("fr").setRegion("FR").build();
-        Locale locale = Locale.getDefault();
-
-        // debug
-        System.out.println("Locale: " + locale.toString());
-        I18n.setLocale(locale);
-    }*/
-
+     * setTheLocale() gets and sets the default locale. It can also test other
+     * locales during debug sessions for example.
+     *
+     * private static void setTheLocale() { //Locale locale = new
+     * Locale.Builder().setLanguage("en").setRegion("US").build(); //Locale
+     * locale = new Locale.Builder().setLanguage("fr").setRegion("FR").build();
+     * Locale locale = Locale.getDefault();
+     *
+     * // debug System.out.println("Locale: " + locale.toString());
+     * I18n.setLocale(locale); }
+     */
     /**
      * showAbout() gets the about window
      */
@@ -2490,14 +2485,14 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         aboutbox.setSize(525, 485);
         aboutbox.setModal(true);
         aboutbox.setLocation(screenSize.width / 2 - aboutbox.getWidth() / 2,
-                          screenSize.height / 2 - aboutbox.getHeight() / 2);
+                screenSize.height / 2 - aboutbox.getHeight() / 2);
         aboutbox.setVisible(true);
     }
 
     /**
      * showPrefsWin() gets the preferences window.
      */
-    private void showPrefsWin(){
+    private void showPrefsWin() {
         PreferencesBox prefs = PreferencesBox.getPrefsWin();
         prefs.setVisible(true);
     }
@@ -2508,110 +2503,102 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     private void showHelpWindow() {
         JFrame hw = HelpContents.createAndShowGUI();
         hw.setLocation(screenSize.width / 2 - hw.getWidth() / 2,
-                        screenSize.height / 2 - hw.getHeight() / 2);
+                screenSize.height / 2 - hw.getHeight() / 2);
         hw.setVisible(true);
     }
 
-   /**
-    * savePreferences() saves the preferences
-    * settings.
-    * @param look the selected look and feel
-    */
-   public static void savePreferences(String look) {
-      try {
-         node.put("DfMCreator.window.LookAndFeel", look);
-         printAnyMsg(I18n.tr("lookAndFeelMsg.dfmCreatorMain"),
-                     I18n.tr("prefsSaved.dfmCreatorMain"), JOptionPane.INFORMATION_MESSAGE);
-      }
-      catch (Throwable t) {
-          System.out.println(t + "\n" + t.getCause());
-      }
-   }
-
-/**
-    * saveLanguagePrefs() saves the preferences
-    * settings relative to the language of the UI
-    * @param look the selected look and feel
-    */
-   public static void saveLanguagePrefs(String lang) {
-      try {
-         node.put("DfMCreator.language.Settings", lang);
-         printAnyMsg(I18n.tr("lang.prefs.saved.DfMCreatorMain"),
-                     I18n.tr("lang.prefs.saved.WinTitle.DfMCreatorMain"), JOptionPane.INFORMATION_MESSAGE);
-      }
-      catch (Throwable t) {
-          System.out.println(t + "\n" + t.getCause());
-      }
-   }
+    /**
+     * savePreferences() saves the preferences settings.
+     *
+     * @param look the selected look and feel
+     */
+    public static void savePreferences(String look) {
+        try {
+            node.put("DfMCreator.window.LookAndFeel", look);
+            printAnyMsg(I18n.tr("lookAndFeelMsg.dfmCreatorMain"),
+                    I18n.tr("prefsSaved.dfmCreatorMain"), JOptionPane.INFORMATION_MESSAGE);
+        } catch (Throwable t) {
+            System.out.println(t + "\n" + t.getCause());
+        }
+    }
 
     /**
-     * applyPreferences() applies the saved
-     * preferences at program startup.
+     * saveLanguagePrefs() saves the preferences settings relative to the
+     * language of the UI
+     *
+     * @param look the selected look and feel
+     */
+    public static void saveLanguagePrefs(String lang) {
+        try {
+            node.put("DfMCreator.language.Settings", lang);
+            printAnyMsg(I18n.tr("lang.prefs.saved.DfMCreatorMain"),
+                    I18n.tr("lang.prefs.saved.WinTitle.DfMCreatorMain"), JOptionPane.INFORMATION_MESSAGE);
+        } catch (Throwable t) {
+            System.out.println(t + "\n" + t.getCause());
+        }
+    }
+
+    /**
+     * applyPreferences() applies the saved preferences at program startup.
      */
     public static void applyPreferences() {
-      try {
-         if (! root.nodeExists(pathName)){
-
-             //TODO: Becomes a placeholder now for writing new code :-)
-
-         } else {
-             if (LookAndFeel != null) {
-                try {
-                    javax.swing.UIManager.setLookAndFeel(LookAndFeel);
+        try {
+            if (!root.nodeExists(pathName)) {
+                //TODO: Becomes a placeholder now for writing new code :-)
+            } else {
+                if (LookAndFeel != null) {
+                    try {
+                        javax.swing.UIManager.setLookAndFeel(LookAndFeel);
+                    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException t) {
+                        System.out.println(t.getLocalizedMessage() + "\n" + t.getCause());
+                    }
                 }
-                catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException t) {
-                    System.out.println(t.getLocalizedMessage() + "\n" + t.getCause());
+                if (selectedLang != null) {
+                    Locale selectedLocale = Locale.forLanguageTag(selectedLang);
+                    I18n.setLocale(selectedLocale);
+                    System.out.println("Locale: " + selectedLocale.toString());
+                } else {
+                    //Locale locale = new Locale.Builder().setLanguage("en").setRegion("US").build();
+                    //Locale locale = new Locale.Builder().setLanguage("fr").setRegion("FR").build();
+                    Locale defaultLocale = Locale.getDefault();
+                    I18n.setLocale(defaultLocale);
+                    System.out.println("Locale: " + defaultLocale.toString());
                 }
-             }
-             if (selectedLang != null){
-                Locale selectedLocale = Locale.forLanguageTag(selectedLang);
-                I18n.setLocale(selectedLocale);
-                System.out.println("Locale: " + selectedLocale.toString());
-             } else {
-                //Locale locale = new Locale.Builder().setLanguage("en").setRegion("US").build();
-                //Locale locale = new Locale.Builder().setLanguage("fr").setRegion("FR").build();
-                Locale defaultLocale = Locale.getDefault();
-                I18n.setLocale(defaultLocale);
-                System.out.println("Locale: " + defaultLocale.toString());
-             }
-          }
-      }
-      catch (Throwable t) {
-          System.out.println(t + "\n" + t.getCause());
-      }
-   }
+            }
+        } catch (Throwable t) {
+            System.out.println(t + "\n" + t.getCause());
+        }
+    }
 
     /**
-     * OwnTextFieldCheck() checks if the "Choose Your Own"
-     * radio button is selected in order to enable/disable
-     * the little text area that lets the user provide
-     * her own choice instead of the ones given by default.
+     * OwnTextFieldCheck() checks if the "Choose Your Own" radio button is
+     * selected in order to enable/disable the little text area that lets the
+     * user provide her own choice instead of the ones given by default.
      */
-    private void OwnTextFieldCheck(){
+    private void OwnTextFieldCheck() {
         if (OwnSCTextField.isEnabled()) {
             OwnSCTextField.setEnabled(false);
         }
     }
 
     /**
-     * OwnEncTextFieldCheck() checks if the "Choose Your Own"
-     * radio button is selected in order to enable/disable
-     * the little text area that enables the user to provide
-     * her own choice instead of the ones given by default.
+     * OwnEncTextFieldCheck() checks if the "Choose Your Own" radio button is
+     * selected in order to enable/disable the little text area that enables the
+     * user to provide her own choice instead of the ones given by default.
      */
-    private void OwnEncTextFieldCheck(){
-        if (OwnEncTextField.isEnabled()){
+    private void OwnEncTextFieldCheck() {
+        if (OwnEncTextField.isEnabled()) {
             OwnEncTextField.setEnabled(false);
         }
     }
 
     /**
-     * trim() removes trailing slashes or
-     * backslashes at the end of a string
+     * trim() removes trailing slashes or backslashes at the end of a string
+     *
      * @param s the string to be trimmed.
      * @return
      */
-    private String trim(String s){
+    private String trim(String s) {
         switch (s.substring(s.length() - 1, s.length())) {
             case "/":
                 s = s.substring(0, s.length() - 1);
@@ -2625,19 +2612,21 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
     /**
      * prints a JOptionPane message dialog.
+     *
      * @param message the text of the message
      * @param winText the title of the windows
      * @param infType the type of the message
      */
-    public static void printAnyMsg(String message, String winText, int infType){
+    public static void printAnyMsg(String message, String winText, int infType) {
         JOptionPane.showMessageDialog(null, message, winText, infType);
     }
 
     /**
-     * getFile() shows a file chooser to let the user
-     * choose a file and returns the file's path
-     * @param dirsOnly whether or not let the user
-     * be able to choose files or directories.
+     * getFile() shows a file chooser to let the user choose a file and returns
+     * the file's path
+     *
+     * @param dirsOnly whether or not let the user be able to choose files or
+     * directories.
      * @return the absolute path of the file.
      */
     public String getFile(boolean dirsOnly) {
@@ -2646,41 +2635,38 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
         JFileChooser chooser = new JFileChooser();
         if (dirsOnly) {
-                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         } else {
             chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         }
         int valueReturned = chooser.showOpenDialog(this);
-        if (valueReturned == JFileChooser.APPROVE_OPTION){
+        if (valueReturned == JFileChooser.APPROVE_OPTION) {
 
             returnedPath = Paths.get(chooser.getSelectedFile().getAbsolutePath());
             returnedPath = returnedPath.normalize();
             returnedPathString = returnedPath.toString();
 
-             return returnedPathString;
-        }
-        else {
+            return returnedPathString;
+        } else {
             return "";
         }
     }
 
     /**
-     * checkScreenResolution() checks the resolution
-     * of the screen just before calling PropertiesEditor
+     * checkScreenResolution() checks the resolution of the screen just before
+     * calling PropertiesEditor
      */
-/*    public void checkScreenResolution(){
-        if (screenSize.getHeight() < PropertiesEditor.Default_height_2_Langs ||
-            screenSize.getWidth() < PropertiesEditor.Default_width) {
-            JOptionPane.showMessageDialog(null, I18n.tr("screenResolution.dfmCreatorMain"),
-                                   I18n.tr("screenResolutionTitle.dfmCreatorMain"), JOptionPane.INFORMATION_MESSAGE);
-        }
-    } */
-
-
+    /*    public void checkScreenResolution(){
+     if (screenSize.getHeight() < PropertiesEditor.Default_height_2_Langs ||
+     screenSize.getWidth() < PropertiesEditor.Default_width) {
+     JOptionPane.showMessageDialog(null, I18n.tr("screenResolution.dfmCreatorMain"),
+     I18n.tr("screenResolutionTitle.dfmCreatorMain"), JOptionPane.INFORMATION_MESSAGE);
+     }
+     } */
     /**
      * showPropWin() gets the PropertiesEditor Window.
      */
-    public void showPropWin(){
+    public void showPropWin() {
         propWin = PropertiesEditor.getPropWin();
         // this subroutine will set the selected index
         // of the combo box to "2" languages and hide all
@@ -2688,68 +2674,66 @@ public class DfMCreatorMain extends javax.swing.JFrame {
         // it also resizes the properties window accordingly
         propWin.updateNumOfLang();
         propWin.setLocation(screenSize.width / 2 - propWin.getWidth() / 2,
-                          screenSize.height / 2 - propWin.getHeight() / 2);
+                screenSize.height / 2 - propWin.getHeight() / 2);
         propWin.setVisible(true);
     }
 
-
-    private void editExistingPropsFile(){
+    private void editExistingPropsFile() {
         //Custom button text
         Object[] options = {I18n.tr("in.a.text.editor.PropsFileEditing"),
-                            I18n.tr("in.props.editor.PropsFileEditing"),
-                            I18n.tr("dismiss.PropsFileCreation")};
+            I18n.tr("in.props.editor.PropsFileEditing"),
+            I18n.tr("dismiss.PropsFileCreation")};
         int n = JOptionPane.showOptionDialog(this,
-            I18n.tr("choose.editing.mode.PropsFileEditing"),
-            I18n.tr("editing.mode.win.title.PropsFileEditing"),
-            JOptionPane.YES_NO_CANCEL_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            options,
-            options[2]);
+                I18n.tr("choose.editing.mode.PropsFileEditing"),
+                I18n.tr("editing.mode.win.title.PropsFileEditing"),
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[2]);
 
-        if (n == JOptionPane.YES_OPTION){
+        if (n == JOptionPane.YES_OPTION) {
             editExistingPropsFileInTextEditor();
-        } else if (n == JOptionPane.NO_OPTION){
+        } else if (n == JOptionPane.NO_OPTION) {
             editExistingPropsFileInPropsEditorWin();
-        } else if (n == JOptionPane.CANCEL_OPTION || n == JOptionPane.CLOSED_OPTION){
+        } else if (n == JOptionPane.CANCEL_OPTION || n == JOptionPane.CLOSED_OPTION) {
             // Do nothing for now.
         }
     }
 
     /**
-     * getPropertiesFile() Edits an existing
-     * DictionaryForMIDs.properties file in the PropertiesEditor.
+     * getPropertiesFile() Edits an existing DictionaryForMIDs.properties file
+     * in the PropertiesEditor.
      */
-    private void editExistingPropsFileInPropsEditorWin(){
+    private void editExistingPropsFileInPropsEditorWin() {
         PropertiesEditor propWindow = PropertiesEditor.getPropWin();
         try {
             propWindow.getPropertiesFile();
-        } catch (UnsupportedOperationException ex){
+        } catch (UnsupportedOperationException ex) {
             DfMCreatorMain.printAnyMsg(PropertiesEditor.openPropFileErrorMsg,
                     I18n.tr("error.dfmPropCreate"), JOptionPane.ERROR_MESSAGE);
             System.out.println(ex.getMessage());
-        } catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
             DfMCreatorMain.printAnyMsg(PropertiesEditor.NotThePropFileErrorMsg,
                     I18n.tr("error.dfmPropCreate"), JOptionPane.ERROR_MESSAGE);
             System.out.println(ex.getMessage());
         }
-        if (PropertiesEditor.openPropsFileForGUIEditFlag){
+        if (PropertiesEditor.openPropsFileForGUIEditFlag) {
             propWindow.updatePropsEditLabel();
             propWindow.updateNumOfLang();
             propWindow.setLocation(screenSize.width / 2 - propWindow.getWidth() / 2,
-                                screenSize.height / 2 - propWindow.getHeight() / 2);
+                    screenSize.height / 2 - propWindow.getHeight() / 2);
             propWindow.setVisible(true);
             propWindow.expandPropsInPropsEditor();
         }
     }
 
-
     /**
      * editExistingPropsFileInTextEditor() Edits an existing
      * DictionaryForMIDs.properties file in the Preview window.
      */
-    private void editExistingPropsFileInTextEditor(){
+    private void editExistingPropsFileInTextEditor() {
         PropertiesEditor propWindow = PropertiesEditor.getPropWin();
         propWindow.setVisible(false);
         propWindow.editExistingPropsFileInTextEditor();
@@ -2758,13 +2742,12 @@ public class DfMCreatorMain extends javax.swing.JFrame {
     /**
      * showCSVFileCheckWin() gets the csvfile check window.
      */
-    private void showCSVFileCheckWin(){
+    private void showCSVFileCheckWin() {
         CheckCSVFileIntegrity csvWin = CheckCSVFileIntegrity.getCSVCheckWin();
         csvWin.setLocation(screenSize.width / 2 - csvWin.getWidth() / 2,
-                        screenSize.height / 2 - csvWin.getHeight() / 2);
+                screenSize.height / 2 - csvWin.getHeight() / 2);
         csvWin.setVisible(true);
     }
-
 
     public static void setTheNimbusLookAndFeel() {
         /*
@@ -2794,14 +2777,14 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
     private void outCSVFileBrowseGetFile() {
         String s = getFile(true);
-        if (!"".equals(s)){
+        if (!"".equals(s)) {
             OutCSVFileTextField.setText(s);
         }
     }
 
     private void dbBrowseButtonGetFile() {
         String s = getFile(true);
-        if (!"".equals(s)){
+        if (!"".equals(s)) {
             DBPathTextField.setText(s);
             OutCSVFileTextField.setText(DBPathTextField.getText());
         }
@@ -2813,48 +2796,47 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
     private void sourceFileBrowseBTGetFile() {
         String s = getFile(false);
-        if (!"".equals(s)){
+        if (!"".equals(s)) {
             SourceFileTF.setText(s);
         }
     }
 
     private void directoryDestinationBrowseBTGetFile() {
         String s = getFile(true);
-        if (!"".equals(s)){
+        if (!"".equals(s)) {
             DirectoryDestinationTF.setText(s);
         }
     }
 
     private void propertyPathBTGetFile() {
         String s = getFile(false);
-        if (!"".equals(s)){
+        if (!"".equals(s)) {
             File propsFile = new File(s);
-            if (!propsFile.getName().equals(PropertiesPreview.PROPERTY_FILE_NAME)){
-            throw new IllegalArgumentException();
-        }
+            if (!propsFile.getName().equals(PropertiesPreview.PROPERTY_FILE_NAME)) {
+                throw new IllegalArgumentException();
+            }
             PropertyPathTF.setText(s);
         }
     }
 
     private void inputCSVFilesButtonGetFile() {
         String s = getFile(true);
-        if (!"".equals(s)){
+        if (!"".equals(s)) {
             InputCSVFilesTF.setText(s);
         }
     }
 
     private void emptyDfMDirButtonGetFile() {
         String s = getFile(true);
-        if (!"".equals(s)){
+        if (!"".equals(s)) {
             EmptyDfMDirTF.setText(s);
         }
     }
 
     private void outputDirButtonGetFile() {
         String s = getFile(true);
-        if (!"".equals(s)){
+        if (!"".equals(s)) {
             OutputDirTF.setText(s);
         }
     }
-
 }
