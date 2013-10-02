@@ -1,36 +1,34 @@
 /* ////////////////////////////////////////////////////////////////
-*
-*   In the Name of Allah
-*
-*   DICTIONARYFORMIDS-CREATOR
-*
-*   This file is part of DictionaryForMIDs-Creator
-*   Copyright (C) 2012, 2013 Karim Mahamane Karimou
-*   DictionaryForMIDs-Creator is a GUI wrapper around various
-*   DictionaryForMIDs tools, among others we have
-*   DictdToDictionaryForMIDs, DictionaryGeneration,
-*   BitmapFontGenerator and BitmapFontGenerator.
-*
-*   DictionaryForMIDs-Creator is free software;
-*   you can redistribute it and/or modify it under the terms
-*   of the GNU General Public License as published by the
-*   Free Software Foundation; either version 2 of the License, or
-*   (at your option) any later version.
-*
-*   DictionaryForMIDs-Creator is distributed in the hope that
-*   it will be useful, but WITHOUT ANY WARRANTY; without even
-*   the implied warranty of MERCHANTABILITY or
-*   FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public
-*   License along with DictionaryForMIDs-Creator;
-*   if not, write to the Free Software Foundation, Inc.,
-*   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-*
-* //////////////////////////////////////////////////////////////// */
-
-
+ *
+ *   In the Name of Allah
+ *
+ *   DICTIONARYFORMIDS-CREATOR
+ *
+ *   This file is part of DictionaryForMIDs-Creator
+ *   Copyright (C) 2012, 2013 Karim Mahamane Karimou
+ *   DictionaryForMIDs-Creator is a GUI wrapper around various
+ *   DictionaryForMIDs tools, among others we have
+ *   DictdToDictionaryForMIDs, DictionaryGeneration,
+ *   BitmapFontGenerator and BitmapFontGenerator.
+ *
+ *   DictionaryForMIDs-Creator is free software;
+ *   you can redistribute it and/or modify it under the terms
+ *   of the GNU General Public License as published by the
+ *   Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   DictionaryForMIDs-Creator is distributed in the hope that
+ *   it will be useful, but WITHOUT ANY WARRANTY; without even
+ *   the implied warranty of MERCHANTABILITY or
+ *   FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public
+ *   License along with DictionaryForMIDs-Creator;
+ *   if not, write to the Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+ *
+ * //////////////////////////////////////////////////////////////// */
 package de.kugihan.DfMCreator;
 
 import de.kugihan.DfMCreator.DfMCreatorException.dictionaryDirNotAccessible;
@@ -49,7 +47,6 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
 
     private Task task;
     public static boolean done;
-
     // This one is to make sure that the task
     // has been already created and launched.
     private static boolean taskFlag = false;
@@ -273,10 +270,9 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             @Override
             public void run() {
-               // new SumWinBFG().setVisible(true);
+                // new SumWinBFG().setVisible(true);
             }
         });
     }
@@ -293,9 +289,7 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
     private javax.swing.JButton genBitmapFontsBT;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
-
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
     // Imported from de.kugihan.fonttoolkit.Core
     // This will be used to launch the font_size generation
     // from here, rather than from the FontToolkit class.
@@ -305,75 +299,74 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
         SumWinBFG bfgSum = new SumWinBFG();
         bfgSum.setSize(800, 600);
         bfgSum.setLocation(screenSize.width / 2 - bfgSum.getWidth() / 2,
-                           screenSize.height / 2 - bfgSum.getHeight() / 2);
+                screenSize.height / 2 - bfgSum.getHeight() / 2);
         return bfgSum;
     }
 
-
     class Task extends SwingWorker<Void, Void> {
+
         @Override
         public Void doInBackground() {
             c = new Core();
             try {
-                    DfMCreatorMain.BitmapFontGeneratorToEnqueue q;
-                    while (!DfMCreatorMain.dfmCreator.fontGenerationQueue.isEmpty()){
-                        q = DfMCreatorMain.dfmCreator.fontGenerationQueue.remove();
+                DfMCreatorMain.BitmapFontGeneratorToEnqueue q;
+                while (!DfMCreatorMain.dfmCreator.fontGenerationQueue.isEmpty()) {
+                    q = DfMCreatorMain.dfmCreator.fontGenerationQueue.remove();
 
-                        // Passing the values of the current item
-                        //c = new Core(q.in_file, q.dict_dir, q.font_directory, q.cback, q.font_size, q.clip_top, q.clip_bottom);
-                        c.setInputFile(q.in_file);
-                        c.setDictionaryDirectory(q.dict_dir);
-                        c.setFontDirectory(q.font_directory);
-                        c.setCallback(q.cback);
-                        c.setSize(q.font_size);
-                        c.setClipTop(q.clip_top);
-                        c.setClipBottom(q.clip_bottom);
+                    // Passing the values of the current item
+                    //c = new Core(q.input_font_file, q.input_dict_dir_FILE, q.input_dict_dir_STRING, q.cback, q.font_size, q.clip_top, q.clip_bottom);
+                    c.setInputFile(q.input_font_file);
+                    c.setDictionaryDirectory(q.input_dict_dir_FILE);
+                    c.setFontDirectory(q.input_dict_dir_STRING);
+                    c.setCallback(q.cback);
+                    c.setSize(q.font_size);
+                    c.setClipTop(q.clip_top);
+                    c.setClipBottom(q.clip_bottom);
 
-                        // Showing the font_size generation preferences
-                        // for the current item being processed.
-                        bfgenSumTextArea.setText("");
-                        bfgenSumTextArea.append(I18n.tr("current.item.processed.BFG") + "\n");
-                        bfgenSumTextArea.append(I18n.tr("remaining.items.BFG"));
-                        bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.
-                                fontGenerationQueue.size()) + "\n\n");
-                        bfgenSumTextArea.append(DfMCreatorMain.dfmCreator.fontTK.getInputFontFile().toString());
-                        bfgenSumTextArea.append("\n\n");
+                    // Showing the font_size generation preferences
+                    // for the current item being processed.
+                    bfgenSumTextArea.setText("");
+                    bfgenSumTextArea.append(I18n.tr("current.item.processed.BFG") + "\n");
+                    bfgenSumTextArea.append(I18n.tr("remaining.items.BFG"));
+                    bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontGenerationQueue.size()) + "\n\n");
+                    bfgenSumTextArea.append(DfMCreatorMain.dfmCreator.fontTK.getInputFontFile().toString());
+                    bfgenSumTextArea.append("\n\n");
 
-                        bfgenSumTextArea.append(I18n.tr("fontSize.BFGSummary") + " " );
-                        bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontTK.getFontSize()));
-                        bfgenSumTextArea.append("\n\n");
+                    bfgenSumTextArea.append(I18n.tr("fontSize.BFGSummary") + " ");
+                    bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontTK.getFontSize()));
+                    bfgenSumTextArea.append("\n\n");
 
-                        bfgenSumTextArea.append(I18n.tr("clipTop.BFGSummary") + " ");
-                        bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontTK.getClipTop()));
-                        bfgenSumTextArea.append("\n\n");
+                    bfgenSumTextArea.append(I18n.tr("clipTop.BFGSummary") + " ");
+                    bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontTK.getClipTop()));
+                    bfgenSumTextArea.append("\n\n");
 
-                        bfgenSumTextArea.append(I18n.tr("clipBottom.BFGSummary") + " ");
-                        bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontTK.getClipBottom()));
-                        bfgenSumTextArea.append("\n\n");
+                    bfgenSumTextArea.append(I18n.tr("clipBottom.BFGSummary") + " ");
+                    bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontTK.getClipBottom()));
+                    bfgenSumTextArea.append("\n\n");
 
-                        // Perform the font generation for the current item
-                        c.generateFonts();
+                    // Perform the font generation for the current item
+                    c.generateFonts();
 
-                        // Update the contents of the TextArea that displays the items
-                        // to be processed as some are being removed from the queue
-                        int i = 0;
-                        DfMCreatorMain.dfmCreator.fontGenerationArray.remove(i);
-                        bfgenQueueTextArea.setText("");
-                        bfgenQueueTextArea.append(I18n.tr("items.in.queue.BFG") + "\n\n");
-                        for (int j=0; j<DfMCreatorMain.dfmCreator.fontGenerationArray.size(); j++){
-                            bfgenQueueTextArea.append(DfMCreatorMain.dfmCreator.fontGenerationArray.get(j).toString() + "\n");
-                        }
+                    // Update the contents of the TextArea that displays the items
+                    // to be processed as some are being removed from the queue
+                    int i = 0;
+                    DfMCreatorMain.dfmCreator.fontGenerationArray.remove(i);
+                    bfgenQueueTextArea.setText("");
+                    bfgenQueueTextArea.append(I18n.tr("items.in.queue.BFG") + "\n\n");
+                    for (int j = 0; j < DfMCreatorMain.dfmCreator.fontGenerationArray.size(); j++) {
+                        bfgenQueueTextArea.append(DfMCreatorMain.dfmCreator.fontGenerationArray.get(j).toString() + "\n");
                     }
+                }
 
             } catch (Throwable t) {
                 done = true;
                 DfMCreatorMain.printAnyMsg(I18n.tr("unknownRuntimeError.dfmCreatorMain",
-                    new Object[] {t, t.getLocalizedMessage()}),
-                    I18n.tr("unknownRuntimeErrorTitle"), JOptionPane.ERROR_MESSAGE);
+                        new Object[]{t, t.getLocalizedMessage()}),
+                        I18n.tr("unknownRuntimeErrorTitle"), JOptionPane.ERROR_MESSAGE);
                 System.out.println(t + "\n");
             }
             return null;
-            }
+        }
 
         @Override
         public void done() {
@@ -404,18 +397,17 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
                 BFGAddDictBT.setEnabled(false);
                 bfgenAddAnotherSizeBT.setEnabled(false);
                 bfgenCancelBT.setEnabled(true);
-            }
-            else {
+            } else {
                 bfgenProgressBar.setIndeterminate(false);
                 bfgenProgressBar.setString(null);
                 bfgenProgressBar.setValue(progress);
-                bfgenSumTextArea.append(String.format("\n" + "\n" +
-                I18n.tr("completed.jarCreationSummary"), task.getProgress()));
+                bfgenSumTextArea.append(String.format("\n" + "\n"
+                        + I18n.tr("completed.jarCreationSummary"), task.getProgress()));
             }
         }
     }
 
-    public void executeFontGenerationTask(){
+    public void executeFontGenerationTask() {
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         genBitmapFontsBT.setEnabled(false);
         bfgenCancelBT.setEnabled(true);
@@ -428,13 +420,13 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
         bfgenProgressBar.setValue(task.getProgress());
         // Tell that the task has been lauched.
         taskFlag = true;
-      }
+    }
 
     public void confirmCancelFontGen() {
         int n = JOptionPane.showConfirmDialog(null, I18n.tr("cancel.font.gen.msg.BFG"),
-                                                    I18n.tr("cancel.font.creation.title.BFG"), JOptionPane.YES_NO_OPTION);
-        if (n == JOptionPane.YES_OPTION){
-            if (!task.isDone()){
+                I18n.tr("cancel.font.creation.title.BFG"), JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+            if (!task.isDone()) {
                 task.cancel(true);
                 DfMCreatorMain.dfmCreator.fontGenerationQueue.clear();
                 DfMCreatorMain.dfmCreator.fontGenerationArray.clear();
@@ -456,15 +448,20 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
         } catch (fontNotAccessible | dictionaryDirNotAccessible ex) {
             System.out.println(ex.getMessage());
         }
-        DfMCreatorMain.dfmCreator.createQueueForBFG();
+        DfMCreatorMain.dfmCreator.createQueueForBFG(DfMCreatorMain.dfmCreator.fontTK.getInputFontFile(),
+                DfMCreatorMain.dfmCreator.fontTK.getDirFile(),
+                DfMCreatorMain.dfmCreator.fontTK.getFontDirectory(),
+                DfMCreatorMain.dfmCreator.fontTK.getFontSize(),
+                DfMCreatorMain.dfmCreator.fontTK.getClipTop(),
+                DfMCreatorMain.dfmCreator.fontTK.getClipBottom());
         DfMCreatorMain.dfmCreator.fontTK.incrementFontSizeAndRevalidateValues();
         fillBFGQueueTextArea();
         fillBFGSummaryTextArea();
     }
 
     private void cancelFontGenerationOnQuit() {
-        if (taskFlag){
-            if (!task.isDone()){
+        if (taskFlag) {
+            if (!task.isDone()) {
                 task.cancel(true);
             }
         }
@@ -473,10 +470,9 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
     }
 
     /**
-     * fillBFGSummaryTextArea() gets all the needed information
-     * and formats them correctly so as to have a clear and neat
-     * summary of the Bitmap Font Generation preferences entered
-     * by the user.
+     * fillBFGSummaryTextArea() gets all the needed information and formats them
+     * correctly so as to have a clear and neat summary of the Bitmap Font
+     * Generation preferences entered by the user.
      */
     private void fillBFGSummaryTextArea() {
         bfgenSumTextArea.setText("");
@@ -486,7 +482,7 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
         bfgenSumTextArea.append(DfMCreatorMain.dfmCreator.fontTK.getInputFontFile().toString());
         bfgenSumTextArea.append("\n\n");
 
-        bfgenSumTextArea.append(I18n.tr("fontSize.BFGSummary") + " " );
+        bfgenSumTextArea.append(I18n.tr("fontSize.BFGSummary") + " ");
         bfgenSumTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.fontTK.getFontSize()));
         bfgenSumTextArea.append("\n\n");
 
@@ -505,11 +501,8 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
     private void fillBFGQueueTextArea() {
         bfgenQueueTextArea.setText("");
         bfgenQueueTextArea.append(I18n.tr("items.in.queue.BFG") + "\n\n");
-        for (int i=0; i<DfMCreatorMain.dfmCreator.fontGenerationArray.size(); i++){
+        for (int i = 0; i < DfMCreatorMain.dfmCreator.fontGenerationArray.size(); i++) {
             bfgenQueueTextArea.append(DfMCreatorMain.dfmCreator.fontGenerationArray.get(i).toString() + "\n");
         }
     }
-
-
-
 }
