@@ -7,6 +7,7 @@ Using: run ant in directory Build
 It runs well on both platforms windows/linux
 The jar-tool must be in the path. Otherwise there will be an error during the preverifier run.
 You also must have the antenna-bin-xxx.jar file in the Build directory (the file antenna-bin-xxx.jar is part of the Build SVN subdirectory)
+And: you must copy proguard.jar from the ProGuard project into WTK_HOME/bin (this is used for obfuscation in Java ME, i.e. making the jar files smaller).
 
 Important note: the source files are UTF-8 encoded. If you are using the old Sun WTK (for versions <= 2.5.2), you must set in the file ktools.properties (found somewhere under wtklib) the following property:
 javac.encoding=UTF-8
