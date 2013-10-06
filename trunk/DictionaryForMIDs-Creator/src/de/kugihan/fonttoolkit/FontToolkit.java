@@ -29,7 +29,6 @@ import de.kugihan.DfMCreator.DfMCreatorException.dictionaryFieldIsEmpty;
 import de.kugihan.DfMCreator.DfMCreatorException.fontFieldIsEmpty;
 import de.kugihan.DfMCreator.DfMCreatorException.fontNotAccessible;
 import de.kugihan.DfMCreator.DfMCreatorMain;
-import static de.kugihan.DfMCreator.DfMCreatorMain.dfmCreator;
 import de.kugihan.DfMCreator.SumWinBFG;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
@@ -46,14 +45,6 @@ import javax.swing.*;
 
 public class FontToolkit extends JFrame implements ActionListener, Callback {
 
-    // Task for the FrontGenerator CLI
-    private Task bitmap_cli_task;
-    public static boolean bitmap_cli_done;
-    Callback call_back;
-
-    public Callback getCallback() {
-        return call_back;
-    }
     // Flag that will tell us wether the FontToolkit
     // is being called from DfM-Creator or from the
     // command line (the user might have called the
@@ -71,9 +62,14 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
     private int clipTop;
     private int clipBottom;
     private String fontDirectory;
-
     // Getter and setter methods for
     // the above variables.
+    Callback call_back;
+
+    public Callback getCallback() {
+        return call_back;
+    }
+
     public File getInputFontFile() {
         return inFile;
     }
@@ -148,46 +144,11 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private Core c;
 
-//#################################################################################
-    // The following routines/subroutines are for the CLI version of BitmapFontGenerator
-    class Task extends SwingWorker<Void, Void> {
-
-        @Override
-        public Void doInBackground() {
-            c = new Core();
-            try {
-                DfMCreatorMain.BitmapFontGeneratorToEnqueue q;
-                while (!dfmCreator.fontGenerationQueue.isEmpty()) {
-                    q = dfmCreator.fontGenerationQueue.remove();
-
-                    // Passing the values of the current item
-                    //c = new Core(q.input_font_file, q.input_dict_dir_FILE, q.input_dict_dir_STRING, q.cback, q.font_size, q.clip_top, q.clip_bottom);
-                    c.setInputFile(q.input_font_file);
-                    c.setDictionaryDirectory(q.input_dict_dir_FILE);
-                    c.setFontDirectory(q.input_dict_dir_STRING);
-                    c.setCallback(q.cback);
-                    c.setSize(q.font_size);
-                    c.setClipTop(q.clip_top);
-                    c.setClipBottom(q.clip_bottom);
-
-                    // Perform the font generation for the current item
-                    c.generateFonts();
-                }
-
-            } catch (Throwable t) {
-                DfMCreatorMain.printAnyMsg(I18n.tr("unknownRuntimeError.dfmCreatorMain",
-                        new Object[]{t, t.getLocalizedMessage()}),
-                        I18n.tr("unknownRuntimeErrorTitle"), JOptionPane.ERROR_MESSAGE);
-                System.out.println(t + "\n");
-            }
-            return null;
-        }
-    }
-
     public void executeFontGenerationTaskCLI(File inputFontFile,
             File dictDirectory_FILE, String dictDirectory_STRING,
             int fontSize, int clip_Top, int clip_Bottom) throws
             fontNotAccessible, dictionaryDirNotAccessible {
+
 
         if (!inputFontFile.canRead()) {
             throw new fontNotAccessible(I18n.tr("notFontAccessible"));
@@ -197,11 +158,86 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
             throw new dictionaryDirNotAccessible(I18n.tr("notDictDir"));
         }
 
-        DfMCreatorMain.dfmCreator.createQueueForBFG(inputFontFile, dictDirectory_FILE,
-                dictDirectory_STRING, fontSize, clip_Top, clip_Bottom);
+        // DEBUG:
+        System.out.println("Debug Information:");
+        System.out.print("Input Font File: ");
+        System.out.println(String.valueOf(inputFontFile));
+        System.out.print("Input Dictionary Directory (FILE): ");
+        System.out.println(String.valueOf(dictDirectory_FILE));
+        System.out.print("Input Dictionary Directory (STRING): ");
+        System.out.println(dictDirectory_STRING);
+        System.out.println(String.valueOf(this));
+        System.out.print("Font Size: ");
+        System.out.println(String.valueOf(fontSize));
+        System.out.print("Clip Top Value: ");
+        System.out.println(String.valueOf(clip_Top));
+        System.out.print("Clip Bottom Value: ");
+        System.out.println(String.valueOf(clip_Bottom));
+        System.out.println();
+        if (!flag_cli) {
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, fontSize, clip_Top, clip_Bottom);
+            c.generateFonts();
+        } else { // Generate font for all the sizes: i.e from 8 to 36!
+            // 8
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 8, clip_Top, clip_Bottom);
+            c.generateFonts();
 
-        bitmap_cli_task = new Task();
-        bitmap_cli_task.execute();
+            // 10
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 10, clip_Top, clip_Bottom);
+            c.generateFonts();
+
+            // 12
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 12, clip_Top, clip_Bottom);
+            c.generateFonts();
+
+            // 14
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 14, clip_Top, clip_Bottom);
+            c.generateFonts();
+
+            // 16
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 16, clip_Top, clip_Bottom);
+            c.generateFonts();
+
+            // 18
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 18, clip_Top, clip_Bottom);
+            c.generateFonts();
+
+            // 20
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 20, clip_Top, clip_Bottom);
+            c.generateFonts();
+
+            // 22
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 22, clip_Top, clip_Bottom);
+            c.generateFonts();
+
+            // 24
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 24, clip_Top, clip_Bottom);
+            c.generateFonts();
+
+            // 26
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 26, clip_Top, clip_Bottom);
+            c.generateFonts();
+
+            // 28
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 28, clip_Top, clip_Bottom);
+            c.generateFonts();
+
+            // 30
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 30, clip_Top, clip_Bottom);
+            c.generateFonts();
+
+            // 32
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 32, clip_Top, clip_Bottom);
+            c.generateFonts();
+
+            // 34
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 34, clip_Top, clip_Bottom);
+            c.generateFonts();
+
+            // 36
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 36, clip_Top, clip_Bottom);
+            c.generateFonts();
+        }
     }
 
 //#################################################################################
