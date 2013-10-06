@@ -1323,14 +1323,15 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                         // If the font_size argument entered is ALL
                         // generate all font sizes. Otherwise, convert
                         // the value entered into an int and pass it on.
-                        if (!args[3].equalsIgnoreCase("ALL")){
+                        if (!args[3].equalsIgnoreCase("ALL")) {
                             font_Size_CLI = Integer.parseInt(args[3]);
                         } else {
                             de.kugihan.fonttoolkit.FontToolkit.flag_cli = true;
                         }
                         clip_Top_CLI = Integer.parseInt(args[4]);
                         clip_Bottom_CLI = Integer.parseInt(args[5]);
-                        
+
+                        /*
                         // DEBUG:
                         System.out.println("Debug Information:");
                         System.out.print("Input Font File: ");
@@ -1346,6 +1347,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                         System.out.print("Clip Bottom Value: ");
                         System.out.println(String.valueOf(clip_Bottom_CLI));
                         System.out.println();
+                        */
 
                         // Set flag to true to tell the app that the fontToolkit is
                         // being called from the command line.
@@ -1353,8 +1355,8 @@ public class DfMCreatorMain extends javax.swing.JFrame {
 
                         try {
                             /* Call the actual font generation process
-                             * This calls actually executeFontGenerationTaskCLI() subroutine                            
-                            */
+                             * This calls actually executeFontGenerationTaskCLI() subroutine
+                             */
                             new FontToolkit().executeFontGenerationTaskCLI(inputFontFile_CLI,
                                     inputDictDir_FILE_CLI, inputDictDir_STRING_CLI, font_Size_CLI, clip_Top_CLI, clip_Bottom_CLI);
                         } catch (DfMCreatorException.fontNotAccessible ex) {
@@ -2415,7 +2417,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
             fontGenerationArray = new ArrayList<>();
             fontGenerationQueueCreationFlag = true;
         }
-        
+
         // Passing values to the variables of this item
         bfgenRecord.input_font_file = inputFontFile;
         bfgenRecord.input_dict_dir_FILE = inputDictDirectory_FILE;
@@ -2460,6 +2462,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                 dfmCreator = new DfMCreatorMain();
                 dfmCreator.setLocation(screenSize.width / 2 - dfmCreator.getWidth() / 2,
                         screenSize.height / 2 - dfmCreator.getHeight() / 2);
+
                 String s = "images" + "/" + "dfm-creator.png";
                 URL imgURL = getClass().getResource(s);
                 if (imgURL == null) {

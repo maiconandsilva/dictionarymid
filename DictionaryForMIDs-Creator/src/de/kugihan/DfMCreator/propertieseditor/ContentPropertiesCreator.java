@@ -1,36 +1,34 @@
 /* ////////////////////////////////////////////////////////////////
-*
-*   In the Name of Allah
-*
-*   DICTIONARYFORMIDS-CREATOR
-*
-*   This file is part of DictionaryForMIDs-Creator
-*   Copyright (C) 2012, 2013 Karim Mahamane Karimou
-*   DictionaryForMIDs-Creator is a GUI wrapper around various
-*   DictionaryForMIDs tools, among others we have
-*   DictdToDictionaryForMIDs, DictionaryGeneration,
-*   JarCreator and BitmapFontGenerator.
-*
-*   DictionaryForMIDs-Creator is free software;
-*   you can redistribute it and/or modify it under the terms
-*   of the GNU General Public License as published by the
-*   Free Software Foundation; either version 2 of the License, or
-*   (at your option) any later version.
-*
-*   DictionaryForMIDs-Creator is distributed in the hope that
-*   it will be useful, but WITHOUT ANY WARRANTY; without even
-*   the implied warranty of MERCHANTABILITY or
-*   FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public
-*   License along with DictionaryForMIDs-Creator;
-*   if not, write to the Free Software Foundation, Inc.,
-*   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-*
-* //////////////////////////////////////////////////////////////// */
-
-
+ *
+ *   In the Name of Allah
+ *
+ *   DICTIONARYFORMIDS-CREATOR
+ *
+ *   This file is part of DictionaryForMIDs-Creator
+ *   Copyright (C) 2012, 2013 Karim Mahamane Karimou
+ *   DictionaryForMIDs-Creator is a GUI wrapper around various
+ *   DictionaryForMIDs tools, among others we have
+ *   DictdToDictionaryForMIDs, DictionaryGeneration,
+ *   JarCreator and BitmapFontGenerator.
+ *
+ *   DictionaryForMIDs-Creator is free software;
+ *   you can redistribute it and/or modify it under the terms
+ *   of the GNU General Public License as published by the
+ *   Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   DictionaryForMIDs-Creator is distributed in the hope that
+ *   it will be useful, but WITHOUT ANY WARRANTY; without even
+ *   the implied warranty of MERCHANTABILITY or
+ *   FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public
+ *   License along with DictionaryForMIDs-Creator;
+ *   if not, write to the Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+ *
+ * //////////////////////////////////////////////////////////////// */
 package de.kugihan.DfMCreator.propertieseditor;
 
 import de.kugihan.DfMCreator.DfMCreatorMain;
@@ -44,10 +42,9 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
-
 public class ContentPropertiesCreator extends javax.swing.JDialog implements PropertyChangeListener {
 
-    public static ContentPropertiesCreator getContentPropsCreator(){
+    public static ContentPropertiesCreator getContentPropsCreator() {
         return new ContentPropertiesCreator();
     }
 
@@ -1215,7 +1212,7 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         JOptionPane.showMessageDialog(this, I18n.tr("about.message.contentPropsEditor"),
-                                            I18n.tr("title.contentPropsEditor"), JOptionPane.INFORMATION_MESSAGE);
+                I18n.tr("title.contentPropsEditor"), JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -1230,11 +1227,11 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         try {
-             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException |
-        		 IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+                IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DfMCreatorMain.class.getName()).
-            log(java.util.logging.Level.SEVERE, null, ex);
+                    log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1242,10 +1239,9 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             @Override
             public void run() {
-              //  new ContentPropertiesCreator().setVisible(true);
+                //  new ContentPropertiesCreator().setVisible(true);
             }
         });
     }
@@ -1370,13 +1366,12 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
     private javax.swing.JButton setContentValsBT;
     // End of variables declaration//GEN-END:variables
 
-
     /**
-     * updateNumOfContentDec() updates (shows or hides some components)
-     * the ContentProperties-Creator's window according to the number of
-     * content declaration chosen for a particular language.
+     * updateNumOfContentDec() updates (shows or hides some components) the
+     * ContentProperties-Creator's window according to the number of content
+     * declaration chosen for a particular language.
      */
-    public void updateNumOfContentDec(){
+    public void updateNumOfContentDec() {
         switch (lang1NumOfContentDecsCB.getSelectedItem().toString()) {
             case "0":
                 lang1Content1FontColourCB.setEnabled(false);
@@ -1741,7 +1736,7 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                 lang2Content4DisplaySelectableCheckB.setEnabled(true);
                 break;
         }
-        
+
         switch (lang3NumOfContentDecsCB.getSelectedItem().toString()) {
             case "0":
                 lang3Content1FontColourCB.setEnabled(false);
@@ -1927,160 +1922,160 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
     }
 
     /**
-     * getRGBCodes() converts the selected item's
-     * name into a RGB color and returns it.
+     * getRGBCodes() converts the selected item's name into a RGB color and
+     * returns it.
+     *
      * @param comboBox
      * @returns String colorCode
      */
-    public static String getRGBCodes(JComboBox comboBox){
+    public static String getRGBCodes(JComboBox comboBox) {
         int i = comboBox.getSelectedIndex();
         String colorCode;
-        switch (i){
+        switch (i) {
             case 0:
-            colorCode = "128,0,0";
-            break;
+                colorCode = "128,0,0";
+                break;
 
             case 1:
-            colorCode = "255,0,0";
-            break;
+                colorCode = "255,0,0";
+                break;
 
             case 2:
-            colorCode = "255,255,0";
-            break;
+                colorCode = "255,255,0";
+                break;
 
             case 3:
-            colorCode = "0,128,0";
-            break;
+                colorCode = "0,128,0";
+                break;
 
             case 4:
-            colorCode = "0,255,0";
-            break;
+                colorCode = "0,255,0";
+                break;
 
             case 5:
-            colorCode = "0,0,128";
-            break;
+                colorCode = "0,0,128";
+                break;
 
             case 6:
-            colorCode = "0,0,255";
-            break;
+                colorCode = "0,0,255";
+                break;
 
             case 7:
-            colorCode = "0,128,128";
-            break;
+                colorCode = "0,128,128";
+                break;
 
             case 8:
-            colorCode = "0,255,255";
-            break;
+                colorCode = "0,255,255";
+                break;
 
             case 9:
-            colorCode = "128,0,128";
-            break;
+                colorCode = "128,0,128";
+                break;
 
             case 10:
-            colorCode = "255,0,255";
-            break;
+                colorCode = "255,0,255";
+                break;
 
             case 11:
-            colorCode = "128,128,0";
-            break;
+                colorCode = "128,128,0";
+                break;
 
             case 12:
-            colorCode = "128,128,128";
-            break;
+                colorCode = "128,128,128";
+                break;
 
             case 13:
-            colorCode = "192,192,192";
-            break;
+                colorCode = "192,192,192";
+                break;
 
             default:
-            colorCode = "0,0,0";
+                colorCode = "0,0,0";
         }
         return colorCode;
     }
 
-
     /**
-     * getRGBCodes() converts the selected item's
-     * name into a RGB color and returns it.
+     * getRGBCodes() converts the selected item's name into a RGB color and
+     * returns it.
+     *
      * @param comboBox
      * @returns String colorCode
      */
-    public static int getColorNamesFromRGBCodes(String colorCode){
+    public static int getColorNamesFromRGBCodes(String colorCode) {
         int idx;
-        switch (colorCode){
+        switch (colorCode) {
             case "128,0,0":
-            idx = 0;
-            break;
+                idx = 0;
+                break;
 
             case "255,0,0":
-            idx = 1;
-            break;
+                idx = 1;
+                break;
 
             case "255,255,0":
-            idx = 2;
-            break;
+                idx = 2;
+                break;
 
             case "0,128,0":
-            idx = 3;
-            break;
+                idx = 3;
+                break;
 
             case "0,255,0":
-            idx = 4;
-            break;
+                idx = 4;
+                break;
 
             case "0,0,128":
-            idx = 5;
-            break;
+                idx = 5;
+                break;
 
             case "0,0,255":
-            idx = 6;
-            break;
+                idx = 6;
+                break;
 
             case "0,128,128":
-            idx = 7;
-            break;
+                idx = 7;
+                break;
 
             case "0,255,255":
-            idx = 8;
-            break;
+                idx = 8;
+                break;
 
             case "128,0,128":
-            idx = 9;
-            break;
+                idx = 9;
+                break;
 
             case "255,0,255":
-            idx = 10;
-            break;
+                idx = 10;
+                break;
 
             case "128,128,0":
-            idx = 11;
-            break;
+                idx = 11;
+                break;
 
             case "128,128,128":
-            idx = 12;
-            break;
+                idx = 12;
+                break;
 
             case "192,192,192":
-            idx = 13;
-            break;
+                idx = 13;
+                break;
 
             default:
-            idx = 1000;
+                idx = 1000;
         }
         return idx;
     }
 
-
     /**
-     * setTheContentNNProperties() saves the content
-     * settings into the content variables located as
-     * public static variables in the PropertiesEditor Class.
+     * setTheContentNNProperties() saves the content settings into the content
+     * variables located as public static variables in the PropertiesEditor
+     * Class.
      */
     private void setTheContentNNProperties() {
 
-        if ("0".equals(lang1NumOfContentDecsCB.getSelectedItem().toString()) &&
-            "0".equals(lang2NumOfContentDecsCB.getSelectedItem().toString()) &&
-            "0".equals(lang3NumOfContentDecsCB.getSelectedItem().toString())){
+        if ("0".equals(lang1NumOfContentDecsCB.getSelectedItem().toString())
+                && "0".equals(lang2NumOfContentDecsCB.getSelectedItem().toString())
+                && "0".equals(lang3NumOfContentDecsCB.getSelectedItem().toString())) {
             throw new IllegalArgumentException(I18n.tr("no.content.prop.dec"));
         }
 
@@ -2092,135 +2087,135 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
         //////////////// LANGUAGE-1 ///////////////
         switch (lang1NumOfContentDecsCB.getSelectedItem().toString()) {
             case "1": // language1Content01 - Only ONE content properties
-                if (!"".equals(lang1Content1DisplayTextTF.getText())){
+                if (!"".equals(lang1Content1DisplayTextTF.getText())) {
                     PropertiesEditor.language1Content01DisplayText = lang1Content1DisplayTextTF.getText();
                 }
                 PropertiesEditor.language1Content01FontColour = getRGBCodes(lang1Content1FontColourCB);
                 PropertiesEditor.language1Content01FontStyle = lang1Content1FontStyleCB.getSelectedItem().toString();
 
-                if (lang1Content1DisplaySelectableCheckB.isSelected()){
+                if (lang1Content1DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language1Content01DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language1Content01DisplaySelectable = "false";
                 }
-            
+
             case "2": // language1Content02 - TWO content properties
-                if (!"".equals(lang1Content1DisplayTextTF.getText())){
+                if (!"".equals(lang1Content1DisplayTextTF.getText())) {
                     PropertiesEditor.language1Content01DisplayText = lang1Content1DisplayTextTF.getText();
                 }
-                
+
                 PropertiesEditor.language1Content01FontColour = getRGBCodes(lang1Content1FontColourCB);
                 PropertiesEditor.language1Content01FontStyle = lang1Content1FontStyleCB.getSelectedItem().toString();
 
-                if (lang1Content1DisplaySelectableCheckB.isSelected()){
+                if (lang1Content1DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language1Content01DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language1Content01DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang1Content2DisplayTextTF.getText())){
+
+                if (!"".equals(lang1Content2DisplayTextTF.getText())) {
                     PropertiesEditor.language1Content02DisplayText = lang1Content2DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language1Content02FontColour = getRGBCodes(lang1Content2FontColourCB);
                 PropertiesEditor.language1Content02FontStyle = lang1Content2FontStyleCB.getSelectedItem().toString();
 
-                if (lang1Content2DisplaySelectableCheckB.isSelected()){
+                if (lang1Content2DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language1Content02DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language1Content02DisplaySelectable = "false";
                 }
                 break;
-            
+
             case "3": // language1Content03 - THREE content properties
-                if (!"".equals(lang1Content1DisplayTextTF.getText())){
+                if (!"".equals(lang1Content1DisplayTextTF.getText())) {
                     PropertiesEditor.language1Content01DisplayText = lang1Content1DisplayTextTF.getText();
                 }
-                
+
                 PropertiesEditor.language1Content01FontColour = getRGBCodes(lang1Content1FontColourCB);
                 PropertiesEditor.language1Content01FontStyle = lang1Content1FontStyleCB.getSelectedItem().toString();
 
-                if (lang1Content1DisplaySelectableCheckB.isSelected()){
+                if (lang1Content1DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language1Content01DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language1Content01DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang1Content2DisplayTextTF.getText())){
+
+                if (!"".equals(lang1Content2DisplayTextTF.getText())) {
                     PropertiesEditor.language1Content02DisplayText = lang1Content2DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language1Content02FontColour = getRGBCodes(lang1Content2FontColourCB);
                 PropertiesEditor.language1Content02FontStyle = lang1Content2FontStyleCB.getSelectedItem().toString();
 
-                if (lang1Content2DisplaySelectableCheckB.isSelected()){
+                if (lang1Content2DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language1Content02DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language1Content02DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang1Content3DisplayTextTF.getText())){
+
+                if (!"".equals(lang1Content3DisplayTextTF.getText())) {
                     PropertiesEditor.language1Content03DisplayText = lang1Content3DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language1Content03FontColour = getRGBCodes(lang1Content3FontColourCB);
                 PropertiesEditor.language1Content03FontStyle = lang1Content3FontStyleCB.getSelectedItem().toString();
 
-                if (lang1Content3DisplaySelectableCheckB.isSelected()){
+                if (lang1Content3DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language1Content03DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language1Content03DisplaySelectable = "false";
                 }
                 break;
-            
+
             case "4": // language1Content04 - FOUR content properties
-                if (!"".equals(lang1Content1DisplayTextTF.getText())){
+                if (!"".equals(lang1Content1DisplayTextTF.getText())) {
                     PropertiesEditor.language1Content01DisplayText = lang1Content1DisplayTextTF.getText();
                 }
-                
+
                 PropertiesEditor.language1Content01FontColour = getRGBCodes(lang1Content1FontColourCB);
                 PropertiesEditor.language1Content01FontStyle = lang1Content1FontStyleCB.getSelectedItem().toString();
 
-                if (lang1Content1DisplaySelectableCheckB.isSelected()){
+                if (lang1Content1DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language1Content01DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language1Content01DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang1Content2DisplayTextTF.getText())){
+
+                if (!"".equals(lang1Content2DisplayTextTF.getText())) {
                     PropertiesEditor.language1Content02DisplayText = lang1Content2DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language1Content02FontColour = getRGBCodes(lang1Content2FontColourCB);
                 PropertiesEditor.language1Content02FontStyle = lang1Content2FontStyleCB.getSelectedItem().toString();
 
-                if (lang1Content2DisplaySelectableCheckB.isSelected()){
+                if (lang1Content2DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language1Content02DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language1Content02DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang1Content3DisplayTextTF.getText())){
+
+                if (!"".equals(lang1Content3DisplayTextTF.getText())) {
                     PropertiesEditor.language1Content03DisplayText = lang1Content3DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language1Content03FontColour = getRGBCodes(lang1Content3FontColourCB);
                 PropertiesEditor.language1Content03FontStyle = lang1Content3FontStyleCB.getSelectedItem().toString();
 
-                if (lang1Content3DisplaySelectableCheckB.isSelected()){
+                if (lang1Content3DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language1Content03DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language1Content03DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang1Content4DisplayTextTF.getText())){
+
+                if (!"".equals(lang1Content4DisplayTextTF.getText())) {
                     PropertiesEditor.language1Content04DisplayText = lang1Content4DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language1Content04FontColour = getRGBCodes(lang1Content4FontColourCB);
                 PropertiesEditor.language1Content04FontStyle = lang1Content4FontStyleCB.getSelectedItem().toString();
 
-                if (lang1Content4DisplaySelectableCheckB.isSelected()){
+                if (lang1Content4DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language1Content04DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language1Content04DisplaySelectable = "false";
@@ -2228,139 +2223,139 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                 break;
         }
 
-        //////////////// LANGUAGE-2 ///////////////        
-        switch (lang2NumOfContentDecsCB.getSelectedItem().toString()) {            
+        //////////////// LANGUAGE-2 ///////////////
+        switch (lang2NumOfContentDecsCB.getSelectedItem().toString()) {
             case "1": // language2Content01 - ONE content properties
-                if (!"".equals(lang2Content1DisplayTextTF.getText())){
+                if (!"".equals(lang2Content1DisplayTextTF.getText())) {
                     PropertiesEditor.language2Content01DisplayText = lang2Content1DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language2Content01FontColour = getRGBCodes(lang2Content1FontColourCB);
                 PropertiesEditor.language2Content01FontStyle = lang2Content1FontStyleCB.getSelectedItem().toString();
 
-                if (lang2Content1DisplaySelectableCheckB.isSelected()){
+                if (lang2Content1DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language2Content01DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language2Content01DisplaySelectable = "false";
                 }
-            
-            case "2": // language2Content02 - TWO content properties                
-                if (!"".equals(lang2Content1DisplayTextTF.getText())){
+
+            case "2": // language2Content02 - TWO content properties
+                if (!"".equals(lang2Content1DisplayTextTF.getText())) {
                     PropertiesEditor.language2Content01DisplayText = lang2Content1DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language2Content01FontColour = getRGBCodes(lang2Content1FontColourCB);
                 PropertiesEditor.language2Content01FontStyle = lang2Content1FontStyleCB.getSelectedItem().toString();
 
-                if (lang2Content1DisplaySelectableCheckB.isSelected()){
+                if (lang2Content1DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language2Content01DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language2Content01DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang2Content2DisplayTextTF.getText())){
+
+                if (!"".equals(lang2Content2DisplayTextTF.getText())) {
                     PropertiesEditor.language2Content02DisplayText = lang2Content2DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language2Content02FontColour = getRGBCodes(lang2Content2FontColourCB);
                 PropertiesEditor.language2Content02FontStyle = lang2Content2FontStyleCB.getSelectedItem().toString();
 
-                if (lang2Content2DisplaySelectableCheckB.isSelected()){
+                if (lang2Content2DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language2Content02DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language2Content02DisplaySelectable = "false";
                 }
                 break;
-            
+
             case "3": // language2Content03 - THREE content properties
-                if (!"".equals(lang2Content1DisplayTextTF.getText())){
+                if (!"".equals(lang2Content1DisplayTextTF.getText())) {
                     PropertiesEditor.language2Content01DisplayText = lang2Content1DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language2Content01FontColour = getRGBCodes(lang2Content1FontColourCB);
                 PropertiesEditor.language2Content01FontStyle = lang2Content1FontStyleCB.getSelectedItem().toString();
 
-                if (lang2Content1DisplaySelectableCheckB.isSelected()){
+                if (lang2Content1DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language2Content01DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language2Content01DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang2Content2DisplayTextTF.getText())){
+
+                if (!"".equals(lang2Content2DisplayTextTF.getText())) {
                     PropertiesEditor.language2Content02DisplayText = lang2Content2DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language2Content02FontColour = getRGBCodes(lang2Content2FontColourCB);
                 PropertiesEditor.language2Content02FontStyle = lang2Content2FontStyleCB.getSelectedItem().toString();
 
-                if (lang2Content2DisplaySelectableCheckB.isSelected()){
+                if (lang2Content2DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language2Content02DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language2Content02DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang2Content3DisplayTextTF.getText())){
+
+                if (!"".equals(lang2Content3DisplayTextTF.getText())) {
                     PropertiesEditor.language2Content03DisplayText = lang2Content3DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language2Content03FontColour = getRGBCodes(lang2Content3FontColourCB);
                 PropertiesEditor.language2Content03FontStyle = lang2Content3FontStyleCB.getSelectedItem().toString();
 
-                if (lang2Content3DisplaySelectableCheckB.isSelected()){
+                if (lang2Content3DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language2Content03DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language2Content03DisplaySelectable = "false";
                 }
                 break;
-            
+
             case "4": // language2Content04 - FOUR content properties
-                if (!"".equals(lang2Content1DisplayTextTF.getText())){
+                if (!"".equals(lang2Content1DisplayTextTF.getText())) {
                     PropertiesEditor.language2Content01DisplayText = lang2Content1DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language2Content01FontColour = getRGBCodes(lang2Content1FontColourCB);
                 PropertiesEditor.language2Content01FontStyle = lang2Content1FontStyleCB.getSelectedItem().toString();
 
-                if (lang2Content1DisplaySelectableCheckB.isSelected()){
+                if (lang2Content1DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language2Content01DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language2Content01DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang2Content2DisplayTextTF.getText())){
+
+                if (!"".equals(lang2Content2DisplayTextTF.getText())) {
                     PropertiesEditor.language2Content02DisplayText = lang2Content2DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language2Content02FontColour = getRGBCodes(lang2Content2FontColourCB);
                 PropertiesEditor.language2Content02FontStyle = lang2Content2FontStyleCB.getSelectedItem().toString();
 
-                if (lang2Content2DisplaySelectableCheckB.isSelected()){
+                if (lang2Content2DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language2Content02DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language2Content02DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang2Content3DisplayTextTF.getText())){
+
+                if (!"".equals(lang2Content3DisplayTextTF.getText())) {
                     PropertiesEditor.language2Content03DisplayText = lang2Content3DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language2Content03FontColour = getRGBCodes(lang2Content3FontColourCB);
                 PropertiesEditor.language2Content03FontStyle = lang2Content3FontStyleCB.getSelectedItem().toString();
 
-                if (lang2Content3DisplaySelectableCheckB.isSelected()){
+                if (lang2Content3DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language2Content03DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language2Content03DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang2Content4DisplayTextTF.getText())){
+
+                if (!"".equals(lang2Content4DisplayTextTF.getText())) {
                     PropertiesEditor.language2Content04DisplayText = lang2Content4DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language2Content04FontColour = getRGBCodes(lang2Content4FontColourCB);
                 PropertiesEditor.language2Content04FontStyle = lang2Content4FontStyleCB.getSelectedItem().toString();
 
-                if (lang2Content4DisplaySelectableCheckB.isSelected()){
+                if (lang2Content4DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language2Content04DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language2Content04DisplaySelectable = "false";
@@ -2368,139 +2363,139 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                 break;
         }
 
-        //////////////// LANGUAGE-3 ///////////////        
+        //////////////// LANGUAGE-3 ///////////////
         switch (lang3NumOfContentDecsCB.getSelectedItem().toString()) {
             case "1": // language3Content01 - ONE content properties
-                if (!"".equals(lang3Content1DisplayTextTF.getText())){
+                if (!"".equals(lang3Content1DisplayTextTF.getText())) {
                     PropertiesEditor.language3Content01DisplayText = lang3Content1DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language3Content01FontColour = getRGBCodes(lang3Content1FontColourCB);
                 PropertiesEditor.language3Content01FontStyle = lang3Content1FontStyleCB.getSelectedItem().toString();
 
-                if (lang3Content1DisplaySelectableCheckB.isSelected()){
+                if (lang3Content1DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language3Content01DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language3Content01DisplaySelectable = "false";
                 }
-            
+
             case "2": // language3Content02 - TWO content properties
-                if (!"".equals(lang3Content1DisplayTextTF.getText())){
+                if (!"".equals(lang3Content1DisplayTextTF.getText())) {
                     PropertiesEditor.language3Content01DisplayText = lang3Content1DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language3Content01FontColour = getRGBCodes(lang3Content1FontColourCB);
                 PropertiesEditor.language3Content01FontStyle = lang3Content1FontStyleCB.getSelectedItem().toString();
 
-                if (lang3Content1DisplaySelectableCheckB.isSelected()){
+                if (lang3Content1DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language3Content01DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language3Content01DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang3Content2DisplayTextTF.getText())){
+
+                if (!"".equals(lang3Content2DisplayTextTF.getText())) {
                     PropertiesEditor.language3Content02DisplayText = lang3Content2DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language3Content02FontColour = getRGBCodes(lang3Content2FontColourCB);
                 PropertiesEditor.language3Content02FontStyle = lang3Content2FontStyleCB.getSelectedItem().toString();
 
-                if (lang3Content2DisplaySelectableCheckB.isSelected()){
+                if (lang3Content2DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language3Content02DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language3Content02DisplaySelectable = "false";
                 }
                 break;
-            
+
             case "3": // language3Content03 - THREE content properties
-                if (!"".equals(lang3Content1DisplayTextTF.getText())){
+                if (!"".equals(lang3Content1DisplayTextTF.getText())) {
                     PropertiesEditor.language3Content01DisplayText = lang3Content1DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language3Content01FontColour = getRGBCodes(lang3Content1FontColourCB);
                 PropertiesEditor.language3Content01FontStyle = lang3Content1FontStyleCB.getSelectedItem().toString();
 
-                if (lang3Content1DisplaySelectableCheckB.isSelected()){
+                if (lang3Content1DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language3Content01DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language3Content01DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang3Content2DisplayTextTF.getText())){
+
+                if (!"".equals(lang3Content2DisplayTextTF.getText())) {
                     PropertiesEditor.language3Content02DisplayText = lang3Content2DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language3Content02FontColour = getRGBCodes(lang3Content2FontColourCB);
                 PropertiesEditor.language3Content02FontStyle = lang3Content2FontStyleCB.getSelectedItem().toString();
 
-                if (lang3Content2DisplaySelectableCheckB.isSelected()){
+                if (lang3Content2DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language3Content02DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language3Content02DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang3Content3DisplayTextTF.getText())){
+
+                if (!"".equals(lang3Content3DisplayTextTF.getText())) {
                     PropertiesEditor.language3Content03DisplayText = lang3Content3DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language3Content03FontColour = getRGBCodes(lang3Content3FontColourCB);
                 PropertiesEditor.language3Content03FontStyle = lang3Content3FontStyleCB.getSelectedItem().toString();
 
-                if (lang3Content3DisplaySelectableCheckB.isSelected()){
+                if (lang3Content3DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language3Content03DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language3Content03DisplaySelectable = "false";
                 }
                 break;
-            
+
             case "4": // language3Content04 - FOUR content properties
-                if (!"".equals(lang3Content1DisplayTextTF.getText())){
+                if (!"".equals(lang3Content1DisplayTextTF.getText())) {
                     PropertiesEditor.language3Content01DisplayText = lang3Content1DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language3Content01FontColour = getRGBCodes(lang3Content1FontColourCB);
                 PropertiesEditor.language3Content01FontStyle = lang3Content1FontStyleCB.getSelectedItem().toString();
 
-                if (lang3Content1DisplaySelectableCheckB.isSelected()){
+                if (lang3Content1DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language3Content01DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language3Content01DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang3Content2DisplayTextTF.getText())){
+
+                if (!"".equals(lang3Content2DisplayTextTF.getText())) {
                     PropertiesEditor.language3Content02DisplayText = lang3Content2DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language3Content02FontColour = getRGBCodes(lang3Content2FontColourCB);
                 PropertiesEditor.language3Content02FontStyle = lang3Content2FontStyleCB.getSelectedItem().toString();
 
-                if (lang3Content2DisplaySelectableCheckB.isSelected()){
+                if (lang3Content2DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language3Content02DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language3Content02DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang3Content3DisplayTextTF.getText())){
+
+                if (!"".equals(lang3Content3DisplayTextTF.getText())) {
                     PropertiesEditor.language3Content03DisplayText = lang3Content3DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language3Content03FontColour = getRGBCodes(lang3Content3FontColourCB);
                 PropertiesEditor.language3Content03FontStyle = lang3Content3FontStyleCB.getSelectedItem().toString();
 
-                if (lang3Content3DisplaySelectableCheckB.isSelected()){
+                if (lang3Content3DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language3Content03DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language3Content03DisplaySelectable = "false";
                 }
-                
-                if (!"".equals(lang3Content4DisplayTextTF.getText())){
+
+                if (!"".equals(lang3Content4DisplayTextTF.getText())) {
                     PropertiesEditor.language3Content04DisplayText = lang3Content4DisplayTextTF.getText();
                 }
 
                 PropertiesEditor.language3Content04FontColour = getRGBCodes(lang3Content4FontColourCB);
                 PropertiesEditor.language3Content04FontStyle = lang3Content4FontStyleCB.getSelectedItem().toString();
 
-                if (lang3Content4DisplaySelectableCheckB.isSelected()){
+                if (lang3Content4DisplaySelectableCheckB.isSelected()) {
                     PropertiesEditor.language3Content04DisplaySelectable = "true";
                 } else {
                     PropertiesEditor.language3Content04DisplaySelectable = "false";
@@ -2510,17 +2505,17 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
     }
 
     /**
-     * loadAndEditExistingContentNNProperties() loads content-NN
-     * properties from a DictionaryForMIDs.properties file that
-     * is loaded in the PropertiesEditor so as to be edited.
+     * loadAndEditExistingContentNNProperties() loads content-NN properties from
+     * a DictionaryForMIDs.properties file that is loaded in the
+     * PropertiesEditor so as to be edited.
      */
-    public void loadAndEditExistingContentNNProperties() {   
+    public void loadAndEditExistingContentNNProperties() {
         try {
             String lang1NumOfContentDec = PropertiesEditor.dfMProps.getProperty("language1NumberOfContentDeclarations");
-            if (lang1NumOfContentDec != null && !"".equals(lang1NumOfContentDec)){
+            if (lang1NumOfContentDec != null && !"".equals(lang1NumOfContentDec)) {
                 if (Integer.parseInt(lang1NumOfContentDec) == 1 || Integer.parseInt(lang1NumOfContentDec) == 2
-                        || Integer.parseInt(lang1NumOfContentDec) == 3 || Integer.parseInt(lang1NumOfContentDec) == 4){
-                        lang1NumOfContentDecsCB.setSelectedItem(lang1NumOfContentDec);
+                        || Integer.parseInt(lang1NumOfContentDec) == 3 || Integer.parseInt(lang1NumOfContentDec) == 4) {
+                    lang1NumOfContentDecsCB.setSelectedItem(lang1NumOfContentDec);
                 } else {
                     // If no content declaration is available, choose 1 by default
                     lang1NumOfContentDecsCB.setSelectedIndex(1);
@@ -2528,20 +2523,20 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
             }
 
             String lang2NumOfContentDec = PropertiesEditor.dfMProps.getProperty("language2NumberOfContentDeclarations");
-            if (lang2NumOfContentDec != null && !"".equals(lang2NumOfContentDec)){
+            if (lang2NumOfContentDec != null && !"".equals(lang2NumOfContentDec)) {
                 if (Integer.parseInt(lang2NumOfContentDec) == 1 || Integer.parseInt(lang2NumOfContentDec) == 2
-                        || Integer.parseInt(lang2NumOfContentDec) == 3 || Integer.parseInt(lang2NumOfContentDec) == 4){
-                        lang2NumOfContentDecsCB.setSelectedItem(lang2NumOfContentDec);
+                        || Integer.parseInt(lang2NumOfContentDec) == 3 || Integer.parseInt(lang2NumOfContentDec) == 4) {
+                    lang2NumOfContentDecsCB.setSelectedItem(lang2NumOfContentDec);
                 } else {
                     // TODO
                 }
             }
 
             String lang3NumOfContentDec = PropertiesEditor.dfMProps.getProperty("language3NumberOfContentDeclarations");
-            if (lang3NumOfContentDec != null && !"".equals(lang3NumOfContentDec)){
+            if (lang3NumOfContentDec != null && !"".equals(lang3NumOfContentDec)) {
                 if (Integer.parseInt(lang3NumOfContentDec) == 1 || Integer.parseInt(lang3NumOfContentDec) == 2
-                        || Integer.parseInt(lang3NumOfContentDec) == 3 || Integer.parseInt(lang3NumOfContentDec) == 4){
-                        lang3NumOfContentDecsCB.setSelectedItem(lang3NumOfContentDec);
+                        || Integer.parseInt(lang3NumOfContentDec) == 3 || Integer.parseInt(lang3NumOfContentDec) == 4) {
+                    lang3NumOfContentDecsCB.setSelectedItem(lang3NumOfContentDec);
                 } else {
                     // TODO
                 }
@@ -2569,16 +2564,16 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
             switch (lang1NumOfContentDecsCB.getSelectedItem().toString()) {
                 case "1":
                     l1C1DT = PropertiesEditor.dfMProps.getProperty("language1Content01DisplayText");
-                    if (l1C1DT != null && !"".equals(l1C1DT)){
+                    if (l1C1DT != null && !"".equals(l1C1DT)) {
                         lang1Content1DisplayTextTF.setText(l1C1DT);
                     }
 
                     l1C1FC = PropertiesEditor.dfMProps.getProperty("language1Content01FontColour");
-                    if (l1C1FC != null && !"".equals(l1C1FC)){
+                    if (l1C1FC != null && !"".equals(l1C1FC)) {
                         int i = getColorNamesFromRGBCodes(l1C1FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang1Content1FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l1C1FCObj = PropertiesEditor.makeObj(l1C1FC);
                             lang1Content1FontColourCB.addItem(l1C1FCObj);
                             lang1Content1FontColourCB.setSelectedItem(l1C1FCObj);
@@ -2586,12 +2581,12 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                     }
 
                     l1C1FS = PropertiesEditor.dfMProps.getProperty("language1Content01FontStyle");
-                    if (l1C1FS != null && !"".equals(l1C1FS)){
+                    if (l1C1FS != null && !"".equals(l1C1FS)) {
                         lang1Content1FontStyleCB.setSelectedItem(l1C1FS);
                     }
 
                     l1C1DS = PropertiesEditor.dfMProps.getProperty("language1Content01DisplaySelectable");
-                    if (l1C1DS != null && !"".equals(l1C1DS)){
+                    if (l1C1DS != null && !"".equals(l1C1DS)) {
                         switch (l1C1DS) {
                             case "true":
                                 lang1Content1DisplaySelectableCheckB.setSelected(true);
@@ -2605,26 +2600,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                 // language1Content02
                 case "2":
                     l1C1DT = PropertiesEditor.dfMProps.getProperty("language1Content01DisplayText");
-                    if (l1C1DT != null && !"".equals(l1C1DT)){
+                    if (l1C1DT != null && !"".equals(l1C1DT)) {
                         lang1Content1DisplayTextTF.setText(l1C1DT);
                     }
                     l1C1FC = PropertiesEditor.dfMProps.getProperty("language1Content01FontColour");
-                    if (l1C1FC != null && !"".equals(l1C1FC)){
+                    if (l1C1FC != null && !"".equals(l1C1FC)) {
                         int i = getColorNamesFromRGBCodes(l1C1FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang1Content1FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l1C1FCObj = PropertiesEditor.makeObj(l1C1FC);
                             lang1Content1FontColourCB.addItem(l1C1FCObj);
                             lang1Content1FontColourCB.setSelectedItem(l1C1FCObj);
                         }
                     }
                     l1C1FS = PropertiesEditor.dfMProps.getProperty("language1Content01FontStyle");
-                    if (l1C1FS != null && !"".equals(l1C1FS)){
+                    if (l1C1FS != null && !"".equals(l1C1FS)) {
                         lang1Content1FontStyleCB.setSelectedItem(l1C1FS);
                     }
                     l1C1DS = PropertiesEditor.dfMProps.getProperty("language1Content01DisplaySelectable");
-                    if (l1C1DS != null && !"".equals(l1C1DS)){
+                    if (l1C1DS != null && !"".equals(l1C1DS)) {
                         switch (l1C1DS) {
                             case "true":
                                 lang1Content1DisplaySelectableCheckB.setSelected(true);
@@ -2633,28 +2628,28 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                                 lang1Content1DisplaySelectableCheckB.setSelected(false);
                                 break;
                         }
-                    }                    
+                    }
                     l1C2DT = PropertiesEditor.dfMProps.getProperty("language1Content02DisplayText");
-                    if (l1C2DT != null && !"".equals(l1C2DT)){
+                    if (l1C2DT != null && !"".equals(l1C2DT)) {
                         lang1Content2DisplayTextTF.setText(l1C2DT);
                     }
                     l1C2FC = PropertiesEditor.dfMProps.getProperty("language1Content02FontColour");
-                    if (l1C2FC != null && !"".equals(l1C2FC)){
+                    if (l1C2FC != null && !"".equals(l1C2FC)) {
                         int i = getColorNamesFromRGBCodes(l1C2FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang1Content2FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l1C2FCObj = PropertiesEditor.makeObj(l1C2FC);
                             lang1Content2FontColourCB.addItem(l1C2FCObj);
                             lang1Content2FontColourCB.setSelectedItem(l1C2FCObj);
                         }
                     }
                     l1C2FS = PropertiesEditor.dfMProps.getProperty("language1Content02FontStyle");
-                    if (l1C2FS != null && !"".equals(l1C2FS)){
+                    if (l1C2FS != null && !"".equals(l1C2FS)) {
                         lang1Content2FontStyleCB.setSelectedItem(l1C2FS);
                     }
                     l1C2DS = PropertiesEditor.dfMProps.getProperty("language1Content02DisplaySelectable");
-                    if (l1C2DS != null && !"".equals(l1C2DS)){
+                    if (l1C2DS != null && !"".equals(l1C2DS)) {
                         switch (l1C2DS) {
                             case "true":
                                 lang1Content2DisplaySelectableCheckB.setSelected(true);
@@ -2669,26 +2664,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                 // language1Content03
                 case "3":
                     l1C1DT = PropertiesEditor.dfMProps.getProperty("language1Content01DisplayText");
-                    if (l1C1DT != null && !"".equals(l1C1DT)){
+                    if (l1C1DT != null && !"".equals(l1C1DT)) {
                         lang1Content1DisplayTextTF.setText(l1C1DT);
                     }
                     l1C1FC = PropertiesEditor.dfMProps.getProperty("language1Content01FontColour");
-                    if (l1C1FC != null && !"".equals(l1C1FC)){
+                    if (l1C1FC != null && !"".equals(l1C1FC)) {
                         int i = getColorNamesFromRGBCodes(l1C1FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang1Content1FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l1C1FCObj = PropertiesEditor.makeObj(l1C1FC);
                             lang1Content1FontColourCB.addItem(l1C1FCObj);
                             lang1Content1FontColourCB.setSelectedItem(l1C1FCObj);
                         }
                     }
                     l1C1FS = PropertiesEditor.dfMProps.getProperty("language1Content01FontStyle");
-                    if (l1C1FS != null && !"".equals(l1C1FS)){
+                    if (l1C1FS != null && !"".equals(l1C1FS)) {
                         lang1Content1FontStyleCB.setSelectedItem(l1C1FS);
                     }
                     l1C1DS = PropertiesEditor.dfMProps.getProperty("language1Content01DisplaySelectable");
-                    if (l1C1DS != null && !"".equals(l1C1DS)){
+                    if (l1C1DS != null && !"".equals(l1C1DS)) {
                         switch (l1C1DS) {
                             case "true":
                                 lang1Content1DisplaySelectableCheckB.setSelected(true);
@@ -2697,28 +2692,28 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                                 lang1Content1DisplaySelectableCheckB.setSelected(false);
                                 break;
                         }
-                    }                    
+                    }
                     l1C2DT = PropertiesEditor.dfMProps.getProperty("language1Content02DisplayText");
-                    if (l1C2DT != null && !"".equals(l1C2DT)){
+                    if (l1C2DT != null && !"".equals(l1C2DT)) {
                         lang1Content2DisplayTextTF.setText(l1C2DT);
                     }
                     l1C2FC = PropertiesEditor.dfMProps.getProperty("language1Content02FontColour");
-                    if (l1C2FC != null && !"".equals(l1C2FC)){
+                    if (l1C2FC != null && !"".equals(l1C2FC)) {
                         int i = getColorNamesFromRGBCodes(l1C2FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang1Content2FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l1C2FCObj = PropertiesEditor.makeObj(l1C2FC);
                             lang1Content2FontColourCB.addItem(l1C2FCObj);
                             lang1Content2FontColourCB.setSelectedItem(l1C2FCObj);
                         }
                     }
                     l1C2FS = PropertiesEditor.dfMProps.getProperty("language1Content02FontStyle");
-                    if (l1C2FS != null && !"".equals(l1C2FS)){
+                    if (l1C2FS != null && !"".equals(l1C2FS)) {
                         lang1Content2FontStyleCB.setSelectedItem(l1C2FS);
                     }
                     l1C2DS = PropertiesEditor.dfMProps.getProperty("language1Content02DisplaySelectable");
-                    if (l1C2DS != null && !"".equals(l1C2DS)){
+                    if (l1C2DS != null && !"".equals(l1C2DS)) {
                         switch (l1C2DS) {
                             case "true":
                                 lang1Content2DisplaySelectableCheckB.setSelected(true);
@@ -2727,28 +2722,28 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                                 lang1Content2DisplaySelectableCheckB.setSelected(false);
                                 break;
                         }
-                    }                    
+                    }
                     l1C3DT = PropertiesEditor.dfMProps.getProperty("language1Content03DisplayText");
-                    if (l1C3DT != null && !"".equals(l1C3DT)){
+                    if (l1C3DT != null && !"".equals(l1C3DT)) {
                         lang1Content3DisplayTextTF.setText(l1C3DT);
-                    }                    
+                    }
                     l1C3FC = PropertiesEditor.dfMProps.getProperty("language1Content03FontColour");
-                    if (l1C3FC != null && !"".equals(l1C3FC)){
+                    if (l1C3FC != null && !"".equals(l1C3FC)) {
                         int i = getColorNamesFromRGBCodes(l1C3FC);
-                        if (i <= 13){
+                        if (i <= 13) {
                             lang1Content3FontColourCB.setSelectedIndex(i);
-                        } else if (i == 1000){
-                        Object l1C3FCObj = PropertiesEditor.makeObj(l1C3FC);
-                        lang1Content3FontColourCB.addItem(l1C3FCObj);
-                        lang1Content3FontColourCB.setSelectedItem(l1C3FCObj);
+                        } else if (i == 1000) {
+                            Object l1C3FCObj = PropertiesEditor.makeObj(l1C3FC);
+                            lang1Content3FontColourCB.addItem(l1C3FCObj);
+                            lang1Content3FontColourCB.setSelectedItem(l1C3FCObj);
                         }
                     }
                     l1C3FS = PropertiesEditor.dfMProps.getProperty("language1Content03FontStyle");
-                    if (l1C3FS != null && !"".equals(l1C3FS)){
+                    if (l1C3FS != null && !"".equals(l1C3FS)) {
                         lang1Content3FontStyleCB.setSelectedItem(l1C3FS);
                     }
                     l1C3DS = PropertiesEditor.dfMProps.getProperty("language1Content03DisplaySelectable");
-                    if (l1C3DS != null && !"".equals(l1C3DS)){
+                    if (l1C3DS != null && !"".equals(l1C3DS)) {
                         switch (l1C3DS) {
                             case "true":
                                 lang1Content3DisplaySelectableCheckB.setSelected(true);
@@ -2763,26 +2758,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                 // language1Content04
                 case "4":
                     l1C1DT = PropertiesEditor.dfMProps.getProperty("language1Content01DisplayText");
-                    if (l1C1DT != null && !"".equals(l1C1DT)){
+                    if (l1C1DT != null && !"".equals(l1C1DT)) {
                         lang1Content1DisplayTextTF.setText(l1C1DT);
                     }
                     l1C1FC = PropertiesEditor.dfMProps.getProperty("language1Content01FontColour");
-                    if (l1C1FC != null && !"".equals(l1C1FC)){
+                    if (l1C1FC != null && !"".equals(l1C1FC)) {
                         int i = getColorNamesFromRGBCodes(l1C1FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang1Content1FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l1C1FCObj = PropertiesEditor.makeObj(l1C1FC);
                             lang1Content1FontColourCB.addItem(l1C1FCObj);
                             lang1Content1FontColourCB.setSelectedItem(l1C1FCObj);
                         }
                     }
                     l1C1FS = PropertiesEditor.dfMProps.getProperty("language1Content01FontStyle");
-                    if (l1C1FS != null && !"".equals(l1C1FS)){
+                    if (l1C1FS != null && !"".equals(l1C1FS)) {
                         lang1Content1FontStyleCB.setSelectedItem(l1C1FS);
                     }
                     l1C1DS = PropertiesEditor.dfMProps.getProperty("language1Content01DisplaySelectable");
-                    if (l1C1DS != null && !"".equals(l1C1DS)){
+                    if (l1C1DS != null && !"".equals(l1C1DS)) {
                         switch (l1C1DS) {
                             case "true":
                                 lang1Content1DisplaySelectableCheckB.setSelected(true);
@@ -2791,28 +2786,28 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                                 lang1Content1DisplaySelectableCheckB.setSelected(false);
                                 break;
                         }
-                    }                    
+                    }
                     l1C2DT = PropertiesEditor.dfMProps.getProperty("language1Content02DisplayText");
-                    if (l1C2DT != null && !"".equals(l1C2DT)){
+                    if (l1C2DT != null && !"".equals(l1C2DT)) {
                         lang1Content2DisplayTextTF.setText(l1C2DT);
                     }
                     l1C2FC = PropertiesEditor.dfMProps.getProperty("language1Content02FontColour");
-                    if (l1C2FC != null && !"".equals(l1C2FC)){
+                    if (l1C2FC != null && !"".equals(l1C2FC)) {
                         int i = getColorNamesFromRGBCodes(l1C2FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang1Content2FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l1C2FCObj = PropertiesEditor.makeObj(l1C2FC);
                             lang1Content2FontColourCB.addItem(l1C2FCObj);
                             lang1Content2FontColourCB.setSelectedItem(l1C2FCObj);
                         }
                     }
                     l1C2FS = PropertiesEditor.dfMProps.getProperty("language1Content02FontStyle");
-                    if (l1C2FS != null && !"".equals(l1C2FS)){
+                    if (l1C2FS != null && !"".equals(l1C2FS)) {
                         lang1Content2FontStyleCB.setSelectedItem(l1C2FS);
                     }
                     l1C2DS = PropertiesEditor.dfMProps.getProperty("language1Content02DisplaySelectable");
-                    if (l1C2DS != null && !"".equals(l1C2DS)){
+                    if (l1C2DS != null && !"".equals(l1C2DS)) {
                         switch (l1C2DS) {
                             case "true":
                                 lang1Content2DisplaySelectableCheckB.setSelected(true);
@@ -2821,28 +2816,28 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                                 lang1Content2DisplaySelectableCheckB.setSelected(false);
                                 break;
                         }
-                    }                    
+                    }
                     l1C3DT = PropertiesEditor.dfMProps.getProperty("language1Content03DisplayText");
-                    if (l1C3DT != null && !"".equals(l1C3DT)){
+                    if (l1C3DT != null && !"".equals(l1C3DT)) {
                         lang1Content3DisplayTextTF.setText(l1C3DT);
-                    }                    
+                    }
                     l1C3FC = PropertiesEditor.dfMProps.getProperty("language1Content03FontColour");
-                    if (l1C3FC != null && !"".equals(l1C3FC)){
+                    if (l1C3FC != null && !"".equals(l1C3FC)) {
                         int i = getColorNamesFromRGBCodes(l1C3FC);
-                        if (i <= 13){
+                        if (i <= 13) {
                             lang1Content3FontColourCB.setSelectedIndex(i);
-                        } else if (i == 1000){
-                        Object l1C3FCObj = PropertiesEditor.makeObj(l1C3FC);
-                        lang1Content3FontColourCB.addItem(l1C3FCObj);
-                        lang1Content3FontColourCB.setSelectedItem(l1C3FCObj);
+                        } else if (i == 1000) {
+                            Object l1C3FCObj = PropertiesEditor.makeObj(l1C3FC);
+                            lang1Content3FontColourCB.addItem(l1C3FCObj);
+                            lang1Content3FontColourCB.setSelectedItem(l1C3FCObj);
                         }
                     }
                     l1C3FS = PropertiesEditor.dfMProps.getProperty("language1Content03FontStyle");
-                    if (l1C3FS != null && !"".equals(l1C3FS)){
+                    if (l1C3FS != null && !"".equals(l1C3FS)) {
                         lang1Content3FontStyleCB.setSelectedItem(l1C3FS);
                     }
                     l1C3DS = PropertiesEditor.dfMProps.getProperty("language1Content03DisplaySelectable");
-                    if (l1C3DS != null && !"".equals(l1C3DS)){
+                    if (l1C3DS != null && !"".equals(l1C3DS)) {
                         switch (l1C3DS) {
                             case "true":
                                 lang1Content3DisplaySelectableCheckB.setSelected(true);
@@ -2851,24 +2846,24 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                                 lang1Content3DisplaySelectableCheckB.setSelected(false);
                                 break;
                         }
-                    }                    
+                    }
                     l1C4DT = PropertiesEditor.dfMProps.getProperty("language1Content04DisplayText");
-                    if (l1C4DT != null && !"".equals(l1C4DT)){
+                    if (l1C4DT != null && !"".equals(l1C4DT)) {
                         lang1Content4DisplayTextTF.setText(l1C4DT);
                     }
                     l1C4FC = PropertiesEditor.dfMProps.getProperty("language1Content04FontColour");
-                    if (l1C4FC != null && !"".equals(l1C4FC)){
+                    if (l1C4FC != null && !"".equals(l1C4FC)) {
                         int i = getColorNamesFromRGBCodes(l1C4FC);
-                        if (i <= 13){
+                        if (i <= 13) {
                             lang1Content4FontColourCB.setSelectedIndex(i);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l1C4FCObj = PropertiesEditor.makeObj(l1C4FC);
                             lang1Content4FontColourCB.addItem(l1C4FCObj);
                             lang1Content4FontColourCB.setSelectedItem(l1C4FCObj);
                         }
                     }
                     l1C4FS = PropertiesEditor.dfMProps.getProperty("language1Content04FontStyle");
-                    if (l1C4FS != null && !"".equals(l1C4FS)){
+                    if (l1C4FS != null && !"".equals(l1C4FS)) {
                         lang1Content4FontStyleCB.setSelectedItem(l1C4FS);
                     }
                     l1C4DS = PropertiesEditor.dfMProps.getProperty("language1Content04DisplaySelectable");
@@ -2899,31 +2894,31 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
             String l2C4DT;
             String l2C4FC;
             String l2C4FS;
-            String l2C4DS;            
+            String l2C4DS;
             // language2Content01
             switch (lang2NumOfContentDecsCB.getSelectedItem().toString()) {
                 case "1":
                     l2C1DT = PropertiesEditor.dfMProps.getProperty("language2Content01DisplayText");
-                    if (l2C1DT != null && !"".equals(l2C1DT)){
+                    if (l2C1DT != null && !"".equals(l2C1DT)) {
                         lang2Content1DisplayTextTF.setText(l2C1DT);
                     }
                     l2C1FC = PropertiesEditor.dfMProps.getProperty("language2Content01FontColour");
-                    if (l2C1FC != null && !"".equals(l2C1FC)){
+                    if (l2C1FC != null && !"".equals(l2C1FC)) {
                         int i = getColorNamesFromRGBCodes(l2C1FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang2Content1FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l2C1FCObj = PropertiesEditor.makeObj(l2C1FC);
                             lang2Content1FontColourCB.addItem(l2C1FCObj);
                             lang2Content1FontColourCB.setSelectedItem(l2C1FCObj);
                         }
                     }
                     l2C1FS = PropertiesEditor.dfMProps.getProperty("language2Content01FontStyle");
-                    if (l2C1FS != null && !"".equals(l2C1FS)){
+                    if (l2C1FS != null && !"".equals(l2C1FS)) {
                         lang2Content1FontStyleCB.setSelectedItem(l2C1FS);
                     }
                     l2C1DS = PropertiesEditor.dfMProps.getProperty("language2Content01DisplaySelectable");
-                    if (l2C1DS != null && !"".equals(l2C1DS)){
+                    if (l2C1DS != null && !"".equals(l2C1DS)) {
                         switch (l2C1DS) {
                             case "true":
                                 lang2Content1DisplaySelectableCheckB.setSelected(true);
@@ -2937,26 +2932,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                 // language2Content02
                 case "2":
                     l2C1DT = PropertiesEditor.dfMProps.getProperty("language2Content01DisplayText");
-                    if (l2C1DT != null && !"".equals(l2C1DT)){
+                    if (l2C1DT != null && !"".equals(l2C1DT)) {
                         lang2Content1DisplayTextTF.setText(l2C1DT);
                     }
                     l2C1FC = PropertiesEditor.dfMProps.getProperty("language2Content01FontColour");
-                    if (l2C1FC != null && !"".equals(l2C1FC)){
+                    if (l2C1FC != null && !"".equals(l2C1FC)) {
                         int i = getColorNamesFromRGBCodes(l2C1FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang2Content1FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l2C1FCObj = PropertiesEditor.makeObj(l2C1FC);
                             lang2Content1FontColourCB.addItem(l2C1FCObj);
                             lang2Content1FontColourCB.setSelectedItem(l2C1FCObj);
                         }
                     }
                     l2C1FS = PropertiesEditor.dfMProps.getProperty("language2Content01FontStyle");
-                    if (l2C1FS != null && !"".equals(l2C1FS)){
+                    if (l2C1FS != null && !"".equals(l2C1FS)) {
                         lang2Content1FontStyleCB.setSelectedItem(l2C1FS);
                     }
                     l2C1DS = PropertiesEditor.dfMProps.getProperty("language2Content01DisplaySelectable");
-                    if (l2C1DS != null && !"".equals(l2C1DS)){
+                    if (l2C1DS != null && !"".equals(l2C1DS)) {
                         switch (l2C1DS) {
                             case "true":
                                 lang2Content1DisplaySelectableCheckB.setSelected(true);
@@ -2965,28 +2960,28 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                                 lang2Content1DisplaySelectableCheckB.setSelected(false);
                                 break;
                         }
-                    }                    
+                    }
                     l2C2DT = PropertiesEditor.dfMProps.getProperty("language2Content02DisplayText");
-                    if (l2C2DT != null && !"".equals(l2C2DT)){
+                    if (l2C2DT != null && !"".equals(l2C2DT)) {
                         lang2Content2DisplayTextTF.setText(l2C2DT);
                     }
                     l2C2FC = PropertiesEditor.dfMProps.getProperty("language2Content02FontColour");
-                    if (l2C2FC != null && !"".equals(l2C2FC)){
+                    if (l2C2FC != null && !"".equals(l2C2FC)) {
                         int i = getColorNamesFromRGBCodes(l2C2FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang2Content2FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l2C2FCObj = PropertiesEditor.makeObj(l2C2FC);
                             lang2Content2FontColourCB.addItem(l2C2FCObj);
                             lang2Content2FontColourCB.setSelectedItem(l2C2FCObj);
                         }
                     }
                     l2C2FS = PropertiesEditor.dfMProps.getProperty("language2Content02FontStyle");
-                    if (l2C2FS != null && !"".equals(l2C2FS)){
+                    if (l2C2FS != null && !"".equals(l2C2FS)) {
                         lang2Content2FontStyleCB.setSelectedItem(l2C2FS);
                     }
                     l2C2DS = PropertiesEditor.dfMProps.getProperty("language2Content02DisplaySelectable");
-                    if (l2C2DS != null && !"".equals(l2C2DS)){
+                    if (l2C2DS != null && !"".equals(l2C2DS)) {
                         switch (l2C2DS) {
                             case "true":
                                 lang2Content2DisplaySelectableCheckB.setSelected(true);
@@ -3001,26 +2996,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                 // language2Content03
                 case "3":
                     l2C1DT = PropertiesEditor.dfMProps.getProperty("language2Content01DisplayText");
-                    if (l2C1DT != null && !"".equals(l2C1DT)){
+                    if (l2C1DT != null && !"".equals(l2C1DT)) {
                         lang2Content1DisplayTextTF.setText(l2C1DT);
                     }
                     l2C1FC = PropertiesEditor.dfMProps.getProperty("language2Content01FontColour");
-                    if (l2C1FC != null && !"".equals(l2C1FC)){
+                    if (l2C1FC != null && !"".equals(l2C1FC)) {
                         int i = getColorNamesFromRGBCodes(l2C1FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang2Content1FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l2C1FCObj = PropertiesEditor.makeObj(l2C1FC);
                             lang2Content1FontColourCB.addItem(l2C1FCObj);
                             lang2Content1FontColourCB.setSelectedItem(l2C1FCObj);
                         }
                     }
                     l2C1FS = PropertiesEditor.dfMProps.getProperty("language2Content01FontStyle");
-                    if (l2C1FS != null && !"".equals(l2C1FS)){
+                    if (l2C1FS != null && !"".equals(l2C1FS)) {
                         lang2Content1FontStyleCB.setSelectedItem(l2C1FS);
                     }
                     l2C1DS = PropertiesEditor.dfMProps.getProperty("language2Content01DisplaySelectable");
-                    if (l2C1DS != null && !"".equals(l2C1DS)){
+                    if (l2C1DS != null && !"".equals(l2C1DS)) {
                         switch (l2C1DS) {
                             case "true":
                                 lang2Content1DisplaySelectableCheckB.setSelected(true);
@@ -3029,28 +3024,28 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                                 lang2Content1DisplaySelectableCheckB.setSelected(false);
                                 break;
                         }
-                    }                    
+                    }
                     l2C2DT = PropertiesEditor.dfMProps.getProperty("language2Content02DisplayText");
-                    if (l2C2DT != null && !"".equals(l2C2DT)){
+                    if (l2C2DT != null && !"".equals(l2C2DT)) {
                         lang2Content2DisplayTextTF.setText(l2C2DT);
                     }
                     l2C2FC = PropertiesEditor.dfMProps.getProperty("language2Content02FontColour");
-                    if (l2C2FC != null && !"".equals(l2C2FC)){
+                    if (l2C2FC != null && !"".equals(l2C2FC)) {
                         int i = getColorNamesFromRGBCodes(l2C2FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang2Content2FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l2C2FCObj = PropertiesEditor.makeObj(l2C2FC);
                             lang2Content2FontColourCB.addItem(l2C2FCObj);
                             lang2Content2FontColourCB.setSelectedItem(l2C2FCObj);
                         }
                     }
                     l2C2FS = PropertiesEditor.dfMProps.getProperty("language2Content02FontStyle");
-                    if (l2C2FS != null && !"".equals(l2C2FS)){
+                    if (l2C2FS != null && !"".equals(l2C2FS)) {
                         lang2Content2FontStyleCB.setSelectedItem(l2C2FS);
                     }
                     l2C2DS = PropertiesEditor.dfMProps.getProperty("language2Content02DisplaySelectable");
-                    if (l2C2DS != null && !"".equals(l2C2DS)){
+                    if (l2C2DS != null && !"".equals(l2C2DS)) {
                         switch (l2C2DS) {
                             case "true":
                                 lang2Content2DisplaySelectableCheckB.setSelected(true);
@@ -3061,26 +3056,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                         }
                     }
                     l2C3DT = PropertiesEditor.dfMProps.getProperty("language2Content03DisplayText");
-                    if (l2C3DT != null && !"".equals(l2C3DT)){
+                    if (l2C3DT != null && !"".equals(l2C3DT)) {
                         lang2Content3DisplayTextTF.setText(l2C3DT);
                     }
                     l2C3FC = PropertiesEditor.dfMProps.getProperty("language2Content03FontColour");
-                    if (l2C3FC != null && !"".equals(l2C3FC)){
+                    if (l2C3FC != null && !"".equals(l2C3FC)) {
                         int i = getColorNamesFromRGBCodes(l2C3FC);
-                        if (i <= 13){
+                        if (i <= 13) {
                             lang2Content3FontColourCB.setSelectedIndex(i);
-                        } else if (i == 1000){
-                        Object l2C3FCObj = PropertiesEditor.makeObj(l2C3FC);
-                        lang2Content3FontColourCB.addItem(l2C3FCObj);
-                        lang2Content3FontColourCB.setSelectedItem(l2C3FCObj);
+                        } else if (i == 1000) {
+                            Object l2C3FCObj = PropertiesEditor.makeObj(l2C3FC);
+                            lang2Content3FontColourCB.addItem(l2C3FCObj);
+                            lang2Content3FontColourCB.setSelectedItem(l2C3FCObj);
                         }
                     }
                     l2C3FS = PropertiesEditor.dfMProps.getProperty("language2Content03FontStyle");
-                    if (l2C3FS != null && !"".equals(l2C3FS)){
+                    if (l2C3FS != null && !"".equals(l2C3FS)) {
                         lang2Content3FontStyleCB.setSelectedItem(l2C3FS);
                     }
                     l2C3DS = PropertiesEditor.dfMProps.getProperty("language2Content03DisplaySelectable");
-                    if (l2C3DS != null && !"".equals(l2C3DS)){
+                    if (l2C3DS != null && !"".equals(l2C3DS)) {
                         switch (l2C3DS) {
                             case "true":
                                 lang2Content3DisplaySelectableCheckB.setSelected(true);
@@ -3095,26 +3090,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                 // language2Content04
                 case "4":
                     l2C1DT = PropertiesEditor.dfMProps.getProperty("language2Content01DisplayText");
-                    if (l2C1DT != null && !"".equals(l2C1DT)){
+                    if (l2C1DT != null && !"".equals(l2C1DT)) {
                         lang2Content1DisplayTextTF.setText(l2C1DT);
                     }
                     l2C1FC = PropertiesEditor.dfMProps.getProperty("language2Content01FontColour");
-                    if (l2C1FC != null && !"".equals(l2C1FC)){
+                    if (l2C1FC != null && !"".equals(l2C1FC)) {
                         int i = getColorNamesFromRGBCodes(l2C1FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang2Content1FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l2C1FCObj = PropertiesEditor.makeObj(l2C1FC);
                             lang2Content1FontColourCB.addItem(l2C1FCObj);
                             lang2Content1FontColourCB.setSelectedItem(l2C1FCObj);
                         }
                     }
                     l2C1FS = PropertiesEditor.dfMProps.getProperty("language2Content01FontStyle");
-                    if (l2C1FS != null && !"".equals(l2C1FS)){
+                    if (l2C1FS != null && !"".equals(l2C1FS)) {
                         lang2Content1FontStyleCB.setSelectedItem(l2C1FS);
                     }
                     l2C1DS = PropertiesEditor.dfMProps.getProperty("language2Content01DisplaySelectable");
-                    if (l2C1DS != null && !"".equals(l2C1DS)){
+                    if (l2C1DS != null && !"".equals(l2C1DS)) {
                         switch (l2C1DS) {
                             case "true":
                                 lang2Content1DisplaySelectableCheckB.setSelected(true);
@@ -3123,28 +3118,28 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                                 lang2Content1DisplaySelectableCheckB.setSelected(false);
                                 break;
                         }
-                    }                    
+                    }
                     l2C2DT = PropertiesEditor.dfMProps.getProperty("language2Content02DisplayText");
-                    if (l2C2DT != null && !"".equals(l2C2DT)){
+                    if (l2C2DT != null && !"".equals(l2C2DT)) {
                         lang2Content2DisplayTextTF.setText(l2C2DT);
                     }
                     l2C2FC = PropertiesEditor.dfMProps.getProperty("language2Content02FontColour");
-                    if (l2C2FC != null && !"".equals(l2C2FC)){
+                    if (l2C2FC != null && !"".equals(l2C2FC)) {
                         int i = getColorNamesFromRGBCodes(l2C2FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang2Content2FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l2C2FCObj = PropertiesEditor.makeObj(l2C2FC);
                             lang2Content2FontColourCB.addItem(l2C2FCObj);
                             lang2Content2FontColourCB.setSelectedItem(l2C2FCObj);
                         }
                     }
                     l2C2FS = PropertiesEditor.dfMProps.getProperty("language2Content02FontStyle");
-                    if (l2C2FS != null && !"".equals(l2C2FS)){
+                    if (l2C2FS != null && !"".equals(l2C2FS)) {
                         lang2Content2FontStyleCB.setSelectedItem(l2C2FS);
                     }
                     l2C2DS = PropertiesEditor.dfMProps.getProperty("language2Content02DisplaySelectable");
-                    if (l2C2DS != null && !"".equals(l2C2DS)){
+                    if (l2C2DS != null && !"".equals(l2C2DS)) {
                         switch (l2C2DS) {
                             case "true":
                                 lang2Content2DisplaySelectableCheckB.setSelected(true);
@@ -3155,26 +3150,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                         }
                     }
                     l2C3DT = PropertiesEditor.dfMProps.getProperty("language2Content03DisplayText");
-                    if (l2C3DT != null && !"".equals(l2C3DT)){
+                    if (l2C3DT != null && !"".equals(l2C3DT)) {
                         lang2Content3DisplayTextTF.setText(l2C3DT);
                     }
                     l2C3FC = PropertiesEditor.dfMProps.getProperty("language2Content03FontColour");
-                    if (l2C3FC != null && !"".equals(l2C3FC)){
+                    if (l2C3FC != null && !"".equals(l2C3FC)) {
                         int i = getColorNamesFromRGBCodes(l2C3FC);
-                        if (i <= 13){
+                        if (i <= 13) {
                             lang2Content3FontColourCB.setSelectedIndex(i);
-                        } else if (i == 1000){
-                        Object l2C3FCObj = PropertiesEditor.makeObj(l2C3FC);
-                        lang2Content3FontColourCB.addItem(l2C3FCObj);
-                        lang2Content3FontColourCB.setSelectedItem(l2C3FCObj);
+                        } else if (i == 1000) {
+                            Object l2C3FCObj = PropertiesEditor.makeObj(l2C3FC);
+                            lang2Content3FontColourCB.addItem(l2C3FCObj);
+                            lang2Content3FontColourCB.setSelectedItem(l2C3FCObj);
                         }
                     }
                     l2C3FS = PropertiesEditor.dfMProps.getProperty("language2Content03FontStyle");
-                    if (l2C3FS != null && !"".equals(l2C3FS)){
+                    if (l2C3FS != null && !"".equals(l2C3FS)) {
                         lang2Content3FontStyleCB.setSelectedItem(l2C3FS);
                     }
                     l2C3DS = PropertiesEditor.dfMProps.getProperty("language2Content03DisplaySelectable");
-                    if (l2C3DS != null && !"".equals(l2C3DS)){
+                    if (l2C3DS != null && !"".equals(l2C3DS)) {
                         switch (l2C3DS) {
                             case "true":
                                 lang2Content3DisplaySelectableCheckB.setSelected(true);
@@ -3185,16 +3180,16 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                         }
                     }
                     l2C4DT = PropertiesEditor.dfMProps.getProperty("language2Content04DisplayText");
-                    if (l2C4DT != null && !"".equals(l2C4DT)){
+                    if (l2C4DT != null && !"".equals(l2C4DT)) {
                         lang2Content4DisplayTextTF.setText(l2C4DT);
                     }
 
                     l2C4FC = PropertiesEditor.dfMProps.getProperty("language2Content04FontColour");
-                    if (l2C4FC != null && !"".equals(l2C4FC)){
+                    if (l2C4FC != null && !"".equals(l2C4FC)) {
                         int i = getColorNamesFromRGBCodes(l2C4FC);
-                        if (i <= 13){
+                        if (i <= 13) {
                             lang2Content4FontColourCB.setSelectedIndex(i);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l2C4FCObj = PropertiesEditor.makeObj(l2C4FC);
                             lang2Content4FontColourCB.addItem(l2C4FCObj);
                             lang2Content4FontColourCB.setSelectedItem(l2C4FCObj);
@@ -3202,7 +3197,7 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                     }
 
                     l2C4FS = PropertiesEditor.dfMProps.getProperty("language2Content04FontStyle");
-                    if (l2C4FS != null && !"".equals(l2C4FS)){
+                    if (l2C4FS != null && !"".equals(l2C4FS)) {
                         lang2Content4FontStyleCB.setSelectedItem(l2C4FS);
                     }
 
@@ -3239,26 +3234,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
             switch (lang3NumOfContentDecsCB.getSelectedItem().toString()) {
                 case "1":
                     l3C1DT = PropertiesEditor.dfMProps.getProperty("language3Content01DisplayText");
-                    if (l3C1DT != null && !"".equals(l3C1DT)){
+                    if (l3C1DT != null && !"".equals(l3C1DT)) {
                         lang3Content1DisplayTextTF.setText(l3C1DT);
                     }
                     l3C1FC = PropertiesEditor.dfMProps.getProperty("language3Content01FontColour");
-                    if (l3C1FC != null && !"".equals(l3C1FC)){
+                    if (l3C1FC != null && !"".equals(l3C1FC)) {
                         int i = getColorNamesFromRGBCodes(l3C1FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang3Content1FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l3C1FCObj = PropertiesEditor.makeObj(l3C1FC);
                             lang3Content1FontColourCB.addItem(l3C1FCObj);
                             lang3Content1FontColourCB.setSelectedItem(l3C1FCObj);
                         }
                     }
                     l3C1FS = PropertiesEditor.dfMProps.getProperty("language3Content01FontStyle");
-                    if (l3C1FS != null && !"".equals(l3C1FS)){
+                    if (l3C1FS != null && !"".equals(l3C1FS)) {
                         lang3Content1FontStyleCB.setSelectedItem(l3C1FS);
                     }
                     l3C1DS = PropertiesEditor.dfMProps.getProperty("language3Content01DisplaySelectable");
-                    if (l3C1DS != null && !"".equals(l3C1DS)){
+                    if (l3C1DS != null && !"".equals(l3C1DS)) {
                         switch (l3C1DS) {
                             case "true":
                                 lang3Content1DisplaySelectableCheckB.setSelected(true);
@@ -3272,26 +3267,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                 // language3Content02
                 case "2":
                     l3C1DT = PropertiesEditor.dfMProps.getProperty("language3Content01DisplayText");
-                    if (l3C1DT != null && !"".equals(l3C1DT)){
+                    if (l3C1DT != null && !"".equals(l3C1DT)) {
                         lang3Content1DisplayTextTF.setText(l3C1DT);
                     }
                     l3C1FC = PropertiesEditor.dfMProps.getProperty("language3Content01FontColour");
-                    if (l3C1FC != null && !"".equals(l3C1FC)){
+                    if (l3C1FC != null && !"".equals(l3C1FC)) {
                         int i = getColorNamesFromRGBCodes(l3C1FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang3Content1FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l3C1FCObj = PropertiesEditor.makeObj(l3C1FC);
                             lang3Content1FontColourCB.addItem(l3C1FCObj);
                             lang3Content1FontColourCB.setSelectedItem(l3C1FCObj);
                         }
                     }
                     l3C1FS = PropertiesEditor.dfMProps.getProperty("language3Content01FontStyle");
-                    if (l3C1FS != null && !"".equals(l3C1FS)){
+                    if (l3C1FS != null && !"".equals(l3C1FS)) {
                         lang3Content1FontStyleCB.setSelectedItem(l3C1FS);
                     }
                     l3C1DS = PropertiesEditor.dfMProps.getProperty("language3Content01DisplaySelectable");
-                    if (l3C1DS != null && !"".equals(l3C1DS)){
+                    if (l3C1DS != null && !"".equals(l3C1DS)) {
                         switch (l3C1DS) {
                             case "true":
                                 lang3Content1DisplaySelectableCheckB.setSelected(true);
@@ -3302,26 +3297,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                         }
                     }
                     l3C2DT = PropertiesEditor.dfMProps.getProperty("language3Content02DisplayText");
-                    if (l3C2DT != null && !"".equals(l3C2DT)){
+                    if (l3C2DT != null && !"".equals(l3C2DT)) {
                         lang3Content2DisplayTextTF.setText(l3C2DT);
                     }
                     l3C2FC = PropertiesEditor.dfMProps.getProperty("language3Content02FontColour");
-                    if (l3C2FC != null && !"".equals(l3C2FC)){
+                    if (l3C2FC != null && !"".equals(l3C2FC)) {
                         int i = getColorNamesFromRGBCodes(l3C2FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang3Content2FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l3C2FCObj = PropertiesEditor.makeObj(l3C2FC);
                             lang3Content2FontColourCB.addItem(l3C2FCObj);
                             lang3Content2FontColourCB.setSelectedItem(l3C2FCObj);
                         }
                     }
                     l3C2FS = PropertiesEditor.dfMProps.getProperty("language3Content02FontStyle");
-                    if (l3C2FS != null && !"".equals(l3C2FS)){
+                    if (l3C2FS != null && !"".equals(l3C2FS)) {
                         lang3Content2FontStyleCB.setSelectedItem(l3C2FS);
                     }
                     l3C2DS = PropertiesEditor.dfMProps.getProperty("language3Content02DisplaySelectable");
-                    if (l3C2DS != null && !"".equals(l3C2DS)){
+                    if (l3C2DS != null && !"".equals(l3C2DS)) {
                         switch (l3C2DS) {
                             case "true":
                                 lang3Content2DisplaySelectableCheckB.setSelected(true);
@@ -3336,26 +3331,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                 // language3Content03
                 case "3":
                     l3C1DT = PropertiesEditor.dfMProps.getProperty("language3Content01DisplayText");
-                    if (l3C1DT != null && !"".equals(l3C1DT)){
+                    if (l3C1DT != null && !"".equals(l3C1DT)) {
                         lang3Content1DisplayTextTF.setText(l3C1DT);
                     }
                     l3C1FC = PropertiesEditor.dfMProps.getProperty("language3Content01FontColour");
-                    if (l3C1FC != null && !"".equals(l3C1FC)){
+                    if (l3C1FC != null && !"".equals(l3C1FC)) {
                         int i = getColorNamesFromRGBCodes(l3C1FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang3Content1FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l3C1FCObj = PropertiesEditor.makeObj(l3C1FC);
                             lang3Content1FontColourCB.addItem(l3C1FCObj);
                             lang3Content1FontColourCB.setSelectedItem(l3C1FCObj);
                         }
                     }
                     l3C1FS = PropertiesEditor.dfMProps.getProperty("language3Content01FontStyle");
-                    if (l3C1FS != null && !"".equals(l3C1FS)){
+                    if (l3C1FS != null && !"".equals(l3C1FS)) {
                         lang3Content1FontStyleCB.setSelectedItem(l3C1FS);
                     }
                     l3C1DS = PropertiesEditor.dfMProps.getProperty("language3Content01DisplaySelectable");
-                    if (l3C1DS != null && !"".equals(l3C1DS)){
+                    if (l3C1DS != null && !"".equals(l3C1DS)) {
                         switch (l3C1DS) {
                             case "true":
                                 lang3Content1DisplaySelectableCheckB.setSelected(true);
@@ -3366,26 +3361,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                         }
                     }
                     l3C2DT = PropertiesEditor.dfMProps.getProperty("language3Content02DisplayText");
-                    if (l3C2DT != null && !"".equals(l3C2DT)){
+                    if (l3C2DT != null && !"".equals(l3C2DT)) {
                         lang3Content2DisplayTextTF.setText(l3C2DT);
                     }
                     l3C2FC = PropertiesEditor.dfMProps.getProperty("language3Content02FontColour");
-                    if (l3C2FC != null && !"".equals(l3C2FC)){
+                    if (l3C2FC != null && !"".equals(l3C2FC)) {
                         int i = getColorNamesFromRGBCodes(l3C2FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang3Content2FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l3C2FCObj = PropertiesEditor.makeObj(l3C2FC);
                             lang3Content2FontColourCB.addItem(l3C2FCObj);
                             lang3Content2FontColourCB.setSelectedItem(l3C2FCObj);
                         }
                     }
                     l3C2FS = PropertiesEditor.dfMProps.getProperty("language3Content02FontStyle");
-                    if (l3C2FS != null && !"".equals(l3C2FS)){
+                    if (l3C2FS != null && !"".equals(l3C2FS)) {
                         lang3Content2FontStyleCB.setSelectedItem(l3C2FS);
                     }
                     l3C2DS = PropertiesEditor.dfMProps.getProperty("language3Content02DisplaySelectable");
-                    if (l3C2DS != null && !"".equals(l3C2DS)){
+                    if (l3C2DS != null && !"".equals(l3C2DS)) {
                         switch (l3C2DS) {
                             case "true":
                                 lang3Content2DisplaySelectableCheckB.setSelected(true);
@@ -3396,26 +3391,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                         }
                     }
                     l3C3DT = PropertiesEditor.dfMProps.getProperty("language3Content03DisplayText");
-                    if (l3C3DT != null && !"".equals(l3C3DT)){
+                    if (l3C3DT != null && !"".equals(l3C3DT)) {
                         lang3Content3DisplayTextTF.setText(l3C3DT);
                     }
                     l3C3FC = PropertiesEditor.dfMProps.getProperty("language3Content03FontColour");
-                    if (l3C3FC != null && !"".equals(l3C3FC)){
+                    if (l3C3FC != null && !"".equals(l3C3FC)) {
                         int i = getColorNamesFromRGBCodes(l3C3FC);
-                        if (i <= 13){
+                        if (i <= 13) {
                             lang3Content3FontColourCB.setSelectedIndex(i);
-                        } else if (i == 1000){
-                        Object l3C3FCObj = PropertiesEditor.makeObj(l3C3FC);
-                        lang3Content3FontColourCB.addItem(l3C3FCObj);
-                        lang3Content3FontColourCB.setSelectedItem(l3C3FCObj);
+                        } else if (i == 1000) {
+                            Object l3C3FCObj = PropertiesEditor.makeObj(l3C3FC);
+                            lang3Content3FontColourCB.addItem(l3C3FCObj);
+                            lang3Content3FontColourCB.setSelectedItem(l3C3FCObj);
                         }
                     }
                     l3C3FS = PropertiesEditor.dfMProps.getProperty("language3Content03FontStyle");
-                    if (l3C3FS != null && !"".equals(l3C3FS)){
+                    if (l3C3FS != null && !"".equals(l3C3FS)) {
                         lang3Content3FontStyleCB.setSelectedItem(l3C3FS);
                     }
                     l3C3DS = PropertiesEditor.dfMProps.getProperty("language3Content03DisplaySelectable");
-                    if (l3C3DS != null && !"".equals(l3C3DS)){
+                    if (l3C3DS != null && !"".equals(l3C3DS)) {
                         switch (l3C3DS) {
                             case "true":
                                 lang3Content3DisplaySelectableCheckB.setSelected(true);
@@ -3430,26 +3425,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                 // language3Content04
                 case "4":
                     l3C1DT = PropertiesEditor.dfMProps.getProperty("language3Content01DisplayText");
-                    if (l3C1DT != null && !"".equals(l3C1DT)){
+                    if (l3C1DT != null && !"".equals(l3C1DT)) {
                         lang3Content1DisplayTextTF.setText(l3C1DT);
                     }
                     l3C1FC = PropertiesEditor.dfMProps.getProperty("language3Content01FontColour");
-                    if (l3C1FC != null && !"".equals(l3C1FC)){
+                    if (l3C1FC != null && !"".equals(l3C1FC)) {
                         int i = getColorNamesFromRGBCodes(l3C1FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang3Content1FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l3C1FCObj = PropertiesEditor.makeObj(l3C1FC);
                             lang3Content1FontColourCB.addItem(l3C1FCObj);
                             lang3Content1FontColourCB.setSelectedItem(l3C1FCObj);
                         }
                     }
                     l3C1FS = PropertiesEditor.dfMProps.getProperty("language3Content01FontStyle");
-                    if (l3C1FS != null && !"".equals(l3C1FS)){
+                    if (l3C1FS != null && !"".equals(l3C1FS)) {
                         lang3Content1FontStyleCB.setSelectedItem(l3C1FS);
                     }
                     l3C1DS = PropertiesEditor.dfMProps.getProperty("language3Content01DisplaySelectable");
-                    if (l3C1DS != null && !"".equals(l3C1DS)){
+                    if (l3C1DS != null && !"".equals(l3C1DS)) {
                         switch (l3C1DS) {
                             case "true":
                                 lang3Content1DisplaySelectableCheckB.setSelected(true);
@@ -3460,26 +3455,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                         }
                     }
                     l3C2DT = PropertiesEditor.dfMProps.getProperty("language3Content02DisplayText");
-                    if (l3C2DT != null && !"".equals(l3C2DT)){
+                    if (l3C2DT != null && !"".equals(l3C2DT)) {
                         lang3Content2DisplayTextTF.setText(l3C2DT);
                     }
                     l3C2FC = PropertiesEditor.dfMProps.getProperty("language3Content02FontColour");
-                    if (l3C2FC != null && !"".equals(l3C2FC)){
+                    if (l3C2FC != null && !"".equals(l3C2FC)) {
                         int i = getColorNamesFromRGBCodes(l3C2FC);
-                        if (1 <= 13){
+                        if (1 <= 13) {
                             lang3Content2FontColourCB.setSelectedIndex(1);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l3C2FCObj = PropertiesEditor.makeObj(l3C2FC);
                             lang3Content2FontColourCB.addItem(l3C2FCObj);
                             lang3Content2FontColourCB.setSelectedItem(l3C2FCObj);
                         }
                     }
                     l3C2FS = PropertiesEditor.dfMProps.getProperty("language3Content02FontStyle");
-                    if (l3C2FS != null && !"".equals(l3C2FS)){
+                    if (l3C2FS != null && !"".equals(l3C2FS)) {
                         lang3Content2FontStyleCB.setSelectedItem(l3C2FS);
                     }
                     l3C2DS = PropertiesEditor.dfMProps.getProperty("language3Content02DisplaySelectable");
-                    if (l3C2DS != null && !"".equals(l3C2DS)){
+                    if (l3C2DS != null && !"".equals(l3C2DS)) {
                         switch (l3C2DS) {
                             case "true":
                                 lang3Content2DisplaySelectableCheckB.setSelected(true);
@@ -3490,26 +3485,26 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                         }
                     }
                     l3C3DT = PropertiesEditor.dfMProps.getProperty("language3Content03DisplayText");
-                    if (l3C3DT != null && !"".equals(l3C3DT)){
+                    if (l3C3DT != null && !"".equals(l3C3DT)) {
                         lang3Content3DisplayTextTF.setText(l3C3DT);
                     }
                     l3C3FC = PropertiesEditor.dfMProps.getProperty("language3Content03FontColour");
-                    if (l3C3FC != null && !"".equals(l3C3FC)){
+                    if (l3C3FC != null && !"".equals(l3C3FC)) {
                         int i = getColorNamesFromRGBCodes(l3C3FC);
-                        if (i <= 13){
+                        if (i <= 13) {
                             lang3Content3FontColourCB.setSelectedIndex(i);
-                        } else if (i == 1000){
-                        Object l3C3FCObj = PropertiesEditor.makeObj(l3C3FC);
-                        lang3Content3FontColourCB.addItem(l3C3FCObj);
-                        lang3Content3FontColourCB.setSelectedItem(l3C3FCObj);
+                        } else if (i == 1000) {
+                            Object l3C3FCObj = PropertiesEditor.makeObj(l3C3FC);
+                            lang3Content3FontColourCB.addItem(l3C3FCObj);
+                            lang3Content3FontColourCB.setSelectedItem(l3C3FCObj);
                         }
                     }
                     l3C3FS = PropertiesEditor.dfMProps.getProperty("language3Content03FontStyle");
-                    if (l3C3FS != null && !"".equals(l3C3FS)){
+                    if (l3C3FS != null && !"".equals(l3C3FS)) {
                         lang3Content3FontStyleCB.setSelectedItem(l3C3FS);
                     }
                     l3C3DS = PropertiesEditor.dfMProps.getProperty("language3Content03DisplaySelectable");
-                    if (l3C3DS != null && !"".equals(l3C3DS)){
+                    if (l3C3DS != null && !"".equals(l3C3DS)) {
                         switch (l3C3DS) {
                             case "true":
                                 lang3Content3DisplaySelectableCheckB.setSelected(true);
@@ -3520,22 +3515,22 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                         }
                     }
                     l3C4DT = PropertiesEditor.dfMProps.getProperty("language3Content04DisplayText");
-                    if (l3C4DT != null && !"".equals(l3C4DT)){
+                    if (l3C4DT != null && !"".equals(l3C4DT)) {
                         lang3Content4DisplayTextTF.setText(l3C4DT);
                     }
                     l3C4FC = PropertiesEditor.dfMProps.getProperty("language3Content04FontColour");
-                    if (l3C4FC != null && !"".equals(l3C4FC)){
+                    if (l3C4FC != null && !"".equals(l3C4FC)) {
                         int i = getColorNamesFromRGBCodes(l3C4FC);
-                        if (i <= 13){
+                        if (i <= 13) {
                             lang3Content4FontColourCB.setSelectedIndex(i);
-                        } else if (i == 1000){
+                        } else if (i == 1000) {
                             Object l3C4FCObj = PropertiesEditor.makeObj(l3C4FC);
                             lang3Content4FontColourCB.addItem(l3C4FCObj);
                             lang3Content4FontColourCB.setSelectedItem(l3C4FCObj);
                         }
                     }
                     l3C4FS = PropertiesEditor.dfMProps.getProperty("language3Content04FontStyle");
-                    if (l3C4FS != null && !"".equals(l3C4FS)){
+                    if (l3C4FS != null && !"".equals(l3C4FS)) {
                         lang3Content4FontStyleCB.setSelectedItem(l3C4FS);
                     }
                     l3C4DS = PropertiesEditor.dfMProps.getProperty("language3Content04DisplaySelectable");
@@ -3549,44 +3544,42 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                     }
             }
 
-        } catch (Throwable t){
+        } catch (Throwable t) {
             System.out.println(t.getLocalizedMessage());
         }
 
     }
-    
+
     private void saveTheProperties() {
         //boolean propFileSaved = false;
-        try {            
+        try {
             setTheContentNNProperties(); // saving the values
             /*if (PropertiesEditor.openPropsFileForGUIEditFlag){
-                try {
-                    DfMCreatorMain.propWin.validateValues();
-                    DfMCreatorMain.propWin.setValuesInThePropsPreviewWindow();
-                    propFileSaved = DfMCreatorMain.propWin.proPrevWin.savePropFile();
-                } catch (IllegalArgumentException e){
-                    DfMCreatorMain.printAnyMsg(PropertiesEditor.RequiredArgsAbsentErrorMsg,
-                            I18n.tr("error.dfmPropCreate"), JOptionPane.ERROR_MESSAGE);
-                    System.out.println(e + "\n");
-                } catch (UnsupportedOperationException ex){
-                    DfMCreatorMain.printAnyMsg(PropertiesPreview.canWriteFileMsg,
-                            I18n.tr("dirNotAccessible"), JOptionPane.ERROR_MESSAGE);
-                } catch (IOException ex){
-                    DfMCreatorMain.printAnyMsg(PropertiesPreview.internalErrorMsg,
-                            I18n.tr("error"), JOptionPane.ERROR_MESSAGE);                
-                }
-            } */
-            //if (propFileSaved) {                           
-                executeFakeProgessBar(); // calling the fake progress bar
+             try {
+             DfMCreatorMain.propWin.validateValues();
+             DfMCreatorMain.propWin.setValuesInThePropsPreviewWindow();
+             propFileSaved = DfMCreatorMain.propWin.proPrevWin.savePropFile();
+             } catch (IllegalArgumentException e){
+             DfMCreatorMain.printAnyMsg(PropertiesEditor.RequiredArgsAbsentErrorMsg,
+             I18n.tr("error.dfmPropCreate"), JOptionPane.ERROR_MESSAGE);
+             System.out.println(e + "\n");
+             } catch (UnsupportedOperationException ex){
+             DfMCreatorMain.printAnyMsg(PropertiesPreview.canWriteFileMsg,
+             I18n.tr("dirNotAccessible"), JOptionPane.ERROR_MESSAGE);
+             } catch (IOException ex){
+             DfMCreatorMain.printAnyMsg(PropertiesPreview.internalErrorMsg,
+             I18n.tr("error"), JOptionPane.ERROR_MESSAGE);
+             }
+             } */
+            //if (propFileSaved) {
+            executeFakeProgessBar(); // calling the fake progress bar
             //}
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             DfMCreatorMain.printAnyMsg(e.getLocalizedMessage(),
                     I18n.tr("no.content.prop.dec.WinTitle"),
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-
     ////////////////////////////////////////////////
     //  Creating a fake progress bar which will   //
     //  give to the user the impression that the  //
@@ -3601,13 +3594,13 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
     //  the user might have the impression that   //
     //  nothing is being saved.                   //
     ////////////////////////////////////////////////
-
     // task variable that will be
     // used to execute the task
     private Task task;
 
     // task class
     class Task extends SwingWorker<Void, Void> {
+
         @Override
         public Void doInBackground() {
             Random random = new Random();
@@ -3618,7 +3611,8 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
                 //Sleep
                 try {
                     Thread.sleep(random.nextInt(50));
-                } catch (InterruptedException ignore) {}
+                } catch (InterruptedException ignore) {
+                }
                 //Make random progress.
                 progress += random.nextInt(10);
                 setProgress(Math.min(progress, 100));
@@ -3656,5 +3650,4 @@ public class ContentPropertiesCreator extends javax.swing.JDialog implements Pro
         }
     }
     ////////////////////////////////////////////////
-
 }

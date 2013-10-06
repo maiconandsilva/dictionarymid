@@ -166,7 +166,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
         System.out.println(String.valueOf(dictDirectory_FILE));
         System.out.print("Input Dictionary Directory (STRING): ");
         System.out.println(dictDirectory_STRING);
-        System.out.println(String.valueOf(this));
+        //System.out.println(String.valueOf(this)); // Callback value
         System.out.print("Font Size: ");
         System.out.println(String.valueOf(fontSize));
         System.out.print("Clip Top Value: ");
@@ -178,65 +178,11 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
             c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, fontSize, clip_Top, clip_Bottom);
             c.generateFonts();
         } else { // Generate font for all the sizes: i.e from 8 to 36!
-            // 8
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 8, clip_Top, clip_Bottom);
-            c.generateFonts();
 
-            // 10
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 10, clip_Top, clip_Bottom);
-            c.generateFonts();
-
-            // 12
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 12, clip_Top, clip_Bottom);
-            c.generateFonts();
-
-            // 14
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 14, clip_Top, clip_Bottom);
-            c.generateFonts();
-
-            // 16
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 16, clip_Top, clip_Bottom);
-            c.generateFonts();
-
-            // 18
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 18, clip_Top, clip_Bottom);
-            c.generateFonts();
-
-            // 20
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 20, clip_Top, clip_Bottom);
-            c.generateFonts();
-
-            // 22
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 22, clip_Top, clip_Bottom);
-            c.generateFonts();
-
-            // 24
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 24, clip_Top, clip_Bottom);
-            c.generateFonts();
-
-            // 26
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 26, clip_Top, clip_Bottom);
-            c.generateFonts();
-
-            // 28
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 28, clip_Top, clip_Bottom);
-            c.generateFonts();
-
-            // 30
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 30, clip_Top, clip_Bottom);
-            c.generateFonts();
-
-            // 32
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 32, clip_Top, clip_Bottom);
-            c.generateFonts();
-
-            // 34
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 34, clip_Top, clip_Bottom);
-            c.generateFonts();
-
-            // 36
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, 36, clip_Top, clip_Bottom);
-            c.generateFonts();
+            for (int i = 8; i <= 36; i += 2) {
+                c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
+                c.generateFonts();
+            }
         }
     }
 

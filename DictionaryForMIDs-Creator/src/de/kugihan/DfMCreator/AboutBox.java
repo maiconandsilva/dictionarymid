@@ -1,47 +1,45 @@
 /* ////////////////////////////////////////////////////////////////
-*   
-*   In the Name of Allah
-*   
-*   DICTIONARYFORMIDS-CREATOR
-*   
-*   This file is part of DictionaryForMIDs-Creator
-*   Copyright (C) 2012, 2013 Karim Mahamane Karimou
-*   DictionaryForMIDs-Creator is a GUI wrapper around various
-*   DictionaryForMIDs tools, among others we have
-*   DictdToDictionaryForMIDs, DictionaryGeneration,
-*   JarCreator and BitmapFontGenerator.
-*   
-*   DictionaryForMIDs-Creator is free software;
-*   you can redistribute it and/or modify it under the terms
-*   of the GNU General Public License as published by the
-*   Free Software Foundation; either version 2 of the License, or
-*   (at your option) any later version.
-*   
-*   DictionaryForMIDs-Creator is distributed in the hope that
-*   it will be useful, but WITHOUT ANY WARRANTY; without even
-*   the implied warranty of MERCHANTABILITY or
-*   FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*   	
-*   You should have received a copy of the GNU General Public
-*   License along with DictionaryForMIDs-Creator;
-*   if not, write to the Free Software Foundation, Inc.,
-*   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-*   
-* //////////////////////////////////////////////////////////////// */
-
+ *
+ *   In the Name of Allah
+ *
+ *   DICTIONARYFORMIDS-CREATOR
+ *
+ *   This file is part of DictionaryForMIDs-Creator
+ *   Copyright (C) 2012, 2013 Karim Mahamane Karimou
+ *   DictionaryForMIDs-Creator is a GUI wrapper around various
+ *   DictionaryForMIDs tools, among others we have
+ *   DictdToDictionaryForMIDs, DictionaryGeneration,
+ *   JarCreator and BitmapFontGenerator.
+ *
+ *   DictionaryForMIDs-Creator is free software;
+ *   you can redistribute it and/or modify it under the terms
+ *   of the GNU General Public License as published by the
+ *   Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   DictionaryForMIDs-Creator is distributed in the hope that
+ *   it will be useful, but WITHOUT ANY WARRANTY; without even
+ *   the implied warranty of MERCHANTABILITY or
+ *   FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public
+ *   License along with DictionaryForMIDs-Creator;
+ *   if not, write to the Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+ *
+ * //////////////////////////////////////////////////////////////// */
 package de.kugihan.DfMCreator;
 
 import edu.hws.eck.mdb.I18n;
 import java.io.IOException;
 import java.net.URL;
 
-
 public class AboutBox extends javax.swing.JDialog {
 
     private static URL gplURL;
-    
-    public static AboutBox getAboutBox(){
+
+    public static AboutBox getAboutBox() {
         return new AboutBox();
     }
 
@@ -189,14 +187,14 @@ public class AboutBox extends javax.swing.JDialog {
         /*
          * Set the default look and feel
          */
-        
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        try {                   
-             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        try {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException |
-        		 IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+                IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DfMCreatorMain.class.getName()).
-            log(java.util.logging.Level.SEVERE, null, ex);
+                    log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -204,7 +202,6 @@ public class AboutBox extends javax.swing.JDialog {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             @Override
             public void run() {
                 new AboutBox().setVisible(true);
@@ -230,7 +227,7 @@ public class AboutBox extends javax.swing.JDialog {
     private javax.swing.JButton okButton;
     private javax.swing.JPanel translationPanel;
     // End of variables declaration//GEN-END:variables
-    
+
     private void getGPLFile() {
         String s = HelpContents.path + I18n.tr("gplFileName.aboutBox");
         gplURL = getClass().getResource(s);
@@ -239,16 +236,16 @@ public class AboutBox extends javax.swing.JDialog {
         }
         displayGPLFile(gplURL);
     }
-    
+
     private void displayGPLFile(URL url) {
         try {
             if (url != null) {
                 licensePane.setPage(url);
             } else { //null url
-		licensePane.setText(I18n.tr("fileNotFound"));
+                licensePane.setText(I18n.tr("fileNotFound"));
             }
         } catch (IOException e) {
-            System.err.println(I18n.tr("badURL", new Object[] {url}));
+            System.err.println(I18n.tr("badURL", new Object[]{url}));
         }
-    }    
+    }
 }

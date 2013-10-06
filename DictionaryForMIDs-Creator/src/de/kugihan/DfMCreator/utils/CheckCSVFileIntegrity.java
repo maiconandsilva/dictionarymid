@@ -1,36 +1,34 @@
 /* ////////////////////////////////////////////////////////////////
-*   
-*   In the Name of Allah
-*   
-*   DICTIONARYFORMIDS-CREATOR
-*   
-*   This file is part of DictionaryForMIDs-Creator
-*   Copyright (C) 2012, 2013 Karim Mahamane Karimou
-*   DictionaryForMIDs-Creator is a GUI wrapper around various
-*   DictionaryForMIDs tools, among others we have
-*   DictdToDictionaryForMIDs, DictionaryGeneration,
-*   JarCreator and BitmapFontGenerator.
-*   
-*   DictionaryForMIDs-Creator is free software;
-*   you can redistribute it and/or modify it under the terms
-*   of the GNU General Public License as published by the
-*   Free Software Foundation; either version 2 of the License, or
-*   (at your option) any later version.
-*   
-*   DictionaryForMIDs-Creator is distributed in the hope that
-*   it will be useful, but WITHOUT ANY WARRANTY; without even
-*   the implied warranty of MERCHANTABILITY or
-*   FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*   	
-*   You should have received a copy of the GNU General Public
-*   License along with DictionaryForMIDs-Creator;
-*   if not, write to the Free Software Foundation, Inc.,
-*   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-*   
-* //////////////////////////////////////////////////////////////// */
-
-
+ *
+ *   In the Name of Allah
+ *
+ *   DICTIONARYFORMIDS-CREATOR
+ *
+ *   This file is part of DictionaryForMIDs-Creator
+ *   Copyright (C) 2012, 2013 Karim Mahamane Karimou
+ *   DictionaryForMIDs-Creator is a GUI wrapper around various
+ *   DictionaryForMIDs tools, among others we have
+ *   DictdToDictionaryForMIDs, DictionaryGeneration,
+ *   JarCreator and BitmapFontGenerator.
+ *
+ *   DictionaryForMIDs-Creator is free software;
+ *   you can redistribute it and/or modify it under the terms
+ *   of the GNU General Public License as published by the
+ *   Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   DictionaryForMIDs-Creator is distributed in the hope that
+ *   it will be useful, but WITHOUT ANY WARRANTY; without even
+ *   the implied warranty of MERCHANTABILITY or
+ *   FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public
+ *   License along with DictionaryForMIDs-Creator;
+ *   if not, write to the Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+ *
+ * //////////////////////////////////////////////////////////////// */
 package de.kugihan.DfMCreator.utils;
 
 import de.kugihan.DfMCreator.DfMCreatorMain;
@@ -49,21 +47,18 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
-
 public class CheckCSVFileIntegrity extends javax.swing.JFrame implements PropertyChangeListener {
-    
+
     // Variables used by checkCsvFileFormat()
     public static String csv_file_name;
     public static String encoding;
     public static char sepChar;
     public static int numOfLang;
-
     // variable that holds lets us know if the job is done
     private boolean done;
-    
     // the actual task tha will be carried on
     Task csvCheck;
-    
+
     /**
      * Creates new form CheckCSVFileIntegrity
      */
@@ -211,12 +206,11 @@ public class CheckCSVFileIntegrity extends javax.swing.JFrame implements Propert
     }// </editor-fold>//GEN-END:initComponents
 
     private void numLangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_numLangItemStateChanged
-        
     }//GEN-LAST:event_numLangItemStateChanged
 
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         String s = openFile(false);
-        if (!"".equals(s)){
+        if (!"".equals(s)) {
             tarea.setText(s);
         }
     }//GEN-LAST:event_browseButtonActionPerformed
@@ -229,25 +223,24 @@ public class CheckCSVFileIntegrity extends javax.swing.JFrame implements Propert
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       
+
         /*
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             @Override
             public void run() {
-               // new CheckCSVFileIntegrity().setVisible(true);
+                // new CheckCSVFileIntegrity().setVisible(true);
             }
         });
     }
-    
-    public static CheckCSVFileIntegrity getCSVCheckWin(){
+
+    public static CheckCSVFileIntegrity getCSVCheckWin() {
         return new CheckCSVFileIntegrity();
     }
 
     private void checkCSVFileIntegrity() {
-        if ("".equals(tarea.getText())){
+        if ("".equals(tarea.getText())) {
             try {
                 throw new FileNotFoundException(I18n.tr("textFieldIsEmpty"));
             } catch (FileNotFoundException ex) {
@@ -266,8 +259,7 @@ public class CheckCSVFileIntegrity extends javax.swing.JFrame implements Propert
         progressBar.setValue(csvCheck.getProgress());
     }
 
-    
-    class Task extends SwingWorker<Void, Void>{
+    class Task extends SwingWorker<Void, Void> {
 
         @Override
         protected Void doInBackground() throws Exception {
@@ -276,32 +268,32 @@ public class CheckCSVFileIntegrity extends javax.swing.JFrame implements Propert
                 encoding = enc.getSelectedItem().toString();
                 numOfLang = Integer.parseInt(numLang.getSelectedItem().toString());
                 String sep_Char = sep.getSelectedItem().toString();
-               
-		if (sep_Char.equals(I18n.tr("tab"))){
-		    sepChar = '\t';
-		} else if ( sep_Char.equals(I18n.tr("carRe"))){
-		    sepChar ='\r';
-		} else if (sep_Char.equals(I18n.tr("formFeed"))){
-		    sepChar = '\f';
-		} else if (sep_Char.equals(I18n.tr("comma"))){
-		    sepChar = ',';
-		} else if (sep_Char.equals(I18n.tr("semiColon"))){
-		    sepChar = ';';
-		} else if (sep_Char.equals(I18n.tr("colon"))){
-		    sepChar = ':';
-		} else {
-		    sepChar = '\t';
-		}        
-                
+
+                if (sep_Char.equals(I18n.tr("tab"))) {
+                    sepChar = '\t';
+                } else if (sep_Char.equals(I18n.tr("carRe"))) {
+                    sepChar = '\r';
+                } else if (sep_Char.equals(I18n.tr("formFeed"))) {
+                    sepChar = '\f';
+                } else if (sep_Char.equals(I18n.tr("comma"))) {
+                    sepChar = ',';
+                } else if (sep_Char.equals(I18n.tr("semiColon"))) {
+                    sepChar = ';';
+                } else if (sep_Char.equals(I18n.tr("colon"))) {
+                    sepChar = ':';
+                } else {
+                    sepChar = '\t';
+                }
+
                 checkCsvFileFormat(csv_file_name, encoding, sepChar, numOfLang);
             } catch (DictionaryException | IOException ex) {
                 System.out.println(ex.getMessage());
             }
             return null;
         }
-        
+
         @Override
-        protected void done(){
+        protected void done() {
             done = true;
             Toolkit.getDefaultToolkit().beep();
             checkButton.setEnabled(true);
@@ -309,9 +301,9 @@ public class CheckCSVFileIntegrity extends javax.swing.JFrame implements Propert
             setCursor(null);
             progressBar.setIndeterminate(false);
             progressBar.setValue(progressBar.getMinimum());
-        }    
+        }
     }
-    
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (!done) {
@@ -319,62 +311,60 @@ public class CheckCSVFileIntegrity extends javax.swing.JFrame implements Propert
             if (progress == 0) {
                 progressBar.setStringPainted(false);
                 progressBar.setIndeterminate(true);
-            }
-            else {
-                progressBar.setIndeterminate(false); 
+            } else {
+                progressBar.setIndeterminate(false);
                 progressBar.setString(null);
                 progressBar.setValue(progress);
-            }            
+            }
         }
     }
-    
+
     /**
-     * checkCsvFileFormat() Copied from DictionaryGeneration in order
-     * to adapt it to the GUI DfM-Creator. Checks a CSV file's integrity.
+     * checkCsvFileFormat() Copied from DictionaryGeneration in order to adapt
+     * it to the GUI DfM-Creator. Checks a CSV file's integrity.
+     *
      * @param csvFileName the input csv-file's name.
      * @throws DictionaryException
-     * @throws IOException 
+     * @throws IOException
      */
     public static void checkCsvFileFormat(String csvFileName, String encoding, char sepChar, int numLang) throws DictionaryException, IOException {
-	System.out.println(I18n.tr("checking.msg", new Object[] {csvFileName}));
-	InputStreamReader csvFile = new InputStreamReader(new FileInputStream(csvFileName), encoding);
-	String csvFileLine;
-	int lineCounter = 0;
-	String splitCharacter = String.valueOf(sepChar);
-	while ((csvFileLine = DictionaryGeneration.readLineFromReader(csvFile)) != null) {
-		++lineCounter;
-		// check if number of separator characters is correct
-		int numberOfSeparatorCharacters = csvFileLine.split(splitCharacter).length - 1;
-		if (numberOfSeparatorCharacters != (numLang -1)) {
-		            String s = I18n.tr("numOfSepCharIncorrect", new Object[] {lineCounter, numberOfSeparatorCharacters, (numLang -1)});
-                    DfMCreatorMain.printAnyMsg(s, I18n.tr("fileFormatIncorrectTitle"), JOptionPane.ERROR_MESSAGE);
-                       
-                    throw new DictionaryException(I18n.tr("fileFormatIsIncorrect"));
-		}
-	}
-	csvFile.close();
-	DfMCreatorMain.printAnyMsg(I18n.tr("done.Checking"),
-                                 I18n.tr("done.Bang"), JOptionPane.INFORMATION_MESSAGE);
+        System.out.println(I18n.tr("checking.msg", new Object[]{csvFileName}));
+        InputStreamReader csvFile = new InputStreamReader(new FileInputStream(csvFileName), encoding);
+        String csvFileLine;
+        int lineCounter = 0;
+        String splitCharacter = String.valueOf(sepChar);
+        while ((csvFileLine = DictionaryGeneration.readLineFromReader(csvFile)) != null) {
+            ++lineCounter;
+            // check if number of separator characters is correct
+            int numberOfSeparatorCharacters = csvFileLine.split(splitCharacter).length - 1;
+            if (numberOfSeparatorCharacters != (numLang - 1)) {
+                String s = I18n.tr("numOfSepCharIncorrect", new Object[]{lineCounter, numberOfSeparatorCharacters, (numLang - 1)});
+                DfMCreatorMain.printAnyMsg(s, I18n.tr("fileFormatIncorrectTitle"), JOptionPane.ERROR_MESSAGE);
+
+                throw new DictionaryException(I18n.tr("fileFormatIsIncorrect"));
+            }
+        }
+        csvFile.close();
+        DfMCreatorMain.printAnyMsg(I18n.tr("done.Checking"),
+                I18n.tr("done.Bang"), JOptionPane.INFORMATION_MESSAGE);
     }
-    
+
     private String openFile(boolean dirsOnly) {
         String filename;
-	JFileChooser chooser = new JFileChooser();
-	if (dirsOnly) {
-		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-	} else {
+        JFileChooser chooser = new JFileChooser();
+        if (dirsOnly) {
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        } else {
             chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         }
-	int valueReturned = chooser.showOpenDialog(this);
-	if (valueReturned == JFileChooser.APPROVE_OPTION){
+        int valueReturned = chooser.showOpenDialog(this);
+        if (valueReturned == JFileChooser.APPROVE_OPTION) {
             filename = chooser.getSelectedFile().getAbsolutePath();
             return filename;
-        }
-        else {
+        } else {
             return "";
         }
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseButton;
     private javax.swing.JButton checkButton;
