@@ -1,36 +1,34 @@
 /* ////////////////////////////////////////////////////////////////
-*
-*   In the Name of Allah
-*
-*   DICTIONARYFORMIDS-CREATOR
-*
-*   This file is part of DictionaryForMIDs-Creator
-*   Copyright (C) 2012, 2013 Karim Mahamane Karimou
-*   DictionaryForMIDs-Creator is a GUI wrapper around various
-*   DictionaryForMIDs tools, among others we have
-*   DictdToDictionaryForMIDs, DictionaryGeneration,
-*   JarCreator and BitmapFontGenerator.
-*
-*   DictionaryForMIDs-Creator is free software;
-*   you can redistribute it and/or modify it under the terms
-*   of the GNU General Public License as published by the
-*   Free Software Foundation; either version 2 of the License, or
-*   (at your option) any later version.
-*
-*   DictionaryForMIDs-Creator is distributed in the hope that
-*   it will be useful, but WITHOUT ANY WARRANTY; without even
-*   the implied warranty of MERCHANTABILITY or
-*   FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public
-*   License along with DictionaryForMIDs-Creator;
-*   if not, write to the Free Software Foundation, Inc.,
-*   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-*
-* //////////////////////////////////////////////////////////////// */
-
-
+ *
+ *   In the Name of Allah
+ *
+ *   DICTIONARYFORMIDS-CREATOR
+ *
+ *   This file is part of DictionaryForMIDs-Creator
+ *   Copyright (C) 2012, 2013 Karim Mahamane Karimou
+ *   DictionaryForMIDs-Creator is a GUI wrapper around various
+ *   DictionaryForMIDs tools, among others we have
+ *   DictdToDictionaryForMIDs, DictionaryGeneration,
+ *   JarCreator and BitmapFontGenerator.
+ *
+ *   DictionaryForMIDs-Creator is free software;
+ *   you can redistribute it and/or modify it under the terms
+ *   of the GNU General Public License as published by the
+ *   Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   DictionaryForMIDs-Creator is distributed in the hope that
+ *   it will be useful, but WITHOUT ANY WARRANTY; without even
+ *   the implied warranty of MERCHANTABILITY or
+ *   FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public
+ *   License along with DictionaryForMIDs-Creator;
+ *   if not, write to the Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+ *
+ * //////////////////////////////////////////////////////////////// */
 package de.kugihan.DfMCreator.propertieseditor;
 
 import de.kugihan.DfMCreator.DfMCreatorMain;
@@ -45,58 +43,49 @@ import java.util.Properties;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-
-
 public class PropertiesEditor extends javax.swing.JFrame {
 
-    public static PropertiesEditor getPropWin(){
+    public static PropertiesEditor getPropWin() {
         return new PropertiesEditor();
     }
-
     public static final PropertiesPreview proPrevWin = PropertiesPreview.getPropPreviewWin();
-
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
     private final JFileChooser fc = new JFileChooser();
-
     // Some look and feel class names
     public static final String gtk = "com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
     public static final String nimbus = "javax.swing.plaf.nimbus.NimbusLookAndFeel";
     public static final String metal = "javax.swing.plaf.metal.MetalLookAndFeel";
     public static final String motif = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
-
     // The size that the PropertiesEditor window should
     // have depending on the look and feel selected.
     // GTk
 /*    public static final int GTk_height_2_Langs = 670;
-    public static final int GTk_height_3_Langs = 685;
-    public static final int GTk_width = 1377;
+     public static final int GTk_height_3_Langs = 685;
+     public static final int GTk_width = 1377;
 
-    // Nimbus
-    public static final int Nimbus_height_2_Langs = 560;
-    public static final int Nimbus_height_3_Langs = 590;
-    public static final int Nimbus_width = 1075;
+     // Nimbus
+     public static final int Nimbus_height_2_Langs = 560;
+     public static final int Nimbus_height_3_Langs = 590;
+     public static final int Nimbus_width = 1075;
 
-    // Metal
-    public static final int Metal_height_2_Langs = 520;
-    public static final int Metal_height_3_Langs = 550;
-    public static final int Metal_width = 1135;
+     // Metal
+     public static final int Metal_height_2_Langs = 520;
+     public static final int Metal_height_3_Langs = 550;
+     public static final int Metal_width = 1135;
 
-    // Motif
-    public static final int Motif_height_2_Langs = 610;
-    public static final int Motif_height_3_Langs = 640;
-    public static final int Motif_width = 1010;
+     // Motif
+     public static final int Motif_height_2_Langs = 610;
+     public static final int Motif_height_3_Langs = 640;
+     public static final int Motif_width = 1010;
 
-    // Default
-    public static final int Default_height_2_Langs = 738;
-    public static final int Default_height_3_Langs = 768;
-    public static final int Default_width = 1200; */
-
-
-   /*
-    * Variable declarations for
-    * the property file editor
-    */
+     // Default
+     public static final int Default_height_2_Langs = 738;
+     public static final int Default_height_3_Langs = 768;
+     public static final int Default_width = 1200; */
+    /*
+     * Variable declarations for
+     * the property file editor
+     */
     // variables unique to all
     // languages in the dict file
     private static String infoText = "";
@@ -116,7 +105,6 @@ public class PropertiesEditor extends javax.swing.JFrame {
     private static String dictionaryGenerationMinNumberOfEntriesPerDictionaryFile = "";
     private static String dictionaryGenerationMinNumberOfEntriesPerIndexFile = "";
     private static String dictionaryGenerationOmitParFromIndex = "";
-
     // language specific variables.
     // language 1
     private static String language1DisplayText = "";
@@ -128,7 +116,6 @@ public class PropertiesEditor extends javax.swing.JFrame {
     private static String language1DictionaryUpdateClassName = "";
     private static String language1NormationClassName = "";
     private static String language1IndexNumberOfSourceEntries = "";
-
     // language 2
     private static String language2DisplayText = "";
     private static String language2FilePostfix = "";
@@ -139,7 +126,6 @@ public class PropertiesEditor extends javax.swing.JFrame {
     private static String language2DictionaryUpdateClassName = "";
     private static String language2NormationClassName = "";
     private static String language2IndexNumberOfSourceEntries = "";
-
     // language 3
     private static String language3DisplayText = "";
     private static String language3FilePostfix = "";
@@ -150,16 +136,13 @@ public class PropertiesEditor extends javax.swing.JFrame {
     private static String language3DictionaryUpdateClassName = "";
     private static String language3NormationClassName = "";
     private static String language3IndexNumberOfSourceEntries = "";
-
     // other variables
     private static String colon = ":";
     private static final String newline = "\n";
-
     // Content Declaration Variables
     public static String language1NumberOfContentDeclarations = "";
     public static String language2NumberOfContentDeclarations = "";
     public static String language3NumberOfContentDeclarations = "";
-
     // Other ContentNN properties Variables
     // Language 1
     public static String language1Content01DisplayText = "";
@@ -180,12 +163,11 @@ public class PropertiesEditor extends javax.swing.JFrame {
     public static String language1Content04DisplaySelectable = "";
 
     /*
-    public static String language1Content05DisplayText = "";
-    public static String language1Content05FontColour = "";
-    public static String language1Content05FontStyle = "";
-    public static String language1Content05DisplaySelectable = "";
-    */
-
+     public static String language1Content05DisplayText = "";
+     public static String language1Content05FontColour = "";
+     public static String language1Content05FontStyle = "";
+     public static String language1Content05DisplaySelectable = "";
+     */
     // Language 2
     public static String language2Content01DisplayText = "";
     public static String language2Content01FontColour = "";
@@ -205,12 +187,11 @@ public class PropertiesEditor extends javax.swing.JFrame {
     public static String language2Content04DisplaySelectable = "";
 
     /*
-    public static String language2Content05DisplayText = "";
-    public static String language2Content05FontColour = "";
-    public static String language2Content05FontStyle = "";
-    public static String language2Content05DisplaySelectable = "";
-    */
-
+     public static String language2Content05DisplayText = "";
+     public static String language2Content05FontColour = "";
+     public static String language2Content05FontStyle = "";
+     public static String language2Content05DisplaySelectable = "";
+     */
     // Language 3
     public static String language3Content01DisplayText = "";
     public static String language3Content01FontColour = "";
@@ -230,29 +211,22 @@ public class PropertiesEditor extends javax.swing.JFrame {
     public static String language3Content04DisplaySelectable = "";
 
     /*
-    public static String language3Content05DisplayText = "";
-    public static String language3Content05FontColour = "";
-    public static String language3Content05FontStyle = "";
-    public static String language3Content05DisplaySelectable = "";
-    */
-
+     public static String language3Content05DisplayText = "";
+     public static String language3Content05FontColour = "";
+     public static String language3Content05FontStyle = "";
+     public static String language3Content05DisplaySelectable = "";
+     */
     // The properties file to be edited.
     private File propsFileChosen;
-
     // Tells us wether the user chose a file or not
     public static boolean openPropsFileForGUIEditFlag = false;
-
     // Directory of the properties file to be edited
     public static String propertiesFile;
-
     // The properties file itself
     File propsFile;
-
     private ArrayList<String> loadedProperties;
     private ArrayList<String> nonLoadedProperties;
-
     public static Properties dfMProps;
-
 
     /**
      * Creates new form PropertiesEditor
@@ -1636,8 +1610,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        JOptionPane.showMessageDialog(proPrevWin, I18n.tr("aboutWinMsg.dfmPropCreate")
-                , I18n.tr("aboutWinTitle.dfmPropCreate"), JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(proPrevWin, I18n.tr("aboutWinMsg.dfmPropCreate"), I18n.tr("aboutWinTitle.dfmPropCreate"), JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -1757,11 +1730,11 @@ public class PropertiesEditor extends javax.swing.JFrame {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         try {
-             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException |
-        		 IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+                IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DfMCreatorMain.class.getName()).
-            log(java.util.logging.Level.SEVERE, null, ex);
+                    log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1769,10 +1742,9 @@ public class PropertiesEditor extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             @Override
             public void run() {
-              //  new PropertiesEditor().setVisible(true);
+                //  new PropertiesEditor().setVisible(true);
             }
         });
     }
@@ -1918,37 +1890,34 @@ public class PropertiesEditor extends javax.swing.JFrame {
     private javax.swing.JComboBox searchListCharEncodingCB;
     private javax.swing.JComboBox searchListSepCharCB;
     // End of variables declaration//GEN-END:variables
-
-
     private static final String moreInfo = I18n.tr("logLevelMsg.dfmPropCreate");
 
     /**
-     * showInputDialog
-     * Shows an input dialog and returns its content.
+     * showInputDialog Shows an input dialog and returns its content.
+     *
      * @param winTitle; the title of the window.
      * @return the value entered by the user.
      */
-    private static String showInputDialog(String labelText){
+    private static String showInputDialog(String labelText) {
         InputDialog id = InputDialog.getInputDialog();
         InputDialog.infoLabel.setText(labelText);
         //id.setSize(300, 200);
         id.setLocation(screenSize.width / 2 - id.getWidth() / 2,
-                       screenSize.height / 2 - id.getHeight() / 2);
+                screenSize.height / 2 - id.getHeight() / 2);
         id.setModal(true);
         id.setVisible(true);
         return InputDialog.inputTextArea.getText();
     }
 
     /**
-     * filterSepChar
-     * Processes the selected item of one of the four
-     * separatorCharacter comboboxes and returns
-     * the actual filterSepChar corresponding to
-     * the selection.
+     * filterSepChar Processes the selected item of one of the four
+     * separatorCharacter comboboxes and returns the actual filterSepChar
+     * corresponding to the selection.
+     *
      * @param combobox
      * @return separator character selected
      */
-    private String filterSepChar(javax.swing.JComboBox combobox){
+    private String filterSepChar(javax.swing.JComboBox combobox) {
         int i = combobox.getSelectedIndex();
         String value;
         switch (i) {
@@ -1956,7 +1925,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
                 value = "'\\t'";
                 break;
             case 1:
-                value ="'\\r'";
+                value = "'\\r'";
                 break;
             case 2:
                 value = "'\\f'";
@@ -1978,18 +1947,17 @@ public class PropertiesEditor extends javax.swing.JFrame {
     }
 
     /**
-     * revertFilterSepChar
-     * this does the contrary of what
-     * revertFilterSepChar does
+     * revertFilterSepChar this does the contrary of what revertFilterSepChar
+     * does
      */
-    private int revertFilterSepChar(String value){
+    private int revertFilterSepChar(String value) {
         int i;
         switch (value) {
             case "'\t'":
                 i = 0;
                 break;
             case "'\r'":
-                i =1;
+                i = 1;
                 break;
             case "'\f'":
                 i = 2;
@@ -2012,7 +1980,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         return i;
     }
 
-    private void resetAll(){
+    private void resetAll() {
         editingTaskInfo.setText("");
         editingTaskInfo.setText(I18n.tr("creating.a.props.file"));
         infoTextTA.setText("");
@@ -2077,198 +2045,187 @@ public class PropertiesEditor extends javax.swing.JFrame {
         langIsSearchCB3.setSelected(false);
         dictGenOmitParCB.setSelected(false);
 
-        langPostfixCB1.setModel(new javax.swing.DefaultComboBoxModel(new String[]
-        { "﻿aar", "abk", "ace", "ach", "ada", "ady", "afa", "afh", "afr", "ain", "aka", "akk", "alb",
-        "ale", "alg", "alt", "amh", "ang", "anp", "apa", "ara", "arc", "arg", "arm", "arn", "arp", "art",
-        "arw", "asm", "ast", "ath", "aus", "ava", "ave", "awa", "aym", "aze", "bad", "bai", "bak", "bal",
-        "bam", "ban", "baq", "bas", "bat", "bej", "bel", "bem", "ben", "ber", "bho", "bih", "bik", "bin",
-        "bis", "bla", "bnt", "bos", "bra", "bre", "btk", "bua", "bug", "bul", "bur", "byn", "cad", "cai",
-        "car", "cat", "cau", "ceb", "cel", "cha", "chb", "che", "chg", "chi", "chk", "chm", "chn", "cho",
-        "chp", "chr", "chu", "chv", "chy", "cmc", "cop", "cor", "cos", "cpe", "cpf", "cpp", "cre", "crh",
-        "crp", "csb", "cus", "cze", "dak", "dan", "dar", "day", "del", "den", "dgr", "din", "div", "doi",
-        "dra", "dsb", "dua", "dum", "dut", "dyu", "dzo", "efi", "egy", "eka", "elx", "eng", "enm", "epo",
-        "est", "ewe", "ewo", "fan", "fao", "fat", "fij", "fil", "fin", "fiu", "fon", "fre", "frm", "fro",
-        "frr", "frs", "fry", "ful", "fur", "gaa", "gay", "gba", "gem", "geo", "ger", "gez", "gil", "gla",
-        "gle", "glg", "glv", "gmh", "goh", "gon", "gor", "got", "grb", "grc", "gre", "grn", "gsw", "guj",
-        "gwi", "hai", "hat", "hau", "haw", "heb", "her", "hil", "him", "hin", "hit", "hmn", "hmo", "hrv",
-        "hsb", "hun", "hup", "iba", "ibo", "ice", "ido", "iii", "ijo", "iku", "ile", "ilo", "ina", "inc",
-        "ind", "ine", "inh", "ipk", "ira", "iro", "ita", "jav", "jbo", "jpn", "jpr", "jrb", "kaa", "kab",
-        "kac", "kal", "kam", "kan", "kar", "kas", "kau", "kaw", "kaz", "kbd", "kha", "khi", "khm", "kho",
-        "kik", "kin", "kir", "kmb", "kok", "kom", "kon", "kor", "kos", "kpe", "krc", "krl", "kro", "kru",
-        "kua", "kum", "kur", "kut", "lad", "lah", "lam", "lao", "lat", "lav", "lez", "lim", "lin", "lit",
-        "lol", "loz", "ltz", "lua", "lub", "lug", "lui", "lun", "luo", "lus", "mac", "mad", "mag", "mah",
-        "mai", "mak", "mal", "man", "mao", "map", "mar", "mas", "may", "mdf", "mdr", "men", "mga", "mic",
-        "min", "mis", "mkh", "mlg", "mlt", "mnc", "mni", "mno", "moh", "mon", "mos", "mul", "mun", "mus",
-        "mwl", "mwr", "myn", "myv", "nah", "nai", "nap", "nau", "nav", "nbl", "nde", "ndo", "nds", "nep",
-        "new", "nia", "nic", "niu", "nno", "nob", "nog", "non", "nor", "nqo", "nso", "nub", "nwc", "nya",
-        "nym", "nyn", "nyo", "nzi", "oci", "oji", "ori", "orm", "osa", "oss", "ota", "oto", "paa", "pag",
-        "pal", "pam", "pan", "pap", "pau", "peo", "per", "phi", "phn", "pli", "pol", "pon", "por", "pra",
-        "pro", "pus", "qaa-qtz", "que", "raj", "rap", "rar", "roa", "roh", "rom", "rum", "run", "rup",
-        "rus", "sad", "sag", "sah", "sai", "sal", "sam", "san", "sas", "sat", "scn", "sco", "sel", "sem",
-        "sga", "sgn", "shn", "sid", "sin", "sio", "sit", "sla", "slo", "slv", "sma", "sme", "smi", "smj",
-        "smn", "smo", "sms", "sna", "snd", "snk", "sog", "som", "son", "sot", "spa", "srd", "srn", "srp",
-        "srr", "ssa", "ssw", "suk", "sun", "sus", "sux", "swa", "swe", "syc", "syr", "tah", "tai", "tam",
-        "tat", "tel", "tem", "ter", "tet", "tgk", "tgl", "tha", "tib", "tig", "tir", "tiv", "tkl", "tlh",
-        "tli", "tmh", "tog", "ton", "tpi", "tsi", "tsn", "tso", "tuk", "tum", "tup", "tur", "tut", "tvl",
-        "twi", "tyv", "udm", "uga", "uig", "ukr", "umb", "und", "urd", "uzb", "vai", "ven", "vie", "vol",
-        "vot", "wak", "wal", "war", "was", "wel", "wen", "wln", "wol", "xal", "xho", "yao", "yap", "yid",
-        "yor", "ypk", "zap", "zbl", "zen", "zgh", "zha", "znd", "zul", "zun", "zxx", "zza", "CHOOSE MY OWN" }));
+        langPostfixCB1.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"﻿aar", "abk", "ace", "ach", "ada", "ady", "afa", "afh", "afr", "ain", "aka", "akk", "alb",
+            "ale", "alg", "alt", "amh", "ang", "anp", "apa", "ara", "arc", "arg", "arm", "arn", "arp", "art",
+            "arw", "asm", "ast", "ath", "aus", "ava", "ave", "awa", "aym", "aze", "bad", "bai", "bak", "bal",
+            "bam", "ban", "baq", "bas", "bat", "bej", "bel", "bem", "ben", "ber", "bho", "bih", "bik", "bin",
+            "bis", "bla", "bnt", "bos", "bra", "bre", "btk", "bua", "bug", "bul", "bur", "byn", "cad", "cai",
+            "car", "cat", "cau", "ceb", "cel", "cha", "chb", "che", "chg", "chi", "chk", "chm", "chn", "cho",
+            "chp", "chr", "chu", "chv", "chy", "cmc", "cop", "cor", "cos", "cpe", "cpf", "cpp", "cre", "crh",
+            "crp", "csb", "cus", "cze", "dak", "dan", "dar", "day", "del", "den", "dgr", "din", "div", "doi",
+            "dra", "dsb", "dua", "dum", "dut", "dyu", "dzo", "efi", "egy", "eka", "elx", "eng", "enm", "epo",
+            "est", "ewe", "ewo", "fan", "fao", "fat", "fij", "fil", "fin", "fiu", "fon", "fre", "frm", "fro",
+            "frr", "frs", "fry", "ful", "fur", "gaa", "gay", "gba", "gem", "geo", "ger", "gez", "gil", "gla",
+            "gle", "glg", "glv", "gmh", "goh", "gon", "gor", "got", "grb", "grc", "gre", "grn", "gsw", "guj",
+            "gwi", "hai", "hat", "hau", "haw", "heb", "her", "hil", "him", "hin", "hit", "hmn", "hmo", "hrv",
+            "hsb", "hun", "hup", "iba", "ibo", "ice", "ido", "iii", "ijo", "iku", "ile", "ilo", "ina", "inc",
+            "ind", "ine", "inh", "ipk", "ira", "iro", "ita", "jav", "jbo", "jpn", "jpr", "jrb", "kaa", "kab",
+            "kac", "kal", "kam", "kan", "kar", "kas", "kau", "kaw", "kaz", "kbd", "kha", "khi", "khm", "kho",
+            "kik", "kin", "kir", "kmb", "kok", "kom", "kon", "kor", "kos", "kpe", "krc", "krl", "kro", "kru",
+            "kua", "kum", "kur", "kut", "lad", "lah", "lam", "lao", "lat", "lav", "lez", "lim", "lin", "lit",
+            "lol", "loz", "ltz", "lua", "lub", "lug", "lui", "lun", "luo", "lus", "mac", "mad", "mag", "mah",
+            "mai", "mak", "mal", "man", "mao", "map", "mar", "mas", "may", "mdf", "mdr", "men", "mga", "mic",
+            "min", "mis", "mkh", "mlg", "mlt", "mnc", "mni", "mno", "moh", "mon", "mos", "mul", "mun", "mus",
+            "mwl", "mwr", "myn", "myv", "nah", "nai", "nap", "nau", "nav", "nbl", "nde", "ndo", "nds", "nep",
+            "new", "nia", "nic", "niu", "nno", "nob", "nog", "non", "nor", "nqo", "nso", "nub", "nwc", "nya",
+            "nym", "nyn", "nyo", "nzi", "oci", "oji", "ori", "orm", "osa", "oss", "ota", "oto", "paa", "pag",
+            "pal", "pam", "pan", "pap", "pau", "peo", "per", "phi", "phn", "pli", "pol", "pon", "por", "pra",
+            "pro", "pus", "qaa-qtz", "que", "raj", "rap", "rar", "roa", "roh", "rom", "rum", "run", "rup",
+            "rus", "sad", "sag", "sah", "sai", "sal", "sam", "san", "sas", "sat", "scn", "sco", "sel", "sem",
+            "sga", "sgn", "shn", "sid", "sin", "sio", "sit", "sla", "slo", "slv", "sma", "sme", "smi", "smj",
+            "smn", "smo", "sms", "sna", "snd", "snk", "sog", "som", "son", "sot", "spa", "srd", "srn", "srp",
+            "srr", "ssa", "ssw", "suk", "sun", "sus", "sux", "swa", "swe", "syc", "syr", "tah", "tai", "tam",
+            "tat", "tel", "tem", "ter", "tet", "tgk", "tgl", "tha", "tib", "tig", "tir", "tiv", "tkl", "tlh",
+            "tli", "tmh", "tog", "ton", "tpi", "tsi", "tsn", "tso", "tuk", "tum", "tup", "tur", "tut", "tvl",
+            "twi", "tyv", "udm", "uga", "uig", "ukr", "umb", "und", "urd", "uzb", "vai", "ven", "vie", "vol",
+            "vot", "wak", "wal", "war", "was", "wel", "wen", "wln", "wol", "xal", "xho", "yao", "yap", "yid",
+            "yor", "ypk", "zap", "zbl", "zen", "zgh", "zha", "znd", "zul", "zun", "zxx", "zza", "CHOOSE MY OWN"}));
 
-        langPostfixCB2.setModel(new javax.swing.DefaultComboBoxModel(new String[]
-        { "﻿aar", "abk", "ace", "ach", "ada", "ady", "afa", "afh", "afr", "ain", "aka", "akk", "alb",
-        "ale", "alg", "alt", "amh", "ang", "anp", "apa", "ara", "arc", "arg", "arm", "arn", "arp", "art",
-        "arw", "asm", "ast", "ath", "aus", "ava", "ave", "awa", "aym", "aze", "bad", "bai", "bak", "bal",
-        "bam", "ban", "baq", "bas", "bat", "bej", "bel", "bem", "ben", "ber", "bho", "bih", "bik", "bin",
-        "bis", "bla", "bnt", "bos", "bra", "bre", "btk", "bua", "bug", "bul", "bur", "byn", "cad", "cai",
-        "car", "cat", "cau", "ceb", "cel", "cha", "chb", "che", "chg", "chi", "chk", "chm", "chn", "cho",
-        "chp", "chr", "chu", "chv", "chy", "cmc", "cop", "cor", "cos", "cpe", "cpf", "cpp", "cre", "crh",
-        "crp", "csb", "cus", "cze", "dak", "dan", "dar", "day", "del", "den", "dgr", "din", "div", "doi",
-        "dra", "dsb", "dua", "dum", "dut", "dyu", "dzo", "efi", "egy", "eka", "elx", "eng", "enm", "epo",
-        "est", "ewe", "ewo", "fan", "fao", "fat", "fij", "fil", "fin", "fiu", "fon", "fre", "frm", "fro",
-        "frr", "frs", "fry", "ful", "fur", "gaa", "gay", "gba", "gem", "geo", "ger", "gez", "gil", "gla",
-        "gle", "glg", "glv", "gmh", "goh", "gon", "gor", "got", "grb", "grc", "gre", "grn", "gsw", "guj",
-        "gwi", "hai", "hat", "hau", "haw", "heb", "her", "hil", "him", "hin", "hit", "hmn", "hmo", "hrv",
-        "hsb", "hun", "hup", "iba", "ibo", "ice", "ido", "iii", "ijo", "iku", "ile", "ilo", "ina", "inc",
-        "ind", "ine", "inh", "ipk", "ira", "iro", "ita", "jav", "jbo", "jpn", "jpr", "jrb", "kaa", "kab",
-        "kac", "kal", "kam", "kan", "kar", "kas", "kau", "kaw", "kaz", "kbd", "kha", "khi", "khm", "kho",
-        "kik", "kin", "kir", "kmb", "kok", "kom", "kon", "kor", "kos", "kpe", "krc", "krl", "kro", "kru",
-        "kua", "kum", "kur", "kut", "lad", "lah", "lam", "lao", "lat", "lav", "lez", "lim", "lin", "lit",
-        "lol", "loz", "ltz", "lua", "lub", "lug", "lui", "lun", "luo", "lus", "mac", "mad", "mag", "mah",
-        "mai", "mak", "mal", "man", "mao", "map", "mar", "mas", "may", "mdf", "mdr", "men", "mga", "mic",
-        "min", "mis", "mkh", "mlg", "mlt", "mnc", "mni", "mno", "moh", "mon", "mos", "mul", "mun", "mus",
-        "mwl", "mwr", "myn", "myv", "nah", "nai", "nap", "nau", "nav", "nbl", "nde", "ndo", "nds", "nep",
-        "new", "nia", "nic", "niu", "nno", "nob", "nog", "non", "nor", "nqo", "nso", "nub", "nwc", "nya",
-        "nym", "nyn", "nyo", "nzi", "oci", "oji", "ori", "orm", "osa", "oss", "ota", "oto", "paa", "pag",
-        "pal", "pam", "pan", "pap", "pau", "peo", "per", "phi", "phn", "pli", "pol", "pon", "por", "pra",
-        "pro", "pus", "qaa-qtz", "que", "raj", "rap", "rar", "roa", "roh", "rom", "rum", "run", "rup",
-        "rus", "sad", "sag", "sah", "sai", "sal", "sam", "san", "sas", "sat", "scn", "sco", "sel", "sem",
-        "sga", "sgn", "shn", "sid", "sin", "sio", "sit", "sla", "slo", "slv", "sma", "sme", "smi", "smj",
-        "smn", "smo", "sms", "sna", "snd", "snk", "sog", "som", "son", "sot", "spa", "srd", "srn", "srp",
-        "srr", "ssa", "ssw", "suk", "sun", "sus", "sux", "swa", "swe", "syc", "syr", "tah", "tai", "tam",
-        "tat", "tel", "tem", "ter", "tet", "tgk", "tgl", "tha", "tib", "tig", "tir", "tiv", "tkl", "tlh",
-        "tli", "tmh", "tog", "ton", "tpi", "tsi", "tsn", "tso", "tuk", "tum", "tup", "tur", "tut", "tvl",
-        "twi", "tyv", "udm", "uga", "uig", "ukr", "umb", "und", "urd", "uzb", "vai", "ven", "vie", "vol",
-        "vot", "wak", "wal", "war", "was", "wel", "wen", "wln", "wol", "xal", "xho", "yao", "yap", "yid",
-        "yor", "ypk", "zap", "zbl", "zen", "zgh", "zha", "znd", "zul", "zun", "zxx", "zza", "CHOOSE MY OWN" }));
+        langPostfixCB2.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"﻿aar", "abk", "ace", "ach", "ada", "ady", "afa", "afh", "afr", "ain", "aka", "akk", "alb",
+            "ale", "alg", "alt", "amh", "ang", "anp", "apa", "ara", "arc", "arg", "arm", "arn", "arp", "art",
+            "arw", "asm", "ast", "ath", "aus", "ava", "ave", "awa", "aym", "aze", "bad", "bai", "bak", "bal",
+            "bam", "ban", "baq", "bas", "bat", "bej", "bel", "bem", "ben", "ber", "bho", "bih", "bik", "bin",
+            "bis", "bla", "bnt", "bos", "bra", "bre", "btk", "bua", "bug", "bul", "bur", "byn", "cad", "cai",
+            "car", "cat", "cau", "ceb", "cel", "cha", "chb", "che", "chg", "chi", "chk", "chm", "chn", "cho",
+            "chp", "chr", "chu", "chv", "chy", "cmc", "cop", "cor", "cos", "cpe", "cpf", "cpp", "cre", "crh",
+            "crp", "csb", "cus", "cze", "dak", "dan", "dar", "day", "del", "den", "dgr", "din", "div", "doi",
+            "dra", "dsb", "dua", "dum", "dut", "dyu", "dzo", "efi", "egy", "eka", "elx", "eng", "enm", "epo",
+            "est", "ewe", "ewo", "fan", "fao", "fat", "fij", "fil", "fin", "fiu", "fon", "fre", "frm", "fro",
+            "frr", "frs", "fry", "ful", "fur", "gaa", "gay", "gba", "gem", "geo", "ger", "gez", "gil", "gla",
+            "gle", "glg", "glv", "gmh", "goh", "gon", "gor", "got", "grb", "grc", "gre", "grn", "gsw", "guj",
+            "gwi", "hai", "hat", "hau", "haw", "heb", "her", "hil", "him", "hin", "hit", "hmn", "hmo", "hrv",
+            "hsb", "hun", "hup", "iba", "ibo", "ice", "ido", "iii", "ijo", "iku", "ile", "ilo", "ina", "inc",
+            "ind", "ine", "inh", "ipk", "ira", "iro", "ita", "jav", "jbo", "jpn", "jpr", "jrb", "kaa", "kab",
+            "kac", "kal", "kam", "kan", "kar", "kas", "kau", "kaw", "kaz", "kbd", "kha", "khi", "khm", "kho",
+            "kik", "kin", "kir", "kmb", "kok", "kom", "kon", "kor", "kos", "kpe", "krc", "krl", "kro", "kru",
+            "kua", "kum", "kur", "kut", "lad", "lah", "lam", "lao", "lat", "lav", "lez", "lim", "lin", "lit",
+            "lol", "loz", "ltz", "lua", "lub", "lug", "lui", "lun", "luo", "lus", "mac", "mad", "mag", "mah",
+            "mai", "mak", "mal", "man", "mao", "map", "mar", "mas", "may", "mdf", "mdr", "men", "mga", "mic",
+            "min", "mis", "mkh", "mlg", "mlt", "mnc", "mni", "mno", "moh", "mon", "mos", "mul", "mun", "mus",
+            "mwl", "mwr", "myn", "myv", "nah", "nai", "nap", "nau", "nav", "nbl", "nde", "ndo", "nds", "nep",
+            "new", "nia", "nic", "niu", "nno", "nob", "nog", "non", "nor", "nqo", "nso", "nub", "nwc", "nya",
+            "nym", "nyn", "nyo", "nzi", "oci", "oji", "ori", "orm", "osa", "oss", "ota", "oto", "paa", "pag",
+            "pal", "pam", "pan", "pap", "pau", "peo", "per", "phi", "phn", "pli", "pol", "pon", "por", "pra",
+            "pro", "pus", "qaa-qtz", "que", "raj", "rap", "rar", "roa", "roh", "rom", "rum", "run", "rup",
+            "rus", "sad", "sag", "sah", "sai", "sal", "sam", "san", "sas", "sat", "scn", "sco", "sel", "sem",
+            "sga", "sgn", "shn", "sid", "sin", "sio", "sit", "sla", "slo", "slv", "sma", "sme", "smi", "smj",
+            "smn", "smo", "sms", "sna", "snd", "snk", "sog", "som", "son", "sot", "spa", "srd", "srn", "srp",
+            "srr", "ssa", "ssw", "suk", "sun", "sus", "sux", "swa", "swe", "syc", "syr", "tah", "tai", "tam",
+            "tat", "tel", "tem", "ter", "tet", "tgk", "tgl", "tha", "tib", "tig", "tir", "tiv", "tkl", "tlh",
+            "tli", "tmh", "tog", "ton", "tpi", "tsi", "tsn", "tso", "tuk", "tum", "tup", "tur", "tut", "tvl",
+            "twi", "tyv", "udm", "uga", "uig", "ukr", "umb", "und", "urd", "uzb", "vai", "ven", "vie", "vol",
+            "vot", "wak", "wal", "war", "was", "wel", "wen", "wln", "wol", "xal", "xho", "yao", "yap", "yid",
+            "yor", "ypk", "zap", "zbl", "zen", "zgh", "zha", "znd", "zul", "zun", "zxx", "zza", "CHOOSE MY OWN"}));
 
-        langPostfixCB3.setModel(new javax.swing.DefaultComboBoxModel(new String[]
-        { "﻿aar", "abk", "ace", "ach", "ada", "ady", "afa", "afh", "afr", "ain", "aka", "akk", "alb",
-        "ale", "alg", "alt", "amh", "ang", "anp", "apa", "ara", "arc", "arg", "arm", "arn", "arp", "art",
-        "arw", "asm", "ast", "ath", "aus", "ava", "ave", "awa", "aym", "aze", "bad", "bai", "bak", "bal",
-        "bam", "ban", "baq", "bas", "bat", "bej", "bel", "bem", "ben", "ber", "bho", "bih", "bik", "bin",
-        "bis", "bla", "bnt", "bos", "bra", "bre", "btk", "bua", "bug", "bul", "bur", "byn", "cad", "cai",
-        "car", "cat", "cau", "ceb", "cel", "cha", "chb", "che", "chg", "chi", "chk", "chm", "chn", "cho",
-        "chp", "chr", "chu", "chv", "chy", "cmc", "cop", "cor", "cos", "cpe", "cpf", "cpp", "cre", "crh",
-        "crp", "csb", "cus", "cze", "dak", "dan", "dar", "day", "del", "den", "dgr", "din", "div", "doi",
-        "dra", "dsb", "dua", "dum", "dut", "dyu", "dzo", "efi", "egy", "eka", "elx", "eng", "enm", "epo",
-        "est", "ewe", "ewo", "fan", "fao", "fat", "fij", "fil", "fin", "fiu", "fon", "fre", "frm", "fro",
-        "frr", "frs", "fry", "ful", "fur", "gaa", "gay", "gba", "gem", "geo", "ger", "gez", "gil", "gla",
-        "gle", "glg", "glv", "gmh", "goh", "gon", "gor", "got", "grb", "grc", "gre", "grn", "gsw", "guj",
-        "gwi", "hai", "hat", "hau", "haw", "heb", "her", "hil", "him", "hin", "hit", "hmn", "hmo", "hrv",
-        "hsb", "hun", "hup", "iba", "ibo", "ice", "ido", "iii", "ijo", "iku", "ile", "ilo", "ina", "inc",
-        "ind", "ine", "inh", "ipk", "ira", "iro", "ita", "jav", "jbo", "jpn", "jpr", "jrb", "kaa", "kab",
-        "kac", "kal", "kam", "kan", "kar", "kas", "kau", "kaw", "kaz", "kbd", "kha", "khi", "khm", "kho",
-        "kik", "kin", "kir", "kmb", "kok", "kom", "kon", "kor", "kos", "kpe", "krc", "krl", "kro", "kru",
-        "kua", "kum", "kur", "kut", "lad", "lah", "lam", "lao", "lat", "lav", "lez", "lim", "lin", "lit",
-        "lol", "loz", "ltz", "lua", "lub", "lug", "lui", "lun", "luo", "lus", "mac", "mad", "mag", "mah",
-        "mai", "mak", "mal", "man", "mao", "map", "mar", "mas", "may", "mdf", "mdr", "men", "mga", "mic",
-        "min", "mis", "mkh", "mlg", "mlt", "mnc", "mni", "mno", "moh", "mon", "mos", "mul", "mun", "mus",
-        "mwl", "mwr", "myn", "myv", "nah", "nai", "nap", "nau", "nav", "nbl", "nde", "ndo", "nds", "nep",
-        "new", "nia", "nic", "niu", "nno", "nob", "nog", "non", "nor", "nqo", "nso", "nub", "nwc", "nya",
-        "nym", "nyn", "nyo", "nzi", "oci", "oji", "ori", "orm", "osa", "oss", "ota", "oto", "paa", "pag",
-        "pal", "pam", "pan", "pap", "pau", "peo", "per", "phi", "phn", "pli", "pol", "pon", "por", "pra",
-        "pro", "pus", "qaa-qtz", "que", "raj", "rap", "rar", "roa", "roh", "rom", "rum", "run", "rup",
-        "rus", "sad", "sag", "sah", "sai", "sal", "sam", "san", "sas", "sat", "scn", "sco", "sel", "sem",
-        "sga", "sgn", "shn", "sid", "sin", "sio", "sit", "sla", "slo", "slv", "sma", "sme", "smi", "smj",
-        "smn", "smo", "sms", "sna", "snd", "snk", "sog", "som", "son", "sot", "spa", "srd", "srn", "srp",
-        "srr", "ssa", "ssw", "suk", "sun", "sus", "sux", "swa", "swe", "syc", "syr", "tah", "tai", "tam",
-        "tat", "tel", "tem", "ter", "tet", "tgk", "tgl", "tha", "tib", "tig", "tir", "tiv", "tkl", "tlh",
-        "tli", "tmh", "tog", "ton", "tpi", "tsi", "tsn", "tso", "tuk", "tum", "tup", "tur", "tut", "tvl",
-        "twi", "tyv", "udm", "uga", "uig", "ukr", "umb", "und", "urd", "uzb", "vai", "ven", "vie", "vol",
-        "vot", "wak", "wal", "war", "was", "wel", "wen", "wln", "wol", "xal", "xho", "yao", "yap", "yid",
-        "yor", "ypk", "zap", "zbl", "zen", "zgh", "zha", "znd", "zul", "zun", "zxx", "zza", "CHOOSE MY OWN" }));
+        langPostfixCB3.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"﻿aar", "abk", "ace", "ach", "ada", "ady", "afa", "afh", "afr", "ain", "aka", "akk", "alb",
+            "ale", "alg", "alt", "amh", "ang", "anp", "apa", "ara", "arc", "arg", "arm", "arn", "arp", "art",
+            "arw", "asm", "ast", "ath", "aus", "ava", "ave", "awa", "aym", "aze", "bad", "bai", "bak", "bal",
+            "bam", "ban", "baq", "bas", "bat", "bej", "bel", "bem", "ben", "ber", "bho", "bih", "bik", "bin",
+            "bis", "bla", "bnt", "bos", "bra", "bre", "btk", "bua", "bug", "bul", "bur", "byn", "cad", "cai",
+            "car", "cat", "cau", "ceb", "cel", "cha", "chb", "che", "chg", "chi", "chk", "chm", "chn", "cho",
+            "chp", "chr", "chu", "chv", "chy", "cmc", "cop", "cor", "cos", "cpe", "cpf", "cpp", "cre", "crh",
+            "crp", "csb", "cus", "cze", "dak", "dan", "dar", "day", "del", "den", "dgr", "din", "div", "doi",
+            "dra", "dsb", "dua", "dum", "dut", "dyu", "dzo", "efi", "egy", "eka", "elx", "eng", "enm", "epo",
+            "est", "ewe", "ewo", "fan", "fao", "fat", "fij", "fil", "fin", "fiu", "fon", "fre", "frm", "fro",
+            "frr", "frs", "fry", "ful", "fur", "gaa", "gay", "gba", "gem", "geo", "ger", "gez", "gil", "gla",
+            "gle", "glg", "glv", "gmh", "goh", "gon", "gor", "got", "grb", "grc", "gre", "grn", "gsw", "guj",
+            "gwi", "hai", "hat", "hau", "haw", "heb", "her", "hil", "him", "hin", "hit", "hmn", "hmo", "hrv",
+            "hsb", "hun", "hup", "iba", "ibo", "ice", "ido", "iii", "ijo", "iku", "ile", "ilo", "ina", "inc",
+            "ind", "ine", "inh", "ipk", "ira", "iro", "ita", "jav", "jbo", "jpn", "jpr", "jrb", "kaa", "kab",
+            "kac", "kal", "kam", "kan", "kar", "kas", "kau", "kaw", "kaz", "kbd", "kha", "khi", "khm", "kho",
+            "kik", "kin", "kir", "kmb", "kok", "kom", "kon", "kor", "kos", "kpe", "krc", "krl", "kro", "kru",
+            "kua", "kum", "kur", "kut", "lad", "lah", "lam", "lao", "lat", "lav", "lez", "lim", "lin", "lit",
+            "lol", "loz", "ltz", "lua", "lub", "lug", "lui", "lun", "luo", "lus", "mac", "mad", "mag", "mah",
+            "mai", "mak", "mal", "man", "mao", "map", "mar", "mas", "may", "mdf", "mdr", "men", "mga", "mic",
+            "min", "mis", "mkh", "mlg", "mlt", "mnc", "mni", "mno", "moh", "mon", "mos", "mul", "mun", "mus",
+            "mwl", "mwr", "myn", "myv", "nah", "nai", "nap", "nau", "nav", "nbl", "nde", "ndo", "nds", "nep",
+            "new", "nia", "nic", "niu", "nno", "nob", "nog", "non", "nor", "nqo", "nso", "nub", "nwc", "nya",
+            "nym", "nyn", "nyo", "nzi", "oci", "oji", "ori", "orm", "osa", "oss", "ota", "oto", "paa", "pag",
+            "pal", "pam", "pan", "pap", "pau", "peo", "per", "phi", "phn", "pli", "pol", "pon", "por", "pra",
+            "pro", "pus", "qaa-qtz", "que", "raj", "rap", "rar", "roa", "roh", "rom", "rum", "run", "rup",
+            "rus", "sad", "sag", "sah", "sai", "sal", "sam", "san", "sas", "sat", "scn", "sco", "sel", "sem",
+            "sga", "sgn", "shn", "sid", "sin", "sio", "sit", "sla", "slo", "slv", "sma", "sme", "smi", "smj",
+            "smn", "smo", "sms", "sna", "snd", "snk", "sog", "som", "son", "sot", "spa", "srd", "srn", "srp",
+            "srr", "ssa", "ssw", "suk", "sun", "sus", "sux", "swa", "swe", "syc", "syr", "tah", "tai", "tam",
+            "tat", "tel", "tem", "ter", "tet", "tgk", "tgl", "tha", "tib", "tig", "tir", "tiv", "tkl", "tlh",
+            "tli", "tmh", "tog", "ton", "tpi", "tsi", "tsn", "tso", "tuk", "tum", "tup", "tur", "tut", "tvl",
+            "twi", "tyv", "udm", "uga", "uig", "ukr", "umb", "und", "urd", "uzb", "vai", "ven", "vie", "vol",
+            "vot", "wak", "wal", "war", "was", "wel", "wen", "wln", "wol", "xal", "xho", "yao", "yap", "yid",
+            "yor", "ypk", "zap", "zbl", "zen", "zgh", "zha", "znd", "zul", "zun", "zxx", "zza", "CHOOSE MY OWN"}));
 
-        dictGenInputCharEncodingCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]
-        { "UTF-8", "ISO-8859-1", "US-ASCII" }));
+        dictGenInputCharEncodingCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"UTF-8", "ISO-8859-1", "US-ASCII"}));
 
-        indexCharEncodingCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]
-        { "UTF-8", "ISO-8859-1", "US-ASCII" }));
+        indexCharEncodingCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"UTF-8", "ISO-8859-1", "US-ASCII"}));
 
-        searchListCharEncodingCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]
-        { "UTF-8", "ISO-8859-1", "US-ASCII" }));
+        searchListCharEncodingCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"UTF-8", "ISO-8859-1", "US-ASCII"}));
 
-        dictionaryCharEncodingCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]
-        { "UTF-8", "ISO-8859-1", "US-ASCII" }));
+        dictionaryCharEncodingCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"UTF-8", "ISO-8859-1", "US-ASCII"}));
 
-        dictGenSepCharCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]
-        { "Tab ( \\t )", "Carriage Return ( \\r )", "Form Feed ( \\f )", "Comma ( , )",
-        "Semi-Colon ( ; )", "Colon ( : )" }));
+        dictGenSepCharCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Tab ( \\t )", "Carriage Return ( \\r )", "Form Feed ( \\f )", "Comma ( , )",
+            "Semi-Colon ( ; )", "Colon ( : )"}));
 
-        indexFileSepCharCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]
-        { "Tab ( \\t )", "Carriage Return ( \\r )", "Form Feed ( \\f )", "Comma ( , )",
-        "Semi-Colon ( ; )", "Colon ( : )" }));
+        indexFileSepCharCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Tab ( \\t )", "Carriage Return ( \\r )", "Form Feed ( \\f )", "Comma ( , )",
+            "Semi-Colon ( ; )", "Colon ( : )"}));
 
-        searchListSepCharCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]
-        { "Tab ( \\t )", "Carriage Return ( \\r )", "Form Feed ( \\f )", "Comma ( , )",
-        "Semi-Colon ( ; )", "Colon ( : )" }));
+        searchListSepCharCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Tab ( \\t )", "Carriage Return ( \\r )", "Form Feed ( \\f )", "Comma ( , )",
+            "Semi-Colon ( ; )", "Colon ( : )"}));
 
-        dictFileSepCharCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]
-        { "Tab ( \\t )", "Carriage Return ( \\r )", "Form Feed ( \\f )", "Comma ( , )",
-        "Semi-Colon ( ; )", "Colon ( : )" }));
+        dictFileSepCharCB.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Tab ( \\t )", "Carriage Return ( \\r )", "Form Feed ( \\f )", "Comma ( , )",
+            "Semi-Colon ( ; )", "Colon ( : )"}));
     }
 
     /**
      * showMoreInfo() shows some extra information about the properties.
      */
-    private void showMoreInfo(){
+    private void showMoreInfo() {
         JOptionPane.showMessageDialog(proPrevWin, moreInfo, I18n.tr("additionalInfo.dfmPropCreate"),
-                                                       JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     // Duplicated from DfMCreatorMain because of the fact that
     // the editExistingPropsFileInPropsEditorWin() method defined
     // there and the one defined here are not the same.
-    private void editExistingPropsFile(){
+    private void editExistingPropsFile() {
         //Custom button text
         Object[] options = {I18n.tr("in.a.text.editor.PropsFileEditing"),
-                            I18n.tr("in.props.editor.PropsFileEditing"),
-                            I18n.tr("dismiss.PropsFileCreation")};
+            I18n.tr("in.props.editor.PropsFileEditing"),
+            I18n.tr("dismiss.PropsFileCreation")};
         int n = JOptionPane.showOptionDialog(this,
-            I18n.tr("choose.editing.mode.PropsFileEditing"),
-            I18n.tr("editing.mode.win.title.PropsFileEditing"),
-            JOptionPane.YES_NO_CANCEL_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            options,
-            options[2]);
+                I18n.tr("choose.editing.mode.PropsFileEditing"),
+                I18n.tr("editing.mode.win.title.PropsFileEditing"),
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[2]);
 
-        if (n == JOptionPane.YES_OPTION){
+        if (n == JOptionPane.YES_OPTION) {
             editExistingPropsFileInTextEditor();
-        } else if (n == JOptionPane.NO_OPTION){
+        } else if (n == JOptionPane.NO_OPTION) {
             editExistingPropsFileInPropsEditorWin();
-        } else if (n == JOptionPane.CANCEL_OPTION || n == JOptionPane.CLOSED_OPTION){
+        } else if (n == JOptionPane.CANCEL_OPTION || n == JOptionPane.CLOSED_OPTION) {
             // Do nothing for now.
         }
     }
 
     /**
-     * editExistingPropsFileInTextEditor() launches a file open dialog in order to let
-     * the user choose a DictionaryForMIDs.properties file that the user
-     * wishes to edit and then launches the PropertiesPreview window. The
-     * user can then edit the file manually and then save it.
+     * editExistingPropsFileInTextEditor() launches a file open dialog in order
+     * to let the user choose a DictionaryForMIDs.properties file that the user
+     * wishes to edit and then launches the PropertiesPreview window. The user
+     * can then edit the file manually and then save it.
      */
-    public void editExistingPropsFileInTextEditor(){
+    public void editExistingPropsFileInTextEditor() {
         try {
-            if (openPropFile()){
-            	proPrevWin.editButton.setSelected(true);
-            	proPrevWin.editButton.setText(I18n.tr("doNotEdit.dfmPropCreate"));
+            if (openPropFile()) {
+                proPrevWin.editButton.setSelected(true);
+                proPrevWin.editButton.setText(I18n.tr("doNotEdit.dfmPropCreate"));
                 proPrevWin.PropFileView.setVisible(true);
                 proPrevWin.propsText.setCaretPosition(0);
             }
-        } catch (UnsupportedOperationException ex){
+        } catch (UnsupportedOperationException ex) {
             DfMCreatorMain.printAnyMsg(openPropFileErrorMsg, I18n.tr("error.dfmPropCreate"), JOptionPane.ERROR_MESSAGE);
             System.out.println(ex.getMessage());
-        } catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
             DfMCreatorMain.printAnyMsg(NotThePropFileErrorMsg, I18n.tr("error.dfmPropCreate"), JOptionPane.ERROR_MESSAGE);
         }
@@ -2276,25 +2233,25 @@ public class PropertiesEditor extends javax.swing.JFrame {
     }
 
     /**
-     * getPropertiesFile() Edits an existing
-     * DictionaryForMIDs.properties file in the PropertiesEditor.
+     * getPropertiesFile() Edits an existing DictionaryForMIDs.properties file
+     * in the PropertiesEditor.
      */
-    private void editExistingPropsFileInPropsEditorWin(){
+    private void editExistingPropsFileInPropsEditorWin() {
         try {
             getPropertiesFile();
-        } catch (UnsupportedOperationException ex){
+        } catch (UnsupportedOperationException ex) {
             DfMCreatorMain.printAnyMsg(openPropFileErrorMsg,
                     I18n.tr("error.dfmPropCreate"),
                     JOptionPane.ERROR_MESSAGE);
             System.out.println(ex.getMessage());
-        } catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
             DfMCreatorMain.printAnyMsg(NotThePropFileErrorMsg,
                     I18n.tr("error.dfmPropCreate"),
                     JOptionPane.ERROR_MESSAGE);
             System.out.println(ex.getMessage());
         }
-        if (openPropsFileForGUIEditFlag){
+        if (openPropsFileForGUIEditFlag) {
             updatePropsEditLabel();
             expandPropsInPropsEditor();
             updateNumOfLang();
@@ -2302,22 +2259,22 @@ public class PropertiesEditor extends javax.swing.JFrame {
     }
 
     /**
-     * getPropertiesFile() launches a file open dialog
-     * in order to let the user choose a DictionaryForMIDs.properties file
-     * that he wishes to edit and then launches the PropertiesEditor window.
-     * He user can then edit the file with the powerful features of the
-     * PropertiesEditor window and then save the file.
+     * getPropertiesFile() launches a file open dialog in order to let the user
+     * choose a DictionaryForMIDs.properties file that he wishes to edit and
+     * then launches the PropertiesEditor window. He user can then edit the file
+     * with the powerful features of the PropertiesEditor window and then save
+     * the file.
      */
     public void getPropertiesFile() throws UnsupportedOperationException {
         propertiesFile = DfMCreatorMain.dfmCreator.getFile(false);
         //String propFileString = propertiesFile + DfMCreatorMain.PATH_SEPARATOR + PropertiesPreview.PROPERTY_FILE_NAME;
         propsFile = new File(propertiesFile);
-        if ("".equals(propertiesFile)){
+        if ("".equals(propertiesFile)) {
             openPropsFileForGUIEditFlag = false; // this is not really needed since its already set to false.
-        } else if (!propsFile.exists() || ! propsFile.canRead()) {
+        } else if (!propsFile.exists() || !propsFile.canRead()) {
             openPropsFileForGUIEditFlag = false;
             throw new UnsupportedOperationException();
-        } else if (!propsFile.getName().equals(PropertiesPreview.PROPERTY_FILE_NAME)){
+        } else if (!propsFile.getName().equals(PropertiesPreview.PROPERTY_FILE_NAME)) {
             openPropsFileForGUIEditFlag = false;
             throw new IllegalArgumentException();
         } else {
@@ -2327,14 +2284,14 @@ public class PropertiesEditor extends javax.swing.JFrame {
 
     public void updatePropsEditLabel() {
         editingTaskInfo.setText("");
-        editingTaskInfo.setText(I18n.tr("props.file.creation.task.info.prefix") +
-                        propertiesFile + DfMCreatorMain.PATH_SEPARATOR +
-                        PropertiesPreview.PROPERTY_FILE_NAME + I18n.tr("props.file.creation.task.info.suffix"));
+        editingTaskInfo.setText(I18n.tr("props.file.creation.task.info.prefix")
+                + propertiesFile + DfMCreatorMain.PATH_SEPARATOR
+                + PropertiesPreview.PROPERTY_FILE_NAME + I18n.tr("props.file.creation.task.info.suffix"));
     }
 
     // This returns an object made of string that
     // that can be added as an item to a combobox.
-    public static Object makeObj(final String item)  {
+    public static Object makeObj(final String item) {
         return new Object() {
             @Override
             public String toString() {
@@ -2343,11 +2300,12 @@ public class PropertiesEditor extends javax.swing.JFrame {
         };
     }
 
-
-    /** This subroutine reads a DictionaryForMIDs.properties file and then applies its settings
-     * to the PropertiesEditor so as to be able to edit the file within it.
+    /**
+     * This subroutine reads a DictionaryForMIDs.properties file and then
+     * applies its settings to the PropertiesEditor so as to be able to edit the
+     * file within it.
      */
-    public void expandPropsInPropsEditor(){
+    public void expandPropsInPropsEditor() {
         dfMProps = new Properties();
 
         loadedProperties = new ArrayList<>();
@@ -2359,7 +2317,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
 
             // Passing the values to the different components of the PropertiesEditor
             String infoTx = dfMProps.getProperty("infoText");
-            if (infoTx != null && !"".equals(infoTx)){
+            if (infoTx != null && !"".equals(infoTx)) {
                 infoTextTA.setText(infoTx);
                 loadedProperties.add("infoText");
             } else {
@@ -2367,7 +2325,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String dictAbb = dfMProps.getProperty("dictionaryAbbreviation");
-            if (dictAbb != null && !"".equals(dictAbb)){
+            if (dictAbb != null && !"".equals(dictAbb)) {
                 dictAbbrevTF.setText(dictAbb);
                 loadedProperties.add("dictionaryAbbreviation");
             } else {
@@ -2375,7 +2333,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String numOfLang = dfMProps.getProperty("numberOfAvailableLanguages");
-            if (numOfLang != null && !"".equals(numOfLang)){
+            if (numOfLang != null && !"".equals(numOfLang)) {
                 numOfLangCmbBox.setSelectedItem(numOfLang);
                 loadedProperties.add("numberOfAvailableLanguages");
             } else {
@@ -2386,7 +2344,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String inputCharEnc = dfMProps.getProperty("dictionaryGenerationInputCharEncoding");
-            if (inputCharEnc != null && !"".equals(inputCharEnc)){
+            if (inputCharEnc != null && !"".equals(inputCharEnc)) {
                 Object inputCharEncObj = makeObj(inputCharEnc);
                 dictGenInputCharEncodingCB.addItem(inputCharEncObj);
                 dictGenInputCharEncodingCB.setSelectedItem(inputCharEncObj);
@@ -2396,7 +2354,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String idxCharEnc = dfMProps.getProperty("indexCharEncoding");
-            if (idxCharEnc != null && !"".equals(idxCharEnc)){
+            if (idxCharEnc != null && !"".equals(idxCharEnc)) {
                 Object idxCharEncObj = makeObj(idxCharEnc);
                 indexCharEncodingCB.addItem(idxCharEncObj);
                 indexCharEncodingCB.setSelectedItem(idxCharEncObj);
@@ -2406,7 +2364,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String searchListCharEnc = dfMProps.getProperty("searchListCharEncoding");
-            if (searchListCharEnc != null && !"".equals(searchListCharEnc)){
+            if (searchListCharEnc != null && !"".equals(searchListCharEnc)) {
                 Object searchListCharEncObj = makeObj(searchListCharEnc);
                 searchListCharEncodingCB.addItem(searchListCharEncObj);
                 searchListCharEncodingCB.setSelectedItem(searchListCharEncObj);
@@ -2416,7 +2374,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String dictCharEnc = dfMProps.getProperty("dictionaryCharEncoding");
-            if (dictCharEnc != null && !"".equals(dictCharEnc)){
+            if (dictCharEnc != null && !"".equals(dictCharEnc)) {
                 Object dictCharEncObj = makeObj(dictCharEnc);
                 dictionaryCharEncodingCB.addItem(dictCharEncObj);
                 dictionaryCharEncodingCB.setSelectedItem(dictCharEncObj);
@@ -2426,11 +2384,11 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String dictGenSepChar = dfMProps.getProperty("dictionaryGenerationSeparatorCharacter");
-            if (dictGenSepChar != null && !"".equals(dictGenSepChar)){
+            if (dictGenSepChar != null && !"".equals(dictGenSepChar)) {
                 int i = revertFilterSepChar(dictGenSepChar);
-                if (i <= 5){
+                if (i <= 5) {
                     dictGenSepCharCB.setSelectedIndex(i);
-                } else if (i == 1000){
+                } else if (i == 1000) {
                     Object dictGenSepCharObj = makeObj(dictGenSepChar);
                     dictGenSepCharCB.addItem(dictGenSepCharObj);
                     dictGenSepCharCB.setSelectedItem(dictGenSepCharObj);
@@ -2441,11 +2399,11 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String indFileSepChar = dfMProps.getProperty("indexFileSeparationCharacter");
-            if (indFileSepChar != null && !"".equals(indFileSepChar)){
+            if (indFileSepChar != null && !"".equals(indFileSepChar)) {
                 int i = revertFilterSepChar(indFileSepChar);
-                if (i <= 5){
+                if (i <= 5) {
                     indexFileSepCharCB.setSelectedIndex(i);
-                } else if (i == 1000){
+                } else if (i == 1000) {
                     Object indFileSepCharObj = makeObj(indFileSepChar);
                     indexFileSepCharCB.addItem(indFileSepCharObj);
                     indexFileSepCharCB.setSelectedItem(indFileSepCharObj);
@@ -2456,11 +2414,11 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String searchListSepChar = dfMProps.getProperty("searchListFileSeparationCharacter");
-            if (searchListSepChar != null && !"".equals(searchListSepChar)){
+            if (searchListSepChar != null && !"".equals(searchListSepChar)) {
                 int i = revertFilterSepChar(searchListSepChar);
-                if (i <= 5){
+                if (i <= 5) {
                     searchListSepCharCB.setSelectedIndex(i);
-                } else if (i == 1000){
+                } else if (i == 1000) {
                     Object searchListSepCharObj = makeObj(searchListSepChar);
                     searchListSepCharCB.addItem(searchListSepCharObj);
                     searchListSepCharCB.setSelectedItem(searchListSepCharObj);
@@ -2471,11 +2429,11 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String dictFileSepChar = dfMProps.getProperty("dictionaryFileSeparationCharacter");
-            if (dictFileSepChar != null && !"".equals(dictFileSepChar)){
+            if (dictFileSepChar != null && !"".equals(dictFileSepChar)) {
                 int i = revertFilterSepChar(dictFileSepChar);
-                if (i <= 5){
+                if (i <= 5) {
                     dictFileSepCharCB.setSelectedIndex(i);
-                } else if (i == 1000){
+                } else if (i == 1000) {
                     Object dictFileSepCharObj = makeObj(dictFileSepChar);
                     dictFileSepCharCB.addItem(dictFileSepCharObj);
                     dictFileSepCharCB.setSelectedItem(dictFileSepCharObj);
@@ -2486,7 +2444,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang1PostFix = dfMProps.getProperty("language1FilePostfix");
-            if (lang1PostFix != null && !"".equals(lang1PostFix)){
+            if (lang1PostFix != null && !"".equals(lang1PostFix)) {
                 Object lang1PostFixObj = makeObj(lang1PostFix);
                 langPostfixCB1.addItem(lang1PostFixObj);
                 langPostfixCB1.setSelectedItem(lang1PostFixObj);
@@ -2496,7 +2454,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang2PostFix = dfMProps.getProperty("language2FilePostfix");
-            if (lang2PostFix != null && !"".equals(lang2PostFix)){
+            if (lang2PostFix != null && !"".equals(lang2PostFix)) {
                 Object lang2PostFixObj = makeObj(lang2PostFix);
                 langPostfixCB2.addItem(lang2PostFixObj);
                 langPostfixCB2.setSelectedItem(lang2PostFixObj);
@@ -2506,7 +2464,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String dictGenOmitPar = dfMProps.getProperty("dictionaryGenerationOmitParFromIndex");
-            if (dictGenOmitPar != null && !"".equals(dictGenOmitPar)){
+            if (dictGenOmitPar != null && !"".equals(dictGenOmitPar)) {
                 switch (dictGenOmitPar) {
                     case "true":
                         dictGenOmitParCB.setSelected(true);
@@ -2521,7 +2479,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang1IsSearch = dfMProps.getProperty("language1IsSearchable");
-            if (lang1IsSearch != null && !"".equals(lang1IsSearch)){
+            if (lang1IsSearch != null && !"".equals(lang1IsSearch)) {
                 switch (lang1IsSearch) {
                     case "true":
                         langIsSearchCB1.setSelected(true);
@@ -2536,7 +2494,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang2IsSearch = dfMProps.getProperty("language2IsSearchable");
-            if (lang2IsSearch != null && !"".equals(lang2IsSearch)){
+            if (lang2IsSearch != null && !"".equals(lang2IsSearch)) {
                 switch (lang2IsSearch) {
                     case "true":
                         langIsSearchCB2.setSelected(true);
@@ -2551,7 +2509,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang1GenInd = dfMProps.getProperty("language1GenerateIndex");
-            if (lang1GenInd != null && !"".equals(lang1GenInd)){
+            if (lang1GenInd != null && !"".equals(lang1GenInd)) {
                 switch (lang1GenInd) {
                     case "true":
                         langGenIndCB1.setSelected(true);
@@ -2566,7 +2524,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang2GenInd = dfMProps.getProperty("language2GenerateIndex");
-            if (lang2GenInd != null && !"".equals(lang2GenInd)){
+            if (lang2GenInd != null && !"".equals(lang2GenInd)) {
                 switch (lang2GenInd) {
                     case "true":
                         langGenIndCB2.setSelected(true);
@@ -2581,7 +2539,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang1HasSepDict = dfMProps.getProperty("language1HasSeparateDictionaryFile");
-            if (lang1HasSepDict != null && !"".equals(lang1HasSepDict)){
+            if (lang1HasSepDict != null && !"".equals(lang1HasSepDict)) {
                 switch (lang1HasSepDict) {
                     case "true":
                         langHasSepDictCB1.setSelected(true);
@@ -2596,7 +2554,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang2HasSepDict = dfMProps.getProperty("language2HasSeparateDictionaryFile");
-            if (lang2HasSepDict != null && !"".equals(lang2HasSepDict)){
+            if (lang2HasSepDict != null && !"".equals(lang2HasSepDict)) {
                 switch (lang2HasSepDict) {
                     case "true":
                         langHasSepDictCB2.setSelected(true);
@@ -2611,7 +2569,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String SearchFileMaxSize = dfMProps.getProperty("searchListFileMaxSize");
-            if (SearchFileMaxSize != null && !"".equals(SearchFileMaxSize) && (Integer.parseInt(SearchFileMaxSize) != 0)){
+            if (SearchFileMaxSize != null && !"".equals(SearchFileMaxSize) && (Integer.parseInt(SearchFileMaxSize) != 0)) {
                 listMaxSizeSL.setValue(Integer.parseInt(SearchFileMaxSize));
                 loadedProperties.add("searchListFileMaxSize");
             } else {
@@ -2619,7 +2577,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String IndFileMaxSize = dfMProps.getProperty("indexFileMaxSize");
-            if (IndFileMaxSize != null && !"".equals(IndFileMaxSize) && (Integer.parseInt(IndFileMaxSize) != 0)){
+            if (IndFileMaxSize != null && !"".equals(IndFileMaxSize) && (Integer.parseInt(IndFileMaxSize) != 0)) {
                 indexMaxSizeSL.setValue(Integer.parseInt(IndFileMaxSize));
                 loadedProperties.add("indexFileMaxSize");
             } else {
@@ -2627,7 +2585,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String DictFileMaxSize = dfMProps.getProperty("dictionaryFileMaxSize");
-            if (DictFileMaxSize != null && !"".equals(DictFileMaxSize) && (Integer.parseInt(DictFileMaxSize) != 0)){
+            if (DictFileMaxSize != null && !"".equals(DictFileMaxSize) && (Integer.parseInt(DictFileMaxSize) != 0)) {
                 dictMaxSizeSL.setValue(Integer.parseInt(DictFileMaxSize));
                 loadedProperties.add("dictionaryFileMaxSize");
             } else {
@@ -2635,15 +2593,15 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String MinNumberOfEntPerDict = dfMProps.getProperty("dictionaryGenerationMinNumberOfEntriesPerDictionaryFile");
-            if (MinNumberOfEntPerDict != null && !"".equals(MinNumberOfEntPerDict) && (Integer.parseInt(MinNumberOfEntPerDict) != 0)){
-                 minNumEntPerDictFileSL.setValue(Integer.parseInt(MinNumberOfEntPerDict));
+            if (MinNumberOfEntPerDict != null && !"".equals(MinNumberOfEntPerDict) && (Integer.parseInt(MinNumberOfEntPerDict) != 0)) {
+                minNumEntPerDictFileSL.setValue(Integer.parseInt(MinNumberOfEntPerDict));
                 loadedProperties.add("dictionaryGenerationMinNumberOfEntriesPerDictionaryFile");
             } else {
                 nonLoadedProperties.add("dictionaryGenerationMinNumberOfEntriesPerDictionaryFile");
             }
 
             String MinNumberOfEntriesPerInd = dfMProps.getProperty("dictionaryGenerationMinNumberOfEntriesPerIndexFile");
-            if (MinNumberOfEntriesPerInd != null && !"".equals(MinNumberOfEntriesPerInd) && (Integer.parseInt(MinNumberOfEntriesPerInd) != 0)){
+            if (MinNumberOfEntriesPerInd != null && !"".equals(MinNumberOfEntriesPerInd) && (Integer.parseInt(MinNumberOfEntriesPerInd) != 0)) {
                 minNumEntPerIndFileSL.setValue(Integer.parseInt(MinNumberOfEntriesPerInd));
                 loadedProperties.add("dictionaryGenerationMinNumberOfEntriesPerIndexFile");
             } else {
@@ -2651,7 +2609,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang1DispTx = dfMProps.getProperty("language1DisplayText");
-            if (lang1DispTx != null && !"".equals(lang1DispTx)){
+            if (lang1DispTx != null && !"".equals(lang1DispTx)) {
                 langDispTextTF1.setText(lang1DispTx);
                 loadedProperties.add("language1DisplayText");
             } else {
@@ -2659,7 +2617,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang1ExpSplit = dfMProps.getProperty("dictionaryGenerationLanguage1ExpressionSplitString");
-            if (lang1ExpSplit != null && !"".equals(lang1ExpSplit)){
+            if (lang1ExpSplit != null && !"".equals(lang1ExpSplit)) {
                 langExpSplitStringTF1.setText(lang1ExpSplit);
                 loadedProperties.add("dictionaryGenerationLanguage1ExpressionSplitString");
             } else {
@@ -2667,7 +2625,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang1Norm = dfMProps.getProperty("language1NormationClassName");
-            if (lang1Norm == null || "".equals(lang1Norm)){
+            if (lang1Norm == null || "".equals(lang1Norm)) {
                 langNormCB1.setSelectedItem("NONE");
                 nonLoadedProperties.add("language1NormationClassName");
             } else {
@@ -2678,7 +2636,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang1DictUpd = dfMProps.getProperty("language1DictionaryUpdateClassName");
-            if (lang1DictUpd == null || "".equals(lang1DictUpd)){
+            if (lang1DictUpd == null || "".equals(lang1DictUpd)) {
                 langDictUpdateCB1.setSelectedItem("NONE");
                 nonLoadedProperties.add("language1DictionaryUpdateClassName");
             } else {
@@ -2689,7 +2647,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang1IndNumSrcEnt = dfMProps.getProperty("language1IndexNumberOfSourceEntries");
-            if (lang1IndNumSrcEnt != null && !"".equals(lang1IndNumSrcEnt)){
+            if (lang1IndNumSrcEnt != null && !"".equals(lang1IndNumSrcEnt)) {
                 langIndNumSrcEntTF1.setText(lang1IndNumSrcEnt);
                 loadedProperties.add("language1IndexNumberOfSourceEntries");
             } else {
@@ -2697,7 +2655,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang2DispTx = dfMProps.getProperty("language2DisplayText");
-            if (lang2DispTx != null && !"".equals(lang2DispTx)){
+            if (lang2DispTx != null && !"".equals(lang2DispTx)) {
                 langDispTextTF2.setText(lang2DispTx);
                 loadedProperties.add("language2DisplayText");
             } else {
@@ -2705,7 +2663,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang2ExpSplit = dfMProps.getProperty("dictionaryGenerationLanguage2ExpressionSplitString");
-            if (lang2ExpSplit != null && !"".equals(lang2ExpSplit)){
+            if (lang2ExpSplit != null && !"".equals(lang2ExpSplit)) {
                 langExpSplitStringTF2.setText(lang2ExpSplit);
                 loadedProperties.add("dictionaryGenerationLanguage2ExpressionSplitString");
             } else {
@@ -2713,7 +2671,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang2DictUpd = dfMProps.getProperty("language2DictionaryUpdateClassName");
-            if (lang2DictUpd == null || "".equals(lang2DictUpd)){
+            if (lang2DictUpd == null || "".equals(lang2DictUpd)) {
                 langDictUpdateCB2.setSelectedItem("NONE");
                 nonLoadedProperties.add("language2DictionaryUpdateClassName");
             } else {
@@ -2724,7 +2682,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang2Norm = dfMProps.getProperty("language2NormationClassName");
-            if (lang2Norm == null || "".equals(lang2Norm)){
+            if (lang2Norm == null || "".equals(lang2Norm)) {
                 langNormCB2.setSelectedItem("NONE");
                 nonLoadedProperties.add("language2NormationClassName");
             } else {
@@ -2735,7 +2693,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             }
 
             String lang2InsNumSrcEnt = dfMProps.getProperty("language2IndexNumberOfSourceEntries");
-            if (lang2InsNumSrcEnt != null && !"".equals(lang2InsNumSrcEnt)){
+            if (lang2InsNumSrcEnt != null && !"".equals(lang2InsNumSrcEnt)) {
                 langIndNumSrcEntTF2.setText(lang2InsNumSrcEnt);
                 loadedProperties.add("language2IndexNumberOfSourceEntries");
             } else {
@@ -2744,9 +2702,9 @@ public class PropertiesEditor extends javax.swing.JFrame {
 
             // These are for language 3 if there is one of course
             String langNumb = dfMProps.getProperty("numberOfAvailableLanguages");
-            if (langNumb != null && !"".equals(langNumb) && "3".equals(langNumb)){
+            if (langNumb != null && !"".equals(langNumb) && "3".equals(langNumb)) {
                 String lang3IsSearch = dfMProps.getProperty("language3IsSearchable");
-                if (lang3IsSearch != null && !"".equals(lang3IsSearch)){
+                if (lang3IsSearch != null && !"".equals(lang3IsSearch)) {
                     switch (lang3IsSearch) {
                         case "true":
                             langIsSearchCB3.setSelected(true);
@@ -2755,13 +2713,13 @@ public class PropertiesEditor extends javax.swing.JFrame {
                             langIsSearchCB3.setSelected(false);
                             break;
                     }
-                loadedProperties.add("language3IsSearchable");
+                    loadedProperties.add("language3IsSearchable");
                 } else {
                     nonLoadedProperties.add("language3IsSearchable");
                 }
 
                 String lang3GenInd = dfMProps.getProperty("language3GenerateIndex");
-                if (lang3GenInd != null && !"".equals(lang3GenInd)){
+                if (lang3GenInd != null && !"".equals(lang3GenInd)) {
                     switch (lang3GenInd) {
                         case "true":
                             langGenIndCB3.setSelected(true);
@@ -2770,13 +2728,13 @@ public class PropertiesEditor extends javax.swing.JFrame {
                             langGenIndCB3.setSelected(false);
                             break;
                     }
-                loadedProperties.add("language3GenerateIndex");
+                    loadedProperties.add("language3GenerateIndex");
                 } else {
                     nonLoadedProperties.add("language3GenerateIndex");
                 }
 
                 String lang3HasSepDict = dfMProps.getProperty("language3HasSeparateDictionaryFile");
-                if (lang3HasSepDict != null && !"".equals(lang3HasSepDict)){
+                if (lang3HasSepDict != null && !"".equals(lang3HasSepDict)) {
                     switch (lang3HasSepDict) {
                         case "true":
                             langHasSepDictCB3.setSelected(true);
@@ -2785,13 +2743,13 @@ public class PropertiesEditor extends javax.swing.JFrame {
                             langHasSepDictCB3.setSelected(false);
                             break;
                     }
-                loadedProperties.add("language3HasSeparateDictionaryFile");
+                    loadedProperties.add("language3HasSeparateDictionaryFile");
                 } else {
                     nonLoadedProperties.add("language3HasSeparateDictionaryFile");
                 }
 
                 String lang3PostFix = dfMProps.getProperty("language3FilePostfix");
-                if (lang3PostFix != null && !"".equals(lang3PostFix)){
+                if (lang3PostFix != null && !"".equals(lang3PostFix)) {
                     Object lang3PostFixObj = makeObj(lang3PostFix);
                     langPostfixCB3.addItem(lang3PostFixObj);
                     langPostfixCB3.setSelectedItem(lang3PostFixObj);
@@ -2801,7 +2759,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
                 }
 
                 String lang3DispTx = dfMProps.getProperty("language3DisplayText");
-                if (lang3DispTx != null && !"".equals(lang3DispTx)){
+                if (lang3DispTx != null && !"".equals(lang3DispTx)) {
                     langDispTextTF3.setText(lang3DispTx);
                     loadedProperties.add("language3DisplayText");
                 } else {
@@ -2809,7 +2767,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
                 }
 
                 String lang3ExpSplit = dfMProps.getProperty("dictionaryGenerationLanguage3ExpressionSplitString");
-                if (lang3ExpSplit != null && !"".equals(lang3ExpSplit)){
+                if (lang3ExpSplit != null && !"".equals(lang3ExpSplit)) {
                     langExpSplitStringTF3.setText(lang3ExpSplit);
                     loadedProperties.add("dictionaryGenerationLanguage3ExpressionSplitString");
                 } else {
@@ -2817,7 +2775,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
                 }
 
                 String lang3DictUpd = dfMProps.getProperty("language3DictionaryUpdateClassName");
-                if (lang3DictUpd == null || "".equals(lang3DictUpd)){
+                if (lang3DictUpd == null || "".equals(lang3DictUpd)) {
                     langDictUpdateCB3.setSelectedItem("NONE");
                     nonLoadedProperties.add("language3DictionaryUpdateClassName");
                 } else {
@@ -2828,7 +2786,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
                 }
 
                 String lang3Norm = dfMProps.getProperty("language3NormationClassName");
-                if (lang3Norm == null || "".equals(lang3Norm)){
+                if (lang3Norm == null || "".equals(lang3Norm)) {
                     langNormCB3.setSelectedItem("NONE");
                     nonLoadedProperties.add("language3NormationClassName");
                 } else {
@@ -2839,7 +2797,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
                 }
 
                 String lang3IndNumSrcEnt = dfMProps.getProperty("language3IndexNumberOfSourceEntries");
-                if (lang3IndNumSrcEnt != null && !"".equals(lang3IndNumSrcEnt)){
+                if (lang3IndNumSrcEnt != null && !"".equals(lang3IndNumSrcEnt)) {
                     langIndNumSrcEntTF3.setText(lang3IndNumSrcEnt);
                     loadedProperties.add("language3IndexNumberOfSourceEntries");
                 } else {
@@ -2850,7 +2808,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
             System.out.println(I18n.tr("successfully.loaded.props"));
             String str = I18n.tr("successfully.loaded.props");
             String curProp;
-            for (int i=0; i<loadedProperties.size(); i++){
+            for (int i = 0; i < loadedProperties.size(); i++) {
                 curProp = loadedProperties.remove(i).toString();
                 System.out.println(curProp);
                 str = str + "\n" + curProp;
@@ -2865,37 +2823,37 @@ public class PropertiesEditor extends javax.swing.JFrame {
     /**
      * showSamplePropFile() shows a sample DictionaryForMIDs.properties file.
      */
-    public void showSamplePropFile(){
+    public void showSamplePropFile() {
         JOptionPane.showMessageDialog(proPrevWin, samplePropertyFile, I18n.tr("samplePropsWinTitle.dfmPropCreate"),
-                                                                JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.PLAIN_MESSAGE);
     }
 
     public boolean openPropFile() throws UnsupportedOperationException,
-                                      IllegalArgumentException {
+            IllegalArgumentException {
         boolean fileChosen;
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         int returnVal = fc.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION){
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             propsFileChosen = fc.getSelectedFile();
-            if (!propsFileChosen.exists() || !propsFileChosen.canRead()){
+            if (!propsFileChosen.exists() || !propsFileChosen.canRead()) {
                 throw new UnsupportedOperationException();
             }
             String propFileName = propsFileChosen.getName();
-            if (!propFileName.equals(PropertiesPreview.PROPERTY_FILE_NAME)){
+            if (!propFileName.equals(PropertiesPreview.PROPERTY_FILE_NAME)) {
                 throw new IllegalArgumentException();
             }
             proPrevWin.propsText.setText("");
             try {
                 try (BufferedReader in = new BufferedReader(new FileReader(propsFileChosen))) {
                     String l;
-                    while ((l = in.readLine()) != null){
+                    while ((l = in.readLine()) != null) {
                         proPrevWin.appendText(l);
                         proPrevWin.appendText("\n");
                         proPrevWin.propsText.setEditable(true);
                         proPrevWin.propsText.setBackground(new java.awt.Color(255, 255, 190));
                     }
                 }
-            } catch (IOException ex){
+            } catch (IOException ex) {
                 DfMCreatorMain.printAnyMsg(fileCantBeOpenedErrorMsg, I18n.tr("error.dfmPropCreate"), JOptionPane.ERROR_MESSAGE);
                 System.out.println(ex + "\n");
             }
@@ -2907,70 +2865,71 @@ public class PropertiesEditor extends javax.swing.JFrame {
     }
 
     /**
-     * viewAndOrEditAndSave() launches the PropertiesPreview window with the values
-     * selected/entered by the user in the PropertiesEditor. Here also the user
-     * can edit the file manually before saving it. Note that the name of the file is
-     * automatically set by the PropertiesPreview and is DictionaryForMIDs.properties.
+     * viewAndOrEditAndSave() launches the PropertiesPreview window with the
+     * values selected/entered by the user in the PropertiesEditor. Here also
+     * the user can edit the file manually before saving it. Note that the name
+     * of the file is automatically set by the PropertiesPreview and is
+     * DictionaryForMIDs.properties.
      */
-    public void viewAndOrEditAndSave(){
+    public void viewAndOrEditAndSave() {
         try {
             validateValues();
             setValuesInThePropsPreviewWindow();
             proPrevWin.propsText.setCaretPosition(0);
             proPrevWin.editButton.setSelected(false);
             proPrevWin.editButton.setText(I18n.tr("edit.dfmPropCreate"));
-            if (!PropertiesPreview.hasPropsFileAlreadyBeenSaved){                
+            if (!PropertiesPreview.hasPropsFileAlreadyBeenSaved) {
                 proPrevWin.PropFileView.setVisible(true);
-        } else {
-            try {
-                proPrevWin.PropFileView.setVisible(false);
-                proPrevWin.savePropFileWithoutPrompt();
-            } catch (UnsupportedOperationException ex){
-                DfMCreatorMain.printAnyMsg(PropertiesPreview.canWriteFileMsg, I18n.tr("dirNotAccessible"), JOptionPane.ERROR_MESSAGE);
-            } catch (IOException ex){
-                DfMCreatorMain.printAnyMsg(PropertiesPreview.internalErrorMsg, I18n.tr("error"), JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    proPrevWin.PropFileView.setVisible(false);
+                    proPrevWin.savePropFileWithoutPrompt();
+                } catch (UnsupportedOperationException ex) {
+                    DfMCreatorMain.printAnyMsg(PropertiesPreview.canWriteFileMsg, I18n.tr("dirNotAccessible"), JOptionPane.ERROR_MESSAGE);
+                } catch (IOException ex) {
+                    DfMCreatorMain.printAnyMsg(PropertiesPreview.internalErrorMsg, I18n.tr("error"), JOptionPane.ERROR_MESSAGE);
+                }
             }
-        }
-        
-        } catch (IllegalArgumentException e){
-                DfMCreatorMain.printAnyMsg(RequiredArgsAbsentErrorMsg, I18n.tr("error.dfmPropCreate"), JOptionPane.ERROR_MESSAGE);
-                System.out.println(e + "\n");
+
+        } catch (IllegalArgumentException e) {
+            DfMCreatorMain.printAnyMsg(RequiredArgsAbsentErrorMsg, I18n.tr("error.dfmPropCreate"), JOptionPane.ERROR_MESSAGE);
+            System.out.println(e + "\n");
         }
     }
 
-
     /**
-     * validateValues() validates the values entered by the user in the PropertiesEditor.
-     * Checks if the required values are all provided, if some TextFields are empty or not and so forth.
+     * validateValues() validates the values entered by the user in the
+     * PropertiesEditor. Checks if the required values are all provided, if some
+     * TextFields are empty or not and so forth.
      */
     public void validateValues() {
-	if ("".equals(infoTextTA.getText()) || "".equals(dictAbbrevTF.getText()) ||
-            "".equals(langDispTextTF1.getText()) || "".equals(langDispTextTF2.getText()) ||
-	    "".equals(langPostfixCB1.getSelectedItem().toString()) || "".equals(langPostfixCB2.getSelectedItem().toString())){
+        if ("".equals(infoTextTA.getText()) || "".equals(dictAbbrevTF.getText())
+                || "".equals(langDispTextTF1.getText()) || "".equals(langDispTextTF2.getText())
+                || "".equals(langPostfixCB1.getSelectedItem().toString()) || "".equals(langPostfixCB2.getSelectedItem().toString())) {
             throw new IllegalArgumentException();
-	}
+        }
 
-	if (numOfLangCmbBox.getSelectedItem().equals("3")){
-            if ("".equals(langDispTextTF3.getText())  || "".equals(langPostfixCB3.getSelectedItem().toString())){
+        if (numOfLangCmbBox.getSelectedItem().equals("3")) {
+            if ("".equals(langDispTextTF3.getText()) || "".equals(langPostfixCB3.getSelectedItem().toString())) {
                 throw new IllegalArgumentException();
             }
-	}
+        }
 
         /* Broken. Disabled till fixed!
-        try {
-            checkInfoTextContents();
-        } catch (IllegalArgumentException e){
-            DfMCreatorMain.printAnyMsg(e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        */
-        
-	infoText = infoTextTA.getText();
-	dictionaryAbbreviation = dictAbbrevTF.getText();
-	numberOfAvailableLanguages = numOfLangCmbBox.getSelectedItem().toString();
-	dictionaryGenerationInputCharEncoding = dictGenInputCharEncodingCB.getSelectedItem().toString();
-	indexCharEncoding = indexCharEncodingCB.getSelectedItem().toString();
-	searchListCharEncoding = searchListCharEncodingCB.getSelectedItem().toString();
-	dictionaryCharEncoding = dictionaryCharEncodingCB.getSelectedItem().toString();
+         try {
+         checkInfoTextContents();
+         } catch (IllegalArgumentException e){
+         DfMCreatorMain.printAnyMsg(e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         */
+
+        infoText = infoTextTA.getText();
+        dictionaryAbbreviation = dictAbbrevTF.getText();
+        numberOfAvailableLanguages = numOfLangCmbBox.getSelectedItem().toString();
+        dictionaryGenerationInputCharEncoding = dictGenInputCharEncodingCB.getSelectedItem().toString();
+        indexCharEncoding = indexCharEncodingCB.getSelectedItem().toString();
+        searchListCharEncoding = searchListCharEncodingCB.getSelectedItem().toString();
+        dictionaryCharEncoding = dictionaryCharEncodingCB.getSelectedItem().toString();
 
         // separator characters
         dictionaryGenerationSeparatorCharacter = filterSepChar(dictGenSepCharCB);
@@ -2979,140 +2938,140 @@ public class PropertiesEditor extends javax.swing.JFrame {
         dictionaryFileSeparationCharacter = filterSepChar(dictFileSepCharCB);
 
 
-	if (dictGenOmitParCB.isSelected()){
-        	dictionaryGenerationOmitParFromIndex = "true";
-	} else {
-		dictionaryGenerationOmitParFromIndex = "false";
-	}
+        if (dictGenOmitParCB.isSelected()) {
+            dictionaryGenerationOmitParFromIndex = "true";
+        } else {
+            dictionaryGenerationOmitParFromIndex = "false";
+        }
 
-	if (listMaxSizeSL.getValue() != 0){
-		searchListFileMaxSize = String.valueOf(listMaxSizeSL.getValue());
-	}
-	if (indexMaxSizeSL.getValue() != 0){
-		indexFileMaxSize = String.valueOf(indexMaxSizeSL.getValue());
-	}
-	if (dictMaxSizeSL.getValue() != 0){
-		dictionaryFileMaxSize = String.valueOf(dictMaxSizeSL.getValue());
-	}
-	if (minNumEntPerDictFileSL.getValue() != 0){
-		dictionaryGenerationMinNumberOfEntriesPerDictionaryFile = String.valueOf(minNumEntPerDictFileSL.getValue());
-	}
-	if (minNumEntPerIndFileSL.getValue() != 0){
-		dictionaryGenerationMinNumberOfEntriesPerIndexFile = String.valueOf(minNumEntPerIndFileSL.getValue());
-	}
+        if (listMaxSizeSL.getValue() != 0) {
+            searchListFileMaxSize = String.valueOf(listMaxSizeSL.getValue());
+        }
+        if (indexMaxSizeSL.getValue() != 0) {
+            indexFileMaxSize = String.valueOf(indexMaxSizeSL.getValue());
+        }
+        if (dictMaxSizeSL.getValue() != 0) {
+            dictionaryFileMaxSize = String.valueOf(dictMaxSizeSL.getValue());
+        }
+        if (minNumEntPerDictFileSL.getValue() != 0) {
+            dictionaryGenerationMinNumberOfEntriesPerDictionaryFile = String.valueOf(minNumEntPerDictFileSL.getValue());
+        }
+        if (minNumEntPerIndFileSL.getValue() != 0) {
+            dictionaryGenerationMinNumberOfEntriesPerIndexFile = String.valueOf(minNumEntPerIndFileSL.getValue());
+        }
 
-	if (langIsSearchCB1.isSelected()){
-		language1IsSearchable = "true";
-	} else {
-		language1IsSearchable = "false";
-	}
-	if (langGenIndCB1.isSelected()){
-		language1GenerateIndex = "true";
-	} else {
-		language1GenerateIndex = "false";
-	}
-	if (langGenIndCB1.isSelected()){
-		language1HasSeparateDictionaryFile = "true";
-	} else {
-		language1HasSeparateDictionaryFile = "false";
-	}
+        if (langIsSearchCB1.isSelected()) {
+            language1IsSearchable = "true";
+        } else {
+            language1IsSearchable = "false";
+        }
+        if (langGenIndCB1.isSelected()) {
+            language1GenerateIndex = "true";
+        } else {
+            language1GenerateIndex = "false";
+        }
+        if (langGenIndCB1.isSelected()) {
+            language1HasSeparateDictionaryFile = "true";
+        } else {
+            language1HasSeparateDictionaryFile = "false";
+        }
 
-	language1DisplayText = langDispTextTF1.getText();
-	//language1FilePostfix = langPostfixCB1.getSelectedItem().toString();
-	dictionaryGenerationLanguage1ExpressionSplitString = langExpSplitStringTF1.getText();
+        language1DisplayText = langDispTextTF1.getText();
+        //language1FilePostfix = langPostfixCB1.getSelectedItem().toString();
+        dictionaryGenerationLanguage1ExpressionSplitString = langExpSplitStringTF1.getText();
 
-        if (langDictUpdateCB1.getSelectedItem().toString().equals("NONE")){
+        if (langDictUpdateCB1.getSelectedItem().toString().equals("NONE")) {
             language1DictionaryUpdateClassName = "";
         } else {
             language1DictionaryUpdateClassName = langDictUpdateCB1.getSelectedItem().toString();
         }
 
-        if (langNormCB1.getSelectedItem().toString().equals("NONE")){
+        if (langNormCB1.getSelectedItem().toString().equals("NONE")) {
             language1NormationClassName = "";
         } else {
             language1NormationClassName = langNormCB1.getSelectedItem().toString();
         }
 
-	language1IndexNumberOfSourceEntries = langIndNumSrcEntTF1.getText();
+        language1IndexNumberOfSourceEntries = langIndNumSrcEntTF1.getText();
 
-	if (langIsSearchCB2.isSelected()){
-		language2IsSearchable = "true";
-	} else {
-		language2IsSearchable = "false";
-	}
-	if (langGenIndCB2.isSelected()){
-		language2GenerateIndex = "true";
-	} else {
-		language2GenerateIndex = "false";
-	}
-	if (langHasSepDictCB2.isSelected()){
-		language2HasSeparateDictionaryFile = "true";
-	} else {
-		language2HasSeparateDictionaryFile = "false";
-	}
+        if (langIsSearchCB2.isSelected()) {
+            language2IsSearchable = "true";
+        } else {
+            language2IsSearchable = "false";
+        }
+        if (langGenIndCB2.isSelected()) {
+            language2GenerateIndex = "true";
+        } else {
+            language2GenerateIndex = "false";
+        }
+        if (langHasSepDictCB2.isSelected()) {
+            language2HasSeparateDictionaryFile = "true";
+        } else {
+            language2HasSeparateDictionaryFile = "false";
+        }
 
-	language2DisplayText = langDispTextTF2.getText();
-	//language2FilePostfix = langPostfixCB2.getSelectedItem().toString();
-	dictionaryGenerationLanguage2ExpressionSplitString = langExpSplitStringTF2.getText();
+        language2DisplayText = langDispTextTF2.getText();
+        //language2FilePostfix = langPostfixCB2.getSelectedItem().toString();
+        dictionaryGenerationLanguage2ExpressionSplitString = langExpSplitStringTF2.getText();
 
-        if (langDictUpdateCB2.getSelectedItem().toString().equals("NONE")){
+        if (langDictUpdateCB2.getSelectedItem().toString().equals("NONE")) {
             language2DictionaryUpdateClassName = "";
         } else {
             language2DictionaryUpdateClassName = langDictUpdateCB2.getSelectedItem().toString();
         }
 
-        if (langNormCB2.getSelectedItem().toString().equals("NONE")){
+        if (langNormCB2.getSelectedItem().toString().equals("NONE")) {
             language2NormationClassName = "";
         } else {
             language2NormationClassName = langNormCB2.getSelectedItem().toString();
         }
 
-	language2IndexNumberOfSourceEntries = langIndNumSrcEntTF2.getText();
+        language2IndexNumberOfSourceEntries = langIndNumSrcEntTF2.getText();
 
 
         if (numOfLangCmbBox.getSelectedItem().equals("3")) {
-            if (langIsSearchCB3.isSelected()){
-                    language3IsSearchable = "true";
-                } else {
-        	        language3IsSearchable = "false";
-	        }
-	    if (langGenIndCB3.isSelected()){
-		    language3GenerateIndex = "true";
-	    } else {
-		    language3GenerateIndex = "false";
-	    }
-	    if (langHasSepDictCB3.isSelected()){
-		    language3HasSeparateDictionaryFile = "true";
-	    } else {
-		    language3HasSeparateDictionaryFile = "false";
-	    }
+            if (langIsSearchCB3.isSelected()) {
+                language3IsSearchable = "true";
+            } else {
+                language3IsSearchable = "false";
+            }
+            if (langGenIndCB3.isSelected()) {
+                language3GenerateIndex = "true";
+            } else {
+                language3GenerateIndex = "false";
+            }
+            if (langHasSepDictCB3.isSelected()) {
+                language3HasSeparateDictionaryFile = "true";
+            } else {
+                language3HasSeparateDictionaryFile = "false";
+            }
 
-	    language3DisplayText = langDispTextTF3.getText();
-	    //language3FilePostfix = langPostfixCB3.getSelectedItem().toString();
-	    dictionaryGenerationLanguage3ExpressionSplitString = langExpSplitStringTF3.getText();
+            language3DisplayText = langDispTextTF3.getText();
+            //language3FilePostfix = langPostfixCB3.getSelectedItem().toString();
+            dictionaryGenerationLanguage3ExpressionSplitString = langExpSplitStringTF3.getText();
 
-            if (langDictUpdateCB3.getSelectedItem().toString().equals("NONE")){
+            if (langDictUpdateCB3.getSelectedItem().toString().equals("NONE")) {
                 language3DictionaryUpdateClassName = "";
             } else {
                 language3DictionaryUpdateClassName = langDictUpdateCB3.getSelectedItem().toString();
             }
 
-            if (langNormCB3.getSelectedItem().toString().equals("NONE")){
+            if (langNormCB3.getSelectedItem().toString().equals("NONE")) {
                 language3NormationClassName = "";
             } else {
                 language3NormationClassName = langNormCB3.getSelectedItem().toString();
             }
 
-	    language3IndexNumberOfSourceEntries = langIndNumSrcEntTF3.getText();
+            language3IndexNumberOfSourceEntries = langIndNumSrcEntTF3.getText();
 
         }
     }
 
     /**
-     * setValuesInThePropsPreviewWindow() sets the values entered/selected by the user in
-     * the PropertiesPreview window.
+     * setValuesInThePropsPreviewWindow() sets the values entered/selected by
+     * the user in the PropertiesPreview window.
      */
-    public void setValuesInThePropsPreviewWindow(){
+    public void setValuesInThePropsPreviewWindow() {
         // passing values to the textarea for preview before saving.
         // General values (general to all languages)
         //ppWin.propsText.setText("");
@@ -3121,62 +3080,62 @@ public class PropertiesEditor extends javax.swing.JFrame {
         proPrevWin.appendText("numberOfAvailableLanguages" + colon + numberOfAvailableLanguages + newline + newline);
 
         proPrevWin.appendText("indexFileSeparationCharacter" + colon + indexFileSeparationCharacter + newline);
-	proPrevWin.appendText("searchListFileSeparationCharacter" + colon + searchListFileSeparationCharacter + newline);
-	proPrevWin.appendText("dictionaryFileSeparationCharacter" + colon + dictionaryFileSeparationCharacter + newline);
-	proPrevWin.appendText("dictionaryGenerationSeparatorCharacter" + colon + dictionaryGenerationSeparatorCharacter + newline + newline);
+        proPrevWin.appendText("searchListFileSeparationCharacter" + colon + searchListFileSeparationCharacter + newline);
+        proPrevWin.appendText("dictionaryFileSeparationCharacter" + colon + dictionaryFileSeparationCharacter + newline);
+        proPrevWin.appendText("dictionaryGenerationSeparatorCharacter" + colon + dictionaryGenerationSeparatorCharacter + newline + newline);
 
-        if (!"".equals(dictionaryGenerationInputCharEncoding)){
+        if (!"".equals(dictionaryGenerationInputCharEncoding)) {
             proPrevWin.appendText("dictionaryGenerationInputCharEncoding" + colon + dictionaryGenerationInputCharEncoding + newline);
         }
-        if (!"".equals(indexCharEncoding)){
+        if (!"".equals(indexCharEncoding)) {
             proPrevWin.appendText("indexCharEncoding" + colon + indexCharEncoding + newline);
         }
-        if (!"".equals(searchListCharEncoding)){
+        if (!"".equals(searchListCharEncoding)) {
             proPrevWin.appendText("searchListCharEncoding" + colon + searchListCharEncoding + newline);
         }
-        if (!"".equals(dictionaryCharEncoding)){
+        if (!"".equals(dictionaryCharEncoding)) {
             proPrevWin.appendText("dictionaryCharEncoding" + colon + dictionaryCharEncoding + newline + newline);
         }
-        if (!"".equals(searchListFileMaxSize)){
+        if (!"".equals(searchListFileMaxSize)) {
             proPrevWin.appendText("searchListFileMaxSize" + colon + searchListFileMaxSize + newline);
         }
-        if (!"".equals(indexFileMaxSize)){
+        if (!"".equals(indexFileMaxSize)) {
             proPrevWin.appendText("indexFileMaxSize" + colon + indexFileMaxSize + newline);
         }
-        if (!"".equals(dictionaryFileMaxSize)){
+        if (!"".equals(dictionaryFileMaxSize)) {
             proPrevWin.appendText("dictionaryFileMaxSize" + colon + dictionaryFileMaxSize + newline + newline);
         }
-        if (!"".equals(dictionaryGenerationMinNumberOfEntriesPerDictionaryFile)){
-            proPrevWin.appendText("dictionaryGenerationMinNumberOfEntriesPerDictionaryFile" + colon +
-                                                                  dictionaryGenerationMinNumberOfEntriesPerDictionaryFile + newline);
+        if (!"".equals(dictionaryGenerationMinNumberOfEntriesPerDictionaryFile)) {
+            proPrevWin.appendText("dictionaryGenerationMinNumberOfEntriesPerDictionaryFile" + colon
+                    + dictionaryGenerationMinNumberOfEntriesPerDictionaryFile + newline);
         }
-        if (!"".equals(dictionaryGenerationMinNumberOfEntriesPerIndexFile)){
-            proPrevWin.appendText("dictionaryGenerationMinNumberOfEntriesPerIndexFile" + colon +
-                                                                  dictionaryGenerationMinNumberOfEntriesPerIndexFile + newline + newline);
+        if (!"".equals(dictionaryGenerationMinNumberOfEntriesPerIndexFile)) {
+            proPrevWin.appendText("dictionaryGenerationMinNumberOfEntriesPerIndexFile" + colon
+                    + dictionaryGenerationMinNumberOfEntriesPerIndexFile + newline + newline);
         }
-        proPrevWin.appendText("dictionaryGenerationOmitParFromIndex" + colon +  dictionaryGenerationOmitParFromIndex + newline + newline);
+        proPrevWin.appendText("dictionaryGenerationOmitParFromIndex" + colon + dictionaryGenerationOmitParFromIndex + newline + newline);
 
         // language 1 non optional values.
         proPrevWin.appendText("language1DisplayText" + colon + language1DisplayText + newline);
         proPrevWin.appendText("language1FilePostfix" + colon + language1FilePostfix + newline + newline);
 
         // language 1 boolean values.
-        proPrevWin.appendText("language1IsSearchable" + colon +  language1IsSearchable + newline);
+        proPrevWin.appendText("language1IsSearchable" + colon + language1IsSearchable + newline);
         proPrevWin.appendText("language1GenerateIndex" + colon + language1GenerateIndex + newline);
         proPrevWin.appendText("language1HasSeparateDictionaryFile" + colon + language1HasSeparateDictionaryFile + newline + newline);
 
         // other values.
-        if (!"".equals(dictionaryGenerationLanguage1ExpressionSplitString)){
-            proPrevWin.appendText("dictionaryGenerationLanguage1ExpressionSplitString" + colon +
-                                                                dictionaryGenerationLanguage1ExpressionSplitString + newline);
+        if (!"".equals(dictionaryGenerationLanguage1ExpressionSplitString)) {
+            proPrevWin.appendText("dictionaryGenerationLanguage1ExpressionSplitString" + colon
+                    + dictionaryGenerationLanguage1ExpressionSplitString + newline);
         }
-        if (!"".equals(language1IndexNumberOfSourceEntries)){
+        if (!"".equals(language1IndexNumberOfSourceEntries)) {
             proPrevWin.appendText("language1IndexNumberOfSourceEntries" + colon + language1IndexNumberOfSourceEntries + newline);
         }
-        if (!"".equals(language1DictionaryUpdateClassName)){
+        if (!"".equals(language1DictionaryUpdateClassName)) {
             proPrevWin.appendText("language1DictionaryUpdateClassName" + colon + language1DictionaryUpdateClassName + newline);
         }
-        if (!"".equals(language1NormationClassName)){
+        if (!"".equals(language1NormationClassName)) {
             proPrevWin.appendText("language1NormationClassName" + colon + language1NormationClassName + newline);
         }
 
@@ -3190,162 +3149,162 @@ public class PropertiesEditor extends javax.swing.JFrame {
         proPrevWin.appendText("language2HasSeparateDictionaryFile" + colon + language2HasSeparateDictionaryFile + newline + newline);
 
         // other values.
-        if (!"".equals(dictionaryGenerationLanguage2ExpressionSplitString)){
-            proPrevWin.appendText("dictionaryGenerationLanguage2ExpressionSplitString" + colon +
-                                                                dictionaryGenerationLanguage2ExpressionSplitString + newline);
+        if (!"".equals(dictionaryGenerationLanguage2ExpressionSplitString)) {
+            proPrevWin.appendText("dictionaryGenerationLanguage2ExpressionSplitString" + colon
+                    + dictionaryGenerationLanguage2ExpressionSplitString + newline);
         }
-        if (!"".equals(language2IndexNumberOfSourceEntries)){
+        if (!"".equals(language2IndexNumberOfSourceEntries)) {
             proPrevWin.appendText("language2IndexNumberOfSourceEntries" + colon + language2IndexNumberOfSourceEntries + newline);
         }
-        if (!"".equals(language2DictionaryUpdateClassName)){
+        if (!"".equals(language2DictionaryUpdateClassName)) {
             proPrevWin.appendText("language2DictionaryUpdateClassName" + colon + language2DictionaryUpdateClassName + newline);
         }
-        if (!"".equals(language2NormationClassName)){
+        if (!"".equals(language2NormationClassName)) {
             proPrevWin.appendText("language2NormationClassName" + colon + language2NormationClassName + newline);
         }
 
         // Number of content declaration variables for language 1 and 2
-        if (!"".equals(language1NumberOfContentDeclarations)){
+        if (!"".equals(language1NumberOfContentDeclarations)) {
             proPrevWin.appendText("language1NumberOfContentDeclarations" + colon + language1NumberOfContentDeclarations + newline);
         }
 
-        if (!"".equals(language2NumberOfContentDeclarations)){
+        if (!"".equals(language2NumberOfContentDeclarations)) {
             proPrevWin.appendText("language2NumberOfContentDeclarations" + colon + language2NumberOfContentDeclarations + newline);
         }
 
         // Langage-1 content variables
-        if (!"".equals(language1Content01DisplayText)){
+        if (!"".equals(language1Content01DisplayText)) {
             proPrevWin.appendText("language1Content01DisplayText" + colon + language1Content01DisplayText + newline);
         }
 
-        if (!"".equals(language1Content01FontColour)){
+        if (!"".equals(language1Content01FontColour)) {
             proPrevWin.appendText("language1Content01FontColour" + colon + language1Content01FontColour + newline);
         }
 
-        if (!"".equals(language1Content01FontStyle)){
+        if (!"".equals(language1Content01FontStyle)) {
             proPrevWin.appendText("language1Content01FontStyle" + colon + language1Content01FontStyle + newline);
         }
 
-        if (!"".equals(language1Content01DisplaySelectable)){
+        if (!"".equals(language1Content01DisplaySelectable)) {
             proPrevWin.appendText("language1Content01DisplaySelectable" + colon + language1Content01DisplaySelectable + newline);
         }
 
-        if (!"".equals(language1Content02DisplayText)){
+        if (!"".equals(language1Content02DisplayText)) {
             proPrevWin.appendText("language1Content02DisplayText" + colon + language1Content02DisplayText + newline);
         }
 
-        if (!"".equals(language1Content02FontColour)){
+        if (!"".equals(language1Content02FontColour)) {
             proPrevWin.appendText("language1Content02FontColour" + colon + language1Content02FontColour + newline);
         }
 
-        if (!"".equals(language1Content02FontStyle)){
+        if (!"".equals(language1Content02FontStyle)) {
             proPrevWin.appendText("language1Content02FontStyle" + colon + language1Content02FontStyle + newline);
         }
 
-        if (!"".equals(language1Content02DisplaySelectable)){
+        if (!"".equals(language1Content02DisplaySelectable)) {
             proPrevWin.appendText("language1Content02DisplaySelectable" + colon + language1Content02DisplaySelectable + newline);
         }
 
-        if (!"".equals(language1Content03DisplayText)){
+        if (!"".equals(language1Content03DisplayText)) {
             proPrevWin.appendText("language1Content03DisplayText" + colon + language1Content03DisplayText + newline);
         }
 
-        if (!"".equals(language1Content03FontColour)){
+        if (!"".equals(language1Content03FontColour)) {
             proPrevWin.appendText("language1Content03FontColour" + colon + language1Content03FontColour + newline);
         }
 
-        if (!"".equals(language1Content03FontStyle)){
+        if (!"".equals(language1Content03FontStyle)) {
             proPrevWin.appendText("language1Content03FontStyle" + colon + language1Content03FontStyle + newline);
         }
 
-        if (!"".equals(language1Content03DisplaySelectable)){
+        if (!"".equals(language1Content03DisplaySelectable)) {
             proPrevWin.appendText("language1Content03DisplaySelectable" + colon + language1Content03DisplaySelectable + newline);
         }
 
-        if (!"".equals(language1Content04DisplayText)){
+        if (!"".equals(language1Content04DisplayText)) {
             proPrevWin.appendText("language1Content04DisplayText" + colon + language1Content04DisplayText + newline);
         }
 
-        if (!"".equals(language1Content04FontColour)){
+        if (!"".equals(language1Content04FontColour)) {
             proPrevWin.appendText("language1Content04FontColour" + colon + language1Content04FontColour + newline);
         }
 
-        if (!"".equals(language1Content04FontStyle)){
+        if (!"".equals(language1Content04FontStyle)) {
             proPrevWin.appendText("language1Content04FontStyle" + colon + language1Content04FontStyle + newline);
         }
 
-        if (!"".equals(language1Content04DisplaySelectable)){
+        if (!"".equals(language1Content04DisplaySelectable)) {
             proPrevWin.appendText("language1Content04DisplaySelectable" + colon + language1Content04DisplaySelectable + newline + newline);
         }
 
         // Langage-2 content variables
-        if (!"".equals(language2Content01DisplayText)){
+        if (!"".equals(language2Content01DisplayText)) {
             proPrevWin.appendText("language2Content01DisplayText" + colon + language2Content01DisplayText + newline);
         }
 
-        if (!"".equals(language2Content01FontColour)){
+        if (!"".equals(language2Content01FontColour)) {
             proPrevWin.appendText("language2Content01FontColour" + colon + language2Content01FontColour + newline);
         }
 
-        if (!"".equals(language2Content01FontStyle)){
+        if (!"".equals(language2Content01FontStyle)) {
             proPrevWin.appendText("language2Content01FontStyle" + colon + language2Content01FontStyle + newline);
         }
 
-        if (!"".equals(language2Content01DisplaySelectable)){
+        if (!"".equals(language2Content01DisplaySelectable)) {
             proPrevWin.appendText("language2Content01DisplaySelectable" + colon + language2Content01DisplaySelectable + newline);
         }
 
-        if (!"".equals(language2Content02DisplayText)){
+        if (!"".equals(language2Content02DisplayText)) {
             proPrevWin.appendText("language2Content02DisplayText" + colon + language2Content02DisplayText + newline);
         }
 
-        if (!"".equals(language2Content02FontColour)){
+        if (!"".equals(language2Content02FontColour)) {
             proPrevWin.appendText("language2Content02FontColour" + colon + language2Content02FontColour + newline);
         }
 
-        if (!"".equals(language2Content02FontStyle)){
+        if (!"".equals(language2Content02FontStyle)) {
             proPrevWin.appendText("language2Content02FontStyle" + colon + language2Content02FontStyle + newline);
         }
 
-        if (!"".equals(language2Content02DisplaySelectable)){
+        if (!"".equals(language2Content02DisplaySelectable)) {
             proPrevWin.appendText("language2Content02DisplaySelectable" + colon + language2Content02DisplaySelectable + newline);
         }
 
-        if (!"".equals(language2Content03DisplayText)){
+        if (!"".equals(language2Content03DisplayText)) {
             proPrevWin.appendText("language2Content03DisplayText" + colon + language2Content03DisplayText + newline);
         }
 
-        if (!"".equals(language2Content03FontColour)){
+        if (!"".equals(language2Content03FontColour)) {
             proPrevWin.appendText("language2Content03FontColour" + colon + language2Content03FontColour + newline);
         }
 
-        if (!"".equals(language2Content03FontStyle)){
+        if (!"".equals(language2Content03FontStyle)) {
             proPrevWin.appendText("language2Content03FontStyle" + colon + language2Content03FontStyle + newline);
         }
 
-        if (!"".equals(language2Content03DisplaySelectable)){
+        if (!"".equals(language2Content03DisplaySelectable)) {
             proPrevWin.appendText("language2Content03DisplaySelectable" + colon + language2Content03DisplaySelectable + newline);
         }
 
-        if (!"".equals(language2Content04DisplayText)){
+        if (!"".equals(language2Content04DisplayText)) {
             proPrevWin.appendText("language2Content04DisplayText" + colon + language2Content04DisplayText + newline);
         }
 
-        if (!"".equals(language2Content04FontColour)){
+        if (!"".equals(language2Content04FontColour)) {
             proPrevWin.appendText("language2Content04FontColour" + colon + language2Content04FontColour + newline);
         }
 
-        if (!"".equals(language2Content04FontStyle)){
+        if (!"".equals(language2Content04FontStyle)) {
             proPrevWin.appendText("language2Content04FontStyle" + colon + language2Content04FontStyle + newline);
         }
 
-        if (!"".equals(language2Content04DisplaySelectable)){
+        if (!"".equals(language2Content04DisplaySelectable)) {
             proPrevWin.appendText("language2Content04DisplaySelectable" + colon + language2Content04DisplaySelectable + newline + newline);
         }
 
 
         // language 3 non optional values.
-        if (numOfLangCmbBox.getSelectedItem().equals("3")){
+        if (numOfLangCmbBox.getSelectedItem().equals("3")) {
             proPrevWin.appendText("language3DisplayText" + colon + language3DisplayText + newline);
             proPrevWin.appendText("language3FilePostfix" + colon + language3FilePostfix + newline + newline);
 
@@ -3355,98 +3314,99 @@ public class PropertiesEditor extends javax.swing.JFrame {
             proPrevWin.appendText("language3HasSeparateDictionaryFile" + colon + language3HasSeparateDictionaryFile + newline + newline);
 
             // other values.
-            if (!"".equals(dictionaryGenerationLanguage3ExpressionSplitString)){
-                proPrevWin.appendText("dictionaryGenerationLanguage3ExpressionSplitString" + colon +
-                                                                  dictionaryGenerationLanguage3ExpressionSplitString + newline);
+            if (!"".equals(dictionaryGenerationLanguage3ExpressionSplitString)) {
+                proPrevWin.appendText("dictionaryGenerationLanguage3ExpressionSplitString" + colon
+                        + dictionaryGenerationLanguage3ExpressionSplitString + newline);
             }
-            if (!"".equals(language3IndexNumberOfSourceEntries)){
+            if (!"".equals(language3IndexNumberOfSourceEntries)) {
                 proPrevWin.appendText("language3IndexNumberOfSourceEntries" + colon + language3IndexNumberOfSourceEntries + newline);
             }
-            if (!"".equals(language3DictionaryUpdateClassName)){
+            if (!"".equals(language3DictionaryUpdateClassName)) {
                 proPrevWin.appendText("language3DictionaryUpdateClassName" + colon + language3DictionaryUpdateClassName + newline);
             }
-            if (!"".equals(language3NormationClassName)){
+            if (!"".equals(language3NormationClassName)) {
                 proPrevWin.appendText("language3NormationClassName" + colon + language3NormationClassName + newline);
             }
 
             // Langage-3 content variables
 
             // Number of content declaration variables for language 3
-            if (!"".equals(language3NumberOfContentDeclarations)){
+            if (!"".equals(language3NumberOfContentDeclarations)) {
                 proPrevWin.appendText("language3NumberOfContentDeclarations" + colon + language3NumberOfContentDeclarations + newline + newline);
             }
-            if (!"".equals(language3Content01DisplayText)){
+            if (!"".equals(language3Content01DisplayText)) {
                 proPrevWin.appendText("language3Content01DisplayText" + colon + language3Content01DisplayText + newline);
             }
 
-            if (!"".equals(language3Content01FontColour)){
+            if (!"".equals(language3Content01FontColour)) {
                 proPrevWin.appendText("language3Content01FontColour" + colon + language3Content01FontColour + newline);
             }
 
-            if (!"".equals(language3Content01FontStyle)){
+            if (!"".equals(language3Content01FontStyle)) {
                 proPrevWin.appendText("language3Content01FontStyle" + colon + language3Content01FontStyle + newline);
             }
 
-            if (!"".equals(language3Content01DisplaySelectable)){
+            if (!"".equals(language3Content01DisplaySelectable)) {
                 proPrevWin.appendText("language3Content01DisplaySelectable" + colon + language3Content01DisplaySelectable + newline);
             }
 
-            if (!"".equals(language3Content02DisplayText)){
+            if (!"".equals(language3Content02DisplayText)) {
                 proPrevWin.appendText("language3Content02DisplayText" + colon + language3Content02DisplayText + newline);
             }
 
-            if (!"".equals(language3Content02FontColour)){
+            if (!"".equals(language3Content02FontColour)) {
                 proPrevWin.appendText("language3Content02FontColour" + colon + language3Content02FontColour + newline);
             }
 
-            if (!"".equals(language3Content02FontStyle)){
+            if (!"".equals(language3Content02FontStyle)) {
                 proPrevWin.appendText("language3Content02FontStyle" + colon + language3Content02FontStyle + newline);
             }
 
-            if (!"".equals(language3Content02DisplaySelectable)){
+            if (!"".equals(language3Content02DisplaySelectable)) {
                 proPrevWin.appendText("language3Content02DisplaySelectable" + colon + language3Content02DisplaySelectable + newline);
             }
 
-            if (!"".equals(language3Content03DisplayText)){
+            if (!"".equals(language3Content03DisplayText)) {
                 proPrevWin.appendText("language3Content03DisplayText" + colon + language3Content03DisplayText + newline);
             }
 
-            if (!"".equals(language3Content03FontColour)){
+            if (!"".equals(language3Content03FontColour)) {
                 proPrevWin.appendText("language3Content03FontColour" + colon + language3Content03FontColour + newline);
             }
 
-            if (!"".equals(language3Content03FontStyle)){
+            if (!"".equals(language3Content03FontStyle)) {
                 proPrevWin.appendText("language3Content03FontStyle" + colon + language3Content03FontStyle + newline);
             }
 
-            if (!"".equals(language3Content03DisplaySelectable)){
+            if (!"".equals(language3Content03DisplaySelectable)) {
                 proPrevWin.appendText("language3Content03DisplaySelectable" + colon + language3Content03DisplaySelectable + newline);
             }
 
-            if (!"".equals(language3Content04DisplayText)){
+            if (!"".equals(language3Content04DisplayText)) {
                 proPrevWin.appendText("language3Content04DisplayText" + colon + language3Content04DisplayText + newline);
             }
 
-            if (!"".equals(language3Content04FontColour)){
+            if (!"".equals(language3Content04FontColour)) {
                 proPrevWin.appendText("language3Content04FontColour" + colon + language3Content04FontColour + newline);
             }
 
-            if (!"".equals(language3Content04FontStyle)){
+            if (!"".equals(language3Content04FontStyle)) {
                 proPrevWin.appendText("language3Content04FontStyle" + colon + language3Content04FontStyle + newline);
             }
 
-            if (!"".equals(language3Content04DisplaySelectable)){
+            if (!"".equals(language3Content04DisplaySelectable)) {
                 proPrevWin.appendText("language3Content04DisplaySelectable" + colon + language3Content04DisplaySelectable + newline);
             }
         }
     }
 
     /**
-     * updateNumOfLang() updates/shows/hides some values/TextFields/CheckBoxes etc.
-     * according to the number of languages selected in the <b>numOfLangCmbBox</b> ComboBox.
+     * updateNumOfLang() updates/shows/hides some values/TextFields/CheckBoxes
+     * etc. according to the number of languages selected in the
+     * <b>numOfLangCmbBox</b> ComboBox.
      */
     public void updateNumOfLang() {
-        if (numOfLangCmbBox.getSelectedItem().equals("2")){
+        if (numOfLangCmbBox.getSelectedItem().equals("2")) {
             // textareas combo boxes...
             langDispTextTF3.setVisible(false);
             langPostfixCB3.setVisible(false);
@@ -3473,26 +3433,25 @@ public class PropertiesEditor extends javax.swing.JFrame {
 
             // adaptiong the size of the screen.
 /*            if (DfMCreatorMain.LookAndFeel != null) {
-                switch (DfMCreatorMain.LookAndFeel) {
-                    case (gtk):
-                    this.setSize(GTk_width, GTk_height_2_Langs);
-                break;
-                    case (nimbus):
-                    this.setSize(Nimbus_width, Nimbus_height_2_Langs);
-                break;
-                    case (metal):
-                    this.setSize(Metal_width, Metal_height_2_Langs);
-                break;
-                    case (motif):
-                    this.setSize(Motif_width, Motif_height_2_Langs);
-                break;
-                default:
-                    this.setSize(Default_width, Default_height_2_Langs);
-                break;
-                }
-            } */
-        }
-        else if (numOfLangCmbBox.getSelectedItem().equals("3")){
+             switch (DfMCreatorMain.LookAndFeel) {
+             case (gtk):
+             this.setSize(GTk_width, GTk_height_2_Langs);
+             break;
+             case (nimbus):
+             this.setSize(Nimbus_width, Nimbus_height_2_Langs);
+             break;
+             case (metal):
+             this.setSize(Metal_width, Metal_height_2_Langs);
+             break;
+             case (motif):
+             this.setSize(Motif_width, Motif_height_2_Langs);
+             break;
+             default:
+             this.setSize(Default_width, Default_height_2_Langs);
+             break;
+             }
+             } */
+        } else if (numOfLangCmbBox.getSelectedItem().equals("3")) {
             // textareas combo boxes...
             langDispTextTF3.setVisible(true);
             langPostfixCB3.setVisible(true);
@@ -3518,98 +3477,92 @@ public class PropertiesEditor extends javax.swing.JFrame {
 
             // adaptiong the size of the screen.
 /*            if (DfMCreatorMain.LookAndFeel != null) {
-                switch (DfMCreatorMain.LookAndFeel) {
-                    case (gtk):
-                    this.setSize(GTk_width, GTk_height_3_Langs);
-                break;
-                    case (nimbus):
-                    this.setSize(Nimbus_width, Nimbus_height_3_Langs);
-                break;
-                    case (metal):
-                    this.setSize(Metal_width, Metal_height_3_Langs);
-                break;
-                    case (motif):
-                    this.setSize(Motif_width, Motif_height_3_Langs);
-                break;
-                default:
-                    this.setSize(Default_width, Default_height_3_Langs);
-                break;
-                }
-            } */
+             switch (DfMCreatorMain.LookAndFeel) {
+             case (gtk):
+             this.setSize(GTk_width, GTk_height_3_Langs);
+             break;
+             case (nimbus):
+             this.setSize(Nimbus_width, Nimbus_height_3_Langs);
+             break;
+             case (metal):
+             this.setSize(Metal_width, Metal_height_3_Langs);
+             break;
+             case (motif):
+             this.setSize(Motif_width, Motif_height_3_Langs);
+             break;
+             default:
+             this.setSize(Default_width, Default_height_3_Langs);
+             break;
+             }
+             } */
         }
     }
-
     public static final String RequiredArgsAbsentErrorMsg = I18n.tr("oneOrMore.dfmPropCreate");
-
     public static final String openPropFileErrorMsg = I18n.tr("errorOpeningPropFile.dfmPropCreate");
-
     public static final String NotThePropFileErrorMsg = I18n.tr("badPropsFileName.dfmPropCreate");
-
     public static final String fileCantBeOpenedErrorMsg = I18n.tr("fileReadError.dfmPropCreate");
-
-
-    private static final String samplePropertyFile
-    = "infoText: Freedict (English - German), http://www.freedict.de\n"
-    + "dictionaryAbbreviation: Freedict(Eng-Ger)\n"
-    + "numberOfAvailableLanguages: 2\n"
-    + "\n"
-    + "language1DisplayText: English\n"
-    + "language2DisplayText: German\n"
-    + "language1FilePostfix: Eng\n"
-    + "language2FilePostfix: Ger\n"
-    + "\n"
-    + "language1IsSearchable: true\n"
-    + "language2IsSearchable: true\n"
-    + "language1GenerateIndex: true\n"
-    + "language2GenerateIndex: true\n"
-    + "\n"
-    + "language1HasSeparateDictionaryFile: false\n"
-    + "language2HasSeparateDictionaryFile: false\n"
-    + "\n"
-    + "dictionaryGenerationSeparatorCharacter: '\\t'\n"
-    + "indexFileSeparationCharacter: '\\t'\n"
-    + "searchListFileSeparationCharacter: '\\t'\n"
-    + "dictionaryFileSeparationCharacter: '\\t'\n"
-    + "\n"
-    + "dictionaryGenerationOmitParFromIndex: true\n"
-    + "dictionaryGenerationInputCharEncoding: UTF-8\n"
-    + "indexCharEncoding: UTF-8\n"
-    + "searchListCharEncoding: UTF-8\n"
-    + "dictionaryCharEncoding: UTF-8\n"
-    + "\n"
-    + "language1DictionaryUpdateClassName: de.kugihan.dictionaryformids.dictgen.\ndictionaryupdate.DictionaryUpdateFreedictDeuEngGer\n"
-    + "language1NormationClassName: de.kugihan.dictionaryformids.translation.\nnormation.Normation.NormationEng\n";
+    private static final String samplePropertyFile = "infoText: Freedict (English - German), http://www.freedict.de\n"
+            + "dictionaryAbbreviation: Freedict(Eng-Ger)\n"
+            + "numberOfAvailableLanguages: 2\n"
+            + "\n"
+            + "language1DisplayText: English\n"
+            + "language2DisplayText: German\n"
+            + "language1FilePostfix: Eng\n"
+            + "language2FilePostfix: Ger\n"
+            + "\n"
+            + "language1IsSearchable: true\n"
+            + "language2IsSearchable: true\n"
+            + "language1GenerateIndex: true\n"
+            + "language2GenerateIndex: true\n"
+            + "\n"
+            + "language1HasSeparateDictionaryFile: false\n"
+            + "language2HasSeparateDictionaryFile: false\n"
+            + "\n"
+            + "dictionaryGenerationSeparatorCharacter: '\\t'\n"
+            + "indexFileSeparationCharacter: '\\t'\n"
+            + "searchListFileSeparationCharacter: '\\t'\n"
+            + "dictionaryFileSeparationCharacter: '\\t'\n"
+            + "\n"
+            + "dictionaryGenerationOmitParFromIndex: true\n"
+            + "dictionaryGenerationInputCharEncoding: UTF-8\n"
+            + "indexCharEncoding: UTF-8\n"
+            + "searchListCharEncoding: UTF-8\n"
+            + "dictionaryCharEncoding: UTF-8\n"
+            + "\n"
+            + "language1DictionaryUpdateClassName: de.kugihan.dictionaryformids.dictgen.\ndictionaryupdate.DictionaryUpdateFreedictDeuEngGer\n"
+            + "language1NormationClassName: de.kugihan.dictionaryformids.translation.\nnormation.Normation.NormationEng\n";
 
     /**
      * getInputOptionDialog() shows the InputDialog window.
+     *
      * @param label
      * @param winTitle
      * @return String <i>S</i>
      */
     public static String getInputOptionDialog(String label, String winTitle) {
-            Object[] possibilities = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-            String s = (String)JOptionPane.showInputDialog(
-                            null,
-                            winTitle,
-                            label + "\n",
-                            JOptionPane.PLAIN_MESSAGE,
-                            null,
-                            possibilities,
-                            "1");
-            return s;
+        Object[] possibilities = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+        String s = (String) JOptionPane.showInputDialog(
+                null,
+                winTitle,
+                label + "\n",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                possibilities,
+                "1");
+        return s;
     }
 
     /**
      * showContentPropsCreator() shows the ContentProperties-Creator window.
      */
-    private void showContentPropsCreator(){
+    private void showContentPropsCreator() {
         ContentPropertiesCreator cpc = ContentPropertiesCreator.getContentPropsCreator();
         cpc.setSize(1020, 600);
         cpc.setLocation(screenSize.width / 2 - cpc.getWidth() / 2,
-                        screenSize.height / 2 - cpc.getHeight() / 2);
+                screenSize.height / 2 - cpc.getHeight() / 2);
 
         cpc.updateNumOfContentDec();
-        if (openPropsFileForGUIEditFlag){
+        if (openPropsFileForGUIEditFlag) {
             cpc.loadAndEditExistingContentNNProperties();
         }
         cpc.updateNumOfContentDec();
@@ -3618,11 +3571,12 @@ public class PropertiesEditor extends javax.swing.JFrame {
     }
 
     /**
-     * checkInfoTextContents() checks the content of the InfoText TextField
-     * to match it against the regular expression patterns present in the
+     * checkInfoTextContents() checks the content of the InfoText TextField to
+     * match it against the regular expression patterns present in the
      * RegexpUtils class in order to make sure the user provided a URL or an
      * email address for the maintainer(s) of the dictionary file that is about
      * to be set up in the empty DictionaryForMIDs.jar/jad files.
+     *
      * @throws IllegalArgumentException
      */
     private void checkInfoTextContents() throws IllegalArgumentException {
@@ -3637,7 +3591,7 @@ public class PropertiesEditor extends javax.swing.JFrame {
         v = RegexpUtils.validateEmail(s);
         w = RegexpUtils.validateURL(s);
 
-        if (!v && !w){
+        if (!v && !w) {
             throw new IllegalArgumentException(I18n.tr("badInfoText.dfmPropCreate"));
         }
 
@@ -3649,15 +3603,14 @@ public class PropertiesEditor extends javax.swing.JFrame {
             setValuesInThePropsPreviewWindow();
             proPrevWin.PropFileView.setVisible(false);
             proPrevWin.savePropFile(true);
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             DfMCreatorMain.printAnyMsg(RequiredArgsAbsentErrorMsg, I18n.tr("error.dfmPropCreate"), JOptionPane.ERROR_MESSAGE);
             System.out.println(e + "\n");
-        } catch (UnsupportedOperationException ex){
+        } catch (UnsupportedOperationException ex) {
             DfMCreatorMain.printAnyMsg(PropertiesPreview.canWriteFileMsg, I18n.tr("dirNotAccessible"), JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ex){
+        } catch (IOException ex) {
             DfMCreatorMain.printAnyMsg(PropertiesPreview.internalErrorMsg, I18n.tr("error"), JOptionPane.ERROR_MESSAGE);
         }
 
     }
-
 }

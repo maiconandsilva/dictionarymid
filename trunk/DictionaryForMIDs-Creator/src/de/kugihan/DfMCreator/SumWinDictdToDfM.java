@@ -1,36 +1,34 @@
 /* ////////////////////////////////////////////////////////////////
-*
-*   In the Name of Allah
-*
-*   DICTIONARYFORMIDS-CREATOR
-*
-*   This file is part of DictionaryForMIDs-Creator
-*   Copyright (C) 2012, 2013 Karim Mahamane Karimou
-*   DictionaryForMIDs-Creator is a GUI wrapper around various
-*   DictionaryForMIDs tools, among others we have
-*   DictdToDictionaryForMIDs, DictionaryGeneration,
-*   JarCreator and BitmapFontGenerator.
-*
-*   DictionaryForMIDs-Creator is free software;
-*   you can redistribute it and/or modify it under the terms
-*   of the GNU General Public License as published by the
-*   Free Software Foundation; either version 2 of the License, or
-*   (at your option) any later version.
-*
-*   DictionaryForMIDs-Creator is distributed in the hope that
-*   it will be useful, but WITHOUT ANY WARRANTY; without even
-*   the implied warranty of MERCHANTABILITY or
-*   FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public
-*   License along with DictionaryForMIDs-Creator;
-*   if not, write to the Free Software Foundation, Inc.,
-*   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-*
-* //////////////////////////////////////////////////////////////// */
-
-
+ *
+ *   In the Name of Allah
+ *
+ *   DICTIONARYFORMIDS-CREATOR
+ *
+ *   This file is part of DictionaryForMIDs-Creator
+ *   Copyright (C) 2012, 2013 Karim Mahamane Karimou
+ *   DictionaryForMIDs-Creator is a GUI wrapper around various
+ *   DictionaryForMIDs tools, among others we have
+ *   DictdToDictionaryForMIDs, DictionaryGeneration,
+ *   JarCreator and BitmapFontGenerator.
+ *
+ *   DictionaryForMIDs-Creator is free software;
+ *   you can redistribute it and/or modify it under the terms
+ *   of the GNU General Public License as published by the
+ *   Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   DictionaryForMIDs-Creator is distributed in the hope that
+ *   it will be useful, but WITHOUT ANY WARRANTY; without even
+ *   the implied warranty of MERCHANTABILITY or
+ *   FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public
+ *   License along with DictionaryForMIDs-Creator;
+ *   if not, write to the Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+ *
+ * //////////////////////////////////////////////////////////////// */
 package de.kugihan.DfMCreator;
 
 import de.kugihan.dictionaryformids.dictdtodictionaryformids.DictdToDfM;
@@ -51,10 +49,8 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
-
-
 public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListener,
-                                             WindowListener, PropertyChangeListener {
+        WindowListener, PropertyChangeListener {
 
     private Task task;
     public static boolean done;
@@ -266,7 +262,6 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
     private void clearQueueBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearQueueBTActionPerformed
         clearDictConvQueueContents();
     }//GEN-LAST:event_clearQueueBTActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea DictConvSummaryTextArea;
     private javax.swing.JButton SumCancelButton;
@@ -280,32 +275,28 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
-
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public static SumWinDictdToDfM getInstance(){
+    public static SumWinDictdToDfM getInstance() {
         SumWinDictdToDfM summary = new SumWinDictdToDfM();
         summary.setSize(800, 600);
         summary.setModal(true);
         summary.setLocation(screenSize.width / 2 - summary.getWidth() / 2,
-                          screenSize.height / 2 - summary.getHeight() / 2);
+                screenSize.height / 2 - summary.getHeight() / 2);
         return summary;
     }
 
     /**
-     * deleteCSVFile() is used to delete the
-     * incomplete output csv file if the conversion
-     * process is aborted by the user.
+     * deleteCSVFile() is used to delete the incomplete output csv file if the
+     * conversion process is aborted by the user.
      */
-
-    private boolean deleteCSVFile(){
+    private boolean deleteCSVFile() {
         boolean status;
-        File csvFile = new File (DictdToDfM.getOutputCSVFile());
+        File csvFile = new File(DictdToDfM.getOutputCSVFile());
         if (csvFile.exists()) {
             csvFile.delete();
             status = true;
-        }
-        else {
+        } else {
             status = false;
         }
         return status;
@@ -315,70 +306,61 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
      * Subroutines that are used to retrieve the
      * conversion preferences summary.
      */
-
     private final static String newline = "\n";
 
-    private String DBName(){
+    private String DBName() {
         return DictdToDfM.getDBName();
     }
 
-    private String DBFolder(){
+    private String DBFolder() {
         return DictdToDfM.getDBFolderName();
     }
 
-    private String CSVFile(){
+    private String CSVFile() {
         return DictdToDfM.getOutputCSVFile();
     }
 
-    private String outputEncoding(){
+    private String outputEncoding() {
         return DictdToDfM.getOutputEncodingCharset();
     }
 
     // This takes the separator character and transcribes it
     // into an english comprehensible word, e.g trancribes
     // \t into Tab-Character...
-    private String transcribeSeparatorCharacter(){
+    private String transcribeSeparatorCharacter() {
         String s = Character.toString(DictdToDfM.getSeparatorCharacter());
 
-        if (DictdToDfM.getSeparatorCharacter() == '\t'){
+        if (DictdToDfM.getSeparatorCharacter() == '\t') {
             return I18n.tr("tab.dictdConvSummary");
+        } else if (DictdToDfM.getSeparatorCharacter() == '\r') {
+            return I18n.tr("carRe.dictdConvSummary");
+        } else if (DictdToDfM.getSeparatorCharacter() == '\f') {
+            return I18n.tr("formFeed.dictdConvSummary");
+        } else {
+            return s;
         }
-        else
-            if (DictdToDfM.getSeparatorCharacter() == '\r'){
-                return I18n.tr("carRe.dictdConvSummary");
-            }
-        else
-            if (DictdToDfM.getSeparatorCharacter() == '\f'){
-                return I18n.tr("formFeed.dictdConvSummary");
-            }
-        else {
-                return s;
-             }
     }
 
-    private String switchLanguages(){
-        if (DictdToDfM.getSwitchLanguages()){
+    private String switchLanguages() {
+        if (DictdToDfM.getSwitchLanguages()) {
             return I18n.tr("true.dictdConvSummary");
-        }
-        else {
+        } else {
             return I18n.tr("false.dictdConvSummary");
         }
     }
 
-    private String keepTabsAndNewlineChars(){
-        if (DictdToDfM.getKeepTabAndNewLineChars()){
+    private String keepTabsAndNewlineChars() {
+        if (DictdToDfM.getKeepTabAndNewLineChars()) {
             return I18n.tr("true.dictdConvSummary");
-        }
-        else {
+        } else {
             return I18n.tr("false.dictdConvSummary");
         }
     }
 
-    private String removeSquareBracketContents(){
-        if (DictdToDfM.getRemoveSquareBrackets()){
+    private String removeSquareBracketContents() {
+        if (DictdToDfM.getRemoveSquareBrackets()) {
             return I18n.tr("true.dictdConvSummary");
-        }
-        else {
+        } else {
             return I18n.tr("false.dictdConvSummary");
         }
     }
@@ -396,116 +378,114 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
     }
 
     /*
-    public void DictConvSummaryTextArea.append(String s) {
-        try {
-            StyledDocument doc = DictConvSummaryTextArea.getStyledDocument();
-            doc.insertString(doc.getLength(), s, null);
-        } catch(BadLocationException exc) {
-        }
-    }
-    */
-
+     public void DictConvSummaryTextArea.append(String s) {
+     try {
+     StyledDocument doc = DictConvSummaryTextArea.getStyledDocument();
+     doc.insertString(doc.getLength(), s, null);
+     } catch(BadLocationException exc) {
+     }
+     }
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (!done) {
             int progress = task.getProgress();
-                if (progress == 0) {
-                    conversionProgBar.setStringPainted(false);
-                    conversionProgBar.setIndeterminate(true);
-                    DictConvSummaryTextArea.append(I18n.tr("pleaseWait.dictdConvSummary"));
-                }
-                else {
-                    conversionProgBar.setIndeterminate(false);
-                    conversionProgBar.setString(null);
-                    conversionProgBar.setValue(progress);
-                    DictConvSummaryTextArea.append(String.format(newline + newline +
-                    I18n.tr("completed.dictdConvSummary"), task.getProgress()));
-                }
+            if (progress == 0) {
+                conversionProgBar.setStringPainted(false);
+                conversionProgBar.setIndeterminate(true);
+                DictConvSummaryTextArea.append(I18n.tr("pleaseWait.dictdConvSummary"));
+            } else {
+                conversionProgBar.setIndeterminate(false);
+                conversionProgBar.setString(null);
+                conversionProgBar.setValue(progress);
+                DictConvSummaryTextArea.append(String.format(newline + newline
+                        + I18n.tr("completed.dictdConvSummary"), task.getProgress()));
+            }
         }
     }
 
-
     /**
-     * <pre>class Task extends SwingWorker<Void, Void></pre>
-     * SwinWorker class named <i>Task</i> that is used to actually
-     * launch the dictionary conversion process in a new thread.<br>
-     * In the DictionaryForMIDs-Creator, almost all SwingWorker classes
-     * are called <i>Task</i>, however, they do not belong to the same
-     * classes and therefore do not do the same things. We could have used
-     * just about any valid variable/class name instead of <i>Task</i>.
+     * <pre>class Task extends SwingWorker<Void, Void></pre> SwinWorker class
+     * named <i>Task</i> that is used to actually launch the dictionary
+     * conversion process in a new thread.<br>
+     * In the DictionaryForMIDs-Creator, almost all SwingWorker classes are
+     * called <i>Task</i>, however, they do not belong to the same classes and
+     * therefore do not do the same things. We could have used just about any
+     * valid variable/class name instead of <i>Task</i>.
      */
     class Task extends SwingWorker<Void, Void> {
+
         @Override
         public Void doInBackground() {
             DfMCreatorMain.DTDFMValsToEnqueue q;
             try {
-                    // This is for the queue itself
-                    while (!DfMCreatorMain.dfmCreator.dictConvQueue.isEmpty()){
-                        q = DfMCreatorMain.dfmCreator.dictConvQueue.remove();
-                        // Passing the values of the current item
-                        // to DictdToDfM in order for it to convert
-                        // this item.
-                        DictdToDfM.setDBName(q.db);
-                        DictdToDfM.setDBFolderName(q.dbFolder);
-                        DictdToDfM.setOutputCSVFile(q.outputCSV);
-                        DictdToDfM.setOutputEncodingCharset(q.outputEncoding);
-                        DictdToDfM.setSeparatorCharacter(q.separatorChar);
-                        DictdToDfM.setSwitchLanguages(q.switchLangs);
-                        DictdToDfM.setKeepTabAndNewLineChars(q.keepTabAndNewLines);
-                        DictdToDfM.setRemoveSquareBrackets(q.removeSquareBracks);
+                // This is for the queue itself
+                while (!DfMCreatorMain.dfmCreator.dictConvQueue.isEmpty()) {
+                    q = DfMCreatorMain.dfmCreator.dictConvQueue.remove();
+                    // Passing the values of the current item
+                    // to DictdToDfM in order for it to convert
+                    // this item.
+                    DictdToDfM.setDBName(q.db);
+                    DictdToDfM.setDBFolderName(q.dbFolder);
+                    DictdToDfM.setOutputCSVFile(q.outputCSV);
+                    DictdToDfM.setOutputEncodingCharset(q.outputEncoding);
+                    DictdToDfM.setSeparatorCharacter(q.separatorChar);
+                    DictdToDfM.setSwitchLanguages(q.switchLangs);
+                    DictdToDfM.setKeepTabAndNewLineChars(q.keepTabAndNewLines);
+                    DictdToDfM.setRemoveSquareBrackets(q.removeSquareBracks);
 
-                        // Showing the conversion preferences
-                        // for the current item being processed.
-                        DictConvSummaryTextArea.setText("");
-                        DictConvSummaryTextArea.append(I18n.tr("item.being.processed.DictdToDfM") + "\n");
-                        DictConvSummaryTextArea.append(I18n.tr("remaining.items.DictdToDfM"));
-                        DictConvSummaryTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.dictConvQueue.size()) + "\n\n");
-                        DictConvSummaryTextArea.append(I18n.tr("dbName.dictdConvSummary") + " ");
-                        DictConvSummaryTextArea.append(" " + q.db + newline + newline);
-                        DictConvSummaryTextArea.append(I18n.tr("dbDir.dictdConvSummary"));
-                        DictConvSummaryTextArea.append(" " + q.dbFolder + newline + newline);
-                        DictConvSummaryTextArea.append(I18n.tr("outputCSVfilePath.dictdConvSummary"));
-                        DictConvSummaryTextArea.append(" " + q.outputCSV + newline + newline);
-                        DictConvSummaryTextArea.append(I18n.tr("encoding.dictdConvSummary"));
-                        DictConvSummaryTextArea.append(" " + q.outputEncoding + newline + newline);
+                    // Showing the conversion preferences
+                    // for the current item being processed.
+                    DictConvSummaryTextArea.setText("");
+                    DictConvSummaryTextArea.append(I18n.tr("item.being.processed.DictdToDfM") + "\n");
+                    DictConvSummaryTextArea.append(I18n.tr("remaining.items.DictdToDfM"));
+                    DictConvSummaryTextArea.append(String.valueOf(DfMCreatorMain.dfmCreator.dictConvQueue.size()) + "\n\n");
+                    DictConvSummaryTextArea.append(I18n.tr("dbName.dictdConvSummary") + " ");
+                    DictConvSummaryTextArea.append(" " + q.db + newline + newline);
+                    DictConvSummaryTextArea.append(I18n.tr("dbDir.dictdConvSummary"));
+                    DictConvSummaryTextArea.append(" " + q.dbFolder + newline + newline);
+                    DictConvSummaryTextArea.append(I18n.tr("outputCSVfilePath.dictdConvSummary"));
+                    DictConvSummaryTextArea.append(" " + q.outputCSV + newline + newline);
+                    DictConvSummaryTextArea.append(I18n.tr("encoding.dictdConvSummary"));
+                    DictConvSummaryTextArea.append(" " + q.outputEncoding + newline + newline);
 
-                        DictConvSummaryTextArea.append(I18n.tr("separatorCharacter.dictdConvSummary"));
-                        DictConvSummaryTextArea.append(" " + q.separatorChar + newline + newline);
+                    DictConvSummaryTextArea.append(I18n.tr("separatorCharacter.dictdConvSummary"));
+                    DictConvSummaryTextArea.append(" " + q.separatorChar + newline + newline);
 
-                        DictConvSummaryTextArea.append(I18n.tr("switchLanguages.dictdConvSummary"));
-                        DictConvSummaryTextArea.append(" " + q.switchLangs + newline);
-                        DictConvSummaryTextArea.append(I18n.tr("keepTabs.dictdConvSummary"));
-                        DictConvSummaryTextArea.append(" " + q.keepTabAndNewLines + newline);
-                        DictConvSummaryTextArea.append(I18n.tr("removeSquares.dictdConvSummary"));
-                        DictConvSummaryTextArea.append(" " + q.removeSquareBracks + newline);
+                    DictConvSummaryTextArea.append(I18n.tr("switchLanguages.dictdConvSummary"));
+                    DictConvSummaryTextArea.append(" " + q.switchLangs + newline);
+                    DictConvSummaryTextArea.append(I18n.tr("keepTabs.dictdConvSummary"));
+                    DictConvSummaryTextArea.append(" " + q.keepTabAndNewLines + newline);
+                    DictConvSummaryTextArea.append(I18n.tr("removeSquares.dictdConvSummary"));
+                    DictConvSummaryTextArea.append(" " + q.removeSquareBracks + newline);
 
-                        // Perform the conversion
-                        DictdToDfM.convert();
+                    // Perform the conversion
+                    DictdToDfM.convert();
 
-                        // Rename the converted dictionary file as follows:
-                        // if it's original name was freedict-eng-fra
-                        // rename it as freedict-eng-fran-converted.txt
-                        String csvfile = DictdToDfM.getOutputCSVFile();
-                        String destcsvfile = csvfile + I18n.tr("converted.dictdConvSummary");
-                        Path csvpath = Paths.get(csvfile);
-                        Path destcsvpath = Paths.get(destcsvfile);
-                        try {
-                            Files.move(csvpath, destcsvpath, REPLACE_EXISTING);
-                        } catch (IOException ex) {
-                            System.out.println(ex.getLocalizedMessage());
-                        }
-
-                        // Update the contents of the TextArea that displays the items
-                        // to be processed as some are being removed from the queue
-                        int i = 0;
-                        DfMCreatorMain.dfmCreator.dictConvArray.remove(i);
-                        dictdToDfMQueueTextArea.setText("");
-                        dictdToDfMQueueTextArea.append(I18n.tr("queue.text.area.DictdToDfM") + "\n\n");
-                        for (int j=0; j<DfMCreatorMain.dfmCreator.dictConvArray.size(); j++){
-                            dictdToDfMQueueTextArea.append(DfMCreatorMain.dfmCreator.dictConvArray.get(j).toString() + "\n");
-                        }
-
+                    // Rename the converted dictionary file as follows:
+                    // if it's original name was freedict-eng-fra
+                    // rename it as freedict-eng-fran-converted.txt
+                    String csvfile = DictdToDfM.getOutputCSVFile();
+                    String destcsvfile = csvfile + I18n.tr("converted.dictdConvSummary");
+                    Path csvpath = Paths.get(csvfile);
+                    Path destcsvpath = Paths.get(destcsvfile);
+                    try {
+                        Files.move(csvpath, destcsvpath, REPLACE_EXISTING);
+                    } catch (IOException ex) {
+                        System.out.println(ex.getLocalizedMessage());
                     }
+
+                    // Update the contents of the TextArea that displays the items
+                    // to be processed as some are being removed from the queue
+                    int i = 0;
+                    DfMCreatorMain.dfmCreator.dictConvArray.remove(i);
+                    dictdToDfMQueueTextArea.setText("");
+                    dictdToDfMQueueTextArea.append(I18n.tr("queue.text.area.DictdToDfM") + "\n\n");
+                    for (int j = 0; j < DfMCreatorMain.dfmCreator.dictConvArray.size(); j++) {
+                        dictdToDfMQueueTextArea.append(DfMCreatorMain.dfmCreator.dictConvArray.get(j).toString() + "\n");
+                    }
+
+                }
 
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException ex) {
                 done = true;
@@ -515,12 +495,12 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
             } catch (Throwable t) {
                 done = true;
                 DfMCreatorMain.printAnyMsg(I18n.tr("unknownRuntimeError.dfmCreatorMain",
-                    new Object[] {t, t.getLocalizedMessage()}),
-                    I18n.tr("unknownRuntimeErrorTitle"), JOptionPane.ERROR_MESSAGE);
+                        new Object[]{t, t.getLocalizedMessage()}),
+                        I18n.tr("unknownRuntimeErrorTitle"), JOptionPane.ERROR_MESSAGE);
                 System.out.println(t + "\n");
             }
             return null;
-            }
+        }
 
         @Override
         public void done() {
@@ -542,7 +522,7 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
     /*
      * This method will set some values up and call the conversion task.
      */
-    public void executeConversionTask(){
+    public void executeConversionTask() {
         SumProceedButton.setEnabled(false);
         SumCancelButton.setEnabled(true);
         clearQueueBT.setEnabled(false);
@@ -553,14 +533,13 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         task.addPropertyChangeListener(this);
         task.execute();
         conversionProgBar.setValue(task.getProgress());
-      }
-
+    }
 
     public void confirmCancelConvert() {
         int n = JOptionPane.showConfirmDialog(this, I18n.tr("sureToCancel.dictdConvSummary"),
-                                      I18n.tr("cancelConversion.dictdConvSummary"), JOptionPane.YES_NO_OPTION);
-        if (n == JOptionPane.YES_OPTION){
-            if (!task.isDone()){
+                I18n.tr("cancelConversion.dictdConvSummary"), JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+            if (!task.isDone()) {
                 task.cancel(true);
                 deleteCSVFile();
                 DfMCreatorMain.dfmCreator.dictConvQueue.clear();
@@ -571,8 +550,8 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
 
     public void convCancelledOnQuit() {
         boolean n = deleteCSVFile();
-        if (n == true){
-            if (!task.isDone()){
+        if (n == true) {
+            if (!task.isDone()) {
                 task.cancel(true);
                 DfMCreatorMain.dfmCreator.dictConvQueue.clear();
                 DfMCreatorMain.dfmCreator.dictConvArray.clear();
@@ -581,12 +560,10 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         //this.dispose();
     }
 
-
     /**
      * fillDictdConvDictConvSummaryTextArea() gets all the needed information
-     * and formats them correctly so as to have a clear and neat
-     * summary of the DictdToDictionaryForMIDs preferences entered
-     * by the user.
+     * and formats them correctly so as to have a clear and neat summary of the
+     * DictdToDictionaryForMIDs preferences entered by the user.
      */
     private void fillDictdConvDictConvSummaryTextArea() {
 
@@ -622,7 +599,7 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
     private void fillDictdToDfMQueueTA() {
         dictdToDfMQueueTextArea.setText("");
         dictdToDfMQueueTextArea.append(I18n.tr("queue.text.area.DictdToDfM") + "\n\n");
-        for (int i=0; i<DfMCreatorMain.dfmCreator.dictConvArray.size(); i++){
+        for (int i = 0; i < DfMCreatorMain.dfmCreator.dictConvArray.size(); i++) {
             dictdToDfMQueueTextArea.append(DfMCreatorMain.dfmCreator.dictConvArray.get(i).toString() + "\n");
         }
     }
@@ -635,6 +612,4 @@ public class SumWinDictdToDfM extends javax.swing.JDialog implements ActionListe
         DfMCreatorMain.dfmCreator.clearDictdToDfMTFs();
         DfMCreatorMain.dfmCreator.dictConvArray.clear();
     }
-
-
 }
