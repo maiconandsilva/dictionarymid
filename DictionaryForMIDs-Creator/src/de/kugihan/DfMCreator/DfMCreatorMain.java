@@ -1323,35 +1323,18 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                         // If the font_size argument entered is ALL
                         // generate all font sizes. Otherwise, convert
                         // the value entered into an int and pass it on.
-                        if (!args[3].equalsIgnoreCase("ALL")) {
-                            font_Size_CLI = Integer.parseInt(args[3]);
+                        if ((args[3].equalsIgnoreCase("small")) || (args[3].equalsIgnoreCase("medium"))
+                                || (args[3].equalsIgnoreCase("large")) || (args[3].equalsIgnoreCase("huge"))
+                                || (args[3].equalsIgnoreCase("giant"))) {
+
+                            de.kugihan.fonttoolkit.FontToolkit.cli_flag = true;
+                            de.kugihan.fonttoolkit.FontToolkit.fontSizeStringArg = args[3];
+
                         } else {
-                            de.kugihan.fonttoolkit.FontToolkit.flag_cli = true;
+                            font_Size_CLI = Integer.parseInt(args[3]);
                         }
                         clip_Top_CLI = Integer.parseInt(args[4]);
                         clip_Bottom_CLI = Integer.parseInt(args[5]);
-
-                        /*
-                        // DEBUG:
-                        System.out.println("Debug Information:");
-                        System.out.print("Input Font File: ");
-                        System.out.println(String.valueOf(inputFontFile_CLI));
-                        System.out.print("Input Dictionary Directory (FILE): ");
-                        System.out.println(String.valueOf(inputDictDir_FILE_CLI));
-                        System.out.print("Input Dictionary Directory (STRING): ");
-                        System.out.println(inputDictDir_STRING_CLI);
-                        System.out.print("Font Size: ");
-                        System.out.println(String.valueOf(font_Size_CLI));
-                        System.out.print("Clip Top Value: ");
-                        System.out.println(String.valueOf(clip_Top_CLI));
-                        System.out.print("Clip Bottom Value: ");
-                        System.out.println(String.valueOf(clip_Bottom_CLI));
-                        System.out.println();
-                        */
-
-                        // Set flag to true to tell the app that the fontToolkit is
-                        // being called from the command line.
-                        //de.kugihan.fonttoolkit.FontToolkit.flag_cli = true;
 
                         try {
                             /* Call the actual font generation process
@@ -1365,6 +1348,9 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                             System.out.println("The input dictionary directory is not accessible");
                         }
                     } catch (Throwable t) {
+                        System.out.println("One or more values are invalid."
+                                + "\nPlease make sure you did not input"
+                                + "\nletters where you should input numbers for example.");
                         System.out.println(t);
                     }
                     break;

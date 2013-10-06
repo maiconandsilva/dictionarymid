@@ -53,7 +53,8 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
     // and to false otherwise.
     public static boolean flag = false;
     // For the new upcoming CLI version of FontGenerator
-    public static boolean flag_cli = false;
+    public static String fontSizeStringArg = "";
+    public static boolean cli_flag = false;
     // These variables will be used in the
     // setValuesForQueue subroutine
     private File inFile;
@@ -149,7 +150,6 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
             int fontSize, int clip_Top, int clip_Bottom) throws
             fontNotAccessible, dictionaryDirNotAccessible {
 
-
         if (!inputFontFile.canRead()) {
             throw new fontNotAccessible(I18n.tr("notFontAccessible"));
         }
@@ -168,22 +168,44 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
         System.out.println(dictDirectory_STRING);
         //System.out.println(String.valueOf(this)); // Callback value
         System.out.print("Font Size: ");
-        System.out.println(String.valueOf(fontSize));
+        if (!cli_flag) {
+            System.out.println(String.valueOf(fontSize));
+        } else {
+            System.out.println(fontSizeStringArg);
+        }
         System.out.print("Clip Top Value: ");
         System.out.println(String.valueOf(clip_Top));
         System.out.print("Clip Bottom Value: ");
         System.out.println(String.valueOf(clip_Bottom));
         System.out.println();
-        if (!flag_cli) {
+
+        if (cli_flag) {
+            if (fontSizeStringArg.equalsIgnoreCase("small")) {
+                for (int i = 8; i <= 14; i += 2) {
+                    c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
+                    c.generateFonts();
+                }
+            } else if (fontSizeStringArg.equalsIgnoreCase("medium")) {
+                for (int i = 8; i <= 18; i += 2) {
+                    c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
+                    c.generateFonts();
+                }
+            } else if (fontSizeStringArg.equalsIgnoreCase("large")) {
+                for (int i = 8; i <= 24; i += 2) {
+                    c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
+                    c.generateFonts();
+                }
+            } else if ((fontSizeStringArg.equalsIgnoreCase("huge")) || (fontSizeStringArg.equalsIgnoreCase("giant"))) {
+                for (int i = 8; i <= 36; i += 2) {
+                    c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
+                    c.generateFonts();
+                }
+            }
+        } else {
             c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, fontSize, clip_Top, clip_Bottom);
             c.generateFonts();
-        } else { // Generate font for all the sizes: i.e from 8 to 36!
-
-            for (int i = 8; i <= 36; i += 2) {
-                c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
-                c.generateFonts();
-            }
         }
+
     }
 
 //#################################################################################
