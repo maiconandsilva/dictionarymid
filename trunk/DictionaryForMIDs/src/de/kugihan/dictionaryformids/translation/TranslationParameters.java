@@ -7,26 +7,30 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.translation;
 
+import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.general.Util;
 
 public class TranslationParameters {
-	public String  		toBeTranslatedWordText; // the expression that has to be translated
-	public boolean[]	inputLanguages;  		// the languages that are searched
-	public boolean[]	outputLanguages; 		// the languages of the translations
-	public boolean 		executeInBackground;	// executes the translation asynchronously in an own thread
+	protected DictionaryDataFile	dictionary;  			  // dictionary that is searched
+	protected String  				toBeTranslatedWordText;   // the expression that has to be translated
+	protected boolean[]				inputLanguages;  		  // the languages that are searched
+	protected boolean[]				outputLanguages; 		  // the languages of the translations
+	protected boolean 				executeInBackground;	  // executes the translation asynchronously in an own thread
 	
-	protected boolean 	searchSubExpressionStart; // false if no subexpressions shall be searched at the beginning
-	protected boolean 	searchSubExpressionEnd;   // false if no subexpressions shall be searched at the end
+	protected boolean 				searchSubExpressionStart; // false if no subexpressions shall be searched at the beginning
+	protected boolean 				searchSubExpressionEnd;   // false if no subexpressions shall be searched at the end
 	
-	int					maxHits;                  // maximum number of translation hits for the search
-	int 				durationForCancelSearch;  // in milliseconds; search will be cancelled if this time exceeded for the search
+	int								maxHits;                  // maximum number of translation hits for the search
+	int 							durationForCancelSearch;  // in milliseconds; search will be cancelled if this time exceeded for the search
 
-	public TranslationParameters(String  		toBeTranslatedWordTextInputParam,
-								 boolean[]		inputLanguagesParam,
-								 boolean[]		outputLanguagesParam,
-								 boolean 		executeInBackgroundParam,
-								 int           	maxHitsParam,
-								 int   			durationForCancelSearchParam) {
+	public TranslationParameters(DictionaryDataFile dictionaryParam,
+								 String  			toBeTranslatedWordTextInputParam,
+								 boolean[]			inputLanguagesParam,
+								 boolean[]			outputLanguagesParam,
+								 boolean 			executeInBackgroundParam,
+								 int           		maxHitsParam,
+								 int   				durationForCancelSearchParam) {
+		dictionary = dictionaryParam;
 		toBeTranslatedWordText = toBeTranslatedWordTextInputParam;
 		inputLanguages = inputLanguagesParam;
 		outputLanguages = outputLanguagesParam;
@@ -90,6 +94,10 @@ public class TranslationParameters {
 		return searchSubExpressionStart;
 	}
 
+
+	public DictionaryDataFile getDictionary() {
+		return dictionary;
+	}
 
 	public String getToBeTranslatedWordText() {
 		return toBeTranslatedWordText;

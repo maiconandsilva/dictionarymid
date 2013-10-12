@@ -150,18 +150,19 @@ public class SettingsStore {
 	// because setDefaultValues is called later when all default values are available
 	public void setDefaultValues()
 			throws DictionaryException {
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
 		// inputLanguage is the first searchable language
 		// outputLanguage is the first language after inputLanguage
 		byte inputLanguageInitalValue = -1;
 		byte outputLanguageInitalValue = -1;
 		for (byte languageCounter = 0; 
-		 	 languageCounter < DictionaryDataFile.numberOfAvailableLanguages; 
+		 	 languageCounter < dictionary.numberOfAvailableLanguages; 
 		 	 ++languageCounter) {
 			if (inputLanguageInitalValue != -1) {
 				outputLanguageInitalValue = languageCounter;
 				break; // both inputLanguageInitalValue and outputLanguageInitalValue are set
 			}
-			if (DictionaryDataFile.supportedLanguages[languageCounter].isSearchable) {
+			if (dictionary.supportedLanguages[languageCounter].isSearchable) {
 				if (inputLanguageInitalValue == -1)
 					inputLanguageInitalValue = languageCounter;
 			}
@@ -178,9 +179,9 @@ public class SettingsStore {
 		setInputLanguage(inputLanguageInitalValue);
 		
 		// outputLanguages:
-		boolean [] outputLanguage = new boolean[DictionaryDataFile.numberOfAvailableLanguages];
+		boolean [] outputLanguage = new boolean[dictionary.numberOfAvailableLanguages];
 		for (int languageCounter = 0; 
-		 	 languageCounter < DictionaryDataFile.numberOfAvailableLanguages; 
+		 	 languageCounter < dictionary.numberOfAvailableLanguages; 
 		 	 ++languageCounter) {
 			boolean languageSetting = languageCounter == outputLanguageInitalValue;
 			outputLanguage[languageCounter] = languageSetting;
@@ -251,8 +252,9 @@ public class SettingsStore {
 	}
 	
 	public boolean [] getOutputLanguage() throws DictionaryException  {
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
 		return getBooleanArrayValue(rms_index_outputLanguage, 
-                					DictionaryDataFile.numberOfAvailableLanguages);
+								    dictionary.numberOfAvailableLanguages);
 	}
 	
 	public void setOutputLanguage(boolean [] outputLanguage) throws DictionaryException  {

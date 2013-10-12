@@ -84,9 +84,10 @@ public class DictionarySettings
 		DictionarySettings.inputLanguage = inputLanguage;
 	}
 	public static int numberOfSearchableInputLanguages() {
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
 		int number = 0;
-		for (int language = 0; language < DictionaryDataFile.numberOfAvailableLanguages; ++language) {
-			if (DictionaryDataFile.supportedLanguages[language].isSearchable) {
+		for (int language = 0; language < dictionary.numberOfAvailableLanguages; ++language) {
+			if (dictionary.supportedLanguages[language].isSearchable) {
 				number++;
 			}
 		}
@@ -112,9 +113,10 @@ public class DictionarySettings
 	 * returns the index of this one outputLanguage. 
 	 */
 	public static int determineOutputLanguage() throws DictionaryException {
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
 		int indexOutputLanguage = -1;
 		for (int indexLanguage = 0;
-	         indexLanguage < DictionaryDataFile.numberOfAvailableLanguages;
+	         indexLanguage < dictionary.numberOfAvailableLanguages;
 	         ++indexLanguage) {
 			if (DictionarySettings.getOutputLanguage(indexLanguage)) {
 				indexOutputLanguage = indexLanguage; 

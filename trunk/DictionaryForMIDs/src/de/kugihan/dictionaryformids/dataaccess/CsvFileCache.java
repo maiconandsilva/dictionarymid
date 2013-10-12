@@ -10,8 +10,9 @@ package de.kugihan.dictionaryformids.dataaccess;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
+
 import de.kugihan.dictionaryformids.general.DictionaryException;
-import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
 import de.kugihan.dictionaryformids.general.Util;
 
 class CsvFileCache {
@@ -25,7 +26,8 @@ class CsvFileCache {
 	protected String      fileName = null;
 	protected int         lastPositionInStream;
 
-	synchronized InputStream getCsvFile(String  fileNameParam,
+	synchronized InputStream getCsvFile(DfMInputStreamAccess dictionaryDataFileISAccess,
+			                            String  fileNameParam,
             					        int 	startPosition) 
 				throws IOException, DictionaryException {
 		long startTime = System.currentTimeMillis();
@@ -37,7 +39,7 @@ class CsvFileCache {
 			int numberOfBytesToBeSkipped = startPosition - lastPositionInStream;
 			if (numberOfBytesToBeSkipped < 0) {
 				// stream needs to be reopened
-				FileAccessHandler.getDictionaryDataFileISAccess().getInputStream(fileNameParam);
+				dictionaryDataFileISAccess.getInputStream(fileNameParam);
 				numberOfBytesToBeSkipped = startPosition;
 			}
 			else {
@@ -61,7 +63,7 @@ class CsvFileCache {
 			if (cachedFile != null)
 				cachedFile.close();
 			// open new file 
-			csvStream =	FileAccessHandler.getDictionaryDataFileISAccess().getInputStream(fileName);  // to be done in specific class
+			csvStream =	dictionaryDataFileISAccess.getInputStream(fileName);  // to be done in specific class
 			Util.getUtil().logTime("open file", startTime);
 			startTime = System.currentTimeMillis();
 			if (csvStream != null) {

@@ -8,9 +8,9 @@ package de.kugihan.dictionaryformids.translation.normation;
 
 import java.util.Vector;
 
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.translation.SearchedWord;
-
 import de.kugihan.dictionaryformids.translation.normation.normationjpn.Parser;
 
 public class NormationJpn extends Normation
@@ -27,6 +27,8 @@ public class NormationJpn extends Normation
 
 	public Vector searchWord(String text)
 	{
+		parserObj.setDictionaryDataFileISAccess(dictionaryDataFileISAccess);
+		
 		Vector words = new Vector(2);
 		text = Util.convertToLowerCase(new StringBuffer(text)).toString();
 

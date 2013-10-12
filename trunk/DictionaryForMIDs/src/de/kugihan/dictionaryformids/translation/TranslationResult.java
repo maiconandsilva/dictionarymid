@@ -8,13 +8,16 @@ GPL applies - see file COPYING for copyright statement.
 package de.kugihan.dictionaryformids.translation;
 import java.util.*;
 
+import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
+
 public class TranslationResult {
 
 	public long    executionTime; 			 // in ms
 	public boolean translationBreakOccurred = false; // true if the translation was aborted
 	public int     translationBreakReason; // reason why translation was aborted
 	
-	protected Vector  translations = new Vector();  // Vector of SingleTranslation
+	public 		DictionaryDataFile	dictionary;  // dictionary that is searched
+	protected 	Vector  			translations = new Vector();  // Vector of SingleTranslation
 	
 	public final static int BreakReasonCancelReceived = 1; 
 	public final static int BreakReasonMaxExecutionTimeReached = 2; 

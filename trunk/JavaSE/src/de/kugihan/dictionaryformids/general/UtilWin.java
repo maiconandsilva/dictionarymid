@@ -8,8 +8,10 @@ GPL applies - see file COPYING for copyright statement.
 package de.kugihan.dictionaryformids.general;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
-import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileDfMInputStreamAccess;
+import de.kugihan.dictionaryformids.translation.TranslationExecution;
+
 import java.io.File;
 
 public class UtilWin extends Util {
@@ -25,16 +27,22 @@ public class UtilWin extends Util {
                 return propertyPath + "/" + propertyFileName;
         }
 
-        public boolean readProperties(String propertyPath, boolean initDictionaryGenerationValues)
+        public DictionaryDataFile readProperties(String propertyPath, 
+                                                 boolean initDictionaryGenerationValues)
                         throws DictionaryException {
-                boolean propertyFileAccessible = new File(buildPropertyFileName(propertyPath)).canRead();
+        		DictionaryDataFile dictionary = null; 
+        		boolean propertyFileAccessible = new File(buildPropertyFileName(propertyPath)).canRead();
                 if (propertyFileAccessible) {
                         FileDfMInputStreamAccess dfmInputStreamObj = new FileDfMInputStreamAccess(propertyPath);
-                        FileAccessHandler.setDictionaryDataFileISAccess(dfmInputStreamObj);
                         DictionaryDataFile.useStandardPath = false;
-                        DictionaryDataFile.initValues(initDictionaryGenerationValues);
+                        if (initDictionaryGenerationValues) {
+                        	dictionary = TranslationExecution.loadDictionaryWithDictionaryGenerationValues(dfmInputStreamObj);
+                        }
+                        else {
+                        	dictionary = TranslationExecution.loadDictionary(dfmInputStreamObj);
+                        }
                 }
-                return propertyFileAccessible;
+                return dictionary;
         }
 
 }

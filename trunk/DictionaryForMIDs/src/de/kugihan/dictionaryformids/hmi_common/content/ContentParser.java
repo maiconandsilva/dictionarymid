@@ -9,7 +9,6 @@ package de.kugihan.dictionaryformids.hmi_common.content;
 
 import java.util.Stack;
 
-import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dataaccess.content.ContentDefinition;
 import de.kugihan.dictionaryformids.dataaccess.content.ContentLib;
 import de.kugihan.dictionaryformids.dataaccess.content.PredefinedContent;
@@ -22,15 +21,17 @@ public class ContentParser {
 	Stack  		 contentHierarchy = new Stack();
 	StringBuffer text = new StringBuffer();
 	
-	public StringColourItemText determineItemsFromContent(TextOfLanguage contentText, 
-			                                              boolean changeInputAndOutputContent,
-			                                              boolean isInput) 
+	public StringColourItemText determineItemsFromContent(TextOfLanguage 		contentText, 
+			                                              boolean 				changeInputAndOutputContent,
+			                                              boolean 				isInput) 
 				throws DictionaryException {
-		int languageIndex = contentText.getLanguageIndex();
+
+		ContentDefinition[] contents =                   contentText.getDictionary().supportedLanguages[contentText.getLanguageIndex()].contents;
+		boolean             contentDefinitionAvailable = contentText.getDictionary().supportedLanguages[contentText.getLanguageIndex()].contentDefinitionAvailable;
+
 		String contentString = contentText.getText();
 		stringColourItemText = new StringColourItemText();
 		int currentContentNumber = 0;
-		ContentDefinition[] contents = DictionaryDataFile.supportedLanguages[languageIndex].contents;
 		// default content is the outmost level:
 		pushNewContent(contents[0], changeInputAndOutputContent, isInput);
 		
@@ -38,7 +39,7 @@ public class ContentParser {
 		int charCount = 0;
 		while (charCount < contentStringLength) {
 			char contentChar = contentString.charAt(charCount);
-			if (DictionaryDataFile.supportedLanguages[languageIndex].contentDefinitionAvailable) {
+			if (contentDefinitionAvailable) {
 				if (contentChar == ContentLib.startOfContentChar) {
 					// the next two characters give the content number
 					if (charCount + 2 >= contentStringLength) 

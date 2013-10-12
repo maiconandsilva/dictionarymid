@@ -11,6 +11,7 @@ package de.kugihan.dictionaryformids.hmi_java_me.mainform;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.general.DictionaryException;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs;
 import de.kugihan.dictionaryformids.hmi_java_me.DictionarySettings;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.translation.TranslationExecution;
@@ -30,7 +31,7 @@ public class WordHistory {
 		historySize = 10;
 		historyWord = new String[historySize];
 		fromLanguageHistory = new int[historySize];
-		toLanguageHistory = new boolean[historySize][DictionaryDataFile.numberOfAvailableLanguages];
+		toLanguageHistory = new boolean[historySize][];
 		curHistoryPos = -1;
 		maxHistoryPos = -1;
 		saveFlag = true;

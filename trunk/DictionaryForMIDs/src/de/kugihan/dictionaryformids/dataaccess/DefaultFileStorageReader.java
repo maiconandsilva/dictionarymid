@@ -14,7 +14,6 @@ import java.io.InputStreamReader;
 
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
-import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.general.DictionaryInterruptedException;
 
@@ -23,7 +22,8 @@ public class DefaultFileStorageReader {
 
 	static CsvFileCache fileCache = new CsvFileCache();
 	
-	public FileStorage readFileToFileStorage(String  fileName,
+	public FileStorage readFileToFileStorage(DfMInputStreamAccess dictionaryDataFileISAccess,
+            							     String  fileName,
 											 String  charEncoding,
 				       	                     int     maxSizeOfFileData) 
 	 						throws DictionaryException {
@@ -31,7 +31,7 @@ public class DefaultFileStorageReader {
 		FileStorage fileStorageObj;
 		try {
 			long startTime = System.currentTimeMillis();
-			InputStream csvStream =	FileAccessHandler.getDictionaryDataFileISAccess().getInputStream(fileName);
+			InputStream csvStream =	dictionaryDataFileISAccess.getInputStream(fileName);
 			Util.getUtil().logTime("open file", startTime);
 			startTime = System.currentTimeMillis();
 			if (csvStream != null) {
@@ -79,13 +79,14 @@ public class DefaultFileStorageReader {
 
 	// special method for reading a CSV file starting at byte position 
 	// startPosition and reading only one single line
-	public FileStorage readCsvFileLine(String fileName,
+	public FileStorage readCsvFileLine(DfMInputStreamAccess dictionaryDataFileISAccess,
+		                               String fileName,
 									   String charEncoding,
 									   int startPosition)
 	 						throws DictionaryException {
 		FileStorage fileStorageObj;
 		try {
-			InputStream csvStream = fileCache.getCsvFile(fileName, startPosition);
+			InputStream csvStream = fileCache.getCsvFile(dictionaryDataFileISAccess, fileName, startPosition);
 			long startTime = System.currentTimeMillis();
 			int sizeOfFile = 0;
 			StringBuffer csvLineString = new StringBuffer();

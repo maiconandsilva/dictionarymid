@@ -13,7 +13,6 @@ import javax.microedition.midlet.MIDlet;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
-import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.JSR75InputStreamAccess;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.ResourceDfMInputStreamAccess;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.ZipInputStreamAccess;
@@ -24,6 +23,7 @@ import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.general.UtilMid;
 import de.kugihan.dictionaryformids.hmi_java_me.mainform.MainForm;
 import de.kugihan.dictionaryformids.hmi_java_me.uidisplaytext.LanguageUI;
+import de.kugihan.dictionaryformids.translation.TranslationExecution;
  
 public class DictionaryForMIDs 
     extends MIDlet  {
@@ -33,6 +33,15 @@ public class DictionaryForMIDs
 		public static DictionaryForMIDs   dictionaryForMIDsMidlet;
 		protected static boolean		  dictionaryCanBeAccessed = false;
 	
+		protected DictionaryDataFile dictionary;
+		public  DictionaryDataFile getloadedDictionary() {
+			return dictionary;
+		}
+		public void setDictionaryNotAvailable() {
+			dictionary = null;
+		}
+
+
 	public DictionaryForMIDs() throws DictionaryException {
 		/*
 		 *  initialise the application
@@ -69,18 +78,16 @@ public class DictionaryForMIDs
 			// initialize SettingsStore
 			SettingsStore.getSettingsStore().initValues();
 
-			// check for file access via JSR 75
-			DictionarySettings.setUseFileAccessJSR75(determineFileAccessJSR75());
-			
-			// Create object for reading InputStreams
-			doSetDictionaryDataFileISAccess();
-			
 			// determine the character encoding scheme that is used by the device
 			utilObj.determineCharEncoding();
 
-			// read the file DictionaryForMIDs.properties
+			// check for file access via JSR 75
+			DictionarySettings.setUseFileAccessJSR75(determineFileAccessJSR75());
+			
+			// Create object for reading InputStreams read the file DictionaryForMIDs.properties
 			try {
-				DictionaryDataFile.initValues(false);
+				doSetDictionaryDataFileISAccessAndReadDictionaryProperties();
+				
 				utilObj.log("Initialized values", Util.logLevelMax);
 				DictionarySettings.setDictionaryAvailable(true);
 			}
@@ -91,7 +98,7 @@ public class DictionaryForMIDs
 			if (dictionaryCanBeAccessed != true) {
 				DictionarySettings.setDictionaryAvailable(false);
 				utilObj.log("DictionaryDataFiles could not be initialized", Util.logLevel1);
-				DictionaryDataFile.setDictionaryNotAvailable();
+				setDictionaryNotAvailable(); 
 			}
 
 		 	LanguageUI.getUI().initValue();
@@ -162,7 +169,8 @@ public class DictionaryForMIDs
 	}
 	
 	// sets the DfMInputStramAccess that is used for accessing the dictionary data files
-	protected void doSetDictionaryDataFileISAccess() 
+	// also reads the file DictionaryForMIDs.properties
+	protected void doSetDictionaryDataFileISAccessAndReadDictionaryProperties() 
 				throws DictionaryException {
 		DfMInputStreamAccess dfmInputStreamObj;
 		if (DictionarySettings.isUseFileAccessJSR75()) {
@@ -189,7 +197,7 @@ public class DictionaryForMIDs
 			dfmInputStreamObj = new ResourceDfMInputStreamAccess();
 			dictionaryCanBeAccessed = true;
 		}
-		FileAccessHandler.setDictionaryDataFileISAccess(dfmInputStreamObj);
+		dictionary = TranslationExecution.loadDictionary(dfmInputStreamObj);
 	}
 	
 	
@@ -207,15 +215,15 @@ public class DictionaryForMIDs
 		// remove trailing slash if there is any
 		Util.getUtil().removeTrailingSlashFromPath(dictionaryDirectoryLocation);
 		// check whether file DictionaryForMIDs.properties can be accessed
-		String DfMPropertyFileLocation = DictionaryDataFile.getDfMPropertyFileLocation(dictionaryDirectoryLocation.toString());
+		String DfMPropertyFileLocation = dictionary.getDfMPropertyFileLocation(dictionaryDirectoryLocation.toString());
 		if (JSR75InputStreamAccess.determineFileType(DfMPropertyFileLocation) == JSR75InputStreamAccess.FileTypeFILE) {
 			dictionaryCanBeAccessed = true;
 		}
-		else if (dictionaryDirectoryLocation.toString().endsWith(DictionaryDataFile.pathNameDataFiles)) {
+		else if (dictionaryDirectoryLocation.toString().endsWith(dictionary.pathNameDataFiles)) {
 			// 'dictionary'-directory is incorrectly included: remove this part
-			dictionaryDirectoryLocation.setLength(dictionaryDirectoryLocation.length() - DictionaryDataFile.pathNameDataFiles.length());
+			dictionaryDirectoryLocation.setLength(dictionaryDirectoryLocation.length() - dictionary.pathNameDataFiles.length());
 			Util.getUtil().removeTrailingSlashFromPath(dictionaryDirectoryLocation);
-			DfMPropertyFileLocation = DictionaryDataFile.getDfMPropertyFileLocation(dictionaryDirectoryLocation.toString());
+			DfMPropertyFileLocation = dictionary.getDfMPropertyFileLocation(dictionaryDirectoryLocation.toString());
 			// check whether file DictionaryForMIDs.properties can be accessed after removal of the incorrect 'dictionary'-part
 			if (JSR75InputStreamAccess.determineFileType(DfMPropertyFileLocation) == JSR75InputStreamAccess.FileTypeFILE) {
 				dictionaryCanBeAccessed = true;

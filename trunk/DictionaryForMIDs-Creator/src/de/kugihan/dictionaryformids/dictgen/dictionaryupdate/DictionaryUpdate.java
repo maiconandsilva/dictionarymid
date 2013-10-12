@@ -17,6 +17,14 @@ import java.util.Vector;
 public class DictionaryUpdate 
 	implements DictionaryUpdateIF {
 
+	protected DictionaryDataFile dictionary;
+	public DictionaryDataFile getDictionary() {
+		return dictionary;
+	}
+	public void setDictionary(DictionaryDataFile dictionaryParam) {
+		dictionary = dictionaryParam;
+	}
+
 	protected int indexLanguage;  // index to DictionaryDataFile.supportedLanguages
 
 	final String delimiterStart = "{{";
@@ -25,7 +33,7 @@ public class DictionaryUpdate
 	public String updateDictionaryExpression(String dictionaryExpression) 
 				throws DictionaryException {
 		String returnString;
-		if (DictionaryDataFile.dictionaryGenerationOmitParFromIndex) {
+		if (dictionary.dictionaryGenerationOmitParFromIndex) {
 			boolean replacementDone;
 			StringBuilder expressionUpdated = new StringBuilder(dictionaryExpression);
 			do {
@@ -57,7 +65,7 @@ public class DictionaryUpdate
 	public String removeNonSearchParts(String expression)  
 				throws DictionaryException {
 		String returnString;
-		if (DictionaryDataFile.dictionaryGenerationOmitParFromIndex) {
+		if (dictionary.dictionaryGenerationOmitParFromIndex) {
 			int nestingLevel = 0;
 			int posDelimiterStartAtNestingLevel0 = 0;
 			int posBehindLastDelimiter = 0;
@@ -120,7 +128,7 @@ public class DictionaryUpdate
 		// default is to use the result from updateDictionaryExpression, remove content delimiters,
 		// remove field/line separator characters and remove non-search parts
 		String keyWordsExpression;
-		if (DictionaryDataFile.dictionaryGenerationOmitParFromIndex) {
+		if (dictionary.dictionaryGenerationOmitParFromIndex) {
 			keyWordsExpression = expression;
 		}
 		else {
