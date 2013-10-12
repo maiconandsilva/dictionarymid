@@ -228,60 +228,63 @@ public class DictionarySettingForm
 		checkBitmapFontAvailable();
 		
 		int choiceTypeLanguageSelection = Choice.EXCLUSIVE;
-		/* 
-		 * input language
-		 */
-		// create inputLanguageChoiceGroup only if there is more than one searchable language
-		if (DictionaryDataFile.numberOfInputLanguages > 1) {  
-			UIDisplayTextItem[] inputLanguageTextItem = 
-					new UIDisplayTextItem[DictionaryDataFile.numberOfInputLanguages+1];  // +1 because of SearchAllLanguages
-			int inputLanguage = 0;
-			for (int language = 0; language < DictionaryDataFile.numberOfAvailableLanguages; ++language) {
-				if (DictionaryDataFile.supportedLanguages[language].isSearchable) {
-					String languageDisplayText = DictionaryDataFile.supportedLanguages[language].languageDisplayText;
-					inputLanguageTextItem[inputLanguage] = LanguageUI.getUI().getUIDisplayTextItem
-					                       (LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + languageDisplayText, 
-					                        languageDisplayText);
-					++inputLanguage;
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
+		if (dictionary != null) {
+			/* 
+			 * input language
+			 */
+			// create inputLanguageChoiceGroup only if there is more than one searchable language
+			if (dictionary.numberOfInputLanguages > 1) {  
+				UIDisplayTextItem[] inputLanguageTextItem = 
+						new UIDisplayTextItem[dictionary.numberOfInputLanguages+1];  // +1 because of SearchAllLanguages
+				int inputLanguage = 0;
+				for (int language = 0; language < dictionary.numberOfAvailableLanguages; ++language) {
+					if (dictionary.supportedLanguages[language].isSearchable) {
+						String languageDisplayText = dictionary.supportedLanguages[language].languageDisplayText;
+						inputLanguageTextItem[inputLanguage] = LanguageUI.getUI().getUIDisplayTextItem
+						                       (LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + languageDisplayText, 
+						                        languageDisplayText);
+						++inputLanguage;
+					}
 				}
+				if ((inputLanguage == 0) && (dictionary.numberOfAvailableLanguages > 0)) {
+					throw new DictionaryException("No searchable languages defined");
+				}
+				inputLanguageTextItem[inputLanguageTextItem.length-1] = UIDisplayTextItems.SearchAllLanguages;
+				
+				// Normally the inputLanguageChoiceGroup and the outputLanguageChoiceGroup are displayed in a 
+				// "RadioButton" style (Choice.EXCLUSIVE); however if there are many languages (> 6) to choose from,
+				// then a ComboBox style is used (Choice.POPUP).
+				int totalNumberOfLanguagesForSelection = inputLanguage + dictionary.numberOfAvailableLanguages;
+				if (totalNumberOfLanguagesForSelection > 6) {
+					// if more than 6 languages are displayed, then a 'ComboBox' style is used: 
+					choiceTypeLanguageSelection = Choice.POPUP;
+				}
+				inputLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsFromLanguage,
+												              choiceTypeLanguageSelection,
+												              inputLanguageTextItem);
+				append(inputLanguageChoiceGroup);
 			}
-			if ((inputLanguage == 0) && (DictionaryDataFile.numberOfAvailableLanguages > 0)) {
-				throw new DictionaryException("No searchable languages defined");
+				
+			/* 
+			 * output language
+			 */
+			// create outputLanguageChoiceGroup only if there are more than one two languages
+			if (dictionary.numberOfAvailableLanguages > 2) {  
+				UIDisplayTextItem[] outputLanguageTextItem = new UIDisplayTextItem [dictionary.numberOfAvailableLanguages];
+				for (int languageIndex = 0; 
+				     languageIndex < dictionary.numberOfAvailableLanguages;
+				     ++languageIndex) {
+					String languageDisplayText = dictionary.supportedLanguages[languageIndex].languageDisplayText;
+					outputLanguageTextItem[languageIndex] = LanguageUI.getUI().getUIDisplayTextItem
+		            								(LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + languageDisplayText, 
+		                                             languageDisplayText);
+				}
+				outputLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsToLanguage,
+											       			   choiceTypeLanguageSelection, // could also be Choice.MULTIPLE for multiple language output
+														       outputLanguageTextItem);
+				append(outputLanguageChoiceGroup);
 			}
-			inputLanguageTextItem[inputLanguageTextItem.length-1] = UIDisplayTextItems.SearchAllLanguages;
-			
-			// Normally the inputLanguageChoiceGroup and the outputLanguageChoiceGroup are displayed in a 
-			// "RadioButton" style (Choice.EXCLUSIVE); however if there are many languages (> 6) to choose from,
-			// then a ComboBox style is used (Choice.POPUP).
-			int totalNumberOfLanguagesForSelection = inputLanguage + DictionaryDataFile.numberOfAvailableLanguages;
-			if (totalNumberOfLanguagesForSelection > 6) {
-				// if more than 6 languages are displayed, then a 'ComboBox' style is used: 
-				choiceTypeLanguageSelection = Choice.POPUP;
-			}
-			inputLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsFromLanguage,
-											              choiceTypeLanguageSelection,
-											              inputLanguageTextItem);
-			append(inputLanguageChoiceGroup);
-		}
-			
-		/* 
-		 * output language
-		 */
-		// create outputLanguageChoiceGroup only if there are more than one two languages
-		if (DictionaryDataFile.numberOfAvailableLanguages > 2) {  
-			UIDisplayTextItem[] outputLanguageTextItem = new UIDisplayTextItem [DictionaryDataFile.numberOfAvailableLanguages];
-			for (int languageIndex = 0; 
-			     languageIndex < DictionaryDataFile.numberOfAvailableLanguages;
-			     ++languageIndex) {
-				String languageDisplayText = DictionaryDataFile.supportedLanguages[languageIndex].languageDisplayText;
-				outputLanguageTextItem[languageIndex] = LanguageUI.getUI().getUIDisplayTextItem
-	            								(LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + languageDisplayText, 
-	                                             languageDisplayText);
-			}
-			outputLanguageChoiceGroup = new DfMChoiceGroup(UIDisplayTextItems.SettingsToLanguage,
-										       			   choiceTypeLanguageSelection, // could also be Choice.MULTIPLE for multiple language output
-													       outputLanguageTextItem);
-			append(outputLanguageChoiceGroup);
 		}
 
 		/*
@@ -331,7 +334,7 @@ public class DictionarySettingForm
 			fileBrowserForm = new FileBrowser(this,display);
 			// create field for path of dictionary
 			dictionaryPathTextField = new TextField("Dictionary path", null, 300, TextField.URL); // temporary: change to UIDisplayText label
-			// DictionaryDataFile.dictionaryPath was already set in the constructor of class DictionaryForMIDs
+			// dictionary.dictionaryPath was already set in the constructor of class DictionaryForMIDs
 			append(dictionaryPathTextField);
 			// temporary: this is a temporary solution for the partial file system dictionary support.
 			dictionaryPathTextField.setDefaultCommand(selectDictionaryCommand);
@@ -365,10 +368,10 @@ public class DictionarySettingForm
 //                null);
 //		int contentIndex = 0;
 //		String[] contents = new String[10];
-//		for (int i = 0; i < DictionaryDataFile.supportedLanguages.length; i++) {		
-//			if (DictionaryDataFile.supportedLanguages[i].contentDefinitionAvailable) {				
-//				for (int j = 1; j < DictionaryDataFile.supportedLanguages[i].contents.length; j++){
-//					contents[contentIndex] = DictionaryDataFile.supportedLanguages[i].contents[j].contentDisplayText;
+//		for (int i = 0; i < dictionary.supportedLanguages.length; i++) {		
+//			if (dictionary.supportedLanguages[i].contentDefinitionAvailable) {				
+//				for (int j = 1; j < dictionary.supportedLanguages[i].contents.length; j++){
+//					contents[contentIndex] = dictionary.supportedLanguages[i].contents[j].contentDisplayText;
 //					contentIndex++;
 //				}				
 //			}
@@ -428,6 +431,8 @@ public class DictionarySettingForm
 	protected void saveSettings() throws DictionaryException {
 		// save settings in SettingStore
 		
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
+
 		// input language:
 		if (inputLanguageChoiceGroup != null) {
 			int inputLanguageSettingsSelectedIndex = 
@@ -437,14 +442,14 @@ public class DictionarySettingForm
 		
 		// output language:
 		if (outputLanguageChoiceGroup !=  null) {
-			boolean [] outputLanguageSettingsSelectedIndexes = new boolean [DictionaryDataFile.numberOfAvailableLanguages];
+			boolean [] outputLanguageSettingsSelectedIndexes = new boolean [dictionary.numberOfAvailableLanguages];
 			outputLanguageChoiceGroup.getSelectedFlags(outputLanguageSettingsSelectedIndexes);
 			setOutputLanguage(outputLanguageSettingsSelectedIndexes);
 		}
 		else if (inputLanguageChoiceGroup != null) {
 			// the choice group for input language exists, but not the choice group for the output language
 			// set output language to the non-input language
-			boolean [] outputLanguageSettingsSelectedIndexes = new boolean [DictionaryDataFile.numberOfAvailableLanguages];
+			boolean [] outputLanguageSettingsSelectedIndexes = new boolean [dictionary.numberOfAvailableLanguages];
 			if (DictionarySettings.getInputLanguage() == 0) {
 				// first language is selected as input language: use second language as output language
 				outputLanguageSettingsSelectedIndexes[0] = false;
@@ -660,13 +665,14 @@ public class DictionarySettingForm
 	}
 
 	protected void selectNextOutputLanguage() {
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
 		if (outputLanguageChoiceGroup != null) {
 			int newSelectedInputLanguage = inputLanguageChoiceGroup.getSelectedIndex(); 
 			if (newSelectedInputLanguage == inputLanguageChoiceGroup.size() -1) {
 				// search over all languages: leave output language unchanged
 			}
 			else {
-				boolean [] currentSelectedOutputLanguage = new boolean [DictionaryDataFile.numberOfAvailableLanguages];
+				boolean [] currentSelectedOutputLanguage = new boolean [dictionary.numberOfAvailableLanguages];
 				outputLanguageChoiceGroup.getSelectedFlags(currentSelectedOutputLanguage);
 				if (currentSelectedOutputLanguage[newSelectedInputLanguage]) {
 					currentSelectedOutputLanguage[newSelectedInputLanguage] = false;
@@ -683,14 +689,15 @@ public class DictionarySettingForm
 	/* exchange inputLanguage and outputLanguage */
 	public void changeTranslationDirection() 
 			throws DictionaryException {
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
 		int inputLanguage = DictionarySettings.getInputLanguage();
 		int outputLanguage = DictionarySettings.determineOutputLanguage();
 
 		if (DictionarySettings.getInputLanguage() != DictionarySettings.inputLanguageAll) {
 			int newInputLanguage = outputLanguage;
-			if (DictionaryDataFile.supportedLanguages[newInputLanguage].isSearchable) {
+			if (dictionary.supportedLanguages[newInputLanguage].isSearchable) {
 				setInputLanguage(newInputLanguage);
-				boolean [] newOutputLanguage = new boolean [DictionaryDataFile.numberOfAvailableLanguages];
+				boolean [] newOutputLanguage = new boolean [dictionary.numberOfAvailableLanguages];
 				for (int language = 0;  language < newOutputLanguage.length; ++language) 
 					newOutputLanguage[language] = false;
 				newOutputLanguage[inputLanguage] = true;
@@ -703,6 +710,7 @@ public class DictionarySettingForm
 	// because in the inputLanguageChoiceGroup only searchable languages are shown. The mapping between the two indexes
 	// is done by the methods inputLanguageSettingsToChoiceGroup and inputLanguageChoiceGroupToSettings 
 	public int inputLanguageSettingsToChoiceGroup(int settingsIndex) {
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
 		int choiceGroupIndex = -1;
 		if (settingsIndex == DictionarySettings.inputLanguageAll) {
 			// search over all langugages is selected
@@ -710,7 +718,7 @@ public class DictionarySettingForm
 		}
 		else {
 			for (int language = 0; language <= settingsIndex; ++language) {
-				if (DictionaryDataFile.supportedLanguages[language].isSearchable) {
+				if (dictionary.supportedLanguages[language].isSearchable) {
 					++choiceGroupIndex;
 				}
 			}
@@ -719,6 +727,7 @@ public class DictionarySettingForm
 	}
 	
 	public int inputLanguageChoiceGroupToSettings(int choiceGroupIndex) {
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
 		int settingsIndex = -1;
 		int visibleLanguageIndex = -1;
 		if (choiceGroupIndex == inputLanguageChoiceGroup.size()-1) {
@@ -728,7 +737,7 @@ public class DictionarySettingForm
 		else {
 			while (visibleLanguageIndex < choiceGroupIndex) {
 				++settingsIndex;
-				if (DictionaryDataFile.supportedLanguages[settingsIndex].isSearchable)
+				if (dictionary.supportedLanguages[settingsIndex].isSearchable)
 					++visibleLanguageIndex;
 			}
 		}

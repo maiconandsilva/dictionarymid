@@ -19,6 +19,7 @@ import de.kugihan.dictionaryformids.dataaccess.content.SelectionMode;
 import de.kugihan.dictionaryformids.general.Util;
 import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
 import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs;
 import de.kugihan.dictionaryformids.hmi_java_me.mainform.MainForm;
 
 public  class StringColourItem extends CustomItem  {
@@ -63,8 +64,9 @@ public  class StringColourItem extends CustomItem  {
   	nItems = stringColourItemText.size();
   	itemTextWrap = new String[nItems];
   	itemLeft = new int[nItems];
-  	isUseBackgroundColour = DictionaryDataFile.isUseBackgroundColour();
-  	if(isUseBackgroundColour) backgroundColour = DictionaryDataFile.getBackgroundColour();
+  	DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary(); 
+  	isUseBackgroundColour = dictionary.isUseBackgroundColour();
+  	if(isUseBackgroundColour) backgroundColour = dictionary.getBackgroundColour();
   	systemBackgroundColour = applicationMainForm.systemBackgroundColour;
   	initValue();
   	// height

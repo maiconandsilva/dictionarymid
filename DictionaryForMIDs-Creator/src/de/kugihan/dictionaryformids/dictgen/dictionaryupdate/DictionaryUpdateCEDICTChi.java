@@ -91,7 +91,7 @@ public class DictionaryUpdateCEDICTChi extends DictionaryUpdate {
 	public String createKeyWordsExpression(String expression)  
 				throws DictionaryException {
 		String keyWordsExpression;
-		if (DictionaryDataFile.dictionaryGenerationOmitParFromIndex) {
+		if (dictionary.dictionaryGenerationOmitParFromIndex) {
 			keyWordsExpression = expression;
 		}
 		else {

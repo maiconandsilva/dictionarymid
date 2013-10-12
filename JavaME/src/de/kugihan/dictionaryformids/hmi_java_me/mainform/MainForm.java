@@ -92,7 +92,7 @@ public class MainForm
 	DfMCommand backToTranslationList = null;
 	
 	public Display display;
-	DictionaryForMIDs dictionaryForMIDsMidlet;
+	public DictionaryForMIDs dictionaryForMIDsMidlet;
 	DictionarySettingForm dictionarySettingFormObj = null;
 	ContentParser contentParserObj;
 	WordHistory wordHistoryObj;
@@ -110,13 +110,13 @@ public class MainForm
 	int		translationListFocusedItemIndex;
 	
 	
-	public MainForm(DictionaryForMIDs DictionaryForMIDsMidletParam) {
+	public MainForm(DictionaryForMIDs dictionaryForMIDsMidletParam) {
 		super();
 		/*
 		 * Initialisation of required objects
 		 */
 		applicationMainForm = this; 
-		dictionaryForMIDsMidlet = DictionaryForMIDsMidletParam;
+		dictionaryForMIDsMidlet = dictionaryForMIDsMidletParam;
 		display = Display.getDisplay(dictionaryForMIDsMidlet);
 		contentParserObj = new ContentParser();
 		wordHistoryObj = new WordHistory();
@@ -385,22 +385,23 @@ public class MainForm
 	public void translateWord(String word,
 			  				  boolean executeInBackground)  
 			throws DictionaryException {
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
 		if (DictionarySettings.isDictionaryAvailable()) {
 			// for JSR75 support this needs to be done in a separate thread
 			if (DictionarySettings.isUseFileAccessJSR75())
 				executeInBackground = true;
 			// set parameters for translation:
-			boolean [] inputLanguages = new boolean[DictionaryDataFile.numberOfAvailableLanguages];
+			boolean [] inputLanguages = new boolean[dictionary.numberOfAvailableLanguages];
 			boolean [] outputLanguages;
 			if (DictionarySettings.getInputLanguage() != DictionarySettings.inputLanguageAll) {
-				for (int languageCount = 0; languageCount < DictionaryDataFile.numberOfAvailableLanguages; ++languageCount) 
+				for (int languageCount = 0; languageCount < dictionary.numberOfAvailableLanguages; ++languageCount) 
 					inputLanguages[languageCount] = false;
 				inputLanguages[DictionarySettings.getInputLanguage()] = true;
 				outputLanguages = DictionarySettings.getOutputLanguage();
 			}
 			else {
-				outputLanguages = new boolean[DictionaryDataFile.numberOfAvailableLanguages];
-				for (int languageCount = 0; languageCount < DictionaryDataFile.numberOfAvailableLanguages; ++languageCount) {
+				outputLanguages = new boolean[dictionary.numberOfAvailableLanguages];
+				for (int languageCount = 0; languageCount < dictionary.numberOfAvailableLanguages; ++languageCount) {
 					// search over all languages
 					inputLanguages[languageCount] = true;
 					outputLanguages[languageCount] = true;
@@ -408,7 +409,8 @@ public class MainForm
 			}
 
 			TranslationParameters translationParametersObj = 
-						new TranslationParameters(addSearchCharacters(word),
+						new TranslationParameters(dictionary,
+								                  addSearchCharacters(word),
 								                  inputLanguages,
 								                  outputLanguages,
 								                  executeInBackground,
@@ -526,7 +528,8 @@ public class MainForm
 			}
 			else {
 				// for support of legacy configuration files: use infoText when no dictionary information is there.
-				dictionaryInformation = DictionaryDataFile.infoText;
+				DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
+				dictionaryInformation = dictionary.infoText;
 			}
 		}
 		else {
@@ -618,6 +621,7 @@ public class MainForm
 	
 	public void updateSelectedLanguage() 
 				throws DictionaryException {
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
 		if (! DictionarySettings.isDictionaryAvailable()) {
 			// no dictionary loaded
 			setTitleUIDisplayTextItem(UIDisplayTextItems.MessageNoDictionaryLoaded);
@@ -636,9 +640,9 @@ public class MainForm
 				else {                                      
 					// indicate translation direction
 					UIDisplayTextItem inputLanguageUIDisplayTextItem = 
-						LanguageUI.getUI().getLanguageDisplayTextItem(DictionaryDataFile.supportedLanguages[DictionarySettings.getInputLanguage()].languageDisplayText);
+						LanguageUI.getUI().getLanguageDisplayTextItem(dictionary.supportedLanguages[DictionarySettings.getInputLanguage()].languageDisplayText);
 					UIDisplayTextItem outputLanguageUIDisplayTextItem = 
-						LanguageUI.getUI().getLanguageDisplayTextItem(DictionaryDataFile.supportedLanguages[DictionarySettings.determineOutputLanguage()].languageDisplayText);
+						LanguageUI.getUI().getLanguageDisplayTextItem(dictionary.supportedLanguages[DictionarySettings.determineOutputLanguage()].languageDisplayText);
 					UIDisplayTextItems.FromLanguageToLanguage.setAllParameterValues(
 															new Object [] { inputLanguageUIDisplayTextItem, 
 																	        outputLanguageUIDisplayTextItem });
@@ -803,11 +807,14 @@ public class MainForm
 	void displaySingleTranslation
 					(SingleTranslation singleTranslation)  
 				throws DictionaryException {
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
 		// display of "from text":
 		TextOfLanguage fromText = singleTranslation.getFromText();		
 		Item translationFromItem;
 		StringColourItemText translationFromItemText = 
-			contentParserObj.determineItemsFromContent(fromText, true, true);
+			contentParserObj.determineItemsFromContent(fromText, 
+                                                       true, 
+                                                       true);
 		int width = this.getWidth();
 		translationFromItem = mainFormItemsObj.createTranslationItem(translationFromItemText, true, width); 
 
@@ -827,7 +834,9 @@ public class MainForm
 					  (toText.getLanguageIndex() == fromText.getLanguageIndex()))) {
 					Item translationToItem;
 					StringColourItemText translationToItemText = 
-						contentParserObj.determineItemsFromContent(toText, true, false); 
+						contentParserObj.determineItemsFromContent(toText, 
+								                                   true, 
+								                                   false); 
 					translationToItem   = mainFormItemsObj.createTranslationItem(translationToItemText, false, width); 
 					addTranslationItem(translationToItem);
 					if (DictionarySettings.getShowTranslationList()) {
@@ -879,14 +888,18 @@ public class MainForm
 			
 	protected void readDisplayTextProperties() 
 				throws DictionaryException {
-		for (int displayTextCounter = 0; displayTextCounter < displayTextProperties.length; ++displayTextCounter) {
-			generateUIDisplayTextItem(displayTextProperties[displayTextCounter]);
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
+		if (dictionary != null) {
+			for (int displayTextCounter = 0; displayTextCounter < displayTextProperties.length; ++displayTextCounter) {
+				generateUIDisplayTextItem(displayTextProperties[displayTextCounter]);
+			}
 		}
 	}
 
 	protected void generateUIDisplayTextItem(String propertyName)
 			throws DictionaryException {
-		String displayText = DictionaryDataFile.getDisplayText(propertyName);
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
+		String displayText = dictionary.getDisplayText(propertyName);
 		if (displayText != null) {
 			LanguageUI.getUI().getUIDisplayTextItem(propertyName, displayText);
 		}
@@ -958,38 +971,41 @@ public class MainForm
 		}
 
 		// display the number of entries for each input language
-		for (int languageCounter = 0; languageCounter < DictionaryDataFile.numberOfAvailableLanguages; ++languageCounter) {
-			LanguageDefinition language = DictionaryDataFile.supportedLanguages[languageCounter]; 
-			if (language.isSearchable && (language.indexNumberOfSourceEntries > 0)) {
-				// prepare required UIDisplayTextItems
-				String languageDisplayText = DictionaryDataFile.supportedLanguages[languageCounter].languageDisplayText;
-				UIDisplayTextItem inputLanguageTextItem = 
-					LanguageUI.getUI().getUIDisplayTextItem
-				                   (LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + languageDisplayText, 
-				                    languageDisplayText);
-				String entriesUIDisplayTextItemTemplate = "StartDisplayLanguageNumberOfEntries";
-				UIDisplayTextItem entriesUIDisplayTextItem =  
-					LanguageUI.getUI().createUIDisplayTextItemFromTemplate
-				                   (entriesUIDisplayTextItemTemplate + language,
-				                    entriesUIDisplayTextItemTemplate);
-				entriesUIDisplayTextItem.setIconID(inputLanguageTextItem.getIconID());  // use the icon for the language
-				entriesUIDisplayTextItem.setParameterValue(1, inputLanguageTextItem);
-				entriesUIDisplayTextItem.setParameterValue(2, new Integer(language.indexNumberOfSourceEntries));
-				// first create icon
-				int iconSizeHeight = startupDisplayFont.getBaselinePosition();
-				int iconSizeWidth = (startupDisplayFont.getBaselinePosition()*4)/3; // flag icons have a bigger width than height
-				Image icon = entriesUIDisplayTextItem.getIcon(ResourceHandler.getResourceHandlerObj().iconSizeGroupSmall, 
-						                                      iconSizeHeight, 
-						                                      iconSizeWidth);
-				if (icon != null) {
-					ImageItem iconItem = new ImageItem(null, icon, Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2, null);
-					appendStartupDisplayItem(iconItem);
+		DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
+		if (dictionary != null) {
+			for (int languageCounter = 0; languageCounter < dictionary.numberOfAvailableLanguages; ++languageCounter) {
+				LanguageDefinition language = dictionary.supportedLanguages[languageCounter]; 
+				if (language.isSearchable && (language.indexNumberOfSourceEntries > 0)) {
+					// prepare required UIDisplayTextItems
+					String languageDisplayText = dictionary.supportedLanguages[languageCounter].languageDisplayText;
+					UIDisplayTextItem inputLanguageTextItem = 
+						LanguageUI.getUI().getUIDisplayTextItem
+					                   (LanguageUI.getUI().uiDisplayTextItemPrefixLanguage + languageDisplayText, 
+					                    languageDisplayText);
+					String entriesUIDisplayTextItemTemplate = "StartDisplayLanguageNumberOfEntries";
+					UIDisplayTextItem entriesUIDisplayTextItem =  
+						LanguageUI.getUI().createUIDisplayTextItemFromTemplate
+					                   (entriesUIDisplayTextItemTemplate + language,
+					                    entriesUIDisplayTextItemTemplate);
+					entriesUIDisplayTextItem.setIconID(inputLanguageTextItem.getIconID());  // use the icon for the language
+					entriesUIDisplayTextItem.setParameterValue(1, inputLanguageTextItem);
+					entriesUIDisplayTextItem.setParameterValue(2, new Integer(language.indexNumberOfSourceEntries));
+					// first create icon
+					int iconSizeHeight = startupDisplayFont.getBaselinePosition();
+					int iconSizeWidth = (startupDisplayFont.getBaselinePosition()*4)/3; // flag icons have a bigger width than height
+					Image icon = entriesUIDisplayTextItem.getIcon(ResourceHandler.getResourceHandlerObj().iconSizeGroupSmall, 
+							                                      iconSizeHeight, 
+							                                      iconSizeWidth);
+					if (icon != null) {
+						ImageItem iconItem = new ImageItem(null, icon, Item.LAYOUT_NEWLINE_BEFORE | Item.LAYOUT_2, null);
+						appendStartupDisplayItem(iconItem);
+					}
+					// second create display text
+					DfMStringItem numberOfEntriesForLanguageItem = new DfMStringItem(entriesUIDisplayTextItem);
+					numberOfEntriesForLanguageItem.setLayout(Item.LAYOUT_2);
+					numberOfEntriesForLanguageItem.setFont(startupDisplayFont);
+					appendStartupDisplayItem(numberOfEntriesForLanguageItem);
 				}
-				// second create display text
-				DfMStringItem numberOfEntriesForLanguageItem = new DfMStringItem(entriesUIDisplayTextItem);
-				numberOfEntriesForLanguageItem.setLayout(Item.LAYOUT_2);
-				numberOfEntriesForLanguageItem.setFont(startupDisplayFont);
-				appendStartupDisplayItem(numberOfEntriesForLanguageItem);
 			}
 		}
 		startupDisplayIsShown = true;

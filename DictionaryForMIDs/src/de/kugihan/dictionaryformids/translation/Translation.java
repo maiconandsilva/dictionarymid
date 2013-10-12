@@ -7,6 +7,7 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.translation;
 import java.util.Vector;
+
 import de.kugihan.dictionaryformids.dataaccess.*;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
@@ -14,16 +15,18 @@ import de.kugihan.dictionaryformids.translation.normation.Normation;
 
 public class Translation {
 
-	public String  		toBeTranslatedWordText; 
-	public boolean[]	inputLanguages;  
-	public boolean[]	outputLanguages; 
-	boolean 			searchSubExpressionStart;
-	boolean 			searchSubExpressionEnd;
-	int					maxHits;
-	int 				durationForCancelSearch;
+	public DictionaryDataFile	dictionary;
+	public String  				toBeTranslatedWordText; 
+	public boolean[]			inputLanguages;  
+	public boolean[]			outputLanguages; 
+	boolean 					searchSubExpressionStart;
+	boolean 					searchSubExpressionEnd;
+	int							maxHits;
+	int 						durationForCancelSearch;
 	
 	public Translation(TranslationParameters translationParametersObj) 
 						throws DictionaryException  {
+		dictionary = translationParametersObj.getDictionary();
 		toBeTranslatedWordText = translationParametersObj.getToBeTranslatedWordText();
 		inputLanguages = translationParametersObj.getInputLanguages();
 		outputLanguages = translationParametersObj.getOutputLanguages();
@@ -32,8 +35,8 @@ public class Translation {
 		maxHits = translationParametersObj.getMaxHits();
 		durationForCancelSearch = translationParametersObj.getDurationForCancelSearch();
 		
-		if ((inputLanguages.length != DictionaryDataFile.numberOfAvailableLanguages) || 
-			(outputLanguages.length != DictionaryDataFile.numberOfAvailableLanguages)) {
+		if ((inputLanguages.length != dictionary.numberOfAvailableLanguages) || 
+			(outputLanguages.length != dictionary.numberOfAvailableLanguages)) {
 			throw  new DictionaryException("Incorrect number of array elements for inputLanguages/outputLanguages"); 
 		}
 	}
@@ -84,14 +87,16 @@ public class Translation {
 		resultOfTranslation = new TranslationResult();
 		startTime = System.currentTimeMillis();
 		Util.memCheck("start translation: ");
+
+		resultOfTranslation.dictionary = dictionary; 
 		
 		try { 
-			for (int languageCount = 0; languageCount < DictionaryDataFile.numberOfAvailableLanguages; ++languageCount) {
-				LanguageDefinition languageDefinitionObj = DictionaryDataFile.supportedLanguages[languageCount];
+			for (int languageCount = 0; languageCount < dictionary.numberOfAvailableLanguages; ++languageCount) {
+				LanguageDefinition languageDefinitionObj = dictionary.supportedLanguages[languageCount];
 				if (languageDefinitionObj.isSearchable && inputLanguages[languageCount]) {
 					// search for this language
 					int inputLanguageForSearch = languageCount; 
-					Normation normationObj = DictionaryDataFile.supportedLanguages[inputLanguageForSearch].normationObj;
+					Normation normationObj = dictionary.supportedLanguages[inputLanguageForSearch].normationObj;
 					// determine search words from the to be translated word
 					Vector searchWords = normationObj.searchWord(toBeTranslatedWordText);
 					// get translation for each searchWord
@@ -129,15 +134,16 @@ public class Translation {
 		/* 
 		 * read searchlist file
 		 */
-		String languagePostfix = DictionaryDataFile.supportedLanguages[inputLanguageForSearch].languageFilePostfix;
-		String searchListFileName = DictionaryDataFile.getPathDataFiles() + 
-								    DictionaryDataFile.prefixSearchListFile + 
+		String languagePostfix = dictionary.supportedLanguages[inputLanguageForSearch].languageFilePostfix;
+		String searchListFileName = dictionary.getPathDataFiles() + 
+								    dictionary.prefixSearchListFile + 
 									languagePostfix +
-									DictionaryDataFile.suffixSearchListFile; 
-		CsvFile searchListFile = new CsvFile(searchListFileName,
-										     DictionaryDataFile.searchListFileSeparationCharacter,
-											 DictionaryDataFile.searchListCharEncoding,
-											 DictionaryDataFile.searchListFileMaxSize);
+									dictionary.suffixSearchListFile; 
+		CsvFile searchListFile = new CsvFile(dictionary.getDictionaryDataFileISAccess(),
+				                             searchListFileName,
+										     dictionary.searchListFileSeparationCharacter,
+											 dictionary.searchListCharEncoding,
+											 dictionary.searchListFileMaxSize);
 		
 		Util.memCheck("searchfile open: ");
 		String indexFileNumber = null;
@@ -231,12 +237,12 @@ public class Translation {
 	public void searchInIndexFile(int inputLanguageForSearch, String toBeTranslatedWordNormated, String indexFileNumber) 
 	                        throws DictionaryException  {
 		Util.getUtil().logDebug("indexFileNumber " + indexFileNumber);
-		String languagePostfix = DictionaryDataFile.supportedLanguages[inputLanguageForSearch].languageFilePostfix;
-		String indexFileName = DictionaryDataFile.getPathDataFiles() + 
-	                           DictionaryDataFile.prefixIndexFile +
+		String languagePostfix = dictionary.supportedLanguages[inputLanguageForSearch].languageFilePostfix;
+		String indexFileName = dictionary.getPathDataFiles() + 
+	                           dictionary.prefixIndexFile +
 							   languagePostfix +
 							   indexFileNumber +
-		                       DictionaryDataFile.suffixIndexFile;
+		                       dictionary.suffixIndexFile;
 
 		/* 
 		 * read index file
@@ -255,10 +261,11 @@ public class Translation {
 		String indexStringLine = null;
 		Util.getUtil().logDebug("indexFileName " + indexFileName);
 		
-		CsvFile indexFile = new CsvFile(indexFileName,
-						    DictionaryDataFile.indexFileSeparationCharacter,
-							DictionaryDataFile.indexCharEncoding,
-							DictionaryDataFile.indexFileMaxSize);
+		CsvFile indexFile = new CsvFile(dictionary.getDictionaryDataFileISAccess(),
+                                 		indexFileName,
+									    dictionary.indexFileSeparationCharacter,
+										dictionary.indexCharEncoding,
+										dictionary.indexFileMaxSize);
 
 		Util.memCheck("indexfile open: ");
 		indexFile.setPositionBefore(initialSearchExpression);
@@ -429,7 +436,7 @@ public class Translation {
 		int posLastCharIndexString;
 		do {
 			posIndexFileSeparatorIndexEntries = 
-				indexStringLine.indexOf(DictionaryDataFile.indexFileSeparatorIndexEntries, 
+				indexStringLine.indexOf(dictionary.indexFileSeparatorIndexEntries, 
 						                posFirstCharIndexString);
 			if (posIndexFileSeparatorIndexEntries == -1)
 				posLastCharIndexString = indexStringLine.length();
@@ -439,11 +446,11 @@ public class Translation {
 					                                       posLastCharIndexString);
 			posFirstCharIndexString = posLastCharIndexString + 1;
 			int posIndexFileSeparatorFileNumberToPosition = 
-			        indexString.indexOf(DictionaryDataFile.indexFileSeparatorFileNumberToPosition);
+			        indexString.indexOf(dictionary.indexFileSeparatorFileNumberToPosition);
 			String directoryFileNumberString = indexString.substring(0, posIndexFileSeparatorFileNumberToPosition);
 			int directoryFileNumber = Integer.parseInt(directoryFileNumberString);
 			int posIndexFileSeparatorFilePositionToSearchIndicator = 
-				    indexString.indexOf(DictionaryDataFile.indexFileSeparatorFilePositionToSearchIndicator, 
+				    indexString.indexOf(dictionary.indexFileSeparatorFilePositionToSearchIndicator, 
 				    		            posIndexFileSeparatorFileNumberToPosition + 1);
 			if (posIndexFileSeparatorFilePositionToSearchIndicator == -1) {
 				throw new DictionaryException("Indexfile has no searchindicator - use DictionaryGeneration 2.4.4 or newer");
@@ -459,7 +466,7 @@ public class Translation {
 			else {
 				// ok, get the corresponding dictionary entry 
 				String postfixDictionaryFile;
-				LanguageDefinition supportedLanguage = DictionaryDataFile.supportedLanguages[inputLanguageForSearch]; 
+				LanguageDefinition supportedLanguage = dictionary.supportedLanguages[inputLanguageForSearch]; 
 				if (supportedLanguage.hasSeparateDictionaryFile) {
 					// use the file postfix also for the dictionary file
 					postfixDictionaryFile =
@@ -496,17 +503,18 @@ public class Translation {
 			                   boolean foundAtBeginOfExpression) 
 			throws DictionaryException
 	{
-		String dictionaryFileName = DictionaryDataFile.getPathDataFiles() + 
-							        DictionaryDataFile.prefixDictionaryFile +
+		String dictionaryFileName = dictionary.getPathDataFiles() + 
+							        dictionary.prefixDictionaryFile +
 							        directoryFileLocation.postfixDictionaryFile +
 							        directoryFileLocation.directoryFileNumber +
-							        DictionaryDataFile.suffixDictionaryFile;
+							        dictionary.suffixDictionaryFile;
 		Util.getUtil().logDebug("dictionaryFileName " + dictionaryFileName);
 		Util.getUtil().logDebug("position " + String.valueOf(directoryFileLocation.positionInDirectoryFile));
-		CsvFile dictionaryFile = new CsvFile(dictionaryFileName, 
-	    							         DictionaryDataFile.dictionaryFileSeparationCharacter,
-											 DictionaryDataFile.dictionaryCharEncoding,
-											 DictionaryDataFile.dictionaryFileMaxSize,
+		CsvFile dictionaryFile = new CsvFile(dictionary.getDictionaryDataFileISAccess(),
+                							 dictionaryFileName, 
+	    							         dictionary.dictionaryFileSeparationCharacter,
+											 dictionary.dictionaryCharEncoding,
+											 dictionary.dictionaryFileMaxSize,
 											 directoryFileLocation.positionInDirectoryFile);
 
 		Util.memCheck("dictionaryfile open: ");
@@ -514,21 +522,21 @@ public class Translation {
 		Vector toTexts = new Vector();
 		
 		for (int indexLanguage = 0;
-  	         indexLanguage < DictionaryDataFile.numberOfAvailableLanguages;
+  	         indexLanguage < dictionary.numberOfAvailableLanguages;
 	         ++indexLanguage) {
 			StringBuffer word = dictionaryFile.getWord();
 
-			if ("weakCrypt".equals(DictionaryDataFile.fileEncodingFormat)) {
+			if ("weakCrypt".equals(dictionary.fileEncodingFormat)) {
 				weakDecrypt(word);
 			}
 
 			if (inputLanguageForSearch == indexLanguage) {
 				Util.getUtil().convertFieldAndLineSeparatorChars(word);
-				fromText = new TextOfLanguage(word.toString(), indexLanguage);
+				fromText = new TextOfLanguage(word.toString(), indexLanguage, dictionary);
 			}
 			if (outputLanguages[indexLanguage]) {
 				Util.getUtil().convertFieldAndLineSeparatorChars(word);
-				toTexts.addElement(new TextOfLanguage(word.toString(), indexLanguage));
+				toTexts.addElement(new TextOfLanguage(word.toString(), indexLanguage, dictionary));
 			}
 		}
 		addTranslation(fromText, 

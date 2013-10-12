@@ -10,6 +10,7 @@ package de.kugihan.dictionaryformids.dataaccess;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.DictionaryInterruptedException;
 import de.kugihan.dictionaryformids.general.Util;
@@ -24,34 +25,40 @@ public class CsvFile {
 	protected int position = 0;
 	protected int columnNumber = 0;
 	protected char separatorCharacter;	
+	protected DfMInputStreamAccess dictionaryDataFileISAccess;
 	protected String fileName;
 	protected int maxSizeOfFileData;
 	protected String  charEncoding;
 	
-	public CsvFile(String  fileNameParam,
+	public CsvFile(DfMInputStreamAccess dictionaryDataFileISAccessParam,
+                   String  fileNameParam,
 	       	       char    separatorCharacterParam,
 		       	   String  charEncodingParam,
 		       	   int     maxSizeOfFileDataParam) throws DictionaryException {
-		setParams(fileNameParam, separatorCharacterParam, charEncodingParam, maxSizeOfFileDataParam);
+		setParams(dictionaryDataFileISAccessParam, fileNameParam, separatorCharacterParam, charEncodingParam, maxSizeOfFileDataParam);
 		readCsvFileComplete();
 	}
 
-	public CsvFile(String  fileNameParam,
+	public CsvFile(DfMInputStreamAccess dictionaryDataFileISAccessParam,
+                   String  fileNameParam,
     	           char    separatorCharacterParam,
 		       	   String  charEncodingParam,
 		       	   int     maxSizeOfFileDataParam,
 		       	   int 	   startPositionParam) throws DictionaryException {
-		setParams(fileNameParam, separatorCharacterParam, charEncodingParam, maxSizeOfFileDataParam);
-		fileStorageObj = fileStorageReader.readCsvFileLine(fileName,
+		setParams(dictionaryDataFileISAccessParam, fileNameParam, separatorCharacterParam, charEncodingParam, maxSizeOfFileDataParam);
+		fileStorageObj = fileStorageReader.readCsvFileLine(dictionaryDataFileISAccess,
+				                                           fileName,
 														   charEncoding,
 														   startPositionParam);
 	}
 
-	private void setParams(String  fileNameParam,
+	private void setParams(DfMInputStreamAccess dictionaryDataFileISAccessParam,
+                           String  fileNameParam,
 				           char    separatorCharacterParam,
 				           String  charEncodingParam,
 				       	   int     maxSizeOfFileDataParam) {
-		separatorCharacter = separatorCharacterParam;
+		dictionaryDataFileISAccess = dictionaryDataFileISAccessParam;
+        separatorCharacter = separatorCharacterParam;
 		charEncoding       = charEncodingParam;
 		maxSizeOfFileData  = maxSizeOfFileDataParam;
 		fileName = fileNameParam;
@@ -60,7 +67,8 @@ public class CsvFile {
 	public void readCsvFileComplete() 
 	 						throws DictionaryException {
 		fileStorageObj = fileStorageReader.readFileToFileStorage
-									(fileName,
+									(dictionaryDataFileISAccess,
+								     fileName,
 									 charEncoding,
 				       	             maxSizeOfFileData);
 	}

@@ -84,8 +84,8 @@ public class DictionarySettings
 	}
 	public static int numberOfSearchableInputLanguages() {
 		int number = 0;
-		for (int language = 0; language < DictionaryDataFile.numberOfAvailableLanguages; ++language) {
-			if (DictionaryDataFile.supportedLanguages[language].isSearchable) {
+		for (int language = 0; language < getloadedDictionary().numberOfAvailableLanguages; ++language) {
+			if (getloadedDictionary().supportedLanguages[language].isSearchable) {
 				number++;
 			}
 		}
@@ -113,7 +113,7 @@ public class DictionarySettings
 	public static int determineOutputLanguage() throws DictionaryException {
 		int indexOutputLanguage = -1;
 		for (int indexLanguage = 0;
-	         indexLanguage < DictionaryDataFile.numberOfAvailableLanguages;
+	         indexLanguage < getloadedDictionary().numberOfAvailableLanguages;
 	         ++indexLanguage) {
 			if (DictionarySettings.getOutputLanguage(indexLanguage)) {
 				indexOutputLanguage = indexLanguage; 
@@ -200,6 +200,10 @@ public class DictionarySettings
 	}
 	public static void setDictionaryPath(String dictionaryPath) {
 		DictionarySettings.dictionaryPath = dictionaryPath;
+	}
+	
+	public static DictionaryDataFile getloadedDictionary() {
+		return DictionaryForSE.DictionaryForSEObj.getloadedDictionary();
 	}
 //	public static void setContentIsShown(boolean[] contentShown) {
 //		if (contentIsShown == null){

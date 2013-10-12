@@ -7,6 +7,8 @@
  */
 package de.kugihan.dictionaryformids.translation.normation.normationjpn;
 
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
+
 public class Parser
 {
 	private LookupTable lookuptable;
@@ -15,6 +17,10 @@ public class Parser
 	public Parser()
 	{
 		lookuptable = new LookupTable();
+	}
+
+	public void setDictionaryDataFileISAccess(DfMInputStreamAccess dictionaryDataFileISAccess) {
+		lookuptable.setDictionaryDataFileISAccess(dictionaryDataFileISAccess);
 	}
 
 	/**

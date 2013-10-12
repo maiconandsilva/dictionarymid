@@ -8,14 +8,15 @@ GPL applies - see file COPYING for copyright statement.
 package de.kugihan.dictionaryformids.general;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
-import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
 import java.io.IOException;
 import java.io.InputStream;
 
 public abstract class Util {
 
-	private static Util utilObj; 
+	private static Util utilObj = null; 
 		
+	// Prior to calling Util.getUtil you must call method Util.setUtil in order to set an utilObj
 	public static Util getUtil() {
 		return utilObj;
 	}
@@ -371,12 +372,13 @@ public abstract class Util {
 	
 	private Properties dictionaryForMIDsProperties;
 	
-	public void openProperties(String propertyPath) throws DictionaryException {
+	public void openProperties(DfMInputStreamAccess dictionaryDataFileISAccess,
+                               String propertyPath) throws DictionaryException {
 		dictionaryForMIDsProperties = new Properties();
 		String propertyFileName = propertyPath + DictionaryDataFile.propertyFileName;
 		InputStream propertyStream;
 		try {
-			propertyStream = FileAccessHandler.getDictionaryDataFileISAccess().getInputStream(propertyFileName);
+			propertyStream = dictionaryDataFileISAccess.getInputStream(propertyFileName);
 		}
 		catch (DictionaryException exception) {
 			throw new CouldNotOpenPropertyFileException();

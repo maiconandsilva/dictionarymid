@@ -10,14 +10,16 @@ package de.kugihan.dictionaryformids.dataaccess;
 import java.io.*;
 
 import de.kugihan.dictionaryformids.dataaccess.CsvFile;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 
 public class FileCsvFile extends CsvFile {
 
-	public FileCsvFile(String  fileName,
+	public FileCsvFile(DfMInputStreamAccess dictionaryDataFileISAccess,
+            		   String  fileName,
 			           char    separatorCharacter,
 					   String  charEncoding) throws DictionaryException {
-		super(fileName, separatorCharacter, charEncoding, (int) new File(fileName).length());
+		super(dictionaryDataFileISAccess, fileName, separatorCharacter, charEncoding, (int) new File(fileName).length());
 	}
 
 	/*

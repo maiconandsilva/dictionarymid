@@ -7,22 +7,30 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.translation;
 
+import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
+
 public class TextOfLanguage {
 	String text;
-	int	   languageIndex;  // index of the language where the text comes from
+	protected int languageIndex;             // index of the language where the text comes from
+	protected DictionaryDataFile dictionary;     // dictinary where the text comes from 
 	
-	public int getLanguageIndex() {
-		return languageIndex;
-	}
-
 	public String getText() {
 		return text;
 	}
 
-	public TextOfLanguage(String text, int languageIndex) {
+	public int getLanguageIndex() {
+		return languageIndex;
+	}
+
+	public DictionaryDataFile getDictionary() {
+		return dictionary;
+	}
+
+	public TextOfLanguage(String text, int languageIndex, DictionaryDataFile dictionaryParam) {
 		super();
 		this.text = text;
 		this.languageIndex = languageIndex;
+		this.dictionary = dictionaryParam;
 	}
 
 }

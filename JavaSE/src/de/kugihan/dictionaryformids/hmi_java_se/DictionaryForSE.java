@@ -21,6 +21,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
@@ -59,7 +60,6 @@ import javax.swing.table.TableCellRenderer;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dataaccess.content.FontStyle;
-import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.JarInputStreamAccess;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
@@ -142,6 +142,12 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	private JComboBox cbFont;
 	private String fontName = "SansSerif";
 
+	public  static DictionaryForSE DictionaryForSEObj; 
+	private DictionaryDataFile dictionary;
+	public  DictionaryDataFile getloadedDictionary() {
+		return dictionary;
+	}
+
 	public static void main(String[] args) throws DictionaryException
 	{
 		UtilWin utilObj = new UtilWin();
@@ -156,6 +162,8 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	
 	public DictionaryForSE() throws DictionaryException
 	{
+		DictionaryForSEObj = this;
+		
 		initGUI();
 		
 		loadPrefs();
@@ -398,8 +406,8 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		dtm.addColumn(languages.elementAt(0));
 		dtm.addColumn(languages.elementAt(1));
 		
-		tfLeft.setEnabled(DictionaryDataFile.supportedLanguages[languagesAll.indexOf(languages.elementAt(0))].isSearchable);
-		tfRight.setEnabled(DictionaryDataFile.supportedLanguages[languagesAll.indexOf(languages.elementAt(1))].isSearchable);
+		tfLeft.setEnabled(dictionary.supportedLanguages[languagesAll.indexOf(languages.elementAt(0))].isSearchable);
+		tfRight.setEnabled(dictionary.supportedLanguages[languagesAll.indexOf(languages.elementAt(1))].isSearchable);
 	}
 	
 	private String getMenuFilename(String path)
@@ -440,49 +448,45 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	
 	private void loadDictionary(String fileName)
 	{
-		if (fileName == null)
+		try
 		{
-			if (languagesAll.size() == 0)
+			if (fileName == null)
 			{
-				loadLanguages();
+				if (languagesAll.size() == 0)
+				{
+					loadLanguages();
+				}
 			}
-		}
-		else if (DictionaryForSE.loadJar(fileName))
-		{
-			utilObj = new UtilWin();
-			Util.setUtil(utilObj);
-			try
+			else if (loadJar(fileName))
 			{
 				try
 				{
-					DictionaryDataFile.initValues(false);
+					loadLanguages();
+					lStatus.setText("Dictionary successfully loaded: " + (new File(fileName)).getName());
+					if (configLoaded)
+					{
+						saveDictHistory(fileName, false);
+					}
+					
 				}
-				catch (DictionaryException e)
-				{
-					showDictInitError();
+				catch (Throwable t)
+				{ 
+					loadLanguages();
+					showDictionaryError(t.toString());
 				}
-
-				loadLanguages();
-				lStatus.setText("Dictionary successfully loaded: " + (new File(fileName)).getName());
-				if (configLoaded)
-				{
-					saveDictHistory(fileName, false);
-				}
-				
 			}
-			catch (Throwable t)
-			{ 
-				loadLanguages();
-				showDictionaryError(t.toString());
+			else
+			{
+				showErrorFileNotFound(fileName);
+				if (languagesAll.size() == 0)
+				{
+					loadLanguages();
+				}
 			}
 		}
-		else
+		catch (DictionaryException e)
 		{
-			showErrorFileNotFound(fileName);
-			if (languagesAll.size() == 0)
-			{
-				loadLanguages();
-			}
+			showDictInitError();
 		}
 	}
 	
@@ -493,11 +497,11 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 			languagesAll.clear();
 			boolean colourSupportNeeded = false;
 			
-			for (int language = 0; language < DictionaryDataFile.numberOfAvailableLanguages; ++language)
+			for (int language = 0; language < dictionary.numberOfAvailableLanguages; ++language)
 			{
-				languagesAll.addElement(DictionaryDataFile.supportedLanguages[language].languageDisplayText);
+				languagesAll.addElement(dictionary.supportedLanguages[language].languageDisplayText);
 				
-				if (DictionaryDataFile.supportedLanguages[language].contentDefinitionAvailable)
+				if (dictionary.supportedLanguages[language].contentDefinitionAvailable)
 				{
 					colourSupportNeeded = true;
 				}
@@ -617,7 +621,8 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		timerStatus.start();
 	}
 	
-	private static boolean loadJar(String jarFile)
+	private boolean loadJar(String jarFile)
+		throws DictionaryException
 	{
 		try
 		{
@@ -631,12 +636,12 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 			{
 				jar = new JarFile(check);
 				// use this jar-file for access to dictionary data files:
-				FileAccessHandler.setDictionaryDataFileISAccess(new JarInputStreamAccess(jar));
+				dictionary = TranslationExecution.loadDictionary(new JarInputStreamAccess(jar));
 				return true;
 			}
 			return false;
 		}
-		catch (Exception e)
+		catch (IOException e)
 		{
 			e.printStackTrace();
 			return false;
@@ -670,7 +675,7 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 	private void showDictInfo()
 	{
 		JOptionPane.showMessageDialog(this,
-				DictionaryDataFile.infoText,
+				dictionary.infoText,
 				"Dictionary Information",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
@@ -693,13 +698,14 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 				try
 				{
 					lStatus.setText("Searching...");
-					boolean [] inputLanguages = new boolean[DictionaryDataFile.numberOfAvailableLanguages];
-					for (int languageCount = 0; languageCount < DictionaryDataFile.numberOfAvailableLanguages; ++languageCount)
+					boolean [] inputLanguages = new boolean[dictionary.numberOfAvailableLanguages];
+					for (int languageCount = 0; languageCount < dictionary.numberOfAvailableLanguages; ++languageCount)
 						inputLanguages[languageCount] = false;
 					inputLanguages[DictionarySettings.getInputLanguage()] = true;
 					boolean [] outputLanguages = DictionarySettings.getOutputLanguage();
 					TranslationParameters translationParametersObj = 
-								new TranslationParameters(lastSearch,
+								new TranslationParameters(dictionary,
+														  lastSearch,
 										                  inputLanguages,
 										                  outputLanguages,
 										                  false,  // no background execution
@@ -929,7 +935,9 @@ implements ActionListener, TranslationExecutionCallback, MouseListener, Document
 		{
 			ContentParser cp = new ContentParser();
 			StringColourItemText result = 
-							cp.determineItemsFromContent(new TextOfLanguage(text, languageIndex), false, false);
+							cp.determineItemsFromContent(new TextOfLanguage(text, languageIndex, dictionary), 
+									                     false, 
+									                     false);
 			StringBuffer returnString = new StringBuffer();
 			String lastColour = null;
 			

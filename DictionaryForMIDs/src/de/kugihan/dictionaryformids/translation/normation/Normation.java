@@ -10,9 +10,12 @@ package de.kugihan.dictionaryformids.translation.normation;
 
 import java.util.Vector;
 
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
 import de.kugihan.dictionaryformids.translation.SearchedWord;
 
 public class Normation {
+
+    public  DfMInputStreamAccess dictionaryDataFileISAccess;  // used for accessing the files of the dictionary, e.g. translation tables
 
 	// Old normateWord without parameter fromUserInput
 	public StringBuffer normateWord(StringBuffer nonNormatedWord) {

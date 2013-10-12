@@ -7,123 +7,111 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.translation;
 
+import java.util.Enumeration;
+import java.util.Vector;
+
+import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
 import de.kugihan.dictionaryformids.general.*;
 
 public class TranslationExecution {
 
-	protected static TranslationThread lastTranslationThread = null;
+	protected static Vector lastTranslationThreads = new Vector();  // Vector with elements of TranslationThreadIF 
 	
-	protected static TranslationExecutionCallback translationResultHMIObj;
+	protected static TranslationThreadFactoryIF translationThreadFactoryObj = new TranslationThreadFactoryJava();  // WebApp uses TranslationThreadFactoryJavascript instead
+
+	public    static void setTranslationThreadFactory(TranslationThreadFactoryIF translationThreadFactoryParam) {
+		translationThreadFactoryObj = translationThreadFactoryParam;
+	}
+	
+	protected static TranslationThreadCallback accessToHMIObj = new TranslationThreadCallback();
 	
 	public static void setTranslationExecutionCallback(TranslationExecutionCallback translationResultHMIObjParam) {
-		translationResultHMIObj = translationResultHMIObjParam;
+		// forward to accessToHMIObj 
+		accessToHMIObj.setTranslationExecutionCallback(translationResultHMIObjParam);
 	}
 	
-	public synchronized static void executeTranslation(TranslationParameters translationParametersObj)
+	public static DictionaryDataFile loadDictionary(DfMInputStreamAccess dictionaryDataFileISAccessParam) 
+				throws DictionaryException {
+		return new DictionaryDataFile(dictionaryDataFileISAccessParam,
+				                      false);  // do not read properties for DictionaryGeneration
+	}
+	
+	public static DictionaryDataFile loadDictionaryWithDictionaryGenerationValues(DfMInputStreamAccess dictionaryDataFileISAccessParam) 
+				throws DictionaryException {
+		return new DictionaryDataFile(dictionaryDataFileISAccessParam,
+				                      true);  // do read properties for DictionaryGeneration
+	}
+	
+	public static void unloadDictionary(DictionaryDataFile dictionary) {
+		// nothing to be done (possibly for a future extension)
+	}
+
+	public static void executeTranslationBatch(TranslationParametersBatch translationParametersBatchObj)
 	throws DictionaryException
 	{
-		cancelLastTranslation();
-		TranslationThread newTranslationThread = new TranslationThread(translationParametersObj);
-	    if (translationParametersObj.isExecuteInBackground()) {
-	    	// start new translation thread
-	    	Thread executionThread = new Thread(newTranslationThread);
-	    	newTranslationThread.setOwnExecutionThread(executionThread);
-	    	lastTranslationThread = newTranslationThread;
-	    	executionThread.start();
-	    }
-	    else {
-	    	newTranslationThread.runInForeground();
-	    }
+		synchronized (accessToHMIObj) {
+			cancelLastTranslation();
+			accessToHMIObj.newTranslation();
+			Enumeration allTranslationParameters = translationParametersBatchObj.getAllTranslationParameters();
+			while (allTranslationParameters.hasMoreElements()) {
+				TranslationParameters translationParametersObj = (TranslationParameters) allTranslationParameters.nextElement(); 
+				TranslationThreadIF newTranslationThread = translationThreadFactoryObj.getTranslationThread(accessToHMIObj, translationParametersObj);
+		    	lastTranslationThreads.addElement(newTranslationThread);
+		    	// start new translation thread
+				newTranslationThread.startTranslation();
+			}
+		}
 	}
 	
-	public synchronized static void cancelLastTranslation() {
-		// cancel last translation thread that may still be running
-		if (lastTranslationThread != null) {
-			lastTranslationThread.cancelTranslation();
-			lastTranslationThread = null;
+	public static void executeTranslation(TranslationParameters translationParametersObj)
+	throws DictionaryException
+	{
+		TranslationParametersBatch translationParametersBatchObj = new TranslationParametersBatch();
+		translationParametersBatchObj.addTranslationParameters(translationParametersObj);
+		executeTranslationBatch(translationParametersBatchObj);
+	}
+	
+	public static void cancelLastTranslation() {
+		synchronized (accessToHMIObj) {
+			// cancel last translation threads that may still be running
+			Enumeration lastTranslationThreadsEnum = lastTranslationThreads.elements();
+			while (lastTranslationThreadsEnum.hasMoreElements()) {
+					TranslationThreadIF lastTranslationThreadToBeCancelled = (TranslationThreadIF) lastTranslationThreadsEnum.nextElement();
+					lastTranslationThreadToBeCancelled.cancelTranslation();
+			}
 		}
+			lastTranslationThreads.removeAllElements();
 	}
 }
 
-class TranslationThread implements Runnable {
 
-	protected volatile boolean translationIsCancelled = false;  // indicates whether the running translation should be aborted
-	protected Translation translate = null;
-	protected Thread ownExecutionThread;
-	protected TranslationParameters translationParametersObj;
+class TranslationThreadCallback implements TranslationThreadCallbackIF {
+
+	protected TranslationExecutionCallback translationResultHMIObj = null;
+	protected boolean noTranslationDoneYet;
 	
-	public TranslationThread(TranslationParameters translationParametersObjParam) {
-		translationParametersObj = translationParametersObjParam;
+	synchronized void setTranslationExecutionCallback(TranslationExecutionCallback translationResultHMIObjParam) {
+		translationResultHMIObj = translationResultHMIObjParam;
 	}
 	
-	public void setOwnExecutionThread(Thread threadParam) {
-		ownExecutionThread = threadParam;
+	synchronized void newTranslation() {
+		noTranslationDoneYet = true;
 	}
 	
-	// called from separate thread:
-	public void run()
-	{
-		try
-		{
-			doTranslation();			
-		}
-		catch (Throwable t)
-		{
-			Util.getUtil().log(t);
-		}
-	}
-	
-	// called directly (not from separate thread):
-	public void runInForeground()
-	throws DictionaryException
-	{
-		doTranslation();
-	}
-	
-	protected void doTranslation()
-	throws DictionaryException
-	{
-		// delete previous translation result
-		synchronized(this) {
-			if (!translationIsCancelled)
-				TranslationExecution.translationResultHMIObj.deletePreviousTranslationResult();
-		}
-		
-		if (translationParametersObj.isExecuteInBackground()) {
-		    // set a low priority for the thread
-			ownExecutionThread.setPriority(Thread.NORM_PRIORITY - 2);
-		}
-		
-		// get new translation
-		if (! translationParametersObj.toBeTranslatedWordTextIsEmpty()) {
-			translate = new Translation(translationParametersObj);
-			TranslationResult resultOfTranslation = null;
-			
-			if (!translationIsCancelled)
-				resultOfTranslation = translate.getTranslationResult();
-			
-			// display new result
-			synchronized(this) {
-				if (!translationIsCancelled)
-					TranslationExecution.translationResultHMIObj.newTranslationResult(resultOfTranslation);
+	public synchronized void translationDone(TranslationResult resultOfTranslation,
+										 	 TranslationThreadIF callingThread) 
+										 			 throws DictionaryException {
+		if (! callingThread.translationIsCancelled()) {
+			if (translationResultHMIObj == null) {
+				throw new DictionaryException("No callback for translation results set. Call TranslationExecution.setTranslationExecutionCallback.");
 			}
-			translate = null;
-		}
-	}
-
-	public synchronized void cancelTranslation() {
-		// cancels a running translation
-		
-		// set flag for cancelled translation
-		translationIsCancelled = true;
-		
-		// forward cancelling to translate-object
-		if (translate != null) {
-			translate.cancelTranslation();
-		
-			// Send interrupt to translation thread 
-			// (Thread.interrupt requires at minimum CLDC 1.1)
-			ownExecutionThread.interrupt();
+			// if this is the first translation result for a translation, then delete previous translation result
+			if (noTranslationDoneYet) {
+				translationResultHMIObj.deletePreviousTranslationResult();
+				noTranslationDoneYet = false;
+			}
+			translationResultHMIObj.newTranslationResult(resultOfTranslation);
 		}
 	}
 }

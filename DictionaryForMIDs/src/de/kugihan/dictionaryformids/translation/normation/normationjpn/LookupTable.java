@@ -10,7 +10,9 @@ package de.kugihan.dictionaryformids.translation.normation.normationjpn;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Hashtable;
+
 import de.kugihan.dictionaryformids.dataaccess.CsvFile;
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 
 public class LookupTable
@@ -24,18 +26,25 @@ public class LookupTable
 
 	private final int maxSize = 20480; // 20KB max
 
+	protected DfMInputStreamAccess dictionaryDataFileISAccess;
+	
 	/** Creates a new instance of LookupTable */
 	public LookupTable()
 	{
 	}
 
-	private Hashtable initialiseTable(String filename, boolean reverse)
+	public void setDictionaryDataFileISAccess(DfMInputStreamAccess dictionaryDataFileISAccessParam) {
+		dictionaryDataFileISAccess = dictionaryDataFileISAccessParam;
+	}
+	
+	private Hashtable initialiseTable(String filename, 
+                                      boolean reverse)
 			throws UnsupportedEncodingException, IOException
 	{
 		Hashtable map = new Hashtable();
 		try
 		{
-			CsvFile file = new CsvFile(filename, '=', "UTF-8", maxSize);
+			CsvFile file = new CsvFile(dictionaryDataFileISAccess, filename, '=', "UTF-8", maxSize);
 			file.readCsvFileComplete();
 
 			String left;

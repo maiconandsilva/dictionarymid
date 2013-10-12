@@ -29,7 +29,6 @@ import de.kugihan.dictionaryformids.dataaccess.CsvFile;
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dataaccess.FileCsvFile;
 import de.kugihan.dictionaryformids.dataaccess.LanguageDefinition;
-import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileDfMInputStreamAccess;
 import de.kugihan.dictionaryformids.dictgen.dictionaryupdate.DictionaryUpdate;
 import de.kugihan.dictionaryformids.general.DictionaryException;
@@ -47,6 +46,7 @@ import javax.swing.JOptionPane;
 
 public class DictionaryGeneration {
 
+	private static DictionaryDataFile dictionary; 
     private static String FILE_SEPARATOR = System.getProperty("file.separator");
     private static String sourceFile;
     private static String directoryDestination;
@@ -178,7 +178,8 @@ public class DictionaryGeneration {
                 fileAccessError = true;
             }
             /* read properties */
-            if (!utilObj.readProperties(propertyPath, true)) {
+            dictionary = utilObj.readProperties(propertyPath, true);
+            if (dictionary == null) {
                 System.err.println(I18n.tr("propFError", new Object[]{utilObj.buildPropertyFileName(propertyPath)}));
                 fileAccessError = true;
             }
@@ -216,20 +217,20 @@ public class DictionaryGeneration {
          */
         System.out.println(I18n.tr("creatingDict"));
         FileDfMInputStreamAccess dfmInputStreamObj = new FileDfMInputStreamAccess("");
-        FileAccessHandler.setDictionaryDataFileISAccess(dfmInputStreamObj);
-        CsvFile source = new FileCsvFile(sourceFile,
-                DictionaryDataFile.dictionaryGenerationSeparatorCharacter,
-                DictionaryDataFile.dictionaryGenerationInputCharEncoding);
+        CsvFile source = new FileCsvFile(dfmInputStreamObj,
+        		sourceFile,
+                dictionary.dictionaryGenerationSeparatorCharacter,
+                dictionary.dictionaryGenerationInputCharEncoding);
         String postfixDictionaryFile = new String();
-        IndexNumberOfSourceEntries = new long[DictionaryDataFile.numberOfAvailableLanguages];
+        IndexNumberOfSourceEntries = new long[dictionary.numberOfAvailableLanguages];
         boolean generateSeparateDictionaryFile = false;
-        HashMap indexOfNormatedWords[] = new HashMap[DictionaryDataFile.numberOfAvailableLanguages];
+        HashMap indexOfNormatedWords[] = new HashMap[dictionary.numberOfAvailableLanguages];
         contentParserObj = new ContentParser();
         for (int indexLanguage = 0;
-                indexLanguage < DictionaryDataFile.numberOfAvailableLanguages;
+                indexLanguage < dictionary.numberOfAvailableLanguages;
                 ++indexLanguage) {
             IndexNumberOfSourceEntries[indexLanguage] = 0;
-            LanguageDefinition supportedLanguage = DictionaryDataFile.supportedLanguages[indexLanguage];
+            LanguageDefinition supportedLanguage = dictionary.supportedLanguages[indexLanguage];
             if (supportedLanguage.generateIndex) {
                 indexOfNormatedWords[indexLanguage] = new HashMap();
                 if (supportedLanguage.hasSeparateDictionaryFile) {
@@ -242,7 +243,7 @@ public class DictionaryGeneration {
                     }
                 }
             }
-            DictionaryUpdate DictionaryUpdateObj = (DictionaryUpdate) DictionaryDataFile.supportedLanguages[indexLanguage].dictionaryUpdateObj;
+            DictionaryUpdate DictionaryUpdateObj = (DictionaryUpdate) dictionary.supportedLanguages[indexLanguage].dictionaryUpdateObj;
             DictionaryUpdateObj.setIndexLanguage(indexLanguage);
         }
         String indexEntryDictionary;
@@ -256,7 +257,7 @@ public class DictionaryGeneration {
         try {
             while (!source.endOfDictionaryReached) {
                 String directoryLine = new String();
-                if ((numberOfEntriesInDictionaryFile >= DictionaryDataFile.dictionaryGenerationMinNumberOfEntriesPerDictionaryFile)
+                if ((numberOfEntriesInDictionaryFile >= dictionary.dictionaryGenerationMinNumberOfEntriesPerDictionaryFile)
                         || (destination == null)) {
                     ++dictionaryFileNumber;
                     if (destination != null) {
@@ -264,26 +265,26 @@ public class DictionaryGeneration {
                         numberOfEntriesInDictionaryFile = 0;
                         positionInDictionaryFile = 0;
                     }
-                    directoryFileName = new String(DictionaryDataFile.prefixDictionaryFile
+                    directoryFileName = new String(dictionary.prefixDictionaryFile
                             + postfixDictionaryFile
                             + String.valueOf(dictionaryFileNumber)
-                            + DictionaryDataFile.suffixDictionaryFile);
+                            + dictionary.suffixDictionaryFile);
                     directoryFileName = directoryDestination + directoryFileName;
                     destination = new OutputStreamWriter(new FileOutputStream(directoryFileName),
-                            DictionaryDataFile.dictionaryCharEncoding);
+                            dictionary.dictionaryCharEncoding);
                 }
                 for (int indexLanguage = 0;
-                        indexLanguage < DictionaryDataFile.numberOfAvailableLanguages;
+                        indexLanguage < dictionary.numberOfAvailableLanguages;
                         ++indexLanguage) {
-                    DictionaryUpdate DictionaryUpdateObj = (DictionaryUpdate) DictionaryDataFile.supportedLanguages[indexLanguage].dictionaryUpdateObj;
-                    Normation normationObj = DictionaryDataFile.supportedLanguages[indexLanguage].normationObj;
+                    DictionaryUpdate DictionaryUpdateObj = (DictionaryUpdate) dictionary.supportedLanguages[indexLanguage].dictionaryUpdateObj;
+                    Normation normationObj = dictionary.supportedLanguages[indexLanguage].normationObj;
                     String sourceExpression = source.getWord().toString();
                     keyWordsDictionaryNonNormated = DictionaryUpdateObj.updateDictionaryExpression(sourceExpression);
-                    if (DictionaryDataFile.supportedLanguages[indexLanguage].generateIndex) {
+                    if (dictionary.supportedLanguages[indexLanguage].generateIndex) {
                         Vector keyWordVector = DictionaryUpdateObj.createKeyWordVector(sourceExpression,
-                                DictionaryDataFile.supportedLanguages[indexLanguage].expressionSplitString);
+                                dictionary.supportedLanguages[indexLanguage].expressionSplitString);
                         DictionaryUpdateObj.updateKeyWordVector(keyWordVector);
-                        if (keyWordVector.size() > DictionaryDataFile.dictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit) {
+                        if (keyWordVector.size() > dictionary.dictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit) {
                             printMaxIndexKeyEntriesWarning(numberOfEntriesDictionaryTotal + 1,
                                     indexLanguage + 1,
                                     sourceExpression);
@@ -297,16 +298,16 @@ public class DictionaryGeneration {
                             indexEntryDictionary = normationObj.normateWord(new StringBuffer(keyWordNonNormated), false).toString();
                             if (indexEntryDictionary.length() > 0) {
                                 indexString = String.valueOf(dictionaryFileNumber)
-                                        + DictionaryDataFile.indexFileSeparatorFileNumberToPosition
+                                        + dictionary.indexFileSeparatorFileNumberToPosition
                                         + String.valueOf(positionInDictionaryFile)
-                                        + DictionaryDataFile.indexFileSeparatorFilePositionToSearchIndicator
+                                        + dictionary.indexFileSeparatorFilePositionToSearchIndicator
                                         + searchIndicatorObj.asChar();
                                 // check if entry already exists in map of normated words
                                 String existingEntry = (String) indexOfNormatedWords[indexLanguage].get(indexEntryDictionary);
                                 if (existingEntry != null) {
                                     // entry already existed: add reference
                                     indexString = existingEntry
-                                            + DictionaryDataFile.indexFileSeparatorIndexEntries
+                                            + dictionary.indexFileSeparatorIndexEntries
                                             + indexString;
                                 }
                                 indexOfNormatedWords[indexLanguage].put(indexEntryDictionary, indexString);
@@ -317,20 +318,20 @@ public class DictionaryGeneration {
                         }
                     }
                     directoryLine = directoryLine + keyWordsDictionaryNonNormated;
-                    if (indexLanguage < DictionaryDataFile.numberOfAvailableLanguages - 1) {
-                        directoryLine = directoryLine + DictionaryDataFile.dictionaryFileSeparationCharacter;
+                    if (indexLanguage < dictionary.numberOfAvailableLanguages - 1) {
+                        directoryLine = directoryLine + dictionary.dictionaryFileSeparationCharacter;
                     }
                 }
                 String directoryOutput = directoryLine + endOfLineString;
                 // calculate the number of used bytes
-                int lengthOfDictionaryEntry = directoryOutput.getBytes(DictionaryDataFile.dictionaryCharEncoding).length;
+                int lengthOfDictionaryEntry = directoryOutput.getBytes(dictionary.dictionaryCharEncoding).length;
                 positionInDictionaryFile += lengthOfDictionaryEntry;
                 if (positionInDictionaryFile > dictionaryFileMaxSize) {
                     dictionaryFileMaxSize = positionInDictionaryFile;
                 }
                 // write to file and increment counters
 
-                if ("weakCrypt".equals(DictionaryDataFile.fileEncodingFormat)) {
+                if ("weakCrypt".equals(dictionary.fileEncodingFormat)) {
                     directoryOutput = weakEncrypt(directoryOutput);
                 }
 
@@ -350,7 +351,7 @@ public class DictionaryGeneration {
          */
         System.out.println(I18n.tr("indexSearchlist"));
         for (int indexLanguage = 0;
-                indexLanguage < DictionaryDataFile.numberOfAvailableLanguages;
+                indexLanguage < dictionary.numberOfAvailableLanguages;
                 ++indexLanguage) {
             long numberOfEntriesInIndexFile = 0;
             long positionInIndexFile = 0;
@@ -358,17 +359,17 @@ public class DictionaryGeneration {
             OutputStreamWriter indexFile = null;
             String indexFileName = null;
 
-            if (!DictionaryDataFile.supportedLanguages[indexLanguage].generateIndex) {
+            if (!dictionary.supportedLanguages[indexLanguage].generateIndex) {
                 // do not generate an index for non-searchable parts: skip this language
                 continue;
             }
-            String languageFilePostfix = DictionaryDataFile.supportedLanguages[indexLanguage].languageFilePostfix;
+            String languageFilePostfix = dictionary.supportedLanguages[indexLanguage].languageFilePostfix;
             String searchListFileName = directoryDestination
-                    + DictionaryDataFile.prefixSearchListFile
+                    + dictionary.prefixSearchListFile
                     + languageFilePostfix
-                    + DictionaryDataFile.suffixSearchListFile;
+                    + dictionary.suffixSearchListFile;
             OutputStreamWriter searchListFile = new OutputStreamWriter(new FileOutputStream(searchListFileName),
-                    DictionaryDataFile.searchListCharEncoding);
+                    dictionary.searchListCharEncoding);
 
             Set indexSet = (new TreeMap(indexOfNormatedWords[indexLanguage])).entrySet();
             Iterator indexIterator = indexSet.iterator();
@@ -376,7 +377,7 @@ public class DictionaryGeneration {
                 Map.Entry indexEntry = (Map.Entry) indexIterator.next();
                 indexEntryDictionary = (String) indexEntry.getKey();
                 indexString = (String) indexEntry.getValue();
-                if ((numberOfEntriesInIndexFile >= DictionaryDataFile.dictionaryGenerationMinNumberOfEntriesPerIndexFile)
+                if ((numberOfEntriesInIndexFile >= dictionary.dictionaryGenerationMinNumberOfEntriesPerIndexFile)
                         || (indexFile == null)) {
                     ++indexFileNumber;
                     if (indexFile != null) {
@@ -384,27 +385,27 @@ public class DictionaryGeneration {
                         numberOfEntriesInIndexFile = 0;
                     }
                     indexFileName = directoryDestination
-                            + DictionaryDataFile.prefixIndexFile
+                            + dictionary.prefixIndexFile
                             + languageFilePostfix
                             + String.valueOf(indexFileNumber)
-                            + DictionaryDataFile.suffixIndexFile;
+                            + dictionary.suffixIndexFile;
                     indexFile = new OutputStreamWriter(new FileOutputStream(indexFileName),
-                            DictionaryDataFile.indexCharEncoding);
+                            dictionary.indexCharEncoding);
                     positionInIndexFile = 0;
                     String searchListOutput = indexEntryDictionary
-                            + DictionaryDataFile.searchListFileSeparationCharacter
+                            + dictionary.searchListFileSeparationCharacter
                             + String.valueOf(indexFileNumber)
                             + endOfLineString;
-                    int lengthOfSearchListEntry = searchListOutput.getBytes(DictionaryDataFile.searchListCharEncoding).length;
+                    int lengthOfSearchListEntry = searchListOutput.getBytes(dictionary.searchListCharEncoding).length;
                     searchListFileMaxSize += lengthOfSearchListEntry;
                     searchListFile.write(searchListOutput);
                     ++numberOfEntriesSearchListTotal;
                 }
                 String indexOutput = indexEntryDictionary
-                        + DictionaryDataFile.indexFileSeparationCharacter
+                        + dictionary.indexFileSeparationCharacter
                         + indexString
                         + endOfLineString;
-                int lengthOfIndexEntry = indexOutput.getBytes(DictionaryDataFile.indexCharEncoding).length;
+                int lengthOfIndexEntry = indexOutput.getBytes(dictionary.indexCharEncoding).length;
                 positionInIndexFile += lengthOfIndexEntry;
                 if (positionInIndexFile > indexFileMaxSize) {
                     indexFileMaxSize = positionInIndexFile;
@@ -422,10 +423,10 @@ public class DictionaryGeneration {
     public static void checkCsvFileFormat(String csvFileName) throws DictionaryException, IOException {
         System.out.println(I18n.tr("checking", new Object[]{csvFileName}));
         InputStreamReader csvFile = new InputStreamReader(new FileInputStream(csvFileName),
-                DictionaryDataFile.dictionaryGenerationInputCharEncoding);
+                dictionary.dictionaryGenerationInputCharEncoding);
         String csvFileLine;
         int lineCounter = 0;
-        char splitCharacter = DictionaryDataFile.dictionaryGenerationSeparatorCharacter;
+        char splitCharacter = dictionary.dictionaryGenerationSeparatorCharacter;
         while ((csvFileLine = readLineFromReader(csvFile)) != null) {
             ++lineCounter;
             // check if number of separator characters is correct
@@ -435,9 +436,9 @@ public class DictionaryGeneration {
                     numberOfSeparatorCharacters++;
                 }
             }
-            if (numberOfSeparatorCharacters != (DictionaryDataFile.numberOfAvailableLanguages - 1)) {
+            if (numberOfSeparatorCharacters != (dictionary.numberOfAvailableLanguages - 1)) {
                 DfMCreatorMain.printAnyMsg(I18n.tr("sepCharError", new Object[]{lineCounter,
-                    numberOfSeparatorCharacters, (DictionaryDataFile.numberOfAvailableLanguages - 1)}),
+                    numberOfSeparatorCharacters, (dictionary.numberOfAvailableLanguages - 1)}),
                         I18n.tr("incorrectFile"), JOptionPane.ERROR_MESSAGE);
 
                 throw new DictionaryException(I18n.tr("incorrectFile"));
@@ -451,7 +452,7 @@ public class DictionaryGeneration {
             throws DictionaryException {
         StringBuffer itemString;
         StringColourItemText stringColourItemText =
-                contentParserObj.determineItemsFromContent(new TextOfLanguage(contentString, indexLanguage), false, false);
+                contentParserObj.determineItemsFromContent(new TextOfLanguage(contentString, indexLanguage, dictionary), false, false);
         itemString = contentParserObj.getTextFromStringColourItemText(stringColourItemText);
         return itemString.toString();
     }
@@ -483,7 +484,7 @@ public class DictionaryGeneration {
             setFileMaxSizeProperty("indexFileMaxSize", indexFileMaxSize, dictionaryForMIDsProperties, fileNameSourcePropertyFile);
             setFileMaxSizeProperty("dictionaryFileMaxSize", dictionaryFileMaxSize, dictionaryForMIDsProperties, fileNameSourcePropertyFile);
             for (int indexLanguage = 0;
-                    indexLanguage < DictionaryDataFile.numberOfAvailableLanguages;
+                    indexLanguage < dictionary.numberOfAvailableLanguages;
                     ++indexLanguage) {
                 long numberOfBeginEntries = IndexNumberOfSourceEntries[indexLanguage];
                 if (numberOfBeginEntries > 0) {
@@ -533,7 +534,7 @@ public class DictionaryGeneration {
             int numberOfLanguage,
             String expression) {
         System.out.println("Note: more than "
-                + DictionaryDataFile.dictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit
+                + dictionary.dictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit
                 + " index entries for language number " + numberOfLanguage
                 + " in line " + lineInInputDictionaryFile + ".\n"
                 + "Expression is: \"" + expression + "\"");
@@ -541,7 +542,7 @@ public class DictionaryGeneration {
         System.out.println("Read the DfM-Creator documentation on 'Excluding text from the generated index files'");
         System.out.println("If you verified that index generation is correct, then set the "
                 + "property\ndictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit\nto a value higher than "
-                + DictionaryDataFile.dictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit + ".\n");
+                + dictionary.dictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit + ".\n");
     }
 
     /**

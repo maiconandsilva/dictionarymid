@@ -43,7 +43,8 @@ import java.util.zip.ZipEntry;
 
 public class JarCreator {
 
-    public static final String DFM_JAVA_ME_APP_VERSION = "3.5.8";
+	private static DictionaryDataFile dictionary; 
+    public static final String DFM_JAVA_ME_APP_VERSION = "3.5.9";
     public static final String EXTENSION_JAR = ".jar";
     public static final String EXTENSION_JAD = ".jad";
     public static final String FILE_EMPTY_JAR_NAME = DictionaryDataFile.applicationFileNamePrefix + EXTENSION_JAR;
@@ -202,7 +203,8 @@ public class JarCreator {
         // open property file
         String propertyPath = dictionarydirectory;
         /* read properties */
-        if (!utilObj.readProperties(propertyPath, false)) {
+        dictionary = utilObj.readProperties(propertyPath, false);
+        if (dictionary == null) {
             System.err.println(I18n.tr("propFileAccessError", new Object[]{utilObj.buildPropertyFileName(propertyPath)}));
             System.exit(1);
         }
@@ -367,18 +369,19 @@ public class JarCreator {
         UtilWin utilObj = new UtilWin();
         Util.setUtil(utilObj);
         String applicationUniqueIdentifier = new String("_");
-        if (!utilObj.readProperties(propertyPath, false)) {
+        DictionaryDataFile dictionary = utilObj.readProperties(propertyPath, false);
+        if (dictionary == null) {
             System.err.println(I18n.tr("propertyFileNotAccessible", new Object[]{utilObj.buildPropertyFileName(propertyPath)}));
             System.exit(1);
         }
         for (int indexLanguage = 0;
-                indexLanguage < DictionaryDataFile.numberOfAvailableLanguages;
+                indexLanguage < dictionary.numberOfAvailableLanguages;
                 ++indexLanguage) {
             applicationUniqueIdentifier = applicationUniqueIdentifier
-                    + DictionaryDataFile.supportedLanguages[indexLanguage].languageFilePostfix;
+                    + dictionary.supportedLanguages[indexLanguage].languageFilePostfix;
         }
-        if (DictionaryDataFile.dictionaryAbbreviation != null) {
-            applicationUniqueIdentifier = "_" + DictionaryDataFile.dictionaryAbbreviation + applicationUniqueIdentifier + "_" + DFM_JAVA_ME_APP_VERSION;
+        if (dictionary.dictionaryAbbreviation != null) {
+            applicationUniqueIdentifier = "_" + dictionary.dictionaryAbbreviation + applicationUniqueIdentifier + "_" + DFM_JAVA_ME_APP_VERSION;
             // produces for instance the name GCIDE_EngDef
         } else {
             System.err.println(I18n.tr("dictAbbrevError"));
@@ -414,8 +417,8 @@ public class JarCreator {
                     fileIsNeeded = false;
                 }
                 if (fileIsLanguageIconFile) {
-                    for (int language = 0; language < DictionaryDataFile.numberOfAvailableLanguages; ++language) {
-                        String languageDisplayText = DictionaryDataFile.supportedLanguages[language].languageDisplayText;
+                    for (int language = 0; language < dictionary.numberOfAvailableLanguages; ++language) {
+                        String languageDisplayText = dictionary.supportedLanguages[language].languageDisplayText;
                         String languageIconLocation =
                                 resourceHandlerObj.getResourceLocation(
                                 resourceHandlerObj.buildIconPathName(iconSize.iconArea,

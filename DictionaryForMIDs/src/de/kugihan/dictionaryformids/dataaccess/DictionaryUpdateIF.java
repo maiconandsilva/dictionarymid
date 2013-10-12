@@ -10,5 +10,7 @@ package de.kugihan.dictionaryformids.dataaccess;
 
 // Interface within DictionaryForMIDs for the DictionaryGeneration DictionaryUpdate classes
 public interface DictionaryUpdateIF {
-	// empty because DictionaryForMIDs does not use the DictionaryUpdate interface (only DictionaryGeneration)
+	// mostly empty because DictionaryForMIDs does not use the DictionaryUpdate interface (only DictionaryGeneration)
+	public DictionaryDataFile getDictionary();
+	public void               setDictionary(DictionaryDataFile dictionary);
 }

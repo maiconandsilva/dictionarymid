@@ -8,8 +8,10 @@ package de.kugihan.dictionaryformids.hmi_java_me.mainform.bitmapfont;
 
 import javax.microedition.lcdui.*;
 
-import de.kugihan.dictionaryformids.dataaccess.fileaccess.FileAccessHandler;
+import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText;
+import de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs;
+
 import java.io.InputStream;
 import java.io.DataInputStream;
 
@@ -57,7 +59,8 @@ public class BitmapFontCanvas extends CustomItem {
 	public static boolean bitmapFontExists() {
 		boolean fileExists = false;	
 		try {
-			fileExists = FileAccessHandler.getDictionaryDataFileISAccess().fileExists(bitmapFontSizesFile);
+			DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
+			fileExists = dictionary.getDictionaryDataFileISAccess().fileExists(bitmapFontSizesFile);
 		} catch (Exception e){
 			return false;
 		}		
@@ -77,7 +80,8 @@ public class BitmapFontCanvas extends CustomItem {
 	private static void loadSizes(){
 		InputStream in = null;
 		try{
-			in = FileAccessHandler.getDictionaryDataFileISAccess().getInputStream(bitmapFontSizesFile);			
+			DictionaryDataFile dictionary = DictionaryForMIDs.dictionaryForMIDsMidlet.getloadedDictionary();
+			in = dictionary.getDictionaryDataFileISAccess().getInputStream(bitmapFontSizesFile);			
 			DataInputStream dataIn = new DataInputStream(in);
 			int bitmapFontSizesTotalNumber = dataIn.readInt();
 			availableSizes = new String[bitmapFontSizesTotalNumber];			
