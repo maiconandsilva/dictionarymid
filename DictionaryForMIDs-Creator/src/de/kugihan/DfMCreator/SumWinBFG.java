@@ -31,8 +31,6 @@
  * //////////////////////////////////////////////////////////////// */
 package de.kugihan.DfMCreator;
 
-import de.kugihan.DfMCreator.DfMCreatorException.dictionaryDirNotAccessible;
-import de.kugihan.DfMCreator.DfMCreatorException.fontNotAccessible;
 import de.kugihan.fonttoolkit.Core;
 import edu.hws.eck.mdb.I18n;
 import java.awt.Cursor;
@@ -307,21 +305,15 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
 
         @Override
         public Void doInBackground() {
-            c = new Core();
             try {
                 DfMCreatorMain.BitmapFontGeneratorToEnqueue q;
                 while (!DfMCreatorMain.dfmCreator.fontGenerationQueue.isEmpty()) {
                     q = DfMCreatorMain.dfmCreator.fontGenerationQueue.remove();
 
                     // Passing the values of the current item
-                    //c = new Core(q.input_font_file, q.input_dict_dir_FILE, q.input_dict_dir_STRING, q.cback, q.font_size, q.clip_top, q.clip_bottom);
-                    c.setInputFile(q.input_font_file);
-                    c.setDictionaryDirectory(q.input_dict_dir_FILE);
-                    c.setFontDirectory(q.input_dict_dir_STRING);
-                    c.setCallback(q.cback);
-                    c.setSize(q.font_size);
-                    c.setClipTop(q.clip_top);
-                    c.setClipBottom(q.clip_bottom);
+                    c = new Core(q.input_font_file, q.input_dict_dir_FILE,
+                            q.input_dict_dir_STRING, q.cback, q.font_size,
+                            q.clip_top, q.clip_bottom);
 
                     // Showing the font_size generation preferences
                     // for the current item being processed.
@@ -345,7 +337,7 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
                     bfgenSumTextArea.append("\n\n");
 
                     // Perform the font generation for the current item
-                    c.generateFonts();
+                    c.generateFontsGUI();
 
                     // Update the contents of the TextArea that displays the items
                     // to be processed as some are being removed from the queue
@@ -445,7 +437,7 @@ public class SumWinBFG extends javax.swing.JDialog implements PropertyChangeList
     private void addAnotherFontSize() {
         try {
             DfMCreatorMain.dfmCreator.fontTK.setValuesForQueue();
-        } catch (fontNotAccessible | dictionaryDirNotAccessible ex) {
+        } catch (Throwable ex) {
             System.out.println(ex.getMessage());
         }
         DfMCreatorMain.dfmCreator.createQueueForBFG(DfMCreatorMain.dfmCreator.fontTK.getInputFontFile(),

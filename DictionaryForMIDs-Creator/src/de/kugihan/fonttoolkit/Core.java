@@ -21,58 +21,37 @@ public class Core extends Thread {
     private int clipTop;
     private int clipBottom;
 
-    // Setter methods that are used by generateFonts()
-    public void setCallback(Callback newCB) {
-        cb = newCB;
+    // Custom run method that is used by
+    // DfM-Creators's BitmapFontGenerator CLI
+    public void generateFontsCLI() {
+        yield();
+        try {
+            findCharacters();
+            process();
+        } catch (IOException e) {
+            e.getMessage();
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
-
-    public void setInputFile(File newInputFile) {
-        inputFile = newInputFile;
-    }
-
-    public void setOutputFile(File newOutputFile) {
-        outputFile = newOutputFile;
-    }
-
-    public void setDictionaryDirectory(File newDictionaryDirectory) {
-        dictionaryDirectory = newDictionaryDirectory;
-    }
-
-    public void setFontDirectory(String newFontDirectory) {
-        fontDirectory = newFontDirectory;
-    }
-
-    public void setSize(int newSize) {
-        size = newSize;
-    }
-
-    public void setClipTop(int newClipTop) {
-        clipTop = newClipTop;
-    }
-
-    public void setClipBottom(int newClipBottom) {
-        clipBottom = newClipBottom;
-    }
-
-    // We turn this into a public constructor requiring
-    // no arguments so as to be able to create variables
-    // from this class and use generateFonts() with them
-    public Core() {
-    }
+    
 
     // Custom run method that is used by
     // DfM-Creators's BitmapFontGenerator GUI
-    public void generateFonts() {
+    public void generateFontsGUI() {
+        yield();
         try {
             //findCharacters();
             process();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 
+    // Default font generation subroutine
+    // used by the old GUI of FontGenerator
     @Override
     public void run() {
         yield();
