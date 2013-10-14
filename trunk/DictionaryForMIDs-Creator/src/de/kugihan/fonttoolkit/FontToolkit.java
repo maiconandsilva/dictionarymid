@@ -41,6 +41,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class FontToolkit extends JFrame implements ActionListener, Callback {
@@ -51,7 +53,7 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
     // older standalone version of the FontToolkit)
     // set to true if it is called from DfM-Creator
     // and to false otherwise.
-    public static boolean flag = false;
+    public static boolean old_gui_flag = false;
     // For the new upcoming CLI version of FontGenerator
     public static String fontSizeStringArg = "";
     public static boolean cli_flag = false;
@@ -95,29 +97,6 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
         return fontDirectory;
     }
 
-    public void setInputFontFile(File newInFile) {
-        inFile = newInFile;
-    }
-
-    public void setDirFile(File newDirFile) {
-        dirFile = newDirFile;
-    }
-
-    public void setFontSize(int newFontSize) {
-        fontSize = newFontSize;
-    }
-
-    public void setClipTop(int newClipTop) {
-        clipTop = newClipTop;
-    }
-
-    public void setClipBottom(int newClipBottom) {
-        clipBottom = newClipBottom;
-    }
-
-    public void setFontDirectory(String newFontDirectory) {
-        fontDirectory = newFontDirectory;
-    }
     private static final long serialVersionUID = 1L;
     private boolean debugMode = false;
     private JPanel panel = new JPanel();
@@ -145,70 +124,6 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private Core c;
 
-    public void executeFontGenerationTaskCLI(File inputFontFile,
-            File dictDirectory_FILE, String dictDirectory_STRING,
-            int fontSize, int clip_Top, int clip_Bottom) throws
-            fontNotAccessible, dictionaryDirNotAccessible {
-
-        if (!inputFontFile.canRead()) {
-            throw new fontNotAccessible(I18n.tr("notFontAccessible"));
-        }
-
-        if (!dictDirectory_FILE.isDirectory() || !dictDirectory_FILE.canRead()) {
-            throw new dictionaryDirNotAccessible(I18n.tr("notDictDir"));
-        }
-
-        // DEBUG:
-        System.out.println("Debug Information:");
-        System.out.print("Input Font File: ");
-        System.out.println(String.valueOf(inputFontFile));
-        System.out.print("Input Dictionary Directory (FILE): ");
-        System.out.println(String.valueOf(dictDirectory_FILE));
-        System.out.print("Input Dictionary Directory (STRING): ");
-        System.out.println(dictDirectory_STRING);
-        //System.out.println(String.valueOf(this)); // Callback value
-        System.out.print("Font Size: ");
-        if (!cli_flag) {
-            System.out.println(String.valueOf(fontSize));
-        } else {
-            System.out.println(fontSizeStringArg);
-        }
-        System.out.print("Clip Top Value: ");
-        System.out.println(String.valueOf(clip_Top));
-        System.out.print("Clip Bottom Value: ");
-        System.out.println(String.valueOf(clip_Bottom));
-        System.out.println();
-
-        if (cli_flag) {
-            if (fontSizeStringArg.equalsIgnoreCase("small")) {
-                for (int i = 8; i <= 14; i += 2) {
-                    c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
-                    c.generateFonts();
-                }
-            } else if (fontSizeStringArg.equalsIgnoreCase("medium")) {
-                for (int i = 8; i <= 18; i += 2) {
-                    c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
-                    c.generateFonts();
-                }
-            } else if (fontSizeStringArg.equalsIgnoreCase("large")) {
-                for (int i = 8; i <= 24; i += 2) {
-                    c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
-                    c.generateFonts();
-                }
-            } else if ((fontSizeStringArg.equalsIgnoreCase("huge")) || (fontSizeStringArg.equalsIgnoreCase("giant"))) {
-                for (int i = 8; i <= 36; i += 2) {
-                    c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
-                    c.generateFonts();
-                }
-            }
-        } else {
-            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, fontSize, clip_Top, clip_Bottom);
-            c.generateFonts();
-        }
-
-    }
-
-//#################################################################################
     public static void main(String[] args) throws DictionaryException {
         DfMCreatorMain.setTheNimbusLookAndFeel();
         new FontToolkit().run();
@@ -352,27 +267,25 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
                 dictionaryField.setText(s);
             }
         } else if (arg0.getSource() == startButton) {
-            // check if flag is set to true, meaning that the fontToolkit
+            // check if old_gui_flag is set to true, meaning that the fontToolkit
             // is being called from the command line. In such case we don't
             // call the bitmap font generation preferences summary window
             // since that window is related to DfM-Creator but here it has
             // not even been loaded, so, we'll directly generate the font
             // files without calling the preferences summary window.
-            if (flag) {
+            if (old_gui_flag) {
                 proceed();
             } else {
                 try {
-                    // if we reach here flag remains set to false. In such case we can call the
+                    // if we reach here old_gui_flag remains set to false. In such case we can call the
                     // bitmap font generation preferences summary window since DfM-Creator is loaded.
                     // We Validate the values entered and then we show the bitmap font generation
                     // preferences summary window. Here, It enables us to actualy generate the font files.
                     setValuesForQueue();
-                } catch (fontNotAccessible | dictionaryDirNotAccessible ex) {
+                } catch (Throwable ex) {
                     System.out.println(ex.getMessage());
                 }
-                DfMCreatorMain.dfmCreator.createQueueForBFG(getInputFontFile(), getDirFile(),
-                        getFontDirectory(), getFontSize(), getClipTop(), getClipBottom());
-                validateAndShowSummaryWin();
+                showSummaryWin();
             }
 
         } else if (arg0.getSource() == clearButton) {
@@ -402,20 +315,13 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
         bfgSum.setVisible(true);
     }
 
-    public void validateAndShowSummaryWin() {
+    public void showSummaryWin() {
         try {
-            validateFields();
             findCSVFiles(new File(dictionaryField.getText()));
             showBFGsummary();
         } catch (CSVDictionaryFilesNotFound ex) {
             DfMCreatorMain.printAnyMsg(DfMCreatorException.CSVDictionaryFilesNotFoundMsg,
                     I18n.tr("badDictDir"), JOptionPane.ERROR_MESSAGE);
-        } catch (fontFieldIsEmpty e) {
-            DfMCreatorMain.printAnyMsg(DfMCreatorException.fontFieldIsEmptyMsg,
-                    I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
-        } catch (dictionaryFieldIsEmpty e) {
-            DfMCreatorMain.printAnyMsg(DfMCreatorException.dictionaryFielsIsEmptyMsg,
-                    I18n.tr("emptyFieldError"), JOptionPane.ERROR_MESSAGE);
         } catch (NumberFormatException e) {
             showSizeError(e);
         } catch (Exception e) {
@@ -435,14 +341,16 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
         }
     }
 
-    public void validateFields() throws fontFieldIsEmpty, dictionaryFieldIsEmpty {
-
-        if ("".equals(fontField.getText())) {
-            throw new fontFieldIsEmpty(I18n.tr("emptyFontField"));
+    public void validateFields() throws fontNotAccessible, dictionaryDirNotAccessible {
+        
+        inFile = new File(fontField.getText());
+        if (!inFile.canRead()) {
+            throw new fontNotAccessible(I18n.tr("notFontAccessible"));
         }
 
-        if ("".equals(dictionaryField.getText())) {
-            throw new dictionaryFieldIsEmpty(I18n.tr("emptyDictField"));
+        dirFile = new File(dictionaryField.getText());
+        if (!dirFile.isDirectory() || !dirFile.canRead()) {
+            throw new dictionaryDirNotAccessible(I18n.tr("notDictDir"));
         }
 
         String font = fontField.getText();
@@ -465,22 +373,25 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
 
     // This is the subroutine that will be called to generate the bitmap fonts
     // when the FontGenerator is called from the GUI of DfM-Creator.
-    public void setValuesForQueue() throws fontNotAccessible, dictionaryDirNotAccessible {
-
-        inFile = new File(fontField.getText());
-        if (!inFile.canRead()) {
-            throw new fontNotAccessible(I18n.tr("notFontAccessible"));
+    public void setValuesForQueue() {
+        try {
+            try {
+                validateFields();
+            } catch (fontNotAccessible | dictionaryDirNotAccessible ex) {
+                System.out.println(ex.getMessage());
+            }
+        } catch (Throwable ex) {
+            System.out.println(ex.getMessage());
         }
-
-        dirFile = new File(dictionaryField.getText());
-        if (!dirFile.isDirectory() || !dirFile.canRead()) {
-            throw new dictionaryDirNotAccessible(I18n.tr("notDictDir"));
-        }
-
+        
+        fontDirectory = dictionaryField.getText();
         fontSize = Integer.parseInt(fontList.getSelectedItem().toString());
         clipTop = Integer.parseInt(pixelsTopBox.getSelectedItem().toString());
         clipBottom = Integer.parseInt(pixelsBottomBox.getSelectedItem().toString());
-        fontDirectory = dictionaryField.getText();
+
+        
+        DfMCreatorMain.dfmCreator.createQueueForBFG(inFile, dirFile,
+                        fontDirectory, fontSize, clipTop, clipBottom);
     }
 
     // This is the subroutine that will be called to generate the bitmap fonts
@@ -507,16 +418,6 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
     }
 
     public void incrementFontSizeAndRevalidateValues() {
-        try {
-            validateFields();
-        } catch (fontFieldIsEmpty | dictionaryFieldIsEmpty ex) {
-            System.out.println(ex.getMessage());
-        }
-        try {
-            findCSVFiles(new File(dictionaryField.getText()));
-        } catch (CSVDictionaryFilesNotFound ex) {
-            System.out.println(ex.getMessage());
-        }
         int i = fontList.getSelectedIndex();
         if (i < 14) {
             i++;
@@ -527,6 +428,70 @@ public class FontToolkit extends JFrame implements ActionListener, Callback {
         }
     }
 
+    public void executeFontGenerationTaskCLI(File inputFontFile,
+            File dictDirectory_FILE, String dictDirectory_STRING,
+            int fontSize, int clip_Top, int clip_Bottom) throws
+            fontNotAccessible, dictionaryDirNotAccessible {
+
+        if (!inputFontFile.canRead()) {
+            throw new fontNotAccessible(I18n.tr("notFontAccessible"));
+        }
+
+        if (!dictDirectory_FILE.isDirectory() || !dictDirectory_FILE.canRead()) {
+            throw new dictionaryDirNotAccessible(I18n.tr("notDictDir"));
+        }
+
+        // DEBUG:
+        System.out.println("Debug Information:");
+        System.out.print("Input Font File: ");
+        System.out.println(String.valueOf(inputFontFile));
+        System.out.print("Input Dictionary Directory (FILE): ");
+        System.out.println(String.valueOf(dictDirectory_FILE));
+        System.out.print("Input Dictionary Directory (STRING): ");
+        System.out.println(dictDirectory_STRING);
+        //System.out.println(String.valueOf(this)); // Callback value
+        System.out.print("Font Size: ");
+        if (!cli_flag) {
+            System.out.println(String.valueOf(fontSize));
+        } else {
+            System.out.println(fontSizeStringArg);
+        }
+        System.out.print("Clip Top Value: ");
+        System.out.println(String.valueOf(clip_Top));
+        System.out.print("Clip Bottom Value: ");
+        System.out.println(String.valueOf(clip_Bottom));
+        System.out.println();
+
+        if (cli_flag) {
+            if (fontSizeStringArg.equalsIgnoreCase("small")) {
+                for (int i = 8; i <= 14; i += 2) {
+                    c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
+                    c.generateFontsCLI();
+                }
+            } else if (fontSizeStringArg.equalsIgnoreCase("medium")) {
+                for (int i = 8; i <= 18; i += 2) {
+                    c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
+                    c.generateFontsCLI();
+                }
+            } else if (fontSizeStringArg.equalsIgnoreCase("large")) {
+                for (int i = 8; i <= 24; i += 2) {
+                    c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
+                    c.generateFontsCLI();
+                }
+            } else if ((fontSizeStringArg.equalsIgnoreCase("huge")) || (fontSizeStringArg.equalsIgnoreCase("giant"))) {
+                for (int i = 8; i <= 36; i += 2) {
+                    c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, i, clip_Top, clip_Bottom);
+                    c.generateFontsCLI();
+                }
+            }
+        } else {
+            c = new Core(inputFontFile, dictDirectory_FILE, dictDirectory_STRING, this, fontSize, clip_Top, clip_Bottom);
+            c.generateFontsCLI();
+        }
+
+    }
+
+    
     public String getFile(boolean dirsOnly) {
         JFileChooser chooser = new JFileChooser();
         if (dirsOnly) {

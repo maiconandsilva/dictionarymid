@@ -1223,7 +1223,7 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                     // Printing the DictdToDictionaryForMIDs copyright notice
                     de.kugihan.dictionaryformids.dictdtodictionaryformids.DictdToDfM.printCopyrightNotice();
 
-                    // Set flag to true to tell the app that the
+                    // Set old_gui_flag to true to tell the app that the
                     // DictdToDictionaryForMIDs is being called from the command line
                     de.kugihan.dictionaryformids.dictdtodictionaryformids.DictdToDfM.flag = true;
 
@@ -1288,10 +1288,10 @@ public class DfMCreatorMain extends javax.swing.JFrame {
                     // Printing the FontGenerator copyright notice
                     de.kugihan.fonttoolkit.FontToolkit.printCopyrightNotice();
 
-                    // Set flag to true to tell the app that the fontToolkit is
+                    // Set old_gui_flag to true to tell the app that the fontToolkit is
                     // being called from the command line in order to prevent it
                     // from calling the font_size generation preferences summary window.
-                    de.kugihan.fonttoolkit.FontToolkit.flag = true;
+                    de.kugihan.fonttoolkit.FontToolkit.old_gui_flag = true;
                     // Call the FontGenerator main class
                     try {
                         de.kugihan.fonttoolkit.FontToolkit.main(args);
