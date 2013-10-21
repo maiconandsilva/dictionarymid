@@ -3501,36 +3501,47 @@ public class PropertiesEditor extends javax.swing.JFrame {
     public static final String openPropFileErrorMsg = I18n.tr("errorOpeningPropFile.dfmPropCreate");
     public static final String NotThePropFileErrorMsg = I18n.tr("badPropsFileName.dfmPropCreate");
     public static final String fileCantBeOpenedErrorMsg = I18n.tr("fileReadError.dfmPropCreate");
-    private static final String samplePropertyFile = "infoText: Freedict (English - German), http://www.freedict.de\n"
-            + "dictionaryAbbreviation: Freedict(Eng-Ger)\n"
-            + "numberOfAvailableLanguages: 2\n"
-            + "\n"
-            + "language1DisplayText: English\n"
-            + "language2DisplayText: German\n"
-            + "language1FilePostfix: Eng\n"
-            + "language2FilePostfix: Ger\n"
-            + "\n"
-            + "language1IsSearchable: true\n"
-            + "language2IsSearchable: true\n"
-            + "language1GenerateIndex: true\n"
-            + "language2GenerateIndex: true\n"
-            + "\n"
-            + "language1HasSeparateDictionaryFile: false\n"
-            + "language2HasSeparateDictionaryFile: false\n"
-            + "\n"
-            + "dictionaryGenerationSeparatorCharacter: '\\t'\n"
-            + "indexFileSeparationCharacter: '\\t'\n"
-            + "searchListFileSeparationCharacter: '\\t'\n"
-            + "dictionaryFileSeparationCharacter: '\\t'\n"
-            + "\n"
-            + "dictionaryGenerationOmitParFromIndex: true\n"
-            + "dictionaryGenerationInputCharEncoding: UTF-8\n"
-            + "indexCharEncoding: UTF-8\n"
-            + "searchListCharEncoding: UTF-8\n"
-            + "dictionaryCharEncoding: UTF-8\n"
-            + "\n"
-            + "language1DictionaryUpdateClassName: de.kugihan.dictionaryformids.dictgen.\ndictionaryupdate.DictionaryUpdateFreedictDeuEngGer\n"
-            + "language1NormationClassName: de.kugihan.dictionaryformids.translation.\nnormation.Normation.NormationEng\n";
+    private static final String samplePropertyFile =
+            "#DictionaryForMIDs property file\n" +
+            "infoText=Wordnet from http://wordnet.princeton.edu/. For Wordnet licensing see file LICENSE.txt\n" +
+            "\n" +
+            "dictionaryAbbreviation=Wordnet-3.0\n" +
+            "dictionaryCharEncoding=UTF-8\n" +
+            "dictionaryFileSeparationCharacter='\t'\n" +
+            "dictionaryGenerationInputCharEncoding=UTF-8\n" +
+            "indexCharEncoding=ISO-8859-1\n" +
+            "indexFileSeparationCharacter='\t'\n" +
+            "\n" +
+            "language1DisplayText=English\n" +
+            "language1FilePostfix=Eng\n" +
+            "language1GenerateIndex=true\n" +
+            "language1HasSeparateDictionaryFile=false\n" +
+            "language1IsSearchable=true\n" +
+            "\n" +
+            "language2Content01DisplayText=contentDefinition\n" +
+            "language2Content01FontColour=180,0,0\n" +
+            "language2Content01FontStyle=plain\n" +
+            "\n" +
+            "language2Content02DisplayText=Synonym\n" +
+            "language2Content02FontColour=210,0,100\n" +
+            "language2Content02FontStyle=plain\n" +
+            "\n" +
+            "language2DisplayText=Definition\n" +
+            "language2FilePostfix=Def\n" +
+            "language2GenerateIndex=false\n" +
+            "language2HasSeparateDictionaryFile=false\n" +
+            "language2IsSearchable=false\n" +
+            "language2NumberOfContentDeclarations=5\n" +
+            "\n" +
+            "numberOfAvailableLanguages=2\n" +
+            "searchListCharEncoding=ISO-8859-1\n" +
+            "searchListFileMaxSize=5497\n" +
+            "searchListFileSeparationCharacter='\t'\n" +
+            "dictionaryGenerationMaxIndexKeyEntriesPerExpressionWarnLimit=20\n" +
+            "\n" +
+            "language2DictionaryUpdateClassName=de.kugihan.dictionaryformids.dictgen.DictionaryUpdateWordnetDefinition\n" +
+            "language1NormationClassName=de.kugihan.dictionaryformids.translation.NormationEng\n";
+
 
     /**
      * getInputOptionDialog() shows the InputDialog window.
