@@ -56,7 +56,14 @@ javac.encoding=UTF-8
 	<property name="JavaSE.srcdir"				  location="${JavaSE.inputbasedir}/src"/>
 	<property name="JavaSE.classdir"				location="${JavaSE.outputbasedir}/bin"/>
 	<property name="JavaSE.jarfile"				 location="${JavaSE.outputbasedir}/DictionaryForMIDsPC.jar"/>
-	
+
+	<!-- note that in order to compile the WebApp Translation Layer you need to set the property "gwt.sdk" in the GWT buildfile at WebAppTL.inputbasedir -->
+	<property name="WebAppTL.inputbasedir"			location="../WebApp/DictionaryForMIDs_Javascript/Java_for_GWT"/>
+	<property name="WebAppTL.outputbasedir"			location="${Build}/WebAppTL"/>
+	<property name="WebAppTL.alljavasrcdir"			location="${WebAppTL.outputbasedir}/javasrc"/>
+	<property name="WebAppTL.buildxmldir"			location="${WebAppTL.outputbasedir}"/>
+	<property name="WebAppTL.srcdir"				location="${WebAppTL.inputbasedir}/src"/>
+
 
 	  <!-- 
 		###################### DfM-Creator ######################
@@ -207,6 +214,10 @@ javac.encoding=UTF-8
 		<delete dir="${JavaSE.outputbasedir}"/>
 	</target>
 	
+	<target name="clean_webapp_tl">
+		<delete dir="${WebAppTL.outputbasedir}"/>
+	</target>
+	
 	<target name="clean_java_me">
 		<delete dir="${JavaME.outputbasedir}"/>
 	</target>
@@ -281,9 +292,10 @@ javac.encoding=UTF-8
 			  <fileset dir="${JavaME.resdir}"/>
 			  <fileset dir="${JavaME.outputbasedir}" includes="${app.propertyfilename}"/>
 		</wtkpackage>
+		<antcall target="do_obfuscate_dfm_java_me"/>
 	</target>
 
-	<target name="package_dfm_java_me_empty" depends="obfuscate_dfm_java_me"> 
+	<target name="package_dfm_java_me_empty" depends="build_dfm_java_me"> 
 		<property name="packaging.java_me_executeable.subdir" value="files_for_packaging/executeable_distribution"/>
 		<antcall target="replace_keywords_readme">
 			<param name="sourcebasedir"			 value="${JavaME.inputbasedir}"/>
@@ -350,10 +362,6 @@ javac.encoding=UTF-8
 		<wtkpreverify jarfile="${JavaME.jarfile}" jadfile="${JavaME.jadfile}"/>
 	</target>
 	  
-	<target name="obfuscate_dfm_java_me" depends="build_dfm_java_me"> 
-		<antcall target="do_obfuscate_dfm_java_me"/>
-	</target>
-	
 	<target name="create_minimal_size_dfm_java_me" depends="compile_dfm_java_me,create_dfm_java_me_jadfile_and_manifest"> 
 		<antcall target="create_application_property_file">
 			<param name="destinationbasedir"	 value="${DfM.outputbasedir}"/>
@@ -409,6 +417,37 @@ javac.encoding=UTF-8
 		</zip>
 	</target>
 	
+
+	  <!-- 
+		  WebApp Translation Layer
+	  -->
+	<target name="compile_dfm_webapp_tl">
+		<mkdir dir="${WebAppTL.outputbasedir}"/>	 
+		<mkdir dir="${WebAppTL.alljavasrcdir}"/>
+		<!-- copy the Java file from the web app translation layer and the DfM translation layer to WebAppTL.alljavasrcdir -->
+		<copy todir="${WebAppTL.alljavasrcdir}">
+		    <fileset dir="${DfM.srcdir}">
+		    	<!-- Do not copy the class ObjectForClass because GWT cannot compile it. 
+		    	     For GWT there is an 'empty' replacement of this class in WebAppTL.srcdir -->
+	    		<exclude name="de/kugihan/dictionaryformids/dataaccess/ObjectForClass.java"/>   
+	    		                                   
+			</fileset>
+		  </copy>
+		<copy todir="${WebAppTL.alljavasrcdir}">
+		    <fileset dir="${WebAppTL.srcdir}"/>
+	    </copy>
+		<!-- also copy the buildfile for GWT -->
+		<copy todir="${WebAppTL.buildxmldir}">
+		    <fileset file="${WebAppTL.inputbasedir}/build.xml"/>
+		  </copy>
+		<!-- compile the Java sources in WebAppTL.alljavasrcdir to Javascript with GWT; the separate build.xml file for GWT is used for that -->
+		<ant antfile="${WebAppTL.buildxmldir}/build.xml" useNativeBasedir="true"/> 
+		<!-- copy the generated file DfMTranslationLayer.nocache.js to DfMTranslationLayer.js (the "nocache" is confusing in the usage for DfM -->
+		<copy tofile="${WebAppTL.outputbasedir}/DfMTranslationLayer.js">
+		    <fileset file="${WebAppTL.outputbasedir}/war/DfMTranslationLayer/DfMTranslationLayer.nocache.js"/>
+		  </copy>
+	</target>
+
 
 	  <!-- 
 		  LanguageUIGeneration
