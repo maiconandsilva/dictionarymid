@@ -7,7 +7,7 @@ then
   mkdir -v --parents $OUTPUT_DIR
 fi
 
-VERSION=0.6-beta
+VERSION=0.7-final
 makeself-2.1.5/makeself.sh --bzip2 \
   DfM-Creator-$VERSION-Linux-x86-portable \
   $OUTPUT_DIR/dfm-creator-$VERSION-linux-i386-with-jre.run \

@@ -1,8 +1,8 @@
 <launch4jConfig>
   <dontWrapJar>true</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>dist\DfM-Creator-0.6-Beta.jar</jar>
-  <outfile>F:\DfM-Creator\DfM-Creator-0.6-beta-Win-64-portable\DfM-Creator-0.6-beta4-amd64.exe</outfile>
+  <jar>dist\DfM-Creator-0.7-final.jar</jar>
+  <outfile>F:\DfM-Creator\DfM-Creator-0.7-final-Win-64-portable\DfM-Creator-0.7-final-amd64.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir></chdir>

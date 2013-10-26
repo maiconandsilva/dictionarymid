@@ -1,13 +1,15 @@
 ====- Todos for the Current Release -====
+__________________FREEZE_________________
+
+
+
+============- TODOs for the Upcoming Release -=============
 ⦁Replace the colors by a Java native color picker in the Content-NN FontColour properties
 ⦁CONSIDER THE FOLLOWING MAIL
 On 06/16/2013 12:06 PM, Muhammad Yoza Acika wrote:
 I want to report a bug regarding DictionaryForMIDs-Creator 0.6-Beta. When we create a Properties File in tab "Dictionary Generation" at "languageXHasSeparateDictionaryFile" box, the default value as written in the help file is set to "false". So, when I had already saved the properties file I created, which I set that box to "false" for both language 1 and language 2. And then I loaded it again using "Edit an Existing Properies File" in the properties editor, it will set to "true" instead. Then, the effect is you can't make it two-way language translation instead just one-way. P.S: when I edit it (properties file) in the Notepad, the generated jar will work in two-way language as I expected.
 ⦁Update the Documentation files (according to the changes in the DfM-Creator GUI).
 ⦁After a run of DictionaryGeneration; clear the fields.
-
-
-============- TODOs for the Upcoming Release -=============
 ⦁In the DictdToDfM pane, "Output CSV file directory" is also the "input CSV file" in the DictionaryGeneration pane.
 ⦁In the DictionaryGeneration pane "Properties File" is requested again for "edit an existing properties file".
 ⦁In the JarCreator pane "DictionaryForMIDs.properties and CSV files directory" is the same as "Destination Directory" in the DictionaryGeneration pane.
@@ -16,7 +18,7 @@ I want to report a bug regarding DictionaryForMIDs-Creator 0.6-Beta. When we cre
 	selects that option, he will have to set these values up only once.
 	The app will behave subtly and will use the output values for one
 	command as the input values for others and so forth.
-====== 
+
 ⦁Enable batch convert through text file containing paths/settings for JarCreator (this will be for batch updating the DictionaryForMIDs that are on the webserver, to the latest version)
 ⦁Bundle custom font file and use it for the DfM-Creator. Why not the Ubuntu font family? It's pretty good!
 ⦁Create a spash-screen.
@@ -25,8 +27,20 @@ I want to report a bug regarding DictionaryForMIDs-Creator 0.6-Beta. When we cre
 ⦁FIX the nasties introduced by DictdToDictionaryForMIDs while converting a dictionary from freedict.org
 
 
-
 ===TODOs Implemented Successfully===
+⦁DfM-Creator's FontGenerator now has a command line version. It is invoked as follows:
+java -jar DfM-Creator.jar --FontGenerator-CLI INPUT_FONT_FILE INPUT_DICT_DIR FONT_SIZE CLIP_TOP CLIP_BOTTOM
+Or:
+java -jar DfM-Creator.jar -fgc INPUT_FONT_FILE INPUT_DICT_DIR FONT_SIZE CLIP_TOP CLIP_BOTTOM
+
+FONT_SIZE is by default a number value, for instance 16. But it can also use the following wrappers whereas each wrapper represents a set of values automatically passed to FontGenerator for batch font sizes generation. The wrappers' values are defined as follows:
+small: 8, 10, 12, 14
+medium: 8, 10, 12, 14, 16, 18
+large: 8, 10, 12, 14, 16, 18, 20, 22, 24
+huge: 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36
+
+Regarding the text value of FONT_SIZE, the case does not matter, so it can be written for instance small, SMALL, SMAll etc. and the same rule applies to the other text options.
+
 JarCreator naming convention changed from for example:
 -DictionaryForMIDs_3.5.8_EngDef_GCIDE.zip
 to
@@ -42,12 +56,9 @@ to
 ⦁Updated the French language locale file
 Updated Documentation files to the latest DfM-Creator version and features (i.e, DfM-Creator-0.6-final.jar)
 BUG FIXES:
-    -Gert fixed a bug that prevented the DfM-Creator's JarCreator to load the internal DictionaryForMIDs.jar/jad files on Microsoft Windows while generating jar/jad files.
+⦁Gert fixed a bug that prevented the DfM-Creator's JarCreator to load the internal DictionaryForMIDs.jar/jad files on Microsoft Windows while generating jar/jad files.
 
-
-
-
-_______________________________________________________
+______________________________________________________
 |    COMMON TASKS FOR EACH NEW DFM-CREATOR VERSION    |
 |_____________________________________________________|
 -Update the version number in:
@@ -65,3 +76,5 @@ _______________________________________________________
 -Test wether the CLI version of the DfM-Creator tools still works
 -Test the DfM-Creator on Linux, Windows and other OSes if possible
 _______________________________________________________
+
+

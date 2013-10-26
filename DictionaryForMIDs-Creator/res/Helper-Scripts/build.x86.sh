@@ -4,7 +4,7 @@
 # License: Under the GPL.
 
 # Current version of DfM-Creator
-VERSION=0.6-beta
+VERSION=0.7-final
 DFM_CREATOR=DfM-Creator-$VERSION.jar
 
 # The location of the build.xml file
