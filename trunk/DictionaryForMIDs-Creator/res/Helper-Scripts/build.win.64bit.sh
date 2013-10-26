@@ -4,7 +4,7 @@
 # License: Under the GPL.
 
 # Current version of DfM-Creator
-VERSION=0.6-beta
+VERSION=0.7-final
 DFM_CREATOR=DfM-Creator-$VERSION.jar
 
 # The location of the build.xml file
@@ -14,7 +14,7 @@ DFM_CREATOR_PATH=/media/X-SOFTS/DictionaryForMIDs/code/trunk/Build
 DFM_CREATOR_JAR=/media/X-SOFTS/DictionaryForMIDs/code/trunk/Build/DictionaryForMIDs-Creator/$DFM_CREATOR
 
 # Where the created jar file will be copied to (backup)
-OUTPUT_LOCATION=/media/Khorasan/DfM-Creator/DfM-Creator-$VERSION-Windows-portable/dist
+OUTPUT_LOCATION=/media/Khorasan/DfM-Creator/DfM-Creator-$VERSION-Win-64-portable/dist/dist
 
 # Older jar file that will have to be deleted and replaced with the new one
 DFM_CREATOR_OLDER_JAR=$OUTPUT_LOCATION/$DFM_CREATOR

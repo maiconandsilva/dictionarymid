@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=0.6-beta
+VERSION=0.7-final
 DFM_CREATOR_DIR=DfM-Creator-$VERSION-Linux-amd64-portable
 LAUNCHER_NAME=DfM-Creator_amd64.desktop
 

@@ -2,10 +2,10 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "DfM-Creator"
-#define MyAppVersion "0.6-beta"
+#define MyAppVersion "0.7-final"
 #define MyAppPublisher "DictionaryForMIDs"
 #define MyAppURL "dictionarymid.sourceforge.net"
-#define MyAppExeName "DfM-Creator-0.6-beta4-amd64.exe"
+#define MyAppExeName "DfM-Creator-0.7-final-amd64.exe"
 
 [Setup]
 ; NOTe: The value of AppId uniquely identifies this application.
@@ -22,10 +22,10 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=F:\DfM-Creator\DfM-Creator-0.6-beta-Win-64-portable\COPYING-GPL-V2.txt
-InfoAfterFile=F:\DfM-Creator\DfM-Creator-0.6-beta-Win-64-portable\CHANGELOG.txt
+LicenseFile=F:\DfM-Creator\DfM-Creator-0.7-final-Win-64-portable\COPYING-GPL-V2.txt
+InfoAfterFile=F:\DfM-Creator\DfM-Creator-0.7-final-Win-64-portable\CHANGELOG.txt
 OutputDir=F:\DfM-Creator\INSTALLERS
-OutputBaseFilename=dfm-creator-0.6-beta-x86_64-installer
+OutputBaseFilename=dfm-creator-0.7-final-x86_64-installer
 SetupIconFile=F:\DfM-Creator\Icons\dfm-creator.ico
 Compression=lzma
 SolidCompression=yes
@@ -39,8 +39,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "F:\DfM-Creator\DfM-Creator-0.6-beta-Win-64-portable\DfM-Creator-0.6-beta4-amd64.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "F:\DfM-Creator\DfM-Creator-0.6-beta-Win-64-portable\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "F:\DfM-Creator\DfM-Creator-0.7-final-Win-64-portable\DfM-Creator-0.7-final-amd64.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\DfM-Creator\DfM-Creator-0.7-final-Win-64-portable\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTe: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

@@ -89,7 +89,7 @@ import javax.swing.JOptionPane;
 public class DfMCreatorMain extends javax.swing.JFrame {
     // version number.
 
-    public static final String dfm_creator_version = "0.6-Beta";
+    public static final String dfm_creator_version = "0.7";
     // variables used with DictdToDfM
     private static String dbNameVar;
     private static String dbFolderNameVar;
