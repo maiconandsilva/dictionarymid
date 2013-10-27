@@ -42,7 +42,7 @@ public class HTRInputStream extends InputStream {
 		req.open('GET', url, false);  
 		//   if (isFirefoxBrowser || !isFileReaderSupported || !isResponseTypeSupported) {
 		//   if (isFirefoxBrowser || (!isFileReaderSupported && !isFileReaderSyncSupported)) {
-		if (true) {
+		//if (true) {
 			// Firefox web browser or missing support for both FileReader and FileReaderSync
 			var mimeType = 'text/plain; charset=' + charset;
 			req.overrideMimeType(mimeType);  
@@ -54,37 +54,37 @@ public class HTRInputStream extends InputStream {
 			}
 			if (req.status != htrStatusOK) return null;
 			return req.responseText; 
-		} 
-		else {
-			// non-Firefox web browser and support for FileReader and/or FileReaderSync
-			var result = null;
-			req.asBlob = true;
-			try {
-				req.send(null); 
-			}
-			catch (e) {
-				alert("Exception bei XMLHttpRequest.send (blob): "+e);
-			}
-			if (req.status != htrStatusOK) return null;
-			var blob = req.responseBlob;
-			if (! isFileReaderSyncSupported) {
-				// this web brwoser does not yet support FileReaderSync: use FileReader and busy waiting instead
-				var reader = new FileReader();
-				reader.readAsBinaryString(blob);
-				do {
-					// do "busy-waiting" cause FileReader is not available for this web browser
-				} 
-				while (reader.readyState != FileReader.DONE);
-				result = reader.result;
-			}
-			else {
-				// web browser supports FileReaderSync for workers
-				var reader = new FileReaderSync();
-				reader.readAsBinaryString(blob);
-				result = reader.result;
-			}
-			return result;
-		}
+	//	} 
+	//	else {
+	//		// non-Firefox web browser and support for FileReader and/or FileReaderSync
+	//		var result = null;
+	//		req.asBlob = true;
+	//		try {
+	//			req.send(null); 
+	//		}
+	//		catch (e) {
+	//			alert("Exception bei XMLHttpRequest.send (blob): "+e);
+	//		}
+	//		if (req.status != htrStatusOK) return null;
+	//		var blob = req.responseBlob;
+	//		if (! isFileReaderSyncSupported) {
+	//			// this web brwoser does not yet support FileReaderSync: use FileReader and busy waiting instead
+	//			var reader = new FileReader();
+	//			reader.readAsBinaryString(blob);
+	//			do {
+	//				// do "busy-waiting" cause FileReader is not available for this web browser
+	//			} 
+	//			while (reader.readyState != FileReader.DONE);
+	//			result = reader.result;
+	//		}
+	//		else {
+	//			// web browser supports FileReaderSync for workers
+	//			var reader = new FileReaderSync();
+	//			reader.readAsBinaryString(blob);
+	//			result = reader.result;
+	//		}
+	//		return result;
+	//	}
 		}-*/;
 
 	public int read() throws IOException {

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="DfMTranslationLayer">
+   <!-- Inherit the core Web Toolkit stuff.                        -->
+  <inherits name='com.google.gwt.user.User'/>
+
+  <!-- Specify the app entry point class.                         -->
+  <entry-point class='de.kugihan.dictionaryformids.client.TranslationLayerGWT'/>
+
+  <!-- Create only one Javascript file -->                          
+  <collapse-all-properties />
+  <!--  does not work: <set-property name="user.agent" value="safari"/>  -->  
+  <add-linker name="sso"/>
+   
+  <!-- Specify the paths for translatable code  -->
+  <source path='de'/>
+  <source path='java'/>
+
+</module>

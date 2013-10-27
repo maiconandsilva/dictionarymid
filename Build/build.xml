@@ -427,10 +427,9 @@ javac.encoding=UTF-8
 		<!-- copy the Java file from the web app translation layer and the DfM translation layer to WebAppTL.alljavasrcdir -->
 		<copy todir="${WebAppTL.alljavasrcdir}">
 		    <fileset dir="${DfM.srcdir}">
-		    	<!-- Do not copy the class ObjectForClass because GWT cannot compile it. 
+		    	<!-- Do not copy the class ClassMethodImpl because GWT cannot compile it. 
 		    	     For GWT there is an 'empty' replacement of this class in WebAppTL.srcdir -->
-	    		<exclude name="de/kugihan/dictionaryformids/dataaccess/ObjectForClass.java"/>   
-	    		                                   
+	    		<exclude name="de/kugihan/dictionaryformids/general/ClassMethodImpl.java"/>   
 			</fileset>
 		  </copy>
 		<copy todir="${WebAppTL.alljavasrcdir}">

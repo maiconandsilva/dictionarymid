@@ -7,8 +7,10 @@ GPL applies - see file COPYING for copyright statement.
 
 package de.kugihan.dictionaryformids.dataaccess;
 
+import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.HTRInputStream;
 import de.kugihan.dictionaryformids.general.DictionaryException;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -18,7 +20,8 @@ public class HTRFileStorageReader
 	GetCharacterIF getUTF8CharacterObj 		= new GetUTF8Character();
 	GetCharacterIF getISO88591CharacterObj	= new GetISO88591Character();
 		
-	public FileStorage readFileToFileStorage(String  fileName,
+	public FileStorage readFileToFileStorage(DfMInputStreamAccess dictionaryDataFileISAccess,
+			                                 String  fileName,
 										     String  charEncoding,
 				       	                     int     maxSizeOfFileData) 
 	 						throws DictionaryException {
@@ -28,7 +31,8 @@ public class HTRFileStorageReader
 		return fileStorageObj;
 	}
 	
-	public FileStorage readCsvFileLine(String fileName,
+	public FileStorage readCsvFileLine(DfMInputStreamAccess dictionaryDataFileISAccess,
+			                           String fileName,
 									   String charEncoding,
 									   int startPosition) 
 						throws DictionaryException {
@@ -44,7 +48,8 @@ public class HTRFileStorageReader
 										     getISO88591CharacterObj);
 		}
 		else {
-			fileStorageObj = super.readCsvFileLine(fileName,
+			fileStorageObj = super.readCsvFileLine(dictionaryDataFileISAccess,
+				    							   fileName,
 								                   charEncoding,
 								                   startPosition);
 		}

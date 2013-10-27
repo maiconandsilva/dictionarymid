@@ -35,7 +35,7 @@ function newTranslationResult(resultOfTranslation) {
 function createInnerHTML(textOfLanguage, 
 						 isInput) {
 	var innerHTMLText = '';
-	var stringColourItemText = determineItemsFromContent(textOfLanguage, true, isInput);
+	var stringColourItemText = ContentParser.determineItemsFromContent(textOfLanguage, true, isInput);
 	for (var currentStringColourItemTextPart = 0; 
 		 currentStringColourItemTextPart < stringColourItemText.size(); 
 		 currentStringColourItemTextPart++) {
@@ -66,63 +66,31 @@ function buildBooleanArray(numberOfElements, indexTrueElement) {
 }
 
 function startTranslation() {
-	var text = document.getElementById('userInput').value;
-	var inputLanguages =  buildBooleanArray(DictionaryDataFile.numberOfAvailableLanguages,
+	var toBeTranslatedWordTextInput = document.getElementById('userInput').value;
+	var inputLanguages =  buildBooleanArray(dictionary.numberOfAvailableLanguages,
 											userSettingsObj.getInputLanguage());
-	var outputLanguages = buildBooleanArray(DictionaryDataFile.numberOfAvailableLanguages,
+	var outputLanguages = buildBooleanArray(dictionary.numberOfAvailableLanguages,
 											userSettingsObj.getOutputLanguage());
-	executeTranslation(text,
-					   inputLanguages,
-					   outputLanguages,
-					   false,
-					   50,
-					   20000);
+	var executeInBackground = false;
+	var maxHits = 100;
+	var durationForCancelSearch = 5000;  // 5 seconds
+	
+	var translationParameters = 
+		TranslationExecution.newTranslationParameters
+		                                 (dictionary,                    // Type DictionaryDataFile: dictionary for translation
+									      toBeTranslatedWordTextInput,   // Type string: word/expression that shall be translated
+									      inputLanguages,                // Type Array of boolean, size window.dictionary.numberOfAvailableLanguages
+									      outputLanguages,               // Type Array of boolean, size window.dictionary.numberOfAvailableLanguages
+									      executeInBackground,           // Type boolean: this parameter is currently ignored
+									      maxHits,                       // Type integer: maximum number of translation results 
+									      durationForCancelSearch)       // Type integer: maximum duration of search in milliseconds
+		TranslationExecution.executeTranslation(translationParameters,
+		                                        deletePreviousTranslationResult,
+												newTranslationResult);
 }
 
-function outputMessage(message) {
+function outputMessageInAlert(message) {
 	alert(message);
-}
-
-function checkForBrowserCompatibility() {
-	// Check whether Application Cache is supported
-	var applicationCacheSupported = true;
-	try {
-		if (applicationCache == undefined) applicationCacheSupported = false;
-	}
-	catch (e) {applicationCacheSupported = false;}
-
-	// Check whether Local Storage is supported
-	var localStorageSupported = true;
-	try {
-		if (localStorage == undefined) localStorageSupported = false;
-	}
-	catch (e) {localStorageSupported = false;}
-
-	// Check whether XMLHttpRequest.overrideMimeType is supported
-	var htrOverrideMimeTypeSupported = true;
-	var htr = new XMLHttpRequest();
-	try {
-		if (htr.overrideMimeType == undefined) htrOverrideMimeTypeSupported = false;
-	}
-	catch (e) {htrOverrideMimeTypeSupported = false;}		
-	// Check whether FileReader is supported
-	var fileReaderSupported = true;
-	try {
-		if (FileReader == undefined) fileReaderSupported = false;
-	}
-	catch (e) {fileReaderSupported = false;}
-	if (!applicationCacheSupported) {
-		alert("Application Cache not supported by browser; download of dictionary not possible !");
-	}
-	if (!localStorageSupported) {
-		alert("Local Storage not supported by browser; you cannot save user settings");
-	}
-	if (!htrOverrideMimeTypeSupported) {
-		alert("XMLHttpRequest.overrideMimeType not supported by browser; DictionaryForMIDs will probably not run !");
-	}
-	if (!fileReaderSupported) {
-		alert("FileReader not supported by browser; translations can produce errors !");
-	}
 }
 
 function applicationCacheEventHandler(event) {
@@ -147,6 +115,7 @@ function openOptionWindow() {
 }
 
 function initializeApplication() {
+	UtilJs.outputMessage = outputMessageInAlert;
 	applicationCache.onchecking    	= applicationCacheEventHandler;
 	applicationCache.onerror       	= applicationCacheEventHandler;
 	applicationCache.onnoupdate    	= applicationCacheEventHandler;
