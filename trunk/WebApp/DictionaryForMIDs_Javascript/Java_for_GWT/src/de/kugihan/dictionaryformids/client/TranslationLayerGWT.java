@@ -1,22 +1,24 @@
 package de.kugihan.dictionaryformids.client;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.*;
+
 import de.kugihan.dictionaryformids.general.*;
 import de.kugihan.dictionaryformids.dataaccess.*;
 import de.kugihan.dictionaryformids.translation.*;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.*;
+
 import java.util.*;
+
 import de.kugihan.dictionaryformids.hmi_common.content.*;
 import de.kugihan.dictionaryformids.dataaccess.content.*;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class TranslationLayerGWT implements EntryPoint , TranslationExecutionCallback{
+public class TranslationLayerGWT implements EntryPoint, TranslationExecutionCallback {
 
 	public static ContentParser contentParserObj;
+	public DictionaryDataFile dictionary;
 
 	/**
 	  * This is the entry point method.
@@ -24,16 +26,15 @@ public class TranslationLayerGWT implements EntryPoint , TranslationExecutionCal
 	public void onModuleLoad() {
 		UtilJs utilObj = new UtilJs();
 		Util.setUtil(utilObj);
-		exportStaticMethods();
-		exportPredefinedContent();
+		utilObj.exportStaticClasses();
 		contentParserObj = new ContentParser();
+		exportStaticClasses();
 		  try {
 			HTRInputStream.setBaseDirectory(getBaseDirectory());
-			FileAccessHandler.setDictionaryDataFileISAccess(new HTRInputStreamAccess());
 			CsvFile.fileStorageReader = new HTRFileStorageReader();
-			DictionaryDataFile.initValues(false);
-			exportDictionaryDataFileDataStructures();
+			dictionary = TranslationExecution.loadDictionary(new HTRInputStreamAccess());
 			TranslationExecution.setTranslationExecutionCallback(this);
+			exportLoadedDictionary(dictionary);
 		}
 		catch (Exception e) { 
 			Util.getUtil().log(e); 
@@ -47,13 +48,17 @@ public class TranslationLayerGWT implements EntryPoint , TranslationExecutionCal
 		callNewTranslationResultJs(resultOfTranslation);
 	}
 	
-	public static void executeTranslation(String  		 toBeTranslatedWordTextInputParam,
-										  JsArrayBoolean inputLanguagesParam,
-										  JsArrayBoolean outputLanguagesParam,
-										  boolean 		 executeInBackgroundParam,
-										  int            maxHitsParam,
-										  int   		 durationForCancelSearchParam) 
-										  throws DictionaryException {
+
+	// newTranslationParameters creates an object of class TranslationParameters from Javascript parameters 
+	public static TranslationParameters newTranslationParameters(DictionaryDataFile dictionary,
+													             String  		    toBeTranslatedWordTextInputParam,
+																 JsArrayBoolean     inputLanguagesParam,
+																 JsArrayBoolean     outputLanguagesParam,
+																 boolean 		    executeInBackgroundParam,
+																 int                maxHitsParam,
+																 int   		        durationForCancelSearchParam) 
+                throws DictionaryException {
+		
 		boolean[]	inputLanguages =  new boolean[inputLanguagesParam.length()];
 		boolean[]	outputLanguages = new boolean[outputLanguagesParam.length()];
 		
@@ -66,29 +71,46 @@ public class TranslationLayerGWT implements EntryPoint , TranslationExecutionCal
 		}
 
 		TranslationParameters translationParametersObj = 
-						new TranslationParameters(toBeTranslatedWordTextInputParam,
+						new TranslationParameters(dictionary,
+								                  toBeTranslatedWordTextInputParam,
 												  inputLanguages,
 												  outputLanguages,
 												  executeInBackgroundParam,
 												  maxHitsParam,
 												  durationForCancelSearchParam);
-		// execute translation in the Translation Layer
+		return translationParametersObj;
+	}
+	
+
+	// newTranslationParametersBatch creates an object of class TranslationParametersBatchs 
+	public static TranslationParametersBatch newTranslationParametersBatch() {
+		TranslationParametersBatch translationParametersBatchObj = new TranslationParametersBatch(); 
+		return translationParametersBatchObj;
+	}
+
+	// execute translation in the Translation Layer
+	public static void executeTranslation(TranslationParameters translationParametersObj) 
+				throws DictionaryException {
 		TranslationExecution.executeTranslation(translationParametersObj);
 	}
 	  
+	// execute batch translation in the Translation Layer
+	public static void executeTranslationBatch(TranslationParametersBatch translationParametersBatchObj) 
+					  throws DictionaryException {
+		TranslationExecution.executeTranslationBatch(translationParametersBatchObj);
+	}
+	
 	public static StringColourItemText determineItemsFromContent(TextOfLanguage contentText, 
-			                                              boolean changeInputAndOutputContent,
-			                                              boolean isInput) {
+			                                                     boolean changeInputAndOutputContent,
+			                                                     boolean isInput) 
+		              throws DictionaryException {
 		StringColourItemText stringColourItemText = null;
-		try {
-			stringColourItemText = contentParserObj.determineItemsFromContent(contentText, changeInputAndOutputContent, isInput);
-		}
-		catch (Exception e) { Util.getUtil().log(e); }
+		stringColourItemText = contentParserObj.determineItemsFromContent(contentText, changeInputAndOutputContent, isInput);
 		return stringColourItemText;
 	}
 
 	protected static native void callDeletePreviousTranslationResultJs() /*-{
-		$wnd.deletePreviousTranslationResult();
+		TranslationExecution.deletePreviousTranslationResultCallback();
     }-*/;
 
 	protected static native void callNewTranslationResultJs(TranslationResult resultOfTranslation) /*-{
@@ -96,16 +118,16 @@ public class TranslationLayerGWT implements EntryPoint , TranslationExecutionCal
 		// create JavaScript methods for accessing Java methods
 		//
 		// TranslationResult
-   		resultOfTranslation.numberOfFoundTranslations 		= resultOfTranslation.@de.kugihan.dictionaryformids.translation.TranslationResult::numberOfFoundTranslations();
-   		resultOfTranslation.translationFound 				= resultOfTranslation.@de.kugihan.dictionaryformids.translation.TranslationResult::translationFound();
-   		resultOfTranslation.getTranslationAt 				= resultOfTranslation.@de.kugihan.dictionaryformids.translation.TranslationResult::getTranslationAt(*);
+   		resultOfTranslation.numberOfFoundTranslations 		= $entry(resultOfTranslation.@de.kugihan.dictionaryformids.translation.TranslationResult::numberOfFoundTranslations());
+   		resultOfTranslation.translationFound 				= $entry(resultOfTranslation.@de.kugihan.dictionaryformids.translation.TranslationResult::translationFound());
+   		resultOfTranslation.getTranslationAt 				= $entry(resultOfTranslation.@de.kugihan.dictionaryformids.translation.TranslationResult::getTranslationAt(*));
 
 		// each SingleTranslation within TranslationResult
    		for (var i = 0; i < resultOfTranslation.numberOfFoundTranslations(); i++) {
    			singleTranslation = resultOfTranslation.getTranslationAt(i);
-   			singleTranslation.getFromText 					= singleTranslation.@de.kugihan.dictionaryformids.translation.SingleTranslation::getFromText();
-   			singleTranslation.getNumberOfToTexts 			= singleTranslation.@de.kugihan.dictionaryformids.translation.SingleTranslation::getNumberOfToTexts();
-   			singleTranslation.getToTextAt 					= singleTranslation.@de.kugihan.dictionaryformids.translation.SingleTranslation::getToTextAt(*);  			
+   			singleTranslation.getFromText 					= $entry(singleTranslation.@de.kugihan.dictionaryformids.translation.SingleTranslation::getFromText());
+   			singleTranslation.getNumberOfToTexts 			= $entry(singleTranslation.@de.kugihan.dictionaryformids.translation.SingleTranslation::getNumberOfToTexts());
+   			singleTranslation.getToTextAt 					= $entry(singleTranslation.@de.kugihan.dictionaryformids.translation.SingleTranslation::getToTextAt(*));  			
    			// fromText within singleTranslation
    			setJsMethodsForJavaTextOfLanguage(singleTranslation.getFromText);
    			// each toText within singleTranslation
@@ -115,29 +137,137 @@ public class TranslationLayerGWT implements EntryPoint , TranslationExecutionCal
    		}
 
    		function setJsMethodsForJavaTextOfLanguage(textOfLanguage)  {
-   			textOfLanguage.getLanguageIndex					= textOfLanguage.@de.kugihan.dictionaryformids.translation.TextOfLanguage::getLanguageIndex();
-   			textOfLanguage.getText 							= textOfLanguage.@de.kugihan.dictionaryformids.translation.TextOfLanguage::getText();
+   			textOfLanguage.getLanguageIndex					= $entry(textOfLanguage.@de.kugihan.dictionaryformids.translation.TextOfLanguage::getLanguageIndex());
+   			textOfLanguage.getText 							= $entry(textOfLanguage.@de.kugihan.dictionaryformids.translation.TextOfLanguage::getText());
    		}
    		
-		$wnd.newTranslationResult(resultOfTranslation);
+		TranslationExecution.newTranslationResultCallback(resultOfTranslation);
     }-*/;
-	 
-	protected static native void exportStaticMethods() /*-{
-		function executeTranslationJs(toBeTranslatedWordTextInputParam,
-									 inputLanguagesParam,
-									 outputLanguagesParam,
-									 executeInBackgroundParam,
-									 maxHitsParam,
-									 durationForCancelSearchPara) {
-			var executeTranslationFunction = @de.kugihan.dictionaryformids.client.TranslationLayerGWT::executeTranslation(*);
-			executeTranslationFunction(toBeTranslatedWordTextInputParam,
-									   inputLanguagesParam,
-									   outputLanguagesParam,
-									   executeInBackgroundParam,
-									   maxHitsParam,
-									   durationForCancelSearchPara);
+
+	protected static native void exportStaticClasses() /*-{
+
+		// Constructor for Javascript objects of type TranslationParameters
+		function newTranslationParametersJs(dictionary,
+									        toBeTranslatedWordTextInputParam,
+									        inputLanguagesParam,
+									        outputLanguagesParam,
+									        executeInBackgroundParam,
+									        maxHitsParam,
+									        durationForCancelSearchParam) {
+			var newTranslationParametersFunction = $entry(@de.kugihan.dictionaryformids.client.TranslationLayerGWT::newTranslationParameters(*));
+			translationParametersObj = newTranslationParametersFunction
+	                                      (dictionary,
+										   toBeTranslatedWordTextInputParam,
+										   inputLanguagesParam,
+										   outputLanguagesParam,
+										   executeInBackgroundParam,
+										   maxHitsParam,
+										   durationForCancelSearchParam);
+            // some member functions are added:
+            translationParametersObj.getInputLanguages = 			$entry(translationParametersObj.@de.kugihan.dictionaryformids.translation.TranslationParameters::getInputLanguages(*));
+            translationParametersObj.getOutputLanguages = 			$entry(translationParametersObj.@de.kugihan.dictionaryformids.translation.TranslationParameters::getOutputLanguages(*));
+            translationParametersObj.getDictionary = 				$entry(translationParametersObj.@de.kugihan.dictionaryformids.translation.TranslationParameters::getDictionary(*));
+            translationParametersObj.getToBeTranslatedWordText = 	$entry(translationParametersObj.@de.kugihan.dictionaryformids.translation.TranslationParameters::getToBeTranslatedWordText(*));
+            translationParametersObj.getDurationForCancelSearch = 	$entry(translationParametersObj.@de.kugihan.dictionaryformids.translation.TranslationParameters::getDurationForCancelSearch(*));
+            translationParametersObj.getMaxHits = 					$entry(translationParametersObj.@de.kugihan.dictionaryformids.translation.TranslationParameters::getMaxHits(*));
+            return translationParametersObj;
 		}
-	   
+
+		// Constructor for Javascript objects of type TranslationParametersBatch
+		function newTranslationParametersBatchJs() {
+			var newTranslationParametersBatchFunction = $entry(@de.kugihan.dictionaryformids.client.TranslationLayerGWT::newTranslationParametersBatch(*));
+			translationParametersBatchJavaObj = newTranslationParametersBatchFunction();
+            
+            // some member functions are added:
+			translationParametersBatchJavaObj.getTranslationParametersAt = 		$entry(translationParametersBatchJavaObj.@de.kugihan.dictionaryformids.translation.TranslationParametersBatch::getTranslationParametersAt(*));
+			translationParametersBatchJavaObj.getAllTranslationParameters = 	$entry(translationParametersBatchJavaObj.@de.kugihan.dictionaryformids.translation.TranslationParametersBatch::getAllTranslationParameters(*));
+			translationParametersBatchJavaObj.numberOfTranslationParameters = 	$entry(translationParametersBatchJavaObj.@de.kugihan.dictionaryformids.translation.TranslationParametersBatch::numberOfTranslationParameters(*));
+			translationParametersBatchJavaObj.addTranslationParameters = 		$entry(translationParametersBatchJavaObj.@de.kugihan.dictionaryformids.translation.TranslationParametersBatch::addTranslationParameters(*));
+			translationParametersBatchJavaObj.insertTranslationParametersAt= 	$entry(translationParametersBatchJavaObj.@de.kugihan.dictionaryformids.translation.TranslationParametersBatch::insertTranslationParametersAt(*));
+			translationParametersBatchJavaObj.removeTranslationParametersAt= 	$entry(translationParametersBatchJavaObj.@de.kugihan.dictionaryformids.translation.TranslationParametersBatch::removeTranslationParametersAt(*));
+			translationParametersBatchJavaObj.removeAllTranslationParameters = 	$entry(translationParametersBatchJavaObj.@de.kugihan.dictionaryformids.translation.TranslationParametersBatch::removeAllTranslationParameters(*));
+			return translationParametersBatchJavaObj;
+		}
+
+		// setting callback functions for translation result
+		function setTranslationResultCallbackJs(deletePreviousTranslationResultCallbackParam,
+		                                        newTranslationResultCallbackParam) {
+			TranslationExecution.deletePreviousTranslationResultCallback = deletePreviousTranslationResultCallbackParam;
+			TranslationExecution.newTranslationResultCallback = newTranslationResultCallbackParam;
+	    }
+	    
+		//
+		// TranslationExecution
+		//
+		function executeTranslationJs(translationParametersObj,
+		                              deletePreviousTranslationResultCallback,
+		                              newTranslationResultCallback) {
+		    setTranslationResultCallbackJs(deletePreviousTranslationResultCallback,
+		                                   newTranslationResultCallback);
+			var executeTranslationFunction = $entry(@de.kugihan.dictionaryformids.client.TranslationLayerGWT::executeTranslation(*));
+			executeTranslationFunction(translationParametersObj);
+		}
+		function executeTranslationBatchJs(translationParametersBatchObj,
+		                              deletePreviousTranslationResultCallback,
+		                              newTranslationResultCallback) {
+		    setTranslationResultCallbackJs(deletePreviousTranslationResultCallback,
+		                                   newTranslationResultCallback);
+			var executeTranslationBatchFunction = $entry(@de.kugihan.dictionaryformids.client.TranslationLayerGWT::executeTranslationBatch(*));
+			executeTranslationBatchFunction(translationParametersBatchObj);
+		}
+		function checkForBrowserCompatibilityJs() { // todo: to be updated
+			// Check whether Application Cache is supported
+			var applicationCacheSupported = true;
+			try {
+				if (applicationCache == undefined) applicationCacheSupported = false;
+			}
+			catch (e) {applicationCacheSupported = false;}
+		
+			// Check whether Local Storage is supported
+			var localStorageSupported = true;
+			try {
+				if (localStorage == undefined) localStorageSupported = false;
+			}
+			catch (e) {localStorageSupported = false;}
+		
+			// Check whether XMLHttpRequest.overrideMimeType is supported
+			var htrOverrideMimeTypeSupported = true;
+			var htr = new XMLHttpRequest();
+			try {
+				if (htr.overrideMimeType == undefined) htrOverrideMimeTypeSupported = false;
+			}
+			catch (e) {htrOverrideMimeTypeSupported = false;}		
+			// Check whether FileReader is supported
+			var fileReaderSupported = true;
+			try {
+				if (FileReader == undefined) fileReaderSupported = false;
+			}
+			catch (e) {fileReaderSupported = false;}
+			if (!applicationCacheSupported) {
+				alert("Application Cache not supported by browser; download of dictionary not possible !");
+			}
+			if (!localStorageSupported) {
+				alert("Local Storage not supported by browser; you cannot save user settings");
+			}
+			if (!htrOverrideMimeTypeSupported) {
+				alert("XMLHttpRequest.overrideMimeType not supported by browser; DictionaryForMIDs will probably not run !");
+			}
+			if (!fileReaderSupported) {
+				alert("FileReader not supported by browser; translations can produce errors !");
+			}
+		}
+		// todo checkForBrowserCompatibilityJs();
+
+		$wnd.TranslationExecution = new Object();
+		var TranslationExecution = $wnd.TranslationExecution;
+		TranslationExecution.executeTranslation			  = executeTranslationJs;
+		TranslationExecution.executeTranslationBatch	  = executeTranslationBatchJs;
+		TranslationExecution.newTranslationParameters     = newTranslationParametersJs;
+
+		//
+		// ContentParser
+		// Note: the Javascript object is called ContentParser, not contentParserObj as in Java
+		//
 		function determineItemsFromContent(contentText, 
 										   changeInputAndOutputContent,
 										   isInput) {
@@ -150,27 +280,36 @@ public class TranslationLayerGWT implements EntryPoint , TranslationExecutionCal
 			// create JavaScript methods for accessing Java methods
 			//
 			// StringColourItemText
-			stringColourItemText.getItemTextPart				= stringColourItemText.@de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText::getItemTextPart(*);
-			stringColourItemText.size							= stringColourItemText.@de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText::size();
+			stringColourItemText.getItemTextPart				= $entry(stringColourItemText.@de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText::getItemTextPart(*));
+			stringColourItemText.size							= $entry(stringColourItemText.@de.kugihan.dictionaryformids.hmi_common.content.StringColourItemText::size());
 			// each stringColourItemTextPart within stringColourItemText
 			for (var i = 0; i < stringColourItemText.size(); i++) {
 				stringColourItemTextPart = stringColourItemText.getItemTextPart(i);
-				stringColourItemTextPart.getText				= stringColourItemTextPart.@de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart::getText();
-				stringColourItemTextPart.getColour				= stringColourItemTextPart.@de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart::getColour();
+				stringColourItemTextPart.getText				= $entry(stringColourItemTextPart.@de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart::getText());
+				stringColourItemTextPart.getColour				= $entry(stringColourItemTextPart.@de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart::getColour());
 				rgbColour = stringColourItemTextPart.getColour();
-				rgbColour.getHexValue							= rgbColour.@de.kugihan.dictionaryformids.dataaccess.content.RGBColour::getHexValue();
-				stringColourItemTextPart.getStyle				= stringColourItemTextPart.@de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart::getStyle();
+				rgbColour.getHexValue							= $entry(rgbColour.@de.kugihan.dictionaryformids.dataaccess.content.RGBColour::getHexValue());
+				stringColourItemTextPart.getStyle				= $entry(stringColourItemTextPart.@de.kugihan.dictionaryformids.hmi_common.content.StringColourItemTextPart::getStyle());
 				style = stringColourItemTextPart.getStyle();
 				style.style 									= style.@de.kugihan.dictionaryformids.dataaccess.content.FontStyle::style; 
 			}
 			return stringColourItemText;
 		}
-		
-		$wnd.executeTranslation = executeTranslationJs;
-		$wnd.determineItemsFromContent = determineItemsFromContent;
+		$wnd.ContentParser = new Object();
+		var ContentParser = $wnd.ContentParser;
+		ContentParser.determineItemsFromContent	= determineItemsFromContent;
+
+		//
+		// PredefinedContent
+		//
+		// to be done: fields/methods of PredefinedContent should be made directly available in Javascript. 
+		$wnd.PredefinedContent = new Object();
+		var predefinedContent = $wnd.PredefinedContent;
+		predefinedContent.getPredefinedContent	= $entry(@de.kugihan.dictionaryformids.dataaccess.content.PredefinedContent::getPredefinedContent(*));
+		 
     }-*/;
 
-	protected static native void exportDictionaryDataFileDataStructures() /*-{
+	protected static native void exportLoadedDictionary(DictionaryDataFile dictionary) /*-{
 		function setJsFieldsForLanguageDefinition(supportedLanguageObj) {
 			supportedLanguageObj.languageDisplayText = 			supportedLanguageObj.@de.kugihan.dictionaryformids.dataaccess.LanguageDefinition::languageDisplayText;
 			supportedLanguageObj.languageFilePostfix = 			supportedLanguageObj.@de.kugihan.dictionaryformids.dataaccess.LanguageDefinition::languageFilePostfix;
@@ -195,27 +334,20 @@ public class TranslationLayerGWT implements EntryPoint , TranslationExecutionCal
 			contentObj.displaySelectable = 		contentObj.@de.kugihan.dictionaryformids.dataaccess.content.ContentDefinition::displaySelectable;
 		}
 
-		$wnd.setJsFieldsForContentDefinition = setJsFieldsForContentDefinition;  // this method may be needed by the HMI
-		$wnd.DictionaryDataFile = new Object();
-		var dictionaryDataFile = $wnd.DictionaryDataFile;
-		dictionaryDataFile.numberOfAvailableLanguages = 	@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::numberOfAvailableLanguages;
-		dictionaryDataFile.numberOfInputLanguages = 		@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::numberOfInputLanguages;
-		dictionaryDataFile.infoText = 						@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::infoText;
-		dictionaryDataFile.dictionaryAbbreviation = 		@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::dictionaryAbbreviation;
-		dictionaryDataFile.applicationFileNamePrefix = 		@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::applicationFileNamePrefix;
-		dictionaryDataFile.supportedLanguages = 			@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::supportedLanguages;
-		var supportedLanguages = dictionaryDataFile.supportedLanguages;
+		dictionary.numberOfAvailableLanguages = 	dictionary.@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::numberOfAvailableLanguages;
+		dictionary.numberOfInputLanguages = 		dictionary.@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::numberOfInputLanguages;
+		dictionary.infoText = 						dictionary.@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::infoText;
+		dictionary.dictionaryAbbreviation = 		dictionary.@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::dictionaryAbbreviation;
+		dictionary.applicationFileNamePrefix = 		           @de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::applicationFileNamePrefix;  // static field
+		dictionary.supportedLanguages = 			dictionary.@de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile::supportedLanguages;
+		var supportedLanguages = dictionary.supportedLanguages;
 		// for each of the supportedLanguage, set the Javascript fields
-		for (var i=0; i < dictionaryDataFile.numberOfAvailableLanguages; ++i) {
+		for (var i=0; i < dictionary.numberOfAvailableLanguages; ++i) {
 			setJsFieldsForLanguageDefinition(supportedLanguages[i]);
 		}
+		$wnd.dictionary = dictionary;
     }-*/;
 	 			
-	protected static native void exportPredefinedContent() /*-{
-		$wnd.PredefinedContent = new Object();
-		var predefinedContent = $wnd.PredefinedContent;
-		predefinedContent.getPredefinedContent	= @de.kugihan.dictionaryformids.dataaccess.content.PredefinedContent::getPredefinedContent(*);
-    }-*/;
 
 
 

@@ -10,6 +10,8 @@ package de.kugihan.dictionaryformids.dataaccess;
 
 import de.kugihan.dictionaryformids.dataaccess.content.*;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
+import de.kugihan.dictionaryformids.general.ClassMethodBase;
+import de.kugihan.dictionaryformids.general.ClassMethodImpl;
 import de.kugihan.dictionaryformids.general.DictionaryClassNotLoadedException;
 import de.kugihan.dictionaryformids.general.DictionaryException;
 import de.kugihan.dictionaryformids.general.Util;
@@ -69,7 +71,7 @@ public class DictionaryDataFile  {
         public static final  String pathNameDataFiles = "dictionary";
         public static boolean useStandardPath = true;  // indicates that the property file is located in pathNameDataFiles; set to false by dictionary generation tools
 
-        public        ObjectForClass objectForClassObj = new ObjectForClass();
+        protected     ClassMethodBase classMethodObj = new ClassMethodImpl();  // used for accessing features of class Class that are not available in GWT
         
         protected	  DfMInputStreamAccess dictionaryDataFileISAccess;  // used for accessing the files of the dictionary
 
@@ -269,11 +271,10 @@ public class DictionaryDataFile  {
                         normationObj.dictionaryDataFileISAccess = dictionaryDataFileISAccess;
                         supportedLanguages[indexLanguage].normationObj = normationObj;
 
-                        // for loading the dictionaryUpdate class, do this via getObjectForClassDynamic, not via getObjectForClass
                         if (initDictionaryGenerationValues) {
                                 String dictionaryUpdateClassName = supportedLanguages[indexLanguage].dictionaryUpdateClassName;
                                 DictionaryUpdateIF dictionaryUpdateObj =
-                                                (DictionaryUpdateIF) getObjectForClassDynamic
+                                                (DictionaryUpdateIF) getObjectForClass
                                                                          (dictionaryUpdateClassName,
                                                                                                   "de.kugihan.dictionaryformids.dictgen.dictionaryupdate.DictionaryUpdate",
                                                                                               "de.kugihan.dictionaryformids.dictgen.dictionaryupdate",
@@ -294,7 +295,7 @@ public class DictionaryDataFile  {
                         className = fallbackClassName;
                 }
                 Object classObj;
-                classObj = objectForClassObj.createObjectForClass(className);
+                classObj = classMethodObj.createObjectForClass(className);
                 if (classObj == null) {
                         // try old package name
                         StringBuffer classNameNewPackage = new StringBuffer(className);
@@ -302,7 +303,7 @@ public class DictionaryDataFile  {
                         classNameNewPackage.delete(0, oldPackageName.length());
                         // prepend new package name:
                         String classNameNewPackageStr = newPackageName + classNameNewPackage.toString();
-                        classObj = objectForClassObj.createObjectForClass(classNameNewPackageStr);
+                        classObj = classMethodObj.createObjectForClass(classNameNewPackageStr);
                         if (classObj == null) {
                                 // did not work neither:
                                 throw new DictionaryClassNotLoadedException("Class could not be loaded: " + className);
@@ -311,44 +312,6 @@ public class DictionaryDataFile  {
                 return classObj;
         }
 
-        /*
-         *  the method getObjectForClassDynamic does the same as getObjectForClass, but does not rely on already referenced classes
-         */
-        protected Object getObjectForClassDynamic(String className,
-                                                  String fallbackClassName,
-                                                  String newPackageName,  // in support of pre 3.0 Jar-files for the PC-Version
-                                                  String oldPackageName)  // in support of pre 3.0 Jar-files for the PC-Version
-                throws DictionaryException {
-                if (className == null) {
-                        // use fallbackClassName instead
-                        className = fallbackClassName;
-                }
-                Class classToLoad;
-                Object classObj;
-                try
-                {
-                        classToLoad = Class.forName(className);
-                        classObj = classToLoad.newInstance();
-                }
-                catch (Exception e)
-                {
-                        // try old package name
-                        try {
-                                StringBuffer classNameNewPackage = new StringBuffer(className);
-                                // delete old package name:
-                                classNameNewPackage.delete(0, oldPackageName.length());
-                                // prepend new package name:
-                                String classNameNewPackageStr = newPackageName + classNameNewPackage.toString();
-                                classToLoad = Class.forName(classNameNewPackageStr);
-                                classObj = classToLoad.newInstance();
-                        }
-                        catch (Exception e2) {
-                                // did not work either:
-                                throw new DictionaryClassNotLoadedException("Class could not be loaded: " + className);
-                        }
-                }
-                return classObj;
-        }
 
         public int determineColourComponent(String rbgString, String propertyName)
                                         throws DictionaryException {

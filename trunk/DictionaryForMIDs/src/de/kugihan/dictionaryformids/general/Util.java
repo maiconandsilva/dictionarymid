@@ -9,6 +9,7 @@ package de.kugihan.dictionaryformids.general;
 
 import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 import de.kugihan.dictionaryformids.dataaccess.fileaccess.DfMInputStreamAccess;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -75,15 +76,17 @@ public abstract class Util {
 		}
 	}
 
-	final String versionNumberPropertyName = "VersionNumber";
-	final String versionStatusPropertyName = "VersionStatus";
-	final String applicationPropertyFileLocation = "/Application.properties";
+	final  String versionNumberPropertyName = "VersionNumber";
+	final  String versionStatusPropertyName = "VersionStatus";
+	final  String applicationPropertyFileLocation = "/Application.properties";
 	static String applicationVersionString = null;
+    final  ClassMethodBase classMethodObj = new ClassMethodImpl();
 	public String getApplicationVersionString() throws DictionaryException {
 		if (applicationVersionString == null) {
 			try {
 				Properties applicationProperties = new Properties();
-				applicationProperties.load(getClass().getResourceAsStream(applicationPropertyFileLocation));
+				InputStream propertyInputStream = classMethodObj.getResourceAsStream(applicationPropertyFileLocation);
+				applicationProperties.load(propertyInputStream);
 				String versionNumberString = applicationProperties.getProperty(versionNumberPropertyName);
 				String versionStatusString = applicationProperties.getProperty(versionStatusPropertyName);
 				applicationVersionString = versionNumberString;

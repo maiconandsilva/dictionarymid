@@ -1,0 +1,99 @@
+html {
+  height: 99.5%;
+}
+
+
+
+body {
+  background: rgb(191,233,255); /* Old browsers */
+  background: -moz-linear-gradient(top,  rgba(191,233,255,1) 0%, rgba(60,190,255,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(191,233,255,1)), color-stop(100%,rgba(60,190,255,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(191,233,255,1) 0%,rgba(60,190,255,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(191,233,255,1) 0%,rgba(60,190,255,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(191,233,255,1) 0%,rgba(60,190,255,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(191,233,255,1) 0%,rgba(60,190,255,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfe9ff', endColorstr='#00a9ff',GradientType=0 ); /* IE6-9 */
+  height: 99%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 99%;
+  background-position: 0px 0px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size:15px;
+}
+
+
+
+td.headerStyle {
+   color:#ffffff;
+   text-align:middle;
+   font-weight:bold; 
+   background-color:#ff4444;
+   font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+td.optionbuttonStyle {
+   color:#ffffff;
+   font-weight:bold; 
+   background-color:#ff9900;
+   font-family: Verdana, Arial, Helvetica, sans-serif;
+   padding:25px; 
+}
+td.inputbackStyle {
+   color:#ffffff;
+   font-weight:bold; 
+   background-color:#00aaff;
+   font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+td.translatebuttonStyle {
+   color:#ffffff;
+   font-weight:bold; 
+   background-color:#66dd00;
+   font-family: Verdana, Arial, Helvetica, sans-serif;
+   padding:25px; 
+}
+
+
+
+
+td.closeoptionStyle {
+   color:#ffffff;
+   font-weight:bold; 
+   background-color:#00aaff;
+   font-family: Verdana, Arial, Helvetica, sans-serif;
+   padding:10px 10px; 
+}
+
+
+
+
+input.inputboxStyle{
+   width:80%;
+   height: 60%;
+   border:3px solid #dadada;
+   font-size:20px;
+   padding:5px;
+}
+input.inputboxStyle:focus { 
+   outline:none;
+   border-color:#9ecaed;
+}
+
+
+
+div.contentMargin{
+   min-height: 100%;
+   height: auto;
+   height: 100%;
+   margin: 0 auto -55px;
+}
+table.footerStyle{
+   color:#000000;
+   background-color:#ffff44;
+   padding-bottom:2px;
+   text-align:right;
+   position:relative;
+   height: 40px;   
+   font-weight:bold; 
+   font-size:12px;
+   font-family: Verdana, Arial, Helvetica, sans-serif
+}

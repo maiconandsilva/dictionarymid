@@ -14,11 +14,27 @@
 <html manifest="cache_mini_hmi.manifest">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
     <title>DictionaryForMIDs Web App (mini_hmi - in development)</title>
-    
+
+    <!-- This is the Scripts used to execute jQuery API's: -->
+    <script src="../../Apps/mini_hmi/jquery-1.9.1.js"></script>
+
+    <!-- This is the Script for the Visual effects and jQuery functions: -->
+	<script>
+		$(window).load(function() {
+		  $("div.headerEffect").hide().delay(700).fadeIn('slow');
+		}); 
+		$(window).load(function() {
+		  $("div.searchbarEffect").hide().delay(700).fadeIn('slow');
+		});
+		$(window).load(function() {
+		  $("div.footerEffect").hide().delay(700).fadeIn('slow');
+		}); 	
+ 	</script>
+  
     <!-- This is the Script for the Translation Layer: -->
-    <script type="text/javascript" src="../../Apps/translationlayergwt/translationlayergwt.nocache.js"></script> 
+    <script type="text/javascript" src="../../Apps/DfMTranslationLayer/DfMTranslationLayer.js"></script> 
 
     <!-- Some includes for the mini_hmi -->
 	<script type="text/javascript" src="../../Apps/mini_hmi/UserSettings.js"> </script> 
@@ -28,22 +44,52 @@
 	<script type="text/javascript">
 		"use strict";
 		var pathToHTML = "../../Apps/mini_hmi/";
-		checkForBrowserCompatibility();
 		window.onload = initializeApplication; 
-    </script>
-  </head>
+      </script>
 
+    <!-- This is the Script for focusing on input box and set action for enter key: -->
+	<script>for (var start = 1; start < 10; start++)
+      	  setTimeout(function Focus(){document.getElementById("userInput").focus();}, 600 * start);
+	
+		  function enterKeyCommand() {if (event.keyCode == 13){startTranslation();}}  //Enter key press action
+	</script>
+  
+</head>
+
+  <!-- todo V.P. Guru: "Focus is no defined" in <body onload="Focus()"> -->
   <body>
     <noscript>
         Your web browser must have JavaScript enabled in order for this application to work.
     </noscript>
 
-    DictionaryForMIDs <button onClick='openOptionWindow();'>Options</button>
-	<BR>
-	<input id='userInput'> 
-	<button onClick='startTranslation();'>Translate</button>
-	<BR>
-	<table id="translationResultsTable">
+	<div class='contentMargin'>
+	<div class='headerEffect'>
+		<table width=100% cellspacing="5">
+		   <tr>
+			<td align="center" width=85% class="headerStyle"><h2>DictionaryForMIDs</h2></td>
+	    	<td align="center" width=15% class='optionbuttonStyle' onClick="openOptionWindow();">Options</td>
+		   </tr>
+		</table>
+	</div>
+
+	<div class='searchbarEffect'>
+		<table width=100%  cellspacing="5">
+		   <tr>
+			<td align="center" width=85% class='inputbackStyle'><input class='inputboxStyle' id='userInput' width=100% onKeydown='enterKeyCommand();'></td>
+			<td align="center" width=15% class='translatebuttonStyle' onClick='startTranslation();'>Translate</td>
+		   </tr>
+		</table>
+	</div>
+	
+	<table style="padding-left:20px" id="translationResultsTable">
 	</table>
+	<p>&nbsp;</p>
+	</div>
+	
+	<div class='footerEffect'>
+	<table width=100% class='footerStyle'>
+		<td>DictionaryforMIDs WebApp is developed by the DictionaryForMIDs community. Contact Us : 	<a href="http://dictionarymid.sourceforge.net/contact.html">http://dictionarymid.sourceforge.net/contact.html</a>&nbsp;&nbsp;</td>
+	</table>
+	</div>
   </body>
 </html>
