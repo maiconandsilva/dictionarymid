@@ -6,3 +6,5 @@ mini_hmi.php
 ../../Apps/mini_hmi/OptionWindow.html
 ../../Apps/mini_hmi/mini_hmi.js
 ../../Apps/mini_hmi/UserSettings.js
+../../Apps/mini_hmi/jquery-1.9.1.js
+../../Apps/mini_hmi/mystyle.css
