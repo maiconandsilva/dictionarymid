@@ -43,7 +43,7 @@ import java.util.zip.ZipEntry;
 
 public class JarCreator {
 
-	private static DictionaryDataFile dictionary; 
+    private static DictionaryDataFile dictionary; 
     public static final String DFM_JAVA_ME_APP_VERSION = "3.5.9";
     public static final String EXTENSION_JAR = ".jar";
     public static final String EXTENSION_JAD = ".jad";
