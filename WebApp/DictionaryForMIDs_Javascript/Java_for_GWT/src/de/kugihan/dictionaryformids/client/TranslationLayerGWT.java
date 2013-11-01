@@ -215,13 +215,17 @@ public class TranslationLayerGWT implements EntryPoint, TranslationExecutionCall
 			var executeTranslationBatchFunction = $entry(@de.kugihan.dictionaryformids.client.TranslationLayerGWT::executeTranslationBatch(*));
 			executeTranslationBatchFunction(translationParametersBatchObj);
 		}
-		function checkForBrowserCompatibilityJs() { // todo: to be updated
+		
+		function checkForBrowserCompatibilityJs() {
 			// Check whether Application Cache is supported
 			var applicationCacheSupported = true;
 			try {
 				if (applicationCache == undefined) applicationCacheSupported = false;
 			}
 			catch (e) {applicationCacheSupported = false;}
+			if (! applicationCacheSupported) {
+				alert("Your Browser does not support HTML5 Application Cache - please upgrade your browser to a newer version !");
+			}
 		
 			// Check whether Local Storage is supported
 			var localStorageSupported = true;
@@ -229,6 +233,9 @@ public class TranslationLayerGWT implements EntryPoint, TranslationExecutionCall
 				if (localStorage == undefined) localStorageSupported = false;
 			}
 			catch (e) {localStorageSupported = false;}
+			if (! localStorageSupported) {
+				alert("Your Browser does not support HTML5 Local Storage - please upgrade your browser to a newer version !");
+			}
 		
 			// Check whether XMLHttpRequest.overrideMimeType is supported
 			var htrOverrideMimeTypeSupported = true;
@@ -237,26 +244,11 @@ public class TranslationLayerGWT implements EntryPoint, TranslationExecutionCall
 				if (htr.overrideMimeType == undefined) htrOverrideMimeTypeSupported = false;
 			}
 			catch (e) {htrOverrideMimeTypeSupported = false;}		
-			// Check whether FileReader is supported
-			var fileReaderSupported = true;
-			try {
-				if (FileReader == undefined) fileReaderSupported = false;
-			}
-			catch (e) {fileReaderSupported = false;}
-			if (!applicationCacheSupported) {
-				alert("Application Cache not supported by browser; download of dictionary not possible !");
-			}
-			if (!localStorageSupported) {
-				alert("Local Storage not supported by browser; you cannot save user settings");
-			}
-			if (!htrOverrideMimeTypeSupported) {
-				alert("XMLHttpRequest.overrideMimeType not supported by browser; DictionaryForMIDs will probably not run !");
-			}
-			if (!fileReaderSupported) {
-				alert("FileReader not supported by browser; translations can produce errors !");
+			if (! htrOverrideMimeTypeSupported) {
+				alert("Your Browser does not support HTML5 overrideMimeType - please upgrade your browser to a newer version !");
 			}
 		}
-		// todo checkForBrowserCompatibilityJs();
+		checkForBrowserCompatibilityJs();
 
 		$wnd.TranslationExecution = new Object();
 		var TranslationExecution = $wnd.TranslationExecution;
