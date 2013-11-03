@@ -1,7 +1,13 @@
+#
+# For description see http://dictionarymid.sourceforge.net/WebApp/htdocs/WebAppCreateDictionaries.html
+#
+# Copyrigth 2013 by DictionaryForMIDs community
+# GPLv2 applies
+#
 # Parameter 1 is the subdirectory in which the dictionary that shall be created is found
 # e.g. "dictionary Wiktionary"
 # This is a subdirectory of /home/frs/project/d/di/dictionarymid 
-
+#
 
 if [ $# -ne 1 ]
   then
