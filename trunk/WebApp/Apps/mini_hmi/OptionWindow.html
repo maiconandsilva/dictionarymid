@@ -12,13 +12,11 @@
 
 <html>
   <head>
-	<link rel="stylesheet" type="text/css" href="../../Apps/mini_hmi/mystyle.css">
+	<link rel="stylesheet" type="text/css" href="../../Apps/mini_hmi/option_style.css">
   	<script type="text/javascript">
 	
 		"use strict";
-		
-		function displayApplicationEventFunction(eventText,
-		                                         applicationCacheStatusValue) {
+		function displayApplicationEventFunction(eventText, applicationCacheStatusValue) {
 			document.getElementById("receivedApplicationCacheEvents").innerHTML +=  eventText + "; ";
 			displayApplicationCacheStatus(applicationCacheStatusValue);
 		}
@@ -56,29 +54,32 @@
 		
 		function numberOfSearchableInputLanguages() {
 			var number = 0;
-			for (var language = 0; language < DictionaryDataFile.numberOfAvailableLanguages; ++language) {
-				if (DictionaryDataFile.supportedLanguages[language].isSearchable) {
+			for (var language = 0; language < dictionary.numberOfAvailableLanguages; ++language) {
+				if (dictionary.supportedLanguages[language].isSearchable) {
 					number++;
 				}
 			}
 			return number;
 		}
 		
-		function initializeApplication() {
-			this.DictionaryDataFile = opener.DictionaryDataFile;
-			this.numberOfAvailableLanguages = DictionaryDataFile.numberOfAvailableLanguages;
+		function initializeOptionWindow() {
+			this.dictionary = parent.dictionary;
+			this.numberOfAvailableLanguages = dictionary.numberOfAvailableLanguages;
+			if (this.numberOfAvailableLanguages != 2) {
+				alert ("Sorry, OptionWindow does currently only support dictionaries with 2 languages");
+			}
 			this.numberOfSearchableInputLanguages = numberOfSearchableInputLanguages();
-			this.inputLanguage = opener.userSettingsObj.getInputLanguage();
-			this.outputLanguage = opener.userSettingsObj.getOutputLanguage();
+			this.inputLanguage = parent.userSettingsObj.getInputLanguage();
+			this.outputLanguage = parent.userSettingsObj.getOutputLanguage();
 			this.radioButtons = document.getElementsByName('languageSelection');
 			this.languageSelection1RadioButton = radioButtons[0];
 			this.languageSelection2RadioButton = radioButtons[1];
 			this.languageSelection1Text = languageSelection1RadioButton.nextSibling;
 			this.languageSelection2Text = languageSelection2RadioButton.nextSibling;
 			
-			displayApplicationCacheStatus(opener.applicationCache.status);
+			displayApplicationCacheStatus(parent.applicationCache.status);
 			createItems();
-			opener.optionWindowInitializationComplete = true;
+			parent.optionWindowInitializationComplete = true;
 		}
 		
 		var languageSelectionTypeEnum = { none : 0, radioButtons : 1,  comboBoxes : 2 };
@@ -92,8 +93,8 @@
 			}
 			else if ((numberOfSearchableInputLanguages == 2) && (numberOfAvailableLanguages == 2)) {
 				languageSelectionType = languageSelectionTypeEnum.radioButtons;
-				var language0DisplayText = DictionaryDataFile.supportedLanguages[0].languageDisplayText;
-				var language1DisplayText = DictionaryDataFile.supportedLanguages[1].languageDisplayText;
+				var language0DisplayText = dictionary.supportedLanguages[0].languageDisplayText;
+				var language1DisplayText = dictionary.supportedLanguages[1].languageDisplayText;
 				languageSelection1Text.nodeValue = language0DisplayText + " > " + language1DisplayText;
 				languageSelection2Text.nodeValue = language1DisplayText + " > " + language0DisplayText;
 				hideLanguageSelectionComboBoxes();
@@ -144,45 +145,47 @@
 				// todo
 			}
 			if (languageSelectionType != languageSelectionTypeEnum.none) {
-				opener.userSettingsObj.setInputLanguage(inputLanguage);
-				opener.userSettingsObj.setOutputLanguage(outputLanguage);
+				parent.userSettingsObj.setInputLanguage(inputLanguage);
+				parent.userSettingsObj.setOutputLanguage(outputLanguage);
 			}
 		}
 		
 		function closeOptionWindow() {
 			saveSettings();
-			close();
 		}
 		
-		function onunloadOptionWindow() {
-			opener.optionWindow = null;
+		function onUnloadOptionWindow() {
+			parent.optionWindow = null;
 		}
 		
 		this.displayApplicationEvent = displayApplicationEventFunction;
-		window.onload = initializeApplication;
-		window.onunload = onunloadOptionWindow;
+		window.onunload = onUnloadOptionWindow;
+	
 	</script>
   </head>
   <body>
-	<div>
-		<table><tr><td class='closeoptionStyle' onClick='closeOptionWindow();'>Close Window</td></tr></table>
-		<br>
-	</div>
-	<div id="languageSelectionRadioButtons">
-		<input type="radio" name="languageSelection" value="languageSelection1"> languageSelection1Text 
-		<br>
-		<input type="radio" name="languageSelection" value="languageSelection2"> languageSelection2Text
-	</div>
-	<div id="languageSelectionComboBoxes">
-		<p>todo</p>
-		<p>todo</p>
-	</div>
-	<div>
-		<br>
-		<p>Application Cache Status: </p> <p id="applicationCacheStatus"></p> 
-	</div>
-	<div>
-		<p>Application Cache Events: </p> <p id="receivedApplicationCacheEvents"></p> 
-	</div>
+  	<table width="100%">
+	<tr>
+	<td>
+		<div id="languageSelectionRadioButtons">
+			<input type="radio" name="languageSelection" value="languageSelection1" onChange='closeOptionWindow();'> languageSelection1Text 
+				<br>
+				<br>
+			<input type="radio" name="languageSelection" value="languageSelection2" onChange='closeOptionWindow();'> languageSelection2Text
+		</div>
+	</td>
+	<td>
+		<div id="languageSelectionComboBoxes">
+			<p>todo</p>
+			<p>todo</p>
+		</div>
+	</td>
+	<td>
+			<div>Application Cache Status: </div><div id="applicationCacheStatus"></div>
+				<br>
+			<div>Application Cache Events: </div><div id="receivedApplicationCacheEvents"></div> 
+	</td>
+	</tr>
+	</table>
   </body>
 </html>

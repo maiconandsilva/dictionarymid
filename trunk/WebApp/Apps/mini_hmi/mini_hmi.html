@@ -14,23 +14,32 @@
 <html manifest="cache_mini_hmi.manifest">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../Apps/mini_hmi/mystyle.css">
+    <link rel="stylesheet" type="text/css" href="../../Apps/mini_hmi/hmi_style.css">
+	
     <title>DictionaryForMIDs Web App (mini_hmi - in development)</title>
 
+	<script type="text/javascript">
+		"use strict";
+		var pathToHTML = "../../Apps/mini_hmi/";
+    </script>
+
     <!-- This is the Scripts used to execute jQuery API's: -->
-    <script src="../../Apps/mini_hmi/jquery-1.9.1.js"></script>
+    <script src="../../Apps/mini_hmi/jquery-1.10.2.js"></script>
 
     <!-- This is the Script for the Visual effects and jQuery functions: -->
 	<script>
 		$(window).load(function() {
-		  $("div.headerEffect").hide().delay(700).fadeIn('slow');
-		}); 
-		$(window).load(function() {
-		  $("div.searchbarEffect").hide().delay(700).fadeIn('slow');
+			$("#headerFrame").hide().delay(700).fadeIn('slow');
+			$("#searchFrame").hide().delay(700).fadeIn('slow');
+			$("#footerFrame").hide().delay(700).fadeIn('slow');
+			$("#optionFrame").hide();
 		});
-		$(window).load(function() {
-		  $("div.footerEffect").hide().delay(700).fadeIn('slow');
-		}); 	
+
+		$(function(){
+			$("td.optionbuttonStyle").click(function(){
+				$("#optionFrame").slideToggle();
+			});
+		});
  	</script>
   
     <!-- This is the Script for the Translation Layer: -->
@@ -40,39 +49,74 @@
 	<script type="text/javascript" src="../../Apps/mini_hmi/UserSettings.js"> </script> 
 	<script type="text/javascript" src="../../Apps/mini_hmi/mini_hmi.js"> </script> 
 
-    <!-- And here some functions for the mini_hmi -->
-	<script type="text/javascript">
-		"use strict";
-		var pathToHTML = "../../Apps/mini_hmi/";
-		window.onload = initializeApplication; 
-      </script>
-
     <!-- This is the Script for focusing on input box and set action for enter key: -->
-	<script>for (var start = 1; start < 10; start++)
-      	  setTimeout(function Focus(){document.getElementById("userInput").focus();}, 600 * start);
+	<script type="text/javascript">
 	
-		  function enterKeyCommand() {if (event.keyCode == 13){startTranslation();}}  //Enter key press action
+		for (var start = 1; start < 10; start++)
+			setTimeout(function Focus(){
+				document.getElementById("userInput").focus();  //Focus Input box
+			}, 1000 * start);  //Timer to handle smooth focusing
+			
+		function visibilityOnload(){
+			document.getElementById("headerFrame").style.visibility = "visible";  //Change Frame visibility status
+			document.getElementById("optionFrame").style.visibility = "visible";  //Change Frame visibility status
+			document.getElementById("searchFrame").style.visibility = "visible";  //Change Frame visibility status
+			document.getElementById("footerFrame").style.visibility = "visible";  //Change Frame visibility status
+		}
+			
+		function enterKeyCommand(){
+			if (event.keyCode == 13){
+				startTranslation(); //Enter key press action	
+			}
+		}
 	</script>
-  
+
+    <!-- This is the Script for toggle between option SVG image: -->
+	<script type="text/javascript">
+		var open = '&#9660; Options'  //The String 'options' with down arrow	
+		var close = '&#9650; Options'  //The String 'options' with up arrow
+
+		var currentState = 0;
+
+		function toggleoptionString() {
+			if (currentState == 0) {
+				document.getElementById("optionString").innerHTML = close;
+				currentState = 1;
+			} else {
+				document.getElementById("optionString").innerHTML = open;
+				currentState = 0;
+			}
+		}
+	
+	</script>
+	
+    <!-- Initialization -->
+	<script type="text/javascript">
+		window.addEventListener("load", initializeApplication);
+    </script>
+
 </head>
 
-  <!-- todo V.P. Guru: "Focus is no defined" in <body onload="Focus()"> -->
-  <body>
+<body onload="visibilityOnload();">
     <noscript>
         Your web browser must have JavaScript enabled in order for this application to work.
     </noscript>
-
-	<div class='contentMargin'>
-	<div class='headerEffect'>
+	
+	<div id='headerFrame' style="visibility:hidden;">
 		<table width=100% cellspacing="5">
 		   <tr>
 			<td align="center" width=85% class="headerStyle"><h2>DictionaryForMIDs</h2></td>
-	    	<td align="center" width=15% class='optionbuttonStyle' onClick="openOptionWindow();">Options</td>
+	    	<td align="center" width=15% class='optionbuttonStyle' id='optionString' onClick="toggleoptionString();">&#9660; Options</td>
 		   </tr>
 		</table>
 	</div>
+	
+	<div id='optionFrame' style="visibility:hidden;">
+		<iframe id='optionStyle' src="../../Apps/mini_hmi/OptionWindow.html" frameBorder="0" allowtransparency="true">
+		</iframe>
+	</div>
 
-	<div class='searchbarEffect'>
+	<div id='searchFrame' style="visibility:hidden;">
 		<table width=100%  cellspacing="5">
 		   <tr>
 			<td align="center" width=85% class='inputbackStyle'><input class='inputboxStyle' id='userInput' width=100% onKeydown='enterKeyCommand();'></td>
@@ -81,15 +125,14 @@
 		</table>
 	</div>
 	
+	<div id="resultFrame">
 	<table style="padding-left:20px" id="translationResultsTable">
 	</table>
-	<p>&nbsp;</p>
 	</div>
 	
-	<div class='footerEffect'>
-	<table width=100% class='footerStyle'>
-		<td>DictionaryforMIDs WebApp is developed by the DictionaryForMIDs community. Contact Us : 	<a href="http://dictionarymid.sourceforge.net/contact.html">http://dictionarymid.sourceforge.net/contact.html</a>&nbsp;&nbsp;</td>
-	</table>
+	<div id='footerFrame' style="visibility:hidden;">
+		DictionaryforMIDs WebApp is developed by the DictionaryForMIDs community. Contact Us : <a href='http://dictionarymid.sourceforge.net/contact.html'>http://dictionarymid.sourceforge.net/contact.html</a>&nbsp;&nbsp;
 	</div>
+	
   </body>
 </html>

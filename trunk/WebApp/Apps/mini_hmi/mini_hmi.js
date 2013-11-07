@@ -126,7 +126,8 @@ function initializeApplication() {
 	this.translationResultsTable 	= document.getElementById("translationResultsTable");
 	this.userSettingsObj 			= new UserSettings(location.href);
 	this.optionWindowInitializationComplete = false;
-
+	var optionWindowObj = window.frames["optionStyle"];
+	optionWindowObj.initializeOptionWindow();
 }
 
 var optionWindow = null;
