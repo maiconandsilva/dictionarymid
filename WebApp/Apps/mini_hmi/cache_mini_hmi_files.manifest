@@ -1,10 +1,12 @@
 #
 # HTML files for mini_hmi
+# Version 1
 # 
 .
 mini_hmi.php
 ../../Apps/mini_hmi/OptionWindow.html
+../../Apps/mini_hmi/option_style.css
 ../../Apps/mini_hmi/mini_hmi.js
 ../../Apps/mini_hmi/UserSettings.js
-../../Apps/mini_hmi/jquery-1.9.1.js
-../../Apps/mini_hmi/mystyle.css
+../../Apps/mini_hmi/jquery-1.10.2.js
+../../Apps/mini_hmi/hmi_style.css

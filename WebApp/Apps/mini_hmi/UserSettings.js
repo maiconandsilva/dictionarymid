@@ -59,18 +59,37 @@ function UserSettings(dictionaryID) {
 	
 	this.buildInitialSettings = function() {
 		this.setVersionOfSettings(versionOfSettings);
-		this.setInputLanguage(this.determineFirstInputLanguage());
-		this.setOutputLanguage(this.determineFirstOutputLanguage());
+		this.setInputAndOutputLanguage();
 	}
 
-	this.determineFirstInputLanguage = function() {
-		return 0;  // for testing
+	this.setInputAndOutputLanguage = function () {
+		// inputLanguage is the first searchable language
+		// outputLanguage is the first language after inputLanguage
+		var inputLanguageInitalValue = -1;
+		var outputLanguageInitalValue = -1;
+		for (var languageCounter = 0; 
+			 languageCounter < dictionary.numberOfAvailableLanguages; 
+			 ++languageCounter) {
+			if (inputLanguageInitalValue != -1) {
+				outputLanguageInitalValue = languageCounter;
+				break; // both inputLanguageInitalValue and outputLanguageInitalValue are set
+			}
+			if (dictionary.supportedLanguages[languageCounter].isSearchable) {
+				if (inputLanguageInitalValue == -1)
+					inputLanguageInitalValue = languageCounter;
+			}
+		}
+		if (inputLanguageInitalValue == -1) {
+			throw "No searchable languages defined";
+		}
+		if (outputLanguageInitalValue == -1) {
+			// inputLanguageInitialValue was last language in list: use first language
+			outputLanguageInitalValue = 0;
+		}
+		this.setInputLanguage(inputLanguageInitalValue);
+		this.setOutputLanguage(outputLanguageInitalValue);
 	}
 
-	this.determineFirstOutputLanguage = function() {
-		return 1;  // for testing
-	}
-	
 	// check if the version of the settings matches
 	if (this.getVersionOfSettings() != versionOfSettings) {
 		this.buildInitialSettings();

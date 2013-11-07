@@ -1,9 +1,9 @@
 html {
-  height: 99.5%;
+	height: 100%;
 }
 
 
-
+	
 body {
   background: rgb(191,233,255); /* Old browsers */
   background: -moz-linear-gradient(top,  rgba(191,233,255,1) 0%, rgba(60,190,255,1) 100%); /* FF3.6+ */
@@ -13,13 +13,21 @@ body {
   background: -ms-linear-gradient(top,  rgba(191,233,255,1) 0%,rgba(60,190,255,1) 100%); /* IE10+ */
   background: linear-gradient(to bottom,  rgba(191,233,255,1) 0%,rgba(60,190,255,1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfe9ff', endColorstr='#00a9ff',GradientType=0 ); /* IE6-9 */
-  height: 99%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  width: 99%;
   background-position: 0px 0px;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size:15px;
+  height: 98.2%;
+  width: 99%;
+  margin:0px 0px;
+  padding:5px 5px;
+}
+
+
+
+h2{
+	margin:15px 0px;
 }
 
 
@@ -34,9 +42,8 @@ td.headerStyle {
 td.optionbuttonStyle {
    color:#ffffff;
    font-weight:bold; 
-   background-color:#ff9900;
+   background-color:#66cc00;
    font-family: Verdana, Arial, Helvetica, sans-serif;
-   padding:25px; 
 }
 td.inputbackStyle {
    color:#ffffff;
@@ -47,31 +54,20 @@ td.inputbackStyle {
 td.translatebuttonStyle {
    color:#ffffff;
    font-weight:bold; 
-   background-color:#66dd00;
+   background-color:#ffbb00;
    font-family: Verdana, Arial, Helvetica, sans-serif;
-   padding:25px; 
-}
-
-
-
-
-td.closeoptionStyle {
-   color:#ffffff;
-   font-weight:bold; 
-   background-color:#00aaff;
-   font-family: Verdana, Arial, Helvetica, sans-serif;
-   padding:10px 10px; 
+   padding:22px; 
 }
 
 
 
 
 input.inputboxStyle{
-   width:80%;
-   height: 60%;
+   width:84%;
+   height: 55%;
    border:3px solid #dadada;
    font-size:20px;
-   padding:5px;
+   padding:4px;
 }
 input.inputboxStyle:focus { 
    outline:none;
@@ -80,20 +76,79 @@ input.inputboxStyle:focus {
 
 
 
-div.contentMargin{
-   min-height: 100%;
-   height: auto;
-   height: 100%;
-   margin: 0 auto -55px;
+
+#optionStyle{
+	margin-bottom:0px;
+	margin-left:5px;
+	display: block;
+	height:81px;
+	width:98.5%;
+	overflow: auto;
 }
-table.footerStyle{
-   color:#000000;
-   background-color:#ffff44;
-   padding-bottom:2px;
-   text-align:right;
-   position:relative;
-   height: 40px;   
-   font-weight:bold; 
-   font-size:12px;
-   font-family: Verdana, Arial, Helvetica, sans-serif
+#optionStyle::-webkit-scrollbar-track{
+	-webkit-box-shadow: inset 0 0 2px rgba(255,255,255,0.15);
+	border-radius: 0px;
+	background-color: #d0d0d0;
+}
+#optionStyle::-webkit-scrollbar{
+	width: 3px;
+	background-color: #d0d0d0;
+}
+#optionStyle::-webkit-scrollbar-thumb{
+	border-radius: 0px;
+	-webkit-box-shadow: inset 0 0 2px rgba(255,255,255,0.1);
+	background-color: #00aaff;
+}
+
+
+
+
+
+#resultFrame{
+	margin-top:3px;
+	margin-left:auto;
+	margin-right:auto;
+	display: block;
+	height: 413px;
+	width: 99%;
+	overflow: auto;
+}
+#resultFrame::-webkit-scrollbar-track{
+	-webkit-box-shadow: inset 0 0 2px rgba(255,255,255,0.15);
+	border-radius: 0px;
+	background-color: #d0d0d0;
+}
+#resultFrame::-webkit-scrollbar{
+	width: 3px;
+	background-color: #d0d0d0;
+}
+#resultFrame::-webkit-scrollbar-thumb{
+	border-radius: 0px;
+	-webkit-box-shadow: inset 0 0 2px rgba(255,255,255,0.1);
+	background-color: #00aaff;
+}
+
+
+
+
+
+#footerFrame{
+	clear:both;
+	color:#000000;
+	background-color:rgba(255,255,0,0.7);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bbffff00', endColorstr='#bbffff00',GradientType=0 ); /* IE6-9 */
+	font-weight:bold; 
+	text-align:right;
+	height: 40px;   
+	left: 10px;
+	line-height: 40px;
+	overflow: visible;
+	position: fixed;			
+	bottom: 10px;
+	clear: both;
+	display: block;
+	width: 98%;
+	z-index: 4;
+    font-size:12px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
 }
