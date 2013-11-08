@@ -12,11 +12,13 @@ import de.kugihan.dictionaryformids.dataaccess.DictionaryDataFile;
 
 public class TranslationResult {
 
-	public long    executionTime; 			 // in ms
-	public boolean translationBreakOccurred = false; // true if the translation was aborted
-	public int     translationBreakReason; // reason why translation was aborted
+	public long    executionTime; 			          // in ms
+	public boolean translationBreakOccurred = false;  // true if the translation was aborted
+	public int     translationBreakReason;            // reason why translation was aborted
 	
-	public 		DictionaryDataFile	dictionary;  // dictionary that is searched
+	public 		DictionaryDataFile	dictionary;                   // dictionary that was searched
+	public 		TranslationParameters translationParametersObj;   // parameters there were used for the search
+	
 	protected 	Vector  			translations = new Vector();  // Vector of SingleTranslation
 	
 	public final static int BreakReasonCancelReceived = 1; 

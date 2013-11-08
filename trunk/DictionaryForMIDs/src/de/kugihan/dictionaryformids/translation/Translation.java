@@ -24,16 +24,20 @@ public class Translation {
 	int							maxHits;
 	int 						durationForCancelSearch;
 	
-	public Translation(TranslationParameters translationParametersObj) 
+	protected                   TranslationParameters translationParametersObj;
+	
+	public Translation(TranslationParameters translationParametersParam) 
 						throws DictionaryException  {
-		dictionary = translationParametersObj.getDictionary();
-		toBeTranslatedWordText = translationParametersObj.getToBeTranslatedWordText();
-		inputLanguages = translationParametersObj.getInputLanguages();
-		outputLanguages = translationParametersObj.getOutputLanguages();
-		searchSubExpressionStart = translationParametersObj.isSearchSubExpressionStart();
-		searchSubExpressionEnd = translationParametersObj.isSearchSubExpressionEnd();
-		maxHits = translationParametersObj.getMaxHits();
-		durationForCancelSearch = translationParametersObj.getDurationForCancelSearch();
+		dictionary = translationParametersParam.getDictionary();
+		toBeTranslatedWordText = translationParametersParam.getToBeTranslatedWordText();
+		inputLanguages = translationParametersParam.getInputLanguages();
+		outputLanguages = translationParametersParam.getOutputLanguages();
+		searchSubExpressionStart = translationParametersParam.isSearchSubExpressionStart();
+		searchSubExpressionEnd = translationParametersParam.isSearchSubExpressionEnd();
+		maxHits = translationParametersParam.getMaxHits();
+		durationForCancelSearch = translationParametersParam.getDurationForCancelSearch();
+		
+		translationParametersObj = translationParametersParam;
 		
 		if ((inputLanguages.length != dictionary.numberOfAvailableLanguages) || 
 			(outputLanguages.length != dictionary.numberOfAvailableLanguages)) {
@@ -89,6 +93,7 @@ public class Translation {
 		Util.memCheck("start translation: ");
 
 		resultOfTranslation.dictionary = dictionary; 
+		resultOfTranslation.translationParametersObj = translationParametersObj;
 		
 		try { 
 			for (int languageCount = 0; languageCount < dictionary.numberOfAvailableLanguages; ++languageCount) {
