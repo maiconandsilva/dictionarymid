@@ -28,35 +28,7 @@ I want to report a bug regarding DictionaryForMIDs-Creator 0.6-Beta. When we cre
 
 
 ===TODOs Implemented Successfully===
-⦁DfM-Creator's FontGenerator now has a command line version. It is invoked as follows:
-java -jar DfM-Creator.jar --FontGenerator-CLI INPUT_FONT_FILE INPUT_DICT_DIR FONT_SIZE CLIP_TOP CLIP_BOTTOM
-Or:
-java -jar DfM-Creator.jar -fgc INPUT_FONT_FILE INPUT_DICT_DIR FONT_SIZE CLIP_TOP CLIP_BOTTOM
-
-FONT_SIZE is by default a number value, for instance 16. But it can also use the following wrappers whereas each wrapper represents a set of values automatically passed to FontGenerator for batch font sizes generation. The wrappers' values are defined as follows:
-small: 8, 10, 12, 14
-medium: 8, 10, 12, 14, 16, 18
-large: 8, 10, 12, 14, 16, 18, 20, 22, 24
-huge: 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36
-
-Regarding the text value of FONT_SIZE, the case does not matter, so it can be written for instance small, SMALL, SMAll etc. and the same rule applies to the other text options.
-
-JarCreator naming convention changed from for example:
--DictionaryForMIDs_3.5.8_EngDef_GCIDE.zip
-to
--DfM_GCIDE_EngDef_3.5.8.zip (the DfM-Creator automatically creates the directories but it is up to the user to create the zip files from the directories.
-⦁Now, DfM-Creator has a simple and nice icon :-)
-⦁The PropertiesEditor's button "Create the Properties File" has been renamed to "Save the Properties File" (overwrites it if it has already been saved)
-⦁ A new button "Save Properties File As..." has been added
-⦁"Create the Properties File" does not trigger regexp checking so as to make sure the user entered an email address or any other contact information, in the dictionary infoText. That functionality is broken so it's disabled, for now...
-⦁The button "Edit existing props file" Has been removed because the DictionaryGeneration panel already has "Edit an Existing Properties File"
-⦁The list of languageX postfixes now includes the complete list (found at http://en.wikipedia.org/wiki/List_of_ISO_639-2_codes)
-⦁The button "Path to the Input CSV file" has been renamed to "Input CSV file"
-⦁The button "Properties File's Directory" has been ranamed to "Properties File"; in fact, it's no longer necessary to select the directory "only" and let DfM-Creator try to find the properties file, now you go ahead and select it yourself! But if you choose a file that has a name that is different from the "conventional" properties file name (i.e, DictionaryForMIDs.properties) you get and error message.
-⦁Updated the French language locale file
-Updated Documentation files to the latest DfM-Creator version and features (i.e, DfM-Creator-0.6-final.jar)
-BUG FIXES:
-⦁Gert fixed a bug that prevented the DfM-Creator's JarCreator to load the internal DictionaryForMIDs.jar/jad files on Microsoft Windows while generating jar/jad files.
+__________________FREEZE_________________
 
 ______________________________________________________
 |    COMMON TASKS FOR EACH NEW DFM-CREATOR VERSION    |

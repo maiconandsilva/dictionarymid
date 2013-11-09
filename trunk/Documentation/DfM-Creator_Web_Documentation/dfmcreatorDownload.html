@@ -79,7 +79,57 @@ DictionaryForMIDs tools and applications, go <a href="dfmcreatorDevelopment.html
 <hr width="800px" align="LEFT">
 
 <div style="display: block; height: 400px; width: 800px" class="pane" id="release-pane">
-        
+
+<h2 class="release-title">Release: 0.7-final [day month, year]</h2>
+
+<h3 class="category">New Features</h3>
+
+<ul>
+	<li>DfM-Creator's FontGenerator now has a command line version. It is invoked as follows:<br>
+java -jar DfM-Creator.jar --FontGenerator-CLI INPUT_FONT_FILE INPUT_DICT_DIR FONT_SIZE CLIP_TOP CLIP_BOTTOM<br>
+Or:<br>
+java -jar DfM-Creator.jar -fgc INPUT_FONT_FILE INPUT_DICT_DIR FONT_SIZE CLIP_TOP CLIP_BOTTOM<br>
+<br>
+FONT_SIZE is by default a number value, for instance 16. But it can also use the following wrappers whereas each wrapper
+represents a set of values automatically passed to FontGenerator for batch font sizes generation. The wrappers' values are
+defined as follows:<br>
+small: 8, 10, 12, 14<br>
+medium: 8, 10, 12, 14, 16, 18<br>
+large: 8, 10, 12, 14, 16, 18, 20, 22, 24<br>
+huge: 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36<br>
+<br>
+Regarding the text value of FONT_SIZE, the case does not matter, so it can be written for instance small, SMALL, SMAll etc.
+and the same rule applies to the other text options.<br>
+</li>
+<br>
+<li>JarCreator naming convention changed from for example:<br>
+-DictionaryForMIDs_3.5.8_EngDef_GCIDE.zip<br>
+to<br>
+-DfM_GCIDE_EngDef_3.5.8.zip (the DfM-Creator automatically creates the directories
+but it is up to the user to create the zip files from the directories.</li><br>
+<li>Now, DfM-Creator has a simple and nice icon :-)</li><br>
+<li>The PropertiesEditor's button "Create the Properties File" has been renamed to
+"Save the Properties File" (overwrites it if it has already been saved)</li><br>
+<li>A new button "Save Properties File As..." has been added</li><br>
+<li>"Create the Properties File" does not trigger regexp checking so as to make sure the user
+entered an email address or any other contact information, in the dictionary infoText.
+That functionality is broken so it's disabled, for now...</li><br>
+<li>The button "Edit existing props file" Has been removed because the DictionaryGeneration
+panel already has "Edit an Existing Properties File"</li><br>
+<li>The list of languageX postfixes now includes the complete list
+(found at http://en.wikipedia.org/wiki/List_of_ISO_639-2_codes)</li><br>
+<li>The button "Path to the Input CSV file" has been renamed to "Input CSV file"</li><br>
+<li>The button "Properties File's Directory" has been ranamed to "Properties File";
+in fact, it's no longer necessary to select the directory "only" and let DfM-Creator try to find the properties file, now you go ahead and select it yourself! But if you choose a file that has a name that is different from the "conventional" properties file name (i.e, DictionaryForMIDs.properties) you get and error message.</li>
+<li>Updated the French language locale file</li><br>
+<li>Updated Documentation files to the latest DfM-Creator version and features
+(i.e, DfM-Creator-0.7-final, except for the properties file documentation)</li><br>
+</ul>
+
+<h3 class="category">BUG FIXES</h3>
+<ul><li>Gert fixed a bug that prevented the DfM-Creator's JarCreator to load the internal DictionaryForMIDs.jar/jad
+files on Microsoft Windows while generating jar/jad files.</li></ul>
+
 <h2 class="release-title">Release: 0.6Beta [12 February, 2013]</h2>
 
 <h3 class="category">New Features</h3>
