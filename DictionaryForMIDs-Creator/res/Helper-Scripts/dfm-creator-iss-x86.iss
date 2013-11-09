@@ -5,7 +5,7 @@
 #define MyAppVersion "0.7-final"
 #define MyAppPublisher "DictionaryForMIDs"
 #define MyAppURL "dictionarymid.sourceforge.net"
-#define MyAppExeName "DfM-Creator-0.7-final-i386.exe"
+#define MyAppExeName "DfM-Creator-0.7-final4-i386.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -39,7 +39,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "F:\DfM-Creator\DfM-Creator-0.7-final-Win-32-portable\DfM-Creator-0.7-final-i386.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\DfM-Creator\DfM-Creator-0.7-final-Win-32-portable\DfM-Creator-0.7-final4-i386.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\DfM-Creator\DfM-Creator-0.7-final-Win-32-portable\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
