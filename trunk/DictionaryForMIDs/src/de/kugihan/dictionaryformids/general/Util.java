@@ -557,4 +557,27 @@ public abstract class Util {
 		return charEncoding;
 	}
 	
+	//stringReplace method for J2ME.
+	public static String stringReplace(String text, String searchStr, String replacementStr) {
+		// String buffer to store str
+		StringBuffer sb = new StringBuffer();
+	
+		// Search for search
+		int searchStringPos = text.indexOf(searchStr);
+		int startPos = 0;
+		int searchStringLength = searchStr.length();
+	
+		// Iterate to add string
+		while (searchStringPos != -1) {
+			sb.append(text.substring(startPos, searchStringPos)).append(replacementStr);
+			startPos = searchStringPos + searchStringLength;
+			searchStringPos = text.indexOf(searchStr, startPos);
+		}
+		
+		// Create string
+		sb.append(text.substring(startPos,text.length()));
+		
+		return sb.toString();
+	}
+	
 }

@@ -203,7 +203,7 @@ javac.encoding=UTF-8
 	<property name="DfM.team"						value="Gert Nuber and Contributors"/> <!-- Must not be longer than 32 characters --> 
 																			  <!-- otherwise an Application Error will occur --> 
 																			  <!-- on some Motorola devices -->
-	<property name="DfM.copyrightyear"			  value="2005, 2006, 2007, 2008, 2009, 2010"/>
+	<property name="DfM.copyrightyear"			  value="2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013"/>
 
 	
 	<target name="clean_dfm">
@@ -354,6 +354,7 @@ javac.encoding=UTF-8
 			<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationBul"/>
 			<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationCyr1"/>
 			<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationCyr2"/>
+			<preserve class="de.kugihan.dictionaryformids.translation.normation.NormationTam"/>
 			<!-- do not obfuscate the zip classes; this will allow JarCreator to strip off the zip classes -->
 			<!-- note: the keeppackagenames parameter is supported by proGuard only; not yet tested
 			<argument value="-keeppackagenames de.kugihan.dictionaryformids.dataaccess.zip/*"/>	-->
