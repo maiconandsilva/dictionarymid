@@ -663,26 +663,27 @@
                 <Component class="javax.swing.JComboBox" name="langNormCB1">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="19">
+                      <StringArray count="20">
                         <StringItem index="0" value="NONE"/>
-                        <StringItem index="1" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationBul"/>
-                        <StringItem index="2" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationCyr1"/>
-                        <StringItem index="3" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationCyr2"/>
-                        <StringItem index="4" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationEng"/>
-                        <StringItem index="5" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationEng2"/>
-                        <StringItem index="6" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationEpo"/>
-                        <StringItem index="7" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationFil"/>
-                        <StringItem index="8" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationGer"/>
-                        <StringItem index="9" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationJpn"/>
-                        <StringItem index="10" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationLat"/>
-                        <StringItem index="11" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationLib"/>
-                        <StringItem index="12" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationNor"/>
-                        <StringItem index="13" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationRus"/>
-                        <StringItem index="14" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationRus2"/>
-                        <StringItem index="15" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationRusC"/>
-                        <StringItem index="16" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationUkr"/>
-                        <StringItem index="17" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationUkrC"/>
-                        <StringItem index="18" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationVie"/>
+                        <StringItem index="1" value="de.kugihan.dictionaryformids.translation.normation.NormationBul"/>
+                        <StringItem index="2" value="de.kugihan.dictionaryformids.translation.normation.NormationCyr1"/>
+                        <StringItem index="3" value="de.kugihan.dictionaryformids.translation.normation.NormationCyr2"/>
+                        <StringItem index="4" value="de.kugihan.dictionaryformids.translation.normation.NormationEng"/>
+                        <StringItem index="5" value="de.kugihan.dictionaryformids.translation.normation.NormationEng2"/>
+                        <StringItem index="6" value="de.kugihan.dictionaryformids.translation.normation.NormationEpo"/>
+                        <StringItem index="7" value="de.kugihan.dictionaryformids.translation.normation.NormationFil"/>
+                        <StringItem index="8" value="de.kugihan.dictionaryformids.translation.normation.NormationGer"/>
+                        <StringItem index="9" value="de.kugihan.dictionaryformids.translation.normation.NormationJpn"/>
+                        <StringItem index="10" value="de.kugihan.dictionaryformids.translation.normation.NormationLat"/>
+                        <StringItem index="11" value="de.kugihan.dictionaryformids.translation.normation.NormationLib"/>
+                        <StringItem index="12" value="de.kugihan.dictionaryformids.translation.normation.NormationNor"/>
+                        <StringItem index="13" value="de.kugihan.dictionaryformids.translation.normation.NormationRus"/>
+                        <StringItem index="14" value="de.kugihan.dictionaryformids.translation.normation.NormationRus2"/>
+                        <StringItem index="15" value="de.kugihan.dictionaryformids.translation.normation.NormationRusC"/>
+                        <StringItem index="16" value="de.kugihan.dictionaryformids.translation.normation.NormationUkr"/>
+                        <StringItem index="17" value="de.kugihan.dictionaryformids.translation.normation.NormationUkrC"/>
+                        <StringItem index="18" value="de.kugihan.dictionaryformids.translation.normation.NormationVie"/>
+                        <StringItem index="19" value="de.kugihan.dictionaryformids.translation.normation.NormationTam"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -695,26 +696,27 @@
                 <Component class="javax.swing.JComboBox" name="langNormCB2">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="19">
+                      <StringArray count="20">
                         <StringItem index="0" value="NONE"/>
-                        <StringItem index="1" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationBul"/>
-                        <StringItem index="2" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationCyr1"/>
-                        <StringItem index="3" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationCyr2"/>
-                        <StringItem index="4" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationEng"/>
-                        <StringItem index="5" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationEng2"/>
-                        <StringItem index="6" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationEpo"/>
-                        <StringItem index="7" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationFil"/>
-                        <StringItem index="8" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationGer"/>
-                        <StringItem index="9" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationJpn"/>
-                        <StringItem index="10" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationLat"/>
-                        <StringItem index="11" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationLib"/>
-                        <StringItem index="12" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationNor"/>
-                        <StringItem index="13" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationRus"/>
-                        <StringItem index="14" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationRus2"/>
-                        <StringItem index="15" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationRusC"/>
-                        <StringItem index="16" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationUkr"/>
-                        <StringItem index="17" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationUkrC"/>
-                        <StringItem index="18" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationVie"/>
+                        <StringItem index="1" value="de.kugihan.dictionaryformids.translation.normation.NormationBul"/>
+                        <StringItem index="2" value="de.kugihan.dictionaryformids.translation.normation.NormationCyr1"/>
+                        <StringItem index="3" value="de.kugihan.dictionaryformids.translation.normation.NormationCyr2"/>
+                        <StringItem index="4" value="de.kugihan.dictionaryformids.translation.normation.NormationEng"/>
+                        <StringItem index="5" value="de.kugihan.dictionaryformids.translation.normation.NormationEng2"/>
+                        <StringItem index="6" value="de.kugihan.dictionaryformids.translation.normation.NormationEpo"/>
+                        <StringItem index="7" value="de.kugihan.dictionaryformids.translation.normation.NormationFil"/>
+                        <StringItem index="8" value="de.kugihan.dictionaryformids.translation.normation.NormationGer"/>
+                        <StringItem index="9" value="de.kugihan.dictionaryformids.translation.normation.NormationJpn"/>
+                        <StringItem index="10" value="de.kugihan.dictionaryformids.translation.normation.NormationLat"/>
+                        <StringItem index="11" value="de.kugihan.dictionaryformids.translation.normation.NormationLib"/>
+                        <StringItem index="12" value="de.kugihan.dictionaryformids.translation.normation.NormationNor"/>
+                        <StringItem index="13" value="de.kugihan.dictionaryformids.translation.normation.NormationRus"/>
+                        <StringItem index="14" value="de.kugihan.dictionaryformids.translation.normation.NormationRus2"/>
+                        <StringItem index="15" value="de.kugihan.dictionaryformids.translation.normation.NormationRusC"/>
+                        <StringItem index="16" value="de.kugihan.dictionaryformids.translation.normation.NormationUkr"/>
+                        <StringItem index="17" value="de.kugihan.dictionaryformids.translation.normation.NormationUkrC"/>
+                        <StringItem index="18" value="de.kugihan.dictionaryformids.translation.normation.NormationVie"/>
+                        <StringItem index="19" value="de.kugihan.dictionaryformids.translation.normation.NormationTam"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -727,26 +729,27 @@
                 <Component class="javax.swing.JComboBox" name="langNormCB3">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="19">
+                      <StringArray count="20">
                         <StringItem index="0" value="NONE"/>
-                        <StringItem index="1" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationBul"/>
-                        <StringItem index="2" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationCyr1"/>
-                        <StringItem index="3" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationCyr2"/>
-                        <StringItem index="4" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationEng"/>
-                        <StringItem index="5" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationEng2"/>
-                        <StringItem index="6" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationEpo"/>
-                        <StringItem index="7" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationFil"/>
-                        <StringItem index="8" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationGer"/>
-                        <StringItem index="9" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationJpn"/>
-                        <StringItem index="10" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationLat"/>
-                        <StringItem index="11" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationLib"/>
-                        <StringItem index="12" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationNor"/>
-                        <StringItem index="13" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationRus"/>
-                        <StringItem index="14" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationRus2"/>
-                        <StringItem index="15" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationRusC"/>
-                        <StringItem index="16" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationUkr"/>
-                        <StringItem index="17" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationUkrC"/>
-                        <StringItem index="18" value="de.kugihan.dictionaryformids.translation.normation.Normation.NormationVie"/>
+                        <StringItem index="1" value="de.kugihan.dictionaryformids.translation.normation.NormationBul"/>
+                        <StringItem index="2" value="de.kugihan.dictionaryformids.translation.normation.NormationCyr1"/>
+                        <StringItem index="3" value="de.kugihan.dictionaryformids.translation.normation.NormationCyr2"/>
+                        <StringItem index="4" value="de.kugihan.dictionaryformids.translation.normation.NormationEng"/>
+                        <StringItem index="5" value="de.kugihan.dictionaryformids.translation.normation.NormationEng2"/>
+                        <StringItem index="6" value="de.kugihan.dictionaryformids.translation.normation.NormationEpo"/>
+                        <StringItem index="7" value="de.kugihan.dictionaryformids.translation.normation.NormationFil"/>
+                        <StringItem index="8" value="de.kugihan.dictionaryformids.translation.normation.NormationGer"/>
+                        <StringItem index="9" value="de.kugihan.dictionaryformids.translation.normation.NormationJpn"/>
+                        <StringItem index="10" value="de.kugihan.dictionaryformids.translation.normation.NormationLat"/>
+                        <StringItem index="11" value="de.kugihan.dictionaryformids.translation.normation.NormationLib"/>
+                        <StringItem index="12" value="de.kugihan.dictionaryformids.translation.normation.NormationNor"/>
+                        <StringItem index="13" value="de.kugihan.dictionaryformids.translation.normation.NormationRus"/>
+                        <StringItem index="14" value="de.kugihan.dictionaryformids.translation.normation.NormationRus2"/>
+                        <StringItem index="15" value="de.kugihan.dictionaryformids.translation.normation.NormationRusC"/>
+                        <StringItem index="16" value="de.kugihan.dictionaryformids.translation.normation.NormationUkr"/>
+                        <StringItem index="17" value="de.kugihan.dictionaryformids.translation.normation.NormationUkrC"/>
+                        <StringItem index="18" value="de.kugihan.dictionaryformids.translation.normation.NormationVie"/>
+                        <StringItem index="19" value="de.kugihan.dictionaryformids.translation.normation.NormationTam"/>
                       </StringArray>
                     </Property>
                   </Properties>
