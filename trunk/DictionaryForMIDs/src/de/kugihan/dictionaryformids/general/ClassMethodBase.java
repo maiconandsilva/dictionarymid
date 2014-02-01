@@ -47,6 +47,7 @@ public class ClassMethodBase {
 		normationClassTable.put("NormationUkr", 	new NormationUkr() 	);
 		normationClassTable.put("NormationUkrC", 	new NormationUkrC() );
 		normationClassTable.put("NormationVie", 	new NormationVie() 	);
+		normationClassTable.put("NormationTam", 	new NormationTam() 	);
 	}
 
 
