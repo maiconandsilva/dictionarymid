@@ -38,18 +38,27 @@ td.headerStyle {
    font-weight:bold; 
    background-color:#ff4444;
    font-family: Verdana, Arial, Helvetica, sans-serif;
+   -webkit-box-shadow: 0 8px 6px -6px black;
+   moz-box-shadow: 0 8px 6px -6px black;
+   box-shadow: 0 8px 6px -6px black;
 }
 td.optionbuttonStyle {
    color:#ffffff;
    font-weight:bold; 
    background-color:#66cc00;
    font-family: Verdana, Arial, Helvetica, sans-serif;
+	-webkit-box-shadow: 0 8px 6px -6px black;
+	moz-box-shadow: 0 8px 6px -6px black;
+	box-shadow: 0 8px 6px -6px black;
 }
 td.inputbackStyle {
    color:#ffffff;
    font-weight:bold; 
    background-color:#00aaff;
    font-family: Verdana, Arial, Helvetica, sans-serif;
+   -webkit-box-shadow: 0 8px 6px -6px black;
+   moz-box-shadow: 0 8px 6px -6px black;
+   box-shadow: 0 8px 6px -6px black;
 }
 td.translatebuttonStyle {
    color:#ffffff;
@@ -57,14 +66,31 @@ td.translatebuttonStyle {
    background-color:#ffbb00;
    font-family: Verdana, Arial, Helvetica, sans-serif;
    padding:22px; 
+	-webkit-box-shadow: 0 8px 6px -6px black;
+	moz-box-shadow: 0 8px 6px -6px black;
+	box-shadow: 0 8px 6px -6px black;
 }
 
+
+
+::-webkit-input-placeholder {
+  color: 00aaff;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: 00aaff;
+}
+:-ms-input-placeholder {
+  color: 00aaff;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: 00aaff;
+}
 
 
 
 input.inputboxStyle{
    width:84%;
-   height: 55%;
+   height: 61%;
    border:3px solid #dadada;
    font-size:20px;
    padding:4px;
@@ -81,7 +107,7 @@ input.inputboxStyle:focus {
 	margin-bottom:0px;
 	margin-left:5px;
 	display: block;
-	height:81px;
+	height:56px;
 	width:98.5%;
 	overflow: auto;
 }
@@ -109,7 +135,7 @@ input.inputboxStyle:focus {
 	margin-left:auto;
 	margin-right:auto;
 	display: block;
-	height: 413px;
+	height: 438px;
 	width: 99%;
 	overflow: auto;
 }
@@ -143,7 +169,7 @@ input.inputboxStyle:focus {
 	left: 10px;
 	line-height: 40px;
 	overflow: visible;
-	position: fixed;			
+	position: fixed;
 	bottom: 10px;
 	clear: both;
 	display: block;
@@ -151,4 +177,7 @@ input.inputboxStyle:focus {
 	z-index: 4;
     font-size:12px;
     font-family: Verdana, Arial, Helvetica, sans-serif;
+	-webkit-box-shadow: 0 8px 6px -6px black;
+	moz-box-shadow: 0 8px 6px -6px black;
+	box-shadow: 0 8px 6px -6px black;
 }

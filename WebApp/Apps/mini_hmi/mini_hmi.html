@@ -23,7 +23,10 @@
 		var pathToHTML = "../../Apps/mini_hmi/";
     </script>
 
-    <!-- This is the Scripts used to execute jQuery API's: -->
+	<!-- This is the Scripts used to load Dictionary: -->
+	<script type="text/javascript" src="../../Apps/mini_hmi/OptionWindow.js"> </script>
+
+	<!-- This is the Scripts used to execute jQuery API's: -->
     <script src="../../Apps/mini_hmi/jquery-1.10.2.js"></script>
 
     <!-- This is the Script for the Visual effects and jQuery functions: -->
@@ -47,7 +50,7 @@
 
     <!-- Some includes for the mini_hmi -->
 	<script type="text/javascript" src="../../Apps/mini_hmi/UserSettings.js"> </script> 
-	<script type="text/javascript" src="../../Apps/mini_hmi/mini_hmi.js"> </script> 
+	<script type="text/javascript" src="../../Apps/mini_hmi/mini_hmi.js"> </script>
 
     <!-- This is the Script for focusing on input box and set action for enter key: -->
 	<script type="text/javascript">
@@ -55,7 +58,7 @@
 		for (var start = 1; start < 10; start++)
 			setTimeout(function Focus(){
 				document.getElementById("userInput").focus();  //Focus Input box
-			}, 1000 * start);  //Timer to handle smooth focusing
+			}, 250 * start);  //Timer to handle smooth focusing
 			
 		function visibilityOnload(){
 			document.getElementById("headerFrame").style.visibility = "visible";  //Change Frame visibility status
@@ -115,11 +118,11 @@
 		<iframe id='optionStyle' src="../../Apps/mini_hmi/OptionWindow.html" frameBorder="0" allowtransparency="true">
 		</iframe>
 	</div>
-
+	
 	<div id='searchFrame' style="visibility:hidden;">
 		<table width=100%  cellspacing="5">
 		   <tr>
-			<td align="center" width=85% class='inputbackStyle'><input class='inputboxStyle' id='userInput' width=100% onKeydown='enterKeyCommand();'></td>
+			<td align="center" width=85% class='inputbackStyle'><input class='inputboxStyle' id='userInput' placeholder="Enter the text to translate" width=100% onKeydown='enterKeyCommand();' onkeyup='startTranslation();'></td>
 			<td align="center" width=15% class='translatebuttonStyle' onClick='startTranslation();'>Translate</td>
 		   </tr>
 		</table>

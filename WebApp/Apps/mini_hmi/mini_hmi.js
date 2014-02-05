@@ -66,7 +66,8 @@ function buildBooleanArray(numberOfElements, indexTrueElement) {
 }
 
 function startTranslation() {
-	var toBeTranslatedWordTextInput = document.getElementById('userInput').value;
+	var TranslatedWordTextInput = document.getElementById('userInput').value;
+	var toBeTranslatedWordTextInput = TranslatedWordTextInput + '*';
 	var inputLanguages =  buildBooleanArray(dictionary.numberOfAvailableLanguages,
 											userSettingsObj.getInputLanguage());
 	var outputLanguages = buildBooleanArray(dictionary.numberOfAvailableLanguages,
@@ -109,8 +110,8 @@ function applicationCacheEventHandler(event) {
 function openOptionWindow() { 
 	optionWindowInitializationComplete = false;
 	optionWindow = open(pathToHTML + "OptionWindow.html", 
-						"Options", 
-						"location=no,height=300,width=200,left=100,top=100,toolbar=no,scrollbars=yes,resizable=yes");
+	"Options", 
+	"location=no,height=300,width=200,left=100,top=100,toolbar=no,scrollbars=yes,resizable=yes");
 	optionWindow.focus();
 }
 
@@ -131,5 +132,3 @@ function initializeApplication() {
 }
 
 var optionWindow = null;
-
-
