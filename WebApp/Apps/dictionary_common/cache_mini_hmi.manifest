@@ -1,9 +1,9 @@
-<?
+﻿<?
 	header('Content-type: text/cache-manifest');
 	$a = file_get_contents("cache_dictionary.manifest");
 	echo $a;
 	$a = file_get_contents("../../Apps/mini_hmi/cache_mini_hmi_files.manifest");
 	echo $a;
-	$a = file_get_contents("../../Apps/translationlayergwt/cache_translationlayergwt.manifest");
+	$a = file_get_contents("../../Apps/DfMTranslationLayer/cache_dfmtranslationlayer.manifest");
 	echo $a;
 ?>
