@@ -66,8 +66,9 @@ function buildBooleanArray(numberOfElements, indexTrueElement) {
 }
 
 function startTranslation() {
-	var TranslatedWordTextInput = document.getElementById('userInput').value;
-	var toBeTranslatedWordTextInput = TranslatedWordTextInput + '*';
+	var textInput = document.getElementById('userInput').value;
+	var textInputWithAstrik = textInput.replace(' ','* ');
+	var toBeTranslatedWordTextInput = textInputWithAstrik + '*';
 	var inputLanguages =  buildBooleanArray(dictionary.numberOfAvailableLanguages,
 											userSettingsObj.getInputLanguage());
 	var outputLanguages = buildBooleanArray(dictionary.numberOfAvailableLanguages,
