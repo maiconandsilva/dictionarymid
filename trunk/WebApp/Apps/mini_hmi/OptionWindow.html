@@ -13,178 +13,37 @@
 <html>
   <head>
 	<link rel="stylesheet" type="text/css" href="../../Apps/mini_hmi/option_style.css">
-  	<script type="text/javascript">
-	
-		"use strict";
-		function displayApplicationEventFunction(eventText, applicationCacheStatusValue) {
-			document.getElementById("receivedApplicationCacheEvents").innerHTML +=  eventText + "; ";
-			displayApplicationCacheStatus(applicationCacheStatusValue);
-		}
-		
-		function displayApplicationCacheStatus(applicationCacheStatusValue) {
-			document.getElementById("applicationCacheStatus").innerHTML = getAppCacheStatusString(applicationCacheStatusValue);
-		}
-		
-		function getAppCacheStatusString(applicationCacheStatusValue) {
-			var appCache = applicationCache;
-			switch (applicationCacheStatusValue) {
-			  case appCache.UNCACHED: // UNCACHED == 0
-				return 'UNCACHED';
-				break;
-			  case appCache.IDLE: // IDLE == 1
-				return 'IDLE';
-				break;
-			  case appCache.CHECKING: // CHECKING == 2
-				return 'CHECKING';
-				break;
-			  case appCache.DOWNLOADING: // DOWNLOADING == 3
-				return 'DOWNLOADING';
-				break;
-			  case appCache.UPDATEREADY:  // UPDATEREADY == 5
-				return 'UPDATEREADY';
-				break;
-			  case appCache.OBSOLETE: // OBSOLETE == 5
-				return 'OBSOLETE';
-				break;
-			  default:
-				return 'UKNOWN CACHE STATUS';
-				break;
-			};
-		}
-		
-		function numberOfSearchableInputLanguages() {
-			var number = 0;
-			for (var language = 0; language < dictionary.numberOfAvailableLanguages; ++language) {
-				if (dictionary.supportedLanguages[language].isSearchable) {
-					number++;
-				}
-			}
-			return number;
-		}
-		
-		function initializeOptionWindow() {
-			this.dictionary = parent.dictionary;
-			this.numberOfAvailableLanguages = dictionary.numberOfAvailableLanguages;
-			if (this.numberOfAvailableLanguages != 2) {
-				alert ("Sorry, OptionWindow does currently only support dictionaries with 2 languages");
-			}
-			this.numberOfSearchableInputLanguages = numberOfSearchableInputLanguages();
-			this.inputLanguage = parent.userSettingsObj.getInputLanguage();
-			this.outputLanguage = parent.userSettingsObj.getOutputLanguage();
-			this.radioButtons = document.getElementsByName('languageSelection');
-			this.languageSelection1RadioButton = radioButtons[0];
-			this.languageSelection2RadioButton = radioButtons[1];
-			this.languageSelection1Text = languageSelection1RadioButton.nextSibling;
-			this.languageSelection2Text = languageSelection2RadioButton.nextSibling;
-			
-			displayApplicationCacheStatus(parent.applicationCache.status);
-			createItems();
-			parent.optionWindowInitializationComplete = true;
-		}
-		
-		var languageSelectionTypeEnum = { none : 0, radioButtons : 1,  comboBoxes : 2 };
-		var languageSelectionType;
-		
-		function createItems() {
-			if (numberOfSearchableInputLanguages < 2) {
-				languageSelectionType = languageSelectionTypeEnum.none;
-				hideLanguageSelectionRadioButtons();
-				hideLanguageSelectionComboBoxes();
-			}
-			else if ((numberOfSearchableInputLanguages == 2) && (numberOfAvailableLanguages == 2)) {
-				languageSelectionType = languageSelectionTypeEnum.radioButtons;
-				var language0DisplayText = dictionary.supportedLanguages[0].languageDisplayText;
-				var language1DisplayText = dictionary.supportedLanguages[1].languageDisplayText;
-				languageSelection1Text.nodeValue = language0DisplayText + " > " + language1DisplayText;
-				languageSelection2Text.nodeValue = language1DisplayText + " > " + language0DisplayText;
-				hideLanguageSelectionComboBoxes();
-			}
-			else {
-				languageSelectionType = languageSelectionTypeEnum.comboBoxes;
-				hideLanguageSelectionRadioButtons();
-			}
-			setItemsToSettingValues();
-		}
-		
-		function hideLanguageSelectionRadioButtons() {
-			document.getElementById("languageSelectionRadioButtons").style.display = "none";
-		}
-
-		function hideLanguageSelectionComboBoxes() {
-			document.getElementById("languageSelectionComboBoxes").style.display = "none";
-		}
-		
-		function setItemsToSettingValues() {
-			if (languageSelectionType == languageSelectionTypeEnum.radioButtons) {
-				if (inputLanguage == 0) {
-					languageSelection1RadioButton.checked = true;
-					languageSelection2RadioButton.checked = false;
-				} 
-				else {
-					languageSelection1RadioButton.checked = false;
-					languageSelection2RadioButton.checked = true;
-				}
-			}
-			else if (languageSelectionType == languageSelectionTypeEnum.comboBoxes){
-				// todo
-			}
-		}
-		
-		function saveSettings() {
-			if (languageSelectionType == languageSelectionTypeEnum.radioButtons) {
-				if (languageSelection1RadioButton.checked) {
-					inputLanguage  = 0;
-					outputLanguage = 1;
-				}
-				else {
-					inputLanguage  = 1;
-					outputLanguage = 0;
-				}
-			}
-			else if (languageSelectionType == languageSelectionTypeEnum.comboBoxes){
-				// todo
-			}
-			if (languageSelectionType != languageSelectionTypeEnum.none) {
-				parent.userSettingsObj.setInputLanguage(inputLanguage);
-				parent.userSettingsObj.setOutputLanguage(outputLanguage);
-			}
-		}
-		
-		function closeOptionWindow() {
-			saveSettings();
-		}
-		
-		function onUnloadOptionWindow() {
-			parent.optionWindow = null;
-		}
-		
-		this.displayApplicationEvent = displayApplicationEventFunction;
-		window.onunload = onUnloadOptionWindow;
-	
-	</script>
+	<script type="text/javascript" src="../../Apps/mini_hmi/OptionWindow.js"> </script>
   </head>
   <body>
-  	<table width="100%">
+	<table>
+	<tr id="languageSelectionRadioButtons">
+		<td colspan="2" width="50%">
+			<input type="radio" name="languageSelection" value="languageSelection1" onChange='saveSettings();'> languageSelection1Text 
+		</td>
+		<td colspan="2" width="50%">
+			<input type="radio" name="languageSelection" value="languageSelection2" onChange='saveSettings();'> languageSelection2Text
+		</td>
+	</tr>
+
+	<tr id="languageSelectionComboBoxes">
+		<td width="10%" style="padding-left:7px">Input </td>
+		<td width="40%">
+			<select name="inputLanguageComboBox" id="inputLanguageComboBox" title="Select Input Language" onChange='outputCombo(); saveSettings();'></select>
+		</td>
+		<td width="10%" style="padding-left:7px">Output </td>
+		<td width="40%">
+			<select name="outputLanguageComboBox" id="outputLanguageComboBox" title="Select Output Language" onChange='saveSettings();'></select>
+		</td>
+	</tr>
+
 	<tr>
-	<td>
-		<div id="languageSelectionRadioButtons">
-			<input type="radio" name="languageSelection" value="languageSelection1" onChange='closeOptionWindow();'> languageSelection1Text 
-				<br>
-				<br>
-			<input type="radio" name="languageSelection" value="languageSelection2" onChange='closeOptionWindow();'> languageSelection2Text
-		</div>
-	</td>
-	<td>
-		<div id="languageSelectionComboBoxes">
-			<p>todo</p>
-			<p>todo</p>
-		</div>
-	</td>
-	<td>
-			<div>Application Cache Status: </div><div id="applicationCacheStatus"></div>
-				<br>
-			<div>Application Cache Events: </div><div id="receivedApplicationCacheEvents"></div> 
-	</td>
+		<td colspan="2" width="50%">
+			<span id="appStatus">Application Cache : </span><span id="applicationCacheStatus"></span>
+		</td>
+		<td colspan="2" width="50%">
+			<span id="appEvents">Application Cache Events: </span><span id="receivedApplicationCacheEvents"></span> 
+		</td>
 	</tr>
 	</table>
   </body>
