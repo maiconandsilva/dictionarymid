@@ -10,40 +10,42 @@ function newTranslationResult(resultOfTranslation) {
 	for (var currentTranslation = 0; 
 		 currentTranslation < resultOfTranslation.numberOfFoundTranslations(); 
 		 currentTranslation++) {
-		var tr = translationResultsTable.insertRow(currentTranslation);
+		var trElement = translationResultsTable.insertRow(currentTranslation);
 		var singleTranslation = resultOfTranslation.getTranslationAt(currentTranslation);
-		var innerHTMLText;
 		var fromText = singleTranslation.getFromText();
-		innerHTMLText = createInnerHTML(fromText, true);
-		var tdElement;
-		tdElement = document.createElement('td');
-		tdElement.innerHTML = innerHTMLText;
-		tr.appendChild(tdElement);
+		var tdElement = document.createElement('td');
+		appendHtmlElementsFromContent(tdElement,
+		                              fromText, 
+									  true);
+		trElement.appendChild(tdElement);
 		for (var currentToText = 0; 
 			 currentToText < singleTranslation.getNumberOfToTexts(); 
 			 currentToText++) {
 				var toText = singleTranslation.getToTextAt(currentToText);
-				innerHTMLText = createInnerHTML(toText, false);
 				var tdElement = document.createElement('td');
-				tdElement.innerHTML = innerHTMLText;
-				tr.appendChild(tdElement);
-			
+				appendHtmlElementsFromContent(tdElement,
+											  toText, 
+											  false);
+				trElement.appendChild(tdElement);
 		}
 	}
 }
 
-function createInnerHTML(textOfLanguage, 
-						 isInput) {
-	var innerHTMLText = '';
+function appendHtmlElementsFromContent(parentElement,
+                                       textOfLanguage, 
+						               isInput) {
 	var stringColourItemText = ContentParser.determineItemsFromContent(textOfLanguage, true, isInput);
 	for (var currentStringColourItemTextPart = 0; 
 		 currentStringColourItemTextPart < stringColourItemText.size(); 
 		 currentStringColourItemTextPart++) {
 		var stringColourItemTextPart = stringColourItemText.getItemTextPart(currentStringColourItemTextPart);
-		var rgbString = stringColourItemTextPart.getColour().getHexValue();
-		innerHTMLText += '<font color=\"#' + rgbString + '\">' + stringColourItemTextPart.getText();
+		var text = stringColourItemTextPart.getText();
+		var colourHexValue = stringColourItemTextPart.getColour().getHexValue();
+		var spanElement = document.createElement('span');
+		spanElement.setAttribute("style", "color:#" + colourHexValue);
+		spanElement.textContent = text;
+		parentElement.appendChild(spanElement);
 	}
-	return innerHTMLText;
 }
 
 function deletePreviousTranslationResult() {
