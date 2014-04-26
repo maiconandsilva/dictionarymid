@@ -38,16 +38,18 @@ function outputCombo() {
 }
 
 function displayApplicationEventFunction(eventText, applicationCacheStatusValue) {
-	document.getElementById("receivedApplicationCacheEvents").innerHTML +=  eventText + "; ";
 	displayApplicationCacheStatus(applicationCacheStatusValue);
+	document.getElementById("receivedApplicationCacheEvents").innerHTML =  eventText.type;
 }
 
 function displayApplicationCacheStatus(applicationCacheStatusValue) {
-	document.getElementById("applicationCacheStatus").innerHTML = getAppCacheStatusString(applicationCacheStatusValue);
+	var currentCacheStatus = getAppCacheStatusString(applicationCacheStatusValue);
+	var applicationCacheStatus =	document.getElementById("applicationCacheStatus");
+	applicationCacheStatus.innerHTML = currentCacheStatus;
 }
 
 function getAppCacheStatusString(applicationCacheStatusValue) {
-	var appCache = applicationCache;
+	var appCache = parent.applicationCache;
 	switch (applicationCacheStatusValue) {
 	  case appCache.UNCACHED: // UNCACHED == 0
 		return 'UNCACHED';
@@ -61,7 +63,7 @@ function getAppCacheStatusString(applicationCacheStatusValue) {
 	  case appCache.DOWNLOADING: // DOWNLOADING == 3
 		return 'DOWNLOADING';
 		break;
-	  case appCache.UPDATEREADY:  // UPDATEREADY == 5
+	  case appCache.UPDATEREADY:  // UPDATEREADY == 4
 		return 'UPDATEREADY';
 		break;
 	  case appCache.OBSOLETE: // OBSOLETE == 5
@@ -94,6 +96,11 @@ function initializeOptionWindow() {
 	this.languageSelection2RadioButton = radioButtons[1];
 	this.languageSelection1Text = languageSelection1RadioButton.nextSibling;
 	this.languageSelection2Text = languageSelection2RadioButton.nextSibling;
+	
+	if (parent.applicationCache.status == parent.applicationCache.UPDATEREADY) {
+		parent.applicationCache.swapCache(); // The fetch was successful
+		parent.location.reload(); // Reload the entire webApp in the cache.
+	}
 	
 	displayApplicationCacheStatus(parent.applicationCache.status);
 	createItems();

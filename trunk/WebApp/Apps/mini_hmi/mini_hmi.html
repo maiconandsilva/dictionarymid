@@ -1,14 +1,7 @@
 <!DOCTYPE HTML> 
-
-<!-- 
-
-	DictionaryForMIDs 
-	
+<!-- 	DictionaryForMIDs 
 	mini_hmi
-	
-	A mininal user interface for the Translation Layer
-
-
+	A minimal user interface for the Translation Layer
  -->
 
 <html manifest="cache_mini_hmi.manifest">
@@ -16,89 +9,20 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="../../Apps/mini_hmi/hmi_style.css">
 	
-    <title>DictionaryForMIDs Web App (mini_hmi - in development)</title>
+    <title>DictionaryForMIDs Web App</title>
+	<!-- This is the Script links used to execute jQuery and rssFeed reading API's: -->
+	<script src="../../Apps/mini_hmi/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../../Apps/mini_hmi/zrssfeed.js"></script>
 
-	<script type="text/javascript">
-		"use strict";
-		var pathToHTML = "../../Apps/mini_hmi/";
-    </script>
-
-	<!-- This is the Scripts used to load Dictionary: -->
-	<script type="text/javascript" src="../../Apps/mini_hmi/OptionWindow.js"> </script>
-
-	<!-- This is the Scripts used to execute jQuery API's: -->
-    <script src="../../Apps/mini_hmi/jquery-1.10.2.js"></script>
-
-    <!-- This is the Script for the Visual effects and jQuery functions: -->
-	<script>
-		$(window).load(function() {
-			$("#headerFrame").hide().delay(700).fadeIn('slow');
-			$("#searchFrame").hide().delay(700).fadeIn('slow');
-			$("#footerFrame").hide().delay(700).fadeIn('slow');
-			$("#optionFrame").hide();
-		});
-
-		$(function(){
-			$("td.optionbuttonStyle").click(function(){
-				$("#optionFrame").slideToggle();
-			});
-		});
- 	</script>
-  
-    <!-- This is the Script for the Translation Layer: -->
-    <script type="text/javascript" src="../../Apps/DfMTranslationLayer/DfMTranslationLayer.js"></script> 
-
-    <!-- Some includes for the mini_hmi -->
-	<script type="text/javascript" src="../../Apps/mini_hmi/UserSettings.js"> </script> 
+	<!-- This is the Script for the Translation Layer: -->
+	<script type="text/javascript" src="../../Apps/DfMTranslationLayer/DfMTranslationLayer.js"></script> 
+	
+	<!-- Some includes for the mini_hmi -->
 	<script type="text/javascript" src="../../Apps/mini_hmi/mini_hmi.js"> </script>
+	<script type="text/javascript" src="../../Apps/mini_hmi/OptionWindow.js"> </script>
+	<script type="text/javascript" src="../../Apps/mini_hmi/UserSettings.js"> </script> 
 
-    <!-- This is the Script for focusing on input box and set action for enter key: -->
-	<script type="text/javascript">
-	
-		for (var start = 1; start < 10; start++)
-			setTimeout(function Focus(){
-				document.getElementById("userInput").focus();  //Focus Input box
-			}, 250 * start);  //Timer to handle smooth focusing
-			
-		function visibilityOnload(){
-			document.getElementById("headerFrame").style.visibility = "visible";  //Change Frame visibility status
-			document.getElementById("optionFrame").style.visibility = "visible";  //Change Frame visibility status
-			document.getElementById("searchFrame").style.visibility = "visible";  //Change Frame visibility status
-			document.getElementById("footerFrame").style.visibility = "visible";  //Change Frame visibility status
-		}
-			
-		function enterKeyCommand(){
-			if (event.keyCode == 13){
-				startTranslation(); //Enter key press action	
-			}
-		}
-	</script>
-
-    <!-- This is the Script for toggle between option SVG image: -->
-	<script type="text/javascript">
-		var open = '&#9660; Options'  //The String 'options' with down arrow	
-		var close = '&#9650; Options'  //The String 'options' with up arrow
-
-		var currentState = 0;
-
-		function toggleoptionString() {
-			if (currentState == 0) {
-				document.getElementById("optionString").innerHTML = close;
-				currentState = 1;
-			} else {
-				document.getElementById("optionString").innerHTML = open;
-				currentState = 0;
-			}
-		}
-	
-	</script>
-	
-    <!-- Initialization -->
-	<script type="text/javascript">
-		window.addEventListener("load", initializeApplication);
-    </script>
-
-</head>
+  </head>
 
 <body onload="visibilityOnload();">
     <noscript>
@@ -136,7 +60,9 @@
 	</div>
 	
 	<div id='footerFrame' style="visibility:hidden;">
-		DictionaryforMIDs WebApp is developed by the DictionaryForMIDs community. Contact Us : <a href='http://dictionarymid.sourceforge.net/contact.html'>http://dictionarymid.sourceforge.net/contact.html</a>&nbsp;&nbsp;
+		<div id='footerText1'>UI Designed and Developed by Stars Soft&nbsp;&nbsp;</div>
+		<div id='footerText2'>DictionaryforMIDs WebApp is developed by the DictionaryForMIDs community. Contact Us : <a href='http://dictionarymid.sourceforge.net/contact.html'>http://dictionarymid.sourceforge.net/contact.html</a>&nbsp;&nbsp;</div>
+		<div id='recentFeeds'></div>
 	</div>
 	
   </body>

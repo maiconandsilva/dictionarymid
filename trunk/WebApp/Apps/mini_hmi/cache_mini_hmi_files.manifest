@@ -1,6 +1,6 @@
 #
 # HTML files for mini_hmi
-# Version 1
+# Version 5
 # 
 .
 mini_hmi.php
@@ -10,5 +10,9 @@ mini_hmi.php
 ../../Apps/mini_hmi/mini_hmi.js
 ../../Apps/mini_hmi/UserSettings.js
 ../../Apps/mini_hmi/jquery-1.10.2.js
+../../Apps/mini_hmi/zrssfeed.js
 ../../Apps/mini_hmi/hmi_style.css
 ../../Apps/mini_hmi/favicon.ico
+
+NETWORK:
+*

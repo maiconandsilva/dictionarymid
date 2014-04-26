@@ -25,48 +25,52 @@ tr{
 
 
 #inputLanguageComboBox{
-	width: 90%;
+	width: 95%;
 	border:3px solid #d0d0d0;
 	float:left;
 }
 #outputLanguageComboBox{
-	width: 90%;
+	width: 95%;
 	border:3px solid #d0d0d0;
 	float:left;
 }
-
+#searchHitsComboBox{
+	width: 95%;
+	border:3px solid #d0d0d0;
+	float:left;
+}
 
 
 
 #appStatus{
 	display: block;
 	margin-top:2px;
-	margin-left:7px;
-	width:40%;
+	margin-left:5px;
+	width:37%;
 	float:left;
 	font-size:13px;
 }
 #applicationCacheStatus{
 	display: block;
 	margin-top:2px;
-	margin-left:7px;
-	width:56%;
+	margin-left:2px;
+	width:61%;
 	float:left;
 	font-size:13px;
 }
 #appEvents{
 	display: block;
 	margin-top:2px;
-	margin-left:7px;
-	width:40%;
+	margin-left:2px;
+	width:36%;
 	float:left;
 	font-size:13px;
 }
 #receivedApplicationCacheEvents{
 	display: block;
 	margin-top:2px;
-	margin-left:7px;
-	width:56%;
+	margin-left:2px;
+	width:62%;
 	float:left;
 	font-size:13px;
 }
