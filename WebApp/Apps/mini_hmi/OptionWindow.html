@@ -1,13 +1,7 @@
 <!DOCTYPE HTML> 
-
-<!-- 
-
-	DictionaryForMIDs 
-	
+<!--  DictionaryForMIDs 
 	Option Window
-	
 	For entering options and for displaying statusvalues
-
  -->
 
 <html>
@@ -19,30 +13,38 @@
   <body>
 	<table>
 	<tr id="languageSelectionRadioButtons">
-		<td colspan="2" width="50%">
-			<input type="radio" name="languageSelection" value="languageSelection1" onChange='saveSettings();'> languageSelection1Text 
+		<td colspan="2" width="32%">
+			<input type="radio" name="languageSelection" value="languageSelection1" onChange='saveSettings(); parent.startTranslation();'> languageSelection1Text 
 		</td>
-		<td colspan="2" width="50%">
-			<input type="radio" name="languageSelection" value="languageSelection2" onChange='saveSettings();'> languageSelection2Text
+		<td colspan="2" width="32%">
+			<input type="radio" name="languageSelection" value="languageSelection2" onChange='saveSettings(); parent.startTranslation();'> languageSelection2Text
+		</td>
+		<td width="8%">Search Hits </td>
+		<td width="5%">
+			<input type="number" name="searchHits" id="searchHitsRadioButton" min="50" max="250" step="25" value="50" onChange='parent.startTranslation();'>
 		</td>
 	</tr>
 
 	<tr id="languageSelectionComboBoxes">
-		<td width="10%" style="padding-left:7px">Input </td>
-		<td width="40%">
-			<select name="inputLanguageComboBox" id="inputLanguageComboBox" title="Select Input Language" onChange='outputCombo(); saveSettings();'></select>
+		<td width="6%" style="padding-left:5px">Input </td>
+		<td width="25%">
+			<select name="inputLanguageComboBox" id="inputLanguageComboBox" title="Select Input Language" onChange='outputCombo(); saveSettings(); parent.startTranslation();'></select>
 		</td>
-		<td width="10%" style="padding-left:7px">Output </td>
-		<td width="40%">
-			<select name="outputLanguageComboBox" id="outputLanguageComboBox" title="Select Output Language" onChange='saveSettings();'></select>
+		<td width="6%" style="padding-left:5px">Output </td>
+		<td width="25%">
+			<select name="outputLanguageComboBox" id="outputLanguageComboBox" title="Select Output Language" onChange='saveSettings(); parent.startTranslation();'></select>
+		</td>
+		<td width="8%">Search Hits </td>
+		<td width="5%">
+			<input type="number" name="searchHits" id="searchHitsComboBox" min="50" max="250" step="25" value="50" onChange='parent.startTranslation();'>
 		</td>
 	</tr>
 
 	<tr>
-		<td colspan="2" width="50%">
+		<td colspan="2">
 			<span id="appStatus">Application Cache : </span><span id="applicationCacheStatus"></span>
 		</td>
-		<td colspan="2" width="50%">
+		<td colspan="4">
 			<span id="appEvents">Application Cache Events: </span><span id="receivedApplicationCacheEvents"></span> 
 		</td>
 	</tr>
