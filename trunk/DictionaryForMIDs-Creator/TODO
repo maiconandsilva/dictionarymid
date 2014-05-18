@@ -1,5 +1,5 @@
 ====- Todos for the Current Release -====
-__________________FREEZE_________________
+__________________FROZEN_________________
 
 
 
@@ -28,7 +28,7 @@ I want to report a bug regarding DictionaryForMIDs-Creator 0.6-Beta. When we cre
 
 
 ===TODOs Implemented Successfully===
-__________________FREEZE_________________
+__________________FROZEN_________________
 
 ______________________________________________________
 |    COMMON TASKS FOR EACH NEW DFM-CREATOR VERSION    |
@@ -49,4 +49,28 @@ ______________________________________________________
 -Test the DfM-Creator on Linux, Windows and other OSes if possible
 _______________________________________________________
 
+NEW TODOs
+My minor improvement requests:
+1.
+Actually completely minor, but for my way of working it would help: when I open a DictionaryForMIDs.properties in the properties editor file, then I'd like to copy the path of the file in the field 'file name' of the 'file open dialogue'. Normally, when I press open, the files in the path would show and I could pick the file. But instead there is a message "Either the file you selected is not a properties file ...".
+
+Besides: the property editor looks fabulously !!
+
+
+2.
+List of languageXDictUpdateClass in property editor: Is that list of classes is 'hardcoded' in DfM-Creator ? DictionaryUpdateLib should be removed, because it is not only a utility class, not inheriting from the DictionaryUpdate class. Also, NormationLib should be removed from the list.
+
+
+3. 
+There is a problem with build.xml, target dfmc_replace_keywords_readme (used for packaging DfM-Creator): 
+
+In line 166 an error is reported, here is a log:
+
+dfmc_replace_keywords_readme:
+
+BUILD FAILED
+C:\Projects\DictionaryForMIDs\code\trunk\Build\build.xml:134: The following error occurred while executing this line:
+C:\Projects\DictionaryForMIDs\code\trunk\Build\build.xml:166: Directory C:\Projects\DictionaryForMIDs\code\trunk\Build\D
+ictionaryForMIDs-Creator\C:\Projects\DictionaryForMIDs\code\trunk\DictionaryForMIDs-Creator\res\README creation was not
+successful for an unknown reason
 
