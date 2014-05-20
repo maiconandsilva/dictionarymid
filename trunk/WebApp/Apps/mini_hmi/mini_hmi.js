@@ -200,7 +200,6 @@ function startTranslation() {
 		TranslationExecution.executeTranslation(translationParameters,
 		                                        deletePreviousTranslationResult,
 												newTranslationResult);
-alert(maxHits);
 }
 
 function outputMessageInAlert(message) {
