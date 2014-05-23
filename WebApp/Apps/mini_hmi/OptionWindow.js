@@ -38,8 +38,14 @@ function outputCombo() {
 }
 
 function displayApplicationEventFunction(eventText, applicationCacheStatusValue) {
+	if (eventText.lengthComputable)
+	{
+		document.getElementById("receivedApplicationCacheEvents").innerHTML =  eventText.type +"&nbsp;-&nbsp;"+Math.round((eventText.loaded / eventText.total)*100)+"%";
+	}
+	else {
+		document.getElementById("receivedApplicationCacheEvents").innerHTML =  eventText.type;
+	}
 	displayApplicationCacheStatus(applicationCacheStatusValue);
-	document.getElementById("receivedApplicationCacheEvents").innerHTML =  eventText.type;
 }
 
 function displayApplicationCacheStatus(applicationCacheStatusValue) {
