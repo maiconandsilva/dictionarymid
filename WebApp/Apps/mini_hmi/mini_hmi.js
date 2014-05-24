@@ -158,7 +158,7 @@ function buildBooleanArray(numberOfElements, indexTrueElement) {
 }
 
 function searchHits() {
-	var optionFrame = window.frames["optionStyle"];
+	var optionFrame = window.frames[0];
 	var radioButtonCount = optionFrame.document.getElementById('searchHitsRadioButton').value;
 	var comboBoxCount = optionFrame.document.getElementById('searchHitsComboBox').value;
 	var resultsCount = "50";
@@ -212,7 +212,7 @@ function applicationCacheEventHandler(event) {
 
 
 function initializeApplication() {
-	optionWindowObj = window.frames["optionStyle"];
+	optionWindowObj = window.frames[0];
 	UtilJs.outputMessage = outputMessageInAlert;
 	applicationCache.onchecking    	= applicationCacheEventHandler;
 	applicationCache.onerror       	= applicationCacheEventHandler;
