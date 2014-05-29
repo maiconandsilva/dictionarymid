@@ -10,7 +10,6 @@
 	</head>
 <body>
 
-
 <div id="w3c_valid">
 <p>
     <a STYLE="COLOR: #000000;"  href="http://validator.w3.org/check?uri=referer"><img border="0"
@@ -24,13 +23,12 @@
 </div>
 <div id="content">
 
-
 <p><h1>Welcome to the DictionaryForMIDs-Creator Documentation.</h1><br>
 Below you will find a quick guide to the GUI components of DfM-Creator.<br>
 </p>
 
-<p>The picture below is a screen-shot of the DfM-Creator tabs.
-This is the GTK+ Look and Feel (on Ubuntu Linux 13.04).
+<p>The picture below is a screen-shot of the the menu bar and the tabs.
+This is the GTK+ Look and Feel (on Ubuntu Linux 12.04).
 There are four tabs, each one represents one DictionaryForMIDs tool:</b><br>
 
 <ol>
@@ -40,38 +38,40 @@ There are four tabs, each one represents one DictionaryForMIDs tool:</b><br>
 <li>JarCreator</li>
 </ol>
 
-<img src="images/DfM-Creator-Tabs.png" alt="DfM-Creator's Tabs">
+Above the tabs is the menu bar. Each menu and its items represent some of the options
+offered by the tab of the same name, i.e the JarCreator menu's items have the same
+name and functionality as the buttons on the JarCreator tab.<br><br>
+
+<img src="images/DfM-Creator-MenuBar.png" alt="DfM-Creator's Menu Bar" width="775" height="99">
 </p><br><br>
 
 <h2>The complete DictdToDictionaryForMIDs tab.</h2>
 <p>
-<img src="images/DictdToDictionaryForMIDs_Tab.png" alt="DictdToDictionaryForMIDs Tab">
+<img src="images/DictdToDictionaryForMIDs_Tab.png" alt="DictdToDictionaryForMIDs Tab" width="774" height="514">
 <ol>
 <li><b><u>Database Name:</u></b> This is where you put the name of the database (without the .ini extension).</li>
 <li><b><u>Database Directory:</u></b> This is the path to the directory containing the database files.</li>
-<li><b><u>Output CSV File Directory:</u></b> This is the path to the location where the output file will be written to.</li>
+<li><b><u>Output File Directory:</u></b> This is the path to the location where the output file will be written to.</li>
 <li><b><u>Encoding:</u></b> Here you choose the encoding of the output file.</li>
 <li><b><u>Choose a Separator Character:</u></b> Here you choose the separator character for the output file.</li>
 <li><b><u>Switch Languages:</u></b> Choose if you want to switch the languages.</li>
 <li><b><u>Keep Tab And New Line Chars:</u></b> Choose here, if you would like to keep the tab and new line characters.</li>
 <li><b><u>Remove Square Bracket Contents:</u></b> Choose if you would like to keep the text within square brackets.</li>
 <li><b><u>Clear Fields:</u></b> Reset all the settings and delete the values entered.</li>
-<li><b><u>Proceed/Enqueue:</u></b> Proceed to the conversion process or enqueue this one and come back to set another dict up for conversion.</li>
+<li><b><u>Proceed:</u></b> Proceed to the conversion process.</li>
 </ol>
 </p><br>
 
 <h2>The complete DictionaryGeneration tab.</h2>
 <p>
-<img src="images/DictionaryGeneration_Tab.png" alt="DictionaryGeneration Tab">
+<img src="images/DictionaryGeneration_Tab.png" alt="DictionaryGeneration Tab" width="775" height="514">
 <ol>
-<li><b><u>Create a Props File:</u></b> This takes you to the PropertiesEditor window which enables you to create a properties file.</li>
+<li><b><u>Create:</u></b> This takes you to the PropertiesEditor window which enables you to create a properties file.</li>
 <li><b><u>Edit an Existing Properties File:</u></b> This enables you to edit a properties file with PropertiesEditor.</li>
-<li><b><u>Input CSV File:</u></b> This is where you put the input comma-separated-value (CSV) file.</li>
-<li><b><u>DictionaryForMIDs.properties File:</u></b> Put here, the properties file itself.</li>
-<li><b><u>Output Directory:</u></b> This is the path to the output directory.</li>
-<li><b><u>Enqueue/Generate Dictionary Files:</u></b> Click here to proceed to the dictionary generation process or to enqueue<br>
-this dictionary and its settings and come back here to provide another dictionary along with its settings so as<br>
-to have a queue of dictionaries to be generated.</li>
+<li><b><u>Path to The Input CSV File:</u></b> This is where you put the path to the input comma-separated-value (CSV) file.</li>
+<li><b><u>Properties File's Directory:</u></b> Put here, the location to the properties file's directory.</li>
+<li><b><u>Destination Directory:</u></b> This is the path to the destination directory.</li>
+<li><b><u>Generate Dictionary Files:</u></b> Click here to proceed to the dictionary generation process.</li>
 <li><b><u>Clear Fields:</u></b> Reset all the settings and delete the values entered.</li>
 <li><b><u>Check an Existing CSV File's Integrity:</u></b> This takes you to a window that will check a CSV file for errors.</li>
 </ol>
@@ -79,7 +79,7 @@ to have a queue of dictionaries to be generated.</li>
 
 <h2>The complete BitmapFontGenerator tab.</h2>
 <p>
-<img src="images/BitmapFontGenerator_Tab.png" alt="BitmapFontGenerator Tab">
+<img src="images/BitmapFontGenerator_Tab.png" alt="BitmapFontGenerator Tab" width="474" height="459">
 <ol>
 <li><b><u>Path to the Font File:</u></b> Where the font file is located.</li>
 <li><b><u>Path to the Dictionary:</u></b> Where the dictionaryXXX.csv files' directory is located.</li>
@@ -87,22 +87,18 @@ to have a queue of dictionaries to be generated.</li>
 <li><b><u>Clip Pixel From Top:</u></b> choose a number here.</li>
 <li><b><u>Clip Pixel From Bottom:</u></b> choose a number here.</li>
 <li><b><u>Generate Bitmap Fonts:</u></b> Click here to proceed to the bitmap font generation.</li>
-<li><b><u>Clear Fields:</u></b> Reset all the settings and delete the values entered.</li>
 </ol>
 </p><br>
 
 <h2>The complete JarCreator tab.</h2>
 <p>
-<img src="images/JarCreator_Tab.png" alt="JarCreator Tab">
+<img src="images/JarCreator_Tab.png" alt="JarCreator Tab" width="536" height="451">
 <ol>
-<li><b><u>Input Dictionary:</u></b> Indicate the full path to the DictionaryForMIDs.properties and CSV files' Directory.</li>
-<li><b><u>Choose Your Own Empty DictionaryForMIDs <font color="red">Jar</font>-<font color="red">Jad</font> Files</u></b>
-Indicate the full path the custom empty DictionaryForMIDs.jar/jad Files</li>
+<li><b><u>DictionaryForMIDs.properties and CSV files' Directory:</u></b> Indicate the full path to the properties and CSV files.</li>
+<li><b><u>Empty DictionaryForMIDs.jar/jad Files' Directory:</u></b> Indicate the full path for the empty DfM.jar/jad Files</li>
 <li><b><u>Output Directory:</u></b> Put here, the path to the location of the directory that will hold the output file.</li>
-<li><b><u>Enqueue/Create Jar & Jad:</u></b> Click here to proceed to the DictionaryForMIDs.jar/jad files creation or to enqueue<br>
-this dictionary and its settings in order to come back here to enqueue another dictionary along with its settings<br>
-so as to have a queue containing many dictionaries and JarCreator will process them all!</li>
-<li><b><u>Clear Fields:</u></b> Reset all the settings and delete the values entered.</li>
+<li><b><u>Pack "CSV" Files in the Empty DfM.jar File:</u></b> Click here to proceed to the DictionaryForMIDs.jar/jad files creation</li>
+<li><b><u>Create Jar/Jad Files:</u></b> Reset all the settings and delete the values entered.</li>
 </ol>
 </p>
 
@@ -136,10 +132,12 @@ so as to have a queue containing many dictionaries and JarCreator will process t
 			<li><a href="dfmcreatorDevelopment.html"> Under the Hood</li>
 			<li><a href="dfmcreatorDevelopment.html#codeoverview"> Code overview</li>
 			<li><a href="dfmcreatorDevelopment.html#downloadsources"> Download Sources</li>
-			<li><a href="dfmcreatorDevelopment.html#buildprocess"> Build process</li>
+			<li><a href="dfmcreatorDevelopment.html#buildprocess"> Build process</a></li>
 		</ul>
 </ol>
 </p>
+
+<p>Click <a href="dfmcreatorDownload.html">here</a> to download DfM-Creator</p>
 
 </div>
 </BODY>
