@@ -30,7 +30,7 @@ if [ ! -d "$dictionaryFRSDir" ]
   exit 1
 fi
 
-newestVersionDir=`ls -1v "$dictionaryFRSDir" | grep [0123456789] | tail -n1`
+newestVersionDir=`ls -tr "$dictionaryFRSDir" | grep [0123456789] | tail -n1`
 
 dictionaryFRSSourceDir=$dictionaryFRSDir/$newestVersionDir
 
