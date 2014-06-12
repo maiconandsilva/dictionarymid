@@ -30,9 +30,13 @@ if [ ! -d "$dictionaryFRSDir" ]
   exit 1
 fi
 
+# in the dictionary_subdirectory: select the directory with the latest modification date
 newestVersionDir=`ls -tr "$dictionaryFRSDir" | grep [0123456789] | tail -n1`
 
 dictionaryFRSSourceDir=$dictionaryFRSDir/$newestVersionDir
+
+# select the zip file with the latest modification date
+dictionaryZipFile=`ls -tr "$dictionaryFRSSourceDir/"*.zip | tail -n1`
 
 dictionaryWebAppDestDir=$projWebAppDictionaries/$dictionarySubDir
 
@@ -79,7 +83,7 @@ function overwriteBOM {
 
 mkdir "$dictionaryWebAppDestDir"
 
-unzip "$dictionaryFRSSourceDir/"*.zip "*.jar" -d "$dictionaryWebAppDestDir"
+unzip "$dictionaryZipFile" "*.jar" -d "$dictionaryWebAppDestDir"
 
 unzip "$dictionaryWebAppDestDir"/*.jar "dictionary/*"  -x "dictionary/fonts/*" -d "$dictionaryWebAppDestDir"
 unzip "$dictionaryWebAppDestDir"/*.jar "Application.properties"  -d "$dictionaryWebAppDestDir"
