@@ -89,10 +89,12 @@ unzip "$dictionaryWebAppDestDir"/*.jar "dictionary/*"  -x "dictionary/fonts/*" -
 unzip "$dictionaryWebAppDestDir"/*.jar "Application.properties"  -d "$dictionaryWebAppDestDir"
 
 # remove any BOM characters at the beginning of directory1 file
-directoryFile1="$dictionaryWebAppDestDir"/dictionary/directory1.csv
-overwriteBOM "$directoryFile1" BOMutf8.bin
-overwriteBOM "$directoryFile1" BOMutf16be.bin
-overwriteBOM "$directoryFile1" BOMutf16le.bin
+# the regex "directory[A-z]*1.csv$" matches files such as directoryEng1.csv or directoryGer1.csv or directory1.csv
+ls -1 "$dictionaryWebAppDestDir"/dictionary/directory* | grep "directory[A-z]*1.csv$" | while read directoryFile1 ; do 
+  overwriteBOM "$directoryFile1" BOMutf8.bin
+  overwriteBOM "$directoryFile1" BOMutf16be.bin
+  overwriteBOM "$directoryFile1" BOMutf16le.bin
+done
 
 # remove the jar file in the destination directory (the jar file is not needed any more)
 rm "$dictionaryWebAppDestDir"/*.jar
